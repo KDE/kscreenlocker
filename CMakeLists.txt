@@ -182,3 +182,5 @@ install(PROGRAMS updaters/ksreenlocker_5_3_separate_autologin.pl
 
 add_subdirectory(autotests)
 add_subdirectory(tests)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
