@@ -27,7 +27,6 @@ add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 target_link_libraries(kscreenlocker_greet
                         KF5::Solid
                         KF5::Package
-                        KF5::Service
                         KF5::Crash
                         KF5::I18n
                         KF5::ConfigGui

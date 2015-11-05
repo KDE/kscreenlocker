@@ -19,7 +19,7 @@ include(ECMMarkNonGuiExecutable)
 include(ECMPackageConfigHelpers)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-                    Plasma KCMUtils Declarative IdleTime KDELibs4Support Crash GlobalAccel DBusAddons)
+                    Plasma KCMUtils Declarative IdleTime KDELibs4Support Crash GlobalAccel)
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
@@ -101,7 +101,6 @@ PUBLIC
    Qt5::X11Extras
 PRIVATE
    KF5::I18n
-   KF5::IconThemes
    KF5::IdleTime
    KF5::GlobalAccel
    KF5::Notifications
