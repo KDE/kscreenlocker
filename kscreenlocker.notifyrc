@@ -1,13 +1,48 @@
 [Global]
 IconName=system-lock-screen
 Comment=Screen Saver
+Comment[ca]=Estalvi de pantalla
+Comment[nl]=Schermbeveiliging
+Comment[pt_BR]=Protetor de tela
+Comment[sv]=Skärmsläckare
+Comment[uk]=Зберігач екрана
+Comment[x-test]=xxScreen Saverxx
+Comment[zh_CN]=屏幕保护程序
 
 [Event/locked]
 Name=Screen locked
+Name[ca]=Pantalla bloquejada
+Name[nl]=Scherm vergrendeld
+Name[pt_BR]=Tela bloqueada
+Name[sv]=Skärm låst
+Name[uk]=Екран заблоковано
+Name[x-test]=xxScreen lockedxx
+Name[zh_CN]=屏幕已锁定
 Comment=The screen has been locked
+Comment[ca]=S'ha bloquejat la pantalla
+Comment[nl]=Het scherm is vergrendeld
+Comment[pt_BR]=A tela foi bloqueada
+Comment[sv]=Skärmen har låsts
+Comment[uk]=Екран було заблоковано
+Comment[x-test]=xxThe screen has been lockedxx
+Comment[zh_CN]=屏幕已经被锁定
 Action=None
 
 [Event/unlocked]
 Name=Screen unlocked
+Name[ca]=Pantalla desbloquejada
+Name[nl]=Scherm ontgrendeld
+Name[pt_BR]=Tela desbloqueada
+Name[sv]=Skärm upplåst
+Name[uk]=Екран розблоковано
+Name[x-test]=xxScreen unlockedxx
+Name[zh_CN]=屏幕已解锁
 Comment=The screen has been unlocked
+Comment[ca]=S'ha desbloquejat la pantalla
+Comment[nl]=Het scherm is ontgrendeld
+Comment[pt_BR]=A tela foi desbloqueada
+Comment[sv]=Skärmen har låsts upp
+Comment[uk]=Екран було розблоковано
+Comment[x-test]=xxThe screen has been unlockedxx
+Comment[zh_CN]=屏幕已经被解锁
 Action=None

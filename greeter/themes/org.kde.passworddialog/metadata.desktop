@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Password dialog
+Name[ca]=Diàleg de contrasenya
+Name[nl]=Wachtwoordvenster
+Name[pt_BR]=Janela de senha
+Name[sv]=Lösenordsdialogruta
+Name[uk]=Вікно для введення пароля
+Name[x-test]=xxPassword dialogxx
+Name[zh_CN]=密码对话框
 Comment=Screen locker that provides a password dialog and an interface to switch the current user
+Comment[ca]=Bloqueig de pantalla que proporciona un diàleg de contrasenya i una interfície per commutar l'usuari actual
+Comment[nl]=Schermvergrendeling die een wachtwoordvenster en een interface om naar de huidige gebruiker om te schakelen biedt
+Comment[pt_BR]=Bloqueador de sessão que fornece uma caixa de diálogo de senha e uma interface para mudar o usuário atual
+Comment[sv]=Skärmlåsning som tillhandahåller en lösenordsdialogruta och ett gränssnitt för att byta aktuell användare
+Comment[uk]=Блокувальник екрана з вікном пароля і інтерфейсом для перемикання поточного користувача
+Comment[x-test]=xxScreen locker that provides a password dialog and an interface to switch the current userxx
+Comment[zh_CN]=屏幕锁定程序提供密码对话框和切换当前用户的界面
 Icon=system-lock-screen
 
 X-Plasma-MainScript=ui/main.qml
