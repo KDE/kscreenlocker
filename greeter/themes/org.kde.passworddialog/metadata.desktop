@@ -1,16 +1,24 @@
 [Desktop Entry]
 Name=Password dialog
 Name[ca]=Diàleg de contrasenya
+Name[de]=Passwort-Dialog
+Name[fi]=Salasanaikkuna
 Name[nl]=Wachtwoordvenster
+Name[pt]=Janela da senha
 Name[pt_BR]=Janela de senha
+Name[sk]=Dialóg hesla
 Name[sv]=Lösenordsdialogruta
 Name[uk]=Вікно для введення пароля
 Name[x-test]=xxPassword dialogxx
 Name[zh_CN]=密码对话框
 Comment=Screen locker that provides a password dialog and an interface to switch the current user
 Comment[ca]=Bloqueig de pantalla que proporciona un diàleg de contrasenya i una interfície per commutar l'usuari actual
+Comment[de]=Bildschirmsperre mit einem Passwortdialog und der Möglichkeit, den aktuellen Benutzer zu wechseln
+Comment[fi]=Salasanakyselyn ja käyttäjävaihdon tarjoava näyttölukko
 Comment[nl]=Schermvergrendeling die een wachtwoordvenster en een interface om naar de huidige gebruiker om te schakelen biedt
+Comment[pt]=Bloqueio do ecrã que mostra uma janela de introdução da senha e para mudar o utilizador actual
 Comment[pt_BR]=Bloqueador de sessão que fornece uma caixa de diálogo de senha e uma interface para mudar o usuário atual
+Comment[sk]=Zamykač obrazovky, ktorý poskytuje dialóg s heslom a rozhranie na prepnutie aktuálneho používateľa
 Comment[sv]=Skärmlåsning som tillhandahåller en lösenordsdialogruta och ett gränssnitt för att byta aktuell användare
 Comment[uk]=Блокувальник екрана з вікном пароля і інтерфейсом для перемикання поточного користувача
 Comment[x-test]=xxScreen locker that provides a password dialog and an interface to switch the current userxx

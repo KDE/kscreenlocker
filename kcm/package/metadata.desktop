@@ -1,16 +1,24 @@
 [Desktop Entry]
 Name=Screen Locking
 Name[ca]=Bloqueig de la pantalla
+Name[de]=Bildschirmsperre
+Name[fi]=Näytön lukitseminen
 Name[nl]=Scherm vergrendelen
+Name[pt]=Bloqueio do Ecrã
 Name[pt_BR]=Bloqueio de tela
+Name[sk]=Zamykanie obrazovky
 Name[sv]=Skärmlåsning
 Name[uk]=Блокування екрана
 Name[x-test]=xxScreen Lockingxx
 Name[zh_CN]=锁屏
 Comment=Screen Locking Themes
 Comment[ca]=Temes per a bloquejar la pantalla
+Comment[de]=Designs für Bildschirmsperre
+Comment[fi]=Näytön lukitsemisen teemat
 Comment[nl]=Thema's van scherm vergrendelen
+Comment[pt]=Temas de Bloqueio do Ecrã
 Comment[pt_BR]=Temas para bloqueio de tela
+Comment[sk]=Témy zamykania obrazovky
 Comment[sv]=Skärmlåsningsteman
 Comment[uk]=Теми вікон блокування екрана
 Comment[x-test]=xxScreen Locking Themesxx
