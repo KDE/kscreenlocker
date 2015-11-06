@@ -89,6 +89,11 @@ public:
     bool isGraceTime() const;
 
     void setWaylandDisplay(KWayland::Server::Display *display);
+
+    KWayland::Server::ClientConnection *greeterClientConnection() const {
+        return m_greeterClientConnection;
+    }
+
     /**
      * Can be used by the lock window to remove the lock during grace time.
      **/
