@@ -35,6 +35,14 @@ class KActionCollection;
 class QTimer;
 class KSldTest;
 
+namespace KWayland
+{
+namespace Server {
+class Display;
+class ClientConnection;
+}
+};
+
 namespace ScreenLocker
 {
 
@@ -80,6 +88,7 @@ public:
 
     bool isGraceTime() const;
 
+    void setWaylandDisplay(KWayland::Server::Display *display);
     /**
      * Can be used by the lock window to remove the lock during grace time.
      **/
@@ -88,6 +97,7 @@ public:
     void uninhibit();
 
     void lock(EstablishLock establishLock);
+    void initialize();
 
 Q_SIGNALS:
     void locked();
@@ -99,7 +109,6 @@ private Q_SLOTS:
     void solidSuspend();
 
 private:
-    void initialize();
     void initializeX11();
     bool establishGrab();
     void startLockProcess(EstablishLock establishLock);
@@ -113,6 +122,8 @@ private:
     QProcess *m_lockProcess;
     AbstractLocker *m_lockWindow;
     WaylandServer *m_waylandServer;
+    KWayland::Server::Display *m_waylandDisplay;
+    KWayland::Server::ClientConnection *m_greeterClientConnection;
     /**
      * Timer to measure how long the screen is locked.
      * This information is required by DBus Interface.

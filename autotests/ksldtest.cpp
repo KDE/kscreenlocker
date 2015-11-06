@@ -41,6 +41,7 @@ void KSldTest::initTestCase()
 void KSldTest::testEstablishGrab()
 {
     ScreenLocker::KSldApp ksld;
+    ksld.initialize();
     QVERIFY(ksld.establishGrab());
     // grab is established, trying again should succeed as well
     QVERIFY(ksld.establishGrab());

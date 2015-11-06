@@ -38,6 +38,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KNotification>
 #include <KGlobalAccel>
 #include <KCrash>
+
+//kwayland
+#include <KWayland/Server/display.h>
+#include <KWayland/Server/clientconnection.h>
+
 // Qt
 #include <QAction>
 #include <QTimer>
@@ -54,6 +59,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // other
 #include <unistd.h>
 #include <signal.h>
+
+#include <sys/types.h>
+#include <sys/socket.h>
 
 namespace ScreenLocker
 {
@@ -86,8 +94,6 @@ KSldApp::KSldApp(QObject * parent)
 {
     m_isX11 = QX11Info::isPlatformX11();
     m_isWayland = QGuiApplication::platformName().startsWith( QLatin1String("wayland"), Qt::CaseInsensitive);
-
-    initialize();
 }
 
 KSldApp::~KSldApp()
@@ -547,6 +553,21 @@ bool KSldApp::isFdoPowerInhibited() const
 
 void KSldApp::startLockProcess(EstablishLock establishLock)
 {
+    if (m_isWayland && m_waylandDisplay) {
+        int sx[2];
+        if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx) < 0) {
+            qWarning() << "Can not create socket";
+            emit m_lockProcess->error(QProcess::FailedToStart);
+            return;
+        }
+        m_greeterClientConnection = m_waylandDisplay->createClient(sx[0]);
+        int socket = dup(sx[1]);
+        if (socket >= 0) {
+            QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+            env.insert("KWIN_WAYLAND_SOCKET", QByteArray::number(socket));
+            m_lockProcess->setProcessEnvironment(env);
+        }
+    }
     QStringList args;
     if (establishLock == EstablishLock::Immediate) {
         args << QStringLiteral("--immediateLock");
@@ -663,6 +684,13 @@ void KSldApp::solidSuspend()
     }
     if (KScreenSaverSettings::lockOnResume()) {
         lock(EstablishLock::Immediate);
+    }
+}
+
+void KSldApp::setWaylandDisplay(KWayland::Server::Display *display)
+{
+    if (m_waylandDisplay != display) {
+        m_waylandDisplay = display;
     }
 }
 
