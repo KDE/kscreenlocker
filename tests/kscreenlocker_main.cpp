@@ -41,6 +41,7 @@ int main(int argc, char **argv)
     parser.process(app);
 
     ScreenLocker::KSldApp locker(&app);
+    locker.initialize();
     QObject::connect(&locker, &ScreenLocker::KSldApp::unlocked, &app, &QApplication::quit);
     locker.lock(ScreenLocker::EstablishLock::Immediate);
 
