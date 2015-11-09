@@ -616,13 +616,7 @@ void KSldApp::showLockWindow()
             },
             Qt::QueuedConnection
         );
-        connect(m_lockWindow, &AbstractLocker::lockWindowShown, this,
-            [this] {
-                m_lockState = Locked;
-                m_lockedTimer.restart();
-                emit locked();
-            }, Qt::QueuedConnection
-        );
+        connect(m_lockWindow, &AbstractLocker::lockWindowShown, this, &KSldApp::lockScreenShown, Qt::QueuedConnection);
         connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
     m_lockWindow->showLockWindow();
@@ -693,6 +687,13 @@ void KSldApp::setWaylandDisplay(KWayland::Server::Display *display)
     if (m_waylandDisplay != display) {
         m_waylandDisplay = display;
     }
+}
+
+void KSldApp::lockScreenShown()
+{
+    m_lockState = Locked;
+    m_lockedTimer.restart();
+    emit locked();
 }
 
 } // namespace

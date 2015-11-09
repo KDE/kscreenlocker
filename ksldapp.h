@@ -114,6 +114,9 @@ private Q_SLOTS:
     void endGraceTime();
     void solidSuspend();
 
+public Q_SLOTS:
+    void lockScreenShown();
+
 private:
     void initializeX11();
     bool establishGrab();
