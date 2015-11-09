@@ -107,6 +107,7 @@ public:
 Q_SIGNALS:
     void locked();
     void unlocked();
+    void greeterClientConnectionChanged();
 
 private Q_SLOTS:
     void cleanUp();

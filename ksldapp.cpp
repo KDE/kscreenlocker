@@ -561,6 +561,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
             return;
         }
         m_greeterClientConnection = m_waylandDisplay->createClient(sx[0]);
+        emit greeterClientConnectionChanged();
         int socket = dup(sx[1]);
         if (socket >= 0) {
             QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
