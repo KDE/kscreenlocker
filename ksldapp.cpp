@@ -565,7 +565,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
         int socket = dup(sx[1]);
         if (socket >= 0) {
             QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-            env.insert("KWIN_WAYLAND_SOCKET", QByteArray::number(socket));
+            env.insert("WAYLAND_SOCKET", QByteArray::number(socket));
             m_lockProcess->setProcessEnvironment(env);
         }
     }
