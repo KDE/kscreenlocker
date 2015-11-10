@@ -213,6 +213,9 @@ void KSldApp::initialize()
     auto finishedSignal = static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished);
     connect(m_lockProcess, finishedSignal, this,
         [this](int exitCode, QProcess::ExitStatus exitStatus) {
+            if (m_isWayland && m_waylandDisplay && m_greeterClientConnection) {
+                m_greeterClientConnection->destroy();
+            }
             if ((!exitCode && exitStatus == QProcess::NormalExit) || s_graceTimeKill || s_logindExit) {
                 // unlock process finished successfully - we can remove the lock grab
                 s_graceTimeKill = false;
@@ -561,6 +564,12 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
             return;
         }
         m_greeterClientConnection = m_waylandDisplay->createClient(sx[0]);
+        connect(m_greeterClientConnection, &QObject::destroyed, this,
+            [this] {
+                m_greeterClientConnection = nullptr;
+                emit greeterClientConnectionChanged();
+            }
+        );
         emit greeterClientConnectionChanged();
         int socket = dup(sx[1]);
         if (socket >= 0) {
