@@ -91,6 +91,9 @@ int WaylandServer::start()
 
 void WaylandServer::stop()
 {
+    if (m_allowedClient) {
+        m_allowedClient->destroy();
+    }
     if (m_interface) {
         wl_global_destroy(m_interface);
         m_interface = nullptr;
