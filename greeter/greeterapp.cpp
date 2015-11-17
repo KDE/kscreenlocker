@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kdeclarative/kdeclarative.h>
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
 #include <KUser>
-#include <KWindowSystem>
 #include <Solid/PowerManagement>
 //Plasma
 #include <KPackage/Package>
