@@ -1,6 +1,7 @@
 [Global]
 IconName=system-lock-screen
 Comment=Screen Saver
+Comment[ast]=Curiapantalles
 Comment[ca]=Estalvi de pantalla
 Comment[ca@valencia]=Estalvi de pantalla
 Comment[de]=Bildschirmschoner

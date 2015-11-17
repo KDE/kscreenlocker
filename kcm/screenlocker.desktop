@@ -11,6 +11,7 @@ X-KDE-System-Settings-Parent-Category=desktopbehavior
 X-KDE-Weight=60
 
 Name=Screen Locking
+Name[ast]=Bloquéu de pantalla
 Name[ca]=Bloqueig de la pantalla
 Name[ca@valencia]=Bloqueig de la pantalla
 Name[de]=Bildschirmsperre
@@ -37,6 +38,7 @@ Name[uk]=Блокування екрана
 Name[x-test]=xxScreen Lockingxx
 Name[zh_CN]=锁屏
 Comment=Screen Locking Timeouts
+Comment[ast]=Tiempos escosaos de bloquéu de pantalla
 Comment[ca]=Temps d'espera pel bloqueig de la pantalla
 Comment[ca@valencia]=Temps d'espera pel bloqueig de la pantalla
 Comment[de]=Zeitüberschreitungen für Bildschirmsperre
