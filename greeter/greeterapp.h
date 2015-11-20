@@ -29,6 +29,7 @@ namespace KWayland {
 namespace Client {
     class ConnectionThread;
     class Registry;
+    class PlasmaShell;
 }
 }
 
@@ -77,6 +78,7 @@ private Q_SLOTS:
 
 private:
     void initialize();
+    void initializeWayland();
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
 
     QUrl m_mainQmlPath;
@@ -96,6 +98,8 @@ private:
     KWayland::Client::Registry *m_ksldRegistry = nullptr;
     QThread *m_ksldConnectionThread = nullptr;
     org_kde_ksld *m_ksldInterface = nullptr;
+
+    KWayland::Client::PlasmaShell *m_plasmaShell = nullptr;
 };
 } // namespace
 
