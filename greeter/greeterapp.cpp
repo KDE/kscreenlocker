@@ -37,7 +37,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // KWayland
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/event_queue.h>
+#include <KWayland/Client/plasmashell.h>
 #include <KWayland/Client/registry.h>
+#include <KWayland/Client/surface.h>
 // Qt
 #include <QAbstractNativeEventFilter>
 #include <QtCore/QTimer>
@@ -124,6 +126,7 @@ UnlockApp::~UnlockApp()
 
 void UnlockApp::initialize()
 {
+    initializeWayland();
     // set up the request ignore timeout, so that multiple requests to sleep/suspend/shutdown
     // are not processed in quick (and confusing) succession)
     m_resetRequestIgnoreTimer->setSingleShot(true);
@@ -147,6 +150,27 @@ void UnlockApp::initialize()
     m_mainQmlPath = QUrl::fromLocalFile(package.filePath("lockscreenmainscript"));
 
     installEventFilter(this);
+}
+
+void UnlockApp::initializeWayland()
+{
+    if (!platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
+        return;
+    }
+    using namespace KWayland::Client;
+    auto *c = ConnectionThread::fromApplication(this);
+    if (!c) {
+        return;
+    }
+    Registry *r = new Registry(this);
+    r->create(c);
+    r->setup();
+    c->roundtrip();
+    const auto i = r->interface(Registry::Interface::PlasmaShell);
+    if (i.name == 0) {
+        return;
+    }
+    m_plasmaShell = r->createPlasmaShell(i.name, i.version, this);
 }
 
 void UnlockApp::desktopResized()
@@ -189,6 +213,15 @@ void UnlockApp::desktopResized()
             org_kde_ksld_x11window(m_ksldInterface, view->winId());
             wl_display_flush(m_ksldConnection->display());
         }
+
+        if (m_plasmaShell) {
+            using namespace KWayland::Client;
+            if (Surface *surface = Surface::fromWindow(view)) {
+                PlasmaShellSurface *shellSurface = m_plasmaShell->createSurface(surface, view);
+                view->setProperty("plasmaShellSurface", QVariant::fromValue(shellSurface));
+            }
+        }
+
 
         // engine stuff
         QQmlContext* context = view->engine()->rootContext();
@@ -241,17 +274,31 @@ void UnlockApp::desktopResized()
 
         auto screen = QGuiApplication::screens()[i];
         view->setGeometry(screen->geometry());
+        KWayland::Client::PlasmaShellSurface *plasmaSurface = view->property("plasmaShellSurface").value<KWayland::Client::PlasmaShellSurface *>();
+        if (plasmaSurface) {
+            plasmaSurface->setPosition(view->geometry().topLeft());
+        }
 
         connect(screen,
                 &QScreen::geometryChanged,
                 view,
-                static_cast<void (KQuickAddons::QuickViewSharedEngine::*)(const QRect&)>(&KQuickAddons::QuickViewSharedEngine::setGeometry)
+                [view, plasmaSurface](const QRect &geo)  {
+                    view->setGeometry(geo);
+                    if (plasmaSurface) {
+                        plasmaSurface->setPosition(view->geometry().topLeft());
+                    }
+                }
         );
 
         if (m_testing) {
             view->show();
         } else {
-            view->showFullScreen();
+            // on Wayland we may not use fullscreen as that puts all windows on one screen
+            if (plasmaSurface) {
+                view->show();
+            } else {
+                view->showFullScreen();
+            }
         }
         view->raise();
 
