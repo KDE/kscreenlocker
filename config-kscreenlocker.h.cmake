@@ -5,3 +5,6 @@
 #endif
 
 #define KSCREENLOCKER_GREET_BIN "${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet"
+
+#cmakedefine01 HAVE_SYS_PRCTL_H
+#cmakedefine01 HAVE_PR_SET_DUMPABLE

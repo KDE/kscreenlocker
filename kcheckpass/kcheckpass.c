@@ -57,6 +57,11 @@
 #include <errno.h>
 #include <time.h>
 
+#include <config-kscreenlocker.h>
+#if HAVE_SYS_PRCTL_H
+#include <sys/prctl.h>
+#endif
+
 /* Compatibility: accept some options from environment variables */
 #define ACCEPT_ENV
 
@@ -320,6 +325,11 @@ main(int argc, char **argv)
   AuthReturn	ret;
   struct flock lk;
   char fname[64], fcont[64];
+
+  // disable ptrace on kcheckpass
+#if HAVE_PR_SET_DUMPABLE
+  prctl(PR_SET_DUMPABLE, 0);
+#endif
 
 #ifdef HAVE_OSF_C2_PASSWD
   initialize_osf_security(argc, argv);

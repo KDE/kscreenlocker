@@ -28,6 +28,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "greeterapp.h"
 
+#include <config-kscreenlocker.h>
+#if HAVE_SYS_PRCTL_H
+#include <sys/prctl.h>
+#endif
+
 static void signalHandler(int signum)
 {
     ScreenLocker::UnlockApp *instance = qobject_cast<ScreenLocker::UnlockApp *>(QCoreApplication::instance());
@@ -51,6 +56,11 @@ static void signalHandler(int signum)
 
 int main(int argc, char* argv[])
 {
+    // disable ptrace on the greeter
+#if HAVE_PR_SET_DUMPABLE
+    prctl(PR_SET_DUMPABLE, 0);
+#endif
+
     KLocalizedString::setApplicationDomain("kscreenlocker_greet");
 
     // explicitly disable input methods as it makes it impossible to unlock, see BUG 306932
@@ -99,6 +109,11 @@ int main(int argc, char* argv[])
     if (parser.isSet(testingOption)) {
         app.setTesting(true);
         app.setImmediateLock(true);
+
+        // allow ptrace if testing is enabled
+#if HAVE_PR_SET_DUMPABLE
+        prctl(PR_SET_DUMPABLE, 1);
+#endif
     } else {
         app.setImmediateLock(parser.isSet(immediateLockOption));
     }

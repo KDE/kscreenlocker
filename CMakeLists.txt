@@ -17,6 +17,13 @@ include(ECMGenerateHeaders)
 include(CheckIncludeFiles)
 include(ECMMarkNonGuiExecutable)
 include(ECMPackageConfigHelpers)
+include(FeatureSummary)
+
+include(CheckIncludeFile)
+include(CheckSymbolExists)
+check_include_file("sys/prctl.h" HAVE_SYS_PRCTL_H)
+check_symbol_exists(PR_SET_DUMPABLE "sys/prctl.h" HAVE_PR_SET_DUMPABLE)
+add_feature_info("prctl-dumpable" HAVE_PR_SET_DUMPABLE "Required for disallow ptrace on greeter and kcheckpass process")
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     Plasma KCMUtils Declarative IdleTime KDELibs4Support Crash GlobalAccel)
