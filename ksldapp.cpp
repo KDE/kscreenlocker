@@ -91,6 +91,7 @@ KSldApp::KSldApp(QObject * parent)
     , m_graceTimer(new QTimer(this))
     , m_inhibitCounter(0)
     , m_logind(nullptr)
+    , m_greeterEnv(QProcessEnvironment::systemEnvironment())
 {
     m_isX11 = QX11Info::isPlatformX11();
     m_isWayland = QGuiApplication::platformName().startsWith( QLatin1String("wayland"), Qt::CaseInsensitive);
@@ -573,7 +574,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
         emit greeterClientConnectionChanged();
         int socket = dup(sx[1]);
         if (socket >= 0) {
-            QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+            QProcessEnvironment env = m_greeterEnv;
             env.insert("WAYLAND_SOCKET", QByteArray::number(socket));
             m_lockProcess->setProcessEnvironment(env);
         }
@@ -703,6 +704,11 @@ void KSldApp::lockScreenShown()
     m_lockState = Locked;
     m_lockedTimer.restart();
     emit locked();
+}
+
+void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
+{
+    m_greeterEnv = env;
 }
 
 } // namespace

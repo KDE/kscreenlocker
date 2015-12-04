@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SCREENLOCKER_KSLDAPP_H
 
 #include <QtCore/QElapsedTimer>
-#include <QtCore/QProcess>
+#include <QtCore/QProcessEnvironment>
 
 #include <KScreenLocker/kscreenlocker_export.h>
 
@@ -93,6 +93,7 @@ public:
     KWayland::Server::ClientConnection *greeterClientConnection() const {
         return m_greeterClientConnection;
     }
+    void setGreeterEnvironment(const QProcessEnvironment &env);
 
     /**
      * Can be used by the lock window to remove the lock during grace time.
@@ -160,6 +161,7 @@ private:
     bool m_isX11;
     bool m_isWayland;
     int m_greeterCrashedCounter = 0;
+    QProcessEnvironment m_greeterEnv;
 
     // for auto tests
     friend KSldTest;
