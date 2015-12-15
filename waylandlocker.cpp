@@ -19,13 +19,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
 #include "waylandlocker.h"
+#include <KWayland/Server/display.h>
+#include <KWayland/Server/seat_interface.h>
 
 namespace ScreenLocker
 {
 
-WaylandLocker::WaylandLocker()
+WaylandLocker::WaylandLocker(KWayland::Server::Display *display)
     : AbstractLocker()
 {
+    const auto seats = display->seats();
+    for (auto s : seats) {
+        connect(s, &KWayland::Server::SeatInterface::timestampChanged, this, &WaylandLocker::userActivity);
+    }
 }
 
 WaylandLocker::~WaylandLocker()

@@ -612,7 +612,7 @@ void KSldApp::showLockWindow()
             m_lockWindow = new X11Locker();
         }
         if (m_isWayland) {
-            m_lockWindow = new WaylandLocker();
+            m_lockWindow = new WaylandLocker(m_waylandDisplay);
         }
         if (!m_lockWindow) {
             return;

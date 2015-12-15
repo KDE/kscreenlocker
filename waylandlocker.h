@@ -23,6 +23,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "abstractlocker.h"
 
+namespace KWayland
+{
+namespace Server
+{
+class Display;
+}
+}
+
 namespace ScreenLocker
 {
 
@@ -31,7 +39,7 @@ class WaylandLocker : public AbstractLocker
     Q_OBJECT
 
 public:
-    WaylandLocker();
+    WaylandLocker(KWayland::Server::Display *display);
     ~WaylandLocker();
 
     void showLockWindow() override;
