@@ -111,7 +111,8 @@ PRIVATE
    KF5::IdleTime
    KF5::GlobalAccel
    KF5::Notifications
-   KF5::XmlGui
+   KF5::CoreAddons
+   KF5::ConfigGui
    KF5::Crash
    KF5::WindowSystem
    ${X11_LIBRARIES}

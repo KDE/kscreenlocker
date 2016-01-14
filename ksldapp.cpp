@@ -31,7 +31,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <config-X11.h>
 #include "waylandserver.h"
 // KDE
-#include <KActionCollection>
 #include <KAuthorized>
 #include <KIdleTime>
 #include <KLocalizedString>
@@ -79,7 +78,6 @@ KSldApp* KSldApp::self()
 
 KSldApp::KSldApp(QObject * parent)
     : QObject(parent)
-    , m_actionCollection(NULL)
     , m_lockState(Unlocked)
     , m_lockProcess(NULL)
     , m_lockWindow(NULL)
@@ -111,7 +109,6 @@ void KSldApp::cleanUp()
     if (m_lockProcess && m_lockProcess->state() != QProcess::NotRunning) {
         m_lockProcess->terminate();
     }
-    delete m_actionCollection;
     delete m_lockProcess;
     delete m_lockWindow;
 
@@ -168,11 +165,11 @@ void KSldApp::initialize()
     }
 
     // Global keys
-    m_actionCollection = new KActionCollection(this);
-
     if (KAuthorized::authorizeKAction(QStringLiteral("lock_screen"))) {
         qDebug() << "Configuring Lock Action";
-        QAction *a = m_actionCollection->addAction(QStringLiteral("Lock Session"));
+        QAction *a = new QAction(this);
+        a->setObjectName(QStringLiteral("Lock Session"));
+        a->setProperty("componentName", QStringLiteral("ksmserver"));
         a->setText(i18n("Lock Session"));
         KGlobalAccel::self()->setGlobalShortcut(a, QList<QKeySequence>() << Qt::ALT+Qt::CTRL+Qt::Key_L << Qt::Key_ScreenSaver );
         connect(a, &QAction::triggered, this,
@@ -181,7 +178,6 @@ void KSldApp::initialize()
             }
         );
     }
-    m_actionCollection->readSettings();
 
     // idle support
     auto idleTimeSignal = static_cast<void (KIdleTime:: *)(int)>(&KIdleTime::timeoutReached);
@@ -388,11 +384,6 @@ void KSldApp::lock(EstablishLock establishLock)
 
     // start unlock screen process
     startLockProcess(establishLock);
-}
-
-KActionCollection *KSldApp::actionCollection()
-{
-    return m_actionCollection;
 }
 
 /*

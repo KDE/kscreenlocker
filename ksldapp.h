@@ -31,7 +31,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // forward declarations
 class GlobalAccel;
 class LogindIntegration;
-class KActionCollection;
 class QTimer;
 class KSldTest;
 
@@ -71,9 +70,6 @@ public:
 
     KSldApp(QObject * parent = 0);
     virtual ~KSldApp();
-
-    // The action collection of the active widget
-    KActionCollection* actionCollection();
 
     LockState lockState() const {
         return m_lockState;
@@ -127,7 +123,6 @@ private:
     void doUnlock();
     bool isFdoPowerInhibited() const;
 
-    KActionCollection *m_actionCollection;
     LockState m_lockState;
     QProcess *m_lockProcess;
     AbstractLocker *m_lockWindow;
