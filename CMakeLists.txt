@@ -26,7 +26,7 @@ check_symbol_exists(PR_SET_DUMPABLE "sys/prctl.h" HAVE_PR_SET_DUMPABLE)
 add_feature_info("prctl-dumpable" HAVE_PR_SET_DUMPABLE "Required for disallow ptrace on greeter and kcheckpass process")
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-                    Plasma KCMUtils Declarative IdleTime KDELibs4Support Crash GlobalAccel)
+                    KCMUtils Declarative IdleTime KDELibs4Support Crash GlobalAccel)
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"

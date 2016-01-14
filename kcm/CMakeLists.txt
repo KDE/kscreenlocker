@@ -39,4 +39,4 @@ install(
         ${KDE_INSTALL_KSERVICES5DIR}
 )
 
-plasma_install_package(package screenlocker_kcm kcms screenlocker_kcm)
+kpackage_install_package(package screenlocker_kcm kcms screenlocker_kcm)
