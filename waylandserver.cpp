@@ -18,6 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "waylandserver.h"
+#include "powermanagement.h"
 // ksld
 #include <config-kscreenlocker.h>
 // Wayland
@@ -54,6 +55,8 @@ WaylandServer::WaylandServer(QObject *parent)
                                           s_osdServiceInterface,
                                           QStringLiteral("osdText"),
                                           this, SLOT(osdText(QString,QString)));
+    connect(PowerManagement::instance(), &PowerManagement::canSuspendChanged, this, &WaylandServer::sendCanSuspend);
+    connect(PowerManagement::instance(), &PowerManagement::canHibernateChanged, this, &WaylandServer::sendCanHibernate);
 }
 
 WaylandServer::~WaylandServer()
@@ -85,7 +88,7 @@ int WaylandServer::start()
         return -1;
     }
     connect(m_allowedClient, &KWayland::Server::ClientConnection::disconnected, this, [this] { m_allowedClient = nullptr; });
-    m_interface = wl_global_create(*m_display.data(), &org_kde_ksld_interface, 2, this, bind);
+    m_interface = wl_global_create(*m_display.data(), &org_kde_ksld_interface, 3, this, bind);
     return socketPair[1];
 }
 
@@ -110,17 +113,21 @@ void WaylandServer::bind(wl_client *client, void *data, uint32_t version, uint32
         wl_client_post_no_memory(client);
         return;
     }
-    wl_resource *r = s->m_allowedClient->createResource(&org_kde_ksld_interface, qMin(version, 2u), id);
+    wl_resource *r = s->m_allowedClient->createResource(&org_kde_ksld_interface, qMin(version, 3u), id);
     if (!r) {
         wl_client_post_no_memory(client);
         return;
     }
 
     static const struct org_kde_ksld_interface s_interface = {
-        x11WindowCallback
+        x11WindowCallback,
+        suspendSystemCallback,
+        hibernateSystemCallback
     };
     wl_resource_set_implementation(r, &s_interface, s, unbind);
     s->addResource(r);
+    s->sendCanSuspend();
+    s->sendCanHibernate();
     s->m_allowedClient->flush();
 }
 
@@ -136,6 +143,20 @@ void WaylandServer::x11WindowCallback(wl_client *client, wl_resource *resource, 
         return;
     }
     emit s->x11WindowAdded(id);
+}
+
+void WaylandServer::suspendSystemCallback(wl_client *client, wl_resource *resource)
+{
+    Q_UNUSED(client)
+    Q_UNUSED(resource)
+    PowerManagement::instance()->suspend();
+}
+
+void WaylandServer::hibernateSystemCallback(wl_client *client, wl_resource *resource)
+{
+    Q_UNUSED(client)
+    Q_UNUSED(resource)
+    PowerManagement::instance()->hibernate();
 }
 
 void WaylandServer::addResource(wl_resource *r)
@@ -174,6 +195,34 @@ void WaylandServer::osdText(const QString &icon, const QString &additionalText)
         org_kde_ksld_send_osdText(r, icon.toUtf8().constData(), additionalText.toUtf8().constData());
         m_allowedClient->flush();
     }
+}
+
+void WaylandServer::sendCanSuspend()
+{
+    if (!m_allowedClient) {
+        return;
+    }
+    Q_FOREACH (auto r, m_resources) {
+        if (wl_resource_get_version(r) < ORG_KDE_KSLD_CANSUSPENDSYSTEM_SINCE_VERSION) {
+            continue;
+        }
+        org_kde_ksld_send_canSuspendSystem(r, PowerManagement::instance()->canSuspend() ? 1 : 0);
+    }
+    m_allowedClient->flush();
+}
+
+void WaylandServer::sendCanHibernate()
+{
+    if (!m_allowedClient) {
+        return;
+    }
+    Q_FOREACH (auto r, m_resources) {
+        if (wl_resource_get_version(r) < ORG_KDE_KSLD_CANHIBERNATESYSTEM_SINCE_VERSION) {
+            continue;
+        }
+        org_kde_ksld_send_canHibernateSystem(r, PowerManagement::instance()->canHibernate() ? 1 : 0);
+    }
+    m_allowedClient->flush();
 }
 
 }

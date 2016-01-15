@@ -25,18 +25,17 @@ ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
 target_link_libraries(kscreenlocker_greet
-                        KF5::Solid
                         KF5::Package
                         KF5::Crash
                         KF5::I18n
                         KF5::ConfigGui
                         KF5::Declarative
                         KF5::QuickAddons
+                        KF5::WindowSystem
                         Qt5::Quick
                         Qt5::Qml
                         Qt5::X11Extras
                         ${X11_LIBRARIES}
-                        KF5::KDELibs4Support
                         KF5::WaylandClient
                         Wayland::Client
                         )

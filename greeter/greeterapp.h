@@ -61,6 +61,8 @@ public:
 
     void osdProgress(const QString &icon, int percent, const QString &additionalText);
     void osdText(const QString &icon, const QString &additionalText);
+    void updateCanSuspend(bool set);
+    void updateCanHibernate(bool set);
 
 public Q_SLOTS:
     void desktopResized();
@@ -93,6 +95,9 @@ private:
     Authenticator *m_authenticator;
     int m_graceTime;
     bool m_noLock;
+
+    bool m_canSuspend = false;
+    bool m_canHibernate = false;
 
     KWayland::Client::ConnectionThread *m_ksldConnection = nullptr;
     KWayland::Client::Registry *m_ksldRegistry = nullptr;

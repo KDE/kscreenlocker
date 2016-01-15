@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kdeclarative/kdeclarative.h>
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
 #include <KUser>
-#include <Solid/PowerManagement>
 //Plasma
 #include <KPackage/Package>
 #include <KPackage/PackageStructure>
@@ -183,7 +182,6 @@ void UnlockApp::desktopResized()
 
     // extend views and savers to current demand
     const bool canLogout = KAuthorized::authorizeKAction(QStringLiteral("logout")) && KAuthorized::authorize(QStringLiteral("logout"));
-    const QSet<Solid::PowerManagement::SleepState> spdMethods = Solid::PowerManagement::supportedSleepStates();
     for (int i = m_views.count(); i < nScreens; ++i) {
         connect(QGuiApplication::screens()[i], &QObject::destroyed, this, &UnlockApp::desktopResized);
         // create the view
@@ -250,16 +248,14 @@ void UnlockApp::desktopResized()
         lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
 
         QQmlProperty sleepProperty(view->rootObject(), QStringLiteral("suspendToRamSupported"));
-        sleepProperty.write(spdMethods.contains(Solid::PowerManagement::SuspendState));
-        if (spdMethods.contains(Solid::PowerManagement::SuspendState) &&
-            view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
+        sleepProperty.write(m_canSuspend);
+        if (view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
             connect(view->rootObject(), SIGNAL(suspendToRam()), SLOT(suspendToRam()));
         }
 
         QQmlProperty hibernateProperty(view->rootObject(), QStringLiteral("suspendToDiskSupported"));
-        hibernateProperty.write(spdMethods.contains(Solid::PowerManagement::HibernateState));
-        if (spdMethods.contains(Solid::PowerManagement::HibernateState) &&
-            view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
+        hibernateProperty.write(m_canHibernate);
+        if (view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
             connect(view->rootObject(), SIGNAL(suspendToDisk()), SLOT(suspendToDisk()));
         }
 
@@ -386,7 +382,7 @@ void UnlockApp::suspendToRam()
     m_ignoreRequests = true;
     m_resetRequestIgnoreTimer->start();
 
-    Solid::PowerManagement::requestSleep(Solid::PowerManagement::SuspendState, 0, 0);
+    org_kde_ksld_suspendSystem(m_ksldInterface);
 
 }
 
@@ -399,7 +395,7 @@ void UnlockApp::suspendToDisk()
     m_ignoreRequests = true;
     m_resetRequestIgnoreTimer->start();
 
-    Solid::PowerManagement::requestSleep(Solid::PowerManagement::HibernateState, 0, 0);
+    org_kde_ksld_hibernateSystem(m_ksldInterface);
 }
 
 void UnlockApp::setTesting(bool enable)
@@ -523,9 +519,23 @@ static void osdText(void *data, org_kde_ksld *org_kde_ksld, const char *icon, co
     reinterpret_cast<UnlockApp*>(data)->osdText(QString::fromUtf8(icon), QString::fromUtf8(text));
 }
 
+static void canSuspend(void *data, org_kde_ksld *org_kde_ksld, uint suspend)
+{
+    Q_UNUSED(org_kde_ksld)
+    reinterpret_cast<UnlockApp*>(data)->updateCanSuspend(suspend);
+}
+
+static void canHibernate(void *data, org_kde_ksld *org_kde_ksld, uint hibernate)
+{
+    Q_UNUSED(org_kde_ksld)
+    reinterpret_cast<UnlockApp*>(data)->updateCanHibernate(hibernate);
+}
+
 static const struct org_kde_ksld_listener s_listener {
     osdProgress,
-    osdText
+    osdText,
+    canSuspend,
+    canHibernate
 };
 
 void UnlockApp::setKsldSocket(int socket)
@@ -595,6 +605,30 @@ void UnlockApp::osdText(const QString &icon, const QString &additionalText)
         osd->setProperty("osdValue", additionalText);
         osd->setProperty("icon", icon);
         QMetaObject::invokeMethod(osd, "show");
+    }
+}
+
+void UnlockApp::updateCanSuspend(bool set)
+{
+    if (m_canSuspend == set) {
+        return;
+    }
+    m_canSuspend = set;
+    for (auto it = m_views.constBegin(), end = m_views.constEnd(); it != end; ++it) {
+        QQmlProperty sleepProperty((*it)->rootObject(), QStringLiteral("suspendToRamSupported"));
+        sleepProperty.write(m_canSuspend);
+    }
+}
+
+void UnlockApp::updateCanHibernate(bool set)
+{
+    if (m_canHibernate == set) {
+        return;
+    }
+    m_canHibernate = set;
+    for (auto it = m_views.constBegin(), end = m_views.constEnd(); it != end; ++it) {
+        QQmlProperty hibernateProperty((*it)->rootObject(), QStringLiteral("suspendToDiskSupported"));
+        hibernateProperty.write(m_canHibernate);
     }
 }
 

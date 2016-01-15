@@ -58,8 +58,12 @@ private:
     static void bind(wl_client *client, void *data, uint32_t version, uint32_t id);
     static void unbind(wl_resource *resource);
     static void x11WindowCallback(wl_client *client, wl_resource *resource, uint32_t id);
+    static void suspendSystemCallback(wl_client *client, wl_resource *resource);
+    static void hibernateSystemCallback(wl_client *client, wl_resource *resource);
     void addResource(wl_resource *r);
     void removeResource(wl_resource *r);
+    void sendCanSuspend();
+    void sendCanHibernate();
     QScopedPointer<KWayland::Server::Display> m_display;
     KWayland::Server::ClientConnection *m_allowedClient = nullptr;
     wl_global *m_interface = nullptr;

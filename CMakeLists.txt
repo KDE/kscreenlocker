@@ -89,6 +89,7 @@ set(ksld_SRCS
    waylandlocker.cpp
    logind.cpp
    waylandserver.cpp
+   powermanagement.cpp
 )
 qt5_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
 qt5_add_dbus_adaptor(ksld_SRCS ${kscreensaver_dbusXML} interface.h ScreenLocker::Interface kscreensaveradaptor KScreenSaverAdaptor)
