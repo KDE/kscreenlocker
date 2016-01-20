@@ -700,6 +700,9 @@ void KSldApp::lockScreenShown()
 void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
 {
     m_greeterEnv = env;
+    if (m_isWayland) {
+        m_greeterEnv.insert(QStringLiteral("QT_QPA_PLATFORM"), QStringLiteral("wayland"));
+    }
 }
 
 } // namespace
