@@ -232,7 +232,8 @@ void UnlockApp::desktopResized()
         context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), user.faceIconPath());
         context->setContextProperty(QStringLiteral("authenticator"), m_authenticator);
         context->setContextProperty(QStringLiteral("backgroundPath"), KScreenSaverSettings::themeBackground());
-        context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 1);
+        context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
+        context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
 
         view->setSource(m_mainQmlPath);
         // on error, load the fallback lockscreen to not lock the user out of the system
