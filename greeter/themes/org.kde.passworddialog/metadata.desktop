@@ -2,6 +2,7 @@
 Name=Password dialog
 Name[ca]=Diàleg de contrasenya
 Name[ca@valencia]=Diàleg de contrasenya
+Name[cs]=Dialog hesla
 Name[da]=Adgangskodedialog
 Name[de]=Passwort-Dialog
 Name[el]=Διάλογος κωδικού πρόσβασης
@@ -31,6 +32,7 @@ Name[zh_CN]=密码对话框
 Comment=Screen locker that provides a password dialog and an interface to switch the current user
 Comment[ca]=Bloqueig de pantalla que proporciona un diàleg de contrasenya i una interfície per commutar l'usuari actual
 Comment[ca@valencia]=Bloqueig de pantalla que proporciona un diàleg de contrasenya i una interfície per commutar l'usuari actual
+Comment[cs]=Zámek obrazovky poskytující dialog s heslem a rozhraní pro přepínání uživatelů
 Comment[da]=Skærmlås som giver en adgangskodedialog med en brugerflade til at skifte aktuel bruger
 Comment[de]=Bildschirmsperre mit einem Passwortdialog und der Möglichkeit, den aktuellen Benutzer zu wechseln
 Comment[el]=Εφαρμογή κλειδώματος οθόνης με διάλογο κωδικού πρόσβασης και μια διεπαφή για την εναλλαγή του τρέχοντος χρήστη
