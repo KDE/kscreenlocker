@@ -175,7 +175,7 @@ void WaylandServer::osdProgress(const QString &icon, int percent, const QString 
         return;
     }
     Q_FOREACH (auto r, m_resources) {
-        if (wl_resource_get_version(r) < 2) {
+        if (wl_resource_get_version(r) < ORG_KDE_KSLD_OSDPROGRESS_SINCE_VERSION) {
             continue;
         }
         org_kde_ksld_send_osdProgress(r, icon.toUtf8().constData(), percent, additionalText.toUtf8().constData());
@@ -189,7 +189,7 @@ void WaylandServer::osdText(const QString &icon, const QString &additionalText)
         return;
     }
     Q_FOREACH (auto r, m_resources) {
-        if (wl_resource_get_version(r) < 2) {
+        if (wl_resource_get_version(r) < ORG_KDE_KSLD_OSDTEXT_SINCE_VERSION) {
             continue;
         }
         org_kde_ksld_send_osdText(r, icon.toUtf8().constData(), additionalText.toUtf8().constData());
