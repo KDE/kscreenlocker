@@ -174,7 +174,7 @@ void WaylandServer::osdProgress(const QString &icon, int percent, const QString 
     if (!m_allowedClient) {
         return;
     }
-    for (auto r : m_resources) {
+    Q_FOREACH (auto r, m_resources) {
         if (wl_resource_get_version(r) < 2) {
             continue;
         }
@@ -188,7 +188,7 @@ void WaylandServer::osdText(const QString &icon, const QString &additionalText)
     if (!m_allowedClient) {
         return;
     }
-    for (auto r : m_resources) {
+    Q_FOREACH (auto r, m_resources) {
         if (wl_resource_get_version(r) < 2) {
             continue;
         }
