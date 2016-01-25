@@ -181,7 +181,6 @@ void UnlockApp::desktopResized()
     }
 
     // extend views and savers to current demand
-    const bool canLogout = KAuthorized::authorizeKAction(QStringLiteral("logout")) && KAuthorized::authorize(QStringLiteral("logout"));
     for (int i = m_views.count(); i < nScreens; ++i) {
         connect(QGuiApplication::screens()[i], &QObject::destroyed, this, &UnlockApp::desktopResized);
         // create the view
