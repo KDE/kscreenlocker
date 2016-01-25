@@ -18,6 +18,7 @@ include(CheckIncludeFiles)
 include(ECMMarkNonGuiExecutable)
 include(ECMPackageConfigHelpers)
 include(FeatureSummary)
+include(GenerateExportHeader)
 
 include(CheckIncludeFile)
 include(CheckSymbolExists)
@@ -26,7 +27,17 @@ check_symbol_exists(PR_SET_DUMPABLE "sys/prctl.h" HAVE_PR_SET_DUMPABLE)
 add_feature_info("prctl-dumpable" HAVE_PR_SET_DUMPABLE "Required for disallow ptrace on greeter and kcheckpass process")
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-                    KCMUtils Declarative IdleTime KDELibs4Support Crash GlobalAccel)
+                    Crash
+                    Declarative
+                    GlobalAccel
+                    I18n
+                    IdleTime
+                    KCMUtils
+                    Notifications
+                    Solid
+                    WindowSystem
+                    XmlGui
+                    )
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
@@ -78,7 +89,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"kscreenlocker\")
 
 set(screensaver_dbusXML dbus/org.freedesktop.ScreenSaver.xml)
 set(kscreensaver_dbusXML dbus/org.kde.screensaver.xml)
-set(powerdevilpolicyagent_xml ${KDE4_DBUS_INTERFACES_DIR}/kf5_org.kde.Solid.PowerManagement.PolicyAgent.xml)
+set(powerdevilpolicyagent_xml ${SOLID_DBUS_INTERFACES_DIR}/kf5_org.kde.Solid.PowerManagement.PolicyAgent.xml)
 
 set(ksld_SRCS
    abstractlocker.cpp
