@@ -33,6 +33,7 @@ class GlobalAccel;
 class LogindIntegration;
 class QTimer;
 class KSldTest;
+class PowerManagementInhibition;
 
 namespace KWayland
 {
@@ -157,6 +158,7 @@ private:
     bool m_isWayland;
     int m_greeterCrashedCounter = 0;
     QProcessEnvironment m_greeterEnv;
+    PowerManagementInhibition *m_powerManagementInhibition;
 
     // for auto tests
     friend KSldTest;

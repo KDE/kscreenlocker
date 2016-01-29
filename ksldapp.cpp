@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "waylandlocker.h"
 #include "logind.h"
 #include "kscreensaversettings.h"
+#include "powermanagement_inhibition.h"
 #include <config-kscreenlocker.h>
 #include <config-X11.h>
 #include "waylandserver.h"
@@ -90,6 +91,7 @@ KSldApp::KSldApp(QObject * parent)
     , m_inhibitCounter(0)
     , m_logind(nullptr)
     , m_greeterEnv(QProcessEnvironment::systemEnvironment())
+    , m_powerManagementInhibition(new PowerManagementInhibition(this))
 {
     m_isX11 = QX11Info::isPlatformX11();
     m_isWayland = QGuiApplication::platformName().startsWith( QLatin1String("wayland"), Qt::CaseInsensitive);
@@ -536,14 +538,7 @@ void KSldApp::doUnlock()
 
 bool KSldApp::isFdoPowerInhibited() const
 {
-    QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
-                                                      QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
-                                                      QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
-                                                      QStringLiteral("HasInhibition"));
-    msg << (uint) 5; // PowerDevil::PolicyAgent::RequiredPolicy::ChangeScreenSettings | PowerDevil::PolicyAgent::RequiredPolicy::InterruptSession
-    QDBusReply<bool> reply = QDBusConnection::sessionBus().asyncCall(msg);
-
-    return reply.isValid() && reply.value();
+    return m_powerManagementInhibition->isInhibited();
 }
 
 void KSldApp::startLockProcess(EstablishLock establishLock)
