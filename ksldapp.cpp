@@ -209,6 +209,7 @@ void KSldApp::initialize()
     );
 
     m_lockProcess = new QProcess();
+    m_lockProcess->setProcessChannelMode(QProcess::ForwardedErrorChannel);
     m_lockProcess->setReadChannel(QProcess::StandardOutput);
     auto finishedSignal = static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished);
     connect(m_lockProcess, finishedSignal, this,
