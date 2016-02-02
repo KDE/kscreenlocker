@@ -388,6 +388,7 @@ void KSldApp::lock(EstablishLock establishLock)
 
     // start unlock screen process
     startLockProcess(establishLock);
+    emit lockStateChanged();
 }
 
 /*
@@ -536,6 +537,7 @@ void KSldApp::doUnlock()
                          KNotification::CloseOnTimeout,
                          QStringLiteral("ksmserver"));
     emit unlocked();
+    emit lockStateChanged();
 }
 
 bool KSldApp::isFdoPowerInhibited() const
@@ -692,6 +694,7 @@ void KSldApp::lockScreenShown()
     m_lockState = Locked;
     m_lockedTimer.restart();
     emit locked();
+    emit lockStateChanged();
 }
 
 void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
