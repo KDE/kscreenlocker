@@ -257,7 +257,7 @@ void KSldApp::initialize()
     );
     connect(m_logind, &LogindIntegration::requestUnlock, this,
         [this]() {
-            if (lockState() == Locked) {
+            if (lockState() == Locked || lockState() == AcquiringLock) {
                 if (m_lockProcess->state() != QProcess::NotRunning) {
                     s_logindExit = true;
                     m_lockProcess->kill();
