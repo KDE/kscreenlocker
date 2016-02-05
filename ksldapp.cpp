@@ -95,7 +95,7 @@ KSldApp::KSldApp(QObject * parent)
     , m_powerManagementInhibition(new PowerManagementInhibition(this))
 {
     m_isX11 = QX11Info::isPlatformX11();
-    m_isWayland = QGuiApplication::platformName().startsWith( QLatin1String("wayland"), Qt::CaseInsensitive);
+    m_isWayland = QCoreApplication::instance()->property("platformName").toString().startsWith( QLatin1String("wayland"), Qt::CaseInsensitive);
 }
 
 KSldApp::~KSldApp()

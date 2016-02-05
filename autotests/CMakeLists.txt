@@ -54,3 +54,16 @@ target_link_libraries(x11LockerTest
 )
 add_test(ksmserver-x11LockerTest x11LockerTest)
 ecm_mark_as_test(x11LockerTest)
+
+#######################################
+# NoScreensTest
+#######################################
+set(noScreensTest_SRCS noscreens.cpp)
+add_executable(noScreensTest ${noScreensTest_SRCS})
+target_link_libraries(noScreensTest
+    KScreenLocker
+    Qt5::Test
+    KF5::WaylandServer
+    )
+add_test(ksld-noScreensTest noScreensTest)
+ecm_mark_as_test(noScreensTest)

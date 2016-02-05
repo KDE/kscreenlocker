@@ -81,8 +81,10 @@ void BackgroundWindow::emergencyShow()
 
 AbstractLocker::AbstractLocker(QObject *parent)
     : QObject(parent)
-    , m_background(new BackgroundWindow(this))
 {
+    if (qobject_cast<QGuiApplication*>(QCoreApplication::instance())) {
+        m_background.reset(new BackgroundWindow(this));
+    }
 }
 
 AbstractLocker::~AbstractLocker()
@@ -91,6 +93,9 @@ AbstractLocker::~AbstractLocker()
 
 void AbstractLocker::emergencyShow()
 {
+    if (m_background.isNull()) {
+        return;
+    }
     m_background->emergencyShow();
 }
 
