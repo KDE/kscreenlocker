@@ -1,6 +1,7 @@
 [Global]
 IconName=system-lock-screen
 Comment=Screen Saver
+Comment[ar]=حافظ الشّاشة
 Comment[ast]=Curiapantalles
 Comment[ca]=Estalvi de pantalla
 Comment[ca@valencia]=Estalvi de pantalla
@@ -35,6 +36,7 @@ Comment[zh_CN]=屏幕保护程序
 
 [Event/locked]
 Name=Screen locked
+Name[ar]=قُفلت الشّاشة
 Name[ca]=Pantalla bloquejada
 Name[ca@valencia]=Pantalla bloquejada
 Name[cs]=Obrazovka uzamčena
@@ -66,6 +68,7 @@ Name[uk]=Екран заблоковано
 Name[x-test]=xxScreen lockedxx
 Name[zh_CN]=屏幕已锁定
 Comment=The screen has been locked
+Comment[ar]=لقد قُفلت الشّاشة
 Comment[ca]=S'ha bloquejat la pantalla
 Comment[ca@valencia]=S'ha bloquejat la pantalla
 Comment[cs]=Obrazovka byla uzamčena
@@ -100,6 +103,7 @@ Action=None
 
 [Event/unlocked]
 Name=Screen unlocked
+Name[ar]=أُزيل قفل الشّاشة
 Name[ca]=Pantalla desbloquejada
 Name[ca@valencia]=Pantalla desbloquejada
 Name[cs]=Obrazovka odemknuta
@@ -131,6 +135,7 @@ Name[uk]=Екран розблоковано
 Name[x-test]=xxScreen unlockedxx
 Name[zh_CN]=屏幕已解锁
 Comment=The screen has been unlocked
+Comment[ar]=لقد أُزيل قفل الشّاشة
 Comment[ca]=S'ha desbloquejat la pantalla
 Comment[ca@valencia]=S'ha desbloquejat la pantalla
 Comment[cs]=Obrazovka byla odemknuta
