@@ -24,7 +24,7 @@ set_property(TARGET kcheckpass APPEND_STRING PROPERTY COMPILE_FLAGS " -U_REENTRA
 target_link_libraries(kcheckpass ${UNIXAUTH_LIBRARIES} ${SOCKET_LIBRARIES})
 install(TARGETS kcheckpass DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 install(CODE "
-    set(KCP_PATH \"\$ENV{DESTDIR}${KDE_INSTALL_LIBEXECDIR}/kcheckpass\")
+    set(KCP_PATH \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/${KDE_INSTALL_LIBEXECDIR}/kcheckpass\")
     execute_process(COMMAND sh -c \"chown root '\${KCP_PATH}' && chmod +s '\${KCP_PATH}'\")
 ")
 
