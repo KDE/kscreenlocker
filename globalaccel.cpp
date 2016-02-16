@@ -83,8 +83,10 @@ void GlobalAccel::prepare()
     // first ensure that we don't have some left over
     release();
 
-    m_keySymbols = xcb_key_symbols_alloc(QX11Info::connection());
-    calculateGrabMasks();
+    if (QX11Info::isPlatformX11()) {
+        m_keySymbols = xcb_key_symbols_alloc(QX11Info::connection());
+        calculateGrabMasks();
+    }
 
     // fetch all compnents from KGlobalAccel
     m_updatingInformation++;
