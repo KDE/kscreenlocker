@@ -102,6 +102,8 @@ public:
     void lock(EstablishLock establishLock);
     void initialize();
 
+    bool event(QEvent *event) override;
+
 Q_SIGNALS:
     void locked();
     void unlocked();

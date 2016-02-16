@@ -45,6 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Qt
 #include <QAction>
+#include <QKeyEvent>
 #include <QTimer>
 #include <QProcess>
 #include <QX11Info>
@@ -706,6 +707,16 @@ void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
     if (m_isWayland) {
         m_greeterEnv.insert(QStringLiteral("QT_QPA_PLATFORM"), QStringLiteral("wayland"));
     }
+}
+
+bool KSldApp::event(QEvent *event)
+{
+    if (m_globalAccel && event->type() == QEvent::KeyPress) {
+        if (m_globalAccel->keyEvent(static_cast<QKeyEvent*>(event))) {
+            event->setAccepted(true);
+        }
+    }
+    return false;
 }
 
 } // namespace

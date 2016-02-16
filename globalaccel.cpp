@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusPendingReply>
+#include <QKeyEvent>
 #include <QX11Info>
 
 #include <xcb/xcb.h>
@@ -182,6 +183,37 @@ void GlobalAccel::release()
         xcb_key_symbols_free(m_keySymbols);
         m_keySymbols = nullptr;
     }
+}
+
+bool GlobalAccel::keyEvent(QKeyEvent *event)
+{
+    const int keyCodeQt = event->key();
+    Qt::KeyboardModifiers keyModQt = event->modifiers();
+
+    if (keyModQt & Qt::SHIFT && !KKeyServer::isShiftAsModifierAllowed(keyCodeQt)) {
+        keyModQt &= ~Qt::SHIFT;
+    }
+
+    if ((keyModQt == 0 || keyModQt == Qt::SHIFT) && (keyCodeQt >= Qt::Key_Space && keyCodeQt <= Qt::Key_AsciiTilde)) {
+        // security check: we don't allow shortcuts without modifier for "normal" keys
+        // this is to prevent a malicious application to grab shortcuts for all keys
+        // and by that being able to read out the keyboard
+        return false;
+    }
+
+    const QKeySequence seq(keyCodeQt | keyModQt);
+    // let's check whether we have a mapping shortcut
+    for (auto it = m_shortcuts.constBegin(); it != m_shortcuts.constEnd(); ++it) {
+        for (const auto &info : it.value()) {
+            if (info.keys().contains(seq)) {
+                auto signal = QDBusMessage::createMethodCall(s_kglobalAccelService, it.key(), s_componentInterface, QStringLiteral("invokeShortcut"));
+                signal.setArguments(QList<QVariant>{QVariant(info.uniqueName())});
+                QDBusConnection::sessionBus().asyncCall(signal);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 bool GlobalAccel::checkKeyPress(xcb_key_press_event_t *event)

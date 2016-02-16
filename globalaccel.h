@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMap>
 
 class QDBusPendingCallWatcher;
+class QKeyEvent;
 
 struct xcb_key_press_event_t;
 typedef struct _XCBKeySymbols xcb_key_symbols_t;
@@ -81,6 +82,8 @@ public:
      * If there is no matching global shortcut @c false is returned.
      **/
     bool checkKeyPress(xcb_key_press_event_t *event);
+
+    bool keyEvent(QKeyEvent *event);
 
 private:
     void components(QDBusPendingCallWatcher *watcher);
