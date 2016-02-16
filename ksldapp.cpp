@@ -691,6 +691,9 @@ void KSldApp::setWaylandDisplay(KWayland::Server::Display *display)
 
 void KSldApp::lockScreenShown()
 {
+    if (m_lockState == Locked) {
+        return;
+    }
     m_lockState = Locked;
     m_lockedTimer.restart();
     emit locked();
