@@ -48,8 +48,8 @@ static Atom   gXA_SCREENSAVER_VERSION;
 namespace ScreenLocker
 {
 
-X11Locker::X11Locker()
-    : AbstractLocker()
+X11Locker::X11Locker(QObject *parent)
+    : AbstractLocker(parent)
     , QAbstractNativeEventFilter()
 {
     initialize();

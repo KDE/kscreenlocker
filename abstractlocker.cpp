@@ -79,8 +79,9 @@ void BackgroundWindow::emergencyShow()
     show();
 }
 
-AbstractLocker::AbstractLocker() :
-    m_background(new BackgroundWindow(this))
+AbstractLocker::AbstractLocker(QObject *parent)
+    : QObject(parent)
+    , m_background(new BackgroundWindow(this))
 {
 }
 

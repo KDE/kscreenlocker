@@ -25,8 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace ScreenLocker
 {
 
-WaylandLocker::WaylandLocker(KWayland::Server::Display *display)
-    : AbstractLocker()
+WaylandLocker::WaylandLocker(KWayland::Server::Display *display, QObject *parent)
+    : AbstractLocker(parent)
 {
     const auto seats = display->seats();
     for (auto s : seats) {
