@@ -126,7 +126,6 @@ PRIVATE
    KF5::Notifications
    KF5::CoreAddons
    KF5::ConfigGui
-   KF5::Crash
    KF5::WindowSystem
    ${X11_LIBRARIES}
    ${X11_Xcursor_LIB}

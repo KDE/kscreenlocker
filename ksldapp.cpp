@@ -37,7 +37,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 #include <KNotification>
 #include <KGlobalAccel>
-#include <KCrash>
 
 //kwayland
 #include <KWayland/Server/display.h>
@@ -163,7 +162,6 @@ void KSldApp::initializeX11()
 
 void KSldApp::initialize()
 {
-    KCrash::setFlags(KCrash::AutoRestart);
     if (m_isX11) {
         initializeX11();
     }
