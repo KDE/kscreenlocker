@@ -88,6 +88,12 @@ int main(int argc, char* argv[])
 
     QCommandLineOption testingOption(QStringLiteral("testing"),
                                      i18n("Starts the greeter in testing mode"));
+
+    QCommandLineOption themeOption(QStringLiteral("theme"),
+                                     i18n("Starts the greeter with the selected theme (only in Testing mode)"),
+                                     QStringLiteral("theme"),
+                                     QStringLiteral(""));
+
     QCommandLineOption immediateLockOption(QStringLiteral("immediateLock"),
                                            i18n("Lock immediately, ignoring any grace time etc."));
     QCommandLineOption graceTimeOption(QStringLiteral("graceTime"),
@@ -101,6 +107,7 @@ int main(int argc, char* argv[])
                                        QStringLiteral("fd"));
 
     parser.addOption(testingOption);
+    parser.addOption(themeOption);
     parser.addOption(immediateLockOption);
     parser.addOption(graceTimeOption);
     parser.addOption(nolockOption);
@@ -110,6 +117,12 @@ int main(int argc, char* argv[])
     if (parser.isSet(testingOption)) {
         app.setTesting(true);
         app.setImmediateLock(true);
+
+        //parse theme option
+        const QString theme = parser.value(themeOption);
+        if (!theme.isEmpty()) {
+            app.setTheme(theme);
+        }
 
         // allow ptrace if testing is enabled
 #if HAVE_PR_SET_DUMPABLE

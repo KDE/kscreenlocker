@@ -53,6 +53,7 @@ public:
     virtual ~UnlockApp();
 
     void setTesting(bool enable);
+    void setTheme(const QString &theme);
     void setImmediateLock(bool immediateLock);
     void lockImmediately();
     void setGraceTime(int milliseconds);
@@ -83,6 +84,7 @@ private:
     void initializeWayland();
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
 
+    QString m_packageName;
     QUrl m_mainQmlPath;
     QList<KQuickAddons::QuickViewSharedEngine*> m_views;
     QTimer *m_resetRequestIgnoreTimer;

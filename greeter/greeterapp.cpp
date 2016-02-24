@@ -138,9 +138,9 @@ void UnlockApp::initialize()
     KScreenSaverSettings::self()->load();
     KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
     KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
-    const QString packageName = cg.readEntry("LookAndFeelPackage", QString());
-    if (!packageName.isEmpty()) {
-        package.setPath(packageName);
+    m_packageName = cg.readEntry("LookAndFeelPackage", QString());
+    if (!m_packageName.isEmpty()) {
+        package.setPath(m_packageName);
     }
     if (!KScreenSaverSettings::theme().isEmpty()) {
         package.setPath(KScreenSaverSettings::theme());
@@ -413,6 +413,19 @@ void UnlockApp::setTesting(bool enable)
             view->setFlags(view->flags() | Qt::X11BypassWindowManagerHint);
         }
     }
+}
+
+void UnlockApp::setTheme(const QString &theme)
+{
+    if (theme.isEmpty() || !m_testing) {
+        return;
+    }
+
+    m_packageName = theme;
+    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
+    package.setPath(m_packageName);
+
+    m_mainQmlPath = QUrl::fromLocalFile(package.filePath("lockscreenmainscript"));
 }
 
 void UnlockApp::setImmediateLock(bool immediate)
