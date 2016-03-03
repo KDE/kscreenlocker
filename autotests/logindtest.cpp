@@ -45,6 +45,7 @@ void LogindTest::testLockUnlock()
     QVERIFY(logindIntegration->isConnected());
 
     fakeLogind.lock();
+    QVERIFY(lockSpy.wait());
     fakeLogind.lock();
 
     QVERIFY(lockSpy.wait());
