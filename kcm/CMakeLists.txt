@@ -20,7 +20,6 @@ target_link_libraries(screenlocker_kcm
     KF5::GlobalAccel
     KF5::Package
     KF5::XmlGui
-    Qt5::QuickWidgets
 )
 
 kcoreaddons_desktop_to_json(screenlocker_kcm screenlocker.desktop SERVICE_TYPES kcmodule.desktop)
@@ -38,5 +37,3 @@ install(
     DESTINATION
         ${KDE_INSTALL_KSERVICES5DIR}
 )
-
-kpackage_install_package(package screenlocker_kcm kcms plasma)

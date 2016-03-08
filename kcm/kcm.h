@@ -30,8 +30,6 @@ class ScreenLockerKcmForm;
 class ScreenLockerKcm : public KCModule
 {
     Q_OBJECT
-    Q_PROPERTY(QStandardItemModel *lockerModel READ lockerModel CONSTANT)
-    Q_PROPERTY(QString selectedPlugin READ selectedPlugin WRITE setSelectedPlugin NOTIFY selectedPluginChanged)
 
 public:
     enum Roles {
@@ -40,28 +38,15 @@ public:
     };
     explicit ScreenLockerKcm(QWidget *parent = nullptr, const QVariantList& args = QVariantList());
 
-    QList<KPackage::Package> availablePackages(const QString &component) const;
-
-    QStandardItemModel *lockerModel();
-
-    QString selectedPlugin() const;
-    void setSelectedPlugin(const QString &plugin);
-
 public Q_SLOTS:
     void load() Q_DECL_OVERRIDE;
     void save() Q_DECL_OVERRIDE;
     void defaults() Q_DECL_OVERRIDE;
     void test(const QString &plugin);
 
-Q_SIGNALS:
-    void selectedPluginChanged();
-
 private:
     void shortcutChanged(const QKeySequence &key);
     bool shouldSaveShortcut();
-    QStandardItemModel *m_model;
-    QString m_selectedPlugin;
-    QQuickView *m_quickView;
     KPackage::Package m_package;
     KActionCollection *m_actionCollection;
     ScreenLockerKcmForm *m_ui;
