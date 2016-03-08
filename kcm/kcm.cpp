@@ -28,10 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KPluginFactory>
 #include <KConfigDialogManager>
 #include <QVBoxLayout>
-#include <QQuickView>
-#include <QtQml>
-#include <QQmlEngine>
-#include <QQmlContext>
 #include <QMessageBox>
 #include <QStandardItemModel>
 
@@ -60,31 +56,9 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
     , m_actionCollection(new KActionCollection(this, QStringLiteral("ksmserver")))
     , m_ui(new ScreenLockerKcmForm(this))
 {
-    qmlRegisterType<QStandardItemModel>();
     KConfigDialogManager::changedMap()->insert(QStringLiteral("SelectImageButton"), SIGNAL(imagePathChanged(QString)));
 
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(m_ui);
-
     addConfig(KScreenSaverSettings::self(), m_ui);
-
-    m_model = new QStandardItemModel(this);
-    QHash<int, QByteArray> roles = m_model->roleNames();
-    roles[PluginNameRole] = "pluginName";
-    roles[ScreenhotRole] = "screenshot";
-    m_model->setItemRoleNames(roles);
-
-    m_quickView = new QQuickView();
-    QWidget *widget = QWidget::createWindowContainer(m_quickView, this);
-    m_quickView->setResizeMode(QQuickView::SizeRootObjectToView);
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Generic"));
-    package.setDefaultPackageRoot(QStringLiteral("plasma/kcms"));
-    package.setPath(QStringLiteral("screenlocker_kcm"));
-    m_quickView->rootContext()->setContextProperty(QStringLiteral("kcm"), this);
-    m_quickView->setSource(QUrl::fromLocalFile(package.filePath("mainscript")));
-    setMinimumHeight(m_quickView->initialSize().height());
-
-    layout->addWidget(widget);
 
     m_actionCollection->setConfigGlobal(true);
     QAction *a = m_actionCollection->addAction(s_lockActionName);
@@ -104,29 +78,6 @@ void ScreenLockerKcm::shortcutChanged(const QKeySequence &key)
     changed();
 }
 
-QList<KPackage::Package> ScreenLockerKcm::availablePackages(const QString &component) const
-{
-    QList<KPackage::Package> packages;
-    QStringList paths;
-    const QStringList dataPaths = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
-
-    for (const QString &path : dataPaths) {
-        QDir dir(path + "/plasma/look-and-feel");
-        paths << dir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot);
-    }
-
-    for (const QString &path : paths) {
-        KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
-        pkg.setPath(path);
-        pkg.setFallbackPackage(KPackage::Package());
-        if (component.isEmpty() || !pkg.filePath(component.toUtf8()).isEmpty()) {
-            packages << pkg;
-        }
-    }
-
-    return packages;
-}
-
 void ScreenLockerKcm::load()
 {
     KCModule::load();
@@ -138,48 +89,12 @@ void ScreenLockerKcm::load()
         m_package.setPath(packageName);
     }
 
-    QString currentPlugin = KScreenSaverSettings::theme();
-    if (currentPlugin.isEmpty()) {
-        currentPlugin = m_package.metadata().pluginId();
-    }
-    setSelectedPlugin(currentPlugin);
-
-    m_model->clear();
-    const QList<KPackage::Package> pkgs = availablePackages(QStringLiteral("lockscreenmainscript"));
-    for (const KPackage::Package &pkg : pkgs) {
-        QStandardItem* row = new QStandardItem(pkg.metadata().name());
-        row->setData(pkg.metadata().pluginId(), PluginNameRole);
-        row->setData(pkg.filePath("previews", QStringLiteral("lockscreen.png")), ScreenhotRole);
-        m_model->appendRow(row);
-    }
-
     if (QAction *a = m_actionCollection->action(s_lockActionName)) {
         auto shortcuts = KGlobalAccel::self()->shortcut(a);
         if (!shortcuts.isEmpty()) {
             m_ui->lockscreenShortcut->setKeySequence(shortcuts.first());
         }
     }
-}
-
-QStandardItemModel *ScreenLockerKcm::lockerModel()
-{
-    return m_model;
-}
-
-QString ScreenLockerKcm::selectedPlugin() const
-{
-    return m_selectedPlugin;
-}
-
-void ScreenLockerKcm::setSelectedPlugin(const QString &plugin)
-{
-    if (m_selectedPlugin == plugin) {
-        return;
-    }
-
-    m_selectedPlugin = plugin;
-    emit selectedPluginChanged();
-    changed();
 }
 
 void ScreenLockerKcm::test(const QString &plugin)
@@ -203,8 +118,6 @@ void ScreenLockerKcm::save()
         return;
     }
     KCModule::save();
-
-    KScreenSaverSettings::setTheme(m_selectedPlugin);
 
     KScreenSaverSettings::self()->save();
     if (m_ui->lockscreenShortcut->property("changed").toBool()) {

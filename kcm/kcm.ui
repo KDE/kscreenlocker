@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>957</width>
-    <height>480</height>
+    <height>260</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -73,7 +73,7 @@
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="KKeySequenceWidget" name="lockscreenShortcut" native="true">
+    <widget class="KKeySequenceWidget" name="lockscreenShortcut">
      <property name="toolTip">
       <string>The global keyboard shortcut to lock the screen.</string>
      </property>
@@ -137,6 +137,19 @@
       <number>1</number>
      </property>
     </widget>
+   </item>
+   <item row="7" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
