@@ -22,10 +22,15 @@ endif ()
 
 set_property(TARGET kcheckpass APPEND_STRING PROPERTY COMPILE_FLAGS " -U_REENTRANT")
 target_link_libraries(kcheckpass ${UNIXAUTH_LIBRARIES} ${SOCKET_LIBRARIES})
-install(TARGETS kcheckpass DESTINATION ${KDE_INSTALL_LIBEXECDIR})
-install(CODE "
-    set(KCP_PATH \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/${KDE_INSTALL_LIBEXECDIR}/kcheckpass\")
-    execute_process(COMMAND sh -c \"chown root '\${KCP_PATH}' && chmod +s '\${KCP_PATH}'\")
-")
+if (PAM_FOUND)
+    set(kcheckpass_suid "")
+else()
+    set(kcheckpass_suid "SETUID")
+    message(STATUS "PAM not found, will install a SUID-kcheckpass")
+endif()
+install(TARGETS kcheckpass
+    DESTINATION ${KDE_INSTALL_LIBEXECDIR}
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE ${kcheckpass_suid}
+    )
 
 #EXTRA_DIST = README
