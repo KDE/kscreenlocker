@@ -61,6 +61,11 @@
 #if HAVE_SYS_PRCTL_H
 #include <sys/prctl.h>
 #endif
+#if HAVE_SYS_PROCCTL_H
+#include <unistd.h>
+#include <sys/procctl.h>
+#endif
+
 
 /* Compatibility: accept some options from environment variables */
 #define ACCEPT_ENV
@@ -329,6 +334,10 @@ main(int argc, char **argv)
   // disable ptrace on kcheckpass
 #if HAVE_PR_SET_DUMPABLE
   prctl(PR_SET_DUMPABLE, 0);
+#endif
+#if HAVE_PROC_TRACE_CTL
+  int mode = PROC_TRACE_CTL_DISABLE;
+  procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
 #endif
 
 #ifdef HAVE_OSF_C2_PASSWD

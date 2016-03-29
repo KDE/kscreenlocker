@@ -32,6 +32,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #if HAVE_SYS_PRCTL_H
 #include <sys/prctl.h>
 #endif
+#if HAVE_SYS_PROCCTL_H
+#include <unistd.h>
+#include <sys/procctl.h>
+#endif
 
 static void signalHandler(int signum)
 {
@@ -59,6 +63,10 @@ int main(int argc, char* argv[])
     // disable ptrace on the greeter
 #if HAVE_PR_SET_DUMPABLE
     prctl(PR_SET_DUMPABLE, 0);
+#endif
+#if HAVE_PROC_TRACE_CTL
+    int mode = PROC_TRACE_CTL_DISABLE;
+    procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
 #endif
 
     KLocalizedString::setApplicationDomain("kscreenlocker_greet");
@@ -127,6 +135,10 @@ int main(int argc, char* argv[])
         // allow ptrace if testing is enabled
 #if HAVE_PR_SET_DUMPABLE
         prctl(PR_SET_DUMPABLE, 1);
+#endif
+#if HAVE_PROC_TRACE_CTL
+        int mode = PROC_TRACE_CTL_ENABLE;
+        procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
 #endif
     } else {
         app.setImmediateLock(parser.isSet(immediateLockOption));
