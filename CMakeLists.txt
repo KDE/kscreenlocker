@@ -7,7 +7,7 @@ set(QT_MIN_VERSION "5.4.0")
 set(KF5_MIN_VERSION "5.15.0")
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Widgets Quick QuickWidgets Test)
 find_package(ECM 1.8.0 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -68,6 +68,14 @@ find_package(Wayland 1.3 COMPONENTS Client Server)
 set_package_properties(Wayland PROPERTIES
                        TYPE REQUIRED
                        PURPOSE "Required for building screenlocker")
+
+find_package(loginctl)
+set_package_properties(loginctl PROPERTIES
+    URL "https://www.freedesktop.org/software/systemd/man/loginctl.html"
+    DESCRIPTION "Send control commands to the login manager"
+    TYPE RUNTIME
+    PURPOSE "Needed for emergency unlock in case that the greeter is broken. In case your distribution does not provide loginctl please contact plasma-devel@kde.org to discuss alternatives."
+    )
 
 include(ConfigureChecks.cmake)
 
