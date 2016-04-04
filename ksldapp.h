@@ -118,6 +118,13 @@ public:
     void setIdleId(int idleId) {
         m_idleId = idleId;
     }
+    /**
+     * For testing
+     * @internal
+     **/
+    void setGraceTime(int msec) {
+        m_lockGrace = msec;
+    }
 
 Q_SIGNALS:
     void locked();

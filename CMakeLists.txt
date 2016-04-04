@@ -52,7 +52,7 @@ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                         TYPE REQUIRED
                         PURPOSE "Required for building the X11 based workspace")
 
-find_package(XCB MODULE REQUIRED COMPONENTS XCB KEYSYMS)
+find_package(XCB MODULE REQUIRED COMPONENTS XCB KEYSYMS XTEST)
 set_package_properties(XCB PROPERTIES TYPE REQUIRED)
 add_feature_info("XInput" X11_Xinput_FOUND "Required for grabbing XInput2 devices in the screen locker")
 

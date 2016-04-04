@@ -24,8 +24,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Qt
 #include <QtTest/QtTest>
 #include <QProcess>
+#include <QX11Info>
 // xcb
 #include <xcb/xcb.h>
+#include <xcb/xtest.h>
 
 class KSldTest : public QObject
 {
@@ -34,6 +36,7 @@ private Q_SLOTS:
     void initTestCase();
     void testEstablishGrab();
     void testActivateOnTimeout();
+    void testGraceTimeUnlocking();
 };
 
 void KSldTest::initTestCase()
@@ -122,6 +125,62 @@ void KSldTest::testActivateOnTimeout()
         break;
     }
     QVERIFY(lockStateChangedSpy.wait());
+
+    KIdleTime::instance()->removeIdleTimeout(ksld.idleId());
+}
+
+void KSldTest::testGraceTimeUnlocking()
+{
+    // this time verifies that the screen gets unlocked during grace time by simulated user activity
+    ScreenLocker::KSldApp ksld(this);
+    ksld.initialize();
+
+    // we need to modify the idle timeout of KSLD, it's in minutes we cannot wait that long
+    if (ksld.idleId() != 0) {
+        // remove old Idle id
+        KIdleTime::instance()->removeIdleTimeout(ksld.idleId());
+    }
+    ksld.setIdleId(KIdleTime::instance()->addIdleTimeout(5000));
+    // infinite
+    ksld.setGraceTime(-1);
+
+    QSignalSpy lockedSpy(&ksld, &ScreenLocker::KSldApp::locked);
+    QVERIFY(lockedSpy.isValid());
+    QSignalSpy unlockedSpy(&ksld, &ScreenLocker::KSldApp::unlocked);
+    QVERIFY(unlockedSpy.isValid());
+
+    // let's wait quite some time to give the greeter a chance to come up
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
+    QEXPECT_FAIL("", "Qt::QueuedConnection broken in Qt 5.6", Abort);
+#endif
+    QVERIFY(lockedSpy.wait(30000));
+    QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Locked);
+
+    // let's simulate unlock by faking input
+    const QPoint cursorPos = QCursor::pos();
+    xcb_test_fake_input(QX11Info::connection(), XCB_MOTION_NOTIFY, 0, XCB_TIME_CURRENT_TIME, XCB_WINDOW_NONE, cursorPos.x() + 1, cursorPos.y() + 1, 0);
+    xcb_flush(QX11Info::connection());
+    QVERIFY(unlockedSpy.wait());
+
+    // now let's test again without grace time
+    ksld.setGraceTime(0);
+    QVERIFY(lockedSpy.wait(30000));
+    QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Locked);
+
+    xcb_test_fake_input(QX11Info::connection(), XCB_MOTION_NOTIFY, 0, XCB_TIME_CURRENT_TIME, XCB_WINDOW_NONE, cursorPos.x(), cursorPos.y(), 0);
+    xcb_flush(QX11Info::connection());
+    QVERIFY(!unlockedSpy.wait());
+
+    // and unlock
+    const auto children = ksld.children();
+    for (auto it = children.begin(); it != children.end(); ++it) {
+        if (qstrcmp((*it)->metaObject()->className(), "LogindIntegration") != 0) {
+            continue;
+        }
+        QMetaObject::invokeMethod(*it, "requestUnlock");
+        break;
+    }
+    QVERIFY(unlockedSpy.wait());
 }
 
 QTEST_MAIN(KSldTest)
