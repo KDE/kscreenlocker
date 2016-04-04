@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 // own
 #include "../ksldapp.h"
+// KDE Frameworks
+#include <KIdleTime>
 // Qt
 #include <QtTest/QtTest>
 #include <QProcess>
@@ -31,6 +33,7 @@ class KSldTest : public QObject
 private Q_SLOTS:
     void initTestCase();
     void testEstablishGrab();
+    void testActivateOnTimeout();
 };
 
 void KSldTest::initTestCase()
@@ -87,6 +90,38 @@ void KSldTest::testEstablishGrab()
 
     // now grabbing should succeed again
     QVERIFY(ksld.establishGrab());
+}
+
+void KSldTest::testActivateOnTimeout()
+{
+    // this time verifies that the screen gets locked on idle timeout, requires the system to be idle
+    ScreenLocker::KSldApp ksld;
+    ksld.initialize();
+
+    // we need to modify the idle timeout of KSLD, it's in minutes we cannot wait that long
+    if (ksld.idleId() != 0) {
+        // remove old Idle id
+        KIdleTime::instance()->removeIdleTimeout(ksld.idleId());
+    }
+    ksld.setIdleId(KIdleTime::instance()->addIdleTimeout(5000));
+
+    QSignalSpy lockStateChangedSpy(&ksld, &ScreenLocker::KSldApp::lockStateChanged);
+    QVERIFY(lockStateChangedSpy.isValid());
+
+    // let's wait the double of the idle timeout
+    QVERIFY(lockStateChangedSpy.wait(10000));
+    QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::AcquiringLock);
+
+    // let's simulate unlock to get rid of started greeter process
+    const auto children = ksld.children();
+    for (auto it = children.begin(); it != children.end(); ++it) {
+        if (qstrcmp((*it)->metaObject()->className(), "LogindIntegration") != 0) {
+            continue;
+        }
+        QMetaObject::invokeMethod(*it, "requestUnlock");
+        break;
+    }
+    QVERIFY(lockStateChangedSpy.wait());
 }
 
 QTEST_MAIN(KSldTest)

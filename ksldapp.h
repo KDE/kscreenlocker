@@ -104,6 +104,21 @@ public:
 
     bool event(QEvent *event) override;
 
+    /**
+     * For testing
+     * @internal
+     **/
+    int idleId() const {
+        return m_idleId;
+    }
+    /**
+     * For testing
+     * @internal
+     **/
+    void setIdleId(int idleId) {
+        m_idleId = idleId;
+    }
+
 Q_SIGNALS:
     void locked();
     void unlocked();
