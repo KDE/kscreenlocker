@@ -150,9 +150,6 @@ void KSldTest::testGraceTimeUnlocking()
     QVERIFY(unlockedSpy.isValid());
 
     // let's wait quite some time to give the greeter a chance to come up
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
-    QEXPECT_FAIL("", "Qt::QueuedConnection broken in Qt 5.6", Abort);
-#endif
     QVERIFY(lockedSpy.wait(30000));
     QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Locked);
 
