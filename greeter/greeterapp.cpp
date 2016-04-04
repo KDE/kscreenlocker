@@ -248,13 +248,13 @@ void UnlockApp::desktopResized()
 
         QQmlProperty sleepProperty(view->rootObject(), QStringLiteral("suspendToRamSupported"));
         sleepProperty.write(m_canSuspend);
-        if (view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
+        if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
             connect(view->rootObject(), SIGNAL(suspendToRam()), SLOT(suspendToRam()));
         }
 
         QQmlProperty hibernateProperty(view->rootObject(), QStringLiteral("suspendToDiskSupported"));
         hibernateProperty.write(m_canHibernate);
-        if (view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
+        if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
             connect(view->rootObject(), SIGNAL(suspendToDisk()), SLOT(suspendToDisk()));
         }
 
