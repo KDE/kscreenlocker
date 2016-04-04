@@ -607,7 +607,7 @@ void KSldApp::showLockWindow()
             return;
         }
         m_lockWindow->setGlobalAccel(m_globalAccel);
-        connect(m_lockWindow, &AbstractLocker::userActivity, this,
+        connect(m_lockWindow, &AbstractLocker::userActivity, m_lockWindow,
             [this]() {
                 if (isGraceTime()) {
                     unlock();
@@ -615,7 +615,11 @@ void KSldApp::showLockWindow()
             },
             Qt::QueuedConnection
         );
-        connect(m_lockWindow, &AbstractLocker::lockWindowShown, this, &KSldApp::lockScreenShown, Qt::QueuedConnection);
+        connect(m_lockWindow, &AbstractLocker::lockWindowShown, m_lockWindow,
+            [this] {
+                lockScreenShown();
+            }
+        , Qt::QueuedConnection);
         connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
     m_lockWindow->showLockWindow();
