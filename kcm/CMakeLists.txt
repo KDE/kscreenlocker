@@ -17,6 +17,7 @@ target_link_libraries(screenlocker_kcm
     Qt5::DBus
     KF5::ConfigWidgets
     KF5::I18n
+    KF5::TextWidgets
     KF5::GlobalAccel
     KF5::Package
     KF5::XmlGui
