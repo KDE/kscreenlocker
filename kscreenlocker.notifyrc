@@ -34,6 +34,7 @@ Comment[sv]=Skärmsläckare
 Comment[uk]=Зберігач екрана
 Comment[x-test]=xxScreen Saverxx
 Comment[zh_CN]=屏幕保护程序
+Comment[zh_TW]=螢幕保護程式
 
 [Event/locked]
 Name=Screen locked
@@ -69,6 +70,7 @@ Name[sv]=Skärm låst
 Name[uk]=Екран заблоковано
 Name[x-test]=xxScreen lockedxx
 Name[zh_CN]=屏幕已锁定
+Name[zh_TW]=螢幕已鎖定
 Comment=The screen has been locked
 Comment[ar]=لقد قُفلت الشّاشة
 Comment[ca]=S'ha bloquejat la pantalla
@@ -102,6 +104,7 @@ Comment[sv]=Skärmen har låsts
 Comment[uk]=Екран було заблоковано
 Comment[x-test]=xxThe screen has been lockedxx
 Comment[zh_CN]=屏幕已经被锁定
+Comment[zh_TW]=螢幕已鎖定
 Action=None
 
 [Event/unlocked]
@@ -138,6 +141,7 @@ Name[sv]=Skärm upplåst
 Name[uk]=Екран розблоковано
 Name[x-test]=xxScreen unlockedxx
 Name[zh_CN]=屏幕已解锁
+Name[zh_TW]=螢幕已解除鎖定
 Comment=The screen has been unlocked
 Comment[ar]=لقد أُزيل قفل الشّاشة
 Comment[ca]=S'ha desbloquejat la pantalla
@@ -171,4 +175,5 @@ Comment[sv]=Skärmen har låsts upp
 Comment[uk]=Екран було розблоковано
 Comment[x-test]=xxThe screen has been unlockedxx
 Comment[zh_CN]=屏幕已经被解锁
+Comment[zh_TW]=螢幕已解除鎖定
 Action=None
