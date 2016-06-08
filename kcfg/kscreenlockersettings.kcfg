@@ -38,8 +38,8 @@
       <label></label>
       <whatsthis></whatsthis>
     </entry>
-    <entry key="ThemeBackground" type="String">
-      <default></default>
+    <entry key="WallpaperPlugin" type="String">
+      <default>org.kde.image</default>
       <label></label>
       <whatsthis></whatsthis>
     </entry>

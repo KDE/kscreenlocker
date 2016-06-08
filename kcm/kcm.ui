@@ -6,92 +6,146 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>457</width>
-    <height>288</height>
+    <width>577</width>
+    <height>388</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
-    <widget class="QCheckBox" name="kcfg_Autolock">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="kcfg_Autolock">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Lock screen automatically after:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="KPluralHandlingSpinBox" name="kcfg_Timeout">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="specialValueText">
+        <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Re&amp;quire password after locking:</string>
+       </property>
+       <property name="buddy">
+        <cstring>kcfg_LockGrace</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="KPluralHandlingSpinBox" name="kcfg_LockGrace">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="specialValueText">
+        <string>Immediately</string>
+       </property>
+       <property name="maximum">
+        <number>300</number>
+       </property>
+       <property name="singleStep">
+        <number>10</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="toolTip">
+        <string>The global keyboard shortcut to lock the screen.</string>
+       </property>
+       <property name="text">
+        <string>Lock screen:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="toolTip">
+        <string>Lock screen when waking up from suspension</string>
+       </property>
+       <property name="text">
+        <string>&amp;Lock screen on resume</string>
+       </property>
+       <property name="buddy">
+        <cstring>kcfg_LockOnResume</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Wallpaper &amp;Type:</string>
+       </property>
+       <property name="buddy">
+        <cstring>wallpaperCombo</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QComboBox" name="wallpaperCombo"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="kcfg_LockOnResume">
+       <property name="toolTip">
+        <string>Lock screen when waking up from suspension</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KKeySequenceWidget" name="lockscreenShortcut">
+       <property name="toolTip">
+        <string>The global keyboard shortcut to lock the screen.</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QQuickWidget" name="wallpaperConfigWidget">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text">
-      <string>Lock screen automatically after:</string>
+     <property name="resizeMode">
+      <enum>QQuickWidget::SizeRootObjectToView</enum>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Re&amp;quire password after locking:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_7">
-     <property name="toolTip">
-      <string>The global keyboard shortcut to lock the screen.</string>
-     </property>
-     <property name="text">
-      <string>Lock screen:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="KKeySequenceWidget" name="lockscreenShortcut">
-     <property name="toolTip">
-      <string>The global keyboard shortcut to lock the screen.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="toolTip">
-      <string>Lock screen when waking up from suspension</string>
-     </property>
-     <property name="text">
-      <string>Loc&amp;k screen on resume</string>
-     </property>
-     <property name="buddy">
-      <cstring>kcfg_LockOnResume</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="QCheckBox" name="kcfg_LockOnResume">
-     <property name="toolTip">
-      <string>Lock screen when waking up from suspension</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Custom Background:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="SelectImageButton" name="kcfg_ThemeBackground">
-     <property name="text">
-      <string>...</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -104,65 +158,25 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="1">
-    <widget class="KPluralHandlingSpinBox" name="kcfg_LockGrace">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="specialValueText">
-      <string>Immediately</string>
-     </property>
-     <property name="maximum">
-      <number>300</number>
-     </property>
-     <property name="singleStep">
-      <number>10</number>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="KPluralHandlingSpinBox" name="kcfg_Timeout">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="specialValueText">
-      <string notr="true"/>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KPluralHandlingSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>kpluralhandlingspinbox.h</header>
-  </customwidget>
   <customwidget>
    <class>KKeySequenceWidget</class>
    <extends>QWidget</extends>
    <header>kkeysequencewidget.h</header>
   </customwidget>
   <customwidget>
-   <class>SelectImageButton</class>
-   <extends>QToolButton</extends>
-   <header>selectimagebutton.h</header>
+   <class>KPluralHandlingSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>kpluralhandlingspinbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QQuickWidget</class>
+   <extends>QWidget</extends>
+   <header>QtQuickWidgets/QQuickWidget</header>
   </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>kcfg_Autolock</tabstop>
-  <tabstop>kcfg_LockOnResume</tabstop>
-  <tabstop>kcfg_ThemeBackground</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

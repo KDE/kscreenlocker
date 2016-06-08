@@ -27,9 +27,21 @@ class QStandardItemModel;
 class KActionCollection;
 class ScreenLockerKcmForm;
 
+namespace ScreenLocker
+{
+class WallpaperIntegration;
+}
+
+namespace KDeclarative
+{
+class ConfigPropertyMap;
+}
+
 class ScreenLockerKcm : public KCModule
 {
     Q_OBJECT
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY wallpaperConfigurationChanged)
+    Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
 
 public:
     enum Roles {
@@ -38,16 +50,29 @@ public:
     };
     explicit ScreenLockerKcm(QWidget *parent = nullptr, const QVariantList& args = QVariantList());
 
+    KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const;
+    QString currentWallpaper() const;
+
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
 public Q_SLOTS:
     void load() Q_DECL_OVERRIDE;
     void save() Q_DECL_OVERRIDE;
     void defaults() Q_DECL_OVERRIDE;
     void test(const QString &plugin);
 
+Q_SIGNALS:
+    void wallpaperConfigurationChanged();
+    void currentWallpaperChanged();
+
 private:
     void shortcutChanged(const QKeySequence &key);
     bool shouldSaveShortcut();
+    void loadWallpapers();
+    void selectWallpaper(const QString &pluginId);
+    void loadWallpaperConfig();
     KPackage::Package m_package;
     KActionCollection *m_actionCollection;
     ScreenLockerKcmForm *m_ui;
+    ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
 };

@@ -12,6 +12,7 @@ set(kscreenlocker_greet_SRCS
    greeterapp.cpp
    main.cpp
    noaccessnetworkaccessmanagerfactory.cpp
+   wallpaper_integration.cpp
 )
 
 qt5_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)

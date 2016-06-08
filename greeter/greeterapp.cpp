@@ -22,12 +22,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "kscreensaversettings.h"
 #include "authenticator.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
+#include "wallpaper_integration.h"
 
 // KDE
 #include <KAuthorized>
 #include <KCrash>
 #include <kdeclarative/kdeclarative.h>
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
+#include <KDeclarative/QmlObjectSharedEngine>
 #include <KUser>
 //Plasma
 #include <KPackage/Package>
@@ -51,6 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlProperty>
+#include <QQmlExpression>
 
 #include <QX11Info>
 // Wayland
@@ -97,6 +100,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_authenticator(new Authenticator(this))
     , m_graceTime(0)
     , m_noLock(false)
+    , m_wallpaperIntegration(new WallpaperIntegration(this))
 {
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit);
     initialize();
@@ -148,6 +152,10 @@ void UnlockApp::initialize()
 
     m_mainQmlPath = QUrl::fromLocalFile(package.filePath("lockscreenmainscript"));
 
+    m_wallpaperIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
+    m_wallpaperIntegration->setPluginName(KScreenSaverSettings::self()->wallpaperPlugin());
+    m_wallpaperIntegration->init();
+
     installEventFilter(this);
 }
 
@@ -172,6 +180,37 @@ void UnlockApp::initializeWayland()
     m_plasmaShell = r->createPlasmaShell(i.name, i.version, this);
 }
 
+void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
+{
+    auto package = m_wallpaperIntegration->package();
+    if (!package.isValid()) {
+        qWarning() << "Error loading the wallpaper, no valid package loaded";
+        return;
+    }
+
+    auto qmlObject = new KDeclarative::QmlObjectSharedEngine(view);
+    qmlObject->setInitializationDelayed(true);
+    qmlObject->setPackage(package);
+    qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);
+    view->setProperty("wallpaperGraphicsObject", QVariant::fromValue(qmlObject->rootObject()));
+    connect(qmlObject, &KDeclarative::QmlObject::finished, this,
+        [this, qmlObject, view] {
+            auto item = qobject_cast<QQuickItem*>(qmlObject->rootObject());
+            if (!item) {
+                qWarning() << "Wallpaper needs to be a QtQuick Item";
+                return;
+            }
+            item->setParentItem(view->rootObject());
+            item->setZ(-1000);
+
+            //set anchors
+            QQmlExpression expr(qmlObject->engine()->rootContext(), item, QStringLiteral("parent"));
+            QQmlProperty prop(item, QStringLiteral("anchors.fill"));
+            prop.write(expr.evaluate());
+        }
+    );
+}
+
 void UnlockApp::desktopResized()
 {
     const int nScreens = screens().count();
@@ -191,11 +230,6 @@ void UnlockApp::desktopResized()
         KDeclarative::KDeclarative declarative;
         declarative.setDeclarativeEngine(view->engine());
         declarative.setupBindings();
-        // overwrite the factory set by kdeclarative
-        auto oldFactory = view->engine()->networkAccessManagerFactory();
-        view->engine()->setNetworkAccessManagerFactory(nullptr);
-        delete oldFactory;
-        view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
 
         if (!m_testing) {
             if (QX11Info::isPlatformX11()) {
@@ -219,7 +253,6 @@ void UnlockApp::desktopResized()
             }
         }
 
-
         // engine stuff
         QQmlContext* context = view->engine()->rootContext();
         const KUser user;
@@ -228,7 +261,6 @@ void UnlockApp::desktopResized()
         context->setContextProperty(QStringLiteral("kscreenlocker_userName"), fullName.isEmpty() ? user.loginName() : fullName);
         context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), user.faceIconPath());
         context->setContextProperty(QStringLiteral("authenticator"), m_authenticator);
-        context->setContextProperty(QStringLiteral("backgroundPath"), KScreenSaverSettings::themeBackground());
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
 
@@ -242,6 +274,13 @@ void UnlockApp::desktopResized()
             view->setSource(fallbackUrl);
         }
         view->setResizeMode(KQuickAddons::QuickViewSharedEngine::SizeRootObjectToView);
+
+        loadWallpaperPlugin(view);
+        // overwrite the factory set by kdeclarative
+        auto oldFactory = view->engine()->networkAccessManagerFactory();
+        view->engine()->setNetworkAccessManagerFactory(nullptr);
+        delete oldFactory;
+        view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
 
         QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
         lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
@@ -273,6 +312,13 @@ void UnlockApp::desktopResized()
         KWayland::Client::PlasmaShellSurface *plasmaSurface = view->property("plasmaShellSurface").value<KWayland::Client::PlasmaShellSurface *>();
         if (plasmaSurface) {
             plasmaSurface->setPosition(view->geometry().topLeft());
+        }
+        if (auto object = view->property("wallpaperGraphicsObject").value<KDeclarative::QmlObjectSharedEngine*>()) {
+            //initialize with our size to avoid as much resize events as possible
+            object->completeInitialization({
+                {QStringLiteral("width"), view->width()},
+                {QStringLiteral("height"), view->height()}
+            });
         }
 
         connect(screen,

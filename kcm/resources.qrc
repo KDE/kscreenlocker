@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/kscreenlocker-kcm-resources">
+  <file>config.qml</file>
+  </qresource>
+</RCC>
+

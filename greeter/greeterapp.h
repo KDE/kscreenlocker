@@ -44,6 +44,7 @@ struct org_kde_ksld;
 namespace ScreenLocker
 {
 class Unlocker;
+class WallpaperIntegration;
 
 class UnlockApp : public QGuiApplication
 {
@@ -83,6 +84,7 @@ private:
     void initialize();
     void initializeWayland();
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
+    void loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
 
     QString m_packageName;
     QUrl m_mainQmlPath;
@@ -107,6 +109,7 @@ private:
     org_kde_ksld *m_ksldInterface = nullptr;
 
     KWayland::Client::PlasmaShell *m_plasmaShell = nullptr;
+    WallpaperIntegration *m_wallpaperIntegration;
 };
 } // namespace
 
