@@ -81,7 +81,7 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
 
     loadWallpapers();
     auto wallpaperChangedSignal = static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged);
-    connect(m_ui->wallpaperCombo, wallpaperChangedSignal, this, static_cast<void (KCModule::*)()>(&KCModule::changed));
+    connect(m_ui->wallpaperCombo, wallpaperChangedSignal, this, static_cast<void (KCModule::*)()>(&ScreenLockerKcm::changed));
     connect(m_ui->wallpaperCombo, wallpaperChangedSignal, this, &ScreenLockerKcm::loadWallpaperConfig);
 
     m_ui->wallpaperCombo->installEventFilter(this);
