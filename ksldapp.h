@@ -41,7 +41,7 @@ namespace Server {
 class Display;
 class ClientConnection;
 }
-};
+}
 
 namespace ScreenLocker
 {
