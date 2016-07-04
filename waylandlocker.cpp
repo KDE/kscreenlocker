@@ -48,7 +48,6 @@ void WaylandLocker::hideLockWindow()
 
 void WaylandLocker::addAllowedWindow(quint32 window)
 {
-    Q_UNUSED(window);
 }
 
 void WaylandLocker::stayOnTop()
