@@ -96,7 +96,7 @@ void AbstractLocker::emergencyShow()
 
 void AbstractLocker::addAllowedWindow(quint32 windows)
 {
+    Q_UNUSED(windows);
 }
 
 }
-
