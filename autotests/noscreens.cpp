@@ -111,6 +111,9 @@ void NoScreensTest::unlock()
 
 void NoScreensTest::testAllQScreensClose()
 {
+    if (!QFile::exists(QStringLiteral("/dev/dri/card0"))) {
+        QSKIP("Needs a DRI device for the greeter");
+    }
     QSignalSpy lockedStateSpy(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::lockStateChanged);
     QVERIFY(lockedStateSpy.isValid());
     QSignalSpy greeterConnectionSpy(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::greeterClientConnectionChanged);
