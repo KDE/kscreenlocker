@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QQmlContext>
 
 static const QString s_lockActionName = QStringLiteral("Lock Session");
-static const QString s_defaultWallpaperPackage = QStringLiteral("org.kde.image");
+static const QString s_defaultWallpaperPackage = QStringLiteral("org.kde.color");
 
 class ScreenLockerKcmForm : public QWidget, public Ui::ScreenLockerKcmForm
 {
