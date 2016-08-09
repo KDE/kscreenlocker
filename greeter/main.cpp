@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
 
     // explicitly disable input methods as it makes it impossible to unlock, see BUG 306932
     // but explicitly set on screen keyboard such as maliit is allowed
-    if (qgetenv("QT_IM_MODULE") != QByteArrayLiteral("maliit")) {
+    if (qEnvironmentVariableIsSet("QT_IM_MODULE") && qgetenv("QT_IM_MODULE") != QByteArrayLiteral("maliit")) {
         qputenv("QT_IM_MODULE", QByteArrayLiteral("compose"));
     }
     ScreenLocker::UnlockApp app(argc, argv);
