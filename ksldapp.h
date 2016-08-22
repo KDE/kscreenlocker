@@ -47,8 +47,9 @@ namespace ScreenLocker
 {
 
 enum class EstablishLock {
-    Immediate,
-    Delayed
+    Immediate, ///Require password from the start. Use if invoked explicitly by the user
+    Delayed, ///Allow the user to log back in without a password for a configured grace time.
+    DefaultToSwitchUser ///UI should default to showing the "switch user dialog"
 };
 
 class AbstractLocker;

@@ -60,6 +60,7 @@ public:
     void setGraceTime(int milliseconds);
     void setNoLock(bool noLock);
     void setKsldSocket(int socket);
+    void setDefaultToSwitchUser(bool defaultToSwitchUser);
 
     void osdProgress(const QString &icon, int percent, const QString &additionalText);
     void osdText(const QString &icon, const QString &additionalText);
@@ -99,6 +100,7 @@ private:
     Authenticator *m_authenticator;
     int m_graceTime;
     bool m_noLock;
+    bool m_defaultToSwitchUser;
 
     bool m_canSuspend = false;
     bool m_canHibernate = false;

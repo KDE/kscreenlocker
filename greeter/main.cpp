@@ -110,6 +110,9 @@ int main(int argc, char* argv[])
                                        QStringLiteral("0"));
     QCommandLineOption nolockOption(QStringLiteral("nolock"),
                                     i18n("Don't show any lock user interface."));
+    QCommandLineOption switchUserOption(QStringLiteral("switchuser"),
+                                    i18n("Default to the switch user UI."));
+
     QCommandLineOption waylandFdOption(QStringLiteral("ksldfd"),
                                        i18n("File descriptor for connecting to ksld."),
                                        QStringLiteral("fd"));
@@ -119,6 +122,7 @@ int main(int argc, char* argv[])
     parser.addOption(immediateLockOption);
     parser.addOption(graceTimeOption);
     parser.addOption(nolockOption);
+    parser.addOption(switchUserOption);
     parser.addOption(waylandFdOption);
     parser.process(app);
 
@@ -149,6 +153,10 @@ int main(int argc, char* argv[])
     int graceTime = parser.value(graceTimeOption).toInt(&ok);
     if (ok) {
         app.setGraceTime(graceTime);
+    }
+
+    if (parser.isSet(switchUserOption)) {
+        app.setDefaultToSwitchUser(true);
     }
 
     if (parser.isSet(waylandFdOption)) {

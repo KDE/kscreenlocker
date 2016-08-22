@@ -100,6 +100,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_authenticator(new Authenticator(this))
     , m_graceTime(0)
     , m_noLock(false)
+    , m_defaultToSwitchUser(false)
     , m_wallpaperIntegration(new WallpaperIntegration(this))
 {
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit);
@@ -263,6 +264,8 @@ void UnlockApp::desktopResized()
         context->setContextProperty(QStringLiteral("authenticator"), m_authenticator);
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
+        context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
+
 
         view->setSource(m_mainQmlPath);
         // on error, load the fallback lockscreen to not lock the user out of the system
@@ -562,6 +565,11 @@ void UnlockApp::setGraceTime(int milliseconds)
 void UnlockApp::setNoLock(bool noLock)
 {
     m_noLock = noLock;
+}
+
+void UnlockApp::setDefaultToSwitchUser(bool defaultToSwitchUser)
+{
+    m_defaultToSwitchUser = defaultToSwitchUser;
 }
 
 

@@ -572,6 +572,11 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     if (establishLock == EstablishLock::Immediate) {
         args << QStringLiteral("--immediateLock");
     }
+    if (establishLock == EstablishLock::DefaultToSwitchUser) {
+        args << QStringLiteral("--immediateLock");
+        args << QStringLiteral("--switchuser");
+    }
+
     if (m_lockGrace > 0) {
         args << QStringLiteral("--graceTime");
         args << QString::number(m_lockGrace);
