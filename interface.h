@@ -54,6 +54,11 @@ public Q_SLOTS:
     void Lock();
 
     /**
+     * Like Lock() but immediately show the switch user dialog
+     */
+    void SwitchUser();
+
+    /**
      * Simulate user activity
      */
     void SimulateUserActivity();

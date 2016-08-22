@@ -94,6 +94,19 @@ void Interface::Lock()
     }
 }
 
+void Interface::SwitchUser()
+{
+    if (!KAuthorized::authorizeAction(QStringLiteral("lock_screen"))) {
+        return;
+    }
+    m_daemon->lock(EstablishLock::DefaultToSwitchUser);
+
+    if (calledFromDBus() && m_daemon->lockState() == KSldApp::AcquiringLock) {
+        m_lockReplies << message().createReply();
+        setDelayedReply(true);
+    }
+}
+
 bool Interface::SetActive (bool state)
 {
     // TODO: what should the return value be?
