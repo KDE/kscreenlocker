@@ -106,6 +106,8 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit);
     initialize();
     connect(this, &UnlockApp::screenAdded, this, &UnlockApp::desktopResized);
+    connect(this, &UnlockApp::screenRemoved, this, &UnlockApp::desktopResized);
+
     if (QX11Info::isPlatformX11()) {
         installNativeEventFilter(new FocusOutEventFilter);
     }
@@ -222,7 +224,6 @@ void UnlockApp::desktopResized()
 
     // extend views and savers to current demand
     for (int i = m_views.count(); i < nScreens; ++i) {
-        connect(QGuiApplication::screens()[i], &QObject::destroyed, this, &UnlockApp::desktopResized);
         // create the view
         auto *view = new KQuickAddons::QuickViewSharedEngine();
         view->setColor(Qt::black);
