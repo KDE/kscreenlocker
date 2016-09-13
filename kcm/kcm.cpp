@@ -258,7 +258,8 @@ bool ScreenLockerKcm::eventFilter(QObject *watched, QEvent *event)
     }
     if (event->type() == QEvent::Move) {
         if (auto object = m_ui->wallpaperConfigWidget->rootObject()) {
-            object->setProperty("formAlignment", m_ui->wallpaperCombo->x());
+            // QtQuick Layouts have a hardcoded 5 px spacing by default
+            object->setProperty("formAlignment", m_ui->wallpaperCombo->x() + 5);
         }
     }
     return false;
