@@ -79,6 +79,7 @@ Comment[uk]=Часові параметри блокування екрана
 Comment[x-test]=xxScreen Locking Timeoutsxx
 Comment[zh_CN]=锁屏时间
 X-KDE-Keywords=lock,resume, screensaver, screenlock
+X-KDE-Keywords[ast]=bloquiar, bloquéu, resumir, resume, curiapantalles, bloquiador de pantalla
 X-KDE-Keywords[ca]=bloqueig,reprendre,estalvi de pantalla,bloqueig de pantalla
 X-KDE-Keywords[ca@valencia]=bloqueig,reprendre,estalvi de pantalla,bloqueig de pantalla
 X-KDE-Keywords[da]=lås,genoptag,pauseskærm,skærmlås
