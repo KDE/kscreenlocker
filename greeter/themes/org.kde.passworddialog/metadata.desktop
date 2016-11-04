@@ -36,6 +36,7 @@ Name[sv]=Lösenordsdialogruta
 Name[uk]=Вікно для введення пароля
 Name[x-test]=xxPassword dialogxx
 Name[zh_CN]=密码对话框
+Name[zh_TW]=密碼對話框
 Comment=Screen locker that provides a password dialog and an interface to switch the current user
 Comment[ar]=قافل شاشة يوفّر حواريّ كلمة مرور وواجهة لتبديل المستخدم الحاليّ
 Comment[ast]=EL bloquiador de pantalla apurre un diálogu de contraseña y una interfaz pa camudar l'usuariu actual
@@ -73,6 +74,7 @@ Comment[sv]=Skärmlåsning som tillhandahåller en lösenordsdialogruta och ett 
 Comment[uk]=Блокувальник екрана з вікном пароля і інтерфейсом для перемикання поточного користувача
 Comment[x-test]=xxScreen locker that provides a password dialog and an interface to switch the current userxx
 Comment[zh_CN]=屏幕锁定程序提供密码对话框和切换当前用户的界面
+Comment[zh_TW]=提供輸入密碼與切換使用者功能的螢幕保護鎖定器
 Icon=system-lock-screen
 
 X-Plasma-MainScript=ui/main.qml
