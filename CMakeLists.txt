@@ -144,7 +144,6 @@ PRIVATE
    KF5::ConfigGui
    KF5::WindowSystem
    ${X11_LIBRARIES}
-   ${X11_Xcursor_LIB}
    XCB::XCB
    XCB::KEYSYMS
    KF5::WaylandServer
