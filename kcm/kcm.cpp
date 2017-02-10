@@ -87,7 +87,12 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
     m_ui->wallpaperCombo->installEventFilter(this);
 
     m_ui->wallpaperConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
-    m_ui->wallpaperConfigWidget->rootContext()->setContextProperty("configDialog", this);
+    auto proxy = new ScreenLockerProxy(this);
+    m_ui->wallpaperConfigWidget->rootContext()->setContextProperty("configDialog", proxy);
+
+    connect(this, &ScreenLockerKcm::wallpaperConfigurationChanged, proxy, &ScreenLockerProxy::wallpaperConfigurationChanged);
+    connect(this, &ScreenLockerKcm::currentWallpaperChanged, proxy, &ScreenLockerProxy::currentWallpaperChanged);
+
     m_ui->wallpaperConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/config.qml")));
     connect(m_ui->wallpaperConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(changed()));
 
