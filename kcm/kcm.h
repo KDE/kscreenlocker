@@ -37,12 +37,10 @@ namespace KDeclarative
 class ConfigPropertyMap;
 }
 
+
 class ScreenLockerKcm : public KCModule
 {
     Q_OBJECT
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY wallpaperConfigurationChanged)
-    Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
-
 public:
     enum Roles {
         PluginNameRole = Qt::UserRole +1,
@@ -75,4 +73,33 @@ private:
     KActionCollection *m_actionCollection;
     ScreenLockerKcmForm *m_ui;
     ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
+};
+
+//see https://bugreports.qt.io/browse/QTBUG-57714, don't expose a QWidget as a context property
+class ScreenLockerProxy : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY wallpaperConfigurationChanged)
+    Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
+public:
+    ScreenLockerProxy(ScreenLockerKcm *parent) :
+        QObject(parent),
+        q(parent)
+    {
+    }
+
+    KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const {
+        return q->wallpaperConfiguration();
+    }
+
+    QString currentWallpaper() const {
+        return q->currentWallpaper();
+    }
+
+signals:
+    void wallpaperConfigurationChanged();
+    void currentWallpaperChanged();
+
+private:
+    ScreenLockerKcm* q;
 };
