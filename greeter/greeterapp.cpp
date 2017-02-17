@@ -42,6 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 // Qt
+#include <QClipboard>
 #include <QAbstractNativeEventFilter>
 #include <QtCore/QTimer>
 #include <QtGui/QKeyEvent>
@@ -361,6 +362,7 @@ void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
     showProperty.write(true);
     // random state update, actually rather required on init only
     QMetaObject::invokeMethod(this, "getFocus", Qt::QueuedConnection);
+    QGuiApplication::clipboard()->clear();
 }
 
 void UnlockApp::getFocus()
