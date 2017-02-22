@@ -363,6 +363,7 @@ void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
     // random state update, actually rather required on init only
     QMetaObject::invokeMethod(this, "getFocus", Qt::QueuedConnection);
     QGuiApplication::clipboard()->clear();
+    QGuiApplication::clipboard()->clear(QClipboard::Selection);
 }
 
 void UnlockApp::getFocus()
