@@ -324,12 +324,9 @@ main(int argc, char **argv)
   char		*p;
 #endif
   struct passwd	*pw;
-  int		c, nfd, lfd;
+  int		c, nfd;
   uid_t		uid;
-  time_t	nexttime;
   AuthReturn	ret;
-  struct flock lk;
-  char fname[64], fcont[64];
 
   // disable ptrace on kcheckpass
 #if HAVE_PR_SET_DUMPABLE
@@ -406,42 +403,6 @@ main(int argc, char **argv)
       message("Out of memory\n");
       return AuthError;
     }
-  }
-
-  /*
-   * Throttle kcheckpass invocations to avoid abusing it for bruteforcing
-   * the password. This delay belongs to the *previous* invocation, where
-   * we can't enforce it reliably (without risking giving away the result
-   * before it is due). We don't differentiate between success and failure -
-   * it's not expected to have a noticeable adverse effect.
-   */
-  if ( uid != geteuid() ) {
-    sprintf(fname, "/var/run/kcheckpass.%d", uid);
-    if ((lfd = open(fname, O_RDWR | O_CREAT | O_NOFOLLOW, 0600)) < 0) {
-      message("Cannot open lockfile\n");
-      return AuthError;
-    }
-
-    lk.l_type = F_WRLCK;
-    lk.l_whence = SEEK_SET;
-    lk.l_start = lk.l_len = 0;
-    if (fcntl(lfd, F_SETLKW, &lk)) {
-      message("Cannot obtain lock\n");
-      return AuthError;
-    }
-
-    if ((c = read(lfd, fcont, sizeof(fcont)-1)) > 0 &&
-        (fcont[c] = '\0', sscanf(fcont, "%ld", &nexttime) == 1))
-    {
-      time_t ct = time(0);
-      if (nexttime > ct && nexttime < ct + THROTTLE)
-        sleep(nexttime - ct);
-    }
-
-    lseek(lfd, 0, SEEK_SET);
-    write(lfd, fcont, sprintf(fcont, "%lu\n", time(0) + THROTTLE));
-
-    close(lfd);
   }
 
   /* Now do the fandango */
