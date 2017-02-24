@@ -78,6 +78,7 @@ set_package_properties(loginctl PROPERTIES
     PURPOSE "Needed for emergency unlock in case that the greeter is broken. In case your distribution does not provide loginctl please contact plasma-devel@kde.org to discuss alternatives."
     )
 
+option(PAM_REQUIRED "Require building with PAM" ON)
 include(ConfigureChecks.cmake)
 
 configure_file(config-workspace.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-workspace.h)

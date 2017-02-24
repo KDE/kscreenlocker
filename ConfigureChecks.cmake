@@ -5,6 +5,9 @@ set_package_properties(PAM PROPERTIES DESCRIPTION "PAM Libraries"
                        TYPE OPTIONAL
                        PURPOSE "Required for screen unlocking and optionally used by the KDM log in manager"
                       )
+if(PAM_REQUIRED)
+set_package_properties(PAM PROPERTIES TYPE REQUIRED)
+endif()
 include(CheckTypeSize)
 include(FindPkgConfig)
 
