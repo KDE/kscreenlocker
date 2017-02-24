@@ -292,10 +292,9 @@ static void ATTR_NORETURN
 usage(int exitval)
 {
   message(
-	  "usage: kcheckpass {-h|[-c caller] [-m method] [-U username|-S handle]}\n"
+	  "usage: kcheckpass {-h|[-c caller] [-m method] [-S handle]}\n"
 	  "  options:\n"
 	  "    -h           this help message\n"
-	  "    -U username  authenticate the specified user instead of current user\n"
 	  "    -S handle    operate in binary server mode on file descriptor handle\n"
 	  "    -c caller    the calling application, effectively the PAM service basename\n"
 	  "    -m method    use the specified authentication method (default: \"classic\")\n"
@@ -351,7 +350,7 @@ main(int argc, char **argv)
 
   havetty = isatty(0);
 
-  while ((c = getopt(argc, argv, "hc:m:U:S:")) != -1) {
+  while ((c = getopt(argc, argv, "hc:m:S:")) != -1) {
     switch (c) {
     case 'h':
       usage(0);
@@ -364,9 +363,6 @@ main(int argc, char **argv)
     case 'm':
       method = optarg;
       break;
-    case 'U':
-      username = optarg;
-      break;
     case 'S':
       sfd = atoi(optarg);
       break;
@@ -377,17 +373,15 @@ main(int argc, char **argv)
   }
 
   uid = getuid();
-  if (!username) {
-    if (!(p = getenv("LOGNAME")) || !(pw = getpwnam(p)) || pw->pw_uid != uid)
-      if (!(p = getenv("USER")) || !(pw = getpwnam(p)) || pw->pw_uid != uid)
-        if (!(pw = getpwuid(uid))) {
-          message("Cannot determinate current user\n");
-          return AuthError;
-        }
-    if (!(username = strdup(pw->pw_name))) {
-      message("Out of memory\n");
-      return AuthError;
-    }
+  if (!(p = getenv("LOGNAME")) || !(pw = getpwnam(p)) || pw->pw_uid != uid)
+    if (!(p = getenv("USER")) || !(pw = getpwnam(p)) || pw->pw_uid != uid)
+      if (!(pw = getpwuid(uid))) {
+        message("Cannot determinate current user\n");
+        return AuthError;
+      }
+  if (!(username = strdup(pw->pw_name))) {
+    message("Out of memory\n");
+    return AuthError;
   }
 
   /* Now do the fandango */

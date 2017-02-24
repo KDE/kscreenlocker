@@ -216,7 +216,6 @@ main(int argc, char **argv)
   const char    *caller = KSCREENSAVER_PAM_SERVICE;
 #endif
   const char    *method = "classic";
-  const char    *username = 0;
   int           c, nfd;
 
 #ifdef HAVE_OSF_C2_PASSWD
@@ -239,7 +238,7 @@ main(int argc, char **argv)
 
   havetty = isatty(0);
 
-  while ((c = getopt(argc, argv, "hc:m:U:S:")) != -1) {
+  while ((c = getopt(argc, argv, "hc:m:S:")) != -1) {
     switch (c) {
     case 'c':
 #ifdef HAVE_PAM
@@ -248,9 +247,6 @@ main(int argc, char **argv)
       break;
     case 'm':
       method = optarg;
-      break;
-    case 'U':
-      username = optarg;
       break;
     case 'S':
       sfd = atoi(optarg);
