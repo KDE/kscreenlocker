@@ -100,9 +100,6 @@ extern "C" {
  * Authenticates user
  *****************************************************************/
 AuthReturn Authenticate(
-#ifdef HAVE_PAM
-        const char *caller, 
-#endif
         const char *method,
         const char *user,
         char *(*conv) (ConvRequest, const char *));

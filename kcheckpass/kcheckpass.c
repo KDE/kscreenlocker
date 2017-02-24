@@ -296,7 +296,6 @@ usage(int exitval)
 	  "  options:\n"
 	  "    -h           this help message\n"
 	  "    -S handle    operate in binary server mode on file descriptor handle\n"
-	  "    -c caller    the calling application, effectively the PAM service basename\n"
 	  "    -m method    use the specified authentication method (default: \"classic\")\n"
 	  "  exit codes:\n"
 	  "    0 success\n"
@@ -310,9 +309,6 @@ usage(int exitval)
 int
 main(int argc, char **argv)
 {
-#ifdef HAVE_PAM
-  const char	*caller = KSCREENSAVER_PAM_SERVICE;
-#endif
   const char	*method = "classic";
   const char	*username = 0;
   char		*p;
@@ -350,15 +346,10 @@ main(int argc, char **argv)
 
   havetty = isatty(0);
 
-  while ((c = getopt(argc, argv, "hc:m:S:")) != -1) {
+  while ((c = getopt(argc, argv, "hm:S:")) != -1) {
     switch (c) {
     case 'h':
       usage(0);
-      break;
-    case 'c':
-#ifdef HAVE_PAM
-      caller = optarg;
-#endif
       break;
     case 'm':
       method = optarg;
@@ -385,11 +376,7 @@ main(int argc, char **argv)
   }
 
   /* Now do the fandango */
-  ret = Authenticate(
-#ifdef HAVE_PAM
-                     caller,
-#endif
-                     method,
+  ret = Authenticate(method,
                      username, 
                      sfd < 0 ? conv_legacy : conv_server);
 

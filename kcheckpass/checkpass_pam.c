@@ -127,7 +127,7 @@ fail_delay(int retval ATTR_UNUSED, unsigned usec_delay ATTR_UNUSED,
 #endif
 
 
-AuthReturn Authenticate(const char *caller, const char *method,
+AuthReturn Authenticate(const char *method,
         const char *user, char *(*conv) (ConvRequest, const char *))
 {
   const char	*tty;
@@ -141,11 +141,11 @@ AuthReturn Authenticate(const char *caller, const char *method,
 
   PAM_data.conv = conv;
   if (strcmp(method, "classic")) {
-    sprintf(pservb, "%.31s-%.31s", caller, method);
+    sprintf(pservb, "%.31s-%.31s", KSCREENSAVER_PAM_SERVICE, method);
     pam_service = pservb;
   } else {
     /* PAM_data.classic = 1; */
-    pam_service = caller;
+    pam_service = KSCREENSAVER_PAM_SERVICE;
   }
   pam_error = pam_start(pam_service, user, &PAM_conversation, &pamh);
   if (pam_error != PAM_SUCCESS)

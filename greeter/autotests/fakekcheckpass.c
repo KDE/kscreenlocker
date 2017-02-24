@@ -212,9 +212,6 @@ message(const char *fmt, ...)
 int
 main(int argc, char **argv)
 {
-#ifdef HAVE_PAM
-  const char    *caller = KSCREENSAVER_PAM_SERVICE;
-#endif
   const char    *method = "classic";
   int           c, nfd;
 
@@ -238,13 +235,8 @@ main(int argc, char **argv)
 
   havetty = isatty(0);
 
-  while ((c = getopt(argc, argv, "hc:m:S:")) != -1) {
+  while ((c = getopt(argc, argv, "hm:S:")) != -1) {
     switch (c) {
-    case 'c':
-#ifdef HAVE_PAM
-      caller = optarg;
-#endif
-      break;
     case 'm':
       method = optarg;
       break;
