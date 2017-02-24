@@ -217,9 +217,6 @@ main(int argc, char **argv)
 #endif
   const char    *method = "classic";
   const char    *username = 0;
-#ifdef ACCEPT_ENV
-  char          *p;
-#endif
   int           c, nfd;
 
 #ifdef HAVE_OSF_C2_PASSWD
@@ -262,16 +259,6 @@ main(int argc, char **argv)
       message("Command line option parsing error\n");
     }
   }
-
-#ifdef ACCEPT_ENV
-# ifdef HAVE_PAM
-  if ((p = getenv("KDE_PAM_ACTION")))
-    caller = p;
-# endif
-  if ((p = getenv("KCHECKPASS_USER")))
-    username = p;
-#endif
-
 
   /* Now do the fandango */
   const char *password = conv_server(ConvGetHidden, 0);
