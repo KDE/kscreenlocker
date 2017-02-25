@@ -70,66 +70,6 @@
 
 static int havetty, sfd = -1, nullpass;
 
-static char *
-conv_legacy (ConvRequest what, const char *prompt)
-{
-    char		*p, *p2;
-    int			len;
-    char		buf[1024];
-
-    switch (what) {
-    case ConvGetBinary:
-	break;
-    case ConvGetNormal:
-	/* there is no prompt == 0 case */
-	if (!havetty)
-	    break;
-	/* i guess we should use /dev/tty ... */
-	fputs(prompt, stdout);
-	fflush(stdout);
-	if (!fgets(buf, sizeof(buf), stdin))
-	    return 0;
-	len = strlen(buf);
-	if (len && buf[len - 1] == '\n')
-	    buf[--len] = 0;
-	return strdup(buf);
-    case ConvGetHidden:
-	if (havetty) {
-#ifdef HAVE_GETPASSPHRASE
-	    p = getpassphrase(prompt ? prompt : "Password: ");
-#else
-	    p = getpass(prompt ? prompt : "Password: ");
-#endif
-	    p2 = strdup(p);
-	    memset(p, 0, strlen(p));
-	    return p2;
-	} else {
-	    if (prompt)
-		break;
-	    if ((len = read(0, buf, sizeof(buf) - 1)) < 0) {
-		message("Cannot read password\n");
-		return 0;
-	    } else {
-		if (len && buf[len - 1] == '\n')
-		    --len;
-		buf[len] = 0;
-		p2 = strdup(buf);
-		memset(buf, 0, len);
-		return p2;
-	    }
-	}
-    case ConvPutInfo:
-	message("Information: %s\n", prompt);
-	return 0;
-    case ConvPutError:
-	message("Error: %s\n", prompt);
-	return 0;
-    }
-    message("Authentication backend requested data type which cannot be handled.\n");
-    return 0;
-}
-
-
 static int
 Reader (void *buf, int count)
 {
@@ -292,7 +232,7 @@ static void ATTR_NORETURN
 usage(int exitval)
 {
   message(
-	  "usage: kcheckpass {-h|[-c caller] [-m method] [-S handle]}\n"
+	  "usage: kcheckpass {-h|[-c caller] [-m method] -S handle}\n"
 	  "  options:\n"
 	  "    -h           this help message\n"
 	  "    -S handle    operate in binary server mode on file descriptor handle\n"
@@ -363,6 +303,11 @@ main(int argc, char **argv)
     }
   }
 
+  if (sfd == -1) {
+      message("Only binary protocol supported\n");
+      return AuthError;
+  }
+
   uid = getuid();
   if (!(p = getenv("LOGNAME")) || !(pw = getpwnam(p)) || pw->pw_uid != uid)
     if (!(p = getenv("USER")) || !(pw = getpwnam(p)) || pw->pw_uid != uid)
@@ -378,7 +323,7 @@ main(int argc, char **argv)
   /* Now do the fandango */
   ret = Authenticate(method,
                      username, 
-                     sfd < 0 ? conv_legacy : conv_server);
+                     conv_server);
 
     if (ret == AuthBad) {
       message("Authentication failure\n");
