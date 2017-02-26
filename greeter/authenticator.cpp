@@ -241,6 +241,18 @@ void KCheckPass::handleVerify()
             emit error(QString::fromLocal8Bit(arr));
             ::free( arr );
             return;
+        case ConvPutAuthSucceeded:
+            emit succeeded();
+            return;
+        case ConvPutAuthFailed:
+            emit failed();
+            return;
+        case ConvPutAuthError:
+            cantCheck();
+            return;
+        case ConvPutAuthAbort:
+            // what to do here?
+            return;
         }
     }
     reapVerify();
@@ -258,18 +270,6 @@ void KCheckPass::reapVerify()
             cantCheck();
             return;
         }
-    if (WIFEXITED(status))
-        switch (WEXITSTATUS(status)) {
-        case AuthOk:
-            emit succeeded();
-            return;
-        case AuthBad:
-            emit failed();
-            return;
-        case AuthAbort:
-            return;
-        }
-    cantCheck();
 }
 
 void KCheckPass::cantCheck()

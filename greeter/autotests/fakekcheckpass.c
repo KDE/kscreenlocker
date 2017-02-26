@@ -251,16 +251,17 @@ main(int argc, char **argv)
   /* Now do the fandango */
   const char *password = conv_server(ConvGetHidden, 0);
   if (strcmp(password, "testpassword") == 0) {
-      return AuthOk;
+      conv_server(ConvPutAuthSucceeded, 0);
   } else if (strcmp(password, "info") == 0) {
       conv_server(ConvPutInfo, "You wanted some info, here you have it");
-      return AuthOk;
+      conv_server(ConvPutAuthSucceeded, 0);
   } else if (strcmp(password, "error") == 0) {
       conv_server(ConvPutError, "The world is going to explode");
-      return AuthError;
+      conv_server(ConvPutAuthFailed, 0);
   } else if (strcmp(password, "") == 0) {
       conv_server(ConvPutError, "Hey, don't give me an empty password");
-      return AuthError;
+  } else {
+      conv_server(ConvPutAuthFailed, 0);
   }
-  return AuthBad;
+  return 0;
 }

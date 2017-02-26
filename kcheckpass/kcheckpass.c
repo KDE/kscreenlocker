@@ -206,6 +206,11 @@ conv_server (ConvRequest what, const char *prompt)
 	  nullpass = 1;
 	return msg;
       }
+    case ConvPutAuthSucceeded:
+    case ConvPutAuthFailed:
+    case ConvPutAuthError:
+    case ConvPutAuthAbort:
+        return 0;
     case ConvPutInfo:
     case ConvPutError:
     default:
@@ -328,8 +333,23 @@ main(int argc, char **argv)
         syslog(LOG_NOTICE, "Authentication failure for %s (invoked by uid %d)", username, uid);
       }
     }
+    switch (ret) {
+        case AuthOk:
+            conv_server(ConvPutAuthSucceeded, 0);
+            break;
+        case AuthBad:
+            conv_server(ConvPutAuthFailed, 0);
+            break;
+        case AuthError:
+            conv_server(ConvPutAuthError, 0);
+            break;
+        case AuthAbort:
+            conv_server(ConvPutAuthAbort, 0);
+        default:
+            break;
+    }
 
-  return ret;
+  return 0;
 }
 
 void
