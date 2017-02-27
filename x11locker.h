@@ -60,6 +60,7 @@ private:
     void setVRoot(Window win, Window vr);
     void removeVRoot(Window win);
     int findWindowInfo(Window w);
+    void fakeFocusIn(WId window);
     void stayOnTop() override;
     struct WindowInfo
     {
@@ -69,6 +70,7 @@ private:
     QList<WindowInfo> m_windowInfo;
     QList<WId> m_lockWindows;
     QList<quint32> m_allowedWindows;
+    WId m_focusedLockWindow;
 };
 }
 

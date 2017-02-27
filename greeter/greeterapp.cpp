@@ -372,7 +372,6 @@ void UnlockApp::getFocus()
     // this loop is required to make the qml/graphicsscene properly handle the shared keyboard input
     // ie. "type something into the box of every greeter"
     foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
-        view->requestActivate();
         if (!m_testing) {
             view->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
         }
