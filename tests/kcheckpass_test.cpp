@@ -19,13 +19,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "../greeter/authenticator.h"
 #include <QGuiApplication>
+#include <QCommandLineParser>
 #include <QQuickView>
 #include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    Authenticator authenticator;
+    QCommandLineParser parser;
+    QCommandLineOption delayedOption(QStringLiteral("delayed"),
+                                     QStringLiteral("KCheckpass is created at startup, the authentication is delayed"));
+    QCommandLineOption directOption(QStringLiteral("direct"),
+                                    QStringLiteral("A new KCheckpass gets created when trying to authenticate"));
+    parser.addOption(directOption);
+    parser.addOption(delayedOption);
+    parser.addHelpOption();
+    parser.process(app);
+    AuthenticationMode mode = AuthenticationMode::Delayed;
+    if (parser.isSet(directOption)) {
+        mode = AuthenticationMode::Direct;
+    }
+    if (parser.isSet(directOption) && parser.isSet(delayedOption)) {
+        parser.showHelp(0);
+    }
+    Authenticator authenticator(mode);
 
     QQuickView view;
     view.rootContext()->setContextProperty("authenticator", &authenticator);

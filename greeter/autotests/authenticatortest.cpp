@@ -33,7 +33,7 @@ private Q_SLOTS:
 
 void AuthenticatorTest::testIncorrectPassword()
 {
-    QScopedPointer<Authenticator> authenticator(new Authenticator(this));
+    QScopedPointer<Authenticator> authenticator(new Authenticator());
     QSignalSpy failedSpy(authenticator.data(), SIGNAL(failed()));
     QSignalSpy succeededSpy(authenticator.data(), SIGNAL(succeeded()));
     QSignalSpy graceLockSpy(authenticator.data(), SIGNAL(graceLockedChanged()));
@@ -56,7 +56,7 @@ void AuthenticatorTest::testIncorrectPassword()
 
 void AuthenticatorTest::testCorrectPassword()
 {
-    QScopedPointer<Authenticator> authenticator(new Authenticator(this));
+    QScopedPointer<Authenticator> authenticator(new Authenticator());
     QSignalSpy succeededSpy(authenticator.data(), SIGNAL(succeeded()));
     QSignalSpy failedSpy(authenticator.data(), SIGNAL(failed()));
     authenticator->tryUnlock(QStringLiteral("testpassword"));
@@ -67,7 +67,7 @@ void AuthenticatorTest::testCorrectPassword()
 
 void AuthenticatorTest::testMessage()
 {
-    QScopedPointer<Authenticator> authenticator(new Authenticator(this));
+    QScopedPointer<Authenticator> authenticator(new Authenticator());
     QSignalSpy succeededSpy(authenticator.data(), SIGNAL(succeeded()));
     QSignalSpy messageSpy(authenticator.data(), SIGNAL(message(QString)));
     authenticator->tryUnlock(QStringLiteral("info"));
@@ -80,7 +80,7 @@ void AuthenticatorTest::testMessage()
 
 void AuthenticatorTest::testError()
 {
-    QScopedPointer<Authenticator> authenticator(new Authenticator(this));
+    QScopedPointer<Authenticator> authenticator(new Authenticator());
     QSignalSpy failedSpy(authenticator.data(), SIGNAL(failed()));
     QSignalSpy errorSpy(authenticator.data(), SIGNAL(error(QString)));
     authenticator->tryUnlock(QStringLiteral("error"));

@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <config-kscreenlocker.h>
 
 // Qt
+#include <QCoreApplication>
 #include <QFile>
 #include <QSocketNotifier>
 #include <QTimer>
@@ -36,13 +37,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <sys/wait.h>
 #include <unistd.h>
 
-Authenticator::Authenticator(QObject *parent)
+Authenticator::Authenticator(AuthenticationMode mode, QObject *parent)
     : QObject(parent)
     , m_graceLockTimer(new QTimer(this))
+    , m_checkPass(nullptr)
 {
     m_graceLockTimer->setSingleShot(true);
     m_graceLockTimer->setInterval(3000);
     connect(m_graceLockTimer, &QTimer::timeout, this, &Authenticator::graceLockedChanged);
+
+    if (mode == AuthenticationMode::Delayed) {
+        m_checkPass = new KCheckPass(AuthenticationMode::Delayed, this);
+        setupCheckPass();
+    }
 }
 
 Authenticator::~Authenticator() = default;
@@ -56,12 +63,32 @@ void Authenticator::tryUnlock(const QString &password)
     m_graceLockTimer->start();
     emit graceLockedChanged();
 
-    KCheckPass *checkPass = new KCheckPass(password, this);
-    connect(checkPass, &KCheckPass::succeeded, this, &Authenticator::succeeded);
-    connect(checkPass, &KCheckPass::failed, this, &Authenticator::failed);
-    connect(checkPass, &KCheckPass::message, this, &Authenticator::message);
-    connect(checkPass, &KCheckPass::error, this, &Authenticator::error);
-    checkPass->start();
+    if (!m_checkPass) {
+        m_checkPass = new KCheckPass(AuthenticationMode::Direct, this);
+        m_checkPass->setPassword(password);
+        setupCheckPass();
+    } else {
+        if (!m_checkPass->isReady()) {
+            emit failed();
+            return;
+        }
+        m_checkPass->setPassword(password);
+        m_checkPass->startAuth();
+    }
+}
+
+void Authenticator::setupCheckPass()
+{
+    connect(m_checkPass, &KCheckPass::succeeded, this, &Authenticator::succeeded);
+    connect(m_checkPass, &KCheckPass::failed, this, &Authenticator::failed);
+    connect(m_checkPass, &KCheckPass::message, this, &Authenticator::message);
+    connect(m_checkPass, &KCheckPass::error, this, &Authenticator::error);
+    connect(m_checkPass, &KCheckPass::destroyed, this,
+        [this] {
+            m_checkPass = nullptr;
+        }
+    );
+    m_checkPass->start();
 }
 
 bool Authenticator::isGraceLocked() const
@@ -69,18 +96,23 @@ bool Authenticator::isGraceLocked() const
     return m_graceLockTimer->isActive();
 }
 
-KCheckPass::KCheckPass(const QString &password, QObject *parent)
+KCheckPass::KCheckPass(AuthenticationMode mode, QObject *parent)
     : QObject(parent)
-    , m_password(password)
     , m_notifier(nullptr)
     , m_pid(0)
     , m_fd(0)
+    , m_mode(mode)
 {
-    connect(this, &KCheckPass::succeeded, this, &QObject::deleteLater);
-    connect(this, &KCheckPass::failed, this, &QObject::deleteLater);
+    if (mode == AuthenticationMode::Direct) {
+        connect(this, &KCheckPass::succeeded, this, &QObject::deleteLater);
+        connect(this, &KCheckPass::failed, this, &QObject::deleteLater);
+    }
 }
 
-KCheckPass::~KCheckPass() = default;
+KCheckPass::~KCheckPass()
+{
+    reapVerify();
+}
 
 void KCheckPass::start()
 {
@@ -194,6 +226,7 @@ bool KCheckPass::GRecvArr(char **ret)
 
 void KCheckPass::handleVerify()
 {
+    m_ready = false;
     int ret;
     char *arr;
 
@@ -253,9 +286,21 @@ void KCheckPass::handleVerify()
         case ConvPutAuthAbort:
             // what to do here?
             return;
+        case ConvPutReadyForAuthentication:
+            m_ready = true;
+            if (m_mode == AuthenticationMode::Direct) {
+                ::kill(m_pid, SIGUSR1);
+            }
+            return;
         }
     }
-    reapVerify();
+    if (m_mode == AuthenticationMode::Direct) {
+        reapVerify();
+    } else {
+        // we broke, let's restart the greeter
+        // error code 1 will result in a restart through the system
+        qApp->exit(1);
+    }
 }
 
 void KCheckPass::reapVerify()
@@ -265,6 +310,7 @@ void KCheckPass::reapVerify()
     m_notifier = nullptr;
     ::close( m_fd );
     int status;
+    ::kill(m_pid, SIGUSR2);
     while (::waitpid( m_pid, &status, 0 ) < 0)
         if (errno != EINTR) { // This should not happen ...
             cantCheck();
@@ -276,4 +322,9 @@ void KCheckPass::cantCheck()
 {
     // TODO: better signal?
     emit failed();
+}
+
+void KCheckPass::startAuth()
+{
+    ::kill(m_pid, SIGUSR1);
 }

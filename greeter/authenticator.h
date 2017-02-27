@@ -24,13 +24,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class QSocketNotifier;
 class QTimer;
+class KCheckPass;
+
+enum class AuthenticationMode {
+    Delayed,
+    Direct
+};
 
 class Authenticator : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool graceLocked READ isGraceLocked NOTIFY graceLockedChanged)
 public:
-    explicit Authenticator(QObject *parent = nullptr);
+    explicit Authenticator(AuthenticationMode mode = AuthenticationMode::Direct, QObject *parent = nullptr);
     ~Authenticator();
 
     bool isGraceLocked() const;
@@ -46,17 +52,29 @@ Q_SIGNALS:
     void error(const QString & err); // don't remove the "err" param, used in QML!!!
 
 private:
+    void setupCheckPass();
     QTimer *m_graceLockTimer;
+    KCheckPass *m_checkPass;
 };
 
 class KCheckPass : public QObject
 {
     Q_OBJECT
 public:
-    explicit KCheckPass(const QString &password, QObject *parent = nullptr);
+    explicit KCheckPass(AuthenticationMode mode, QObject *parent = nullptr);
     ~KCheckPass();
 
     void start();
+
+    bool isReady() const {
+        return m_ready;
+    }
+
+    void setPassword(const QString &password) {
+        m_password = password;
+    }
+
+    void startAuth();
 
 Q_SIGNALS:
     void failed();
@@ -84,6 +102,8 @@ private:
     QSocketNotifier *m_notifier;
     int m_pid;
     int m_fd;
+    bool m_ready = false;
+    AuthenticationMode m_mode;
 };
 
 #endif

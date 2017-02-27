@@ -56,6 +56,8 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+#include <sys/signalfd.h>
+#include <signal.h>
 
 #include <config-kscreenlocker.h>
 #if HAVE_SYS_PRCTL_H
@@ -210,6 +212,7 @@ conv_server (ConvRequest what, const char *prompt)
     case ConvPutAuthFailed:
     case ConvPutAuthError:
     case ConvPutAuthAbort:
+    case ConvPutReadyForAuthentication:
         return 0;
     case ConvPutInfo:
     case ConvPutError:
@@ -261,6 +264,13 @@ main(int argc, char **argv)
   int		c, nfd;
   uid_t		uid;
   AuthReturn	ret;
+  sigset_t signalMask;
+  int signalFd;
+  struct signalfd_siginfo fdsi;
+  ssize_t sigReadSize;
+  pid_t parentPid;
+
+  parentPid = getppid();
 
   // disable ptrace on kcheckpass
 #if HAVE_PR_SET_DUMPABLE
@@ -321,32 +331,75 @@ main(int argc, char **argv)
     return AuthError;
   }
 
-  /* Now do the fandango */
-  ret = Authenticate(method,
-                     username, 
-                     conv_server);
-
-    if (ret == AuthBad) {
-      message("Authentication failure\n");
-      if (!nullpass) {
-        openlog("kcheckpass", LOG_PID, LOG_AUTH);
-        syslog(LOG_NOTICE, "Authentication failure for %s (invoked by uid %d)", username, uid);
-      }
+    // setup signals
+    sigemptyset(&signalMask);
+    sigaddset(&signalMask, SIGUSR1);
+    sigaddset(&signalMask, SIGUSR2);
+    // block them
+    if (sigprocmask(SIG_BLOCK, &signalMask, NULL) == -1) {
+        message("Block signal failed\n");
+        conv_server(ConvPutAuthError, 0);
+        return 1;
     }
-    switch (ret) {
-        case AuthOk:
-            conv_server(ConvPutAuthSucceeded, 0);
+    signalFd = signalfd(-1, &signalMask, SFD_CLOEXEC);
+    if (signalFd == -1) {
+        message("Signal fd failed\n");
+        conv_server(ConvPutAuthError, 0);
+        return 1;
+    }
+    // now lets block on the fd
+    for (;;) {
+        conv_server(ConvPutReadyForAuthentication, 0);
+        sigReadSize = read(signalFd, &fdsi, sizeof(struct signalfd_siginfo));
+        if (sigReadSize != sizeof(struct signalfd_siginfo)) {
+            message("Read wrong size\n");
+            return 1;
+        }
+        if (fdsi.ssi_signo == SIGUSR1) {
+            if (fdsi.ssi_pid != parentPid) {
+                message("signal from wrong process\n");
+                continue;
+            }
+            /* Now do the fandango */
+            ret = Authenticate(method,
+                                username,
+                                conv_server);
+
+            if (ret == AuthBad) {
+                message("Authentication failure\n");
+                if (!nullpass) {
+                    openlog("kcheckpass", LOG_PID, LOG_AUTH);
+                    syslog(LOG_NOTICE, "Authentication failure for %s (invoked by uid %d)", username, uid);
+                }
+            }
+            switch (ret) {
+                case AuthOk:
+                    conv_server(ConvPutAuthSucceeded, 0);
+                    break;
+                case AuthBad:
+                    conv_server(ConvPutAuthFailed, 0);
+                    break;
+                case AuthError:
+                    conv_server(ConvPutAuthError, 0);
+                    break;
+                case AuthAbort:
+                    conv_server(ConvPutAuthAbort, 0);
+                default:
+                    break;
+            }
+            if (uid != geteuid()) {
+                // we don't support multiple auth for setuid kcheckpass
+                break;
+            }
+        } else if (fdsi.ssi_signo == SIGUSR2) {
+            if (fdsi.ssi_pid != parentPid) {
+                message("signal from wrong process\n");
+                continue;
+            }
             break;
-        case AuthBad:
-            conv_server(ConvPutAuthFailed, 0);
-            break;
-        case AuthError:
-            conv_server(ConvPutAuthError, 0);
-            break;
-        case AuthAbort:
-            conv_server(ConvPutAuthAbort, 0);
-        default:
-            break;
+        } else {
+            message("unexpected signal\n");
+        }
     }
 
   return 0;
