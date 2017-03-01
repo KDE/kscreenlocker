@@ -51,6 +51,7 @@ namespace ScreenLocker
 X11Locker::X11Locker(QObject *parent)
     : AbstractLocker(parent)
     , QAbstractNativeEventFilter()
+    , m_focusedLockWindow(XCB_WINDOW_NONE)
 {
     initialize();
 }
@@ -229,8 +230,12 @@ void X11Locker::removeVRoot(Window win)
     XDeleteProperty (QX11Info::display(), win, gXA_VROOT);
 }
 
-static void fakeFocusIn( WId window )
+void X11Locker::fakeFocusIn( WId window )
 {
+    if (window == m_focusedLockWindow) {
+        return;
+    }
+
     // We have keyboard grab, so this application will
     // get keyboard events even without having focus.
     // Fake FocusIn to make Qt realize it has the active
@@ -244,6 +249,8 @@ static void fakeFocusIn( WId window )
     ev.xfocus.detail = NotifyAncestor;
     XSendEvent( QX11Info::display(), window, False, NoEventMask, &ev );
     XFlush(QX11Info::display());
+
+    m_focusedLockWindow = window;
 }
 
 template< typename T>
@@ -308,6 +315,11 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
                         (x>=x_return && x<=x_return+(int)width_return)
                         &&
                         (y>=y_return && y<=y_return+(int)height_return) ) {
+                        // We need to do our own focus handling (see comment in fakeFocusIn).
+                        // For now: Focus on clicks inside the window
+                        if (responseType == XCB_BUTTON_PRESS) {
+                            fakeFocusIn(window);
+                        }
                         const int targetX = x - x_return;
                         const int targetY = y - y_return;
                         if (responseType == XCB_KEY_PRESS || responseType == XCB_KEY_RELEASE) {
@@ -386,6 +398,10 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
                 else
                     qDebug() << "Unknown toplevel for MapNotify";
                 m_lockWindows.removeAll(xu->event);
+                if (m_focusedLockWindow == xu->event && !m_lockWindows.empty()) {
+                    // The currently focused window vanished, just focus the first one in the list
+                    fakeFocusIn(m_lockWindows[0]);
+                }
                 ret = true;
             }
             break;
@@ -508,8 +524,14 @@ void X11Locker::addAllowedWindow(quint32 window)
             // not yet shown and we have a lock window, so we show our own window
             m_background->show();
         }
+
+        if (m_lockWindows.empty()) {
+            // Make sure to focus the first window
+            m_focusedLockWindow = XCB_WINDOW_NONE;
+            fakeFocusIn(window);
+        }
+
         m_lockWindows.prepend(window);
-        fakeFocusIn(window);
         stayOnTop();
     }
 }
