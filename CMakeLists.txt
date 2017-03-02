@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 set(PROJECT_VERSION "5.9.3")
-=======
-set(PROJECT_VERSION "5.8.6")
->>>>>>> Plasma/5.8
 set(PROJECT_VERSION_MAJOR 5)
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
