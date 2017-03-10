@@ -266,10 +266,6 @@ main(int argc, char **argv)
   procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
 #endif
 
-#ifdef HAVE_OSF_C2_PASSWD
-  initialize_osf_security(argc, argv);
-#endif
-
   /* Make sure stdout/stderr are open */
   for (c = 1; c <= 2; c++) {
     if (fcntl(c, F_GETFL) == -1) {

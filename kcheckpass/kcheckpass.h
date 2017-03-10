@@ -63,21 +63,10 @@
 
 #include <unistd.h>
 
-#ifdef OSF1_ENH_SEC
-#include <sys/security.h>
-#include <prot.h>
-#endif
-
 /* Make sure there is only one! */
 #if defined(HAVE_PAM)
-# undef HAVE_OSF_C2_PASSWD
-#elif defined(HAVE_OSF_C2_PASSWD)
-#elif defined(_AIX)
-# define HAVE_AIX_AUTH
-#elif defined(HAVE_GETSPNAM)
-# define HAVE_SHADOW
 #else
-# define HAVE_ETCPASSWD
+#define HAVE_SHADOW
 #endif
 
 #if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ > 4)

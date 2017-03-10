@@ -5,11 +5,8 @@ configure_file (config-kcheckpass.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kch
 set(kcheckpass_SRCS
 	kcheckpass.h
 	kcheckpass.c
-	checkpass_etcpasswd.c
 	checkpass_pam.c
 	checkpass_shadow.c
-	checkpass_osfc2passwd.c
-	checkpass_aix.c
 )
 
 add_executable(kcheckpass ${kcheckpass_SRCS})
