@@ -555,7 +555,10 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
         }
         m_greeterClientConnection = m_waylandDisplay->createClient(sx[0]);
         connect(m_greeterClientConnection, &QObject::destroyed, this,
-            [this] {
+            [this] (QObject *destroyedObject) {
+                if (destroyedObject != m_greeterClientConnection) {
+                    return;
+                }
                 m_greeterClientConnection = nullptr;
                 emit greeterClientConnectionChanged();
             }
