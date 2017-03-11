@@ -67,6 +67,10 @@ public:
     void updateCanSuspend(bool set);
     void updateCanHibernate(bool set);
 
+    bool supportsSeccomp() const {
+        return m_supportsSeccomp;
+    }
+
 public Q_SLOTS:
     void desktopResized();
 
@@ -86,6 +90,7 @@ private:
     void initializeWayland();
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
     void loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
+    Authenticator *createAuthenticator();
 
     QString m_packageName;
     QUrl m_mainQmlPath;
@@ -112,6 +117,7 @@ private:
 
     KWayland::Client::PlasmaShell *m_plasmaShell = nullptr;
     WallpaperIntegration *m_wallpaperIntegration;
+    bool m_supportsSeccomp = false;
 };
 } // namespace
 

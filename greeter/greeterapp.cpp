@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "authenticator.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
 #include "wallpaper_integration.h"
+#include <config-kscreenlocker.h>
 
 // KDE
 #include <KAuthorized>
@@ -67,6 +68,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 #include <xcb/xcb.h>
 
+#if HAVE_SECCOMP
+#include <sys/stat.h>
+#include <unistd.h>
+#endif
+
 // this is usable to fake a "screensaver" installation for testing
 // *must* be "0" for every public commit!
 #define TEST_SCREENSAVER 0
@@ -98,12 +104,12 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_testing(false)
     , m_ignoreRequests(false)
     , m_immediateLock(false)
-    , m_authenticator(new Authenticator(AuthenticationMode::Direct, this))
     , m_graceTime(0)
     , m_noLock(false)
     , m_defaultToSwitchUser(false)
     , m_wallpaperIntegration(new WallpaperIntegration(this))
 {
+    m_authenticator = createAuthenticator();
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit);
     initialize();
     connect(this, &UnlockApp::screenAdded, this, &UnlockApp::desktopResized);
@@ -129,6 +135,19 @@ UnlockApp::~UnlockApp()
         m_ksldConnectionThread->quit();
         m_ksldConnectionThread->wait();
     }
+}
+
+Authenticator *UnlockApp::createAuthenticator()
+{
+#if HAVE_SECCOMP
+    struct stat buf;
+    stat(KCHECKPASS_BIN, &buf);
+    if (!(buf.st_mode & S_ISUID)) {
+        m_supportsSeccomp = true;
+        return new Authenticator(AuthenticationMode::Delayed, this);
+    }
+#endif
+    return new Authenticator(AuthenticationMode::Direct, this);
 }
 
 void UnlockApp::initialize()

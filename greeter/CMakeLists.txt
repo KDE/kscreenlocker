@@ -15,6 +15,10 @@ set(kscreenlocker_greet_SRCS
    wallpaper_integration.cpp
 )
 
+if(HAVE_SECCOMP)
+    set(kscreenlocker_greet_SRCS ${kscreenlocker_greet_SRCS} seccomp_filter.cpp)
+endif()
+
 qt5_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 kconfig_add_kcfg_files(kscreenlocker_greet_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/../kcfg/kscreensaversettings.kcfgc)
 
@@ -40,6 +44,9 @@ target_link_libraries(kscreenlocker_greet
                         KF5::WaylandClient
                         Wayland::Client
                         )
+if(HAVE_SECCOMP)
+    target_link_libraries(kscreenlocker_greet Qt5::DBus Seccomp::Seccomp)
+endif()
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 
