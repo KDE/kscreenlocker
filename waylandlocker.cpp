@@ -19,6 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
 #include "waylandlocker.h"
+
+#include <QGuiApplication>
+#include <QScreen>
+
 #include <KWayland/Server/display.h>
 #include <KWayland/Server/seat_interface.h>
 
@@ -32,10 +36,35 @@ WaylandLocker::WaylandLocker(KWayland::Server::Display *display, QObject *parent
     for (auto s : seats) {
         connect(s, &KWayland::Server::SeatInterface::timestampChanged, this, &WaylandLocker::userActivity);
     }
+    if (m_background) {
+        updateGeometryOfBackground();
+        const auto screens = qApp->screens();
+        for (auto s : screens) {
+            connect(s, &QScreen::geometryChanged, this, &WaylandLocker::updateGeometryOfBackground);
+        }
+        connect(qApp, &QGuiApplication::screenAdded, this,
+            [this] (QScreen *s) {
+                connect(s, &QScreen::geometryChanged, this, &WaylandLocker::updateGeometryOfBackground);
+                updateGeometryOfBackground();
+            }
+        );
+        connect(qApp, &QGuiApplication::screenRemoved, this, &WaylandLocker::updateGeometryOfBackground);
+    }
 }
 
 WaylandLocker::~WaylandLocker()
 {
+}
+
+void WaylandLocker::updateGeometryOfBackground()
+{
+    QRect combined;
+    const auto screens = qApp->screens();
+    for (auto s : screens) {
+        combined = combined.united(s->geometry());
+    }
+    m_background->setGeometry(combined);
+    m_background->update();
 }
 
 void WaylandLocker::showLockWindow()

@@ -38,7 +38,8 @@ BackgroundWindow::BackgroundWindow(AbstractLocker *lock)
     : QRasterWindow()
     , m_lock(lock)
 {
-    setFlags(Qt::X11BypassWindowManagerHint);
+    setFlags(Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint);
+    setProperty("org_kde_ksld_emergency", true);
 }
 
 BackgroundWindow::~BackgroundWindow() = default;

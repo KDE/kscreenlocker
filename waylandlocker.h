@@ -49,6 +49,7 @@ public:
 
 private:
     void stayOnTop() override;
+    void updateGeometryOfBackground();
 
 };
 
