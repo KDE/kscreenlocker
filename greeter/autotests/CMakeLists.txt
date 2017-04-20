@@ -24,6 +24,7 @@ ecm_mark_as_test(authenticatorTest)
 # KillTest
 #######################################
 add_executable(killTest killtest.cpp)
+add_test(kscreenlocker-killTest killTest)
 ecm_mark_as_test(killTest)
 target_link_libraries(killTest Qt5::Test)
 
@@ -32,6 +33,7 @@ target_link_libraries(killTest Qt5::Test)
 #######################################
 if(HAVE_SECCOMP)
     add_executable(seccompTest seccomp_test.cpp ../seccomp_filter.cpp)
+    add_test(kscreenlocker-seccompTest seccompTest)
     ecm_mark_as_test(seccompTest)
     target_link_libraries(seccompTest
         Qt5::Test
