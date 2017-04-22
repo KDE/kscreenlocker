@@ -259,7 +259,7 @@ void KSldApp::initialize()
             if (lockState() == Locked || lockState() == AcquiringLock) {
                 if (m_lockProcess->state() != QProcess::NotRunning) {
                     s_logindExit = true;
-                    m_lockProcess->kill();
+                    m_lockProcess->terminate();
                 } else {
                     doUnlock();
                 }
