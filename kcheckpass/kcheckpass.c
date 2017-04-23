@@ -281,6 +281,11 @@ main(int argc, char **argv)
   procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
 #endif
 
+  // prevent becoming an orphan while waiting for SIGUSR2
+#if HAVE_PR_SET_DUMPABLE
+  prctl(PR_SET_PDEATHSIG, SIGUSR2);
+#endif
+
   /* Make sure stdout/stderr are open */
   for (c = 1; c <= 2; c++) {
     if (fcntl(c, F_GETFL) == -1) {
