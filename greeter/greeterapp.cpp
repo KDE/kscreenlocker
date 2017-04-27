@@ -230,6 +230,8 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
             QQmlExpression expr(qmlObject->engine()->rootContext(), item, QStringLiteral("parent"));
             QQmlProperty prop(item, QStringLiteral("anchors.fill"));
             prop.write(expr.evaluate());
+
+            view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
         }
     );
 }
