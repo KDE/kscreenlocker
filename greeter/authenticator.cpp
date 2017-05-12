@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <sys/socket.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <signal.h>
 
 Authenticator::Authenticator(AuthenticationMode mode, QObject *parent)
     : QObject(parent)
