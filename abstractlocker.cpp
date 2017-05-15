@@ -52,8 +52,9 @@ void BackgroundWindow::paintEvent(QPaintEvent* )
         auto text = ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
                           "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
                           "log in and execute the command:\n\n"
-                          "loginctl unlock-sessions\n\n"
-                          "Afterwards switch back to the running session (Ctrl+Alt+F%1).");
+                          "loginctl unlock-session %1\n\n"
+                          "Afterwards switch back to the running session (Ctrl+Alt+F%2).");
+        text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_SESSION_ID")));
         text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_VTNR")));
         p.setPen(Qt::white);
         QFont f = p.font();
