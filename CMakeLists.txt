@@ -35,7 +35,7 @@ add_feature_info("prctl/procctl tracing control"
 
 check_include_file("sys/signalfd.h" HAVE_SIGNALFD_H)
 if (NOT HAVE_SIGNALFD_H)
-    check_include_file("sys/event.h" HAVE_EVENT_H)
+    check_include_files("sys/types.h;sys/event.h" HAVE_EVENT_H)
 endif ()
 if (NOT (HAVE_SIGNALFD_H OR HAVE_EVENT_H))
     message(FATAL_ERROR "kcheckpass either needs signalfd() or kevent()&sigtimedwait() to work")
