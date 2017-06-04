@@ -243,27 +243,19 @@ void KCheckPass::handleVerify()
                 ::free( arr );
             return;
         case ConvGetNormal:
-            if (!GRecvArr( &arr ))
-                break;
-            GSendStr(m_password.toUtf8().constData());
-            if (!m_password.isEmpty()) {
-                // IsSecret
-                GSendInt(1);
-            }
-            if (arr)
-                ::free( arr );
-            return;
         case ConvGetHidden:
+        {
             if (!GRecvArr( &arr ))
                 break;
-            GSendStr(m_password.toUtf8().constData());
-            if (!m_password.isEmpty()) {
-                // IsSecret
-                GSendInt(1);
-            }
+            QByteArray utf8pass = m_password.toUtf8();
+            GSendStr(utf8pass.constData());
+            if (utf8pass.constData() != nullptr)
+                GSendInt(IsPassword);
+
             if (arr)
                 ::free( arr );
             return;
+        }
         case ConvPutInfo:
             if (!GRecvArr( &arr ))
                 break;
