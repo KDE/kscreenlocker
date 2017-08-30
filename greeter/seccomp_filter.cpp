@@ -21,9 +21,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "seccomp_filter.h"
+#include "kwinglplatform.h"
 
 #include <QDBusConnection>
 #include <QOpenGLContext>
+#include <QOffscreenSurface>
 
 #include <seccomp.h>
 #include <sys/socket.h>
@@ -38,7 +40,22 @@ void init()
 {
     // trigger OpenGL context creation
     // we need this to ensure that all required files are opened for write
-    QOpenGLContext::supportsThreadedOpenGL();
+    // on NVIDIA we need to keep write around, otherwise BUG 384005 happens
+    bool writeSupported = true;
+    QScopedPointer<QOffscreenSurface> dummySurface(new QOffscreenSurface);
+    dummySurface->create();
+    QOpenGLContext dummyGlContext;
+    if (dummyGlContext.create()) {
+        if (dummyGlContext.makeCurrent(dummySurface.data())) {
+            auto gl = KWin::GLPlatform::instance();
+            gl->detect();
+            gl->printResults();
+            if (gl->driver() == KWin::Driver_NVidia) {
+                // BUG: 384005
+                writeSupported = false;
+            }
+        }
+    }
 
     // access DBus to have the socket open
     QDBusConnection::sessionBus();
@@ -57,8 +74,10 @@ void init()
 
     // instead disallow opening new files for writing
     // they should fail with EPERM error
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
+    if (writeSupported) {
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
+    }
     seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
 
     // disallow going to a socket

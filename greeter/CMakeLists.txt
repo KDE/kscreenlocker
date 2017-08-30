@@ -13,6 +13,7 @@ set(kscreenlocker_greet_SRCS
    main.cpp
    noaccessnetworkaccessmanagerfactory.cpp
    wallpaper_integration.cpp
+   kwinglplatform.cpp
 )
 
 if(HAVE_SECCOMP)
