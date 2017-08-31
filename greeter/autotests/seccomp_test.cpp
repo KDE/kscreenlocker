@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include <config-kscreenlocker.h>
 #include "../seccomp_filter.h"
+#include "../kwinglplatform.h"
 
 #include <QtTest/QtTest>
 #include <QTemporaryFile>
@@ -55,6 +56,9 @@ void SeccompTest::testCreateFile()
 
 void SeccompTest::testOpenFile()
 {
+    if (KWin::GLPlatform::instance()->driver() == KWin::Driver_NVidia) {
+        QSKIP("Write protection not supported on NVIDIA");
+    }
     QFile file(QStringLiteral(KCHECKPASS_BIN));
     QVERIFY(file.exists());
     QVERIFY(!file.open(QIODevice::WriteOnly));

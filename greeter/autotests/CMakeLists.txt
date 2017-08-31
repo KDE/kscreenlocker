@@ -32,7 +32,7 @@ target_link_libraries(killTest Qt5::Test)
 # Seccomp Test
 #######################################
 if(HAVE_SECCOMP)
-    add_executable(seccompTest seccomp_test.cpp ../seccomp_filter.cpp)
+    add_executable(seccompTest seccomp_test.cpp ../seccomp_filter.cpp ../kwinglplatform.cpp)
     add_test(kscreenlocker-seccompTest seccompTest)
     ecm_mark_as_test(seccompTest)
     target_link_libraries(seccompTest
