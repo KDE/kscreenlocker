@@ -29,6 +29,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
+#ifdef __linux__
+#include <sys/syscall.h>
+#endif
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 
 class SeccompTest : public QObject
@@ -38,6 +44,8 @@ private Q_SLOTS:
     void initTestCase();
     void testCreateFile();
     void testOpenFile();
+    void testOpenFilePosix();
+    void testWriteFilePosix();
     void testStartProcess();
     void testNetworkAccess_data();
     void testNetworkAccess();
@@ -64,6 +72,33 @@ void SeccompTest::testOpenFile()
     QVERIFY(!file.open(QIODevice::WriteOnly));
     QVERIFY(!file.open(QIODevice::ReadWrite));
     QVERIFY(file.open(QIODevice::ReadOnly));
+}
+
+void SeccompTest::testOpenFilePosix()
+{
+    QVERIFY(open("/dev/null", O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
+    QVERIFY(openat(AT_FDCWD, "/dev/null", O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
+#ifdef SYS_open
+    QVERIFY(syscall(SYS_open, "/dev/null", O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_openat
+    QVERIFY(syscall(SYS_openat, AT_FDCWD, "/dev/null", O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
+#endif
+}
+
+void SeccompTest::testWriteFilePosix()
+{
+    if (KWin::GLPlatform::instance()->driver() == KWin::Driver_NVidia) {
+        QSKIP("Write protection not supported on NVIDIA");
+    }
+    QVERIFY(open("/dev/null", O_RDWR) == -1 && errno == EPERM);
+    QVERIFY(openat(AT_FDCWD, "/dev/null", O_RDWR) == -1 && errno == EPERM);
+#ifdef SYS_open
+    QVERIFY(syscall(SYS_open, "/dev/null", O_RDWR) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_openat
+    QVERIFY(syscall(SYS_openat, AT_FDCWD, "/dev/null", O_RDWR) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testStartProcess()
