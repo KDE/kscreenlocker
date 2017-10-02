@@ -122,6 +122,13 @@ UnlockApp::UnlockApp(int &argc, char **argv)
 
 UnlockApp::~UnlockApp()
 {
+    //workaround QTBUG-55460
+    //will be fixed when themes port to QQC2
+    for (auto view: m_views) {
+        if (QQuickItem *focusItem = view->activeFocusItem()) {
+            focusItem->setFocus(false);
+        }
+    }
     qDeleteAll(m_views);
 
     if (m_ksldInterface) {
