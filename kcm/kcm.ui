@@ -128,7 +128,7 @@
             <string>The global keyboard shortcut to lock the screen.</string>
            </property>
            <property name="text">
-            <string>Lock screen:</string>
+            <string>Keyboard shortcut:</string>
            </property>
           </widget>
          </item>
