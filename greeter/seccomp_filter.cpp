@@ -76,12 +76,38 @@ void init()
     // they should fail with EPERM error
     if (writeSupported) {
         seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
-        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
         seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
+
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
         seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
     }
     seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
     seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
+
+    // Disallow everything which modifies the filesystem. An attacker could store the password as a directory name or encode it in chmod bits.
+    // Also prevent deleting anything, to prevent an attacker from deleting the users files.
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(creat), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(truncate), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(rename), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(renameat), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(renameat2), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(mkdir), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(mkdirat), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(rmdir), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(link), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(linkat), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(unlink), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(unlinkat), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(symlink), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(symlinkat), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(mknod), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(mknodat), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(chmod), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(fchmod), 0);
+    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(fchmodat), 0);
 
     // disallow going to a socket
     seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(socket), 0);
