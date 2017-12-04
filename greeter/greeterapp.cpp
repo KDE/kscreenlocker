@@ -180,7 +180,7 @@ void UnlockApp::initialize()
         package.setPath(KScreenSaverSettings::theme());
     }
 
-    m_mainQmlPath = QUrl::fromLocalFile(package.filePath("lockscreenmainscript"));
+    m_mainQmlPath = package.fileUrl("lockscreenmainscript");
 
     m_wallpaperIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
     m_wallpaperIntegration->setPluginName(KScreenSaverSettings::self()->wallpaperPlugin());
@@ -505,7 +505,7 @@ void UnlockApp::setTheme(const QString &theme)
     KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
     package.setPath(m_packageName);
 
-    m_mainQmlPath = QUrl::fromLocalFile(package.filePath("lockscreenmainscript"));
+    m_mainQmlPath = package.fileUrl("lockscreenmainscript");
 }
 
 void UnlockApp::setImmediateLock(bool immediate)
