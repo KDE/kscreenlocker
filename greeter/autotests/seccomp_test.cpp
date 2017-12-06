@@ -39,15 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <fcntl.h>
 #include <unistd.h>
 
-#if !defined(SYS_open) || !defined(SYS_openat) || !defined(SYS_creat) || !defined(SYS_truncate) \
- || !defined(SYS_rename) || !defined(SYS_renameat) || !defined(SYS_renameat2) || !defined(SYS_mkdir) \
- || !defined(SYS_mkdirat) || !defined(SYS_rmdir) || !defined(SYS_link) || !defined(SYS_linkat) \
- || !defined(SYS_unlink) || !defined(SYS_unlinkat) || !defined(SYS_symlink) || !defined(SYS_symlinkat) \
- || !defined(SYS_mknod) || !defined(SYS_mknodat) || !defined(SYS_chmod) || !defined(SYS_fchmod) \
- || !defined(SYS_fchmodat)
-#error "Some systemcalls are not available, though seccomp is available."
-#endif
-
 class SeccompTest : public QObject
 {
     Q_OBJECT
@@ -110,9 +101,15 @@ void SeccompTest::testOpenFilePosix()
 {
     QVERIFY(open(createPathChar, O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
     QVERIFY(openat(AT_FDCWD, createPathChar, O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
+#ifdef SYS_open
     QVERIFY(syscall(SYS_open, createPathChar, O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_openat
     QVERIFY(syscall(SYS_openat, AT_FDCWD, createPathChar, O_RDONLY | O_CREAT, 0) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_creat
     QVERIFY(syscall(SYS_creat, createPathChar, S_IRWXU) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testWriteFilePosix()
@@ -122,74 +119,114 @@ void SeccompTest::testWriteFilePosix()
     }
     QVERIFY(open(existingFileChar, O_RDWR) == -1 && errno == EPERM);
     QVERIFY(openat(AT_FDCWD, existingFileChar, O_RDWR) == -1 && errno == EPERM);
+#ifdef SYS_open
     QVERIFY(syscall(SYS_open, existingFileChar, O_RDWR) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_openat
     QVERIFY(syscall(SYS_openat, AT_FDCWD, existingFileChar, O_RDWR) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testTruncate()
 {
     QVERIFY(!QFile::resize(existingFile, 0));
 
+#ifdef SYS_truncate
     QVERIFY(syscall(SYS_truncate, existingFileChar, 0) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testRename()
 {
     QVERIFY(!QFile::rename(existingFile, createPath));
 
+#ifdef SYS_rename
     QVERIFY(syscall(SYS_rename, existingFileChar, createPathChar) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_renameat
     QVERIFY(syscall(SYS_renameat, AT_FDCWD, existingFileChar, AT_FDCWD, createPathChar) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_renameat2
     QVERIFY(syscall(SYS_renameat2, AT_FDCWD, existingFileChar, AT_FDCWD, createPathChar, 0) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testMkdir()
 {
     QVERIFY(!QDir::current().mkdir(createPath));
 
+#ifdef SYS_mkdir
     QVERIFY(syscall(SYS_mkdir, createPathChar, S_IRWXU) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_mkdirat
     QVERIFY(syscall(SYS_mkdirat, AT_FDCWD, createPathChar, S_IRWXU) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testRmdir()
 {
     QVERIFY(!QDir::current().remove(existingDir));
 
+#ifdef SYS_rmdir
     QVERIFY(syscall(SYS_rmdir, existingDir.data()) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testLinkUnlink()
 {
     QVERIFY(!QFile::remove(existingFile));
 
+#ifdef SYS_link
     QVERIFY(syscall(SYS_link, existingFileChar, createPathChar) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_linkat
     QVERIFY(syscall(SYS_linkat, AT_FDCWD, existingFileChar, AT_FDCWD, createPathChar, 0) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_unlink
     QVERIFY(syscall(SYS_unlink, existingFileChar) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_unlinkat
     QVERIFY(syscall(SYS_unlinkat, AT_FDCWD, existingFileChar, 0) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testSymlink()
 {
     QVERIFY(!QFile::link(existingFile, createPath));
 
+#ifdef SYS_symlink
     QVERIFY(syscall(SYS_symlink, existingFileChar, createPathChar) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_symlinkat
     QVERIFY(syscall(SYS_symlinkat, existingFileChar, AT_FDCWD, createPathChar) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testMknod()
 {
+#ifdef SYS_mknod
     QVERIFY(syscall(SYS_mknod, createPathChar, S_IRWXU, S_IFIFO) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_mknodat
     QVERIFY(syscall(SYS_mknodat, AT_FDCWD, createPathChar, S_IRWXU, S_IFIFO) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testChmod()
 {
     QVERIFY(!QFile::setPermissions(existingFileChar, QFileDevice::ExeOwner));
+#ifdef SYS_chmod
     QVERIFY(syscall(SYS_chmod, existingFileChar, S_IRWXU) == -1 && errno == EPERM);
+#endif
+#ifdef SYS_fchmod
     QFile file(existingFile);
     QVERIFY(file.open(QIODevice::ReadOnly));
     QVERIFY(syscall(SYS_fchmod, file.handle(), S_IRWXU) == -1 && errno == EPERM);
     file.close();
+#endif
+#ifdef SYS_fchmodat
     QVERIFY(syscall(SYS_fchmodat, AT_FDCWD, existingFileChar, S_IRWXU, 0) == -1 && errno == EPERM);
+#endif
 }
 
 void SeccompTest::testStartProcess()
