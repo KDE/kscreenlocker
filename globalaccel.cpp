@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDBusMessage>
 #include <QDBusPendingReply>
 #include <QKeyEvent>
+#include <QRegularExpression>
 #include <QX11Info>
 
 #include <xcb/xcb.h>
@@ -38,23 +39,23 @@ static const QString s_componentInterface = QStringLiteral("org.kde.kglobalaccel
 /**
  * Whitelist of the components which are allowed to get global shortcuts.
  * The DBus path of the component is the key for the whitelist.
- * The value for each key contains a list of unique shortcut names which are allowed.
+ * The value for each key contains a regular expression matching unique shortcut names which are allowed.
  * This allows to not only restrict on component, but also restrict on the shortcuts.
  * E.g. plasmashell might accept media shortcuts, but not shortcuts for switching the activity.
  **/
-static const QMap<QString, QStringList> s_shortcutWhitelist{
-    {QStringLiteral("/component/mediacontrol"), {QStringLiteral("stopmedia"),
-                    QStringLiteral("nextmedia"),
-                    QStringLiteral("previousmedia"),
-                    QStringLiteral("playpausemedia")}},
-    {QStringLiteral("/component/kmix"), {QStringLiteral("mute"),
-                    QStringLiteral("decrease_volume"),
-                    QStringLiteral("increase_volume")}},
-    {QStringLiteral("/component/kded5"), {QStringLiteral("Increase Screen Brightness"),
-                    QStringLiteral("Decrease Screen Brightness"),
-                    QStringLiteral("Increase Keyboard Brightness"),
-                    QStringLiteral("Decrease Keyboard Brightness")}},
-    {QStringLiteral("/component/KDE_Keyboard_Layout_Switcher"), {QStringLiteral("Switch to Next Keyboard Layout")}}
+static const QMap<QString, QRegularExpression> s_shortcutWhitelist{
+    {QStringLiteral("/component/mediacontrol"), QRegularExpression(
+        QStringLiteral("stopmedia|nextmedia|previousmedia|playpausemedia")
+    )},
+    {QStringLiteral("/component/kmix"), QRegularExpression(
+        QStringLiteral("mute|decrease_volume|increase_volume")
+    )},
+    {QStringLiteral("/component/kded5"), QRegularExpression(
+        QStringLiteral("Increase Screen Brightness|Decrease Screen Brightness|Increase Keyboard Brightness|Decrease Keyboard Brightness")
+    )},
+    {QStringLiteral("/component/KDE_Keyboard_Layout_Switcher"), QRegularExpression(
+        QStringLiteral("Switch to Next Keyboard Layout|Switch keyboard layout to .*")
+    )}
 };
 
 static uint g_keyModMaskXAccel = 0;
@@ -163,7 +164,8 @@ void GlobalAccel::components(QDBusPendingCallWatcher *self)
                         }
                         const auto s = reply.value();
                         for (auto it = s.begin(); it != s.end(); ++it) {
-                            if (whitelist.value().contains((*it).uniqueName())) {
+                            auto matches = whitelist.value().match((*it).uniqueName());
+                            if (matches.hasMatch()) {
                                 infos.append(*it);
                             }
                         }
