@@ -40,6 +40,7 @@ if(HAVE_SECCOMP)
         Qt5::Gui
         Qt5::DBus
         Qt5::Network
+        KF5::WindowSystem
         Seccomp::Seccomp
     )
 endif()

@@ -21,6 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../seccomp_filter.h"
 #include "../kwinglplatform.h"
 
+#include <KWindowSystem>
+
 #include <QtTest/QtTest>
 #include <QTemporaryFile>
 #include <QProcess>
@@ -84,6 +86,10 @@ void SeccompTest::initTestCase()
 
 void SeccompTest::testCreateFile()
 {
+    if (KWin::GLPlatform::instance()->isSoftwareEmulation() && KWindowSystem::isPlatformWayland()) {
+        QSKIP("File creation protection not supported with Mesa on Wayland");
+    }
+
     QTemporaryFile file;
     QVERIFY(!file.open());
 }

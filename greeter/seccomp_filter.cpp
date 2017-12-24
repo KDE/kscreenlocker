@@ -23,6 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "seccomp_filter.h"
 #include "kwinglplatform.h"
 
+#include <KWindowSystem>
+
 #include <QDBusConnection>
 #include <QOpenGLContext>
 #include <QOffscreenSurface>
@@ -42,6 +44,8 @@ void init()
     // we need this to ensure that all required files are opened for write
     // on NVIDIA we need to keep write around, otherwise BUG 384005 happens
     bool writeSupported = true;
+    // Mesa's software renderers create buffers in $XDG_RUNTIME_DIR on wayland
+    bool createSupported = true;
     QScopedPointer<QOffscreenSurface> dummySurface(new QOffscreenSurface);
     dummySurface->create();
     QOpenGLContext dummyGlContext;
@@ -53,6 +57,9 @@ void init()
             if (gl->driver() == KWin::Driver_NVidia) {
                 // BUG: 384005
                 writeSupported = false;
+            }
+            else if (gl->isSoftwareEmulation() && KWindowSystem::isPlatformWayland()) {
+                createSupported = writeSupported = false;
             }
         }
     }
@@ -81,15 +88,17 @@ void init()
         seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
         seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
     }
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
+    if (createSupported) {
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(openat), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open), 1, SCMP_A1(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_WRONLY, O_WRONLY));
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_RDWR, O_RDWR));
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(open_by_handle_at), 1, SCMP_A2(SCMP_CMP_MASKED_EQ, O_CREAT, O_CREAT));
+        seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(creat), 0);
+    }
 
     // Disallow everything which modifies the filesystem. An attacker could store the password as a directory name or encode it in chmod bits.
     // Also prevent deleting anything, to prevent an attacker from deleting the users files.
-    seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(creat), 0);
     seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(truncate), 0);
     seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(rename), 0);
     seccomp_rule_add(context, SCMP_ACT_ERRNO(EPERM), SCMP_SYS(renameat), 0);
