@@ -67,8 +67,6 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_ui);
 
-    KConfigDialogManager::changedMap()->insert(QStringLiteral("SelectImageButton"), SIGNAL(imagePathChanged(QString)));
-
     addConfig(KScreenSaverSettings::self(), m_ui);
 
     m_actionCollection->setConfigGlobal(true);
