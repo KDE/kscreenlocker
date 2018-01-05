@@ -30,6 +30,7 @@ class ScreenLockerKcmForm;
 namespace ScreenLocker
 {
 class WallpaperIntegration;
+class LnFIntegration;
 }
 
 namespace KDeclarative
@@ -49,6 +50,8 @@ public:
     explicit ScreenLockerKcm(QWidget *parent = nullptr, const QVariantList& args = QVariantList());
 
     KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const;
+    KDeclarative::ConfigPropertyMap *lnfConfiguration() const;
+
     QString currentWallpaper() const;
 
     bool eventFilter(QObject *watched, QEvent *event) override;
@@ -69,10 +72,12 @@ private:
     void loadWallpapers();
     void selectWallpaper(const QString &pluginId);
     void loadWallpaperConfig();
+    void loadLnfConfig();
     KPackage::Package m_package;
     KActionCollection *m_actionCollection;
     ScreenLockerKcmForm *m_ui;
     ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
+    ScreenLocker::LnFIntegration* m_lnfIntegration = nullptr;
 };
 
 //see https://bugreports.qt.io/browse/QTBUG-57714, don't expose a QWidget as a context property
@@ -80,6 +85,8 @@ class ScreenLockerProxy : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY wallpaperConfigurationChanged)
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *lnfConfiguration READ lnfConfiguration CONSTANT)
+
     Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
 public:
     ScreenLockerProxy(ScreenLockerKcm *parent) :
@@ -90,6 +97,9 @@ public:
 
     KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const {
         return q->wallpaperConfiguration();
+    }
+    KDeclarative::ConfigPropertyMap *lnfConfiguration() const {
+        return q->lnfConfiguration();
     }
 
     QString currentWallpaper() const {

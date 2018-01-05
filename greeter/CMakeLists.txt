@@ -12,6 +12,7 @@ set(kscreenlocker_greet_SRCS
    greeterapp.cpp
    main.cpp
    noaccessnetworkaccessmanagerfactory.cpp
+   lnf_integration.cpp
    wallpaper_integration.cpp
    kwinglplatform.cpp
 )

@@ -45,6 +45,7 @@ namespace ScreenLocker
 {
 class Unlocker;
 class WallpaperIntegration;
+class LnFIntegration;
 
 class UnlockApp : public QGuiApplication
 {
@@ -117,6 +118,8 @@ private:
 
     KWayland::Client::PlasmaShell *m_plasmaShell = nullptr;
     WallpaperIntegration *m_wallpaperIntegration;
+    LnFIntegration *m_lnfIntegration;
+
     bool m_supportsSeccomp = false;
 };
 } // namespace

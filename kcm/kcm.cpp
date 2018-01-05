@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_kcm.h"
 #include "screenlocker_interface.h"
 #include "../greeter/wallpaper_integration.h"
+#include "../greeter/lnf_integration.h"
+
 #include <config-kscreenlocker.h>
 #include <KActionCollection>
 #include <KGlobalAccel>
@@ -84,15 +86,23 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
 
     m_ui->wallpaperCombo->installEventFilter(this);
 
-    m_ui->wallpaperConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
     auto proxy = new ScreenLockerProxy(this);
+    m_ui->wallpaperConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
     m_ui->wallpaperConfigWidget->rootContext()->setContextProperty("configDialog", proxy);
+
+    m_ui->lnfConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
+    m_ui->lnfConfigWidget->rootContext()->setContextProperty("configDialog", proxy);
+
+
 
     connect(this, &ScreenLockerKcm::wallpaperConfigurationChanged, proxy, &ScreenLockerProxy::wallpaperConfigurationChanged);
     connect(this, &ScreenLockerKcm::currentWallpaperChanged, proxy, &ScreenLockerProxy::currentWallpaperChanged);
 
-    m_ui->wallpaperConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/config.qml")));
+    m_ui->wallpaperConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/wallpaperconfig.qml")));
     connect(m_ui->wallpaperConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(changed()));
+
+    m_ui->lnfConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/lnfconfig.qml")));
+    connect(m_ui->lnfConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(changed()));
 
     m_ui->installEventFilter(this);
 }
@@ -123,9 +133,15 @@ void ScreenLockerKcm::load()
             m_ui->lockscreenShortcut->setKeySequence(shortcuts.first());
         }
     }
+    m_lnfIntegration = new ScreenLocker::LnFIntegration(this);
+    m_lnfIntegration->setPackage(m_package);
+    m_lnfIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
+    m_lnfIntegration->init();
+
 
     selectWallpaper(KScreenSaverSettings::self()->wallpaperPlugin());
     loadWallpaperConfig();
+    loadLnfConfig();
 }
 
 void ScreenLockerKcm::test(const QString &plugin)
@@ -150,6 +166,7 @@ void ScreenLockerKcm::save()
     }
     KCModule::save();
     QMetaObject::invokeMethod(m_ui->wallpaperConfigWidget->rootObject(), "saveConfig");
+    QMetaObject::invokeMethod(m_ui->lnfConfigWidget->rootObject(), "saveConfig");
 
     // set the wallpaper config
     KScreenSaverSettings::self()->setWallpaperPlugin(m_ui->wallpaperCombo->currentData().toString());
@@ -235,6 +252,16 @@ void ScreenLockerKcm::loadWallpaperConfig()
     m_ui->wallpaperConfigWidget->rootObject()->setProperty("sourceFile", m_wallpaperIntegration->package().filePath(QByteArrayLiteral("ui"), QStringLiteral("config.qml")));
 }
 
+void ScreenLockerKcm::loadLnfConfig()
+{
+    auto sourceFile = m_package.fileUrl(QByteArrayLiteral("lockscreen"), QStringLiteral("config.qml"));
+    if (sourceFile.isEmpty()) {
+        m_ui->lnfConfigWidget->hide();
+        return;
+    }
+    m_ui->lnfConfigWidget->rootObject()->setProperty("sourceFile", sourceFile);
+}
+
 KDeclarative::ConfigPropertyMap * ScreenLockerKcm::wallpaperConfiguration() const
 {
     if (!m_wallpaperIntegration) {
@@ -242,6 +269,15 @@ KDeclarative::ConfigPropertyMap * ScreenLockerKcm::wallpaperConfiguration() cons
     }
     return m_wallpaperIntegration->configuration();
 }
+
+KDeclarative::ConfigPropertyMap * ScreenLockerKcm::lnfConfiguration() const
+{
+    if (!m_lnfIntegration) {
+        return nullptr;
+    }
+    return m_lnfIntegration->configuration();
+}
+
 
 QString ScreenLockerKcm::currentWallpaper() const
 {
@@ -264,6 +300,11 @@ bool ScreenLockerKcm::eventFilter(QObject *watched, QEvent *event)
             // QtQuick Layouts have a hardcoded 5 px spacing by default
             object->setProperty("formAlignment", m_ui->wallpaperCombo->x() + 5);
         }
+        if (auto object = m_ui->lnfConfigWidget->rootObject()) {
+            // QtQuick Layouts have a hardcoded 5 px spacing by default
+            object->setProperty("formAlignment", m_ui->wallpaperCombo->x() + 5);
+        }
+
     }
     return false;
 }

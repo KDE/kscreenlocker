@@ -120,7 +120,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="KKeySequenceWidget" name="lockscreenShortcut" native="true"/>
+          <widget class="KKeySequenceWidget" name="lockscreenShortcut"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_7">
@@ -138,9 +138,28 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Wallpaper</string>
+       <string>Appearance</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QQuickWidget" name="lnfConfigWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="resizeMode">
+          <enum>QQuickWidget::SizeRootObjectToView</enum>
+         </property>
+        </widget>
+       </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
@@ -151,7 +170,7 @@
            <property name="formAlignment">
             <set>Qt::AlignHCenter|Qt::AlignTop</set>
            </property>
-           <item row="0" column="0">
+           <item row="1" column="0">
             <widget class="QLabel" name="label">
              <property name="text">
               <string>Wallpaper &amp;Type:</string>
@@ -161,7 +180,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="1" column="1">
             <widget class="QComboBox" name="wallpaperCombo"/>
            </item>
           </layout>
@@ -189,11 +208,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQuickWidget</class>
-   <extends>QWidget</extends>
-   <header>QtQuickWidgets/QQuickWidget</header>
-  </customwidget>
-  <customwidget>
    <class>KKeySequenceWidget</class>
    <extends>QWidget</extends>
    <header>kkeysequencewidget.h</header>
@@ -202,6 +216,11 @@
    <class>KPluralHandlingSpinBox</class>
    <extends>QSpinBox</extends>
    <header>kpluralhandlingspinbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QQuickWidget</class>
+   <extends>QWidget</extends>
+   <header>QtQuickWidgets/QQuickWidget</header>
   </customwidget>
  </customwidgets>
  <resources/>

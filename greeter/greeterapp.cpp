@@ -23,6 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "authenticator.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
 #include "wallpaper_integration.h"
+#include "lnf_integration.h"
+
 #include <config-kscreenlocker.h>
 
 // KDE
@@ -31,6 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kdeclarative/kdeclarative.h>
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
 #include <KDeclarative/QmlObjectSharedEngine>
+#include <KDeclarative/ConfigPropertyMap>
+
 #include <KUser>
 //Plasma
 #include <KPackage/Package>
@@ -108,6 +112,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_noLock(false)
     , m_defaultToSwitchUser(false)
     , m_wallpaperIntegration(new WallpaperIntegration(this))
+    , m_lnfIntegration(new LnFIntegration(this))
 {
     m_authenticator = createAuthenticator();
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit);
@@ -185,6 +190,11 @@ void UnlockApp::initialize()
     m_wallpaperIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
     m_wallpaperIntegration->setPluginName(KScreenSaverSettings::self()->wallpaperPlugin());
     m_wallpaperIntegration->init();
+
+    m_lnfIntegration->setPackage(package);
+    m_lnfIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
+    m_lnfIntegration->init();
+
 
     installEventFilter(this);
 }
@@ -295,7 +305,7 @@ void UnlockApp::desktopResized()
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
         context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
-
+        context->setContextProperty(QStringLiteral("config"), m_lnfIntegration->configuration());
 
         view->setSource(m_mainQmlPath);
         // on error, load the fallback lockscreen to not lock the user out of the system
