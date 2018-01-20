@@ -239,7 +239,8 @@ install(FILES   updaters/kscreenlocker.upd DESTINATION ${KDE_INSTALL_DATADIR}/kc
 install(PROGRAMS updaters/ksreenlocker_5_3_separate_autologin.pl
                 DESTINATION ${KDE_INSTALL_DATADIR}/kconf_update)
 
-add_subdirectory(autotests)
-add_subdirectory(tests)
-
+if(BUILD_TESTING)
+   add_subdirectory(autotests)
+   add_subdirectory(tests)
+endif()
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
