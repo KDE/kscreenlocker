@@ -11,7 +11,6 @@ X-KDE-System-Settings-Parent-Category=desktopbehavior
 X-KDE-Weight=60
 
 Name=Screen Locking
-Name[ar]=قفل الشّاشة
 Name[ca]=Bloqueig de la pantalla
 Name[ca@valencia]=Bloqueig de la pantalla
 Name[cs]=Uzamykání obrazovky
@@ -51,7 +50,6 @@ Name[x-test]=xxScreen Lockingxx
 Name[zh_CN]=锁屏
 Name[zh_TW]=螢幕鎖定
 Comment=Configure Screen Locking
-Comment[ar]=اضبط قفل الشّاشة
 Comment[ca]=Configura el bloqueig de pantalla
 Comment[ca@valencia]=Configura el bloqueig de pantalla
 Comment[cs]=Nastavit uzamykání obrazovky
