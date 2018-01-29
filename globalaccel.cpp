@@ -50,7 +50,7 @@ static const QMap<QString, QRegularExpression> s_shortcutWhitelist{
     {QStringLiteral("/component/kmix"), QRegularExpression(
         QStringLiteral("mute|decrease_volume|increase_volume")
     )},
-    {QStringLiteral("/component/kded5"), QRegularExpression(
+    {QStringLiteral("/component/org_kde_powerdevil"), QRegularExpression(
         QStringLiteral("Increase Screen Brightness|Decrease Screen Brightness|Increase Keyboard Brightness|Decrease Keyboard Brightness")
     )},
     {QStringLiteral("/component/KDE_Keyboard_Layout_Switcher"), QRegularExpression(
