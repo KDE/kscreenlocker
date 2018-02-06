@@ -65,7 +65,7 @@ class GlobalAccel : public QObject
 {
     Q_OBJECT
 public:
-    GlobalAccel(QObject *parent = nullptr);
+    explicit GlobalAccel(QObject *parent = nullptr);
 
     /**
      * Starts interacting with KGlobalAccel and fetches the up-to-date shortcut information.

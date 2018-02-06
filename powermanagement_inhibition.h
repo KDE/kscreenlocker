@@ -30,7 +30,7 @@ class PowerManagementInhibition : public QObject
 {
     Q_OBJECT
 public:
-    PowerManagementInhibition(QObject *parent = nullptr);
+    explicit PowerManagementInhibition(QObject *parent = nullptr);
     ~PowerManagementInhibition() override;
 
     bool isInhibited() const {

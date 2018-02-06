@@ -57,7 +57,7 @@ class AbstractLocker : public QObject
 {
     Q_OBJECT
 public:
-    AbstractLocker(QObject *parent);
+    explicit AbstractLocker(QObject *parent);
     ~AbstractLocker() override;
 
     virtual void showLockWindow() = 0;

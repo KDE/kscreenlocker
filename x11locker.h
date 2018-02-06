@@ -41,7 +41,7 @@ class X11Locker : public AbstractLocker, public QAbstractNativeEventFilter
 {
     Q_OBJECT
 public:
-    X11Locker(QObject *parent = nullptr);
+    explicit X11Locker(QObject *parent = nullptr);
     ~X11Locker() override;
 
     void showLockWindow() override;

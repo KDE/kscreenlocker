@@ -70,7 +70,7 @@ public:
 
     static KSldApp* self();
 
-    KSldApp(QObject * parent = nullptr);
+    explicit KSldApp(QObject * parent = nullptr);
     ~KSldApp() override;
 
     LockState lockState() const {
