@@ -17,14 +17,14 @@ set( authenticatorTest_SRCS
 )
 add_executable(authenticatorTest ${authenticatorTest_SRCS})
 target_link_libraries(authenticatorTest Qt5::Test)
-add_test(ksmserver-authenticatorTest authenticatorTest)
+add_test(NAME ksmserver-authenticatorTest COMMAND authenticatorTest)
 ecm_mark_as_test(authenticatorTest)
 
 #######################################
 # KillTest
 #######################################
 add_executable(killTest killtest.cpp)
-add_test(kscreenlocker-killTest killTest)
+add_test(NAME kscreenlocker-killTest COMMAND killTest)
 ecm_mark_as_test(killTest)
 target_link_libraries(killTest Qt5::Test)
 
@@ -33,7 +33,7 @@ target_link_libraries(killTest Qt5::Test)
 #######################################
 if(HAVE_SECCOMP)
     add_executable(seccompTest seccomp_test.cpp ../seccomp_filter.cpp ../kwinglplatform.cpp)
-    add_test(kscreenlocker-seccompTest seccompTest)
+    add_test(NAME kscreenlocker-seccompTest COMMAND seccompTest)
     ecm_mark_as_test(seccompTest)
     target_link_libraries(seccompTest
         Qt5::Test

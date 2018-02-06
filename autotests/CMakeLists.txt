@@ -11,7 +11,7 @@ set(logindTest_SRCS
 )
 add_executable(logindTest ${logindTest_SRCS})
 target_link_libraries(logindTest Qt5::DBus Qt5::Test KF5::I18n)
-add_test(ksmserver-logindTest logindTest)
+add_test(NAME ksmserver-logindTest COMMAND logindTest)
 ecm_mark_as_test(logindTest)
 
 #######################################
@@ -19,7 +19,7 @@ ecm_mark_as_test(logindTest)
 #######################################
 add_executable(ksldTest ksldtest.cpp)
 target_link_libraries(ksldTest Qt5::Test Qt5::Widgets KF5::IdleTime XCB::XTEST KScreenLocker)
-add_test(ksmserver-ksldTest ksldTest)
+add_test(NAME ksmserver-ksldTest COMMAND ksldTest)
 ecm_mark_as_test(ksldTest)
 
 #######################################
@@ -52,7 +52,7 @@ target_link_libraries(x11LockerTest
     XCB::XCB
     XCB::KEYSYMS
 )
-add_test(ksmserver-x11LockerTest x11LockerTest)
+add_test(NAME ksmserver-x11LockerTest COMMAND x11LockerTest)
 ecm_mark_as_test(x11LockerTest)
 
 #######################################
@@ -65,5 +65,5 @@ target_link_libraries(noScreensTest
     Qt5::Test
     KF5::WaylandServer
     )
-add_test(ksld-noScreensTest noScreensTest)
+add_test(NAME ksld-noScreensTest COMMAND noScreensTest)
 ecm_mark_as_test(noScreensTest)
