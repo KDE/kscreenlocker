@@ -52,7 +52,7 @@ class UnlockApp : public QGuiApplication
     Q_OBJECT
 public:
     explicit UnlockApp(int &argc, char **argv);
-    virtual ~UnlockApp();
+    ~UnlockApp() override;
 
     void setTesting(bool enable);
     void setTheme(const QString &theme);

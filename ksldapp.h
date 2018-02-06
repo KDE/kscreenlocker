@@ -71,7 +71,7 @@ public:
     static KSldApp* self();
 
     KSldApp(QObject * parent = nullptr);
-    virtual ~KSldApp();
+    ~KSldApp() override;
 
     LockState lockState() const {
         return m_lockState;

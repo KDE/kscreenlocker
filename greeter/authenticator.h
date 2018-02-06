@@ -37,7 +37,7 @@ class Authenticator : public QObject
     Q_PROPERTY(bool graceLocked READ isGraceLocked NOTIFY graceLockedChanged)
 public:
     explicit Authenticator(AuthenticationMode mode = AuthenticationMode::Direct, QObject *parent = nullptr);
-    ~Authenticator();
+    ~Authenticator() override;
 
     bool isGraceLocked() const;
 
@@ -62,7 +62,7 @@ class KCheckPass : public QObject
     Q_OBJECT
 public:
     explicit KCheckPass(AuthenticationMode mode, QObject *parent = nullptr);
-    ~KCheckPass();
+    ~KCheckPass() override;
 
     void start();
 

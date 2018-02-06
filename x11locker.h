@@ -42,14 +42,14 @@ class X11Locker : public AbstractLocker, public QAbstractNativeEventFilter
     Q_OBJECT
 public:
     X11Locker(QObject *parent = nullptr);
-    virtual ~X11Locker();
+    ~X11Locker() override;
 
     void showLockWindow() override;
     void hideLockWindow() override;
 
     void addAllowedWindow(quint32 window) override;
 
-    virtual bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
 
 private Q_SLOTS:
     void updateGeo();

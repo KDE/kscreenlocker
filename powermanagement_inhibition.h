@@ -31,7 +31,7 @@ class PowerManagementInhibition : public QObject
     Q_OBJECT
 public:
     PowerManagementInhibition(QObject *parent = nullptr);
-    virtual ~PowerManagementInhibition();
+    ~PowerManagementInhibition() override;
 
     bool isInhibited() const {
         return m_inhibited;

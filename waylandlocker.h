@@ -40,7 +40,7 @@ class WaylandLocker : public AbstractLocker
 
 public:
     WaylandLocker(KWayland::Server::Display *display, QObject *parent);
-    virtual ~WaylandLocker();
+    ~WaylandLocker() override;
 
     void showLockWindow() override;
     void hideLockWindow() override;

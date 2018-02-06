@@ -46,7 +46,7 @@ class WallpaperIntegration : public QObject
 
 public:
     WallpaperIntegration(QObject *parent);
-    virtual ~WallpaperIntegration();
+    ~WallpaperIntegration() override;
 
     void init();
 

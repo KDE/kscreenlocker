@@ -46,7 +46,7 @@ class LnFIntegration : public QObject
 
 public:
     LnFIntegration(QObject *parent);
-    virtual ~LnFIntegration();
+    ~LnFIntegration() override;
 
     void init();
 

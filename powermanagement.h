@@ -28,7 +28,7 @@ class PowerManagement : public QObject
     Q_PROPERTY(bool canSuspend READ canSuspend NOTIFY canSuspendChanged)
     Q_PROPERTY(bool canHibernate READ canHibernate NOTIFY canHibernateChanged)
 public:
-    virtual ~PowerManagement();
+    ~PowerManagement() override;
 
     bool canSuspend() const;
     bool canHibernate() const;

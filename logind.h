@@ -32,7 +32,7 @@ class LogindIntegration : public QObject
     Q_OBJECT
 public:
     explicit LogindIntegration(QObject *parent = nullptr);
-    ~LogindIntegration();
+    ~LogindIntegration() override;
 
     bool isConnected() const {
         return m_connected;

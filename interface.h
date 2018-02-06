@@ -45,7 +45,7 @@ class Interface : public QObject, protected QDBusContext
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.ScreenSaver")
 public:
     explicit Interface(KSldApp *parent = nullptr);
-    virtual ~Interface();
+    ~Interface() override;
 
 public Q_SLOTS:
     /**

@@ -41,7 +41,7 @@ class BackgroundWindow : public QRasterWindow
     Q_OBJECT
 public:
     explicit BackgroundWindow(AbstractLocker *lock);
-    virtual ~BackgroundWindow();
+    ~BackgroundWindow() override;
 
     void emergencyShow();
 
@@ -58,7 +58,7 @@ class AbstractLocker : public QObject
     Q_OBJECT
 public:
     AbstractLocker(QObject *parent);
-    virtual ~AbstractLocker();
+    ~AbstractLocker() override;
 
     virtual void showLockWindow() = 0;
     virtual void hideLockWindow() = 0;

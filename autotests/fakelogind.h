@@ -31,7 +31,7 @@ class FakeLogind : public QObject
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.login1.Manager")
 public:
     explicit FakeLogind(QObject *parent = nullptr);
-    virtual ~FakeLogind();
+    ~FakeLogind() override;
 
     FakeLogindSession *session() const {
         return m_session;
@@ -52,7 +52,7 @@ class FakeLogindSession : public QObject
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.login1.Session")
 public:
     explicit FakeLogindSession(const QString &path, QObject *parent = nullptr);
-    virtual ~FakeLogindSession();
+    ~FakeLogindSession() override;
 
     const QString &path() {
         return m_path;

@@ -43,7 +43,7 @@ class WaylandServer : public QObject
     Q_OBJECT
 public:
     explicit WaylandServer(QObject *parent = nullptr);
-    virtual ~WaylandServer();
+    ~WaylandServer() override;
     int start();
     void stop();
 
