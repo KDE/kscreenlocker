@@ -17,7 +17,7 @@ include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(CheckIncludeFiles)
 include(ECMMarkNonGuiExecutable)
-include(ECMPackageConfigHelpers)
+include(CMakePackageConfigHelpers)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
@@ -193,7 +193,7 @@ generate_export_header(KScreenLocker
     EXPORT_FILE_NAME KScreenLocker/kscreenlocker_export.h
 )
 
-ecm_configure_package_config_file(ScreenSaverDBusInterfaceConfig.cmake.in
+configure_package_config_file(ScreenSaverDBusInterfaceConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/ScreenSaverDBusInterfaceConfig.cmake
     PATH_VARS KDE_INSTALL_DBUSINTERFACEDIR
     INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/ScreenSaverDBusInterface")
@@ -204,7 +204,7 @@ install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/ScreenSaverDBusInterfaceConfig.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/ScreenSaverDBusInterface")
 
-ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KScreenLockerConfig.cmake.in"
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KScreenLockerConfig.cmake.in"
 								  "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
 								  INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker")
 
