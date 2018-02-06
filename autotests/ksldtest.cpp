@@ -42,6 +42,8 @@ private Q_SLOTS:
 void KSldTest::initTestCase()
 {
     QCoreApplication::setAttribute(Qt::AA_ForceRasterWidgets);
+    // change to the build bin dir
+    QDir::setCurrent(QCoreApplication::applicationDirPath());
 }
 
 void KSldTest::testEstablishGrab()
