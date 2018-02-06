@@ -83,7 +83,7 @@ uint Interface::GetSessionIdleTime()
 
 void Interface::Lock()
 {
-    if (!KAuthorized::authorizeKAction(QStringLiteral("lock_screen"))) {
+    if (!KAuthorized::authorizeAction(QStringLiteral("lock_screen"))) {
         return;
     }
     m_daemon->lock(calledFromDBus() ? EstablishLock::Immediate : EstablishLock::Delayed);
