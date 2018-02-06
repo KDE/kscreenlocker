@@ -82,7 +82,7 @@ void X11Locker::initialize()
     Window* real;
     unsigned nreal;
     if( XQueryTree( QX11Info::display(), QX11Info::appRootWindow(), &r, &p, &real, &nreal )
-        && real != NULL ) {
+        && real != nullptr ) {
         for( unsigned i = 0; i < nreal; ++i ) {
             XWindowAttributes winAttr;
             if (XGetWindowAttributes(QX11Info::display(), real[ i ], &winAttr)) {
@@ -168,7 +168,7 @@ void X11Locker::saveVRoot()
       Atom actual_type;
       int actual_format;
       unsigned long nitems, bytesafter;
-      unsigned char *newRoot = 0;
+      unsigned char *newRoot = nullptr;
 
       if ((XGetWindowProperty(QX11Info::display(), children[i], gXA_VROOT, 0, 1,
           False, XA_WINDOW, &actual_type, &actual_format, &nitems, &bytesafter,

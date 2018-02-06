@@ -104,7 +104,7 @@ public:
 UnlockApp::UnlockApp(int &argc, char **argv)
     : QGuiApplication(argc, argv)
     , m_resetRequestIgnoreTimer(new QTimer(this))
-    , m_delayedLockTimer(0)
+    , m_delayedLockTimer(nullptr)
     , m_testing(false)
     , m_ignoreRequests(false)
     , m_immediateLock(false)
@@ -395,7 +395,7 @@ void UnlockApp::desktopResized()
 
 void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
 {
-    disconnect(view, &QQuickWindow::frameSwapped, this, 0);
+    disconnect(view, &QQuickWindow::frameSwapped, this, nullptr);
     QQmlProperty showProperty(view->rootObject(), QStringLiteral("viewVisible"));
     showProperty.write(true);
     // random state update, actually rather required on init only
@@ -409,7 +409,7 @@ void UnlockApp::getFocus()
     if (m_views.isEmpty()) {
         return;
     }
-    QWindow *w = 0;
+    QWindow *w = nullptr;
     // this loop is required to make the qml/graphicsscene properly handle the shared keyboard input
     // ie. "type something into the box of every greeter"
     foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
@@ -449,7 +449,7 @@ void UnlockApp::getFocus()
 void UnlockApp::setLockedPropertyOnViews()
 {
     delete m_delayedLockTimer;
-    m_delayedLockTimer = 0;
+    m_delayedLockTimer = nullptr;
 
     foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
         QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
@@ -532,7 +532,7 @@ void UnlockApp::lockImmediately()
 bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
 {
     if (obj != this && event->type() == QEvent::Show) {
-        KQuickAddons::QuickViewSharedEngine *view(0);
+        KQuickAddons::QuickViewSharedEngine *view = nullptr;
         foreach (KQuickAddons::QuickViewSharedEngine *v, m_views) {
             if (v == obj) {
                 view = v;
@@ -542,7 +542,7 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
         if (view && view->winId() && QX11Info::isPlatformX11()) {
             // showing greeter view window, set property
             static Atom tag = XInternAtom(QX11Info::display(), "_KDE_SCREEN_LOCKER", False);
-            XChangeProperty(QX11Info::display(), view->winId(), tag, tag, 32, PropModeReplace, 0, 0);
+            XChangeProperty(QX11Info::display(), view->winId(), tag, tag, 32, PropModeReplace, nullptr, 0);
         }
         // no further processing
         return false;

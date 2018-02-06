@@ -66,7 +66,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace ScreenLocker
 {
 
-static KSldApp * s_instance = 0;
+static KSldApp * s_instance = nullptr;
 
 KSldApp* KSldApp::self()
 {
@@ -80,8 +80,8 @@ KSldApp* KSldApp::self()
 KSldApp::KSldApp(QObject * parent)
     : QObject(parent)
     , m_lockState(Unlocked)
-    , m_lockProcess(NULL)
-    , m_lockWindow(NULL)
+    , m_lockProcess(nullptr)
+    , m_lockWindow(nullptr)
     , m_waylandServer(new WaylandServer(this))
     , m_waylandDisplay(nullptr)
     , m_lockedTimer(QElapsedTimer())
@@ -523,7 +523,7 @@ void KSldApp::doUnlock()
     hideLockWindow();
     // delete the window again, to get rid of event filter
     delete m_lockWindow;
-    m_lockWindow = NULL;
+    m_lockWindow = nullptr;
     m_lockState = Unlocked;
     m_lockedTimer.invalidate();
     m_greeterCrashedCounter = 0;

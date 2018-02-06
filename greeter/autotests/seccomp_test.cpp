@@ -240,7 +240,7 @@ void SeccompTest::testStartProcess()
     // using glibc fork succeeds as it uses clone
     // we don't forbid clone as it's needed to start a new thread
     // so only test that exec fails
-    QCOMPARE(execl(existingFileChar, "fakekcheckpass", (char*)0), -1);
+    QCOMPARE(execl(existingFileChar, "fakekcheckpass", (char*)nullptr), -1);
     QCOMPARE(errno, EPERM);
 }
 

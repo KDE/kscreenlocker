@@ -62,7 +62,7 @@ KConfigLoader *LnFIntegration::configScheme()
         const KConfigGroup cfg = m_config->group("Greeter").group("LnF");
 
         if (xmlPath.isEmpty()) {
-            m_configLoader = new KConfigLoader(cfg, 0, this);
+            m_configLoader = new KConfigLoader(cfg, nullptr, this);
         } else {
             QFile file(xmlPath);
             m_configLoader = new KConfigLoader(cfg, &file, this);

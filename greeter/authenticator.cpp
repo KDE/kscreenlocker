@@ -140,7 +140,7 @@ void KCheckPass::start()
                "kcheckpass",
                "-m", "classic",
                "-S", fdbuf,
-               (char *)0);
+               (char *)nullptr);
         _exit(20);
     }
     ::close(sfd[1]);
@@ -211,7 +211,7 @@ bool KCheckPass::GRecvArr(char **ret)
     if (!GRecvInt(&len))
         return false;
     if (!len) {
-        *ret = 0;
+        *ret = nullptr;
         return true;
     }
     if (!(buf = (char *)::malloc (len)))
@@ -221,7 +221,7 @@ bool KCheckPass::GRecvArr(char **ret)
         return true;
     } else {
         ::free(buf);
-        *ret = 0;
+        *ret = nullptr;
         return false;
     }
 }
