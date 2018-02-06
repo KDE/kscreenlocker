@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KWindowSystem>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 #include <QTemporaryFile>
 #include <QProcess>
 

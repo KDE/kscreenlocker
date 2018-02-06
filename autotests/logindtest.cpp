@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../logind.h"
 #include "fakelogind.h"
 // Qt
-#include <QtTest/QtTest>
+#include <QtTest>
 
 class LogindTest : public QObject
 {

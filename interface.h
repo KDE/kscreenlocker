@@ -21,9 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SCREENLOCKER_INTERFACE_H
 #define SCREENLOCKER_INTERFACE_H
 
-#include <QtCore/QObject>
-#include <QtDBus/QDBusContext>
-#include <QtDBus/QDBusMessage>
+#include <QObject>
+#include <QDBusContext>
+#include <QDBusMessage>
 
 class QDBusServiceWatcher;
 

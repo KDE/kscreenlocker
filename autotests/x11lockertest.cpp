@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // own
 #include "../x11locker.h"
 // Qt
-#include <QtTest/QtTest>
+#include <QtTest>
 #include <QWindow>
 #include <QX11Info>
 // xcb

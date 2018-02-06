@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define FAKELOGIND_H
 
 #include <QObject>
-#include <QtDBus/QtDBus>
+#include <QtDBus>
 
 class FakeLogindSession;
 

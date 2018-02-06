@@ -49,8 +49,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Qt
 #include <QClipboard>
 #include <QAbstractNativeEventFilter>
-#include <QtCore/QTimer>
-#include <QtGui/QKeyEvent>
+#include <QTimer>
+#include <QKeyEvent>
 #include <qscreen.h>
 #include <QThread>
 

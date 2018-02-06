@@ -28,10 +28,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KIdleTime>
 #include <KRandom>
 // Qt
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusInterface>
-#include <QtDBus/QDBusReply>
-#include <QtDBus/QDBusServiceWatcher>
+#include <QDBusConnection>
+#include <QDBusInterface>
+#include <QDBusReply>
+#include <QDBusServiceWatcher>
 
 namespace ScreenLocker
 {

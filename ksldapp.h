@@ -23,8 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SCREENLOCKER_KSLDAPP_H
 #define SCREENLOCKER_KSLDAPP_H
 
-#include <QtCore/QElapsedTimer>
-#include <QtCore/QProcessEnvironment>
+#include <QElapsedTimer>
+#include <QProcessEnvironment>
 
 #include <KScreenLocker/kscreenlocker_export.h>
 
