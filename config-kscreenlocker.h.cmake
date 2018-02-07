@@ -1,7 +1,7 @@
 #ifdef KSCREENLOCKER_TEST_APPS
 #define KCHECKPASS_BIN "${CMAKE_BINARY_DIR}/kcheckpass/kcheckpass"
 #elif defined(KSCREENLOCKER_UNIT_TEST)
-#define KCHECKPASS_BIN "${CMAKE_CURRENT_BINARY_DIR}/greeter/autotests/fakekcheckpass"
+#define KCHECKPASS_BIN "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/fakekcheckpass"
 #else
 #define KCHECKPASS_BIN "${CMAKE_INSTALL_FULL_LIBEXECDIR}/kcheckpass"
 #endif
