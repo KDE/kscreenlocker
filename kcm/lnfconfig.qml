@@ -54,6 +54,9 @@ ColumnLayout {
             left: parent.left;
             right: parent.right;
         }
+
+        implicitHeight: currentItem && currentItem.implicitHeight || 0
+
         property string sourceFile
         onSourceFileChanged: {
             if (sourceFile) {
