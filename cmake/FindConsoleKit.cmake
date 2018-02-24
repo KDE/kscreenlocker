@@ -1,5 +1,5 @@
 #=============================================================================
-# Copyright 2016 Martin Gräßlin <mgraesslin@kde.org>
+# Copyright 2017 Tobias C. Berner <tcberner@FreeBSD.org>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -24,11 +24,13 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #=============================================================================
-find_program(loginctl_EXECUTABLE NAMES loginctl)
-find_package_handle_standard_args(loginctl
+find_program(cklistsessions_EXECUTABLE NAMES ck-list-sessions)
+find_program(qdbus_EXECUTABLE NAMES qdbus)
+find_package_handle_standard_args(ConsoleKit
     FOUND_VAR
-        loginctl_FOUND
+        ConsoleKit_FOUND
     REQUIRED_VARS
-        loginctl_EXECUTABLE
+        cklistsessions_EXECUTABLE
+        qdbus_EXECUTABLE
 )
-mark_as_advanced(loginctl_FOUND loginctl_EXECUTABLE)
+mark_as_advanced(ConsoleKit_FOUND cklistsessions_EXECUTABLE qdbus_EXECUTABLE)

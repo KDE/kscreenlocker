@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QScreen>
 #include <QPainter>
 #include <QApplication>
+#include <QtDBus/QtDBus>
 
 #include <KLocalizedString>
 
@@ -49,13 +50,28 @@ void BackgroundWindow::paintEvent(QPaintEvent* )
     QPainter p(this);
     p.fillRect(0, 0, width(), height(), Qt::black);
     if (m_greeterFailure) {
-        auto text = ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
-                          "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-                          "log in and execute the command:\n\n"
-                          "loginctl unlock-session %1\n\n"
-                          "Afterwards switch back to the running session (Ctrl+Alt+F%2).");
-        text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_SESSION_ID")));
-        text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_VTNR")));
+        auto text =    ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
+                             "In order to unlock it either ConsoleKit or LoginD is needed, none of\n"
+                             "which could be found on your system.");
+        auto text_ck = ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
+                             "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+                             "log in as root and execute the command:\n\n"
+                             "# ck-unlock-session <session-name>\n\n");
+        auto text_ld = ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
+                             "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+                             "log in and execute the command:\n\n"
+                             "loginctl unlock-session %1\n\n"
+                             "Afterwards switch back to the running session (Ctrl+Alt+F%2).");
+
+        auto haveService = [](QString service){return QDBusConnection::systemBus().interface()->isServiceRegistered(service);};
+        if (haveService("org.freedesktop.ConsoleKit")) {
+            text = text_ck;
+        } else if (haveService("org.freedesktop.login1")) {
+            text = text_ld;
+            text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_SESSION_ID")));
+            text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_VTNR")));
+        }
+
         p.setPen(Qt::white);
         QFont f = p.font();
         f.setBold(true);

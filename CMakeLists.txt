@@ -6,7 +6,7 @@ set(PROJECT_VERSION_MAJOR 5)
 
 set(QT_MIN_VERSION "5.9.0")
 set(KF5_MIN_VERSION "5.42.0")
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Widgets Quick QuickWidgets Test)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick QuickWidgets Test)
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
@@ -90,8 +90,26 @@ set_package_properties(loginctl PROPERTIES
     URL "https://www.freedesktop.org/software/systemd/man/loginctl.html"
     DESCRIPTION "Send control commands to the login manager"
     TYPE RUNTIME
-    PURPOSE "Needed for emergency unlock in case that the greeter is broken. In case your distribution does not provide loginctl please contact plasma-devel@kde.org to discuss alternatives."
     )
+set(HAVE_LOGINCTL ${loginctl_FOUND})
+
+if ( NOT HAVE_LOGINCTL )
+    find_package(ConsoleKit)
+    set_package_properties(ConsoleKit PROPERTIES
+        URL "https://github.com/ConsoleKit2/ConsoleKit2"
+        DESCRIPTION "Framework for tracking user login sessions"
+        TYPE RECOMMENDED
+        )
+    set(HAVE_CONSOLEKIT ${ConsoleKit_FOUND})
+endif ()
+
+if (HAVE_LOGINCTL OR HAVE_CONSOLEKIT)
+    set(HAVE_UNLOCK_CAPABILITY TRUE)
+endif ()
+
+add_feature_info("Unlock broken screenlocker"
+                 HAVE_UNLOCK_CAPABILITY
+                 "Needed for emergency unlock in case that the greeter is broken. In case your distribution does not provide loginctl or consolekit please contact plasma-devel@kde.org to discuss alternatives.")
 
 option(PAM_REQUIRED "Require building with PAM" ON)
 
@@ -109,6 +127,10 @@ include(ConfigureChecks.cmake)
 configure_file(config-workspace.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-workspace.h)
 configure_file(config-unix.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-unix.h )
 configure_file(config-X11.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-X11.h)
+
+if (HAVE_CONSOLEKIT)
+    configure_file(ck-unlock-session.cmake ${CMAKE_CURRENT_BINARY_DIR}/ck-unlock-session)
+endif ()
 
 # adjusting CMAKE_C_FLAGS to get wayland protocols to compile
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu90")
@@ -162,6 +184,7 @@ PUBLIC
    Qt5::Core
    Qt5::X11Extras
 PRIVATE
+   Qt5::DBus
    KF5::I18n
    KF5::IdleTime
    KF5::GlobalAccel
@@ -206,7 +229,10 @@ install(FILES
 
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KScreenLockerConfig.cmake.in"
 								  "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
-								  INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker")
+								   INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker")
+if (HAVE_CONSOLEKIT)
+  install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/ck-unlock-session DESTINATION ${KDE_INSTALL_BINDIR})
+endif ()
 
 install(TARGETS KScreenLocker EXPORT KScreenLockerTargets ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY)
 install(EXPORT KScreenLockerTargets DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker" FILE KScreenLockerTargets.cmake NAMESPACE PW::)
