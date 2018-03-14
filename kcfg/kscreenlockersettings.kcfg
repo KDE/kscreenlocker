@@ -39,7 +39,7 @@
       <whatsthis></whatsthis>
     </entry>
     <entry key="WallpaperPlugin" type="String">
-      <default>org.kde.color</default>
+      <default>org.kde.image</default>
       <label></label>
       <whatsthis></whatsthis>
     </entry>
