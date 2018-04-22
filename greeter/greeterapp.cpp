@@ -249,6 +249,7 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
             prop.write(expr.evaluate());
 
             view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
+            view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), m_wallpaperIntegration);
         }
     );
 }
