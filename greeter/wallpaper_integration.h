@@ -45,7 +45,7 @@ class WallpaperIntegration : public QObject
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
 
 public:
-    WallpaperIntegration(QObject *parent);
+    explicit WallpaperIntegration(QObject *parent);
     ~WallpaperIntegration() override;
 
     void init();

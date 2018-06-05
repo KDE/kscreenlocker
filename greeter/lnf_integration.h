@@ -45,7 +45,7 @@ class LnFIntegration : public QObject
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
 
 public:
-    LnFIntegration(QObject *parent);
+    explicit LnFIntegration(QObject *parent);
     ~LnFIntegration() override;
 
     void init();
