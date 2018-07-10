@@ -214,7 +214,7 @@ void SeccompTest::testMknod()
 
 void SeccompTest::testChmod()
 {
-    QVERIFY(!QFile::setPermissions(existingFileChar, QFileDevice::ExeOwner));
+    QVERIFY(!QFile::setPermissions(QLatin1String(existingFileChar), QFileDevice::ExeOwner));
 #ifdef SYS_chmod
     QVERIFY(syscall(SYS_chmod, existingFileChar, S_IRWXU) == -1 && errno == EPERM);
 #endif
@@ -259,8 +259,7 @@ void SeccompTest::testNetworkAccess()
 {
     QNetworkAccessManager manager;
     QFETCH(QString, url);
-    QNetworkRequest request(url);
-    auto reply = manager.get(request);
+    auto reply = manager.get(QNetworkRequest(QUrl(url)));
     QVERIFY(reply);
     QSignalSpy finishedSpy(reply, &QNetworkReply::finished);
     QVERIFY(finishedSpy.isValid());
