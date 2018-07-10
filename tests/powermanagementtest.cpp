@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     QGuiApplication app(argc, argv);
 
     QQuickView view;
-    view.rootContext()->setContextProperty("powerManagement", PowerManagement::instance());
+    view.rootContext()->setContextProperty(QStringLiteral("powerManagement"), PowerManagement::instance());
     view.setSource(QUrl::fromLocalFile(QStringLiteral(QML_PATH)));
 
     view.show();

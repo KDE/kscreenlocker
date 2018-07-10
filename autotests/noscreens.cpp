@@ -73,7 +73,7 @@ void NoScreensTest::initTestCase()
     ScreenLocker::KSldApp::self();
     ScreenLocker::KSldApp::self()->setWaylandDisplay(m_display);
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    env.insert("QT_QPA_PLATFORM", "wayland");
+    env.insert(QStringLiteral("QT_QPA_PLATFORM"), QStringLiteral("wayland"));
     ScreenLocker::KSldApp::self()->setGreeterEnvironment(env);
     ScreenLocker::KSldApp::self()->initialize();
     connect(m_shell, &ShellInterface::surfaceCreated, this,

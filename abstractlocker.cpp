@@ -64,9 +64,9 @@ void BackgroundWindow::paintEvent(QPaintEvent* )
                              "Afterwards switch back to the running session (Ctrl+Alt+F%2).");
 
         auto haveService = [](QString service){return QDBusConnection::systemBus().interface()->isServiceRegistered(service);};
-        if (haveService("org.freedesktop.ConsoleKit")) {
+        if (haveService(QStringLiteral("org.freedesktop.ConsoleKit"))) {
             text = text_ck;
-        } else if (haveService("org.freedesktop.login1")) {
+        } else if (haveService(QStringLiteral("org.freedesktop.login1"))) {
             text = text_ld;
             text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_SESSION_ID")));
             text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_VTNR")));
@@ -119,6 +119,7 @@ void AbstractLocker::emergencyShow()
 
 void AbstractLocker::addAllowedWindow(quint32 windows)
 {
+    Q_UNUSED(windows);
 }
 
 }

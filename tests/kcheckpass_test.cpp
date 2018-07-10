@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     Authenticator authenticator(mode);
 
     QQuickView view;
-    view.rootContext()->setContextProperty("authenticator", &authenticator);
+    view.rootContext()->setContextProperty(QStringLiteral("authenticator"), &authenticator);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.setSource(QUrl::fromLocalFile(QStringLiteral(QML_FILE)));
     view.show();

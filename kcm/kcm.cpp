@@ -89,10 +89,10 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
 
     auto proxy = new ScreenLockerProxy(this);
     m_ui->wallpaperConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
-    m_ui->wallpaperConfigWidget->rootContext()->setContextProperty("configDialog", proxy);
+    m_ui->wallpaperConfigWidget->rootContext()->setContextProperty(QStringLiteral("configDialog"), proxy);
 
     m_ui->lnfConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
-    m_ui->lnfConfigWidget->rootContext()->setContextProperty("configDialog", proxy);
+    m_ui->lnfConfigWidget->rootContext()->setContextProperty(QStringLiteral("configDialog"), proxy);
 
 
 
@@ -154,7 +154,7 @@ void ScreenLockerKcm::test(const QString &plugin)
     QProcess proc;
     QStringList arguments;
     arguments << plugin << QStringLiteral("--testing");
-    if (proc.execute(KSCREENLOCKER_GREET_BIN, arguments)) {
+    if (proc.execute(QString::fromLatin1(KSCREENLOCKER_GREET_BIN), arguments)) {
         QMessageBox::critical(this, i18n("Error"), i18n("Failed to successfully test the screen locker."));
     }
 }
