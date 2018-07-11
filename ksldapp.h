@@ -127,6 +127,14 @@ public:
         m_lockGrace = msec;
     }
 
+    bool forceSoftwareRendering() const {
+        return m_forceSoftwareRendering;
+    }
+
+    void setForceSoftwareRendering(bool force) {
+        m_forceSoftwareRendering = force;
+    }
+
 Q_SIGNALS:
     void locked();
     void unlocked();
@@ -179,6 +187,7 @@ private:
     LogindIntegration *m_logind;
     GlobalAccel *m_globalAccel = nullptr;
     bool m_hasXInput2 = false;
+    bool m_forceSoftwareRendering = false;
 
     bool m_isX11;
     bool m_isWayland;
