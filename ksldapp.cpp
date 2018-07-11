@@ -66,6 +66,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace ScreenLocker
 {
 
+static const QString s_qtQuickBackend = QStringLiteral("QT_QUICK_BACKEND");
+
 static KSldApp * s_instance = 0;
 
 KSldApp* KSldApp::self()
@@ -226,6 +228,8 @@ void KSldApp::initialize()
             // failure, restart lock process
             m_greeterCrashedCounter++;
             if (m_greeterCrashedCounter < 4) {
+                // Perhaps it crashed due to a graphics driver issue, force software rendering now
+                setForceSoftwareRendering(true);
                 startLockProcess(EstablishLock::Immediate);
             } else if (m_lockWindow) {
                 m_lockWindow->emergencyShow();
@@ -385,6 +389,7 @@ void KSldApp::lock(EstablishLock establishLock)
 
     m_lockState = AcquiringLock;
 
+    setForceSoftwareRendering(false);
     // start unlock screen process
     startLockProcess(establishLock);
     emit lockStateChanged();
@@ -546,6 +551,8 @@ bool KSldApp::isFdoPowerInhibited() const
 
 void KSldApp::startLockProcess(EstablishLock establishLock)
 {
+    QProcessEnvironment env = m_greeterEnv;
+
     if (m_isWayland && m_waylandDisplay) {
         int sx[2];
         if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx) < 0) {
@@ -566,9 +573,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
         emit greeterClientConnectionChanged();
         int socket = dup(sx[1]);
         if (socket >= 0) {
-            QProcessEnvironment env = m_greeterEnv;
             env.insert("WAYLAND_SOCKET", QByteArray::number(socket));
-            m_lockProcess->setProcessEnvironment(env);
         }
     }
     QStringList args;
@@ -587,6 +592,9 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     if (m_lockGrace == -1) {
         args << QStringLiteral("--nolock");
     }
+    if (m_forceSoftwareRendering) {
+        env.insert(s_qtQuickBackend, QStringLiteral("software"));
+    }
 
     // start the Wayland server
     int fd = m_waylandServer->start();
@@ -598,6 +606,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     args << QStringLiteral("--ksldfd");
     args << QString::number(fd);
 
+    m_lockProcess->setProcessEnvironment(env);
     m_lockProcess->start(QStringLiteral(KSCREENLOCKER_GREET_BIN), args);
     close(fd);
 }
