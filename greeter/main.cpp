@@ -17,6 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include <KLocalizedString>
+#include <KQuickAddons/QtQuickSettings>
 
 #include <QDateTime>
 #include <QCommandLineParser>
@@ -84,6 +85,8 @@ int main(int argc, char* argv[])
     QCoreApplication::setApplicationName(QStringLiteral("kscreenlocker_greet"));
     QCoreApplication::setApplicationVersion(QStringLiteral("0.1"));
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
+
+    KQuickAddons::QtQuickSettings::init();
 
     // disable session management for the greeter
     auto disableSessionManagement = [](QSessionManager &sm) {
