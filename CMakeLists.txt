@@ -234,8 +234,10 @@ install(FILES
         DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/ScreenSaverDBusInterface")
 
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KScreenLockerConfig.cmake.in"
-								  "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
-								   INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker")
+    "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
+    PATH_VARS KDE_INSTALL_DBUSINTERFACEDIR
+    INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker")
+
 if (HAVE_CONSOLEKIT)
   install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/ck-unlock-session DESTINATION ${KDE_INSTALL_BINDIR})
 endif ()
