@@ -106,7 +106,7 @@ public:
         return q->currentWallpaper();
     }
 
-signals:
+Q_SIGNALS:
     void wallpaperConfigurationChanged();
     void currentWallpaperChanged();
 
