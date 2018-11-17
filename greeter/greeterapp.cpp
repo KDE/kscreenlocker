@@ -317,7 +317,7 @@ void UnlockApp::desktopResized()
 
         view->setSource(m_mainQmlPath);
         // on error, load the fallback lockscreen to not lock the user out of the system
-        if (view->status() == QQmlComponent::Error) {
+        if (view->status() != QQmlComponent::Ready) {
             static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
 
             qWarning() << "Failed to load lockscreen QML, falling back to built-in locker";
