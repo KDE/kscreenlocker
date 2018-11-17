@@ -85,6 +85,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace ScreenLocker
 {
 
+// disable DrKonqi as the crash dialog blocks the restart of the locker
+void disableDrKonqi()
+{
+    KCrash::setDrKonqiEnabled(false);
+}
+// run immediately, before Q_CORE_STARTUP functions
+// that would enable drkonqi
+Q_CONSTRUCTOR_FUNCTION(disableDrKonqi)
+
 class FocusOutEventFilter : public QAbstractNativeEventFilter
 {
 public:
@@ -171,9 +180,6 @@ void UnlockApp::initialize()
     m_resetRequestIgnoreTimer->setSingleShot(true);
     m_resetRequestIgnoreTimer->setInterval(2000);
     connect(m_resetRequestIgnoreTimer, &QTimer::timeout, this, &UnlockApp::resetRequestIgnore);
-
-    // disable DrKonqi as the crash dialog blocks the restart of the locker
-    KCrash::setDrKonqiEnabled(false);
 
     KScreenSaverSettings::self()->load();
     KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
