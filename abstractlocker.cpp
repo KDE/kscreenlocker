@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QScreen>
 #include <QPainter>
 #include <QApplication>
-#include <QtDBus/QtDBus>
+#include <QtDBus>
 
 #include <KLocalizedString>
 
