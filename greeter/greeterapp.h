@@ -76,7 +76,7 @@ public Q_SLOTS:
     void desktopResized();
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private Q_SLOTS:
     void resetRequestIgnore();
