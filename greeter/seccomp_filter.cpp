@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <seccomp.h>
 #include <sys/socket.h>
 #include <fcntl.h>
+#include <errno.h>
 
 namespace ScreenLocker
 {
