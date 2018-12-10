@@ -53,6 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QKeyEvent>
 #include <qscreen.h>
 #include <QThread>
+#include <QMimeData>
 
 #include <QQuickView>
 #include <QQuickItem>
@@ -401,8 +402,20 @@ void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
     showProperty.write(true);
     // random state update, actually rather required on init only
     QMetaObject::invokeMethod(this, "getFocus", Qt::QueuedConnection);
-    QGuiApplication::clipboard()->clear();
-    QGuiApplication::clipboard()->clear(QClipboard::Selection);
+
+    auto mime1 = new QMimeData;
+    //Effectively we want to clear the clipboard
+    //however some clipboard managers (like klipper with it's default settings)
+    //will prevent an empty clipbard
+    //we need some non-empty non-text mimeData to replace the clipboard so we don't leak real data to a user pasting into the text field
+    //as the clipboard is cleared on close, klipper will then put the original text back when we exit
+    mime1->setData(QStringLiteral("x-kde-lockscreen"), QByteArrayLiteral("empty"));
+    //ownership is transferred
+    QGuiApplication::clipboard()->setMimeData(mime1, QClipboard::Clipboard);
+
+    auto mime2 = new QMimeData;
+    mime2->setData(QStringLiteral("x-kde-lockscreen"), QByteArrayLiteral("empty"));
+    QGuiApplication::clipboard()->setMimeData(mime2, QClipboard::Selection);
 }
 
 void UnlockApp::getFocus()
