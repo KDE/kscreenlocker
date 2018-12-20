@@ -423,41 +423,23 @@ void UnlockApp::getFocus()
     if (m_views.isEmpty()) {
         return;
     }
-    QWindow *w = nullptr;
-    // this loop is required to make the qml/graphicsscene properly handle the shared keyboard input
-    // ie. "type something into the box of every greeter"
+
     foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
-        if (!m_testing) {
-            view->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
+
+        if (view->geometry().contains(QCursor::pos())) {
+
+            view->setFlags(view->flags() & ~Qt::X11BypassWindowManagerHint);
+
+            view->setKeyboardGrabEnabled(true);
+            view->requestActivate();
+
+            view->setFlags(view->flags() | Qt::X11BypassWindowManagerHint);
+
+            break;
+
         }
-//         w->setFocus(Qt::OtherFocusReason); // FIXME
+
     }
-    // determine which window should actually be active and have the real input focus/grab
-    // FIXME - QWidget::underMouse()
-//     foreach (QQuickView *view, m_views) {
-//         if (view->underMouse()) {
-//             w = view;
-//             break;
-//         }
-//     }
-    if (!w) { // try harder
-        foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
-            if (view->geometry().contains(QCursor::pos())) {
-                w = view;
-                break;
-            }
-        }
-    }
-    if (!w) { // fallback solution
-        w = m_views.first();
-    }
-    // activate window and grab input to be sure it really ends up there.
-    // focus setting is still required for proper internal QWidget state (and eg. visual reflection)
-    if (!m_testing) {
-        w->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
-    }
-    w->requestActivate();
-//     w->setFocus(Qt::OtherFocusReason); // FIXME
 }
 
 void UnlockApp::setLockedPropertyOnViews()
