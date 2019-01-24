@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 X-KDE-ServiceTypes=KCModule
-Icon=preferences-system
+Icon=preferences-desktop-user-password
 Exec=kcmshell5 screenlocker
 X-KDE-Library=screenlocker_kcm
 X-KDE-ParentApp=kcontrol
