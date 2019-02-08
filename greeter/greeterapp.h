@@ -92,6 +92,7 @@ private:
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
     void loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
     Authenticator *createAuthenticator();
+    QWindow *getActiveScreen();
 
     QString m_packageName;
     QUrl m_mainQmlPath;

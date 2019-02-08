@@ -206,6 +206,27 @@ void UnlockApp::initialize()
     installEventFilter(this);
 }
 
+QWindow *UnlockApp::getActiveScreen()
+{
+    QWindow *activeScreen = nullptr;
+
+    if (m_views.isEmpty()) {
+        return activeScreen;
+    }
+
+    foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
+        if (view->geometry().contains(QCursor::pos())) {
+            activeScreen = view;
+            break;
+        }
+    }
+    if (!activeScreen) {
+        activeScreen = m_views.first();
+    }
+
+    return activeScreen;
+}
+
 void UnlockApp::initializeWayland()
 {
     if (!platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
@@ -383,15 +404,11 @@ void UnlockApp::desktopResized()
                 }
         );
 
-        if (m_testing) {
+        // on Wayland we may not use fullscreen as that puts all windows on one screen
+        if (m_testing || plasmaSurface || QX11Info::isPlatformX11()) {
             view->show();
         } else {
-            // on Wayland we may not use fullscreen as that puts all windows on one screen
-            if (plasmaSurface) {
-                view->show();
-            } else {
-                view->showFullScreen();
-            }
+            view->showFullScreen();
         }
         view->raise();
 
@@ -426,44 +443,24 @@ void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
 
 void UnlockApp::getFocus()
 {
-    if (m_views.isEmpty()) {
+    QWindow *activeScreen = getActiveScreen();
+
+    if (!activeScreen) {
         return;
     }
-    QWindow *w = nullptr;
     // this loop is required to make the qml/graphicsscene properly handle the shared keyboard input
     // ie. "type something into the box of every greeter"
     foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
         if (!m_testing) {
             view->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
         }
-//         w->setFocus(Qt::OtherFocusReason); // FIXME
-    }
-    // determine which window should actually be active and have the real input focus/grab
-    // FIXME - QWidget::underMouse()
-//     foreach (QQuickView *view, m_views) {
-//         if (view->underMouse()) {
-//             w = view;
-//             break;
-//         }
-//     }
-    if (!w) { // try harder
-        foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
-            if (view->geometry().contains(QCursor::pos())) {
-                w = view;
-                break;
-            }
-        }
-    }
-    if (!w) { // fallback solution
-        w = m_views.first();
     }
     // activate window and grab input to be sure it really ends up there.
     // focus setting is still required for proper internal QWidget state (and eg. visual reflection)
     if (!m_testing) {
-        w->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
+        activeScreen->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
     }
-    w->requestActivate();
-//     w->setFocus(Qt::OtherFocusReason); // FIXME
+    activeScreen->requestActivate();
 }
 
 void UnlockApp::setLockedPropertyOnViews()
@@ -565,6 +562,13 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
             XChangeProperty(QX11Info::display(), view->winId(), tag, tag, 32, PropModeReplace, nullptr, 0);
         }
         // no further processing
+        return false;
+    }
+
+    if (event->type() == QEvent::MouseButtonPress && QX11Info::isPlatformX11()) {
+        if (getActiveScreen()) {
+            getActiveScreen()->requestActivate();
+        }
         return false;
     }
 
