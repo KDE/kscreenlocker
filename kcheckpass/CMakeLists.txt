@@ -12,11 +12,6 @@ set(kcheckpass_SRCS
 add_executable(kcheckpass ${kcheckpass_SRCS})
 ecm_mark_nongui_executable(kcheckpass)
 
-if (KDE4_ENABLE_FPIE)
-    set_property(TARGET kcheckpass APPEND_STRING PROPERTY COMPILE_FLAGS " ${KDE4_CXX_FPIE_FLAGS}")
-    set_property(TARGET kcheckpass APPEND_STRING PROPERTY LINK_FLAGS " ${KDE4_PIE_LDFLAGS}")
-endif ()
-
 set_property(TARGET kcheckpass APPEND_STRING PROPERTY COMPILE_FLAGS " -U_REENTRANT")
 target_link_libraries(kcheckpass ${UNIXAUTH_LIBRARIES} ${SOCKET_LIBRARIES})
 if (PAM_FOUND)
