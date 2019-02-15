@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../greeter/authenticator.h"
 #include <QGuiApplication>
 #include <QCommandLineParser>
-#include <QQuickView>
+#include <QQmlApplicationEngine>
 #include <QQmlContext>
 
 int main(int argc, char *argv[])
@@ -44,10 +44,8 @@ int main(int argc, char *argv[])
     }
     Authenticator authenticator(mode);
 
-    QQuickView view;
-    view.rootContext()->setContextProperty(QStringLiteral("authenticator"), &authenticator);
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.setSource(QUrl::fromLocalFile(QStringLiteral(QML_FILE)));
-    view.show();
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty(QStringLiteral("authenticator"), &authenticator);
+    engine.load(QUrl::fromLocalFile(QStringLiteral(QML_FILE)));
     return app.exec();
 }
