@@ -107,7 +107,7 @@ void LockWindowTest::testBlankScreen()
     QWidget dummy;
     dummy.setWindowFlags(Qt::X11BypassWindowManagerHint);
     QPalette p;
-    p.setColor(QPalette::Background, Qt::red);
+    p.setColor(QPalette::Window, Qt::red);
     dummy.setAutoFillBackground(true);
     dummy.setPalette(p);
     dummy.setGeometry(0, 0, 100, 100);
@@ -162,7 +162,7 @@ void LockWindowTest::testBlankScreen()
     QWidget widgetWindow;
     widgetWindow.setGeometry(10, 10, 100, 100);
     QPalette p1;
-    p1.setColor(QPalette::Background, Qt::blue);
+    p1.setColor(QPalette::Window, Qt::blue);
     widgetWindow.setAutoFillBackground(true);
     widgetWindow.setPalette(p1);
     widgetWindow.show();
@@ -181,7 +181,7 @@ void LockWindowTest::testEmergencyShow()
     QWidget dummy;
     dummy.setWindowFlags(Qt::X11BypassWindowManagerHint);
     QPalette p;
-    p.setColor(QPalette::Background, Qt::red);
+    p.setColor(QPalette::Window, Qt::red);
     dummy.setAutoFillBackground(true);
     dummy.setPalette(p);
     dummy.setGeometry(0, 0, 100, 100);
