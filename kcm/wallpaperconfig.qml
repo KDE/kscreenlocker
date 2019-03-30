@@ -49,6 +49,7 @@ ColumnLayout {
 
     QtControls.StackView {
         id: main
+        implicitHeight: 490
         Layout.fillHeight: true
         anchors {
             left: parent.left;
