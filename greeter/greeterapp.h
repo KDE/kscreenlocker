@@ -43,7 +43,6 @@ struct org_kde_ksld;
 
 namespace ScreenLocker
 {
-class Unlocker;
 class WallpaperIntegration;
 class LnFIntegration;
 

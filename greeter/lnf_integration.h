@@ -32,7 +32,6 @@ class KConfigLoader;
 namespace KDeclarative
 {
 class ConfigPropertyMap;
-class QmlObject;
 }
 
 namespace ScreenLocker

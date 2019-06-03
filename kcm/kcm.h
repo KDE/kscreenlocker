@@ -22,8 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KCModule>
 #include <KPackage/Package>
 
-class QQuickView;
-class QStandardItemModel;
 class KActionCollection;
 class ScreenLockerKcmForm;
 

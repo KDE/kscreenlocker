@@ -30,7 +30,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <X11/Xlib.h>
 #include <fixx11h.h>
 
-class QTimer;
 
 namespace ScreenLocker
 {
