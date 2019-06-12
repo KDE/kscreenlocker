@@ -113,6 +113,8 @@ Q_SIGNALS:
     // DBus signals
     void ActiveChanged(bool state);
 
+    void AboutToLock();
+
 private Q_SLOTS:
     void slotLocked();
     void slotUnlocked();

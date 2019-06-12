@@ -51,6 +51,7 @@ Interface::Interface(KSldApp *parent)
     QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/freedesktop/ScreenSaver"), this);
     connect(m_daemon, &KSldApp::locked, this, &Interface::slotLocked);
     connect(m_daemon, &KSldApp::unlocked, this, &Interface::slotUnlocked);
+    connect(m_daemon, &KSldApp::aboutToLock, this, &Interface::AboutToLock);
 
     m_serviceWatcher->setConnection(QDBusConnection::sessionBus());
     m_serviceWatcher->setWatchMode(QDBusServiceWatcher::WatchForUnregistration);

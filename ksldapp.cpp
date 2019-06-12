@@ -358,7 +358,7 @@ void KSldApp::configure()
     }
 }
 
-void KSldApp::lock(EstablishLock establishLock)
+void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 {
     if (lockState() != Unlocked) {
         // already locked or acquiring lock, no need to lock again
@@ -371,9 +371,20 @@ void KSldApp::lock(EstablishLock establishLock)
         return;
     }
 
+    if (attemptCount == 0) {
+        emit aboutToLock();
+    }
+
     qDebug() << "lock called";
     if (!establishGrab()) {
-        qCritical() << "Could not establish screen lock";
+        if (attemptCount < 3) {
+            qWarning() << "Could not establish screen lock. Trying again in 10ms";
+            QTimer::singleShot(10, this, [=]() {
+                lock(establishLock, attemptCount+1);
+            });
+        } else {
+            qCritical() << "Could not establish screen lock";
+        }
         return;
     }
 

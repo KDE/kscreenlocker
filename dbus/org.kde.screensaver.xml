@@ -5,5 +5,7 @@
     <method name="SwitchUser" />
     <!-- Re-read configuration -->
     <method name="configure" />
+    <!-- Emitted just before we start the lock process. Clients should release any X grabs -->
+    <signal name="AboutToLock" />
   </interface>
 </node>

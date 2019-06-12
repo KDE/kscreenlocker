@@ -100,7 +100,7 @@ public:
     void inhibit();
     void uninhibit();
 
-    void lock(EstablishLock establishLock);
+    void lock(EstablishLock establishLock, int attemptCount = 0);
     void initialize();
 
     bool event(QEvent *event) override;
@@ -136,6 +136,7 @@ public:
     }
 
 Q_SIGNALS:
+    void aboutToLock();
     void locked();
     void unlocked();
     void greeterClientConnectionChanged();
