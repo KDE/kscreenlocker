@@ -139,7 +139,7 @@ UnlockApp::~UnlockApp()
 {
     //workaround QTBUG-55460
     //will be fixed when themes port to QQC2
-    for (auto view: m_views) {
+    for (auto view: qAsConst(m_views)) {
         if (QQuickItem *focusItem = view->activeFocusItem()) {
             focusItem->setFocus(false);
         }
@@ -214,7 +214,7 @@ QWindow *UnlockApp::getActiveScreen()
         return activeScreen;
     }
 
-    foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
+    for (KQuickAddons::QuickViewSharedEngine * view : qAsConst(m_views)) {
         if (view->geometry().contains(QCursor::pos())) {
             activeScreen = view;
             break;
@@ -450,7 +450,7 @@ void UnlockApp::getFocus()
     }
     // this loop is required to make the qml/graphicsscene properly handle the shared keyboard input
     // ie. "type something into the box of every greeter"
-    foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
+    for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
         if (!m_testing) {
             view->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
         }
@@ -468,7 +468,7 @@ void UnlockApp::setLockedPropertyOnViews()
     delete m_delayedLockTimer;
     m_delayedLockTimer = nullptr;
 
-    foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
+    for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
         QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
         lockProperty.write(true);
     }
@@ -512,11 +512,11 @@ void UnlockApp::setTesting(bool enable)
     }
     if (enable) {
         // remove bypass window manager hint
-        foreach (KQuickAddons::QuickViewSharedEngine * view, m_views) {
+        for (KQuickAddons::QuickViewSharedEngine * view : qAsConst(m_views)) {
             view->setFlags(view->flags() & ~Qt::X11BypassWindowManagerHint);
         }
     } else {
-        foreach (KQuickAddons::QuickViewSharedEngine * view, m_views) {
+        for (KQuickAddons::QuickViewSharedEngine * view : qAsConst(m_views)) {
             view->setFlags(view->flags() | Qt::X11BypassWindowManagerHint);
         }
     }
@@ -550,7 +550,7 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
 {
     if (obj != this && event->type() == QEvent::Show) {
         KQuickAddons::QuickViewSharedEngine *view = nullptr;
-        foreach (KQuickAddons::QuickViewSharedEngine *v, m_views) {
+        for (KQuickAddons::QuickViewSharedEngine *v : qAsConst(m_views)) {
             if (v == obj) {
                 view = v;
                 break;
@@ -605,7 +605,7 @@ void UnlockApp::shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from)
         // Any change in regarded event processing shall be tested thoroughly!
         removeEventFilter(this); // prevent recursion!
         const bool accepted = e->isAccepted(); // store state
-        foreach (KQuickAddons::QuickViewSharedEngine *view, m_views) {
+        for (KQuickAddons::QuickViewSharedEngine * view : qAsConst(m_views)) {
             if (view != from) {
                 QCoreApplication::sendEvent(view, e);
                 e->setAccepted(accepted);
@@ -688,7 +688,7 @@ void UnlockApp::setKsldSocket(int socket)
             if (version >= 2) {
                 org_kde_ksld_add_listener(m_ksldInterface, &s_listener, this);
             }
-            for (auto v : m_views) {
+            for (auto v : qAsConst(m_views)) {
                 org_kde_ksld_x11window(m_ksldInterface, v->winId());
                 wl_display_flush(m_ksldConnection->display());
             }
@@ -712,7 +712,7 @@ void UnlockApp::setKsldSocket(int socket)
 
 void UnlockApp::osdProgress(const QString &icon, int percent, const QString &additionalText)
 {
-    for (auto v : m_views) {
+    for (auto v : qAsConst(m_views)) {
         auto osd = v->rootObject()->findChild<QQuickItem*>(QStringLiteral("onScreenDisplay"));
         if (!osd) {
             continue;
@@ -727,7 +727,7 @@ void UnlockApp::osdProgress(const QString &icon, int percent, const QString &add
 
 void UnlockApp::osdText(const QString &icon, const QString &additionalText)
 {
-    for (auto v : m_views) {
+    for (auto v : qAsConst(m_views)) {
         auto osd = v->rootObject()->findChild<QQuickItem*>(QStringLiteral("onScreenDisplay"));
         if (!osd) {
             continue;

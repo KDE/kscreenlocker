@@ -204,7 +204,7 @@ void Interface::configure()
 
 void Interface::sendLockReplies()
 {
-    foreach (const QDBusMessage &reply, m_lockReplies) {
+    for (const QDBusMessage &reply : qAsConst(m_lockReplies)) {
         QDBusConnection::sessionBus().send(reply);
     }
 
