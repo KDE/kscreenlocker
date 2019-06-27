@@ -295,6 +295,8 @@ void UnlockApp::desktopResized()
         // create the view
         auto *view = new KQuickAddons::QuickViewSharedEngine();
         view->setColor(Qt::black);
+        auto screen = QGuiApplication::screens()[i];
+        view->setGeometry(screen->geometry());
 
         // first create KDeclarative, to be sure that it created a KIO Network Factory
         KDeclarative::KDeclarative declarative;
