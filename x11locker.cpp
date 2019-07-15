@@ -25,15 +25,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "globalaccel.h"
 #include "abstractlocker.h"
 // KDE
-#include <KLocalizedString>
 // Qt
 #include <QApplication>
 #include <QDebug>
-#include <QTimer>
-#include <QPointer>
 #include <QDesktopWidget>
-#include <QPainter>
-#include <QScreen>
 #include <QX11Info>
 // X11
 #include <X11/Xatom.h>

@@ -26,11 +26,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 #include <KConfigLoader>
-#include <KPackage/PackageLoader>
 #include <KDeclarative/ConfigPropertyMap>
 
 #include <QFile>
-#include <QDebug>
 
 namespace ScreenLocker
 {

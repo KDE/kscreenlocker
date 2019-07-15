@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KRandom>
 // Qt
 #include <QDBusConnection>
-#include <QDBusInterface>
 #include <QDBusReply>
 #include <QDBusServiceWatcher>
 

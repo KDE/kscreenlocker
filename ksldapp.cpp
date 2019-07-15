@@ -48,8 +48,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTimer>
 #include <QProcess>
 #include <QX11Info>
-#include <QDBusReply>
-#include <QGuiApplication>
 // X11
 #include <X11/Xlib.h>
 #include <xcb/xcb.h>

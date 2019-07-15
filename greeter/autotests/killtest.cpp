@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // own
 #include <config-kscreenlocker.h>
 // Qt
-#include <QDebug>
 #include <QtTest>
 // system
 #include <signal.h>
