@@ -55,9 +55,9 @@ ScreenLockerKcmForm::ScreenLockerKcmForm(QWidget *parent)
 {
     setupUi(this);
     layout()->setContentsMargins(0, 0, 0, 0);
-    kcfg_Timeout->setSuffix(ki18ncp("Spinbox suffix. Short for minutes"," min"," mins"));
+    kcfg_Timeout->setSuffix(ki18ncp("Spinbox suffix"," minute"," minutes"));
 
-    kcfg_LockGrace->setSuffix(ki18ncp("Spinbox suffix. Short for seconds"," sec"," secs"));
+    kcfg_LockGrace->setSuffix(ki18ncp("Spinbox suffix"," second"," seconds"));
 }
 
 
