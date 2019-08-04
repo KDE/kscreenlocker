@@ -62,7 +62,7 @@
           <string>Lock screen when waking up from suspension</string>
          </property>
          <property name="text">
-          <string>On resume</string>
+          <string>After waking from sleep</string>
          </property>
         </widget>
        </item>
