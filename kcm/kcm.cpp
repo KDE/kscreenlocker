@@ -29,16 +29,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KGlobalAccel>
 #include <KCModule>
 #include <KPluginFactory>
-#include <KConfigDialogManager>
 #include <QVBoxLayout>
 #include <QMessageBox>
-#include <QStandardItemModel>
 
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
 
-#include <QQuickItem>
 #include <QQmlContext>
+#include <QQuickItem>
 
 static const QString s_lockActionName = QStringLiteral("Lock Session");
 static const QString s_defaultWallpaperPackage = QStringLiteral("org.kde.image");
