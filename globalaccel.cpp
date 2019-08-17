@@ -254,9 +254,10 @@ bool GlobalAccel::checkKeyPress(xcb_key_press_event_t *event)
     }
 
     int keyCodeQt;
-    int keyModQt;
-    KKeyServer::symXToKeyQt(keySymX, &keyCodeQt);
-    KKeyServer::modXToQt(keyModX, &keyModQt);
+    KKeyServer::symXModXToKeyQt(keySymX, keyModX, &keyCodeQt);
+    // Split keycode and modifier
+    int keyModQt = keyCodeQt & Qt::KeyboardModifierMask;
+    keyCodeQt &= ~Qt::KeyboardModifierMask;
 
     if (keyModQt & Qt::SHIFT && !KKeyServer::isShiftAsModifierAllowed(keyCodeQt)) {
         keyModQt &= ~Qt::SHIFT;
