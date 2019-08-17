@@ -70,6 +70,7 @@ Comment[ru]=Настройка блокировщика экрана
 Comment[sv]=Anpassa skärmlåsning
 Comment[uk]=Налаштування блокування екрана
 Comment[x-test]=xxConfigure screen lockingxx
+Comment[zh_CN]=配置锁屏
 Comment[zh_TW]=設定螢幕鎖定方式
 X-KDE-Keywords=lock,resume, screensaver, screenlock
 X-KDE-Keywords[ca]=bloqueig,reprendre,estalvi de pantalla,bloqueig de pantalla
