@@ -53,6 +53,7 @@ Name[zh_CN]=锁屏
 Name[zh_TW]=螢幕鎖定
 Comment=Configure screen locking
 Comment[ca]=Configura el bloqueig de la pantalla
+Comment[cs]=Nastavit uzamykání obrazovky
 Comment[de]=Bildschirmsperre einrichten
 Comment[en_GB]=Configure screen locking
 Comment[es]=Configurar el bloqueo de pantalla
