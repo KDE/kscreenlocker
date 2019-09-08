@@ -60,9 +60,9 @@ private Q_SLOTS:
     void testNetworkAccess_data();
     void testNetworkAccess();
 private:
-    QLatin1Literal existingFile = QLatin1Literal(KCHECKPASS_BIN);
-    QLatin1Literal createPath = QLatin1Literal(KCHECKPASS_BIN ".new");
-    QLatin1Literal existingDir = QLatin1Literal(KCHECKPASS_BIN ".newDir");
+    QLatin1String existingFile = QLatin1String(KCHECKPASS_BIN);
+    QLatin1String createPath = QLatin1String(KCHECKPASS_BIN ".new");
+    QLatin1String existingDir = QLatin1String(KCHECKPASS_BIN ".newDir");
     const char* existingFileChar;
     const char* createPathChar;
 };
