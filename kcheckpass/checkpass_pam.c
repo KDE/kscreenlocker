@@ -121,7 +121,7 @@ static struct pam_conv PAM_conversation = {
 
 #ifdef PAM_FAIL_DELAY
 static void
-fail_delay(int retval ATTR_UNUSED, unsigned usec_delay ATTR_UNUSED, 
+fail_delay(int retval ATTR_UNUSED, unsigned usec_delay ATTR_UNUSED,
 	   void *appdata_ptr ATTR_UNUSED)
 {}
 #endif
@@ -168,7 +168,8 @@ AuthReturn Authenticate(const char *method,
   pam_error = pam_authenticate(pamh, 0);
   if (pam_error != PAM_SUCCESS) {
     if (PAM_data.abort) {
-      pam_end(pamh, PAM_SUCCESS);
+      PAM_data.abort = 0;
+      pam_end(pamh, pam_error);
       return AuthAbort;
     }
     pam_end(pamh, pam_error);

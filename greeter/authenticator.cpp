@@ -247,10 +247,16 @@ void KCheckPass::handleVerify()
         {
             if (!GRecvArr( &arr ))
                 break;
-            QByteArray utf8pass = m_password.toUtf8();
-            GSendStr(utf8pass.constData());
-            if (utf8pass.constData() != nullptr)
+
+            if (m_password.isNull()) {
+                GSendStr(nullptr);
+            } else {
+                QByteArray utf8pass = m_password.toUtf8();
+                GSendStr(utf8pass.constData());
                 GSendInt(IsPassword);
+            }
+
+            m_password.clear();
 
             if (arr)
                 ::free( arr );
@@ -278,8 +284,6 @@ void KCheckPass::handleVerify()
             cantCheck();
             return;
         case ConvPutAuthAbort:
-            // what to do here?
-            return;
         case ConvPutReadyForAuthentication:
             m_ready = true;
             if (m_mode == AuthenticationMode::Direct) {
