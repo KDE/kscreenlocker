@@ -1,8 +1,8 @@
 @PACKAGE_INIT@
 
 include(CMakeFindDependencyMacro)
-find_dependency(Qt5Core @REQUIRED_QT_VERSION@)
-find_dependency(Qt5X11Extras @REQUIRED_QT_VERSION@)
+find_dependency(Qt5Core @QT_MIN_VERSION@)
+find_dependency(Qt5X11Extras @QT_MIN_VERSION@)
 
 set(KSCREENLOCKER_DBUS_INTERFACES_DIR "@PACKAGE_KDE_INSTALL_DBUSINTERFACEDIR@")
 
