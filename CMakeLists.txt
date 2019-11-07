@@ -146,8 +146,6 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(KSLD_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}/KScreenLocker")
 
-add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
-
 add_subdirectory(kcheckpass)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
