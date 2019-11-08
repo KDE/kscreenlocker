@@ -3,13 +3,15 @@ add_definitions(-DTRANSLATION_DOMAIN=\"screenlocker_kcm\")
 
 set(screenlocker_kcm_SRCS
     kcm.cpp
+    ../kscreensaversettings.cpp
     ../greeter/wallpaper_integration.cpp
     ../greeter/lnf_integration.cpp
 )
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
 
 ki18n_wrap_ui(screenlocker_kcm_SRCS kcm.ui)
-kconfig_add_kcfg_files(screenlocker_kcm_SRCS ../kcfg/kscreensaversettings.kcfgc)
+kconfig_add_kcfg_files(screenlocker_kcm_SRCS ../kcfg/kscreensaversettingsbase.kcfgc)
 qt5_add_dbus_interface(screenlocker_kcm_SRCS ../dbus/org.kde.screensaver.xml screenlocker_interface)
 qt5_add_resources( screenlocker_kcm_SRCS resources.qrc )
 

@@ -173,7 +173,7 @@ void KSldApp::initialize()
         a->setObjectName(QStringLiteral("Lock Session"));
         a->setProperty("componentName", QStringLiteral("ksmserver"));
         a->setText(i18n("Lock Session"));
-        KGlobalAccel::self()->setGlobalShortcut(a, QList<QKeySequence>() << Qt::META+Qt::Key_L << Qt::ALT+Qt::CTRL+Qt::Key_L << Qt::Key_ScreenSaver );
+        KGlobalAccel::self()->setGlobalShortcut(a, KScreenSaverSettings::defaultShortcuts());
         connect(a, &QAction::triggered, this,
             [this]() {
                 lock(EstablishLock::Immediate);

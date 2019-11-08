@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../greeter/lnf_integration.h"
 
 #include <config-kscreenlocker.h>
-#include <KActionCollection>
+#include <KConfigDialogManager>
 #include <KGlobalAccel>
 #include <KCModule>
 #include <KPluginFactory>
@@ -38,7 +38,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QQmlContext>
 #include <QQuickItem>
 
-static const QString s_lockActionName = QStringLiteral("Lock Session");
 static const QString s_defaultWallpaperPackage = QStringLiteral("org.kde.image");
 
 class ScreenLockerKcmForm : public QWidget, public Ui::ScreenLockerKcmForm
@@ -62,21 +61,13 @@ ScreenLockerKcmForm::ScreenLockerKcmForm(QWidget *parent)
 
 ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
     : KCModule(parent, args)
-    , m_actionCollection(new KActionCollection(this, QStringLiteral("ksmserver")))
+    , m_settings(new KScreenSaverSettings(this))
     , m_ui(new ScreenLockerKcmForm(this))
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_ui);
 
-    addConfig(KScreenSaverSettings::self(), m_ui);
-
-    m_actionCollection->setConfigGlobal(true);
-    QAction *a = m_actionCollection->addAction(s_lockActionName);
-    a->setProperty("isConfigurationAction", true);
-    m_ui->lockscreenShortcut->setCheckForConflictsAgainst(KKeySequenceWidget::None);
-    a->setText(i18n("Lock Session"));
-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>{Qt::ALT+Qt::CTRL+Qt::Key_L, Qt::Key_ScreenSaver});
-    connect(m_ui->lockscreenShortcut, &KKeySequenceWidget::keySequenceChanged, this, &ScreenLockerKcm::shortcutChanged);
+    addConfig(m_settings, m_ui);
 
     loadWallpapers();
     auto wallpaperChangedSignal = static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged);
@@ -106,15 +97,6 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
     m_ui->installEventFilter(this);
 }
 
-void ScreenLockerKcm::shortcutChanged(const QKeySequence &key)
-{
-    if (QAction *a = m_actionCollection->action(s_lockActionName)) {
-        auto shortcuts = KGlobalAccel::self()->shortcut(a);
-        m_ui->lockscreenShortcut->setProperty("changed", !shortcuts.contains(key));
-    }
-    changed();
-}
-
 void ScreenLockerKcm::load()
 {
     KCModule::load();
@@ -126,19 +108,13 @@ void ScreenLockerKcm::load()
         m_package.setPath(packageName);
     }
 
-    if (QAction *a = m_actionCollection->action(s_lockActionName)) {
-        auto shortcuts = KGlobalAccel::self()->shortcut(a);
-        if (!shortcuts.isEmpty()) {
-            m_ui->lockscreenShortcut->setKeySequence(shortcuts.first());
-        }
-    }
     m_lnfIntegration = new ScreenLocker::LnFIntegration(this);
     m_lnfIntegration->setPackage(m_package);
-    m_lnfIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
+    m_lnfIntegration->setConfig(m_settings->sharedConfig());
     m_lnfIntegration->init();
 
 
-    selectWallpaper(KScreenSaverSettings::self()->wallpaperPlugin());
+    selectWallpaper(m_settings->wallpaperPlugin());
     loadWallpaperConfig();
     loadLnfConfig();
 }
@@ -159,25 +135,15 @@ void ScreenLockerKcm::test(const QString &plugin)
 
 void ScreenLockerKcm::save()
 {
-    if (!shouldSaveShortcut()) {
-        QMetaObject::invokeMethod(this, "changed", Qt::QueuedConnection);
-        return;
-    }
     KCModule::save();
     QMetaObject::invokeMethod(m_ui->wallpaperConfigWidget->rootObject(), "saveConfig");
     QMetaObject::invokeMethod(m_ui->lnfConfigWidget->rootObject(), "saveConfig");
 
     // set the wallpaper config
-    KScreenSaverSettings::self()->setWallpaperPlugin(m_ui->wallpaperCombo->currentData().toString());
+    m_settings->setWallpaperPlugin(m_ui->wallpaperCombo->currentData().toString());
 
-    KScreenSaverSettings::self()->save();
-    if (m_ui->lockscreenShortcut->property("changed").toBool()) {
-        if (QAction *a = m_actionCollection->action(s_lockActionName)) {
-            KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>{m_ui->lockscreenShortcut->keySequence()}, KGlobalAccel::NoAutoloading);
-            m_actionCollection->writeSettings();
-        }
-        m_ui->lockscreenShortcut->setProperty("changed", false);
-    }
+    m_settings->save();
+
     // reconfigure through DBus
     OrgKdeScreensaverInterface interface(QStringLiteral("org.kde.screensaver"),
                                          QStringLiteral("/ScreenSaver"),
@@ -187,28 +153,9 @@ void ScreenLockerKcm::save()
     }
 }
 
-bool ScreenLockerKcm::shouldSaveShortcut()
-{
-    if (m_ui->lockscreenShortcut->property("changed").toBool()) {
-        const QKeySequence &sequence = m_ui->lockscreenShortcut->keySequence();
-        auto conflicting = KGlobalAccel::getGlobalShortcutsByKey(sequence);
-        if (!conflicting.isEmpty()) {
-            // Inform and ask the user about the conflict and reassigning
-            // the keys sequence
-            if (!KGlobalAccel::promptStealShortcutSystemwide(this, conflicting, sequence)) {
-                return false;
-            }
-            KGlobalAccel::stealShortcutSystemwide(sequence);
-        }
-    }
-    return true;
-}
-
 void ScreenLockerKcm::defaults()
 {
     KCModule::defaults();
-    m_ui->lockscreenShortcut->setKeySequence(Qt::ALT+Qt::CTRL+Qt::Key_L);
-
     selectWallpaper(s_defaultWallpaperPackage);
 }
 
@@ -243,7 +190,7 @@ void ScreenLockerKcm::loadWallpaperConfig()
     emit currentWallpaperChanged();
 
     m_wallpaperIntegration = new ScreenLocker::WallpaperIntegration(this);
-    m_wallpaperIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
+    m_wallpaperIntegration->setConfig(m_settings->sharedConfig());
     m_wallpaperIntegration->setPluginName(m_ui->wallpaperCombo->currentData().toString());
     m_wallpaperIntegration->init();
     m_ui->wallpaperConfigWidget->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);

@@ -22,7 +22,7 @@ if(HAVE_SECCOMP)
 endif()
 
 qt5_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
-kconfig_add_kcfg_files(kscreenlocker_greet_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/../kcfg/kscreensaversettings.kcfgc)
+kconfig_add_kcfg_files(kscreenlocker_greet_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/../kcfg/kscreensaversettingsbase.kcfgc)
 
 ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
     PROTOCOL ../protocols/ksld.xml

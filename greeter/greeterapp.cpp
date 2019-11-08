@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "greeterapp.h"
-#include "kscreensaversettings.h"
+#include "kscreensaversettingsbase.h"
 #include "authenticator.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
 #include "wallpaper_integration.h"
@@ -181,25 +181,25 @@ void UnlockApp::initialize()
     m_resetRequestIgnoreTimer->setInterval(2000);
     connect(m_resetRequestIgnoreTimer, &QTimer::timeout, this, &UnlockApp::resetRequestIgnore);
 
-    KScreenSaverSettings::self()->load();
+    KScreenSaverSettingsBase::self()->load();
     KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
     KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
     m_packageName = cg.readEntry("LookAndFeelPackage", QString());
     if (!m_packageName.isEmpty()) {
         package.setPath(m_packageName);
     }
-    if (!KScreenSaverSettings::theme().isEmpty()) {
-        package.setPath(KScreenSaverSettings::theme());
+    if (!KScreenSaverSettingsBase::theme().isEmpty()) {
+        package.setPath(KScreenSaverSettingsBase::theme());
     }
 
     m_mainQmlPath = package.fileUrl("lockscreenmainscript");
 
-    m_wallpaperIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
-    m_wallpaperIntegration->setPluginName(KScreenSaverSettings::self()->wallpaperPlugin());
+    m_wallpaperIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
+    m_wallpaperIntegration->setPluginName(KScreenSaverSettingsBase::self()->wallpaperPlugin());
     m_wallpaperIntegration->init();
 
     m_lnfIntegration->setPackage(package);
-    m_lnfIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
+    m_lnfIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
     m_lnfIntegration->init();
 
 

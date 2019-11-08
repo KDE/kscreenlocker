@@ -97,7 +97,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="KKeySequenceWidget" name="lockscreenShortcut" native="true"/>
+        <widget class="KKeySequenceWidget" name="kcfg_lockscreenShortcut"/>
        </item>
       </layout>
      </widget>

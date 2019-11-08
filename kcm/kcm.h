@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KCModule>
 #include <KPackage/Package>
 
-class KActionCollection;
+class KScreenSaverSettings;
 class ScreenLockerKcmForm;
 
 namespace ScreenLocker
@@ -65,14 +65,12 @@ Q_SIGNALS:
     void currentWallpaperChanged();
 
 private:
-    void shortcutChanged(const QKeySequence &key);
-    bool shouldSaveShortcut();
     void loadWallpapers();
     void selectWallpaper(const QString &pluginId);
     void loadWallpaperConfig();
     void loadLnfConfig();
     KPackage::Package m_package;
-    KActionCollection *m_actionCollection;
+    KScreenSaverSettings *m_settings;
     ScreenLockerKcmForm *m_ui;
     ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
     ScreenLocker::LnFIntegration* m_lnfIntegration = nullptr;

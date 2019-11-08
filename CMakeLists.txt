@@ -167,10 +167,11 @@ set(ksld_SRCS
    waylandserver.cpp
    powermanagement.cpp
    powermanagement_inhibition.cpp
+   kscreensaversettings.cpp
 )
 qt5_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
 qt5_add_dbus_adaptor(ksld_SRCS ${kscreensaver_dbusXML} interface.h ScreenLocker::Interface kscreensaveradaptor KScreenSaverAdaptor)
-kconfig_add_kcfg_files(ksld_SRCS kcfg/kscreensaversettings.kcfgc)
+kconfig_add_kcfg_files(ksld_SRCS kcfg/kscreensaversettingsbase.kcfgc)
 qt5_add_dbus_interface(ksld_SRCS ${powerdevilpolicyagent_xml} powerdevilpolicyagent)
 
 ecm_add_wayland_server_protocol(ksld_SRCS
@@ -193,6 +194,7 @@ PRIVATE
    KF5::CoreAddons
    KF5::ConfigGui
    KF5::WindowSystem
+   KF5::XmlGui
    ${X11_LIBRARIES}
    XCB::XCB
    XCB::KEYSYMS
