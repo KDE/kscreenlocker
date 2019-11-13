@@ -65,12 +65,13 @@ public:
         return m_configuration;
     }
 
+    KConfigLoader *configScheme();
+
 Q_SIGNALS:
     void packageChanged();
     void configurationChanged();
 
 private:
-    KConfigLoader *configScheme();
     QString m_pluginName;
     KPackage::Package m_package;
     KSharedConfig::Ptr m_config;

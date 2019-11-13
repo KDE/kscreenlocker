@@ -4,6 +4,7 @@
 
 Copyright (C) 2014 Martin Gräßlin <mgraesslin@kde.org>
 Copyright (C) 2014 Marco Martin <mart@kde.org>
+Copyright (C) 2019 Kevin Ottens <kevin.ottens@enioka.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -64,6 +65,9 @@ Q_SIGNALS:
     void wallpaperConfigurationChanged();
     void currentWallpaperChanged();
 
+private Q_SLOTS:
+    void updateState();
+
 private:
     void loadWallpapers();
     void selectWallpaper(const QString &pluginId);
@@ -73,7 +77,9 @@ private:
     KScreenSaverSettings *m_settings;
     ScreenLockerKcmForm *m_ui;
     ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
+    KCoreConfigSkeleton *m_wallpaperSettings = nullptr;
     ScreenLocker::LnFIntegration* m_lnfIntegration = nullptr;
+    KCoreConfigSkeleton *m_lnfSettings = nullptr;
 };
 
 //see https://bugreports.qt.io/browse/QTBUG-57714, don't expose a QWidget as a context property

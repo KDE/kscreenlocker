@@ -3,6 +3,7 @@
  This file is part of the KDE project.
 
 Copyright (C) 2014 Martin Gräßlin <mgraesslin@kde.org>
+Copyright (C) 2019 Kevin Ottens <kevin.ottens@enioka.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../greeter/lnf_integration.h"
 
 #include <config-kscreenlocker.h>
+#include <KConfigLoader>
 #include <KConfigDialogManager>
 #include <KGlobalAccel>
 #include <KCModule>
@@ -70,9 +72,8 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
     addConfig(m_settings, m_ui);
 
     loadWallpapers();
-    auto wallpaperChangedSignal = static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged);
-    connect(m_ui->wallpaperCombo, wallpaperChangedSignal, this, static_cast<void (KCModule::*)()>(&ScreenLockerKcm::changed));
-    connect(m_ui->wallpaperCombo, wallpaperChangedSignal, this, &ScreenLockerKcm::loadWallpaperConfig);
+    connect(m_ui->wallpaperCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &ScreenLockerKcm::loadWallpaperConfig);
 
     m_ui->wallpaperCombo->installEventFilter(this);
 
@@ -89,10 +90,10 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
     connect(this, &ScreenLockerKcm::currentWallpaperChanged, proxy, &ScreenLockerProxy::currentWallpaperChanged);
 
     m_ui->wallpaperConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/wallpaperconfig.qml")));
-    connect(m_ui->wallpaperConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(changed()));
+    connect(m_ui->wallpaperConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(updateState()));
 
     m_ui->lnfConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/lnfconfig.qml")));
-    connect(m_ui->lnfConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(changed()));
+    connect(m_ui->lnfConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(updateState()));
 
     m_ui->installEventFilter(this);
 }
@@ -100,6 +101,8 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
 void ScreenLockerKcm::load()
 {
     KCModule::load();
+    // Because the wallpaper plugin is currently handled wrongly
+    m_settings->load();
 
     m_package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
     KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
@@ -112,11 +115,23 @@ void ScreenLockerKcm::load()
     m_lnfIntegration->setPackage(m_package);
     m_lnfIntegration->setConfig(m_settings->sharedConfig());
     m_lnfIntegration->init();
-
+    m_lnfSettings = m_lnfIntegration->configScheme();
 
     selectWallpaper(m_settings->wallpaperPlugin());
     loadWallpaperConfig();
     loadLnfConfig();
+
+    if (m_lnfSettings) {
+        m_lnfSettings->load();
+        emit m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+    }
+
+    if (m_wallpaperSettings) {
+        m_wallpaperSettings->load();
+        emit m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+    }
+
+    updateState();
 }
 
 void ScreenLockerKcm::test(const QString &plugin)
@@ -136,13 +151,13 @@ void ScreenLockerKcm::test(const QString &plugin)
 void ScreenLockerKcm::save()
 {
     KCModule::save();
-    QMetaObject::invokeMethod(m_ui->wallpaperConfigWidget->rootObject(), "saveConfig");
-    QMetaObject::invokeMethod(m_ui->lnfConfigWidget->rootObject(), "saveConfig");
+    if (m_lnfSettings) {
+        m_lnfSettings->save();
+    }
 
-    // set the wallpaper config
-    m_settings->setWallpaperPlugin(m_ui->wallpaperCombo->currentData().toString());
-
-    m_settings->save();
+    if (m_wallpaperSettings) {
+        m_wallpaperSettings->save();
+    }
 
     // reconfigure through DBus
     OrgKdeScreensaverInterface interface(QStringLiteral("org.kde.screensaver"),
@@ -151,12 +166,45 @@ void ScreenLockerKcm::save()
     if (interface.isValid()) {
         interface.configure();
     }
+
+    updateState();
 }
 
 void ScreenLockerKcm::defaults()
 {
     KCModule::defaults();
     selectWallpaper(s_defaultWallpaperPackage);
+
+    if (m_lnfSettings) {
+        m_lnfSettings->setDefaults();
+        emit m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+    }
+
+    if (m_wallpaperSettings) {
+        m_wallpaperSettings->setDefaults();
+        emit m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+    }
+
+    updateState();
+}
+
+void ScreenLockerKcm::updateState()
+{
+    bool isDefaults = m_settings->isDefaults();
+    bool isSaveNeeded = m_settings->isSaveNeeded();
+
+    if (m_lnfSettings) {
+        isDefaults &= m_lnfSettings->isDefaults();
+        isSaveNeeded |= m_lnfSettings->isSaveNeeded();
+    }
+
+    if (m_wallpaperSettings) {
+        isDefaults &= m_wallpaperSettings->isDefaults();
+        isSaveNeeded |= m_wallpaperSettings->isSaveNeeded();
+    }
+
+    emit changed(isSaveNeeded);
+    emit defaulted(isDefaults);
 }
 
 void ScreenLockerKcm::loadWallpapers()
@@ -180,6 +228,10 @@ void ScreenLockerKcm::selectWallpaper(const QString &pluginId)
 
 void ScreenLockerKcm::loadWallpaperConfig()
 {
+    // set the wallpaper config
+    m_settings->setWallpaperPlugin(m_ui->wallpaperCombo->currentData().toString());
+    updateState();
+
     if (m_wallpaperIntegration) {
         if (m_wallpaperIntegration->pluginName() == m_ui->wallpaperCombo->currentData().toString()) {
             // nothing changed
@@ -193,6 +245,7 @@ void ScreenLockerKcm::loadWallpaperConfig()
     m_wallpaperIntegration->setConfig(m_settings->sharedConfig());
     m_wallpaperIntegration->setPluginName(m_ui->wallpaperCombo->currentData().toString());
     m_wallpaperIntegration->init();
+    m_wallpaperSettings = m_wallpaperIntegration->configScheme();
     m_ui->wallpaperConfigWidget->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);
     emit wallpaperConfigurationChanged();
     m_ui->wallpaperConfigWidget->rootObject()->setProperty("sourceFile", m_wallpaperIntegration->package().filePath(QByteArrayLiteral("ui"), QStringLiteral("config.qml")));

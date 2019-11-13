@@ -3,6 +3,7 @@
  This file is part of the KDE project.
 
 Copyright (C) 2016 Martin Gräßlin <mgraesslin@kde.org>
+Copyright (C) 2019 Kevin Ottens <kevin.ottens@enioka.com>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -29,19 +30,6 @@ ColumnLayout {
     property int formAlignment: 0
     property alias sourceFile: main.sourceFile
     signal configurationChanged
-
-//BEGIN functions
-    function saveConfig() {
-        if (main.currentItem.saveConfig) {
-            main.currentItem.saveConfig()
-        }
-        for (var key in configDialog.wallpaperConfiguration) {
-            if (main.currentItem["cfg_"+key] !== undefined) {
-                configDialog.wallpaperConfiguration[key] = main.currentItem["cfg_"+key]
-            }
-        }
-    }
-//END functions
 
     Item {
         id: emptyConfig
@@ -71,10 +59,23 @@ ColumnLayout {
                     properties: props
                 })
 
+                wallpaperConfig.valueChanged.connect(function(key, value) {
+                    if (newItem["cfg_" + key] !== undefined) {
+                        newItem["cfg_" + key] = value
+                    }
+                })
+
+                var createSignalHandler = function(key) {
+                    return function() {
+                        configDialog.wallpaperConfiguration[key] = newItem["cfg_" + key]
+                        root.configurationChanged()
+                    }
+                }
+
                 for (var key in wallpaperConfig) {
                     var changedSignal = newItem["cfg_" + key + "Changed"]
                     if (changedSignal) {
-                        changedSignal.connect(root.configurationChanged)
+                        changedSignal.connect(createSignalHandler(key))
                     }
                 }
             } else {

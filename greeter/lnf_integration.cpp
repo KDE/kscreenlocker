@@ -48,6 +48,7 @@ void LnFIntegration::init()
     }
     if (auto config = configScheme()) {
         m_configuration = new KDeclarative::ConfigPropertyMap(config, this);
+        m_configuration->setAutosave(false);
     }
 }
 
