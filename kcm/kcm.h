@@ -59,7 +59,6 @@ public Q_SLOTS:
     void load() override;
     void save() override;
     void defaults() override;
-    void test(const QString &plugin);
 
 Q_SIGNALS:
     void wallpaperConfigurationChanged();

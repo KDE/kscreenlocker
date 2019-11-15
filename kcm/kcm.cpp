@@ -134,20 +134,6 @@ void ScreenLockerKcm::load()
     updateState();
 }
 
-void ScreenLockerKcm::test(const QString &plugin)
-{
-    if (plugin.isEmpty() || plugin == QLatin1String("none")) {
-        return;
-    }
-
-    QProcess proc;
-    QStringList arguments;
-    arguments << plugin << QStringLiteral("--testing");
-    if (proc.execute(QString::fromLatin1(KSCREENLOCKER_GREET_BIN), arguments)) {
-        QMessageBox::critical(this, i18n("Error"), i18n("Failed to successfully test the screen locker."));
-    }
-}
-
 void ScreenLockerKcm::save()
 {
     KCModule::save();
