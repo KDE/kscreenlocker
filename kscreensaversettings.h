@@ -28,16 +28,30 @@ class KScreenSaverSettings : public KScreenSaverSettingsBase
 {
     Q_OBJECT
     Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut)
+    Q_PROPERTY(int wallpaperPluginIndex READ wallpaperPluginIndex WRITE setWallpaperPluginIndex)
 public:
+    struct WallpaperInfo {
+        QString name;
+        QString id;
+    };
+
     static QList<QKeySequence> defaultShortcuts();
+    static QString defaultWallpaperPlugin();
 
     KScreenSaverSettings(QObject *parent = nullptr);
     ~KScreenSaverSettings() override;
+
+    QVector<WallpaperInfo> availableWallpaperPlugins() const;
+    int wallpaperPluginIndex() const;
+    void setWallpaperPluginIndex(int index);
 
     QKeySequence shortcut() const;
     void setShortcut(const QKeySequence &sequence);
 
 private:
+    int indexFromWallpaperPluginId(const QString &id) const;
+
+    QVector<WallpaperInfo> m_availableWallpaperPlugins;
     KActionCollection *m_actionCollection;
     QAction *m_lockAction;
 };

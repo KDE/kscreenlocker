@@ -195,7 +195,7 @@ void UnlockApp::initialize()
     m_mainQmlPath = package.fileUrl("lockscreenmainscript");
 
     m_wallpaperIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
-    m_wallpaperIntegration->setPluginName(KScreenSaverSettingsBase::self()->wallpaperPlugin());
+    m_wallpaperIntegration->setPluginName(KScreenSaverSettingsBase::self()->wallpaperPluginId());
     m_wallpaperIntegration->init();
 
     m_lnfIntegration->setPackage(package);

@@ -68,7 +68,6 @@ private Q_SLOTS:
     void updateState();
 
 private:
-    void loadWallpapers();
     void selectWallpaper(const QString &pluginId);
     void loadWallpaperConfig();
     void loadLnfConfig();
@@ -94,6 +93,8 @@ public:
         QObject(parent),
         q(parent)
     {
+        connect(q, &ScreenLockerKcm::wallpaperConfigurationChanged, this, &ScreenLockerProxy::wallpaperConfigurationChanged);
+        connect(q, &ScreenLockerKcm::currentWallpaperChanged, this, &ScreenLockerProxy::currentWallpaperChanged);
     }
 
     KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const {

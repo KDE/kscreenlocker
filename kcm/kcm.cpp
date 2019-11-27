@@ -40,8 +40,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QQmlContext>
 #include <QQuickItem>
 
-static const QString s_defaultWallpaperPackage = QStringLiteral("org.kde.image");
-
 class ScreenLockerKcmForm : public QWidget, public Ui::ScreenLockerKcmForm
 {
     Q_OBJECT
@@ -68,56 +66,33 @@ ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_ui);
-
-    addConfig(m_settings, m_ui);
-
-    loadWallpapers();
-    connect(m_ui->wallpaperCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    for (const auto &pluginInfo : m_settings->availableWallpaperPlugins()) {
+        m_ui->kcfg_wallpaperPluginIndex->addItem(pluginInfo.name, pluginInfo.id);
+    }
+    connect(m_ui->kcfg_wallpaperPluginIndex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &ScreenLockerKcm::loadWallpaperConfig);
-
-    m_ui->wallpaperCombo->installEventFilter(this);
+    m_ui->kcfg_wallpaperPluginIndex->installEventFilter(this);
+    m_ui->installEventFilter(this);
 
     auto proxy = new ScreenLockerProxy(this);
+
     m_ui->wallpaperConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
     m_ui->wallpaperConfigWidget->rootContext()->setContextProperty(QStringLiteral("configDialog"), proxy);
-
-    m_ui->lnfConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
-    m_ui->lnfConfigWidget->rootContext()->setContextProperty(QStringLiteral("configDialog"), proxy);
-
-
-
-    connect(this, &ScreenLockerKcm::wallpaperConfigurationChanged, proxy, &ScreenLockerProxy::wallpaperConfigurationChanged);
-    connect(this, &ScreenLockerKcm::currentWallpaperChanged, proxy, &ScreenLockerProxy::currentWallpaperChanged);
-
     m_ui->wallpaperConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/wallpaperconfig.qml")));
     connect(m_ui->wallpaperConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(updateState()));
 
+    m_ui->lnfConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
+    m_ui->lnfConfigWidget->rootContext()->setContextProperty(QStringLiteral("configDialog"), proxy);
     m_ui->lnfConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/lnfconfig.qml")));
     connect(m_ui->lnfConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(updateState()));
 
-    m_ui->installEventFilter(this);
+    addConfig(m_settings, m_ui);
 }
 
 void ScreenLockerKcm::load()
 {
     KCModule::load();
-    // Because the wallpaper plugin is currently handled wrongly
-    m_settings->load();
 
-    m_package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
-    KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
-    const QString packageName = cg.readEntry("LookAndFeelPackage", QString());
-    if (!packageName.isEmpty()) {
-        m_package.setPath(packageName);
-    }
-
-    m_lnfIntegration = new ScreenLocker::LnFIntegration(this);
-    m_lnfIntegration->setPackage(m_package);
-    m_lnfIntegration->setConfig(m_settings->sharedConfig());
-    m_lnfIntegration->init();
-    m_lnfSettings = m_lnfIntegration->configScheme();
-
-    selectWallpaper(m_settings->wallpaperPlugin());
     loadWallpaperConfig();
     loadLnfConfig();
 
@@ -159,7 +134,6 @@ void ScreenLockerKcm::save()
 void ScreenLockerKcm::defaults()
 {
     KCModule::defaults();
-    selectWallpaper(s_defaultWallpaperPackage);
 
     if (m_lnfSettings) {
         m_lnfSettings->setDefaults();
@@ -193,33 +167,10 @@ void ScreenLockerKcm::updateState()
     emit defaulted(isDefaults);
 }
 
-void ScreenLockerKcm::loadWallpapers()
-{
-    const auto wallpaperPackages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Wallpaper"));
-    for (auto &package : wallpaperPackages) {
-        m_ui->wallpaperCombo->addItem(package.name(), package.pluginId());
-    }
-}
-
-void ScreenLockerKcm::selectWallpaper(const QString &pluginId)
-{
-    const auto index = m_ui->wallpaperCombo->findData(pluginId);
-    if (index != -1) {
-        m_ui->wallpaperCombo->setCurrentIndex(index);
-    } else if (pluginId != s_defaultWallpaperPackage) {
-        // fall back to default plugin
-        selectWallpaper(s_defaultWallpaperPackage);
-    }
-}
-
 void ScreenLockerKcm::loadWallpaperConfig()
 {
-    // set the wallpaper config
-    m_settings->setWallpaperPlugin(m_ui->wallpaperCombo->currentData().toString());
-    updateState();
-
     if (m_wallpaperIntegration) {
-        if (m_wallpaperIntegration->pluginName() == m_ui->wallpaperCombo->currentData().toString()) {
+        if (m_wallpaperIntegration->pluginName() == m_ui->kcfg_wallpaperPluginIndex->currentData().toString()) {
             // nothing changed
             return;
         }
@@ -229,7 +180,7 @@ void ScreenLockerKcm::loadWallpaperConfig()
 
     m_wallpaperIntegration = new ScreenLocker::WallpaperIntegration(this);
     m_wallpaperIntegration->setConfig(m_settings->sharedConfig());
-    m_wallpaperIntegration->setPluginName(m_ui->wallpaperCombo->currentData().toString());
+    m_wallpaperIntegration->setPluginName(m_ui->kcfg_wallpaperPluginIndex->currentData().toString());
     m_wallpaperIntegration->init();
     m_wallpaperSettings = m_wallpaperIntegration->configScheme();
     m_ui->wallpaperConfigWidget->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);
@@ -239,6 +190,25 @@ void ScreenLockerKcm::loadWallpaperConfig()
 
 void ScreenLockerKcm::loadLnfConfig()
 {
+    if (m_package.isValid() && m_lnfIntegration) {
+        return;
+    }
+
+    Q_ASSERT(!m_package.isValid() && !m_lnfIntegration);
+
+    m_package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
+    KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
+    const QString packageName = cg.readEntry("LookAndFeelPackage", QString());
+    if (!packageName.isEmpty()) {
+        m_package.setPath(packageName);
+    }
+
+    m_lnfIntegration = new ScreenLocker::LnFIntegration(this);
+    m_lnfIntegration->setPackage(m_package);
+    m_lnfIntegration->setConfig(m_settings->sharedConfig());
+    m_lnfIntegration->init();
+    m_lnfSettings = m_lnfIntegration->configScheme();
+
     auto sourceFile = m_package.fileUrl(QByteArrayLiteral("lockscreen"), QStringLiteral("config.qml"));
     if (sourceFile.isEmpty()) {
         m_ui->lnfConfigWidget->hide();
@@ -266,7 +236,7 @@ KDeclarative::ConfigPropertyMap * ScreenLockerKcm::lnfConfiguration() const
 
 QString ScreenLockerKcm::currentWallpaper() const
 {
-    return m_ui->wallpaperCombo->currentData().toString();
+    return m_ui->kcfg_wallpaperPluginIndex->currentData().toString();
 }
 
 bool ScreenLockerKcm::eventFilter(QObject *watched, QEvent *event)
@@ -277,17 +247,17 @@ bool ScreenLockerKcm::eventFilter(QObject *watched, QEvent *event)
         }
         return false;
     }
-    if (watched != m_ui->wallpaperCombo) {
+    if (watched != m_ui->kcfg_wallpaperPluginIndex) {
         return false;
     }
     if (event->type() == QEvent::Move) {
         if (auto object = m_ui->wallpaperConfigWidget->rootObject()) {
             // QtQuick Layouts have a hardcoded 5 px spacing by default
-            object->setProperty("formAlignment", m_ui->wallpaperCombo->x() + 5);
+            object->setProperty("formAlignment", m_ui->kcfg_wallpaperPluginIndex->x() + 5);
         }
         if (auto object = m_ui->lnfConfigWidget->rootObject()) {
             // QtQuick Layouts have a hardcoded 5 px spacing by default
-            object->setProperty("formAlignment", m_ui->wallpaperCombo->x() + 5);
+            object->setProperty("formAlignment", m_ui->kcfg_wallpaperPluginIndex->x() + 5);
         }
 
     }

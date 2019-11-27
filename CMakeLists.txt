@@ -193,6 +193,7 @@ PRIVATE
    KF5::Notifications
    KF5::CoreAddons
    KF5::ConfigGui
+   KF5::Package
    KF5::WindowSystem
    KF5::XmlGui
    ${X11_LIBRARIES}

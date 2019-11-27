@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KActionCollection>
 #include <KGlobalAccel>
 #include <KLocalizedString>
+#include <KPackage/Package>
+#include <KPackage/PackageLoader>
 
 QList<QKeySequence> KScreenSaverSettings::defaultShortcuts()
 {
@@ -32,12 +34,22 @@ QList<QKeySequence> KScreenSaverSettings::defaultShortcuts()
     };
 }
 
+QString KScreenSaverSettings::defaultWallpaperPlugin()
+{
+    return QStringLiteral("org.kde.image");
+}
+
 KScreenSaverSettings::KScreenSaverSettings(QObject *parent)
     : KScreenSaverSettingsBase()
     , m_actionCollection(new KActionCollection(this, QStringLiteral("ksmserver")))
     , m_lockAction(nullptr)
 {
     setParent(parent);
+
+    const auto wallpaperPackages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Wallpaper"));
+    for (auto &package : wallpaperPackages) {
+         m_availableWallpaperPlugins.append({package.name(), package.pluginId()});
+    }
 
     m_actionCollection->setConfigGlobal(true);
     m_lockAction = m_actionCollection->addAction(QStringLiteral("Lock Session"));
@@ -46,10 +58,33 @@ KScreenSaverSettings::KScreenSaverSettings(QObject *parent)
     KGlobalAccel::self()->setShortcut(m_lockAction, defaultShortcuts());
 
     addItem(new KPropertySkeletonItem(this, "shortcut", defaultShortcuts().first()), QStringLiteral("lockscreenShortcut"));
+    addItem(new KPropertySkeletonItem(this, "wallpaperPluginIndex", indexFromWallpaperPluginId(defaultWallpaperPlugin())),
+            QStringLiteral("wallpaperPluginIndex"));
 }
 
 KScreenSaverSettings::~KScreenSaverSettings()
 {
+}
+
+QVector<KScreenSaverSettings::WallpaperInfo> KScreenSaverSettings::availableWallpaperPlugins() const
+{
+    return m_availableWallpaperPlugins;
+}
+
+int KScreenSaverSettings::wallpaperPluginIndex() const
+{
+    return indexFromWallpaperPluginId(wallpaperPluginId());
+}
+
+void KScreenSaverSettings::setWallpaperPluginIndex(int index)
+{
+    Q_ASSERT(index >=0 && index < m_availableWallpaperPlugins.size());
+    setWallpaperPluginId(m_availableWallpaperPlugins[index].id);
+
+    // We get in this function during save, but wallpaperPluginId might
+    // have been written already, since we're tempering with its value here
+    // we make sure it really reaches the config object.
+    findItem(QStringLiteral("wallpaperPluginId"))->writeConfig(config());
 }
 
 QKeySequence KScreenSaverSettings::shortcut() const
@@ -66,4 +101,17 @@ void KScreenSaverSettings::setShortcut(const QKeySequence &sequence)
 
     shortcuts[0] = sequence;
     KGlobalAccel::self()->setShortcut(m_lockAction, shortcuts, KGlobalAccel::NoAutoloading);
+}
+
+int KScreenSaverSettings::indexFromWallpaperPluginId(const QString &id) const
+{
+    const auto it = std::find_if(m_availableWallpaperPlugins.cbegin(), m_availableWallpaperPlugins.cend(),
+                                 [id] (const WallpaperInfo &info) { return info.id == id; });
+    if (it != m_availableWallpaperPlugins.cend()) {
+        return it - m_availableWallpaperPlugins.cbegin();
+    } else if (id != defaultWallpaperPlugin()) {
+        return indexFromWallpaperPluginId(defaultWallpaperPlugin());
+    } else {
+        return -1;
+    }
 }
