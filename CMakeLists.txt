@@ -65,7 +65,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
-                        URL "http://www.x.org"
+                        URL "https://www.x.org"
                         TYPE REQUIRED
                         PURPOSE "Required for building the X11 based workspace")
 

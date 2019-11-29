@@ -93,7 +93,7 @@ void GlobalAccel::prepare()
         calculateGrabMasks();
     }
 
-    // fetch all compnents from KGlobalAccel
+    // fetch all components from KGlobalAccel
     m_updatingInformation++;
     auto message = QDBusMessage::createMethodCall(s_kglobalAccelService,
                                                   QStringLiteral("/kglobalaccel"),

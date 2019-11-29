@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
 
     app.desktopResized();
 
-    // This allow ksmserver to know when the applicaion has actually finished setting itself up.
+    // This allow ksmserver to know when the application has actually finished setting itself up.
     // Crucial for blocking until it is ready, ensuring locking happens before sleep, e.g.
     std::cout << "Locked at " << QDateTime::currentDateTime().toTime_t() << std::endl;
 

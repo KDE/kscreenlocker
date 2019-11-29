@@ -152,7 +152,7 @@ void LockWindowTest::testBlankScreen()
     QVERIFY(isBlack());
     dummy.hide();
 
-    // destorying the fakeWindow should not remove the blanked screen
+    // destroying the fakeWindow should not remove the blanked screen
     fakeWindow.destroy();
     QTest::qWait(1000);
     QVERIFY(isBlack());

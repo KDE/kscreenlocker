@@ -663,7 +663,7 @@ void GLPlatform::detect()
         m_chipClass = detectIntelClass(chipset);
     }
 
-    // Properietary drivers
+    // Proprietary drivers
     // ====================================================
     else if (m_vendor == "ATI Technologies Inc.") {
         m_chipClass = detectRadeonClass(m_renderer);

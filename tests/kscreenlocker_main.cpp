@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QStringLiteral(
-        "This test application starts the screen locker immediatelly and\n"
+        "This test application starts the screen locker immediately and\n"
         "exits once the screen got successfully unlocked. The purpose is\n"
         "to test changes in KSLD without having to restart KSMServer.\n"
         "Thus it's a good way to verify grabbing of keyboard/pointer and\n"

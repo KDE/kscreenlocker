@@ -281,7 +281,7 @@ void KSldApp::initialize()
     );
     connect(m_logind, &LogindIntegration::inhibited, this,
         [this]() {
-            // if we are already locked, we immediatelly remove the inhibition lock
+            // if we are already locked, we immediately remove the inhibition lock
             if (m_lockState == KSldApp::Locked) {
                 m_logind->uninhibit();
             }

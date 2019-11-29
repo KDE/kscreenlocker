@@ -431,7 +431,7 @@ void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
     auto mime1 = new QMimeData;
     //Effectively we want to clear the clipboard
     //however some clipboard managers (like klipper with it's default settings)
-    //will prevent an empty clipbard
+    //will prevent an empty clipboard
     //we need some non-empty non-text mimeData to replace the clipboard so we don't leak real data to a user pasting into the text field
     //as the clipboard is cleared on close, klipper will then put the original text back when we exit
     mime1->setData(QStringLiteral("x-kde-lockscreen"), QByteArrayLiteral("empty"));
