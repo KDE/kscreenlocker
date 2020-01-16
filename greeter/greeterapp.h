@@ -110,6 +110,7 @@ private:
 
     bool m_canSuspend = false;
     bool m_canHibernate = false;
+    QString m_userName, m_userImage;
 
     KWayland::Client::ConnectionThread *m_ksldConnection = nullptr;
     KWayland::Client::Registry *m_ksldRegistry = nullptr;

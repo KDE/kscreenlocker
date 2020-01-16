@@ -196,6 +196,11 @@ void UnlockApp::initialize()
     m_lnfIntegration->setConfig(KScreenSaverSettings::self()->sharedConfig());
     m_lnfIntegration->init();
 
+    const KUser user;
+    const QString fullName = user.property(KUser::FullName).toString();
+
+    m_userName = fullName.isEmpty() ? user.loginName() : fullName;
+    m_userImage = user.faceIconPath();
 
     installEventFilter(this);
 }
@@ -297,11 +302,9 @@ void UnlockApp::desktopResized()
 
         // engine stuff
         QQmlContext* context = view->engine()->rootContext();
-        const KUser user;
-        const QString fullName = user.property(KUser::FullName).toString();
 
-        context->setContextProperty(QStringLiteral("kscreenlocker_userName"), fullName.isEmpty() ? user.loginName() : fullName);
-        context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), user.faceIconPath());
+        context->setContextProperty(QStringLiteral("kscreenlocker_userName"), m_userName);
+        context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), m_userImage);
         context->setContextProperty(QStringLiteral("authenticator"), m_authenticator);
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
         context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
