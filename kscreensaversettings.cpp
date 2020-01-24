@@ -89,7 +89,11 @@ void KScreenSaverSettings::setWallpaperPluginIndex(int index)
 
 QKeySequence KScreenSaverSettings::shortcut() const
 {
-    return KGlobalAccel::self()->shortcut(m_lockAction).first();
+    const QList<QKeySequence> shortcuts = KGlobalAccel::self()->shortcut(m_lockAction);
+    if (shortcuts.count() > 0) {
+        return shortcuts.first();
+    }
+    return QKeySequence();
 }
 
 void KScreenSaverSettings::setShortcut(const QKeySequence &sequence)
