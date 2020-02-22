@@ -264,8 +264,6 @@ bool ScreenLockerKcm::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory,
-                           "screenlocker.json",
-                           registerPlugin<ScreenLockerKcm>();)
+K_PLUGIN_CLASS_WITH_JSON(ScreenLockerKcm, "screenlocker.json")
 
 #include "kcm.moc"
