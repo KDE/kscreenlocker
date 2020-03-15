@@ -38,10 +38,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KNotification>
 #include <KGlobalAccel>
 
-//kwayland
-#include <KWayland/Server/display.h>
-#include <KWayland/Server/clientconnection.h>
-
 // Qt
 #include <QAction>
 #include <QKeyEvent>
@@ -83,7 +79,6 @@ KSldApp::KSldApp(QObject * parent)
     , m_lockProcess(nullptr)
     , m_lockWindow(nullptr)
     , m_waylandServer(new WaylandServer(this))
-    , m_waylandDisplay(nullptr)
     , m_lockedTimer(QElapsedTimer())
     , m_idleId(0)
     , m_lockGrace(0)
@@ -213,13 +208,8 @@ void KSldApp::initialize()
     auto finishedSignal = static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished);
     connect(m_lockProcess, finishedSignal, this,
         [this](int exitCode, QProcess::ExitStatus exitStatus) {
-
             qDebug() << "Greeter process exitted with status:"
                      << exitStatus << "exit code:" << exitCode;
-
-            if (m_isWayland && m_waylandDisplay && m_greeterClientConnection) {
-                m_greeterClientConnection->destroy();
-            }
 
             const bool regularExit = !exitCode && exitStatus == QProcess::NormalExit;
             if (regularExit || s_graceTimeKill || s_logindExit) {
@@ -451,6 +441,9 @@ public:
 
 bool KSldApp::establishGrab()
 {
+    if (m_isWayland) {
+        return m_waylandFd >= 0;
+    }
     if (!m_isX11) {
         return true;
     }
@@ -584,33 +577,22 @@ bool KSldApp::isFdoPowerInhibited() const
     return m_powerManagementInhibition->isInhibited();
 }
 
+void KSldApp::setWaylandFd(int fd)
+{
+    m_waylandFd = fd;
+}
+
 void KSldApp::startLockProcess(EstablishLock establishLock)
 {
     QProcessEnvironment env = m_greeterEnv;
 
-    if (m_isWayland && m_waylandDisplay) {
-        int sx[2];
-        if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx) < 0) {
-            qWarning() << "Can not create socket";
-            emit m_lockProcess->errorOccurred(QProcess::FailedToStart);
-            return;
-        }
-        m_greeterClientConnection = m_waylandDisplay->createClient(sx[0]);
-        connect(m_greeterClientConnection, &QObject::destroyed, this,
-            [this] (QObject *destroyedObject) {
-                if (destroyedObject != m_greeterClientConnection) {
-                    return;
-                }
-                m_greeterClientConnection = nullptr;
-                emit greeterClientConnectionChanged();
-            }
-        );
-        emit greeterClientConnectionChanged();
-        int socket = dup(sx[1]);
+    if (m_isWayland && m_waylandFd >= 0) {
+        int socket = dup(m_waylandFd);
         if (socket >= 0) {
             env.insert(QStringLiteral("WAYLAND_SOCKET"), QString::number(socket));
         }
     }
+
     QStringList args;
     if (establishLock == EstablishLock::Immediate) {
         args << QStringLiteral("--immediateLock");
@@ -647,32 +629,46 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     close(fd);
 }
 
+void KSldApp::userActivity()
+{
+    if (isGraceTime()) {
+        unlock();
+    }
+    if (m_lockWindow) {
+        m_lockWindow->userActivity();
+    }
+}
+
 void KSldApp::showLockWindow()
 {
     if (!m_lockWindow) {
         if (m_isX11) {
             m_lockWindow = new X11Locker(this);
+
+            connect(m_lockWindow, &AbstractLocker::userActivity, m_lockWindow,
+                [this]() {
+                    if (isGraceTime()) {
+                        unlock();
+                    }
+                },
+                Qt::QueuedConnection
+            );
         }
+
         if (m_isWayland) {
-            m_lockWindow = new WaylandLocker(m_waylandDisplay, this);
+            m_lockWindow = new WaylandLocker(this);
         }
         if (!m_lockWindow) {
             return;
         }
         m_lockWindow->setGlobalAccel(m_globalAccel);
-        connect(m_lockWindow, &AbstractLocker::userActivity, m_lockWindow,
-            [this]() {
-                if (isGraceTime()) {
-                    unlock();
-                }
-            },
-            Qt::QueuedConnection
-        );
+
         connect(m_lockWindow, &AbstractLocker::lockWindowShown, m_lockWindow,
             [this] {
                 lockScreenShown();
             }
         , Qt::QueuedConnection);
+
         connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
     m_lockWindow->showLockWindow();
@@ -735,13 +731,6 @@ void KSldApp::solidSuspend()
     }
     if (KScreenSaverSettings::lockOnResume()) {
         lock(EstablishLock::Immediate);
-    }
-}
-
-void KSldApp::setWaylandDisplay(KWayland::Server::Display *display)
-{
-    if (m_waylandDisplay != display) {
-        m_waylandDisplay = display;
     }
 }
 

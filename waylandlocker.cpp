@@ -23,19 +23,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QGuiApplication>
 #include <QScreen>
 
-#include <KWayland/Server/display.h>
-#include <KWayland/Server/seat_interface.h>
-
 namespace ScreenLocker
 {
 
-WaylandLocker::WaylandLocker(KWayland::Server::Display *display, QObject *parent)
+WaylandLocker::WaylandLocker(QObject *parent)
     : AbstractLocker(parent)
 {
-    const auto seats = display->seats();
-    for (auto s : seats) {
-        connect(s, &KWayland::Server::SeatInterface::timestampChanged, this, &WaylandLocker::userActivity);
-    }
     if (m_background) {
         updateGeometryOfBackground();
         const auto screens = qApp->screens();

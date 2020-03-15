@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QtTest>
 #include "../ksldapp.h"
+#include <KWayland/Server/clientconnection.h>
 #include <KWayland/Server/compositor_interface.h>
 #include <KWayland/Server/datadevicemanager_interface.h>
 #include <KWayland/Server/display.h>
@@ -27,6 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KWayland/Server/seat_interface.h>
 #include <KWayland/Server/shell_interface.h>
 #include <KWayland/Server/plasmashell_interface.h>
+
+#include <sys/socket.h>
 
 using namespace KWayland::Server;
 
@@ -37,7 +40,7 @@ Q_SIGNALS:
     void surfaceShown();
 
 private Q_SLOTS:
-    void initTestCase();
+    void init();
     void cleanup();
     void testAllQScreensClose();
 
@@ -49,12 +52,16 @@ private:
     SeatInterface *m_seat = nullptr;
     PlasmaShellInterface *m_plasma = nullptr;
     SurfaceInterface *m_surface = nullptr;
+    ClientConnection *m_clientConnection = nullptr;
 };
 
-void NoScreensTest::initTestCase()
+void NoScreensTest::init()
 {
-    m_display = new Display(this);
+    m_display = new Display;
+    m_display->setAutomaticSocketNaming(true);
     m_display->start(Display::StartMode::ConnectClientsOnly);
+    QVERIFY(m_display->isRunning());
+
     m_compositor = m_display->createCompositor(m_display);
     m_compositor->create();
     m_shell = m_display->createShell(m_display);
@@ -70,12 +77,40 @@ void NoScreensTest::initTestCase()
     m_plasma->create();
 
     QCoreApplication::instance()->setProperty("platformName", QStringLiteral("wayland"));
-    ScreenLocker::KSldApp::self();
-    ScreenLocker::KSldApp::self()->setWaylandDisplay(m_display);
+    auto *app = ScreenLocker::KSldApp::self();
+
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     env.insert(QStringLiteral("QT_QPA_PLATFORM"), QStringLiteral("wayland"));
-    ScreenLocker::KSldApp::self()->setGreeterEnvironment(env);
-    ScreenLocker::KSldApp::self()->initialize();
+    app->setGreeterEnvironment(env);
+    app->initialize();
+
+    connect(app, &ScreenLocker::KSldApp::aboutToLock,
+            this, [this, app] {
+                int sx[2];
+                QVERIFY(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx) >= 0);
+
+                m_clientConnection = m_display->createClient(sx[0]);
+                QVERIFY(m_clientConnection);
+                connect(m_clientConnection, &ClientConnection::disconnected, this, [this] {
+                    // The API is currently ill-defined about the ownership of a client connection
+                    // when calling createClient server-side.
+                    m_clientConnection = nullptr;
+                });
+                app->setWaylandFd(sx[1]);
+                connect(m_seat, &SeatInterface::timestampChanged,
+                        app, &ScreenLocker::KSldApp::userActivity);
+
+    });
+    connect(app, &ScreenLocker::KSldApp::unlocked,
+            this, [this, app] {
+                if (m_clientConnection) {
+                    delete m_clientConnection;
+                    m_clientConnection = nullptr;
+                }
+                disconnect(m_seat, &SeatInterface::timestampChanged,
+                           app, &ScreenLocker::KSldApp::userActivity);
+    });
+
     connect(m_shell, &ShellInterface::surfaceCreated, this,
         [this] (ShellSurfaceInterface *surface) {
             m_surface = surface->surface();
@@ -93,7 +128,7 @@ void NoScreensTest::initTestCase()
 
 void NoScreensTest::cleanup()
 {
-    unlock();
+    delete m_display;
 }
 
 void NoScreensTest::unlock()
@@ -116,8 +151,6 @@ void NoScreensTest::testAllQScreensClose()
     }
     QSignalSpy lockedStateSpy(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::lockStateChanged);
     QVERIFY(lockedStateSpy.isValid());
-    QSignalSpy greeterConnectionSpy(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::greeterClientConnectionChanged);
-    QVERIFY(greeterConnectionSpy.isValid());
 
     QSignalSpy surfaceShownSpy(this, &NoScreensTest::surfaceShown);
     QVERIFY(surfaceShownSpy.isValid());
@@ -131,11 +164,11 @@ void NoScreensTest::testAllQScreensClose()
 
     ScreenLocker::KSldApp::self()->lock(ScreenLocker::EstablishLock::Immediate);
     QCOMPARE(lockedStateSpy.count(), 1);
-    QCOMPARE(greeterConnectionSpy.count(), 1);
     QCOMPARE(ScreenLocker::KSldApp::self()->lockState(), ScreenLocker::KSldApp::AcquiringLock);
 
     QVERIFY(surfaceShownSpy.wait());
     QCOMPARE(ScreenLocker::KSldApp::self()->lockState(), ScreenLocker::KSldApp::Locked);
+    QVERIFY(m_clientConnection);
 
     // give some time to show the window
     QTest::qWait(5000);

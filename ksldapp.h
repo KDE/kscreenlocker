@@ -35,14 +35,6 @@ class QTimer;
 class KSldTest;
 class PowerManagementInhibition;
 
-namespace KWayland
-{
-namespace Server {
-class Display;
-class ClientConnection;
-}
-}
-
 namespace ScreenLocker
 {
 
@@ -84,13 +76,11 @@ public:
 
     void configure();
 
+    void userActivity();
     bool isGraceTime() const;
 
-    void setWaylandDisplay(KWayland::Server::Display *display);
+    void setWaylandFd(int fd);
 
-    KWayland::Server::ClientConnection *greeterClientConnection() const {
-        return m_greeterClientConnection;
-    }
     void setGreeterEnvironment(const QProcessEnvironment &env);
 
     /**
@@ -139,7 +129,6 @@ Q_SIGNALS:
     void aboutToLock();
     void locked();
     void unlocked();
-    void greeterClientConnectionChanged();
     void lockStateChanged();
 
 private Q_SLOTS:
@@ -163,8 +152,7 @@ private:
     QProcess *m_lockProcess;
     AbstractLocker *m_lockWindow;
     WaylandServer *m_waylandServer;
-    KWayland::Server::Display *m_waylandDisplay;
-    KWayland::Server::ClientConnection *m_greeterClientConnection;
+
     /**
      * Timer to measure how long the screen is locked.
      * This information is required by DBus Interface.
@@ -195,6 +183,8 @@ private:
     int m_greeterCrashedCounter = 0;
     QProcessEnvironment m_greeterEnv;
     PowerManagementInhibition *m_powerManagementInhibition;
+
+    int m_waylandFd = -1;
 
     // for auto tests
     friend KSldTest;
