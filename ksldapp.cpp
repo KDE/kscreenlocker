@@ -213,33 +213,59 @@ void KSldApp::initialize()
     auto finishedSignal = static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished);
     connect(m_lockProcess, finishedSignal, this,
         [this](int exitCode, QProcess::ExitStatus exitStatus) {
+
+            qDebug() << "Greeter process exitted with status:"
+                     << exitStatus << "exit code:" << exitCode;
+
             if (m_isWayland && m_waylandDisplay && m_greeterClientConnection) {
                 m_greeterClientConnection->destroy();
             }
-            if ((!exitCode && exitStatus == QProcess::NormalExit) || s_graceTimeKill || s_logindExit) {
+
+            const bool regularExit = !exitCode && exitStatus == QProcess::NormalExit;
+            if (regularExit || s_graceTimeKill || s_logindExit) {
                 // unlock process finished successfully - we can remove the lock grab
+
+                if (regularExit) {
+                    qDebug() << "Unlocking now on regular exit.";
+                } else if (s_graceTimeKill) {
+                    qDebug() << "Unlocking anyway due to grace time.";
+                } else {
+                    Q_ASSERT(s_logindExit);
+                    qDebug() << "Unlocking anyway since forced through logind.";
+                }
+
                 s_graceTimeKill = false;
                 s_logindExit = false;
                 doUnlock();
                 return;
             }
-            // failure, restart lock process
+
+            qWarning() << "Greeter process exit unregular. Restarting lock.";
+
             m_greeterCrashedCounter++;
             if (m_greeterCrashedCounter < 4) {
                 // Perhaps it crashed due to a graphics driver issue, force software rendering now
+                qDebug("Trying to lock again with software rendering (%d/4).",
+                       m_greeterCrashedCounter);
                 setForceSoftwareRendering(true);
                 startLockProcess(EstablishLock::Immediate);
             } else if (m_lockWindow) {
+                qWarning("Everything else failed. Need to put Greeter in emergency mode.");
                 m_lockWindow->emergencyShow();
+            } else {
+                qCritical("Greeter process exitted and we could in no way recover from that!");
             }
         }
     );
     connect(m_lockProcess, &QProcess::errorOccurred, this,
         [this](QProcess::ProcessError error) {
             if (error == QProcess::FailedToStart) {
+                qDebug() << "Greeter Process  failed to start. Trying to directly unlock again.";
                 doUnlock();
                 m_waylandServer->stop();
                 qCritical() << "Greeter Process not available";
+            } else {
+                qWarning() << "Greeter Process encountered an unhandled error:" << error;
             }
         }
     );
@@ -608,6 +634,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     // start the Wayland server
     int fd = m_waylandServer->start();
     if (fd == -1) {
+        qWarning() << "Could not start the Wayland server.";
         emit m_lockProcess->errorOccurred(QProcess::FailedToStart);
         return;
     }
