@@ -43,6 +43,9 @@
          </item>
          <item>
           <widget class="KPluralHandlingSpinBox" name="kcfg_Timeout">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="specialValueText">
             <string notr="true"/>
            </property>
