@@ -22,10 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 
 #include <QCoreApplication>
-#include <QDebug>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusServiceWatcher>
+
+#include <kscreenlocker_logging.h>
 
 const static QString s_login1Service = QStringLiteral("org.freedesktop.login1");
 const static QString s_login1Path = QStringLiteral("/org/freedesktop/login1");
@@ -144,11 +145,12 @@ void LogindIntegration::commonServiceRegistered(QDBusPendingCallWatcher *watcher
                 return;
             }
             if (!reply.isValid()) {
-                qDebug() << "The session is not registered: " << reply.error().message();
+                qCDebug(KSCREENLOCKER) << "The session is not registered: "
+                                       << reply.error().message();
                 return;
             }
             const QString sessionPath = reply.value().path();
-            qDebug() << "Session path:" << sessionPath;
+            qCDebug(KSCREENLOCKER) << "Session path:" << sessionPath;
 
             // connections need to be done this way as the object exposes both method and signal
             // with name "Lock"/"Unlock". Qt is not able to automatically handle this.

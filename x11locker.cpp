@@ -27,13 +27,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // KDE
 // Qt
 #include <QApplication>
-#include <QDebug>
 #include <QDesktopWidget>
 #include <QX11Info>
 // X11
 #include <X11/Xatom.h>
 #include <fixx11h.h>
 #include <xcb/xcb.h>
+
+#include <kscreenlocker_logging.h>
 
 static Window gVRoot = 0;
 static Window gVRootData = 0;
@@ -104,7 +105,7 @@ void X11Locker::showLockWindow()
                      gXA_SCREENSAVER_VERSION, XA_STRING, 8, PropModeReplace,
                      (unsigned char *) version, strlen(version));
 
-    qDebug() << "Lock window Id: " << m_background->winId();
+    qCDebug(KSCREENLOCKER) << "Lock window Id: " << m_background->winId();
 
     m_background->setPosition(0, 0);
     XSync(QX11Info::display(), False);
@@ -337,14 +338,14 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
                 if( index >= 0 ) {
                     int index2 = xc->above_sibling ? findWindowInfo( xc->above_sibling ) : 0;
                     if( index2 < 0 )
-                        qDebug() << "Unknown above for ConfigureNotify";
+                        qCDebug(KSCREENLOCKER) << "Unknown above for ConfigureNotify";
                     else { // move just above the other window
                         if( index2 < index )
                             ++index2;
                         m_windowInfo.move( index, index2 );
                     }
                 } else
-                    qDebug() << "Unknown toplevel for ConfigureNotify";
+                    qCDebug(KSCREENLOCKER) << "Unknown toplevel for ConfigureNotify";
                 //kDebug() << "ConfigureNotify:";
                 //the stacking order changed, so let's change the stacking order again to what we want
                 stayOnTop();
@@ -355,15 +356,15 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         case XCB_MAP_NOTIFY: { // from SubstructureNotifyMask on the root window
             xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t*>(event);
             if (xm->event == QX11Info::appRootWindow()) {
-                qDebug() << "MapNotify:" << xm->window;
+                qCDebug(KSCREENLOCKER) << "MapNotify:" << xm->window;
                 int index = findWindowInfo( xm->window );
                 if( index >= 0 )
                     m_windowInfo[ index ].viewable = true;
                 else
-                    qDebug() << "Unknown toplevel for MapNotify";
+                    qCDebug(KSCREENLOCKER) << "Unknown toplevel for MapNotify";
                 if (m_allowedWindows.contains(xm->window)) {
                     if (m_lockWindows.contains(xm->window)) {
-                        qDebug() << "uhoh! duplicate!";
+                        qCDebug(KSCREENLOCKER) << "uhoh! duplicate!";
                     } else {
                         if (!m_background->isVisible()) {
                             // not yet shown and we have a lock window, so we show our own window
@@ -386,12 +387,12 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         case XCB_UNMAP_NOTIFY: {
             xcb_unmap_notify_event_t *xu = reinterpret_cast<xcb_unmap_notify_event_t*>(event);
             if (xu->event == QX11Info::appRootWindow()) {
-                qDebug() << "UnmapNotify:" << xu->window;
+                qCDebug(KSCREENLOCKER) << "UnmapNotify:" << xu->window;
                 int index = findWindowInfo( xu->window );
                 if( index >= 0 )
                     m_windowInfo[ index ].viewable = false;
                 else
-                    qDebug() << "Unknown toplevel for MapNotify";
+                    qCDebug(KSCREENLOCKER) << "Unknown toplevel for MapNotify";
                 m_lockWindows.removeAll(xu->window);
                 if (m_focusedLockWindow == xu->event && !m_lockWindows.empty()) {
                     // The currently focused window vanished, just focus the first one in the list
@@ -404,10 +405,10 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         case XCB_CREATE_NOTIFY: {
             xcb_create_notify_event_t *xc = reinterpret_cast<xcb_create_notify_event_t*>(event);
             if (xc->parent == QX11Info::appRootWindow()) {
-                qDebug() << "CreateNotify:" << xc->window;
+                qCDebug(KSCREENLOCKER) << "CreateNotify:" << xc->window;
                 int index = findWindowInfo( xc->window );
                 if( index >= 0 )
-                    qDebug() << "Already existing toplevel for CreateNotify";
+                    qCDebug(KSCREENLOCKER) << "Already existing toplevel for CreateNotify";
                 else {
                     WindowInfo info;
                     info.window = xc->window;
@@ -425,7 +426,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
                 if( index >= 0 )
                     m_windowInfo.removeAt( index );
                 else
-                    qDebug() << "Unknown toplevel for DestroyNotify";
+                    qCDebug(KSCREENLOCKER) << "Unknown toplevel for DestroyNotify";
                 ret = true;
             }
             break;
@@ -437,11 +438,11 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
                 if( index >= 0 )
                     m_windowInfo.removeAt( index );
                 else
-                    qDebug() << "Unknown toplevel for ReparentNotify away";
+                    qCDebug(KSCREENLOCKER) << "Unknown toplevel for ReparentNotify away";
             } else if (xr->parent == QX11Info::appRootWindow()) {
                 int index = findWindowInfo( xr->window );
                 if( index >= 0 )
-                    qDebug() << "Already existing toplevel for ReparentNotify";
+                    qCDebug(KSCREENLOCKER) << "Already existing toplevel for ReparentNotify";
                 else {
                     WindowInfo info;
                     info.window = xr->window;
@@ -458,7 +459,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
                 if( index >= 0 ) {
                     m_windowInfo.move( index, xc->place == PlaceOnTop ? m_windowInfo.size() - 1 : 0 );
                 } else
-                    qDebug() << "Unknown toplevel for CirculateNotify";
+                    qCDebug(KSCREENLOCKER) << "Unknown toplevel for CirculateNotify";
             }
             break;
         }
@@ -513,7 +514,7 @@ void X11Locker::addAllowedWindow(quint32 window)
         return;
     }
     if (m_lockWindows.contains(window)) {
-        qDebug() << "uhoh! duplicate!";
+        qCDebug(KSCREENLOCKER) << "uhoh! duplicate!";
     } else {
         if (!m_background->isVisible()) {
             // not yet shown and we have a lock window, so we show our own window

@@ -21,6 +21,17 @@ if(HAVE_SECCOMP)
     set(kscreenlocker_greet_SRCS ${kscreenlocker_greet_SRCS} seccomp_filter.cpp)
 endif()
 
+ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
+    HEADER
+        kscreenlocker_greet_logging.h
+    IDENTIFIER
+        KSCREENLOCKER_GREET
+    CATEGORY_NAME
+        kscreenlocker_greet
+    DEFAULT_SEVERITY
+        Critical
+)
+
 qt5_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 kconfig_add_kcfg_files(kscreenlocker_greet_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/../kcfg/kscreensaversettingsbase.kcfgc)
 

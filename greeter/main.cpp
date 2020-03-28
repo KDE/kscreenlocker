@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KQuickAddons/QtQuickSettings>
 
 #include <QDateTime>
-#include <QDebug>
 #include <QCommandLineParser>
 #include <QSessionManager>
 
@@ -31,6 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "greeterapp.h"
 
 #include <config-kscreenlocker.h>
+#include <kscreenlocker_greet_logging.h>
+
 #if HAVE_SYS_PRCTL_H
 #include <sys/prctl.h>
 #endif
@@ -56,11 +57,11 @@ static void signalHandler(int signum)
         // return exit code 1 to indicate that a valid password was not entered,
         // to prevent circumventing the password input by sending a SIGTERM
 
-        qDebug() << "Greeter received SIGTERM. Will exit with error.";
+        qCDebug(KSCREENLOCKER_GREET) << "Greeter received SIGTERM. Will exit with error.";
         instance->exit(1);
         break;
       case SIGUSR1:
-        qDebug() << "Greeter received SIGUSR1. Will lock immediately.";
+        qCDebug(KSCREENLOCKER_GREET) << "Greeter received SIGUSR1. Will lock immediately.";
         instance->lockImmediately();
         break;
     }
@@ -77,7 +78,7 @@ int main(int argc, char* argv[])
     procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
 #endif
 
-    qDebug() << "Greeter is starting up.";
+    qCDebug(KSCREENLOCKER_GREET) << "Greeter is starting up.";
 
     KLocalizedString::setApplicationDomain("kscreenlocker_greet");
 

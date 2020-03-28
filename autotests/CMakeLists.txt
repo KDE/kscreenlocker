@@ -8,7 +8,9 @@ set(logindTest_SRCS
     logindtest.cpp
     fakelogind.cpp
     ../logind.cpp
+    ../kscreenlocker_logging.cpp
 )
+
 add_executable(logindTest ${logindTest_SRCS})
 target_link_libraries(logindTest Qt5::DBus Qt5::Test KF5::I18n)
 add_test(NAME ksmserver-logindTest COMMAND logindTest)
@@ -39,7 +41,14 @@ ecm_mark_as_test(pointerGrabber)
 #######################################
 # LockWindowTest
 #######################################
-set(x11LockerTest_SRCS x11lockertest.cpp ../x11locker.cpp ../globalaccel.cpp ../abstractlocker.cpp)
+set(x11LockerTest_SRCS
+    x11lockertest.cpp
+    ../x11locker.cpp
+    ../globalaccel.cpp
+    ../abstractlocker.cpp
+    ../kscreenlocker_logging.cpp
+)
+
 add_executable(x11LockerTest ${x11LockerTest_SRCS})
 target_link_libraries(x11LockerTest
     KF5::GlobalAccel

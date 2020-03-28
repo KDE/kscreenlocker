@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "wallpaper_integration.h"
 #include "lnf_integration.h"
 
+#include <kscreenlocker_greet_logging.h>
 #include <config-kscreenlocker.h>
 
 // KDE
@@ -257,7 +258,7 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
 {
     auto package = m_wallpaperIntegration->package();
     if (!package.isValid()) {
-        qWarning() << "Error loading the wallpaper, no valid package loaded";
+        qCWarning(KSCREENLOCKER_GREET) << "Error loading the wallpaper, no valid package loaded";
         return;
     }
 
@@ -270,7 +271,7 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
         [this, qmlObject, view] {
             auto item = qobject_cast<QQuickItem*>(qmlObject->rootObject());
             if (!item) {
-                qWarning() << "Wallpaper needs to be a QtQuick Item";
+                qCWarning(KSCREENLOCKER_GREET) << "Wallpaper needs to be a QtQuick Item";
                 return;
             }
             item->setParentItem(view->rootObject());
@@ -346,7 +347,9 @@ void UnlockApp::desktopResized()
         if (view->status() != QQmlComponent::Ready) {
             static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
 
-            qWarning() << "Failed to load lockscreen QML, falling back to built-in locker";
+            qCWarning(KSCREENLOCKER_GREET)
+                    << "Failed to load lockscreen QML, falling back to built-in locker";
+
             m_mainQmlPath = fallbackUrl;
             view->setSource(fallbackUrl);
         }

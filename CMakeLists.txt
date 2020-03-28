@@ -146,6 +146,8 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(KSLD_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}/KScreenLocker")
 
+include(ECMQtDeclareLoggingCategory)
+
 add_subdirectory(kcheckpass)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
@@ -169,6 +171,18 @@ set(ksld_SRCS
    powermanagement_inhibition.cpp
    kscreensaversettings.cpp
 )
+
+ecm_qt_declare_logging_category(ksld_SRCS
+    HEADER
+        kscreenlocker_logging.h
+    IDENTIFIER
+        KSCREENLOCKER
+    CATEGORY_NAME
+        kscreenlocker
+    DEFAULT_SEVERITY
+        Critical
+)
+
 qt5_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
 qt5_add_dbus_adaptor(ksld_SRCS ${kscreensaver_dbusXML} interface.h ScreenLocker::Interface kscreensaveradaptor KScreenSaverAdaptor)
 kconfig_add_kcfg_files(ksld_SRCS kcfg/kscreensaversettingsbase.kcfgc)

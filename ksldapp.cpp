@@ -28,7 +28,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "logind.h"
 #include "kscreensaversettings.h"
 #include "powermanagement_inhibition.h"
+
+#include "kscreenlocker_logging.h"
 #include <config-kscreenlocker.h>
+
 #include <config-X11.h>
 #include "waylandserver.h"
 // KDE
@@ -163,7 +166,7 @@ void KSldApp::initialize()
 
     // Global keys
     if (KAuthorized::authorizeAction(QStringLiteral("lock_screen"))) {
-        qDebug() << "Configuring Lock Action";
+        qCDebug(KSCREENLOCKER) << "Configuring Lock Action";
         QAction *a = new QAction(this);
         a->setObjectName(QStringLiteral("Lock Session"));
         a->setProperty("componentName", QStringLiteral("ksmserver"));
@@ -208,7 +211,7 @@ void KSldApp::initialize()
     auto finishedSignal = static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished);
     connect(m_lockProcess, finishedSignal, this,
         [this](int exitCode, QProcess::ExitStatus exitStatus) {
-            qDebug() << "Greeter process exitted with status:"
+            qCDebug(KSCREENLOCKER) << "Greeter process exitted with status:"
                      << exitStatus << "exit code:" << exitCode;
 
             const bool regularExit = !exitCode && exitStatus == QProcess::NormalExit;
@@ -216,12 +219,12 @@ void KSldApp::initialize()
                 // unlock process finished successfully - we can remove the lock grab
 
                 if (regularExit) {
-                    qDebug() << "Unlocking now on regular exit.";
+                    qCDebug(KSCREENLOCKER) << "Unlocking now on regular exit.";
                 } else if (s_graceTimeKill) {
-                    qDebug() << "Unlocking anyway due to grace time.";
+                    qCDebug(KSCREENLOCKER) << "Unlocking anyway due to grace time.";
                 } else {
                     Q_ASSERT(s_logindExit);
-                    qDebug() << "Unlocking anyway since forced through logind.";
+                    qCDebug(KSCREENLOCKER) << "Unlocking anyway since forced through logind.";
                 }
 
                 s_graceTimeKill = false;
@@ -230,32 +233,34 @@ void KSldApp::initialize()
                 return;
             }
 
-            qWarning() << "Greeter process exit unregular. Restarting lock.";
+            qCWarning(KSCREENLOCKER) << "Greeter process exit unregular. Restarting lock.";
 
             m_greeterCrashedCounter++;
             if (m_greeterCrashedCounter < 4) {
                 // Perhaps it crashed due to a graphics driver issue, force software rendering now
-                qDebug("Trying to lock again with software rendering (%d/4).",
+                qCDebug(KSCREENLOCKER, "Trying to lock again with software rendering (%d/4).",
                        m_greeterCrashedCounter);
                 setForceSoftwareRendering(true);
                 startLockProcess(EstablishLock::Immediate);
             } else if (m_lockWindow) {
-                qWarning("Everything else failed. Need to put Greeter in emergency mode.");
+                qCWarning(KSCREENLOCKER)
+                        << "Everything else failed. Need to put Greeter in emergency mode.";
                 m_lockWindow->emergencyShow();
             } else {
-                qCritical("Greeter process exitted and we could in no way recover from that!");
+                qCCritical(KSCREENLOCKER)
+                        << "Greeter process exitted and we could in no way recover from that!";
             }
         }
     );
     connect(m_lockProcess, &QProcess::errorOccurred, this,
         [this](QProcess::ProcessError error) {
             if (error == QProcess::FailedToStart) {
-                qDebug() << "Greeter Process  failed to start. Trying to directly unlock again.";
+                qCDebug(KSCREENLOCKER) << "Greeter Process  failed to start. Trying to directly unlock again.";
                 doUnlock();
                 m_waylandServer->stop();
-                qCritical() << "Greeter Process not available";
+                qCCritical(KSCREENLOCKER) << "Greeter Process not available";
             } else {
-                qWarning() << "Greeter Process encountered an unhandled error:" << error;
+                qCWarning(KSCREENLOCKER) << "Greeter Process encountered an unhandled error:" << error;
             }
         }
     );
@@ -389,15 +394,15 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
         emit aboutToLock();
     }
 
-    qDebug() << "lock called";
+    qCDebug(KSCREENLOCKER) << "lock called";
     if (!establishGrab()) {
         if (attemptCount < 3) {
-            qWarning() << "Could not establish screen lock. Trying again in 10ms";
+            qCWarning(KSCREENLOCKER) << "Could not establish screen lock. Trying again in 10ms";
             QTimer::singleShot(10, this, [=]() {
                 lock(establishLock, attemptCount+1);
             });
         } else {
-            qCritical() << "Could not establish screen lock";
+            qCCritical(KSCREENLOCKER) << "Could not establish screen lock";
         }
         return;
     }
@@ -532,7 +537,7 @@ static bool grabMouse()
 
 void KSldApp::doUnlock()
 {
-    qDebug() << "Grab Released";
+    qCDebug(KSCREENLOCKER) << "Grab Released";
     if (m_isX11) {
         xcb_connection_t *c = QX11Info::connection();
         xcb_ungrab_keyboard(c, XCB_CURRENT_TIME);
@@ -616,7 +621,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     // start the Wayland server
     int fd = m_waylandServer->start();
     if (fd == -1) {
-        qWarning() << "Could not start the Wayland server.";
+        qCWarning(KSCREENLOCKER) << "Could not start the Wayland server.";
         emit m_lockProcess->errorOccurred(QProcess::FailedToStart);
         return;
     }
