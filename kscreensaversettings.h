@@ -19,21 +19,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KSCREENSAVERSETTINGS_H
 #define KSCREENSAVERSETTINGS_H
 
+#include <QKeySequence>
+
 #include "kscreensaversettingsbase.h"
 
 class QAction;
 class KActionCollection;
 
+class KScreenSaverSettingsStore;
+
+struct WallpaperInfo {
+    Q_PROPERTY(QString name MEMBER name CONSTANT)
+    Q_PROPERTY(QString id MEMBER id CONSTANT)
+    QString name;
+    QString id;
+    Q_GADGET
+};
+
 class KScreenSaverSettings : public KScreenSaverSettingsBase
 {
     Q_OBJECT
-    Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut)
-    Q_PROPERTY(int wallpaperPluginIndex READ wallpaperPluginIndex WRITE setWallpaperPluginIndex)
+    Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut NOTIFY shortcutChanged)
 public:
-    struct WallpaperInfo {
-        QString name;
-        QString id;
-    };
 
     static QList<QKeySequence> defaultShortcuts();
     static QString defaultWallpaperPlugin();
@@ -42,18 +49,15 @@ public:
     ~KScreenSaverSettings() override;
 
     QVector<WallpaperInfo> availableWallpaperPlugins() const;
-    int wallpaperPluginIndex() const;
-    void setWallpaperPluginIndex(int index);
 
     QKeySequence shortcut() const;
     void setShortcut(const QKeySequence &sequence);
 
+Q_SIGNALS:
+    void shortcutChanged();
 private:
-    int indexFromWallpaperPluginId(const QString &id) const;
-
     QVector<WallpaperInfo> m_availableWallpaperPlugins;
-    KActionCollection *m_actionCollection;
-    QAction *m_lockAction;
+    KScreenSaverSettingsStore *m_store;
 };
 
 #endif // KSCREENSAVERSETTINGS_H

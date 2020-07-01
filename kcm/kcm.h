@@ -1,10 +1,10 @@
 /********************************************************************
- KSld - the KDE Screenlocker Daemon
  This file is part of the KDE project.
 
 Copyright (C) 2014 Martin Gräßlin <mgraesslin@kde.org>
 Copyright (C) 2014 Marco Martin <mart@kde.org>
 Copyright (C) 2019 Kevin Ottens <kevin.ottens@enioka.com>
+Copyright (C) 2020 David Redondo <kde@david-redondo.de>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,11 +19,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
+#ifndef KCM_H
+#define KCM_H
 
-#include <KCModule>
 #include <KPackage/Package>
+#include <KQuickAddons/ManagedConfigModule>
 
-class KScreenSaverSettings;
+#include "kscreensaversettings.h"
 class ScreenLockerKcmForm;
 
 namespace ScreenLocker
@@ -38,80 +40,50 @@ class ConfigPropertyMap;
 }
 
 
-class ScreenLockerKcm : public KCModule
+class ScreenLockerKcm : public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
 public:
-    enum Roles {
-        PluginNameRole = Qt::UserRole +1,
-        ScreenhotRole
-    };
-    explicit ScreenLockerKcm(QWidget *parent = nullptr, const QVariantList& args = QVariantList());
+    explicit ScreenLockerKcm(QObject *parent = nullptr, const QVariantList& args = QVariantList());
 
-    KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const;
-    KDeclarative::ConfigPropertyMap *lnfConfiguration() const;
+    Q_PROPERTY(KScreenSaverSettings *settings MEMBER m_settings CONSTANT)
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap  *wallpaperConfiguration READ wallpaperConfiguration NOTIFY currentWallpaperChanged)
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *lnfConfiguration READ lnfConfiguration CONSTANT)
+    Q_PROPERTY(QUrl lnfConfigFile MEMBER m_lnfConfigFile CONSTANT)
+    Q_PROPERTY(QUrl wallpaperConfigFile MEMBER m_wallpaperConfigFile NOTIFY currentWallpaperChanged)
+    Q_PROPERTY(ScreenLocker::WallpaperIntegration *wallpaperIntegration MEMBER m_wallpaperIntegration NOTIFY currentWallpaperChanged)
+    Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
 
-    QString currentWallpaper() const;
+    Q_INVOKABLE QVector<WallpaperInfo> availableWallpaperPlugins() {
+        return m_settings->availableWallpaperPlugins();
+    }
 
-    bool eventFilter(QObject *watched, QEvent *event) override;
+   QString currentWallpaper() const;
 
 public Q_SLOTS:
     void load() override;
     void save() override;
     void defaults() override;
-
-Q_SIGNALS:
-    void wallpaperConfigurationChanged();
-    void currentWallpaperChanged();
-
-private Q_SLOTS:
     void updateState();
 
-private:
-    void selectWallpaper(const QString &pluginId);
-    void loadWallpaperConfig();
-    void loadLnfConfig();
-    KPackage::Package m_package;
-    KScreenSaverSettings *m_settings;
-    ScreenLockerKcmForm *m_ui;
-    ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
-    KCoreConfigSkeleton *m_wallpaperSettings = nullptr;
-    ScreenLocker::LnFIntegration* m_lnfIntegration = nullptr;
-    KCoreConfigSkeleton *m_lnfSettings = nullptr;
-};
-
-//see https://bugreports.qt.io/browse/QTBUG-57714, don't expose a QWidget as a context property
-class ScreenLockerProxy : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY wallpaperConfigurationChanged)
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *lnfConfiguration READ lnfConfiguration CONSTANT)
-
-    Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
-public:
-    ScreenLockerProxy(ScreenLockerKcm *parent) :
-        QObject(parent),
-        q(parent)
-    {
-        connect(q, &ScreenLockerKcm::wallpaperConfigurationChanged, this, &ScreenLockerProxy::wallpaperConfigurationChanged);
-        connect(q, &ScreenLockerKcm::currentWallpaperChanged, this, &ScreenLockerProxy::currentWallpaperChanged);
-    }
-
-    KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const {
-        return q->wallpaperConfiguration();
-    }
-    KDeclarative::ConfigPropertyMap *lnfConfiguration() const {
-        return q->lnfConfiguration();
-    }
-
-    QString currentWallpaper() const {
-        return q->currentWallpaper();
-    }
-
 Q_SIGNALS:
-    void wallpaperConfigurationChanged();
     void currentWallpaperChanged();
 
 private:
-    ScreenLockerKcm* q;
+    void loadWallpaperConfig();
+    void loadLnfConfig();
+
+    KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const;
+    KDeclarative::ConfigPropertyMap *lnfConfiguration() const;
+
+    KPackage::Package m_package;
+    KScreenSaverSettings *m_settings;
+    ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
+    KCoreConfigSkeleton *m_wallpaperSettings = nullptr;
+    QUrl m_wallpaperConfigFile;
+    ScreenLocker::LnFIntegration* m_lnfIntegration = nullptr;
+    KCoreConfigSkeleton *m_lnfSettings = nullptr;
+    QUrl m_lnfConfigFile;
 };
+
+#endif

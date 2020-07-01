@@ -55,10 +55,8 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     GlobalAccel
                     I18n
                     IdleTime
-                    KCMUtils
                     Notifications
                     Solid
-                    TextWidgets
                     WindowSystem
                     XmlGui
                     )
@@ -185,7 +183,7 @@ ecm_qt_declare_logging_category(ksld_SRCS
 
 qt5_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
 qt5_add_dbus_adaptor(ksld_SRCS ${kscreensaver_dbusXML} interface.h ScreenLocker::Interface kscreensaveradaptor KScreenSaverAdaptor)
-kconfig_add_kcfg_files(ksld_SRCS kcfg/kscreensaversettingsbase.kcfgc)
+kconfig_add_kcfg_files(ksld_SRCS GENERATE_MOC kcfg/kscreensaversettingsbase.kcfgc)
 qt5_add_dbus_interface(ksld_SRCS ${powerdevilpolicyagent_xml} powerdevilpolicyagent)
 
 ecm_add_wayland_server_protocol(ksld_SRCS

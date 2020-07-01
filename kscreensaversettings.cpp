@@ -2,6 +2,7 @@
  This file is part of the KDE project.
 
  Copyright 2019 Kevin Ottens <kevin.ottens@enioka.com>
+ Copyright (C) 2020 David Redondo <kde@david-redondo.de>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,6 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
 
+#include <QCollator>
+
 QList<QKeySequence> KScreenSaverSettings::defaultShortcuts()
 {
     return {
@@ -39,10 +42,49 @@ QString KScreenSaverSettings::defaultWallpaperPlugin()
     return QStringLiteral("org.kde.image");
 }
 
+
+class KScreenSaverSettingsStore : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut)
+public:
+    KScreenSaverSettingsStore(KScreenSaverSettings *parent)
+        : QObject(parent)
+        , m_actionCollection(new KActionCollection(this, QStringLiteral("ksmserver")))
+        , m_lockAction(nullptr)
+    {
+        m_actionCollection->setConfigGlobal(true);
+        m_actionCollection->setComponentDisplayName(i18n("Session Management"));
+        m_lockAction = m_actionCollection->addAction(QStringLiteral("Lock Session"));
+        m_lockAction->setProperty("isConfigurationAction", true);
+        m_lockAction->setText(i18n("Lock Session"));
+        KGlobalAccel::self()->setShortcut(m_lockAction, parent->defaultShortcuts());
+    }
+
+    QKeySequence shortcut() const 
+    {
+        const QList<QKeySequence> shortcuts = KGlobalAccel::self()->shortcut(m_lockAction);
+        if (shortcuts.count() > 0) {
+            return shortcuts.first();
+        }
+        return QKeySequence();
+    }
+    void  setShortcut(const QKeySequence &sequence) const {
+        auto shortcuts = KGlobalAccel::self()->shortcut(m_lockAction);
+        if (shortcuts.isEmpty()) {
+            shortcuts << QKeySequence();
+        }
+        shortcuts[0] = sequence;
+        KGlobalAccel::self()->setShortcut(m_lockAction, shortcuts, KGlobalAccel::NoAutoloading);
+    }
+private:
+    KActionCollection *m_actionCollection;
+    QAction *m_lockAction;
+};
+
+
 KScreenSaverSettings::KScreenSaverSettings(QObject *parent)
     : KScreenSaverSettingsBase()
-    , m_actionCollection(new KActionCollection(this, QStringLiteral("ksmserver")))
-    , m_lockAction(nullptr)
+    , m_store(new KScreenSaverSettingsStore(this))
 {
     setParent(parent);
 
@@ -50,73 +92,34 @@ KScreenSaverSettings::KScreenSaverSettings(QObject *parent)
     for (auto &package : wallpaperPackages) {
          m_availableWallpaperPlugins.append({package.name(), package.pluginId()});
     }
+    QCollator collator;
+    collator.setCaseSensitivity(Qt::CaseInsensitive);
+    std::sort(m_availableWallpaperPlugins.begin(), m_availableWallpaperPlugins.end(),
+              [] (const WallpaperInfo &w1, const WallpaperInfo &w2) {return w1.name < w2.name;});
 
-    m_actionCollection->setConfigGlobal(true);
-    m_actionCollection->setComponentDisplayName(i18n("Session Management"));
-    m_lockAction = m_actionCollection->addAction(QStringLiteral("Lock Session"));
-    m_lockAction->setProperty("isConfigurationAction", true);
-    m_lockAction->setText(i18n("Lock Session"));
-    KGlobalAccel::self()->setShortcut(m_lockAction, defaultShortcuts());
-
-    addItem(new KPropertySkeletonItem(this, "shortcut", defaultShortcuts().first()), QStringLiteral("lockscreenShortcut"));
-    addItem(new KPropertySkeletonItem(this, "wallpaperPluginIndex", indexFromWallpaperPluginId(defaultWallpaperPlugin())),
-            QStringLiteral("wallpaperPluginIndex"));
+    auto shortcutItem = new KPropertySkeletonItem(m_store, "shortcut", defaultShortcuts().first());
+    addItem(shortcutItem, QStringLiteral("shortcut"));
+    shortcutItem->setNotifyFunction([this]{emit shortcutChanged();});
 }
 
 KScreenSaverSettings::~KScreenSaverSettings()
 {
 }
 
-QVector<KScreenSaverSettings::WallpaperInfo> KScreenSaverSettings::availableWallpaperPlugins() const
+QVector<WallpaperInfo> KScreenSaverSettings::availableWallpaperPlugins() const
 {
     return m_availableWallpaperPlugins;
 }
 
-int KScreenSaverSettings::wallpaperPluginIndex() const
-{
-    return indexFromWallpaperPluginId(wallpaperPluginId());
-}
-
-void KScreenSaverSettings::setWallpaperPluginIndex(int index)
-{
-    Q_ASSERT(index >=0 && index < m_availableWallpaperPlugins.size());
-    setWallpaperPluginId(m_availableWallpaperPlugins[index].id);
-
-    // We get in this function during save, but wallpaperPluginId might
-    // have been written already, since we're tempering with its value here
-    // we make sure it really reaches the config object.
-    findItem(QStringLiteral("wallpaperPluginId"))->writeConfig(config());
-}
-
 QKeySequence KScreenSaverSettings::shortcut() const
 {
-    const QList<QKeySequence> shortcuts = KGlobalAccel::self()->shortcut(m_lockAction);
-    if (shortcuts.count() > 0) {
-        return shortcuts.first();
-    }
-    return QKeySequence();
+    return findItem(QStringLiteral("shortcut"))->property().value<QKeySequence>();
 }
 
 void KScreenSaverSettings::setShortcut(const QKeySequence &sequence)
 {
-    auto shortcuts = KGlobalAccel::self()->shortcut(m_lockAction);
-    if (shortcuts.isEmpty()) {
-        shortcuts << QKeySequence();
-    }
-
-    shortcuts[0] = sequence;
-    KGlobalAccel::self()->setShortcut(m_lockAction, shortcuts, KGlobalAccel::NoAutoloading);
+    findItem(QStringLiteral("shortcut"))->setProperty(sequence);
 }
 
-int KScreenSaverSettings::indexFromWallpaperPluginId(const QString &id) const
-{
-    const auto it = std::find_if(m_availableWallpaperPlugins.cbegin(), m_availableWallpaperPlugins.cend(),
-                                 [id] (const WallpaperInfo &info) { return info.id == id; });
-    if (it != m_availableWallpaperPlugins.cend()) {
-        return it - m_availableWallpaperPlugins.cbegin();
-    } else if (id != defaultWallpaperPlugin()) {
-        return indexFromWallpaperPluginId(defaultWallpaperPlugin());
-    } else {
-        return -1;
-    }
-}
+
+#include "kscreensaversettings.moc"

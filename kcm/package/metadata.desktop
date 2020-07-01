@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Screen Locking
+
+Comment=Configure screen locking
+
+Icon=preferences-desktop-keyboard-shortcut
+Type=Service
+X-KDE-PluginInfo-Author=David Redondo
+X-KDE-PluginInfo-Email=kde@david-redondo.de
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=kcm_screenlocker
+X-KDE-ServiceTypes=Plasma/Generic
+X-Plasma-API=declarativeappletscript
+
+X-Plasma-MainScript=ui/main.qml
+

@@ -4,6 +4,7 @@
 
 Copyright (C) 2014 Martin Gräßlin <mgraesslin@kde.org>
 Copyright (C) 2019 Kevin Ottens <kevin.ottens@enioka.com>
+Copyright (C) 2020 David Redondo <kde@david-redondo.de>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,79 +21,45 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "kcm.h"
 #include "kscreensaversettings.h"
-#include "ui_kcm.h"
 #include "screenlocker_interface.h"
 #include "../greeter/wallpaper_integration.h"
 #include "../greeter/lnf_integration.h"
 
-#include <config-kscreenlocker.h>
+#include <KAboutData>
 #include <KConfigLoader>
-#include <KConfigDialogManager>
+#include <KDeclarative/ConfigPropertyMap>
 #include <KGlobalAccel>
-#include <KCModule>
+#include <KLocalizedString>
 #include <KPluginFactory>
-#include <QVBoxLayout>
-#include <QMessageBox>
 
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
 
-#include <QQmlContext>
-#include <QQuickItem>
+#include <QVector>
 
-class ScreenLockerKcmForm : public QWidget, public Ui::ScreenLockerKcmForm
-{
-    Q_OBJECT
-public:
-    explicit ScreenLockerKcmForm(QWidget *parent);
-};
-
-ScreenLockerKcmForm::ScreenLockerKcmForm(QWidget *parent)
-    : QWidget(parent)
-{
-    setupUi(this);
-    layout()->setContentsMargins(0, 0, 0, 0);
-    kcfg_Timeout->setSuffix(ki18ncp("Spinbox suffix"," minute"," minutes"));
-
-    kcfg_LockGrace->setSuffix(ki18ncp("Spinbox suffix"," second"," seconds"));
-}
-
-
-
-ScreenLockerKcm::ScreenLockerKcm(QWidget *parent, const QVariantList &args)
-    : KCModule(parent, args)
+ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
+    : KQuickAddons::ManagedConfigModule(parent, args)
     , m_settings(new KScreenSaverSettings(this))
-    , m_ui(new ScreenLockerKcmForm(this))
 {
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(m_ui);
-    for (const auto &pluginInfo : m_settings->availableWallpaperPlugins()) {
-        m_ui->kcfg_wallpaperPluginIndex->addItem(pluginInfo.name, pluginInfo.id);
-    }
-    connect(m_ui->kcfg_wallpaperPluginIndex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &ScreenLockerKcm::loadWallpaperConfig);
-    m_ui->kcfg_wallpaperPluginIndex->installEventFilter(this);
-    m_ui->installEventFilter(this);
-
-    auto proxy = new ScreenLockerProxy(this);
-
-    m_ui->wallpaperConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
-    m_ui->wallpaperConfigWidget->rootContext()->setContextProperty(QStringLiteral("configDialog"), proxy);
-    m_ui->wallpaperConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/wallpaperconfig.qml")));
-    connect(m_ui->wallpaperConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(updateState()));
-
-    m_ui->lnfConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
-    m_ui->lnfConfigWidget->rootContext()->setContextProperty(QStringLiteral("configDialog"), proxy);
-    m_ui->lnfConfigWidget->setSource(QUrl(QStringLiteral("qrc:/kscreenlocker-kcm-resources/lnfconfig.qml")));
-    connect(m_ui->lnfConfigWidget->rootObject(), SIGNAL(configurationChanged()), this, SLOT(updateState()));
-
-    addConfig(m_settings, m_ui);
+    constexpr const char* url = "org.kde.private.kcms.screenlocker";
+    qRegisterMetaType<QVector<WallpaperInfo>>("QVector<WallpaperInfo>");
+    qmlRegisterAnonymousType<KScreenSaverSettings>(url, 1);
+    qmlRegisterAnonymousType<WallpaperInfo>(url, 1);
+    qmlRegisterAnonymousType<ScreenLocker::WallpaperIntegration>(url, 1);
+    qmlRegisterAnonymousType<KDeclarative::ConfigPropertyMap>(url, 1);
+    qmlProtectModule(url, 1);
+    KAboutData *about = new KAboutData(QStringLiteral("kcm_screenlocker"), i18n("Screen Locking"),
+                                       QStringLiteral("1.0"), QString(), KAboutLicense::GPL);
+    about->addAuthor(i18n("Martin Gräßlin"), QString(), QStringLiteral("mgraesslin@kde.org"));
+    about->addAuthor(i18n("Kevin Ottens"), QString(), QStringLiteral("kevin.ottens@enioka.com"));
+    setAboutData(about);
+    connect(m_settings, &KScreenSaverSettings::wallpaperPluginIdChanged, this, &ScreenLockerKcm::loadWallpaperConfig);
 }
+
 
 void ScreenLockerKcm::load()
 {
-    KCModule::load();
-
+    ManagedConfigModule::load();
     loadWallpaperConfig();
     loadLnfConfig();
 
@@ -111,7 +78,7 @@ void ScreenLockerKcm::load()
 
 void ScreenLockerKcm::save()
 {
-    KCModule::save();
+    ManagedConfigModule::save();
     if (m_lnfSettings) {
         m_lnfSettings->save();
     }
@@ -133,7 +100,7 @@ void ScreenLockerKcm::save()
 
 void ScreenLockerKcm::defaults()
 {
-    KCModule::defaults();
+    ManagedConfigModule::defaults();
 
     if (m_lnfSettings) {
         m_lnfSettings->setDefaults();
@@ -162,30 +129,27 @@ void ScreenLockerKcm::updateState()
         isDefaults &= m_wallpaperSettings->isDefaults();
         isSaveNeeded |= m_wallpaperSettings->isSaveNeeded();
     }
-
-    emit changed(isSaveNeeded);
-    emit defaulted(isDefaults);
+    setNeedsSave(isSaveNeeded);
+    setRepresentsDefaults(isDefaults);
 }
 
 void ScreenLockerKcm::loadWallpaperConfig()
 {
     if (m_wallpaperIntegration) {
-        if (m_wallpaperIntegration->pluginName() == m_ui->kcfg_wallpaperPluginIndex->currentData().toString()) {
-            // nothing changed
+        if (m_wallpaperIntegration->pluginName() == m_settings->wallpaperPluginId()) {
+            //nothing changed
             return;
         }
         delete m_wallpaperIntegration;
     }
-    emit currentWallpaperChanged();
 
     m_wallpaperIntegration = new ScreenLocker::WallpaperIntegration(this);
     m_wallpaperIntegration->setConfig(m_settings->sharedConfig());
-    m_wallpaperIntegration->setPluginName(m_ui->kcfg_wallpaperPluginIndex->currentData().toString());
+    m_wallpaperIntegration->setPluginName(m_settings->wallpaperPluginId());
     m_wallpaperIntegration->init();
     m_wallpaperSettings = m_wallpaperIntegration->configScheme();
-    m_ui->wallpaperConfigWidget->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);
-    emit wallpaperConfigurationChanged();
-    m_ui->wallpaperConfigWidget->rootObject()->setProperty("sourceFile", m_wallpaperIntegration->package().filePath(QByteArrayLiteral("ui"), QStringLiteral("config.qml")));
+    m_wallpaperConfigFile = m_wallpaperIntegration->package().fileUrl(QByteArrayLiteral("ui"), QStringLiteral("config.qml"));
+    emit currentWallpaperChanged();
 }
 
 void ScreenLockerKcm::loadLnfConfig()
@@ -210,11 +174,7 @@ void ScreenLockerKcm::loadLnfConfig()
     m_lnfSettings = m_lnfIntegration->configScheme();
 
     auto sourceFile = m_package.fileUrl(QByteArrayLiteral("lockscreen"), QStringLiteral("config.qml"));
-    if (sourceFile.isEmpty()) {
-        m_ui->lnfConfigWidget->hide();
-        return;
-    }
-    m_ui->lnfConfigWidget->rootObject()->setProperty("sourceFile", sourceFile);
+    m_lnfConfigFile = sourceFile;
 }
 
 KDeclarative::ConfigPropertyMap * ScreenLockerKcm::wallpaperConfiguration() const
@@ -236,33 +196,10 @@ KDeclarative::ConfigPropertyMap * ScreenLockerKcm::lnfConfiguration() const
 
 QString ScreenLockerKcm::currentWallpaper() const
 {
-    return m_ui->kcfg_wallpaperPluginIndex->currentData().toString();
+    return m_settings->wallpaperPluginId();
 }
 
-bool ScreenLockerKcm::eventFilter(QObject *watched, QEvent *event)
-{
-    if (watched == m_ui) {
-        if (event->type() == QEvent::PaletteChange) {
-            m_ui->wallpaperConfigWidget->setClearColor(m_ui->palette().color(QPalette::Active, QPalette::Window));
-        }
-        return false;
-    }
-    if (watched != m_ui->kcfg_wallpaperPluginIndex) {
-        return false;
-    }
-    if (event->type() == QEvent::Move) {
-        if (auto object = m_ui->wallpaperConfigWidget->rootObject()) {
-            // QtQuick Layouts have a hardcoded 5 px spacing by default
-            object->setProperty("formAlignment", m_ui->kcfg_wallpaperPluginIndex->x() + 5);
-        }
-        if (auto object = m_ui->lnfConfigWidget->rootObject()) {
-            // QtQuick Layouts have a hardcoded 5 px spacing by default
-            object->setProperty("formAlignment", m_ui->kcfg_wallpaperPluginIndex->x() + 5);
-        }
 
-    }
-    return false;
-}
 
 K_PLUGIN_CLASS_WITH_JSON(ScreenLockerKcm, "screenlocker.json")
 
