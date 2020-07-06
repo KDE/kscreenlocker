@@ -1,2 +1,2 @@
 #!bin/sh
-$XGETTEXT `find . -name "*.cpp" -o -name "*.qml"` -o $podir/screenlocker_kcm.pot
+$XGETTEXT `find . -name "*.cpp" -o -name "*.qml"` -o $podir/kcm_screenlocker.pot
