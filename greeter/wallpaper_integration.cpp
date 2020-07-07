@@ -50,6 +50,9 @@ void WallpaperIntegration::init()
     if (auto config = configScheme()) {
         m_configuration = new KDeclarative::ConfigPropertyMap(config, this);
         m_configuration->setAutosave(false);
+        // potd (picture of the day) is using a kded to monitor changes and
+        // cache data for the lockscreen. Let's notify it.
+        m_configuration->setNotify(true);
     }
 }
 
