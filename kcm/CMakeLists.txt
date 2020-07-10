@@ -15,6 +15,8 @@ qt5_add_dbus_interface(screenlocker_kcm_SRCS ../dbus/org.kde.screensaver.xml scr
 
 add_library(kcm_screenlocker MODULE ${screenlocker_kcm_SRCS})
 
+add_dependencies(kscreenlocker_greet KScreenLocker)
+
 target_link_libraries(kcm_screenlocker
     Qt5::DBus
     KF5::Declarative
