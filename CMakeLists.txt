@@ -149,6 +149,7 @@ include(ECMQtDeclareLoggingCategory)
 add_subdirectory(kcheckpass)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
+add_subdirectory(settings)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kscreenlocker\")
 
@@ -167,7 +168,6 @@ set(ksld_SRCS
    waylandserver.cpp
    powermanagement.cpp
    powermanagement_inhibition.cpp
-   kscreensaversettings.cpp
 )
 
 ecm_qt_declare_logging_category(ksld_SRCS
@@ -183,7 +183,6 @@ ecm_qt_declare_logging_category(ksld_SRCS
 
 qt5_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
 qt5_add_dbus_adaptor(ksld_SRCS ${kscreensaver_dbusXML} interface.h ScreenLocker::Interface kscreensaveradaptor KScreenSaverAdaptor)
-kconfig_add_kcfg_files(ksld_SRCS GENERATE_MOC kcfg/kscreensaversettingsbase.kcfgc)
 qt5_add_dbus_interface(ksld_SRCS ${powerdevilpolicyagent_xml} powerdevilpolicyagent)
 
 ecm_add_wayland_server_protocol(ksld_SRCS
@@ -198,6 +197,7 @@ PUBLIC
    Qt5::Core
    Qt5::X11Extras
 PRIVATE
+   settings
    Qt5::DBus
    KF5::I18n
    KF5::IdleTime

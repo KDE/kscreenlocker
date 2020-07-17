@@ -22,8 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "kcm.h"
 #include "kscreensaversettings.h"
 #include "screenlocker_interface.h"
-#include "../greeter/wallpaper_integration.h"
-#include "../greeter/lnf_integration.h"
+#include "wallpaper_integration.h"
+#include "lnf_integration.h"
 
 #include <KAboutData>
 #include <KConfigLoader>

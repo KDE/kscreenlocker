@@ -12,8 +12,6 @@ set(kscreenlocker_greet_SRCS
    greeterapp.cpp
    main.cpp
    noaccessnetworkaccessmanagerfactory.cpp
-   lnf_integration.cpp
-   wallpaper_integration.cpp
    kwinglplatform.cpp
 )
 
@@ -33,7 +31,7 @@ ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
 )
 
 qt5_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
-kconfig_add_kcfg_files(kscreenlocker_greet_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/../kcfg/kscreensaversettingsbase.kcfgc)
+
 
 ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
     PROTOCOL ../protocols/ksld.xml
@@ -43,6 +41,7 @@ ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
 target_link_libraries(kscreenlocker_greet
+                        settings
                         KF5::Package
                         KF5::Crash
                         KF5::I18n
@@ -60,8 +59,6 @@ target_link_libraries(kscreenlocker_greet
 if(HAVE_SECCOMP)
     target_link_libraries(kscreenlocker_greet Qt5::DBus Seccomp::Seccomp)
 endif()
-
-add_dependencies(kscreenlocker_greet KScreenLocker)
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 
