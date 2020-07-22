@@ -43,7 +43,15 @@ public:
 
     bool isInhibited() const;
 
+    /**
+     * Notify logind of our current state
+     */
+    void setLocked(bool locked);
+
 Q_SIGNALS:
+    /**
+     * signalled when logind asks us to lock
+     */
     void requestLock();
     void requestUnlock();
     void connectedChanged();
@@ -68,6 +76,7 @@ private:
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
     const QString *m_service;
     const QString *m_path;
+    QString m_sessionPath;
     const QString *m_managerInterface;
     const QString *m_sessionInterface;
 };

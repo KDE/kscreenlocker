@@ -318,6 +318,7 @@ void KSldApp::initialize()
     connect(this, &KSldApp::locked, this,
         [this]() {
             m_logind->uninhibit();
+            m_logind->setLocked(true);
             if (m_lockGrace > 0 && m_inGraceTime) {
                 m_graceTimer->start(m_lockGrace);
             }
@@ -325,6 +326,7 @@ void KSldApp::initialize()
     );
     connect(this, &KSldApp::unlocked, this,
         [this]() {
+            m_logind->setLocked(false);
             if (KScreenSaverSettings::lockOnResume()) {
                 m_logind->inhibit();
             }

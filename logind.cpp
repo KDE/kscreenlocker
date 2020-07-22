@@ -56,6 +56,7 @@ LogindIntegration::LogindIntegration(const QDBusConnection &connection, QObject 
     connect(m_logindServiceWatcher, &QDBusServiceWatcher::serviceUnregistered, this,
         [this]() {
             m_connected = false;
+            m_sessionPath = QString();
             emit connectedChanged();
         }
     );
@@ -149,19 +150,19 @@ void LogindIntegration::commonServiceRegistered(QDBusPendingCallWatcher *watcher
                                        << reply.error().message();
                 return;
             }
-            const QString sessionPath = reply.value().path();
-            qCDebug(KSCREENLOCKER) << "Session path:" << sessionPath;
+            m_sessionPath = reply.value().path();
+            qCDebug(KSCREENLOCKER) << "Session path:" << m_sessionPath;
 
             // connections need to be done this way as the object exposes both method and signal
             // with name "Lock"/"Unlock". Qt is not able to automatically handle this.
             m_bus.connect(*m_service,
-                          sessionPath,
+                          m_sessionPath,
                           *m_sessionInterface,
                           QStringLiteral("Lock"),
                           this,
                           SIGNAL(requestLock()));
             m_bus.connect(*m_service,
-                          sessionPath,
+                          m_sessionPath,
                           *m_sessionInterface,
                           QStringLiteral("Unlock"),
                           this,
@@ -225,3 +226,18 @@ bool LogindIntegration::isInhibited() const
 {
     return m_inhibitFileDescriptor.isValid();
 }
+
+void LogindIntegration::setLocked(bool locked)
+{
+    if (!m_connected || m_sessionPath.isEmpty()) {
+        return;
+    }
+
+    QDBusMessage message = QDBusMessage::createMethodCall(*m_service,
+                                                          m_sessionPath,
+                                                          *m_sessionInterface,
+                                                          QStringLiteral("SetLockedHint"));
+    message.setArguments({locked});
+    m_bus.call(message, QDBus::NoBlock);
+}
+
