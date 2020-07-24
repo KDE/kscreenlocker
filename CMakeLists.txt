@@ -112,15 +112,6 @@ add_feature_info("Unlock broken screenlocker"
 
 option(PAM_REQUIRED "Require building with PAM" ON)
 
-find_package(Seccomp)
-set_package_properties(Seccomp PROPERTIES
-    TYPE
-        OPTIONAL
-    PURPOSE
-        "Used for putting the look'n'feel package in the greeter into a sandbox."
-)
-set(HAVE_SECCOMP ${Seccomp_FOUND})
-
 include(ConfigureChecks.cmake)
 
 configure_file(config-workspace.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-workspace.h)

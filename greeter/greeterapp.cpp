@@ -74,11 +74,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 #include <xcb/xcb.h>
 
-#if HAVE_SECCOMP
-#include <sys/stat.h>
-#include <unistd.h>
-#endif
-
 // this is usable to fake a "screensaver" installation for testing
 // *must* be "0" for every public commit!
 #define TEST_SCREENSAVER 0
@@ -162,14 +157,6 @@ UnlockApp::~UnlockApp()
 
 Authenticator *UnlockApp::createAuthenticator()
 {
-#if HAVE_SECCOMP
-    struct stat buf;
-    stat(KCHECKPASS_BIN, &buf);
-    if (!(buf.st_mode & S_ISUID)) {
-        m_supportsSeccomp = true;
-        return new Authenticator(AuthenticationMode::Delayed, this);
-    }
-#endif
     return new Authenticator(AuthenticationMode::Direct, this);
 }
 

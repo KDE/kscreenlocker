@@ -12,12 +12,7 @@ set(kscreenlocker_greet_SRCS
    greeterapp.cpp
    main.cpp
    noaccessnetworkaccessmanagerfactory.cpp
-   kwinglplatform.cpp
 )
-
-if(HAVE_SECCOMP)
-    set(kscreenlocker_greet_SRCS ${kscreenlocker_greet_SRCS} seccomp_filter.cpp)
-endif()
 
 ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
     HEADER
@@ -56,9 +51,6 @@ target_link_libraries(kscreenlocker_greet
                         KF5::WaylandClient
                         Wayland::Client
                         )
-if(HAVE_SECCOMP)
-    target_link_libraries(kscreenlocker_greet Qt5::DBus Seccomp::Seccomp)
-endif()
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 

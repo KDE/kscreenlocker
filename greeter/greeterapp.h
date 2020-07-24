@@ -66,10 +66,6 @@ public:
     void updateCanSuspend(bool set);
     void updateCanHibernate(bool set);
 
-    bool supportsSeccomp() const {
-        return m_supportsSeccomp;
-    }
-
 public Q_SLOTS:
     void desktopResized();
 
@@ -119,8 +115,6 @@ private:
     KWayland::Client::PlasmaShell *m_plasmaShell = nullptr;
     WallpaperIntegration *m_wallpaperIntegration;
     LnFIntegration *m_lnfIntegration;
-
-    bool m_supportsSeccomp = false;
 };
 } // namespace
 

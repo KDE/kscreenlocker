@@ -39,9 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <unistd.h>
 #include <sys/procctl.h>
 #endif
-#if HAVE_SECCOMP
-#include "seccomp_filter.h"
-#endif
 
 static void signalHandler(int signum)
 {
@@ -183,13 +180,6 @@ int main(int argc, char* argv[])
             app.setKsldSocket(fd);
         }
     }
-
-    // init the sandbox
-#if HAVE_SECCOMP
-    if (app.supportsSeccomp()) {
-        ScreenLocker::SecComp::init();
-    }
-#endif
 
     app.desktopResized();
 
