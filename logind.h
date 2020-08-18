@@ -43,6 +43,8 @@ public:
 
     bool isInhibited() const;
 
+    void setLockedHint(bool lockedHint);
+
 Q_SIGNALS:
     void requestLock();
     void requestUnlock();
@@ -70,6 +72,7 @@ private:
     const QString *m_path;
     const QString *m_managerInterface;
     const QString *m_sessionInterface;
+    QString m_sessionPath;
 };
 
 #endif

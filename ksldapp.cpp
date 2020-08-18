@@ -419,6 +419,8 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 
     m_lockState = AcquiringLock;
 
+    m_logind->setLockedHint(true);
+
     setForceSoftwareRendering(false);
     // start unlock screen process
     startLockProcess(establishLock);
@@ -573,6 +575,9 @@ void KSldApp::doUnlock()
                          nullptr,
                          KNotification::CloseOnTimeout,
                          QStringLiteral("ksmserver"));
+
+    m_logind->setLockedHint(false);
+
     emit unlocked();
     emit lockStateChanged();
 }

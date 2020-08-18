@@ -150,6 +150,7 @@ void LogindIntegration::commonServiceRegistered(QDBusPendingCallWatcher *watcher
                 return;
             }
             const QString sessionPath = reply.value().path();
+            m_sessionPath = sessionPath;
             qCDebug(KSCREENLOCKER) << "Session path:" << sessionPath;
 
             // connections need to be done this way as the object exposes both method and signal
@@ -224,4 +225,14 @@ void LogindIntegration::uninhibit()
 bool LogindIntegration::isInhibited() const
 {
     return m_inhibitFileDescriptor.isValid();
+}
+
+void LogindIntegration::setLockedHint(bool lockedHint)
+{
+    QDBusMessage message = QDBusMessage::createMethodCall(*m_service,
+                                                          m_sessionPath,
+                                                          *m_sessionInterface,
+                                                          QStringLiteral("SetLockedHint"));
+    message.setArguments({lockedHint});
+    m_bus.asyncCall(message);
 }
