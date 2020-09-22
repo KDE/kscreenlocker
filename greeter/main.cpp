@@ -79,12 +79,6 @@ int main(int argc, char* argv[])
 
     KLocalizedString::setApplicationDomain("kscreenlocker_greet");
 
-    // explicitly disable input methods as it makes it impossible to unlock, see BUG 306932
-    // but explicitly set on screen keyboard such as maliit is allowed
-    if (!qEnvironmentVariableIsSet("QT_IM_MODULE") || (qEnvironmentVariableIsSet("QT_IM_MODULE") && qgetenv("QT_IM_MODULE") != QByteArrayLiteral("maliit"))) {
-        qputenv("QT_IM_MODULE", QByteArrayLiteral("qtvirtualkeyboard"));
-    }
-
     // Suppresses modal warnings about unwritable configuration files which may render the system inaccessible
     qputenv("KDE_HOME_READONLY", "1");
 
