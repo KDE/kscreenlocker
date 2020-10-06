@@ -39,7 +39,7 @@ QtControls.StackView {
                 props["cfg_" + key] = wallpaperConfig[key]
             }
 
-            var newItem = push(sourceFile, props, QtControls.StackView.ReplaceTransition)
+            var newItem = replace(sourceFile, props, QtControls.StackView.ReplaceTransition)
 
             wallpaperConfig.valueChanged.connect(function(key, value) {
                 if (newItem["cfg_" + key] !== undefined) {
@@ -62,7 +62,7 @@ QtControls.StackView {
             }
         }
         else {
-            push(empty)
+            replace(empty)
          }
     }
     Component {
