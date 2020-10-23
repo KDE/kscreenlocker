@@ -39,7 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUser>
 //Plasma
 #include <KPackage/Package>
-#include <KPackage/PackageStructure>
 #include <KPackage/PackageLoader>
 // KWayland
 #include <KWayland/Client/connection_thread.h>

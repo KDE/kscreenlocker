@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "x11locker.h"
 #include "globalaccel.h"
-#include "abstractlocker.h"
 // KDE
 // Qt
 #include <QApplication>
@@ -31,7 +30,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QX11Info>
 // X11
 #include <X11/Xatom.h>
-#include <fixx11h.h>
 #include <xcb/xcb.h>
 
 #include <kscreenlocker_logging.h>

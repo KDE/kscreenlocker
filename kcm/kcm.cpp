@@ -20,7 +20,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "kcm.h"
-#include "kscreensaversettings.h"
 #include "screenlocker_interface.h"
 #include "wallpaper_integration.h"
 #include "lnf_integration.h"
@@ -32,7 +31,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 #include <KPluginFactory>
 
-#include <KPackage/Package>
 #include <KPackage/PackageLoader>
 
 #include <QVector>
