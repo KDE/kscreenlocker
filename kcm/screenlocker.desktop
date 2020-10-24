@@ -2,7 +2,6 @@
 Type=Service
 X-KDE-ServiceTypes=KCModule
 Icon=preferences-desktop-user-password
-Exec=kcmshell5 kcm_screenlocker
 X-KDE-Library=kcm_screenlocker
 X-KDE-ParentApp=kcontrol
 X-DocPath=kcontrol/screenlocker/index.html
