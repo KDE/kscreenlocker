@@ -47,6 +47,7 @@ public:
      * Notify logind of our current state
      */
     void setLocked(bool locked);
+    bool isLocked() const;
 
 Q_SIGNALS:
     /**

@@ -308,10 +308,15 @@ void KSldApp::initialize()
             }
         }
     );
-    connect(m_logind, &LogindIntegration::connectedChanged, this,
-        [this]() {
-            if (m_logind->isConnected() && m_lockState == ScreenLocker::KSldApp::Unlocked && KScreenSaverSettings::lockOnResume()) {
+    connect(m_logind, &LogindIntegration::connectedChanged, this, [this]() {
+            if (!m_logind->isConnected()) {
+                return;
+            }
+            if (m_lockState == ScreenLocker::KSldApp::Unlocked && KScreenSaverSettings::lockOnResume()) {
                 m_logind->inhibit();
+            }
+            if (m_logind->isLocked()) {
+                lock(EstablishLock::Immediate);
             }
         }
     );
@@ -347,6 +352,10 @@ void KSldApp::initialize()
                                           this, SLOT(solidSuspend()));
 
     configure();
+
+    if (m_logind->isLocked()) {
+        lock(EstablishLock::Immediate);
+    }
 }
 
 void KSldApp::configure()

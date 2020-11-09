@@ -37,6 +37,8 @@ const static QString s_consolekitPath = QStringLiteral("/org/freedesktop/Console
 const static QString s_consolekitManagerInterface = QStringLiteral("org.freedesktop.ConsoleKit.Manager");
 const static QString s_consolekitSessionInterface = QStringLiteral("org.freedesktop.ConsoleKit.Session");
 
+const static QString s_propertyInterface = QStringLiteral("org.freedesktop.DBus.Properties");
+
 LogindIntegration::LogindIntegration(const QDBusConnection &connection, QObject *parent)
     : QObject(parent)
     , m_bus(connection)
@@ -240,3 +242,19 @@ void LogindIntegration::setLocked(bool locked)
     m_bus.call(message, QDBus::NoBlock);
 }
 
+bool LogindIntegration::isLocked() const
+{
+    if (!m_connected || m_sessionPath.isEmpty()) {
+        return false;
+    }
+
+    QDBusMessage message = QDBusMessage::createMethodCall(*m_service, m_sessionPath, s_propertyInterface,
+                                                          QStringLiteral("Get"));
+    message.setArguments({*m_sessionInterface, QStringLiteral("LockedHint")});
+    QDBusReply<QDBusVariant> reply = m_bus.call(message);
+    if (reply.isValid()) {
+        return reply.value().variant().toBool();
+    }
+    qCDebug(KSCREENLOCKER()) << reply.error();
+    return false;
+}
