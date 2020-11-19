@@ -120,7 +120,8 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_lnfIntegration(new LnFIntegration(this))
 {
     m_authenticator = createAuthenticator();
-    connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit);
+    // It's a queued connection to give the QML part time to eventually execute code connected to Authenticator::succeeded if any
+    connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit, Qt::QueuedConnection);
     initialize();
     connect(this, &UnlockApp::screenAdded, this, &UnlockApp::desktopResized);
     connect(this, &UnlockApp::screenRemoved, this, &UnlockApp::desktopResized);
