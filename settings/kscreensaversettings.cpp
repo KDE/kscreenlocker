@@ -31,8 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 QList<QKeySequence> KScreenSaverSettings::defaultShortcuts()
 {
     return {
-        Qt::META + Qt::Key_L,
-        Qt::ALT + Qt::CTRL + Qt::Key_L,
+        Qt::META | Qt::Key_L,
+        Qt::ALT | Qt::CTRL | Qt::Key_L,
         Qt::Key_ScreenSaver
     };
 }
