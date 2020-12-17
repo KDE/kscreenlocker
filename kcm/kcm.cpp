@@ -23,6 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "screenlocker_interface.h"
 #include "wallpaper_integration.h"
 #include "lnf_integration.h"
+#include "kscreenlockerdata.h"
+#include "appearancesettings.h"
 
 #include <KAboutData>
 #include <KConfigLoader>
@@ -35,10 +37,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QVector>
 
+K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory, "screenlocker.json", registerPlugin<ScreenLockerKcm>(); registerPlugin<KScreenLockerData>();)
+
 ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
     : KQuickAddons::ManagedConfigModule(parent, args)
-    , m_settings(new KScreenSaverSettings(this))
+    , m_appearanceSettings(new AppearanceSettings(this))
 {
+    registerSettings(&KScreenSaverSettings::getInstance());
+
     constexpr const char* url = "org.kde.private.kcms.screenlocker";
     qRegisterMetaType<QVector<WallpaperInfo>>("QVector<WallpaperInfo>");
     qmlRegisterAnonymousType<KScreenSaverSettings>(url, 1);
@@ -51,25 +57,14 @@ ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
     about->addAuthor(i18n("Martin Gräßlin"), QString(), QStringLiteral("mgraesslin@kde.org"));
     about->addAuthor(i18n("Kevin Ottens"), QString(), QStringLiteral("kevin.ottens@enioka.com"));
     setAboutData(about);
-    connect(m_settings, &KScreenSaverSettings::wallpaperPluginIdChanged, this, &ScreenLockerKcm::loadWallpaperConfig);
+    connect(&KScreenSaverSettings::getInstance(), &KScreenSaverSettings::wallpaperPluginIdChanged, m_appearanceSettings, &AppearanceSettings::loadWallpaperConfig);
+    connect(m_appearanceSettings, &AppearanceSettings::currentWallpaperChanged, this, &ScreenLockerKcm::currentWallpaperChanged);
 }
-
 
 void ScreenLockerKcm::load()
 {
     ManagedConfigModule::load();
-    loadWallpaperConfig();
-    loadLnfConfig();
-
-    if (m_lnfSettings) {
-        m_lnfSettings->load();
-        emit m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
-    }
-
-    if (m_wallpaperSettings) {
-        m_wallpaperSettings->load();
-        emit m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
-    }
+    m_appearanceSettings->load();
 
     updateState();
 }
@@ -77,13 +72,7 @@ void ScreenLockerKcm::load()
 void ScreenLockerKcm::save()
 {
     ManagedConfigModule::save();
-    if (m_lnfSettings) {
-        m_lnfSettings->save();
-    }
-
-    if (m_wallpaperSettings) {
-        m_wallpaperSettings->save();
-    }
+    m_appearanceSettings->save();
 
     // reconfigure through DBus
     OrgKdeScreensaverInterface interface(QStringLiteral("org.kde.screensaver"),
@@ -92,113 +81,71 @@ void ScreenLockerKcm::save()
     if (interface.isValid()) {
         interface.configure();
     }
-
     updateState();
 }
 
 void ScreenLockerKcm::defaults()
 {
     ManagedConfigModule::defaults();
-
-    if (m_lnfSettings) {
-        m_lnfSettings->setDefaults();
-        emit m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
-    }
-
-    if (m_wallpaperSettings) {
-        m_wallpaperSettings->setDefaults();
-        emit m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
-    }
+    m_appearanceSettings->defaults();
 
     updateState();
 }
 
 void ScreenLockerKcm::updateState()
 {
-    bool isDefaults = m_settings->isDefaults();
-    bool isSaveNeeded = m_settings->isSaveNeeded();
-
-    if (m_lnfSettings) {
-        isDefaults &= m_lnfSettings->isDefaults();
-        isSaveNeeded |= m_lnfSettings->isSaveNeeded();
-    }
-
-    if (m_wallpaperSettings) {
-        isDefaults &= m_wallpaperSettings->isDefaults();
-        isSaveNeeded |= m_wallpaperSettings->isSaveNeeded();
-    }
-    setNeedsSave(isSaveNeeded);
-    setRepresentsDefaults(isDefaults);
+    settingsChanged();
+    emit isDefaultsAppearanceChanged();
 }
 
-void ScreenLockerKcm::loadWallpaperConfig()
+bool ScreenLockerKcm::isSaveNeeded() const
 {
-    if (m_wallpaperIntegration) {
-        if (m_wallpaperIntegration->pluginName() == m_settings->wallpaperPluginId()) {
-            //nothing changed
-            return;
-        }
-        delete m_wallpaperIntegration;
-    }
-
-    m_wallpaperIntegration = new ScreenLocker::WallpaperIntegration(this);
-    m_wallpaperIntegration->setConfig(m_settings->sharedConfig());
-    m_wallpaperIntegration->setPluginName(m_settings->wallpaperPluginId());
-    m_wallpaperIntegration->init();
-    m_wallpaperSettings = m_wallpaperIntegration->configScheme();
-    m_wallpaperConfigFile = m_wallpaperIntegration->package().fileUrl(QByteArrayLiteral("ui"), QStringLiteral("config.qml"));
-    emit currentWallpaperChanged();
+    return m_appearanceSettings->isSaveNeeded();
 }
 
-void ScreenLockerKcm::loadLnfConfig()
+bool ScreenLockerKcm::isDefaults() const
 {
-    if (m_package.isValid() && m_lnfIntegration) {
-        return;
-    }
-
-    Q_ASSERT(!m_package.isValid() && !m_lnfIntegration);
-
-    m_package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
-    KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
-    const QString packageName = cg.readEntry("LookAndFeelPackage", QString());
-    if (!packageName.isEmpty()) {
-        m_package.setPath(packageName);
-    }
-
-    m_lnfIntegration = new ScreenLocker::LnFIntegration(this);
-    m_lnfIntegration->setPackage(m_package);
-    m_lnfIntegration->setConfig(m_settings->sharedConfig());
-    m_lnfIntegration->init();
-    m_lnfSettings = m_lnfIntegration->configScheme();
-
-    auto sourceFile = m_package.fileUrl(QByteArrayLiteral("lockscreen"), QStringLiteral("config.qml"));
-    m_lnfConfigFile = sourceFile;
+    return m_appearanceSettings->isDefaults();
 }
 
 KDeclarative::ConfigPropertyMap * ScreenLockerKcm::wallpaperConfiguration() const
 {
-    if (!m_wallpaperIntegration) {
-        return nullptr;
-    }
-    return m_wallpaperIntegration->configuration();
+    return m_appearanceSettings->wallpaperConfiguration();
 }
 
 KDeclarative::ConfigPropertyMap * ScreenLockerKcm::lnfConfiguration() const
 {
-    if (!m_lnfIntegration) {
-        return nullptr;
-    }
-    return m_lnfIntegration->configuration();
+    return m_appearanceSettings->lnfConfiguration();
 }
 
+KScreenSaverSettings *ScreenLockerKcm::settings() const
+{
+    return &KScreenSaverSettings::getInstance();
+}
 
 QString ScreenLockerKcm::currentWallpaper() const
 {
-    return m_settings->wallpaperPluginId();
+    return KScreenSaverSettings::getInstance().wallpaperPluginId();
 }
 
+bool ScreenLockerKcm::isDefaultsAppearance() const
+{
+    return m_appearanceSettings->isDefaults();
+}
 
+QUrl ScreenLockerKcm::lnfConfigFile() const
+{
+    return m_appearanceSettings->lnfConfigFile();
+}
 
-K_PLUGIN_CLASS_WITH_JSON(ScreenLockerKcm, "screenlocker.json")
+QUrl ScreenLockerKcm::wallpaperConfigFile() const
+{
+    return m_appearanceSettings->wallpaperConfigFile();
+}
+
+ScreenLocker::WallpaperIntegration *ScreenLockerKcm::wallpaperIntegration() const
+{
+    return m_appearanceSettings->wallpaperIntegration();
+}
 
 #include "kcm.moc"

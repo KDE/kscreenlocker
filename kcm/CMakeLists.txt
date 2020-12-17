@@ -3,6 +3,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"screenlocker_kcm\")
 
 set(screenlocker_kcm_SRCS
     kcm.cpp
+    kscreenlockerdata.cpp
 )
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
@@ -15,6 +16,7 @@ target_link_libraries(kcm_screenlocker
     settings
     Qt5::DBus
     KF5::Declarative
+    KF5::KCMUtils
     KF5::I18n
     KF5::GlobalAccel
     KF5::Package

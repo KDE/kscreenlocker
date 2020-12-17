@@ -3,4 +3,3 @@ ClassName=KScreenSaverSettingsBase
 Singleton=true
 Mutators=true
 GenerateProperties=true
-ParentInConstructor=true

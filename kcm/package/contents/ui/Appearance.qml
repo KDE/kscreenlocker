@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import QtQuick 2.14
 import QtQuick.Controls 2.14 as QQC2
 import QtQuick.Layouts 1.14
-import org.kde.kcm 1.1 as KCM
+import org.kde.kcm 1.5 as KCM
 import org.kde.kirigami 2.12 as Kirigami
 
 Kirigami.Page {
@@ -48,6 +48,10 @@ Kirigami.Page {
                 displayText: model[currentIndex]["name"]
                 onActivated: {
                     kcm.settings.wallpaperPluginId = model[index]["id"]
+                }
+                KCM.SettingStateBinding {
+                    configObject: kcm.settings
+                    settingName: "wallpaperPluginId"
                 }
             }
         }

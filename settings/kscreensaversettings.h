@@ -42,10 +42,11 @@ class KScreenSaverSettings : public KScreenSaverSettingsBase
     Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut NOTIFY shortcutChanged)
 public:
 
+    static KScreenSaverSettings &getInstance();
+
     static QList<QKeySequence> defaultShortcuts();
     static QString defaultWallpaperPlugin();
 
-    KScreenSaverSettings(QObject *parent = nullptr);
     ~KScreenSaverSettings() override;
 
     QVector<WallpaperInfo> availableWallpaperPlugins() const;
@@ -53,8 +54,15 @@ public:
     QKeySequence shortcut() const;
     void setShortcut(const QKeySequence &sequence);
 
+    KScreenSaverSettings(KScreenSaverSettings const&) = delete;
+    void operator=(KScreenSaverSettings const&)  = delete;
+
 Q_SIGNALS:
     void shortcutChanged();
+
+protected:
+    KScreenSaverSettings(QObject *parent = nullptr);
+
 private:
     QVector<WallpaperInfo> m_availableWallpaperPlugins;
     KScreenSaverSettingsStore *m_store;

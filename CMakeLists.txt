@@ -56,6 +56,7 @@ add_feature_info("sys/event.h"
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     Crash
                     Declarative
+                    KCMUtils
                     GlobalAccel
                     I18n
                     IdleTime

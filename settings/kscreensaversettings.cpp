@@ -81,6 +81,11 @@ private:
     QAction *m_lockAction;
 };
 
+KScreenSaverSettings &KScreenSaverSettings::getInstance()
+{
+    static KScreenSaverSettings instance;
+    return instance;
+}
 
 KScreenSaverSettings::KScreenSaverSettings(QObject *parent)
     : KScreenSaverSettingsBase()

@@ -2,6 +2,7 @@ add_library(settings STATIC
     kscreensaversettings.cpp
     lnf_integration.cpp
     wallpaper_integration.cpp
+    appearancesettings.cpp
 )
 kconfig_add_kcfg_files(settings GENERATE_MOC kscreensaversettingsbase.kcfgc)
 target_link_libraries(settings

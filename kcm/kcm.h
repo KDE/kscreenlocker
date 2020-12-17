@@ -26,8 +26,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KQuickAddons/ManagedConfigModule>
 
 #include "kscreensaversettings.h"
-class ScreenLockerKcmForm;
 
+class ScreenLockerKcmForm;
+class AppearanceSettings;
 namespace ScreenLocker
 {
 class WallpaperIntegration;
@@ -46,19 +47,25 @@ class ScreenLockerKcm : public KQuickAddons::ManagedConfigModule
 public:
     explicit ScreenLockerKcm(QObject *parent = nullptr, const QVariantList& args = QVariantList());
 
-    Q_PROPERTY(KScreenSaverSettings *settings MEMBER m_settings CONSTANT)
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap  *wallpaperConfiguration READ wallpaperConfiguration NOTIFY currentWallpaperChanged)
+    Q_PROPERTY(KScreenSaverSettings *settings READ settings CONSTANT)
+    Q_PROPERTY(KDeclarative::ConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY currentWallpaperChanged)
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *lnfConfiguration READ lnfConfiguration CONSTANT)
-    Q_PROPERTY(QUrl lnfConfigFile MEMBER m_lnfConfigFile CONSTANT)
-    Q_PROPERTY(QUrl wallpaperConfigFile MEMBER m_wallpaperConfigFile NOTIFY currentWallpaperChanged)
-    Q_PROPERTY(ScreenLocker::WallpaperIntegration *wallpaperIntegration MEMBER m_wallpaperIntegration NOTIFY currentWallpaperChanged)
+    Q_PROPERTY(QUrl lnfConfigFile READ lnfConfigFile CONSTANT)
+    Q_PROPERTY(QUrl wallpaperConfigFile READ wallpaperConfigFile NOTIFY currentWallpaperChanged)
+    Q_PROPERTY(ScreenLocker::WallpaperIntegration *wallpaperIntegration READ wallpaperIntegration NOTIFY currentWallpaperChanged)
     Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
+    Q_PROPERTY(bool isDefaultsAppearance READ isDefaultsAppearance NOTIFY isDefaultsAppearanceChanged)
 
     Q_INVOKABLE QVector<WallpaperInfo> availableWallpaperPlugins() {
-        return m_settings->availableWallpaperPlugins();
+        return KScreenSaverSettings::getInstance().availableWallpaperPlugins();
     }
 
-   QString currentWallpaper() const;
+    KScreenSaverSettings *settings() const;
+    QUrl lnfConfigFile() const;
+    QUrl wallpaperConfigFile() const;
+    ScreenLocker::WallpaperIntegration *wallpaperIntegration() const;
+    QString currentWallpaper() const;
+    bool isDefaultsAppearance() const;
 
 public Q_SLOTS:
     void load() override;
@@ -68,22 +75,17 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void currentWallpaperChanged();
+    void isDefaultsAppearanceChanged();
 
 private:
-    void loadWallpaperConfig();
-    void loadLnfConfig();
+    bool isSaveNeeded() const override;
+    bool isDefaults() const override;
 
     KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const;
     KDeclarative::ConfigPropertyMap *lnfConfiguration() const;
 
-    KPackage::Package m_package;
-    KScreenSaverSettings *m_settings;
-    ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
-    KCoreConfigSkeleton *m_wallpaperSettings = nullptr;
-    QUrl m_wallpaperConfigFile;
-    ScreenLocker::LnFIntegration* m_lnfIntegration = nullptr;
-    KCoreConfigSkeleton *m_lnfSettings = nullptr;
-    QUrl m_lnfConfigFile;
+    AppearanceSettings *m_appearanceSettings;
+    QString m_currentWallpaper;
 };
 
 #endif
