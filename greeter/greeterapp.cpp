@@ -123,7 +123,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     // It's a queued connection to give the QML part time to eventually execute code connected to Authenticator::succeeded if any
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit, Qt::QueuedConnection);
     initialize();
-    connect(this, &UnlockApp::screenAdded, this, &UnlockApp::desktopResized);
+    connect(this, &UnlockApp::screenAdded, this, &UnlockApp::onScreenAdded);
     connect(this, &UnlockApp::screenRemoved, this, &UnlockApp::desktopResized);
 
     if (QX11Info::isPlatformX11()) {
@@ -275,6 +275,44 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
     );
 }
 
+void UnlockApp::onScreenAdded(QScreen *screen)
+{
+    // Lambda connections can not have uniqueness constraints, ensure
+    // geometry change signals are only connected once
+    connect(screen, &QScreen::geometryChanged, this, [this, screen] (const QRect& geo) { screenGeometryChanged(screen, geo); });
+    desktopResized();
+}
+
+void UnlockApp::screenGeometryChanged(QScreen *screen, const QRect &geo)
+{
+    // We map screens() to m_views by index and Qt is free to
+    // reorder screens, so pointer to pointer connections
+    // may not remain matched by index, perform index
+    // mapping in the change event itself
+    const int screenIndex = QGuiApplication::screens().indexOf(screen);
+    if (screenIndex < 0) {
+        qCWarning(KSCREENLOCKER_GREET) << "Screen not found, not updating geometry" << screen;
+        return;
+    }
+    if (screenIndex >= m_views.size()) {
+        qCWarning(KSCREENLOCKER_GREET) << "Screen index out of range, not updating geometry" << screenIndex;
+        return;
+    }
+    KQuickAddons::QuickViewSharedEngine* view = m_views[screenIndex];
+    view->setGeometry(geo);
+    KWayland::Client::PlasmaShellSurface *plasmaSurface = view->property("plasmaShellSurface").value<KWayland::Client::PlasmaShellSurface *>();
+    if (plasmaSurface) {
+        plasmaSurface->setPosition(view->geometry().topLeft());
+    }
+}
+
+void UnlockApp::initialViewSetup()
+{
+    for (QScreen *screen : screens())
+        connect(screen, &QScreen::geometryChanged, this, [this, screen] (const QRect& geo) { screenGeometryChanged(screen, geo); });
+    desktopResized();
+}
+
 void UnlockApp::desktopResized()
 {
     const int nScreens = screens().count();
@@ -388,16 +426,6 @@ void UnlockApp::desktopResized()
             });
         }
 
-        connect(screen,
-                &QScreen::geometryChanged,
-                view,
-                [view, plasmaSurface](const QRect &geo)  {
-                    view->setGeometry(geo);
-                    if (plasmaSurface) {
-                        plasmaSurface->setPosition(view->geometry().topLeft());
-                    }
-                }
-        );
 
         // on Wayland we may not use fullscreen as that puts all windows on one screen
         if (m_testing || plasmaSurface || QX11Info::isPlatformX11()) {

@@ -52,6 +52,8 @@ public:
     explicit UnlockApp(int &argc, char **argv);
     ~UnlockApp() override;
 
+    void initialViewSetup();
+
     void setTesting(bool enable);
     void setTheme(const QString &theme);
     void setImmediateLock(bool immediateLock);
@@ -68,6 +70,7 @@ public:
 
 public Q_SLOTS:
     void desktopResized();
+    void onScreenAdded(QScreen *screen);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
@@ -85,6 +88,7 @@ private:
     void initializeWayland();
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
     void loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
+    void screenGeometryChanged(QScreen *screen, const QRect &geo);
     Authenticator *createAuthenticator();
     QWindow *getActiveScreen();
 

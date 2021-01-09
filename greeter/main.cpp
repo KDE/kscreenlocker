@@ -181,7 +181,7 @@ int main(int argc, char* argv[])
         }
     }
 
-    app.desktopResized();
+    app.initialViewSetup();
 
     // This allow ksmserver to know when the application has actually finished setting itself up.
     // Crucial for blocking until it is ready, ensuring locking happens before sleep, e.g.
