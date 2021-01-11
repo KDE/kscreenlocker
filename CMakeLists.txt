@@ -85,6 +85,7 @@ set_package_properties(KF5Wayland PROPERTIES
                        PURPOSE "Required for building screenlocker")
 find_package(WaylandScanner)
 find_package(Wayland 1.3 COMPONENTS Client Server)
+find_package(LayerShellQt REQUIRED)
 
 set_package_properties(Wayland PROPERTIES
                        TYPE REQUIRED

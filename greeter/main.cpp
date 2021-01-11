@@ -40,6 +40,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <unistd.h>
 #endif
 
+#include <LayerShellQt/Shell>
+
 static void signalHandler(int signum)
 {
     ScreenLocker::UnlockApp *instance = qobject_cast<ScreenLocker::UnlockApp *>(QCoreApplication::instance());
@@ -66,6 +68,8 @@ static void signalHandler(int signum)
 
 int main(int argc, char *argv[])
 {
+    LayerShellQt::Shell::useLayerShell();
+
     // disable ptrace on the greeter
 #if HAVE_PR_SET_DUMPABLE
     prctl(PR_SET_DUMPABLE, 0);
