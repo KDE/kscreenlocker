@@ -76,14 +76,17 @@ find_package(XCB MODULE REQUIRED COMPONENTS XCB KEYSYMS XTEST)
 set_package_properties(XCB PROPERTIES TYPE REQUIRED)
 add_feature_info("XInput" X11_Xinput_FOUND "Required for grabbing XInput2 devices in the screen locker")
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS X11Extras)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS X11Extras WaylandClient)
+find_package(Qt5XkbCommonSupport REQUIRED PRIVATE)
 
 find_package(KF5Wayland CONFIG REQUIRED)
 set_package_properties(KF5Wayland PROPERTIES
                        TYPE REQUIRED
                        PURPOSE "Required for building screenlocker")
 find_package(WaylandScanner)
+find_package(QtWaylandScanner)
 find_package(Wayland 1.3 COMPONENTS Client Server)
+find_package(WaylandProtocols)
 
 set_package_properties(Wayland PROPERTIES
                        TYPE REQUIRED
@@ -146,6 +149,7 @@ add_subdirectory(kcheckpass)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
 add_subdirectory(settings)
+add_subdirectory(layershell)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kscreenlocker\")
 

@@ -64,8 +64,11 @@ static void signalHandler(int signum)
     }
 }
 
+Q_IMPORT_PLUGIN(QWaylandLayerShellIntegrationPlugin)
+
 int main(int argc, char* argv[])
 {
+    qputenv("QT_WAYLAND_SHELL_INTEGRATION", "fullscreen-layer-shell");
     // disable ptrace on the greeter
 #if HAVE_PR_SET_DUMPABLE
     prctl(PR_SET_DUMPABLE, 0);

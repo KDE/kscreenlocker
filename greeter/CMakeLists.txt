@@ -50,6 +50,7 @@ target_link_libraries(kscreenlocker_greet
                         ${X11_LIBRARIES}
                         KF5::WaylandClient
                         Wayland::Client
+                        layer-shell
                         )
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
