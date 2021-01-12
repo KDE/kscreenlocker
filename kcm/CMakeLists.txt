@@ -1,5 +1,5 @@
 # KI18N Translation Domain for this library
-add_definitions(-DTRANSLATION_DOMAIN=\"screenlocker_kcm\")
+add_definitions(-DTRANSLATION_DOMAIN=\"kcm_screenlocker\")
 
 set(screenlocker_kcm_SRCS
     kcm.cpp
