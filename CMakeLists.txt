@@ -252,7 +252,7 @@ if (HAVE_CONSOLEKIT)
   install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/ck-unlock-session DESTINATION ${KDE_INSTALL_BINDIR})
 endif ()
 
-install(TARGETS KScreenLocker EXPORT KScreenLockerTargets ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY)
+install(TARGETS KScreenLocker EXPORT KScreenLockerTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY)
 install(EXPORT KScreenLockerTargets DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker" FILE KScreenLockerTargets.cmake NAMESPACE PW::)
 
 ecm_generate_headers(KScreenLocker_CamelCase_HEADERS
