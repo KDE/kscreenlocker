@@ -14,7 +14,7 @@ add_library(kcm_screenlocker MODULE ${screenlocker_kcm_SRCS})
 
 target_link_libraries(kcm_screenlocker
     settings
-    Qt5::DBus
+    Qt::DBus
     KF5::Declarative
     KF5::KCMUtils
     KF5::I18n

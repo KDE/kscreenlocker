@@ -44,9 +44,9 @@ target_link_libraries(kscreenlocker_greet
                         KF5::Declarative
                         KF5::QuickAddons
                         KF5::WindowSystem
-                        Qt5::Quick
-                        Qt5::Qml
-                        Qt5::X11Extras
+                        Qt::Quick
+                        Qt::Qml
+                        Qt::X11Extras
                         ${X11_LIBRARIES}
                         KF5::WaylandClient
                         Wayland::Client

@@ -190,11 +190,11 @@ add_library(KScreenLocker SHARED ${ksld_SRCS})
 
 target_link_libraries(KScreenLocker
 PUBLIC
-   Qt5::Core
-   Qt5::X11Extras
+   Qt::Core
+   Qt::X11Extras
 PRIVATE
    settings
-   Qt5::DBus
+   Qt::DBus
    KF5::I18n
    KF5::IdleTime
    KF5::GlobalAccel

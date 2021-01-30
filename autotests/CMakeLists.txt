@@ -12,7 +12,7 @@ set(logindTest_SRCS
 )
 
 add_executable(logindTest ${logindTest_SRCS})
-target_link_libraries(logindTest Qt5::DBus Qt5::Test KF5::I18n)
+target_link_libraries(logindTest Qt::DBus Qt::Test KF5::I18n)
 add_test(NAME ksmserver-logindTest COMMAND logindTest)
 ecm_mark_as_test(logindTest)
 
@@ -20,7 +20,7 @@ ecm_mark_as_test(logindTest)
 # KSldTest
 #######################################
 add_executable(ksldTest ksldtest.cpp)
-target_link_libraries(ksldTest Qt5::Test Qt5::Widgets KF5::IdleTime XCB::XTEST KScreenLocker)
+target_link_libraries(ksldTest Qt::Test Qt::Widgets KF5::IdleTime XCB::XTEST KScreenLocker)
 add_test(NAME ksmserver-ksldTest COMMAND ksldTest)
 ecm_mark_as_test(ksldTest)
 
@@ -28,14 +28,14 @@ ecm_mark_as_test(ksldTest)
 # KeyboardGrabber
 #######################################
 add_executable(keyboardGrabber keyboardgrabber.cpp)
-target_link_libraries(keyboardGrabber Qt5::Core XCB::XCB)
+target_link_libraries(keyboardGrabber Qt::Core XCB::XCB)
 ecm_mark_as_test(keyboardGrabber)
 
 #######################################
 # PointerGrabber
 #######################################
 add_executable(pointerGrabber pointergrabber.cpp)
-target_link_libraries(pointerGrabber Qt5::Core XCB::XCB)
+target_link_libraries(pointerGrabber Qt::Core XCB::XCB)
 ecm_mark_as_test(pointerGrabber)
 
 #######################################
@@ -54,9 +54,9 @@ target_link_libraries(x11LockerTest
     KF5::GlobalAccel
     KF5::I18n
     KF5::WindowSystem
-    Qt5::Test
-    Qt5::X11Extras
-    Qt5::Widgets
+    Qt::Test
+    Qt::X11Extras
+    Qt::Widgets
     ${X11_LIBRARIES}
     XCB::XCB
     XCB::KEYSYMS
@@ -71,7 +71,7 @@ set(noScreensTest_SRCS noscreens.cpp)
 add_executable(noScreensTest ${noScreensTest_SRCS})
 target_link_libraries(noScreensTest
     KScreenLocker
-    Qt5::Test
+    Qt::Test
     KF5::WaylandServer
     )
 add_test(NAME ksld-noScreensTest COMMAND noScreensTest)

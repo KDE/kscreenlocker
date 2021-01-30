@@ -16,7 +16,7 @@ set( authenticatorTest_SRCS
      ../authenticator.cpp
 )
 add_executable(authenticatorTest ${authenticatorTest_SRCS})
-target_link_libraries(authenticatorTest Qt5::Test)
+target_link_libraries(authenticatorTest Qt::Test)
 add_test(NAME ksmserver-authenticatorTest COMMAND authenticatorTest)
 ecm_mark_as_test(authenticatorTest)
 
@@ -26,4 +26,4 @@ ecm_mark_as_test(authenticatorTest)
 add_executable(killTest killtest.cpp)
 add_test(NAME kscreenlocker-killTest COMMAND killTest)
 ecm_mark_as_test(killTest)
-target_link_libraries(killTest Qt5::Test)
+target_link_libraries(killTest Qt::Test)
