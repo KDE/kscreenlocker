@@ -771,7 +771,7 @@ void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
 
 bool KSldApp::event(QEvent *event)
 {
-    if (m_globalAccel && event->type() == QEvent::KeyPress) {
+    if (event->type() == QEvent::KeyPress && m_globalAccel) {
         if (m_globalAccel->keyEvent(static_cast<QKeyEvent*>(event))) {
             event->setAccepted(true);
         }
