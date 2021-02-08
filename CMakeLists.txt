@@ -138,7 +138,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KSCREENLOCKER
 configure_file(config-kscreenlocker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kscreenlocker.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-set(KSLD_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}/KScreenLocker")
+set(KSLD_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KScreenLocker")
 
 include(ECMQtDeclareLoggingCategory)
 
@@ -235,25 +235,25 @@ generate_export_header(KScreenLocker
 configure_package_config_file(ScreenSaverDBusInterfaceConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/ScreenSaverDBusInterfaceConfig.cmake
     PATH_VARS KDE_INSTALL_DBUSINTERFACEDIR
-    INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/ScreenSaverDBusInterface")
+    INSTALL_DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/ScreenSaverDBusInterface")
 
 set_target_properties(KScreenLocker PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 
 install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/ScreenSaverDBusInterfaceConfig.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/ScreenSaverDBusInterface")
+        DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/ScreenSaverDBusInterface")
 
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KScreenLockerConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
     PATH_VARS KDE_INSTALL_DBUSINTERFACEDIR
-    INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker")
+    INSTALL_DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KScreenLocker")
 
 if (HAVE_CONSOLEKIT)
   install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/ck-unlock-session DESTINATION ${KDE_INSTALL_BINDIR})
 endif ()
 
 install(TARGETS KScreenLocker EXPORT KScreenLockerTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY)
-install(EXPORT KScreenLockerTargets DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker" FILE KScreenLockerTargets.cmake NAMESPACE PW::)
+install(EXPORT KScreenLockerTargets DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KScreenLocker" FILE KScreenLockerTargets.cmake NAMESPACE PW::)
 
 ecm_generate_headers(KScreenLocker_CamelCase_HEADERS
     HEADER_NAMES
@@ -271,7 +271,7 @@ install(
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
 			  "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfigVersion.cmake"
-		DESTINATION "${CMAKECONFIG_INSTALL_PREFIX}/KScreenLocker"
+		DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KScreenLocker"
 		COMPONENT Devel)
 
 install(FILES kscreenlocker.notifyrc  DESTINATION ${KDE_INSTALL_KNOTIFY5RCDIR} RENAME ksmserver.notifyrc)
