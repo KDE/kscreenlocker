@@ -28,7 +28,7 @@ class KCheckPass;
 
 enum class AuthenticationMode {
     Delayed,
-    Direct
+    Direct,
 };
 
 class Authenticator : public QObject

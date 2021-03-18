@@ -116,7 +116,7 @@ static struct pam_data PAM_data;
 
 static struct pam_conv PAM_conversation = {
   &PAM_conv,
-  &PAM_data
+  &PAM_data,
 };
 
 #ifdef PAM_FAIL_DELAY

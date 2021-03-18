@@ -46,7 +46,7 @@ typedef enum {
     AuthOk = 0,
     AuthBad = 1,
     AuthError = 2,
-    AuthAbort = 3
+    AuthAbort = 3,
 } AuthReturn;
 
 typedef enum {
@@ -59,13 +59,13 @@ typedef enum {
     ConvPutAuthFailed,
     ConvPutAuthError,
     ConvPutAuthAbort,
-    ConvPutReadyForAuthentication
+    ConvPutReadyForAuthentication,
 } ConvRequest;
 
 /* these must match the defs in kgreeterplugin.h */
 typedef enum {
     IsUser = 1, /* unused in kcheckpass */
-    IsPassword = 2
+    IsPassword = 2,
 } DataTag;
 
 #ifdef __cplusplus

@@ -122,7 +122,7 @@ void WaylandServer::bind(wl_client *client, void *data, uint32_t version, uint32
     static const struct org_kde_ksld_interface s_interface = {
         x11WindowCallback,
         suspendSystemCallback,
-        hibernateSystemCallback
+        hibernateSystemCallback,
     };
     wl_resource_set_implementation(r, &s_interface, s, unbind);
     s->addResource(r);
