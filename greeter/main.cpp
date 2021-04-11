@@ -44,8 +44,9 @@ static void signalHandler(int signum)
 {
     ScreenLocker::UnlockApp *instance = qobject_cast<ScreenLocker::UnlockApp *>(QCoreApplication::instance());
 
-    if (!instance)
+    if (!instance) {
         return;
+    }
 
     switch (signum) {
     case SIGTERM:

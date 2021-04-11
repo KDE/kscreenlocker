@@ -118,8 +118,9 @@ void KCheckPass::start()
     int sfd[2];
     char fdbuf[16];
 
-    if (m_notifier)
+    if (m_notifier) {
         return;
+    }
     if (::socketpair(AF_LOCAL, SOCK_STREAM, 0, sfd)) {
         cantCheck();
         return;
@@ -152,14 +153,17 @@ int KCheckPass::Reader(void *buf, int count)
     dord:
         ret = ::read(m_fd, (void *)((char *)buf + rlen), count - rlen);
         if (ret < 0) {
-            if (errno == EINTR)
+            if (errno == EINTR) {
                 goto dord;
-            if (errno == EAGAIN)
+            }
+            if (errno == EAGAIN) {
                 break;
+            }
             return -1;
         }
-        if (!ret)
+        if (!ret) {
             break;
+        }
         rlen += ret;
     }
     return rlen;
@@ -201,14 +205,16 @@ bool KCheckPass::GRecvArr(char **ret)
     int len;
     char *buf;
 
-    if (!GRecvInt(&len))
+    if (!GRecvInt(&len)) {
         return false;
+    }
     if (!len) {
         *ret = nullptr;
         return true;
     }
-    if (!(buf = (char *)::malloc(len)))
+    if (!(buf = (char *)::malloc(len))) {
         return false;
+    }
     *ret = buf;
     if (GRead(buf, len)) {
         return true;
@@ -228,17 +234,20 @@ void KCheckPass::handleVerify()
     if (GRecvInt(&ret)) {
         switch (ret) {
         case ConvGetBinary:
-            if (!GRecvArr(&arr))
+            if (!GRecvArr(&arr)) {
                 break;
+            }
             // FIXME: not supported
             cantCheck();
-            if (arr)
+            if (arr) {
                 ::free(arr);
+            }
             return;
         case ConvGetNormal:
         case ConvGetHidden: {
-            if (!GRecvArr(&arr))
+            if (!GRecvArr(&arr)) {
                 break;
+            }
 
             if (m_password.isNull()) {
                 GSendStr(nullptr);
@@ -250,19 +259,22 @@ void KCheckPass::handleVerify()
 
             m_password.clear();
 
-            if (arr)
+            if (arr) {
                 ::free(arr);
+            }
             return;
         }
         case ConvPutInfo:
-            if (!GRecvArr(&arr))
+            if (!GRecvArr(&arr)) {
                 break;
+            }
             emit message(QString::fromLocal8Bit(arr));
             ::free(arr);
             return;
         case ConvPutError:
-            if (!GRecvArr(&arr))
+            if (!GRecvArr(&arr)) {
                 break;
+            }
             emit error(QString::fromLocal8Bit(arr));
             ::free(arr);
             return;
@@ -301,11 +313,12 @@ void KCheckPass::reapVerify()
     ::close(m_fd);
     int status;
     ::kill(m_pid, SIGUSR2);
-    while (::waitpid(m_pid, &status, 0) < 0)
+    while (::waitpid(m_pid, &status, 0) < 0) {
         if (errno != EINTR) { // This should not happen ...
             cantCheck();
             return;
         }
+    }
 }
 
 void KCheckPass::cantCheck()

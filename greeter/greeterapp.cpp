@@ -308,10 +308,11 @@ void UnlockApp::screenGeometryChanged(QScreen *screen, const QRect &geo)
 
 void UnlockApp::initialViewSetup()
 {
-    for (QScreen *screen : screens())
+    for (QScreen *screen : screens()) {
         connect(screen, &QScreen::geometryChanged, this, [this, screen](const QRect &geo) {
             screenGeometryChanged(screen, geo);
         });
+    }
     desktopResized();
 }
 

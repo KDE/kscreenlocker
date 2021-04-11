@@ -58,14 +58,17 @@ static int Reader(void *buf, int count)
     dord:
         ret = read(sfd, (void *)((char *)buf + rlen), count - rlen);
         if (ret < 0) {
-            if (errno == EINTR)
+            if (errno == EINTR) {
                 goto dord;
-            if (errno == EAGAIN)
+            }
+            if (errno == EAGAIN) {
                 break;
+            }
             return -1;
         }
-        if (!ret)
+        if (!ret) {
             break;
+        }
         rlen += ret;
     }
     return rlen;
@@ -118,8 +121,9 @@ static char *GRecvStr(void)
     unsigned len;
     char *buf;
 
-    if (!(len = GRecvInt()))
+    if (!(len = GRecvInt())) {
         return (char *)0;
+    }
     if (len > 0x1000 || !(buf = malloc(len))) {
         message("No memory for read buffer\n");
         exit(15);
@@ -135,8 +139,9 @@ static char *GRecvArr(void)
     char *arr;
     unsigned const char *up;
 
-    if (!(len = (unsigned)GRecvInt()))
+    if (!(len = (unsigned)GRecvInt())) {
         return (char *)0;
+    }
     if (len < 4) {
         message("Too short binary authentication data block\n");
         exit(15);
@@ -169,8 +174,9 @@ static char *conv_server(ConvRequest what, const char *prompt)
         char *msg;
         GSendStr(prompt);
         msg = GRecvStr();
-        if (msg && (GRecvInt() & IsPassword) && !*msg)
+        if (msg && (GRecvInt() & IsPassword) && !*msg) {
             nullpass = 1;
+        }
         return msg;
     }
     case ConvPutInfo:

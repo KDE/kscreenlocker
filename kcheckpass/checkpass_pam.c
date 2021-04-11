@@ -52,10 +52,11 @@ static int PAM_conv(int num_msg, pam_message_type **msg, struct pam_response **r
     struct pam_response *repl;
     struct pam_data *pd = (struct pam_data *)appdata_ptr;
 
-    if (!(repl = calloc(num_msg, sizeof(struct pam_response))))
+    if (!(repl = calloc(num_msg, sizeof(struct pam_response)))) {
         return PAM_CONV_ERR;
+    }
 
-    for (count = 0; count < num_msg; count++)
+    for (count = 0; count < num_msg; count++) {
         switch (msg[count]->msg_style) {
         case PAM_TEXT_INFO:
             pd->conv(ConvPutInfo, msg[count]->msg);
@@ -87,12 +88,13 @@ static int PAM_conv(int num_msg, pam_message_type **msg, struct pam_response **r
             repl[count].resp_retcode = PAM_SUCCESS;
             break;
         }
+    }
     *resp = repl;
     return PAM_SUCCESS;
 
 conv_err:
-    for (; count >= 0; count--)
-        if (repl[count].resp)
+    for (; count >= 0; count--) {
+        if (repl[count].resp) {
             switch (msg[count]->msg_style) {
             case PAM_PROMPT_ECHO_OFF:
                 dispose(repl[count].resp);
@@ -104,6 +106,8 @@ conv_err:
                 free(repl[count].resp);
                 break;
             }
+        }
+    }
     free(repl);
     return PAM_CONV_ERR;
 }
@@ -141,12 +145,14 @@ AuthReturn Authenticate(const char *method, const char *user, char *(*conv)(Conv
         pam_service = KSCREENSAVER_PAM_SERVICE;
     }
     pam_error = pam_start(pam_service, user, &PAM_conversation, &pamh);
-    if (pam_error != PAM_SUCCESS)
+    if (pam_error != PAM_SUCCESS) {
         return AuthError;
+    }
 
     tty = ttyname(0);
-    if (!tty)
+    if (!tty) {
         tty = getenv("DISPLAY");
+    }
 
     pam_error = pam_set_item(pamh, PAM_TTY, tty);
     if (pam_error != PAM_SUCCESS) {

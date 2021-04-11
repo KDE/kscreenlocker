@@ -197,8 +197,9 @@ void X11Locker::saveVRoot()
 //
 void X11Locker::setVRoot(Window win, Window vr)
 {
-    if (gVRoot)
+    if (gVRoot) {
         removeVRoot(gVRoot);
+    }
 
     unsigned long rw = QX11Info::appRootWindow();
     unsigned long vroot_data[1] = {vr};
@@ -207,14 +208,17 @@ void X11Locker::setVRoot(Window win, Window vr)
     unsigned int numChildren;
     Window top = win;
     while (1) {
-        if (!XQueryTree(QX11Info::display(), top, &rootReturn, &parentReturn, &children, &numChildren))
+        if (!XQueryTree(QX11Info::display(), top, &rootReturn, &parentReturn, &children, &numChildren)) {
             return;
-        if (children)
+        }
+        if (children) {
             XFree((char *)children);
+        }
         if (parentReturn == rw) {
             break;
-        } else
+        } else {
             top = parentReturn;
+        }
     }
 
     XChangeProperty(QX11Info::display(), top, gXA_VROOT, XA_WINDOW, 32, PropModeReplace, (unsigned char *)vroot_data, 1);
@@ -342,15 +346,17 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
             int index = findWindowInfo(xc->window);
             if (index >= 0) {
                 int index2 = xc->above_sibling ? findWindowInfo(xc->above_sibling) : 0;
-                if (index2 < 0)
+                if (index2 < 0) {
                     qCDebug(KSCREENLOCKER) << "Unknown above for ConfigureNotify";
-                else { // move just above the other window
-                    if (index2 < index)
+                } else { // move just above the other window
+                    if (index2 < index) {
                         ++index2;
+                    }
                     m_windowInfo.move(index, index2);
                 }
-            } else
+            } else {
                 qCDebug(KSCREENLOCKER) << "Unknown toplevel for ConfigureNotify";
+            }
             // kDebug() << "ConfigureNotify:";
             // the stacking order changed, so let's change the stacking order again to what we want
             stayOnTop();
@@ -363,10 +369,11 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         if (xm->event == QX11Info::appRootWindow()) {
             qCDebug(KSCREENLOCKER) << "MapNotify:" << xm->window;
             int index = findWindowInfo(xm->window);
-            if (index >= 0)
+            if (index >= 0) {
                 m_windowInfo[index].viewable = true;
-            else
+            } else {
                 qCDebug(KSCREENLOCKER) << "Unknown toplevel for MapNotify";
+            }
             if (m_allowedWindows.contains(xm->window)) {
                 if (m_lockWindows.contains(xm->window)) {
                     qCDebug(KSCREENLOCKER) << "uhoh! duplicate!";
@@ -394,10 +401,11 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         if (xu->event == QX11Info::appRootWindow()) {
             qCDebug(KSCREENLOCKER) << "UnmapNotify:" << xu->window;
             int index = findWindowInfo(xu->window);
-            if (index >= 0)
+            if (index >= 0) {
                 m_windowInfo[index].viewable = false;
-            else
+            } else {
                 qCDebug(KSCREENLOCKER) << "Unknown toplevel for MapNotify";
+            }
             m_lockWindows.removeAll(xu->window);
             if (m_focusedLockWindow == xu->event && !m_lockWindows.empty()) {
                 // The currently focused window vanished, just focus the first one in the list
@@ -412,9 +420,9 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         if (xc->parent == QX11Info::appRootWindow()) {
             qCDebug(KSCREENLOCKER) << "CreateNotify:" << xc->window;
             int index = findWindowInfo(xc->window);
-            if (index >= 0)
+            if (index >= 0) {
                 qCDebug(KSCREENLOCKER) << "Already existing toplevel for CreateNotify";
-            else {
+            } else {
                 WindowInfo info;
                 info.window = xc->window;
                 info.viewable = false;
@@ -428,10 +436,11 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         xcb_destroy_notify_event_t *xd = reinterpret_cast<xcb_destroy_notify_event_t *>(event);
         if (xd->event == QX11Info::appRootWindow()) {
             int index = findWindowInfo(xd->window);
-            if (index >= 0)
+            if (index >= 0) {
                 m_windowInfo.removeAt(index);
-            else
+            } else {
                 qCDebug(KSCREENLOCKER) << "Unknown toplevel for DestroyNotify";
+            }
             ret = true;
         }
         break;
@@ -440,15 +449,16 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
         xcb_reparent_notify_event_t *xr = reinterpret_cast<xcb_reparent_notify_event_t *>(event);
         if (xr->event == QX11Info::appRootWindow() && xr->parent != QX11Info::appRootWindow()) {
             int index = findWindowInfo(xr->window);
-            if (index >= 0)
+            if (index >= 0) {
                 m_windowInfo.removeAt(index);
-            else
+            } else {
                 qCDebug(KSCREENLOCKER) << "Unknown toplevel for ReparentNotify away";
+            }
         } else if (xr->parent == QX11Info::appRootWindow()) {
             int index = findWindowInfo(xr->window);
-            if (index >= 0)
+            if (index >= 0) {
                 qCDebug(KSCREENLOCKER) << "Already existing toplevel for ReparentNotify";
-            else {
+            } else {
                 WindowInfo info;
                 info.window = xr->window;
                 info.viewable = false;
@@ -463,8 +473,9 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
             int index = findWindowInfo(xc->window);
             if (index >= 0) {
                 m_windowInfo.move(index, xc->place == PlaceOnTop ? m_windowInfo.size() - 1 : 0);
-            } else
+            } else {
                 qCDebug(KSCREENLOCKER) << "Unknown toplevel for CirculateNotify";
+            }
         }
         break;
     }
@@ -474,9 +485,11 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
 
 int X11Locker::findWindowInfo(Window w)
 {
-    for (int i = 0; i < m_windowInfo.size(); ++i)
-        if (m_windowInfo[i].window == w)
+    for (int i = 0; i < m_windowInfo.size(); ++i) {
+        if (m_windowInfo[i].window == w) {
             return i;
+        }
+    }
     return -1;
 }
 
@@ -489,14 +502,16 @@ void X11Locker::stayOnTop()
     // thus avoiding possible infinite loops
     QVector<Window> stack(m_lockWindows.count() + 1);
     int count = 0;
-    for (WId w : qAsConst(m_lockWindows))
+    for (WId w : qAsConst(m_lockWindows)) {
         stack[count++] = w;
+    }
     // finally, the lock window
     stack[count++] = m_background->winId();
     // do the actual restacking if needed
     XRaiseWindow(QX11Info::display(), stack[0]);
-    if (count > 1)
+    if (count > 1) {
         XRestackWindows(QX11Info::display(), stack.data(), count);
+    }
     XFlush(QX11Info::display());
 }
 
