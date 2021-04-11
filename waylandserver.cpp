@@ -22,21 +22,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // ksld
 #include <config-kscreenlocker.h>
 // Wayland
-#include <wayland-server.h>
 #include <wayland-ksld-server-protocol.h>
+#include <wayland-server.h>
 // KWayland
 #include <KWayland/Server/display.h>
 // Qt
 #include <QDBusConnection>
 // system
-#include <unistd.h>
 #include <fcntl.h>
-#include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 namespace ScreenLocker
 {
-
 static const QString s_plasmaShellService = QStringLiteral("org.kde.plasmashell");
 static const QString s_osdServicePath = QStringLiteral("/org/kde/osdService");
 static const QString s_osdServiceInterface = QStringLiteral("org.kde.osdService");
@@ -45,16 +44,10 @@ WaylandServer::WaylandServer(QObject *parent)
     : QObject(parent)
 {
     // connect to osd service
-    QDBusConnection::sessionBus().connect(s_plasmaShellService,
-                                          s_osdServicePath,
-                                          s_osdServiceInterface,
-                                          QStringLiteral("osdProgress"),
-                                          this, SLOT(osdProgress(QString,int,QString)));
-    QDBusConnection::sessionBus().connect(s_plasmaShellService,
-                                          s_osdServicePath,
-                                          s_osdServiceInterface,
-                                          QStringLiteral("osdText"),
-                                          this, SLOT(osdText(QString,QString)));
+    QDBusConnection::sessionBus()
+        .connect(s_plasmaShellService, s_osdServicePath, s_osdServiceInterface, QStringLiteral("osdProgress"), this, SLOT(osdProgress(QString, int, QString)));
+    QDBusConnection::sessionBus()
+        .connect(s_plasmaShellService, s_osdServicePath, s_osdServiceInterface, QStringLiteral("osdText"), this, SLOT(osdText(QString, QString)));
     connect(PowerManagement::instance(), &PowerManagement::canSuspendChanged, this, &WaylandServer::sendCanSuspend);
     connect(PowerManagement::instance(), &PowerManagement::canHibernateChanged, this, &WaylandServer::sendCanHibernate);
 }
@@ -87,7 +80,9 @@ int WaylandServer::start()
         close(socketPair[1]);
         return -1;
     }
-    connect(m_allowedClient, &KWayland::Server::ClientConnection::disconnected, this, [this] { m_allowedClient = nullptr; });
+    connect(m_allowedClient, &KWayland::Server::ClientConnection::disconnected, this, [this] {
+        m_allowedClient = nullptr;
+    });
     m_interface = wl_global_create(*m_display.data(), &org_kde_ksld_interface, 3, this, bind);
     return socketPair[1];
 }
@@ -107,7 +102,7 @@ void WaylandServer::stop()
 
 void WaylandServer::bind(wl_client *client, void *data, uint32_t version, uint32_t id)
 {
-    auto s = reinterpret_cast<WaylandServer*>(data);
+    auto s = reinterpret_cast<WaylandServer *>(data);
     if (client != s->m_allowedClient->client()) {
         // a proper error would be better
         wl_client_post_no_memory(client);
@@ -133,12 +128,12 @@ void WaylandServer::bind(wl_client *client, void *data, uint32_t version, uint32
 
 void WaylandServer::unbind(wl_resource *resource)
 {
-    reinterpret_cast<WaylandServer*>(wl_resource_get_user_data(resource))->removeResource(resource);
+    reinterpret_cast<WaylandServer *>(wl_resource_get_user_data(resource))->removeResource(resource);
 }
 
 void WaylandServer::x11WindowCallback(wl_client *client, wl_resource *resource, uint32_t id)
 {
-    auto s = reinterpret_cast<WaylandServer*>(wl_resource_get_user_data(resource));
+    auto s = reinterpret_cast<WaylandServer *>(wl_resource_get_user_data(resource));
     if (s->m_allowedClient->client() != client) {
         return;
     }

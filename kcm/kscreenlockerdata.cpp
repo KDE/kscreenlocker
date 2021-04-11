@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
 #include "kscreenlockerdata.h"
-#include "kscreensaversettings.h"
 #include "appearancesettings.h"
+#include "kscreensaversettings.h"
 
 KScreenLockerData::KScreenLockerData(QObject *parent, const QVariantList &args)
     : KCModuleData(parent, args)

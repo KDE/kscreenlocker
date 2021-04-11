@@ -19,10 +19,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "interface.h"
-#include "ksldapp.h"
-#include "screensaveradaptor.h"
 #include "kscreensaveradaptor.h"
+#include "ksldapp.h"
 #include "powerdevilpolicyagent.h"
+#include "screensaveradaptor.h"
 // KDE
 #include <KAuthorized>
 #include <KIdleTime>
@@ -42,9 +42,9 @@ Interface::Interface(KSldApp *parent)
     , m_serviceWatcher(new QDBusServiceWatcher(this))
     , m_next_cookie(0)
 {
-    (void) new ScreenSaverAdaptor( this );
-    QDBusConnection::sessionBus().registerService(QStringLiteral("org.freedesktop.ScreenSaver")) ;
-    (void) new KScreenSaverAdaptor( this );
+    (void)new ScreenSaverAdaptor(this);
+    QDBusConnection::sessionBus().registerService(QStringLiteral("org.freedesktop.ScreenSaver"));
+    (void)new KScreenSaverAdaptor(this);
     QDBusConnection::sessionBus().registerService(QStringLiteral("org.kde.screensaver"));
     QDBusConnection::sessionBus().registerObject(QStringLiteral("/ScreenSaver"), this);
     QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/freedesktop/ScreenSaver"), this);
@@ -107,7 +107,7 @@ void Interface::SwitchUser()
     }
 }
 
-bool Interface::SetActive (bool state)
+bool Interface::SetActive(bool state)
 {
     // TODO: what should the return value be?
     if (state) {
@@ -142,8 +142,8 @@ void Interface::UnInhibit(uint cookie)
         if (it.next().cookie == cookie) {
             if (uint powerdevilcookie = it.value().powerdevilcookie) {
                 OrgKdeSolidPowerManagementPolicyAgentInterface policyAgent(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
-                                                               QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
-                                                               QDBusConnection::sessionBus());
+                                                                           QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
+                                                                           QDBusConnection::sessionBus());
                 policyAgent.ReleaseInhibition(powerdevilcookie);
             }
             it.remove();
@@ -211,4 +211,3 @@ void Interface::sendLockReplies()
 }
 
 } // namespace
-

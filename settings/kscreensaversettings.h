@@ -41,7 +41,6 @@ class KScreenSaverSettings : public KScreenSaverSettingsBase
     Q_OBJECT
     Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut NOTIFY shortcutChanged)
 public:
-
     static KScreenSaverSettings &getInstance();
 
     static QList<QKeySequence> defaultShortcuts();
@@ -54,8 +53,8 @@ public:
     QKeySequence shortcut() const;
     void setShortcut(const QKeySequence &sequence);
 
-    KScreenSaverSettings(KScreenSaverSettings const&) = delete;
-    void operator=(KScreenSaverSettings const&)  = delete;
+    KScreenSaverSettings(KScreenSaverSettings const &) = delete;
+    void operator=(KScreenSaverSettings const &) = delete;
 
 Q_SIGNALS:
     void shortcutChanged();

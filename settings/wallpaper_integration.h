@@ -35,7 +35,6 @@ class ConfigPropertyMap;
 
 namespace ScreenLocker
 {
-
 class WallpaperIntegration : public QObject
 {
     Q_OBJECT
@@ -49,19 +48,23 @@ public:
 
     void init();
 
-    void setConfig(const KSharedConfig::Ptr &config) {
+    void setConfig(const KSharedConfig::Ptr &config)
+    {
         m_config = config;
     }
-    QString pluginName() const {
+    QString pluginName() const
+    {
         return m_pluginName;
     }
     void setPluginName(const QString &name);
 
-    KPackage::Package package() const {
+    KPackage::Package package() const
+    {
         return m_package;
     }
 
-    KDeclarative::ConfigPropertyMap *configuration() const {
+    KDeclarative::ConfigPropertyMap *configuration() const
+    {
         return m_configuration;
     }
 

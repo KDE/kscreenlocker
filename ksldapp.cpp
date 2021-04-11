@@ -21,31 +21,31 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "ksldapp.h"
-#include "interface.h"
 #include "globalaccel.h"
-#include "x11locker.h"
-#include "waylandlocker.h"
-#include "logind.h"
+#include "interface.h"
 #include "kscreensaversettings.h"
+#include "logind.h"
 #include "powermanagement_inhibition.h"
+#include "waylandlocker.h"
+#include "x11locker.h"
 
 #include "kscreenlocker_logging.h"
 #include <config-kscreenlocker.h>
 
-#include <config-X11.h>
 #include "waylandserver.h"
+#include <config-X11.h>
 // KDE
 #include <KAuthorized>
+#include <KGlobalAccel>
 #include <KIdleTime>
 #include <KLocalizedString>
 #include <KNotification>
-#include <KGlobalAccel>
 
 // Qt
 #include <QAction>
 #include <QKeyEvent>
-#include <QTimer>
 #include <QProcess>
+#include <QTimer>
 #include <QX11Info>
 // X11
 #include <X11/Xlib.h>
@@ -54,20 +54,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <X11/extensions/XInput2.h>
 #endif
 // other
-#include <unistd.h>
 #include <signal.h>
+#include <unistd.h>
 
-#include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 
 namespace ScreenLocker
 {
-
 static const QString s_qtQuickBackend = QStringLiteral("QT_QUICK_BACKEND");
 
-static KSldApp * s_instance = nullptr;
+static KSldApp *s_instance = nullptr;
 
-KSldApp* KSldApp::self()
+KSldApp *KSldApp::self()
 {
     if (!s_instance) {
         s_instance = new KSldApp();
@@ -76,7 +75,7 @@ KSldApp* KSldApp::self()
     return s_instance;
 }
 
-KSldApp::KSldApp(QObject * parent)
+KSldApp::KSldApp(QObject *parent)
     : QObject(parent)
     , m_lockState(Unlocked)
     , m_lockProcess(nullptr)
@@ -93,7 +92,7 @@ KSldApp::KSldApp(QObject * parent)
     , m_powerManagementInhibition(new PowerManagementInhibition(this))
 {
     m_isX11 = QX11Info::isPlatformX11();
-    m_isWayland = QCoreApplication::instance()->property("platformName").toString().startsWith( QLatin1String("wayland"), Qt::CaseInsensitive);
+    m_isWayland = QCoreApplication::instance()->property("platformName").toString().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive);
 }
 
 KSldApp::~KSldApp()
@@ -172,98 +171,86 @@ void KSldApp::initialize()
         a->setProperty("componentName", QStringLiteral("ksmserver"));
         a->setText(i18n("Lock Session"));
         KGlobalAccel::self()->setGlobalShortcut(a, KScreenSaverSettings::defaultShortcuts());
-        connect(a, &QAction::triggered, this,
-            [this]() {
-                lock(EstablishLock::Immediate);
-            }
-        );
+        connect(a, &QAction::triggered, this, [this]() {
+            lock(EstablishLock::Immediate);
+        });
     }
 
     // idle support
-    auto idleTimeSignal = static_cast<void (KIdleTime:: *)(int)>(&KIdleTime::timeoutReached);
-    connect(KIdleTime::instance(), idleTimeSignal, this,
-        [this](int identifier) {
-            if (identifier != m_idleId) {
-                // not our identifier
-                return;
-            }
-            if (lockState() != Unlocked) {
-                return;
-            }
-            if (m_inhibitCounter // either we got a direct inhibit request thru our outdated o.f.Screensaver iface ...
-                    || isFdoPowerInhibited()) { // ... or the newer one at o.f.PowerManagement.Inhibit
-                // there is at least one process blocking the auto lock of screen locker
-                return;
-            }
-            if (m_lockGrace) {  // short-circuit if grace time is zero
-                m_inGraceTime = true;
-            } else if (m_lockGrace == -1) {
-                m_inGraceTime = true;  // if no timeout configured, grace time lasts forever
-            }
-
-            lock(EstablishLock::Delayed);
+    auto idleTimeSignal = static_cast<void (KIdleTime::*)(int)>(&KIdleTime::timeoutReached);
+    connect(KIdleTime::instance(), idleTimeSignal, this, [this](int identifier) {
+        if (identifier != m_idleId) {
+            // not our identifier
+            return;
         }
-    );
+        if (lockState() != Unlocked) {
+            return;
+        }
+        if (m_inhibitCounter // either we got a direct inhibit request thru our outdated o.f.Screensaver iface ...
+            || isFdoPowerInhibited()) { // ... or the newer one at o.f.PowerManagement.Inhibit
+            // there is at least one process blocking the auto lock of screen locker
+            return;
+        }
+        if (m_lockGrace) { // short-circuit if grace time is zero
+            m_inGraceTime = true;
+        } else if (m_lockGrace == -1) {
+            m_inGraceTime = true; // if no timeout configured, grace time lasts forever
+        }
+
+        lock(EstablishLock::Delayed);
+    });
 
     m_lockProcess = new QProcess();
     m_lockProcess->setProcessChannelMode(QProcess::ForwardedErrorChannel);
     m_lockProcess->setReadChannel(QProcess::StandardOutput);
     auto finishedSignal = static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished);
-    connect(m_lockProcess, finishedSignal, this,
-        [this](int exitCode, QProcess::ExitStatus exitStatus) {
-            qCDebug(KSCREENLOCKER) << "Greeter process exitted with status:"
-                     << exitStatus << "exit code:" << exitCode;
+    connect(m_lockProcess, finishedSignal, this, [this](int exitCode, QProcess::ExitStatus exitStatus) {
+        qCDebug(KSCREENLOCKER) << "Greeter process exitted with status:" << exitStatus << "exit code:" << exitCode;
 
-            const bool regularExit = !exitCode && exitStatus == QProcess::NormalExit;
-            if (regularExit || s_graceTimeKill || s_logindExit) {
-                // unlock process finished successfully - we can remove the lock grab
+        const bool regularExit = !exitCode && exitStatus == QProcess::NormalExit;
+        if (regularExit || s_graceTimeKill || s_logindExit) {
+            // unlock process finished successfully - we can remove the lock grab
 
-                if (regularExit) {
-                    qCDebug(KSCREENLOCKER) << "Unlocking now on regular exit.";
-                } else if (s_graceTimeKill) {
-                    qCDebug(KSCREENLOCKER) << "Unlocking anyway due to grace time.";
-                } else {
-                    Q_ASSERT(s_logindExit);
-                    qCDebug(KSCREENLOCKER) << "Unlocking anyway since forced through logind.";
-                }
-
-                s_graceTimeKill = false;
-                s_logindExit = false;
-                doUnlock();
-                return;
-            }
-
-            qCWarning(KSCREENLOCKER) << "Greeter process exit unregular. Restarting lock.";
-
-            m_greeterCrashedCounter++;
-            if (m_greeterCrashedCounter < 4) {
-                // Perhaps it crashed due to a graphics driver issue, force software rendering now
-                qCDebug(KSCREENLOCKER, "Trying to lock again with software rendering (%d/4).",
-                       m_greeterCrashedCounter);
-                setForceSoftwareRendering(true);
-                startLockProcess(EstablishLock::Immediate);
-            } else if (m_lockWindow) {
-                qCWarning(KSCREENLOCKER)
-                        << "Everything else failed. Need to put Greeter in emergency mode.";
-                m_lockWindow->emergencyShow();
+            if (regularExit) {
+                qCDebug(KSCREENLOCKER) << "Unlocking now on regular exit.";
+            } else if (s_graceTimeKill) {
+                qCDebug(KSCREENLOCKER) << "Unlocking anyway due to grace time.";
             } else {
-                qCCritical(KSCREENLOCKER)
-                        << "Greeter process exitted and we could in no way recover from that!";
+                Q_ASSERT(s_logindExit);
+                qCDebug(KSCREENLOCKER) << "Unlocking anyway since forced through logind.";
             }
+
+            s_graceTimeKill = false;
+            s_logindExit = false;
+            doUnlock();
+            return;
         }
-    );
-    connect(m_lockProcess, &QProcess::errorOccurred, this,
-        [this](QProcess::ProcessError error) {
-            if (error == QProcess::FailedToStart) {
-                qCDebug(KSCREENLOCKER) << "Greeter Process  failed to start. Trying to directly unlock again.";
-                doUnlock();
-                m_waylandServer->stop();
-                qCCritical(KSCREENLOCKER) << "Greeter Process not available";
-            } else {
-                qCWarning(KSCREENLOCKER) << "Greeter Process encountered an unhandled error:" << error;
-            }
+
+        qCWarning(KSCREENLOCKER) << "Greeter process exit unregular. Restarting lock.";
+
+        m_greeterCrashedCounter++;
+        if (m_greeterCrashedCounter < 4) {
+            // Perhaps it crashed due to a graphics driver issue, force software rendering now
+            qCDebug(KSCREENLOCKER, "Trying to lock again with software rendering (%d/4).", m_greeterCrashedCounter);
+            setForceSoftwareRendering(true);
+            startLockProcess(EstablishLock::Immediate);
+        } else if (m_lockWindow) {
+            qCWarning(KSCREENLOCKER) << "Everything else failed. Need to put Greeter in emergency mode.";
+            m_lockWindow->emergencyShow();
+        } else {
+            qCCritical(KSCREENLOCKER) << "Greeter process exitted and we could in no way recover from that!";
         }
-    );
+    });
+    connect(m_lockProcess, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
+        if (error == QProcess::FailedToStart) {
+            qCDebug(KSCREENLOCKER) << "Greeter Process  failed to start. Trying to directly unlock again.";
+            doUnlock();
+            m_waylandServer->stop();
+            qCCritical(KSCREENLOCKER) << "Greeter Process not available";
+        } else {
+            qCWarning(KSCREENLOCKER) << "Greeter Process encountered an unhandled error:" << error;
+        }
+    });
     m_lockedTimer.invalidate();
     m_graceTimer->setSingleShot(true);
     connect(m_graceTimer, &QTimer::timeout, this, &KSldApp::endGraceTime);
@@ -272,71 +259,58 @@ void KSldApp::initialize()
 
     // connect to logind
     m_logind = new LogindIntegration(this);
-    connect(m_logind, &LogindIntegration::requestLock, this,
-        [this]() {
+    connect(m_logind, &LogindIntegration::requestLock, this, [this]() {
+        lock(EstablishLock::Immediate);
+    });
+    connect(m_logind, &LogindIntegration::requestUnlock, this, [this]() {
+        if (lockState() == Locked || lockState() == AcquiringLock) {
+            if (m_lockProcess->state() != QProcess::NotRunning) {
+                s_logindExit = true;
+                m_lockProcess->terminate();
+            } else {
+                doUnlock();
+            }
+        }
+    });
+    connect(m_logind, &LogindIntegration::prepareForSleep, this, [this](bool goingToSleep) {
+        if (!goingToSleep) {
+            // not interested in doing anything on wakeup
+            return;
+        }
+        if (KScreenSaverSettings::lockOnResume()) {
             lock(EstablishLock::Immediate);
         }
-    );
-    connect(m_logind, &LogindIntegration::requestUnlock, this,
-        [this]() {
-            if (lockState() == Locked || lockState() == AcquiringLock) {
-                if (m_lockProcess->state() != QProcess::NotRunning) {
-                    s_logindExit = true;
-                    m_lockProcess->terminate();
-                } else {
-                    doUnlock();
-                }
-            }
-        }
-    );
-    connect(m_logind, &LogindIntegration::prepareForSleep, this,
-        [this](bool goingToSleep) {
-            if (!goingToSleep) {
-                // not interested in doing anything on wakeup
-                return;
-            }
-            if (KScreenSaverSettings::lockOnResume()) {
-                lock(EstablishLock::Immediate);
-            }
-        }
-    );
-    connect(m_logind, &LogindIntegration::inhibited, this,
-        [this]() {
-            // if we are already locked, we immediately remove the inhibition lock
-            if (m_lockState == KSldApp::Locked) {
-                m_logind->uninhibit();
-            }
-        }
-    );
-    connect(m_logind, &LogindIntegration::connectedChanged, this, [this]() {
-            if (!m_logind->isConnected()) {
-                return;
-            }
-            if (m_lockState == ScreenLocker::KSldApp::Unlocked && KScreenSaverSettings::lockOnResume()) {
-                m_logind->inhibit();
-            }
-            if (m_logind->isLocked()) {
-                lock(EstablishLock::Immediate);
-            }
-        }
-    );
-    connect(this, &KSldApp::locked, this,
-        [this]() {
+    });
+    connect(m_logind, &LogindIntegration::inhibited, this, [this]() {
+        // if we are already locked, we immediately remove the inhibition lock
+        if (m_lockState == KSldApp::Locked) {
             m_logind->uninhibit();
-            m_logind->setLocked(true);
-            if (m_lockGrace > 0 && m_inGraceTime) {
-                m_graceTimer->start(m_lockGrace);
-            }
         }
-    );
-    connect(this, &KSldApp::unlocked, this,
-        [this]() {
-            m_logind->setLocked(false);
-            if (KScreenSaverSettings::lockOnResume()) {
-                m_logind->inhibit();
-            }
+    });
+    connect(m_logind, &LogindIntegration::connectedChanged, this, [this]() {
+        if (!m_logind->isConnected()) {
+            return;
         }
-    );
+        if (m_lockState == ScreenLocker::KSldApp::Unlocked && KScreenSaverSettings::lockOnResume()) {
+            m_logind->inhibit();
+        }
+        if (m_logind->isLocked()) {
+            lock(EstablishLock::Immediate);
+        }
+    });
+    connect(this, &KSldApp::locked, this, [this]() {
+        m_logind->uninhibit();
+        m_logind->setLocked(true);
+        if (m_lockGrace > 0 && m_inGraceTime) {
+            m_graceTimer->start(m_lockGrace);
+        }
+    });
+    connect(this, &KSldApp::unlocked, this, [this]() {
+        m_logind->setLocked(false);
+        if (KScreenSaverSettings::lockOnResume()) {
+            m_logind->inhibit();
+        }
+    });
 
     m_globalAccel = new GlobalAccel(this);
     connect(this, &KSldApp::locked, m_globalAccel, &GlobalAccel::prepare);
@@ -349,7 +323,8 @@ void KSldApp::initialize()
                                           QStringLiteral("/org/kde/Solid/PowerManagement/Actions/SuspendSession"),
                                           QStringLiteral("org.kde.Solid.PowerManagement.Actions.SuspendSession"),
                                           QStringLiteral("aboutToSuspend"),
-                                          this, SLOT(solidSuspend()));
+                                          this,
+                                          SLOT(solidSuspend()));
 
     configure();
 
@@ -371,7 +346,7 @@ void KSldApp::configure()
     // timeout > 0 is for backwards compatibility with old configs
     if (KScreenSaverSettings::autolock() && timeout > 0) {
         // timeout stored in minutes
-        m_idleId = KIdleTime::instance()->addIdleTimeout(timeout*1000*60);
+        m_idleId = KIdleTime::instance()->addIdleTimeout(timeout * 1000 * 60);
     }
     if (KScreenSaverSettings::lock()) {
         // lockGrace is stored in seconds
@@ -410,7 +385,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
         if (attemptCount < 3) {
             qCWarning(KSCREENLOCKER) << "Could not establish screen lock. Trying again in 10ms";
             QTimer::singleShot(10, this, [=]() {
-                lock(establishLock, attemptCount+1);
+                lock(establishLock, attemptCount + 1);
             });
         } else {
             qCCritical(KSCREENLOCKER) << "Could not establish screen lock";
@@ -418,12 +393,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
         return;
     }
 
-    KNotification::event(QStringLiteral("locked"),
-                         i18n("Screen locked"),
-                         QPixmap(),
-                         nullptr,
-                         KNotification::CloseOnTimeout,
-                         QStringLiteral("ksmserver"));
+    KNotification::event(QStringLiteral("locked"), i18n("Screen locked"), QPixmap(), nullptr, KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
 
     // blank the screen
     showLockWindow();
@@ -446,10 +416,12 @@ static bool grabMouse();
 class XServerGrabber
 {
 public:
-    XServerGrabber() {
+    XServerGrabber()
+    {
         xcb_grab_server(QX11Info::connection());
     }
-    ~XServerGrabber() {
+    ~XServerGrabber()
+    {
         xcb_ungrab_server(QX11Info::connection());
         xcb_flush(QX11Info::connection());
     }
@@ -491,7 +463,7 @@ bool KSldApp::establishGrab()
                 continue;
             }
             XIEventMask mask;
-            uchar bitmask[] = { 0, 0 };
+            uchar bitmask[] = {0, 0};
             mask.deviceid = masters[i].deviceid;
             mask.mask = bitmask;
             mask.mask_len = sizeof(bitmask);
@@ -500,9 +472,15 @@ bool KSldApp::establishGrab()
             XISetMask(bitmask, XI_Motion);
             XISetMask(bitmask, XI_Enter);
             XISetMask(bitmask, XI_Leave);
-            const int result = XIGrabDevice(dpy, masters[i].deviceid, QX11Info::appRootWindow(),
-                                            XCB_TIME_CURRENT_TIME, XCB_CURSOR_NONE, XIGrabModeAsync,
-                                            XIGrabModeAsync, True, &mask);
+            const int result = XIGrabDevice(dpy,
+                                            masters[i].deviceid,
+                                            QX11Info::appRootWindow(),
+                                            XCB_TIME_CURRENT_TIME,
+                                            XCB_CURSOR_NONE,
+                                            XIGrabModeAsync,
+                                            XIGrabModeAsync,
+                                            True,
+                                            &mask);
             if (result != XIGrabSuccess) {
                 success = false;
                 break;
@@ -528,19 +506,15 @@ bool KSldApp::establishGrab()
 
 static bool grabKeyboard()
 {
-    int rv = XGrabKeyboard( QX11Info::display(), QX11Info::appRootWindow(),
-        True, GrabModeAsync, GrabModeAsync, CurrentTime );
+    int rv = XGrabKeyboard(QX11Info::display(), QX11Info::appRootWindow(), True, GrabModeAsync, GrabModeAsync, CurrentTime);
 
     return (rv == GrabSuccess);
 }
 
 static bool grabMouse()
 {
-#define GRABEVENTS ButtonPressMask | ButtonReleaseMask | PointerMotionMask | \
-                   EnterWindowMask | LeaveWindowMask
-    int rv = XGrabPointer( QX11Info::display(), QX11Info::appRootWindow(),
-            True, GRABEVENTS, GrabModeAsync, GrabModeAsync, None,
-            None, CurrentTime );
+#define GRABEVENTS ButtonPressMask | ButtonReleaseMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask
+    int rv = XGrabPointer(QX11Info::display(), QX11Info::appRootWindow(), True, GRABEVENTS, GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
 #undef GRABEVENTS
 
     return (rv == GrabSuccess);
@@ -578,12 +552,7 @@ void KSldApp::doUnlock()
     m_greeterCrashedCounter = 0;
     endGraceTime();
     m_waylandServer->stop();
-    KNotification::event(QStringLiteral("unlocked"),
-                         i18n("Screen unlocked"),
-                         QPixmap(),
-                         nullptr,
-                         KNotification::CloseOnTimeout,
-                         QStringLiteral("ksmserver"));
+    KNotification::event(QStringLiteral("unlocked"), i18n("Screen unlocked"), QPixmap(), nullptr, KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
     emit unlocked();
     emit lockStateChanged();
 }
@@ -661,14 +630,16 @@ void KSldApp::showLockWindow()
         if (m_isX11) {
             m_lockWindow = new X11Locker(this);
 
-            connect(m_lockWindow, &AbstractLocker::userActivity, m_lockWindow,
+            connect(
+                m_lockWindow,
+                &AbstractLocker::userActivity,
+                m_lockWindow,
                 [this]() {
                     if (isGraceTime()) {
                         unlock();
                     }
                 },
-                Qt::QueuedConnection
-            );
+                Qt::QueuedConnection);
         }
 
         if (m_isWayland) {
@@ -679,11 +650,14 @@ void KSldApp::showLockWindow()
         }
         m_lockWindow->setGlobalAccel(m_globalAccel);
 
-        connect(m_lockWindow, &AbstractLocker::lockWindowShown, m_lockWindow,
+        connect(
+            m_lockWindow,
+            &AbstractLocker::lockWindowShown,
+            m_lockWindow,
             [this] {
                 lockScreenShown();
-            }
-        , Qt::QueuedConnection);
+            },
+            Qt::QueuedConnection);
 
         connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
@@ -772,7 +746,7 @@ void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
 bool KSldApp::event(QEvent *event)
 {
     if (event->type() == QEvent::KeyPress && m_globalAccel) {
-        if (m_globalAccel->keyEvent(static_cast<QKeyEvent*>(event))) {
+        if (m_globalAccel->keyEvent(static_cast<QKeyEvent *>(event))) {
             event->setAccepted(true);
         }
     }

@@ -30,11 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 QList<QKeySequence> KScreenSaverSettings::defaultShortcuts()
 {
-    return {
-        Qt::META | Qt::Key_L,
-        Qt::ALT | Qt::CTRL | Qt::Key_L,
-        Qt::Key_ScreenSaver
-    };
+    return {Qt::META | Qt::Key_L, Qt::ALT | Qt::CTRL | Qt::Key_L, Qt::Key_ScreenSaver};
 }
 
 QString KScreenSaverSettings::defaultWallpaperPlugin()
@@ -42,8 +38,8 @@ QString KScreenSaverSettings::defaultWallpaperPlugin()
     return QStringLiteral("org.kde.image");
 }
 
-
-class KScreenSaverSettingsStore : public QObject {
+class KScreenSaverSettingsStore : public QObject
+{
     Q_OBJECT
     Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut)
 public:
@@ -60,7 +56,7 @@ public:
         KGlobalAccel::self()->setShortcut(m_lockAction, parent->defaultShortcuts());
     }
 
-    QKeySequence shortcut() const 
+    QKeySequence shortcut() const
     {
         const QList<QKeySequence> shortcuts = KGlobalAccel::self()->shortcut(m_lockAction);
         if (shortcuts.count() > 0) {
@@ -68,7 +64,8 @@ public:
         }
         return QKeySequence();
     }
-    void  setShortcut(const QKeySequence &sequence) const {
+    void setShortcut(const QKeySequence &sequence) const
+    {
         auto shortcuts = KGlobalAccel::self()->shortcut(m_lockAction);
         if (shortcuts.isEmpty()) {
             shortcuts << QKeySequence();
@@ -76,6 +73,7 @@ public:
         shortcuts[0] = sequence;
         KGlobalAccel::self()->setShortcut(m_lockAction, shortcuts, KGlobalAccel::NoAutoloading);
     }
+
 private:
     KActionCollection *m_actionCollection;
     QAction *m_lockAction;
@@ -95,16 +93,19 @@ KScreenSaverSettings::KScreenSaverSettings(QObject *parent)
 
     const auto wallpaperPackages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Wallpaper"));
     for (auto &package : wallpaperPackages) {
-         m_availableWallpaperPlugins.append({package.name(), package.pluginId()});
+        m_availableWallpaperPlugins.append({package.name(), package.pluginId()});
     }
     QCollator collator;
     collator.setCaseSensitivity(Qt::CaseInsensitive);
-    std::sort(m_availableWallpaperPlugins.begin(), m_availableWallpaperPlugins.end(),
-              [] (const WallpaperInfo &w1, const WallpaperInfo &w2) {return w1.name < w2.name;});
+    std::sort(m_availableWallpaperPlugins.begin(), m_availableWallpaperPlugins.end(), [](const WallpaperInfo &w1, const WallpaperInfo &w2) {
+        return w1.name < w2.name;
+    });
 
     auto shortcutItem = new KPropertySkeletonItem(m_store, "shortcut", defaultShortcuts().first());
     addItem(shortcutItem, QStringLiteral("shortcut"));
-    shortcutItem->setNotifyFunction([this]{emit shortcutChanged();});
+    shortcutItem->setNotifyFunction([this] {
+        emit shortcutChanged();
+    });
 }
 
 KScreenSaverSettings::~KScreenSaverSettings()
@@ -125,6 +126,5 @@ void KScreenSaverSettings::setShortcut(const QKeySequence &sequence)
 {
     findItem(QStringLiteral("shortcut"))->setProperty(sequence);
 }
-
 
 #include "kscreensaversettings.moc"

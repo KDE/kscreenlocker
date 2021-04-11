@@ -22,9 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // KDE Frameworks
 #include <KIdleTime>
 // Qt
-#include <QtTest>
 #include <QProcess>
 #include <QX11Info>
+#include <QtTest>
 // xcb
 #include <xcb/xcb.h>
 #include <xcb/xtest.h>

@@ -36,7 +36,6 @@ class ConfigPropertyMap;
 
 namespace ScreenLocker
 {
-
 class LnFIntegration : public QObject
 {
     Q_OBJECT
@@ -49,19 +48,23 @@ public:
 
     void init();
 
-    void setConfig(const KSharedConfig::Ptr &config) {
+    void setConfig(const KSharedConfig::Ptr &config)
+    {
         m_config = config;
     }
 
-    void setPackage(const KPackage::Package &package) {
+    void setPackage(const KPackage::Package &package)
+    {
         m_package = package;
     }
 
-    KPackage::Package package() const {
+    KPackage::Package package() const
+    {
         return m_package;
     }
 
-    KDeclarative::ConfigPropertyMap *configuration() const {
+    KDeclarative::ConfigPropertyMap *configuration() const
+    {
         return m_configuration;
     }
 

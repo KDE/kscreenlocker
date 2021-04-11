@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace ScreenLocker
 {
-
 WaylandLocker::WaylandLocker(QObject *parent)
     : AbstractLocker(parent)
 {
@@ -35,12 +34,10 @@ WaylandLocker::WaylandLocker(QObject *parent)
         for (auto s : screens) {
             connect(s, &QScreen::geometryChanged, this, &WaylandLocker::updateGeometryOfBackground);
         }
-        connect(qApp, &QGuiApplication::screenAdded, this,
-            [this] (QScreen *s) {
-                connect(s, &QScreen::geometryChanged, this, &WaylandLocker::updateGeometryOfBackground);
-                updateGeometryOfBackground();
-            }
-        );
+        connect(qApp, &QGuiApplication::screenAdded, this, [this](QScreen *s) {
+            connect(s, &QScreen::geometryChanged, this, &WaylandLocker::updateGeometryOfBackground);
+            updateGeometryOfBackground();
+        });
         connect(qApp, &QGuiApplication::screenRemoved, this, &WaylandLocker::updateGeometryOfBackground);
     }
 }

@@ -31,50 +31,49 @@
  *******************************************************************/
 
 #ifdef HAVE_SHADOW
-#include <string.h>
-#include <stdlib.h>
 #include <pwd.h>
+#include <stdlib.h>
+#include <string.h>
 
 #ifndef __hpux
 #include <shadow.h>
 #endif
 
-AuthReturn Authenticate(const char *method,
-        const char *login, char *(*conv) (ConvRequest, const char *))
+AuthReturn Authenticate(const char *method, const char *login, char *(*conv)(ConvRequest, const char *))
 {
-  char          *typed_in_password;
-  char          *crpt_passwd;
-  char          *password;
-  struct passwd *pw;
-  struct spwd   *spw;
+    char *typed_in_password;
+    char *crpt_passwd;
+    char *password;
+    struct passwd *pw;
+    struct spwd *spw;
 
-  if (strcmp(method, "classic"))
-    return AuthError;
+    if (strcmp(method, "classic"))
+        return AuthError;
 
-  if (!(pw = getpwnam(login)))
-    return AuthAbort;
+    if (!(pw = getpwnam(login)))
+        return AuthAbort;
 
-  spw = getspnam(login);
-  password = spw ? spw->sp_pwdp : pw->pw_passwd;
+    spw = getspnam(login);
+    password = spw ? spw->sp_pwdp : pw->pw_passwd;
 
-  if (!*password)
-    return AuthOk;
+    if (!*password)
+        return AuthOk;
 
-  if (!(typed_in_password = conv(ConvGetHidden, 0)))
-    return AuthAbort;
+    if (!(typed_in_password = conv(ConvGetHidden, 0)))
+        return AuthAbort;
 
-#if defined( __linux__ ) && defined( HAVE_PW_ENCRYPT )
-  crpt_passwd = pw_encrypt(typed_in_password, password);  /* (1) */
-#else  
-  crpt_passwd = crypt(typed_in_password, password);
+#if defined(__linux__) && defined(HAVE_PW_ENCRYPT)
+    crpt_passwd = pw_encrypt(typed_in_password, password); /* (1) */
+#else
+    crpt_passwd = crypt(typed_in_password, password);
 #endif
 
-  if (crpt_passwd && !strcmp(password, crpt_passwd )) {
+    if (crpt_passwd && !strcmp(password, crpt_passwd)) {
+        dispose(typed_in_password);
+        return AuthOk; /* Success */
+    }
     dispose(typed_in_password);
-    return AuthOk; /* Success */
-  }
-  dispose(typed_in_password);
-  return AuthBad; /* Password wrong or account locked */
+    return AuthBad; /* Password wrong or account locked */
 }
 
 /*

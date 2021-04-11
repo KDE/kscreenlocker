@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 #include <KQuickAddons/QtQuickSettings>
 
-#include <QDateTime>
 #include <QCommandLineParser>
+#include <QDateTime>
 #include <QSessionManager>
 
 #include <iostream>
@@ -36,8 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <sys/prctl.h>
 #endif
 #if HAVE_SYS_PROCCTL_H
-#include <unistd.h>
 #include <sys/procctl.h>
+#include <unistd.h>
 #endif
 
 static void signalHandler(int signum)
@@ -47,9 +47,8 @@ static void signalHandler(int signum)
     if (!instance)
         return;
 
-    switch(signum)
-    {
-      case SIGTERM:
+    switch (signum) {
+    case SIGTERM:
         // exit gracefully to not leave behind screensaver processes (bug#224200)
         // return exit code 1 to indicate that a valid password was not entered,
         // to prevent circumventing the password input by sending a SIGTERM
@@ -57,14 +56,14 @@ static void signalHandler(int signum)
         qCDebug(KSCREENLOCKER_GREET) << "Greeter received SIGTERM. Will exit with error.";
         instance->exit(1);
         break;
-      case SIGUSR1:
+    case SIGUSR1:
         qCDebug(KSCREENLOCKER_GREET) << "Greeter received SIGUSR1. Will lock immediately.";
         instance->lockImmediately();
         break;
     }
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     // disable ptrace on the greeter
 #if HAVE_PR_SET_DUMPABLE
@@ -108,28 +107,22 @@ int main(int argc, char* argv[])
     parser.addHelpOption();
     parser.addVersionOption();
 
-    QCommandLineOption testingOption(QStringLiteral("testing"),
-                                     i18n("Starts the greeter in testing mode"));
+    QCommandLineOption testingOption(QStringLiteral("testing"), i18n("Starts the greeter in testing mode"));
 
     QCommandLineOption themeOption(QStringLiteral("theme"),
-                                     i18n("Starts the greeter with the selected theme (only in Testing mode)"),
-                                     QStringLiteral("theme"),
-                                     QStringLiteral(""));
+                                   i18n("Starts the greeter with the selected theme (only in Testing mode)"),
+                                   QStringLiteral("theme"),
+                                   QStringLiteral(""));
 
-    QCommandLineOption immediateLockOption(QStringLiteral("immediateLock"),
-                                           i18n("Lock immediately, ignoring any grace time etc."));
+    QCommandLineOption immediateLockOption(QStringLiteral("immediateLock"), i18n("Lock immediately, ignoring any grace time etc."));
     QCommandLineOption graceTimeOption(QStringLiteral("graceTime"),
                                        i18n("Delay till the lock user interface gets shown in milliseconds."),
                                        QStringLiteral("milliseconds"),
                                        QStringLiteral("0"));
-    QCommandLineOption nolockOption(QStringLiteral("nolock"),
-                                    i18n("Don't show any lock user interface."));
-    QCommandLineOption switchUserOption(QStringLiteral("switchuser"),
-                                    i18n("Default to the switch user UI."));
+    QCommandLineOption nolockOption(QStringLiteral("nolock"), i18n("Don't show any lock user interface."));
+    QCommandLineOption switchUserOption(QStringLiteral("switchuser"), i18n("Default to the switch user UI."));
 
-    QCommandLineOption waylandFdOption(QStringLiteral("ksldfd"),
-                                       i18n("File descriptor for connecting to ksld."),
-                                       QStringLiteral("fd"));
+    QCommandLineOption waylandFdOption(QStringLiteral("ksldfd"), i18n("File descriptor for connecting to ksld."), QStringLiteral("fd"));
 
     parser.addOption(testingOption);
     parser.addOption(themeOption);
@@ -144,7 +137,7 @@ int main(int argc, char* argv[])
         app.setTesting(true);
         app.setImmediateLock(true);
 
-        //parse theme option
+        // parse theme option
         const QString theme = parser.value(themeOption);
         if (!theme.isEmpty()) {
             app.setTheme(theme);

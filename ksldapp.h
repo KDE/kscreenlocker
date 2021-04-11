@@ -37,11 +37,10 @@ class PowerManagementInhibition;
 
 namespace ScreenLocker
 {
-
 enum class EstablishLock {
-    Immediate, ///Require password from the start. Use if invoked explicitly by the user
-    Delayed, ///Allow the user to log back in without a password for a configured grace time.
-    DefaultToSwitchUser, ///UI should default to showing the "switch user dialog"
+    Immediate, /// Require password from the start. Use if invoked explicitly by the user
+    Delayed, /// Allow the user to log back in without a password for a configured grace time.
+    DefaultToSwitchUser, /// UI should default to showing the "switch user dialog"
 };
 
 class AbstractLocker;
@@ -60,12 +59,13 @@ public:
         Locked,
     };
 
-    static KSldApp* self();
+    static KSldApp *self();
 
-    explicit KSldApp(QObject * parent = nullptr);
+    explicit KSldApp(QObject *parent = nullptr);
     ~KSldApp() override;
 
-    LockState lockState() const {
+    LockState lockState() const
+    {
         return m_lockState;
     }
 
@@ -99,29 +99,34 @@ public:
      * For testing
      * @internal
      **/
-    int idleId() const {
+    int idleId() const
+    {
         return m_idleId;
     }
     /**
      * For testing
      * @internal
      **/
-    void setIdleId(int idleId) {
+    void setIdleId(int idleId)
+    {
         m_idleId = idleId;
     }
     /**
      * For testing
      * @internal
      **/
-    void setGraceTime(int msec) {
+    void setGraceTime(int msec)
+    {
         m_lockGrace = msec;
     }
 
-    bool forceSoftwareRendering() const {
+    bool forceSoftwareRendering() const
+    {
         return m_forceSoftwareRendering;
     }
 
-    void setForceSoftwareRendering(bool force) {
+    void setForceSoftwareRendering(bool force)
+    {
         m_forceSoftwareRendering = force;
     }
 

@@ -37,9 +37,9 @@
 #ifndef KCHECKPASS_H_
 #define KCHECKPASS_H_
 
-#include <config-workspace.h>
-#include <config-unix.h>
 #include <config-kcheckpass.h>
+#include <config-unix.h>
+#include <config-workspace.h>
 
 #ifdef HAVE_CRYPT_H
 #include <crypt.h>
@@ -56,7 +56,6 @@
 #define _PATH_TMP "/tmp/"
 #endif
 
-
 #ifdef ultrix
 #include <auth.h>
 #endif
@@ -70,13 +69,13 @@
 #endif
 
 #if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ > 4)
-# define ATTR_UNUSED __attribute__((unused))
-# define ATTR_NORETURN __attribute__((noreturn))
-# define ATTR_PRINTFLIKE(fmt,var) __attribute__((format(printf,fmt,var)))
+#define ATTR_UNUSED __attribute__((unused))
+#define ATTR_NORETURN __attribute__((noreturn))
+#define ATTR_PRINTFLIKE(fmt, var) __attribute__((format(printf, fmt, var)))
 #else
-# define ATTR_UNUSED
-# define ATTR_NORETURN
-# define ATTR_PRINTFLIKE(fmt,var)
+#define ATTR_UNUSED
+#define ATTR_NORETURN
+#define ATTR_PRINTFLIKE(fmt, var)
 #endif
 
 #include "kcheckpass-enums.h"
@@ -88,10 +87,7 @@ extern "C" {
 /*****************************************************************
  * Authenticates user
  *****************************************************************/
-AuthReturn Authenticate(
-        const char *method,
-        const char *user,
-        char *(*conv) (ConvRequest, const char *));
+AuthReturn Authenticate(const char *method, const char *user, char *(*conv)(ConvRequest, const char *));
 
 /*****************************************************************
  * Output a message to stderr

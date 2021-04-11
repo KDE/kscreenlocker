@@ -33,7 +33,6 @@ class GlobalAccel;
 
 namespace ScreenLocker
 {
-
 class AbstractLocker;
 
 class BackgroundWindow : public QRasterWindow
@@ -65,7 +64,8 @@ public:
 
     virtual void addAllowedWindow(quint32 window);
 
-    void setGlobalAccel(GlobalAccel *ga) {
+    void setGlobalAccel(GlobalAccel *ga)
+    {
         m_globalAccel = ga;
     }
 
@@ -76,10 +76,10 @@ Q_SIGNALS:
     void lockWindowShown();
 
 protected:
-
     virtual void stayOnTop() = 0;
 
-    GlobalAccel* globalAccel() {
+    GlobalAccel *globalAccel()
+    {
         return m_globalAccel;
     }
     QScopedPointer<BackgroundWindow> m_background;
@@ -88,9 +88,8 @@ private:
     GlobalAccel *m_globalAccel = nullptr;
 
     friend class BackgroundWindow;
-
 };
 
 }
 
-#endif //ABSTRACTLOCKER_H
+#endif // ABSTRACTLOCKER_H

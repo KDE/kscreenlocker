@@ -33,7 +33,6 @@ class Display;
 
 namespace ScreenLocker
 {
-
 class WaylandLocker : public AbstractLocker
 {
     Q_OBJECT
@@ -50,7 +49,6 @@ public:
 private:
     void stayOnTop() override;
     void updateGeometryOfBackground();
-
 };
 
 }

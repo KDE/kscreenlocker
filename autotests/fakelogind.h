@@ -33,7 +33,8 @@ public:
     explicit FakeLogind(QObject *parent = nullptr);
     ~FakeLogind() override;
 
-    FakeLogindSession *session() const {
+    FakeLogindSession *session() const
+    {
         return m_session;
     }
 
@@ -54,7 +55,8 @@ public:
     explicit FakeLogindSession(const QString &path, QObject *parent = nullptr);
     ~FakeLogindSession() override;
 
-    const QString &path() {
+    const QString &path()
+    {
         return m_path;
     }
 

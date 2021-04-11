@@ -21,15 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SCREENLOCKER_INTERFACE_H
 #define SCREENLOCKER_INTERFACE_H
 
-#include <QObject>
 #include <QDBusContext>
 #include <QDBusMessage>
+#include <QObject>
 
 class QDBusServiceWatcher;
 
 namespace ScreenLocker
 {
-
 class InhibitRequest
 {
 public:

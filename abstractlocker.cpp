@@ -25,16 +25,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "abstractlocker.h"
 
-#include <QScreen>
-#include <QPainter>
 #include <QApplication>
+#include <QPainter>
+#include <QScreen>
 #include <QtDBus>
 
 #include <KLocalizedString>
 
 namespace ScreenLocker
 {
-
 BackgroundWindow::BackgroundWindow(AbstractLocker *lock)
     : QRasterWindow()
     , m_lock(lock)
@@ -45,25 +44,30 @@ BackgroundWindow::BackgroundWindow(AbstractLocker *lock)
 
 BackgroundWindow::~BackgroundWindow() = default;
 
-void BackgroundWindow::paintEvent(QPaintEvent* )
+void BackgroundWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.fillRect(0, 0, width(), height(), Qt::black);
     if (m_greeterFailure) {
-        auto text =    ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
-                             "In order to unlock it either ConsoleKit or LoginD is needed, none of\n"
-                             "which could be found on your system.");
-        auto text_ck = ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
-                             "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-                             "log in as root and execute the command:\n\n"
-                             "# ck-unlock-session <session-name>\n\n");
-        auto text_ld = ki18n("The screen locker is broken and unlocking is not possible anymore.\n"
-                             "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-                             "log in and execute the command:\n\n"
-                             "loginctl unlock-session %1\n\n"
-                             "Afterwards switch back to the running session (Ctrl+Alt+F%2).");
+        auto text = ki18n(
+            "The screen locker is broken and unlocking is not possible anymore.\n"
+            "In order to unlock it either ConsoleKit or LoginD is needed, none of\n"
+            "which could be found on your system.");
+        auto text_ck = ki18n(
+            "The screen locker is broken and unlocking is not possible anymore.\n"
+            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+            "log in as root and execute the command:\n\n"
+            "# ck-unlock-session <session-name>\n\n");
+        auto text_ld = ki18n(
+            "The screen locker is broken and unlocking is not possible anymore.\n"
+            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+            "log in and execute the command:\n\n"
+            "loginctl unlock-session %1\n\n"
+            "Afterwards switch back to the running session (Ctrl+Alt+F%2).");
 
-        auto haveService = [](QString service){return QDBusConnection::systemBus().interface()->isServiceRegistered(service);};
+        auto haveService = [](QString service) {
+            return QDBusConnection::systemBus().interface()->isServiceRegistered(service);
+        };
         if (haveService(QStringLiteral("org.freedesktop.ConsoleKit"))) {
             text = text_ck;
         } else if (haveService(QStringLiteral("org.freedesktop.login1"))) {
@@ -100,7 +104,7 @@ void BackgroundWindow::emergencyShow()
 AbstractLocker::AbstractLocker(QObject *parent)
     : QObject(parent)
 {
-    if (qobject_cast<QGuiApplication*>(QCoreApplication::instance())) {
+    if (qobject_cast<QGuiApplication *>(QCoreApplication::instance())) {
         m_background.reset(new BackgroundWindow(this));
     }
 }
@@ -123,4 +127,3 @@ void AbstractLocker::addAllowedWindow(quint32 windows)
 }
 
 }
-

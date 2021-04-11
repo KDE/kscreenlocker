@@ -20,11 +20,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "kcm.h"
+#include "appearancesettings.h"
+#include "kscreenlockerdata.h"
+#include "lnf_integration.h"
 #include "screenlocker_interface.h"
 #include "wallpaper_integration.h"
-#include "lnf_integration.h"
-#include "kscreenlockerdata.h"
-#include "appearancesettings.h"
 
 #include <KAboutData>
 #include <KConfigLoader>
@@ -45,19 +45,21 @@ ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
 {
     registerSettings(&KScreenSaverSettings::getInstance());
 
-    constexpr const char* url = "org.kde.private.kcms.screenlocker";
+    constexpr const char *url = "org.kde.private.kcms.screenlocker";
     qRegisterMetaType<QVector<WallpaperInfo>>("QVector<WallpaperInfo>");
     qmlRegisterAnonymousType<KScreenSaverSettings>(url, 1);
     qmlRegisterAnonymousType<WallpaperInfo>(url, 1);
     qmlRegisterAnonymousType<ScreenLocker::WallpaperIntegration>(url, 1);
     qmlRegisterAnonymousType<KDeclarative::ConfigPropertyMap>(url, 1);
     qmlProtectModule(url, 1);
-    KAboutData *about = new KAboutData(QStringLiteral("kcm_screenlocker"), i18n("Screen Locking"),
-                                       QStringLiteral("1.0"), QString(), KAboutLicense::GPL);
+    KAboutData *about = new KAboutData(QStringLiteral("kcm_screenlocker"), i18n("Screen Locking"), QStringLiteral("1.0"), QString(), KAboutLicense::GPL);
     about->addAuthor(i18n("Martin Gräßlin"), QString(), QStringLiteral("mgraesslin@kde.org"));
     about->addAuthor(i18n("Kevin Ottens"), QString(), QStringLiteral("kevin.ottens@enioka.com"));
     setAboutData(about);
-    connect(&KScreenSaverSettings::getInstance(), &KScreenSaverSettings::wallpaperPluginIdChanged, m_appearanceSettings, &AppearanceSettings::loadWallpaperConfig);
+    connect(&KScreenSaverSettings::getInstance(),
+            &KScreenSaverSettings::wallpaperPluginIdChanged,
+            m_appearanceSettings,
+            &AppearanceSettings::loadWallpaperConfig);
     connect(m_appearanceSettings, &AppearanceSettings::currentWallpaperChanged, this, &ScreenLockerKcm::currentWallpaperChanged);
 }
 
@@ -75,9 +77,7 @@ void ScreenLockerKcm::save()
     m_appearanceSettings->save();
 
     // reconfigure through DBus
-    OrgKdeScreensaverInterface interface(QStringLiteral("org.kde.screensaver"),
-                                         QStringLiteral("/ScreenSaver"),
-                                         QDBusConnection::sessionBus());
+    OrgKdeScreensaverInterface interface(QStringLiteral("org.kde.screensaver"), QStringLiteral("/ScreenSaver"), QDBusConnection::sessionBus());
     if (interface.isValid()) {
         interface.configure();
     }
@@ -108,12 +108,12 @@ bool ScreenLockerKcm::isDefaults() const
     return m_appearanceSettings->isDefaults();
 }
 
-KDeclarative::ConfigPropertyMap * ScreenLockerKcm::wallpaperConfiguration() const
+KDeclarative::ConfigPropertyMap *ScreenLockerKcm::wallpaperConfiguration() const
 {
     return m_appearanceSettings->wallpaperConfiguration();
 }
 
-KDeclarative::ConfigPropertyMap * ScreenLockerKcm::lnfConfiguration() const
+KDeclarative::ConfigPropertyMap *ScreenLockerKcm::lnfConfiguration() const
 {
     return m_appearanceSettings->lnfConfiguration();
 }

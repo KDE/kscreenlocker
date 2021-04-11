@@ -40,12 +40,11 @@ namespace KDeclarative
 class ConfigPropertyMap;
 }
 
-
 class ScreenLockerKcm : public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
 public:
-    explicit ScreenLockerKcm(QObject *parent = nullptr, const QVariantList& args = QVariantList());
+    explicit ScreenLockerKcm(QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
     Q_PROPERTY(KScreenSaverSettings *settings READ settings CONSTANT)
     Q_PROPERTY(KDeclarative::ConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY currentWallpaperChanged)
@@ -56,7 +55,8 @@ public:
     Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
     Q_PROPERTY(bool isDefaultsAppearance READ isDefaultsAppearance NOTIFY isDefaultsAppearanceChanged)
 
-    Q_INVOKABLE QVector<WallpaperInfo> availableWallpaperPlugins() {
+    Q_INVOKABLE QVector<WallpaperInfo> availableWallpaperPlugins()
+    {
         return KScreenSaverSettings::getInstance().availableWallpaperPlugins();
     }
 

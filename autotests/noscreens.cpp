@@ -18,16 +18,16 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
-#include <QtTest>
 #include "../ksldapp.h"
 #include <KWayland/Server/clientconnection.h>
 #include <KWayland/Server/compositor_interface.h>
 #include <KWayland/Server/datadevicemanager_interface.h>
 #include <KWayland/Server/display.h>
 #include <KWayland/Server/output_interface.h>
+#include <KWayland/Server/plasmashell_interface.h>
 #include <KWayland/Server/seat_interface.h>
 #include <KWayland/Server/shell_interface.h>
-#include <KWayland/Server/plasmashell_interface.h>
+#include <QtTest>
 
 #include <sys/socket.h>
 
@@ -84,46 +84,37 @@ void NoScreensTest::init()
     app->setGreeterEnvironment(env);
     app->initialize();
 
-    connect(app, &ScreenLocker::KSldApp::aboutToLock,
-            this, [this, app] {
-                int sx[2];
-                QVERIFY(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx) >= 0);
+    connect(app, &ScreenLocker::KSldApp::aboutToLock, this, [this, app] {
+        int sx[2];
+        QVERIFY(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx) >= 0);
 
-                m_clientConnection = m_display->createClient(sx[0]);
-                QVERIFY(m_clientConnection);
-                connect(m_clientConnection, &ClientConnection::disconnected, this, [this] {
-                    // The API is currently ill-defined about the ownership of a client connection
-                    // when calling createClient server-side.
-                    m_clientConnection = nullptr;
-                });
-                app->setWaylandFd(sx[1]);
-                connect(m_seat, &SeatInterface::timestampChanged,
-                        app, &ScreenLocker::KSldApp::userActivity);
-
+        m_clientConnection = m_display->createClient(sx[0]);
+        QVERIFY(m_clientConnection);
+        connect(m_clientConnection, &ClientConnection::disconnected, this, [this] {
+            // The API is currently ill-defined about the ownership of a client connection
+            // when calling createClient server-side.
+            m_clientConnection = nullptr;
+        });
+        app->setWaylandFd(sx[1]);
+        connect(m_seat, &SeatInterface::timestampChanged, app, &ScreenLocker::KSldApp::userActivity);
     });
-    connect(app, &ScreenLocker::KSldApp::unlocked,
-            this, [this, app] {
-                if (m_clientConnection) {
-                    delete m_clientConnection;
-                    m_clientConnection = nullptr;
-                }
-                disconnect(m_seat, &SeatInterface::timestampChanged,
-                           app, &ScreenLocker::KSldApp::userActivity);
-    });
-
-    connect(m_shell, &ShellInterface::surfaceCreated, this,
-        [this] (ShellSurfaceInterface *surface) {
-            m_surface = surface->surface();
-            connect(surface->surface(), &SurfaceInterface::damaged, this,
-                [this, surface] {
-                    emit surfaceShown();
-                    ScreenLocker::KSldApp::self()->lockScreenShown();
-                    surface->surface()->frameRendered(0);
-                    surface->client()->flush();
-                }
-            );
+    connect(app, &ScreenLocker::KSldApp::unlocked, this, [this, app] {
+        if (m_clientConnection) {
+            delete m_clientConnection;
+            m_clientConnection = nullptr;
         }
-    );
+        disconnect(m_seat, &SeatInterface::timestampChanged, app, &ScreenLocker::KSldApp::userActivity);
+    });
+
+    connect(m_shell, &ShellInterface::surfaceCreated, this, [this](ShellSurfaceInterface *surface) {
+        m_surface = surface->surface();
+        connect(surface->surface(), &SurfaceInterface::damaged, this, [this, surface] {
+            emit surfaceShown();
+            ScreenLocker::KSldApp::self()->lockScreenShown();
+            surface->surface()->frameRendered(0);
+            surface->client()->flush();
+        });
+    });
 }
 
 void NoScreensTest::cleanup()

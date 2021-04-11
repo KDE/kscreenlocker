@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "../greeter/authenticator.h"
-#include <QGuiApplication>
 #include <QCommandLineParser>
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
@@ -27,10 +27,8 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QCommandLineParser parser;
-    QCommandLineOption delayedOption(QStringLiteral("delayed"),
-                                     QStringLiteral("KCheckpass is created at startup, the authentication is delayed"));
-    QCommandLineOption directOption(QStringLiteral("direct"),
-                                    QStringLiteral("A new KCheckpass gets created when trying to authenticate"));
+    QCommandLineOption delayedOption(QStringLiteral("delayed"), QStringLiteral("KCheckpass is created at startup, the authentication is delayed"));
+    QCommandLineOption directOption(QStringLiteral("direct"), QStringLiteral("A new KCheckpass gets created when trying to authenticate"));
     parser.addOption(directOption);
     parser.addOption(delayedOption);
     parser.addHelpOption();

@@ -223,7 +223,7 @@ set_target_properties(KScreenLocker PROPERTIES COMPILE_FLAGS "-fPIC")
 add_library(PW::KScreenLocker ALIAS KScreenLocker)
 
 # add clang-format target for all our real source files
-file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 generate_export_header(KScreenLocker

@@ -32,11 +32,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace ScreenLocker
 {
-
 LnFIntegration::LnFIntegration(QObject *parent)
     : QObject(parent)
 {
-    qRegisterMetaType<KDeclarative::ConfigPropertyMap*>();
+    qRegisterMetaType<KDeclarative::ConfigPropertyMap *>();
 }
 
 LnFIntegration::~LnFIntegration() = default;
@@ -51,7 +50,6 @@ void LnFIntegration::init()
         m_configuration->setAutosave(false);
     }
 }
-
 
 KConfigLoader *LnFIntegration::configScheme()
 {

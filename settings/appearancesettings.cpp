@@ -23,10 +23,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KPackage/PackageLoader>
 
 #include "kscreensaversettings.h"
-#include "wallpaper_integration.h"
 #include "lnf_integration.h"
+#include "wallpaper_integration.h"
 
-AppearanceSettings::AppearanceSettings(QObject *parent) : QObject(parent)
+AppearanceSettings::AppearanceSettings(QObject *parent)
+    : QObject(parent)
 {
 }
 
@@ -134,7 +135,7 @@ void AppearanceSettings::loadWallpaperConfig()
 {
     if (m_wallpaperIntegration) {
         if (m_wallpaperIntegration->pluginName() == KScreenSaverSettings::getInstance().wallpaperPluginId()) {
-            //nothing changed
+            // nothing changed
             return;
         }
         delete m_wallpaperIntegration;

@@ -21,9 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOGIND_H
 
 #include <QDBusConnection>
+#include <QDBusPendingCallWatcher>
 #include <QDBusUnixFileDescriptor>
 #include <QObject>
-#include <QDBusPendingCallWatcher>
 
 class QDBusServiceWatcher;
 
@@ -34,7 +34,8 @@ public:
     explicit LogindIntegration(QObject *parent = nullptr);
     ~LogindIntegration() override;
 
-    bool isConnected() const {
+    bool isConnected() const
+    {
         return m_connected;
     }
 

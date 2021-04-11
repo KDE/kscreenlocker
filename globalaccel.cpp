@@ -29,9 +29,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QRegularExpression>
 #include <QX11Info>
 
+#include <X11/keysym.h>
 #include <xcb/xcb.h>
 #include <xcb/xcb_keysyms.h>
-#include <X11/keysym.h>
 
 static const QString s_kglobalAccelService = QStringLiteral("org.kde.kglobalaccel");
 static const QString s_componentInterface = QStringLiteral("org.kde.kglobalaccel.Component");
@@ -44,21 +44,14 @@ static const QString s_componentInterface = QStringLiteral("org.kde.kglobalaccel
  * E.g. plasmashell might accept media shortcuts, but not shortcuts for switching the activity.
  **/
 static const QMap<QString, QRegularExpression> s_shortcutWhitelist{
-    {QStringLiteral("/component/mediacontrol"), QRegularExpression(
-        QStringLiteral("stopmedia|nextmedia|previousmedia|playpausemedia")
-    )},
-    {QStringLiteral("/component/kmix"), QRegularExpression(
-        QStringLiteral("mute|decrease_volume|increase_volume")
-    )},
-    {QStringLiteral("/component/org_kde_powerdevil"), QRegularExpression(
-        QStringLiteral("Increase Screen Brightness|Decrease Screen Brightness|Increase Keyboard Brightness|Decrease Keyboard Brightness|Turn Off Screen|Sleep|Hibernate")
-    )},
-    {QStringLiteral("/component/KDE_Keyboard_Layout_Switcher"), QRegularExpression(
-        QStringLiteral("Switch to Next Keyboard Layout|Switch keyboard layout to .*")
-    )},
-    {QStringLiteral("/component/kcm_touchpad"), QRegularExpression(
-        QStringLiteral("Toggle Touchpad|Enable Touchpad|Disable Touchpad")
-    )},
+    {QStringLiteral("/component/mediacontrol"), QRegularExpression(QStringLiteral("stopmedia|nextmedia|previousmedia|playpausemedia"))},
+    {QStringLiteral("/component/kmix"), QRegularExpression(QStringLiteral("mute|decrease_volume|increase_volume"))},
+    {QStringLiteral("/component/org_kde_powerdevil"),
+     QRegularExpression(QStringLiteral(
+         "Increase Screen Brightness|Decrease Screen Brightness|Increase Keyboard Brightness|Decrease Keyboard Brightness|Turn Off Screen|Sleep|Hibernate"))},
+    {QStringLiteral("/component/KDE_Keyboard_Layout_Switcher"),
+     QRegularExpression(QStringLiteral("Switch to Next Keyboard Layout|Switch keyboard layout to .*"))},
+    {QStringLiteral("/component/kcm_touchpad"), QRegularExpression(QStringLiteral("Toggle Touchpad|Enable Touchpad|Disable Touchpad"))},
 };
 
 static uint g_keyModMaskXAccel = 0;
@@ -67,11 +60,7 @@ static uint g_keyModMaskXOnOrOff = 0;
 static void calculateGrabMasks()
 {
     g_keyModMaskXAccel = KKeyServer::accelModMaskX();
-    g_keyModMaskXOnOrOff =
-            KKeyServer::modXLock() |
-            KKeyServer::modXNumLock() |
-            KKeyServer::modXScrollLock() |
-            KKeyServer::modXModeSwitch();
+    g_keyModMaskXOnOrOff = KKeyServer::modXLock() | KKeyServer::modXNumLock() | KKeyServer::modXScrollLock() | KKeyServer::modXModeSwitch();
 }
 
 GlobalAccel::GlobalAccel(QObject *parent)
@@ -126,57 +115,47 @@ void GlobalAccel::components(QDBusPendingCallWatcher *self)
         if (!whitelisted) {
             continue;
         }
-        auto message = QDBusMessage::createMethodCall(s_kglobalAccelService,
-                                                      objectPath,
-                                                      s_componentInterface,
-                                                      QStringLiteral("isActive"));
+        auto message = QDBusMessage::createMethodCall(s_kglobalAccelService, objectPath, s_componentInterface, QStringLiteral("isActive"));
         QDBusPendingReply<bool> async = QDBusConnection::sessionBus().asyncCall(message);
         QDBusPendingCallWatcher *callWatcher = new QDBusPendingCallWatcher(async, this);
         m_updatingInformation++;
-        connect(callWatcher, &QDBusPendingCallWatcher::finished, this,
-            [this, objectPath] (QDBusPendingCallWatcher *self) {
-                QDBusPendingReply<bool> reply = *self;
+        connect(callWatcher, &QDBusPendingCallWatcher::finished, this, [this, objectPath](QDBusPendingCallWatcher *self) {
+            QDBusPendingReply<bool> reply = *self;
+            self->deleteLater();
+            // filter out inactive components
+            if (!reply.isValid() || !reply.value()) {
+                m_updatingInformation--;
+                return;
+            }
+
+            // active, whitelisted component: get all shortcuts
+            auto message = QDBusMessage::createMethodCall(s_kglobalAccelService, objectPath, s_componentInterface, QStringLiteral("allShortcutInfos"));
+            QDBusPendingReply<QList<KGlobalShortcutInfo>> async = QDBusConnection::sessionBus().asyncCall(message);
+            QDBusPendingCallWatcher *callWatcher = new QDBusPendingCallWatcher(async, this);
+            connect(callWatcher, &QDBusPendingCallWatcher::finished, this, [this, objectPath](QDBusPendingCallWatcher *self) {
+                m_updatingInformation--;
+                QDBusPendingReply<QList<KGlobalShortcutInfo>> reply = *self;
                 self->deleteLater();
-                // filter out inactive components
-                if (!reply.isValid() || !reply.value()) {
-                    m_updatingInformation--;
+                if (!reply.isValid()) {
                     return;
                 }
-
-                // active, whitelisted component: get all shortcuts
-                auto message = QDBusMessage::createMethodCall(s_kglobalAccelService,
-                                                              objectPath,
-                                                              s_componentInterface,
-                                                              QStringLiteral("allShortcutInfos"));
-                QDBusPendingReply<QList<KGlobalShortcutInfo>> async = QDBusConnection::sessionBus().asyncCall(message);
-                QDBusPendingCallWatcher *callWatcher = new QDBusPendingCallWatcher(async, this);
-                connect(callWatcher, &QDBusPendingCallWatcher::finished, this,
-                    [this, objectPath] (QDBusPendingCallWatcher *self) {
-                        m_updatingInformation--;
-                        QDBusPendingReply<QList<KGlobalShortcutInfo>> reply = *self;
-                        self->deleteLater();
-                        if (!reply.isValid()) {
-                            return;
-                        }
-                        // restrict to whitelist
-                        QList<KGlobalShortcutInfo> infos;
-                        auto whitelist = s_shortcutWhitelist.constFind(objectPath);
-                        if (whitelist == s_shortcutWhitelist.constEnd()) {
-                            // this should not happen, just for safety
-                            return;
-                        }
-                        const auto s = reply.value();
-                        for (auto it = s.begin(); it != s.end(); ++it) {
-                            auto matches = whitelist.value().match((*it).uniqueName());
-                            if (matches.hasMatch()) {
-                                infos.append(*it);
-                            }
-                        }
-                        m_shortcuts.insert(objectPath, infos);
+                // restrict to whitelist
+                QList<KGlobalShortcutInfo> infos;
+                auto whitelist = s_shortcutWhitelist.constFind(objectPath);
+                if (whitelist == s_shortcutWhitelist.constEnd()) {
+                    // this should not happen, just for safety
+                    return;
+                }
+                const auto s = reply.value();
+                for (auto it = s.begin(); it != s.end(); ++it) {
+                    auto matches = whitelist.value().match((*it).uniqueName());
+                    if (matches.hasMatch()) {
+                        infos.append(*it);
                     }
-                );
-            }
-        );
+                }
+                m_shortcuts.insert(objectPath, infos);
+            });
+        });
     }
     m_updatingInformation--;
 }

@@ -22,8 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KGlobalShortcutInfo>
 
-#include <QObject>
 #include <QMap>
+#include <QObject>
 
 class QDBusPendingCallWatcher;
 class QKeyEvent;

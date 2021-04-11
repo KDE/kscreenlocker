@@ -20,19 +20,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SCREENLOCKER_GREETERAPP_H
 #define SCREENLOCKER_GREETERAPP_H
 
-#include <QGuiApplication>
 #include <KPackage/PackageStructure>
+#include <QGuiApplication>
 #include <QUrl>
 
-namespace KWayland {
-namespace Client {
-    class ConnectionThread;
-    class Registry;
-    class PlasmaShell;
+namespace KWayland
+{
+namespace Client
+{
+class ConnectionThread;
+class Registry;
+class PlasmaShell;
 }
 }
 
-namespace KQuickAddons {
+namespace KQuickAddons
+{
 class QuickViewSharedEngine;
 }
 
@@ -94,7 +97,7 @@ private:
 
     QString m_packageName;
     QUrl m_mainQmlPath;
-    QList<KQuickAddons::QuickViewSharedEngine*> m_views;
+    QList<KQuickAddons::QuickViewSharedEngine *> m_views;
     QTimer *m_resetRequestIgnoreTimer;
     QTimer *m_delayedLockTimer;
     KPackage::Package m_package;

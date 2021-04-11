@@ -25,19 +25,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 #include <KConfigLoader>
-#include <KPackage/PackageLoader>
 #include <KDeclarative/ConfigPropertyMap>
+#include <KPackage/PackageLoader>
 
 #include <QFile>
 
 namespace ScreenLocker
 {
-
 WallpaperIntegration::WallpaperIntegration(QObject *parent)
     : QObject(parent)
     , m_package(KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper")))
 {
-    qRegisterMetaType<KDeclarative::ConfigPropertyMap*>();
+    qRegisterMetaType<KDeclarative::ConfigPropertyMap *>();
 }
 
 WallpaperIntegration::~WallpaperIntegration() = default;

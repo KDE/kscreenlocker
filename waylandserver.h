@@ -37,7 +37,6 @@ class Display;
 
 namespace ScreenLocker
 {
-
 class WaylandServer : public QObject
 {
     Q_OBJECT
@@ -67,7 +66,7 @@ private:
     QScopedPointer<KWayland::Server::Display> m_display;
     KWayland::Server::ClientConnection *m_allowedClient = nullptr;
     wl_global *m_interface = nullptr;
-    QList<wl_resource*> m_resources;
+    QList<wl_resource *> m_resources;
 };
 
 }

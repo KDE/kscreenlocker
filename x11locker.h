@@ -30,10 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <X11/Xlib.h>
 #include <fixx11h.h>
 
-
 namespace ScreenLocker
 {
-
 class AbstractLocker;
 
 class X11Locker : public AbstractLocker, public QAbstractNativeEventFilter
@@ -61,8 +59,7 @@ private:
     int findWindowInfo(Window w);
     void fakeFocusIn(WId window);
     void stayOnTop() override;
-    struct WindowInfo
-    {
+    struct WindowInfo {
         Window window;
         bool viewable;
     };

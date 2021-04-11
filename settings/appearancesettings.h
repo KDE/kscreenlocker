@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KCoreConfigSkeleton>
 #include <KPackage/Package>
 
-
 namespace ScreenLocker
 {
 class WallpaperIntegration;
@@ -71,7 +70,7 @@ private:
     ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
     KCoreConfigSkeleton *m_wallpaperSettings = nullptr;
     QUrl m_wallpaperConfigFile;
-    ScreenLocker::LnFIntegration* m_lnfIntegration = nullptr;
+    ScreenLocker::LnFIntegration *m_lnfIntegration = nullptr;
     KCoreConfigSkeleton *m_lnfSettings = nullptr;
     QUrl m_lnfConfigFile;
 };

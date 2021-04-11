@@ -21,8 +21,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "authenticator.h"
-#include <kcheckpass-enums.h>
 #include <config-kscreenlocker.h>
+#include <kcheckpass-enums.h>
 
 // Qt
 #include <QCoreApplication>
@@ -33,11 +33,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // system
 #include <errno.h>
 #include <signal.h>
-#include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <signal.h>
 
 Authenticator::Authenticator(AuthenticationMode mode, QObject *parent)
     : QObject(parent)
@@ -85,11 +84,9 @@ void Authenticator::setupCheckPass()
     connect(m_checkPass, &KCheckPass::failed, this, &Authenticator::failed);
     connect(m_checkPass, &KCheckPass::message, this, &Authenticator::message);
     connect(m_checkPass, &KCheckPass::error, this, &Authenticator::error);
-    connect(m_checkPass, &KCheckPass::destroyed, this,
-        [this] {
-            m_checkPass = nullptr;
-        }
-    );
+    connect(m_checkPass, &KCheckPass::destroyed, this, [this] {
+        m_checkPass = nullptr;
+    });
     m_checkPass->start();
 }
 
@@ -136,11 +133,7 @@ void KCheckPass::start()
     if (!m_pid) {
         ::close(sfd[0]);
         sprintf(fdbuf, "%d", sfd[1]);
-        execlp(QFile::encodeName(QStringLiteral(KCHECKPASS_BIN)).data(),
-               "kcheckpass",
-               "-m", "classic",
-               "-S", fdbuf,
-               (char *)nullptr);
+        execlp(QFile::encodeName(QStringLiteral(KCHECKPASS_BIN)).data(), "kcheckpass", "-m", "classic", "-S", fdbuf, (char *)nullptr);
         _exit(20);
     }
     ::close(sfd[1]);
@@ -155,8 +148,8 @@ int KCheckPass::Reader(void *buf, int count)
 {
     int ret, rlen;
 
-    for (rlen = 0; rlen < count; ) {
-      dord:
+    for (rlen = 0; rlen < count;) {
+    dord:
         ret = ::read(m_fd, (void *)((char *)buf + rlen), count - rlen);
         if (ret < 0) {
             if (errno == EINTR)
@@ -189,13 +182,13 @@ bool KCheckPass::GSendInt(int val)
 
 bool KCheckPass::GSendStr(const char *buf)
 {
-    int len = buf ? ::strlen (buf) + 1 : 0;
-    return GWrite(&len, sizeof(len)) && GWrite (buf, len);
+    int len = buf ? ::strlen(buf) + 1 : 0;
+    return GWrite(&len, sizeof(len)) && GWrite(buf, len);
 }
 
 bool KCheckPass::GSendArr(int len, const char *buf)
 {
-    return GWrite(&len, sizeof(len)) && GWrite (buf, len);
+    return GWrite(&len, sizeof(len)) && GWrite(buf, len);
 }
 
 bool KCheckPass::GRecvInt(int *val)
@@ -214,10 +207,10 @@ bool KCheckPass::GRecvArr(char **ret)
         *ret = nullptr;
         return true;
     }
-    if (!(buf = (char *)::malloc (len)))
+    if (!(buf = (char *)::malloc(len)))
         return false;
     *ret = buf;
-    if (GRead (buf, len)) {
+    if (GRead(buf, len)) {
         return true;
     } else {
         ::free(buf);
@@ -232,20 +225,19 @@ void KCheckPass::handleVerify()
     int ret;
     char *arr;
 
-    if (GRecvInt( &ret )) {
+    if (GRecvInt(&ret)) {
         switch (ret) {
         case ConvGetBinary:
-            if (!GRecvArr( &arr ))
+            if (!GRecvArr(&arr))
                 break;
             // FIXME: not supported
             cantCheck();
             if (arr)
-                ::free( arr );
+                ::free(arr);
             return;
         case ConvGetNormal:
-        case ConvGetHidden:
-        {
-            if (!GRecvArr( &arr ))
+        case ConvGetHidden: {
+            if (!GRecvArr(&arr))
                 break;
 
             if (m_password.isNull()) {
@@ -259,20 +251,20 @@ void KCheckPass::handleVerify()
             m_password.clear();
 
             if (arr)
-                ::free( arr );
+                ::free(arr);
             return;
         }
         case ConvPutInfo:
-            if (!GRecvArr( &arr ))
+            if (!GRecvArr(&arr))
                 break;
             emit message(QString::fromLocal8Bit(arr));
-            ::free( arr );
+            ::free(arr);
             return;
         case ConvPutError:
-            if (!GRecvArr( &arr ))
+            if (!GRecvArr(&arr))
                 break;
             emit error(QString::fromLocal8Bit(arr));
-            ::free( arr );
+            ::free(arr);
             return;
         case ConvPutAuthSucceeded:
             emit succeeded();
@@ -303,13 +295,13 @@ void KCheckPass::handleVerify()
 
 void KCheckPass::reapVerify()
 {
-    m_notifier->setEnabled( false );
+    m_notifier->setEnabled(false);
     m_notifier->deleteLater();
     m_notifier = nullptr;
-    ::close( m_fd );
+    ::close(m_fd);
     int status;
     ::kill(m_pid, SIGUSR2);
-    while (::waitpid( m_pid, &status, 0 ) < 0)
+    while (::waitpid(m_pid, &status, 0) < 0)
         if (errno != EINTR) { // This should not happen ...
             cantCheck();
             return;

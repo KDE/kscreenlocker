@@ -33,7 +33,8 @@ public:
     explicit PowerManagementInhibition(QObject *parent = nullptr);
     ~PowerManagementInhibition() override;
 
-    bool isInhibited() const {
+    bool isInhibited() const
+    {
         return m_inhibited;
     }
 
