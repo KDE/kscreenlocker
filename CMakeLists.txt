@@ -25,6 +25,7 @@ include(CMakePackageConfigHelpers)
 include(FeatureSummary)
 include(GenerateExportHeader)
 include(KDEClangFormat)
+include(KDEGitCommitHooks)
 
 include(CheckIncludeFile)
 include(CheckSymbolExists)
@@ -225,6 +226,7 @@ add_library(PW::KScreenLocker ALIAS KScreenLocker)
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 generate_export_header(KScreenLocker
     BASE_NAME KScreenLocker
