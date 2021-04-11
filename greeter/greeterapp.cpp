@@ -422,7 +422,7 @@ void UnlockApp::desktopResized()
             //initialize with our size to avoid as much resize events as possible
             object->completeInitialization({
                 {QStringLiteral("width"), view->width()},
-                {QStringLiteral("height"), view->height()}
+                {QStringLiteral("height"), view->height()},
             });
         }
 
@@ -435,9 +435,10 @@ void UnlockApp::desktopResized()
         }
         view->raise();
 
-        connect(view, &QQuickWindow::frameSwapped, this, [this, view] {
+        auto onFrameSwapped = [this, view] {
             markViewsAsVisible(view);
-        }, Qt::QueuedConnection);
+        };
+        connect(view, &QQuickWindow::frameSwapped, this, onFrameSwapped, Qt::QueuedConnection);
     }
 }
 

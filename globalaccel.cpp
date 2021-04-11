@@ -58,7 +58,7 @@ static const QMap<QString, QRegularExpression> s_shortcutWhitelist{
     )},
     {QStringLiteral("/component/kcm_touchpad"), QRegularExpression(
         QStringLiteral("Toggle Touchpad|Enable Touchpad|Disable Touchpad")
-    )}
+    )},
 };
 
 static uint g_keyModMaskXAccel = 0;
