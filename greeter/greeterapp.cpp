@@ -28,12 +28,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <config-kscreenlocker.h>
 #include <kscreenlocker_greet_logging.h>
 
+#include <LayerShellQt/Window>
+
 // KDE
 #include <KAuthorized>
 #include <KCrash>
 #include <KDeclarative/ConfigPropertyMap>
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
 #include <KDeclarative/QmlObjectSharedEngine>
+#include <KWindowSystem>
 #include <kdeclarative/kdeclarative.h>
 
 #include <KUser>
@@ -409,6 +412,12 @@ void UnlockApp::desktopResized()
                 {QStringLiteral("width"), view->width()},
                 {QStringLiteral("height"), view->height()},
             });
+        }
+
+        if (KWindowSystem::isPlatformWayland()) {
+            if (auto layerShellWindow = LayerShellQt::Window::get(view)) {
+                layerShellWindow->setExclusiveZone(-1);
+            }
         }
 
         // on Wayland we may not use fullscreen as that puts all windows on one screen
