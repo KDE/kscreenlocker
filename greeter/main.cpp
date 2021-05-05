@@ -83,9 +83,11 @@ int main(int argc, char *argv[])
 
     KLocalizedString::setApplicationDomain("kscreenlocker_greet");
 
-    // explicitly disable input methods as it makes it impossible to unlock, see BUG 306932
+    // explicitly disable input methods on x11 as it makes it impossible to unlock, see BUG 306932
     // but explicitly set on screen keyboard such as maliit is allowed
-    if (!qEnvironmentVariableIsSet("QT_IM_MODULE") || (qEnvironmentVariableIsSet("QT_IM_MODULE") && qgetenv("QT_IM_MODULE") != QByteArrayLiteral("maliit"))) {
+    // on wayland, let the compositor take care of the input method
+    if (!qEnvironmentVariableIsSet("WAYLAND_DISPLAY") && !qEnvironmentVariableIsSet("WAYLAND_SOCKET")
+        && qgetenv("QT_IM_MODULE") != QByteArrayLiteral("maliit")) {
         qputenv("QT_IM_MODULE", QByteArrayLiteral("qtvirtualkeyboard"));
     }
 
