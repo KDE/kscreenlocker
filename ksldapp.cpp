@@ -650,14 +650,7 @@ void KSldApp::showLockWindow()
         }
         m_lockWindow->setGlobalAccel(m_globalAccel);
 
-        connect(
-            m_lockWindow,
-            &AbstractLocker::lockWindowShown,
-            m_lockWindow,
-            [this] {
-                lockScreenShown();
-            },
-            Qt::QueuedConnection);
+        connect(m_lockWindow, &AbstractLocker::lockWindowShown, this, &KSldApp::lockScreenShown);
 
         connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
