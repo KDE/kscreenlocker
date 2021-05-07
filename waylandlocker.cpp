@@ -67,6 +67,8 @@ void WaylandLocker::hideLockWindow()
 
 void WaylandLocker::addAllowedWindow(quint32 window)
 {
+    Q_UNUSED(window)
+    Q_EMIT lockWindowShown();
 }
 
 void WaylandLocker::stayOnTop()
