@@ -92,8 +92,8 @@ LogindIntegration::~LogindIntegration() = default;
 void LogindIntegration::logindServiceRegistered()
 {
     // get the current session
-    QDBusMessage message = QDBusMessage::createMethodCall(s_login1Service, s_login1Path, s_login1ManagerInterface, QStringLiteral("GetSessionByPID"));
-    message.setArguments(QVariantList() << (quint32)QCoreApplication::applicationPid());
+    QDBusMessage message = QDBusMessage::createMethodCall(s_login1Service, s_login1Path, s_login1ManagerInterface, QStringLiteral("GetSession"));
+    message.setArguments({QStringLiteral("auto")});
     QDBusPendingReply<QDBusObjectPath> session = m_bus.asyncCall(message);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(session, this);
 
