@@ -109,7 +109,7 @@ void NoScreensTest::init()
     connect(m_shell, &ShellInterface::surfaceCreated, this, [this](ShellSurfaceInterface *surface) {
         m_surface = surface->surface();
         connect(surface->surface(), &SurfaceInterface::damaged, this, [this, surface] {
-            emit surfaceShown();
+            Q_EMIT surfaceShown();
             ScreenLocker::KSldApp::self()->lockScreenShown();
             surface->surface()->frameRendered(0);
             surface->client()->flush();

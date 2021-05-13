@@ -62,7 +62,7 @@ void WallpaperIntegration::setPluginName(const QString &name)
     }
     m_pluginName = name;
     m_package.setPath(name);
-    emit packageChanged();
+    Q_EMIT packageChanged();
 }
 
 KConfigLoader *WallpaperIntegration::configScheme()

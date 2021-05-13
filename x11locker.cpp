@@ -119,7 +119,7 @@ void X11Locker::showLockWindow()
 //
 void X11Locker::hideLockWindow()
 {
-    emit userActivity();
+    Q_EMIT userActivity();
     m_background->hide();
     m_background->lower();
     removeVRoot(m_background->winId());
@@ -284,7 +284,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
     const uint8_t responseType = event->response_type & ~0x80;
     if (globalAccel() && responseType == XCB_KEY_PRESS) {
         if (globalAccel()->checkKeyPress(reinterpret_cast<xcb_key_press_event_t *>(event))) {
-            emit userActivity();
+            Q_EMIT userActivity();
             return true;
         }
     }
@@ -295,7 +295,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
     case XCB_KEY_PRESS:
     case XCB_KEY_RELEASE:
     case XCB_MOTION_NOTIFY:
-        emit userActivity();
+        Q_EMIT userActivity();
         if (!m_lockWindows.isEmpty()) {
             int x = 0;
             int y = 0;
@@ -388,7 +388,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, lo
             }
             if (xm->window == m_background->winId()) {
                 m_background->update();
-                emit lockWindowShown();
+                Q_EMIT lockWindowShown();
                 return false;
             }
             stayOnTop();

@@ -137,7 +137,7 @@ void WaylandServer::x11WindowCallback(wl_client *client, wl_resource *resource, 
     if (s->m_allowedClient->client() != client) {
         return;
     }
-    emit s->x11WindowAdded(id);
+    Q_EMIT s->x11WindowAdded(id);
 }
 
 void WaylandServer::suspendSystemCallback(wl_client *client, wl_resource *resource)

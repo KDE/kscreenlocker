@@ -95,7 +95,7 @@ void ScreenLockerKcm::defaults()
 void ScreenLockerKcm::updateState()
 {
     settingsChanged();
-    emit isDefaultsAppearanceChanged();
+    Q_EMIT isDefaultsAppearanceChanged();
 }
 
 bool ScreenLockerKcm::isSaveNeeded() const

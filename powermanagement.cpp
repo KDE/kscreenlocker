@@ -94,7 +94,7 @@ void PowerManagement::Private::setCanHibernate(bool set)
         return;
     }
     canHibernate = set;
-    emit q->canHibernateChanged();
+    Q_EMIT q->canHibernateChanged();
 }
 
 void PowerManagement::Private::setCanSuspend(bool set)
@@ -103,7 +103,7 @@ void PowerManagement::Private::setCanSuspend(bool set)
         return;
     }
     canSuspend = set;
-    emit q->canSuspendChanged();
+    Q_EMIT q->canSuspendChanged();
 }
 
 PowerManagement *PowerManagement::instance()

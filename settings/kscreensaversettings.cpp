@@ -104,7 +104,7 @@ KScreenSaverSettings::KScreenSaverSettings(QObject *parent)
     auto shortcutItem = new KPropertySkeletonItem(m_store, "shortcut", defaultShortcuts().first());
     addItem(shortcutItem, QStringLiteral("shortcut"));
     shortcutItem->setNotifyFunction([this] {
-        emit shortcutChanged();
+        Q_EMIT shortcutChanged();
     });
 }
 

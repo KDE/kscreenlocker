@@ -187,13 +187,13 @@ void Interface::UnThrottle(uint cookie)
 void Interface::slotLocked()
 {
     sendLockReplies();
-    emit ActiveChanged(true);
+    Q_EMIT ActiveChanged(true);
 }
 
 void Interface::slotUnlocked()
 {
     sendLockReplies();
-    emit ActiveChanged(false);
+    Q_EMIT ActiveChanged(false);
 }
 
 void Interface::configure()

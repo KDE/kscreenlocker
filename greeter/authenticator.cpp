@@ -58,11 +58,11 @@ Authenticator::~Authenticator() = default;
 void Authenticator::tryUnlock(const QString &password)
 {
     if (isGraceLocked()) {
-        emit failed();
+        Q_EMIT failed();
         return;
     }
     m_graceLockTimer->start();
-    emit graceLockedChanged();
+    Q_EMIT graceLockedChanged();
 
     if (!m_checkPass) {
         m_checkPass = new KCheckPass(AuthenticationMode::Direct, this);
@@ -70,7 +70,7 @@ void Authenticator::tryUnlock(const QString &password)
         setupCheckPass();
     } else {
         if (!m_checkPass->isReady()) {
-            emit failed();
+            Q_EMIT failed();
             return;
         }
         m_checkPass->setPassword(password);
@@ -268,21 +268,21 @@ void KCheckPass::handleVerify()
             if (!GRecvArr(&arr)) {
                 break;
             }
-            emit message(QString::fromLocal8Bit(arr));
+            Q_EMIT message(QString::fromLocal8Bit(arr));
             ::free(arr);
             return;
         case ConvPutError:
             if (!GRecvArr(&arr)) {
                 break;
             }
-            emit error(QString::fromLocal8Bit(arr));
+            Q_EMIT error(QString::fromLocal8Bit(arr));
             ::free(arr);
             return;
         case ConvPutAuthSucceeded:
-            emit succeeded();
+            Q_EMIT succeeded();
             return;
         case ConvPutAuthFailed:
-            emit failed();
+            Q_EMIT failed();
             return;
         case ConvPutAuthError:
             cantCheck();
@@ -324,7 +324,7 @@ void KCheckPass::reapVerify()
 void KCheckPass::cantCheck()
 {
     // TODO: better signal?
-    emit failed();
+    Q_EMIT failed();
 }
 
 void KCheckPass::startAuth()

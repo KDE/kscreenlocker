@@ -69,12 +69,12 @@ void AppearanceSettings::load()
 
     if (m_lnfSettings) {
         m_lnfSettings->load();
-        emit m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+        Q_EMIT m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
     }
 
     if (m_wallpaperSettings) {
         m_wallpaperSettings->load();
-        emit m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+        Q_EMIT m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
     }
 }
 
@@ -93,12 +93,12 @@ void AppearanceSettings::defaults()
 {
     if (m_lnfSettings) {
         m_lnfSettings->setDefaults();
-        emit m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+        Q_EMIT m_lnfSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
     }
 
     if (m_wallpaperSettings) {
         m_wallpaperSettings->setDefaults();
-        emit m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
+        Q_EMIT m_wallpaperSettings->configChanged(); // To force the ConfigPropertyMap to reevaluate
     }
 }
 
@@ -147,7 +147,7 @@ void AppearanceSettings::loadWallpaperConfig()
     m_wallpaperIntegration->init();
     m_wallpaperSettings = m_wallpaperIntegration->configScheme();
     m_wallpaperConfigFile = m_wallpaperIntegration->package().fileUrl(QByteArrayLiteral("ui"), QStringLiteral("config.qml"));
-    emit currentWallpaperChanged();
+    Q_EMIT currentWallpaperChanged();
 }
 
 void AppearanceSettings::loadLnfConfig()

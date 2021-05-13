@@ -377,7 +377,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
     }
 
     if (attemptCount == 0) {
-        emit aboutToLock();
+        Q_EMIT aboutToLock();
     }
 
     qCDebug(KSCREENLOCKER) << "lock called";
@@ -403,7 +403,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
     setForceSoftwareRendering(false);
     // start unlock screen process
     startLockProcess(establishLock);
-    emit lockStateChanged();
+    Q_EMIT lockStateChanged();
 }
 
 /*
@@ -553,8 +553,8 @@ void KSldApp::doUnlock()
     endGraceTime();
     m_waylandServer->stop();
     KNotification::event(QStringLiteral("unlocked"), i18n("Screen unlocked"), QPixmap(), nullptr, KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
-    emit unlocked();
-    emit lockStateChanged();
+    Q_EMIT unlocked();
+    Q_EMIT lockStateChanged();
 }
 
 bool KSldApp::isFdoPowerInhibited() const
@@ -602,7 +602,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     int fd = m_waylandServer->start();
     if (fd == -1) {
         qCWarning(KSCREENLOCKER) << "Could not start the Wayland server.";
-        emit m_lockProcess->errorOccurred(QProcess::FailedToStart);
+        Q_EMIT m_lockProcess->errorOccurred(QProcess::FailedToStart);
         return;
     }
 
@@ -724,8 +724,8 @@ void KSldApp::lockScreenShown()
     }
     m_lockState = Locked;
     m_lockedTimer.restart();
-    emit locked();
-    emit lockStateChanged();
+    Q_EMIT locked();
+    Q_EMIT lockStateChanged();
 }
 
 void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)

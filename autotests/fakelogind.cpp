@@ -63,10 +63,10 @@ FakeLogindSession::~FakeLogindSession()
 
 void FakeLogindSession::lock()
 {
-    emit Lock();
+    Q_EMIT Lock();
 }
 
 void FakeLogindSession::unlock()
 {
-    emit Unlock();
+    Q_EMIT Unlock();
 }

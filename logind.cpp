@@ -55,7 +55,7 @@ LogindIntegration::LogindIntegration(const QDBusConnection &connection, QObject 
     connect(m_logindServiceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this]() {
         m_connected = false;
         m_sessionPath = QString();
-        emit connectedChanged();
+        Q_EMIT connectedChanged();
     });
 
     // check whether the logind service is registered
@@ -146,7 +146,7 @@ void LogindIntegration::commonServiceRegistered(QDBusPendingCallWatcher *watcher
         m_bus.connect(*m_service, m_sessionPath, *m_sessionInterface, QStringLiteral("Lock"), this, SIGNAL(requestLock()));
         m_bus.connect(*m_service, m_sessionPath, *m_sessionInterface, QStringLiteral("Unlock"), this, SIGNAL(requestUnlock()));
         m_connected = true;
-        emit connectedChanged();
+        Q_EMIT connectedChanged();
     });
 
     // connect to manager object's signals we need
@@ -175,7 +175,7 @@ void LogindIntegration::inhibit()
             return;
         }
         reply.value().swap(m_inhibitFileDescriptor);
-        emit inhibited();
+        Q_EMIT inhibited();
     });
 }
 
