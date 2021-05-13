@@ -169,7 +169,7 @@ void WaylandServer::osdProgress(const QString &icon, int percent, const QString 
     if (!m_allowedClient) {
         return;
     }
-    Q_FOREACH (auto r, m_resources) {
+    for (auto r : qAsConst(m_resources)) {
         if (wl_resource_get_version(r) < ORG_KDE_KSLD_OSDPROGRESS_SINCE_VERSION) {
             continue;
         }
@@ -183,7 +183,7 @@ void WaylandServer::osdText(const QString &icon, const QString &additionalText)
     if (!m_allowedClient) {
         return;
     }
-    Q_FOREACH (auto r, m_resources) {
+    for (auto r : qAsConst(m_resources)) {
         if (wl_resource_get_version(r) < ORG_KDE_KSLD_OSDTEXT_SINCE_VERSION) {
             continue;
         }
@@ -197,7 +197,7 @@ void WaylandServer::sendCanSuspend()
     if (!m_allowedClient) {
         return;
     }
-    Q_FOREACH (auto r, m_resources) {
+    for (auto r : qAsConst(m_resources)) {
         if (wl_resource_get_version(r) < ORG_KDE_KSLD_CANSUSPENDSYSTEM_SINCE_VERSION) {
             continue;
         }
@@ -211,7 +211,7 @@ void WaylandServer::sendCanHibernate()
     if (!m_allowedClient) {
         return;
     }
-    Q_FOREACH (auto r, m_resources) {
+    for (auto r : qAsConst(m_resources)) {
         if (wl_resource_get_version(r) < ORG_KDE_KSLD_CANHIBERNATESYSTEM_SINCE_VERSION) {
             continue;
         }
