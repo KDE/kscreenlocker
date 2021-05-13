@@ -39,7 +39,7 @@ public:
     }
 
 public Q_SLOTS:
-    Q_SCRIPTABLE QDBusObjectPath GetSessionByPID(quint32 pid);
+    Q_SCRIPTABLE QDBusObjectPath GetSession(const QString &session);
     Q_SCRIPTABLE void lock();
     Q_SCRIPTABLE void unlock();
 

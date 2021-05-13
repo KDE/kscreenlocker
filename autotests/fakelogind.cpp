@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 FakeLogind::FakeLogind(QObject *parent)
     : QObject(parent)
-    , m_session(new FakeLogindSession(QStringLiteral("/org/freedesktop/login1/session/_1"), this))
+    , m_session(new FakeLogindSession(QStringLiteral("/org/freedesktop/login1/session/auto"), this))
 {
     QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/freedesktop/login1"), this, QDBusConnection::ExportScriptableContents);
     QDBusConnection::sessionBus().registerService(QStringLiteral("org.freedesktop.login1"));
@@ -33,9 +33,9 @@ FakeLogind::~FakeLogind()
     QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.freedesktop.login1"));
 }
 
-QDBusObjectPath FakeLogind::GetSessionByPID(quint32 pid)
+QDBusObjectPath FakeLogind::GetSession(const QString &session)
 {
-    Q_UNUSED(pid)
+    Q_UNUSED(session)
     return QDBusObjectPath(m_session->path());
 }
 
