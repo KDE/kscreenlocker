@@ -30,7 +30,6 @@ namespace Client
 {
 class ConnectionThread;
 class Registry;
-class PlasmaShell;
 }
 }
 
@@ -88,7 +87,6 @@ private Q_SLOTS:
 
 private:
     void initialize();
-    void initializeWayland();
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
     void loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
@@ -119,7 +117,6 @@ private:
     QThread *m_ksldConnectionThread = nullptr;
     org_kde_ksld *m_ksldInterface = nullptr;
 
-    KWayland::Client::PlasmaShell *m_plasmaShell = nullptr;
     WallpaperIntegration *m_wallpaperIntegration;
     LnFIntegration *m_lnfIntegration;
 };

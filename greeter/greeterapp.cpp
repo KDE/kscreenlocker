@@ -47,7 +47,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/event_queue.h>
 #include <KWayland/Client/registry.h>
-#include <KWayland/Client/surface.h>
 // Qt
 #include <QAbstractNativeEventFilter>
 #include <QClipboard>
@@ -164,7 +163,6 @@ Authenticator *UnlockApp::createAuthenticator()
 
 void UnlockApp::initialize()
 {
-    initializeWayland();
     // set up the request ignore timeout, so that multiple requests to sleep/suspend/shutdown
     // are not processed in quick (and confusing) succession)
     m_resetRequestIgnoreTimer->setSingleShot(true);
@@ -220,27 +218,6 @@ QWindow *UnlockApp::getActiveScreen()
     }
 
     return activeScreen;
-}
-
-void UnlockApp::initializeWayland()
-{
-    if (!platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
-        return;
-    }
-    using namespace KWayland::Client;
-    auto *c = ConnectionThread::fromApplication(this);
-    if (!c) {
-        return;
-    }
-    Registry *r = new Registry(this);
-    r->create(c);
-    r->setup();
-    c->roundtrip();
-    const auto i = r->interface(Registry::Interface::PlasmaShell);
-    if (i.name == 0) {
-        return;
-    }
-    m_plasmaShell = r->createPlasmaShell(i.name, i.version, this);
 }
 
 void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
