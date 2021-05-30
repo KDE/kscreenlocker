@@ -8,7 +8,7 @@ set(screenlocker_kcm_SRCS
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
 
-qt5_add_dbus_interface(screenlocker_kcm_SRCS ../dbus/org.kde.screensaver.xml screenlocker_interface)
+qt_add_dbus_interface(screenlocker_kcm_SRCS ../dbus/org.kde.screensaver.xml screenlocker_interface)
 
 add_library(kcm_screenlocker MODULE ${screenlocker_kcm_SRCS})
 
