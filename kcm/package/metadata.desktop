@@ -82,7 +82,7 @@ Comment[x-test]=xxConfigure screen lockingxx
 Comment[zh_CN]=配置锁屏
 Comment[zh_TW]=設定螢幕鎖定方式
 
-Icon=preferences-desktop-keyboard-shortcut
+Icon=preferences-desktop-user-password
 Type=Service
 X-KDE-PluginInfo-Author=David Redondo
 X-KDE-PluginInfo-Email=kde@david-redondo.de
