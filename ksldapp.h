@@ -50,7 +50,6 @@ class KSCREENLOCKER_EXPORT KSldApp : public QObject
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.ksld.App")
-    Q_ENUMS(LockState)
 
 public:
     enum LockState {
@@ -58,6 +57,7 @@ public:
         AcquiringLock,
         Locked,
     };
+    Q_ENUM(LockState)
 
     static KSldApp *self();
 
