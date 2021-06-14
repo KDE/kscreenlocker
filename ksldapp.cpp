@@ -371,7 +371,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
         endGraceTime();
         if (establishLock == EstablishLock::Immediate) {
             // signal the greeter to switch to immediateLock mode
-            kill(m_lockProcess->pid(), SIGUSR1);
+            kill(m_lockProcess->processId(), SIGUSR1);
         }
         return;
     }
