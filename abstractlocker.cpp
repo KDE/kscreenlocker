@@ -63,7 +63,8 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
             "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
             "log in and execute the command:\n\n"
             "loginctl unlock-session %1\n\n"
-            "Afterwards switch back to the running session (Ctrl+Alt+F%2).");
+            "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
+            "back to the running session (Ctrl+Alt+F%2).");
 
         auto haveService = [](QString service) {
             return QDBusConnection::systemBus().interface()->isServiceRegistered(service);
