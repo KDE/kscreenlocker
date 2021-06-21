@@ -285,9 +285,9 @@ void KCheckPass::handleVerify()
             Q_EMIT failed();
             return;
         case ConvPutAuthError:
+        case ConvPutAuthAbort:
             cantCheck();
             return;
-        case ConvPutAuthAbort:
         case ConvPutReadyForAuthentication:
             m_ready = true;
             if (m_mode == AuthenticationMode::Direct) {
