@@ -372,7 +372,7 @@ int main(int argc, char **argv)
     /* Setup the events */
     EV_SET(&keventEvent[0], SIGUSR1, EVFILT_SIGNAL, EV_ADD, 0, 0, NULL);
     EV_SET(&keventEvent[1], SIGUSR2, EVFILT_SIGNAL, EV_ADD, 0, 0, NULL);
-    int setupResult = kevent(keventQueue, &keventEvent, 2, NULL, 0, NULL);
+    int setupResult = kevent(keventQueue, keventEvent, 2, NULL, 0, NULL);
     if (setupResult == -1) {
         message("Failed to attach event to the kqueue\n");
         conv_server(ConvPutAuthError, 0);
