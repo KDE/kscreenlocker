@@ -90,7 +90,7 @@ Comment[sv]=Skärmlåsning som tillhandahåller en lösenordsdialogruta och ett 
 Comment[tr]=Geçerli kullanıcıyı değiştirmek için parola penceresi ve arayüz sunan ekran kilitleyici
 Comment[uk]=Блокувальник екрана з вікном пароля і інтерфейсом для перемикання поточного користувача
 Comment[x-test]=xxScreen locker that provides a password dialog and an interface to switch the current userxx
-Comment[zh_CN]=屏幕锁定程序提供密码对话框和切换当前用户的界面
+Comment[zh_CN]=屏幕锁定程序提供密码对话框和用于切换当前用户的界面
 Comment[zh_TW]=提供輸入密碼與切換使用者功能的螢幕保護鎖定器
 Icon=system-lock-screen
 
