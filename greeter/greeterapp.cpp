@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "kscreensaversettingsbase.h"
 #include "lnf_integration.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
+#include "powermanagement.h"
 #include "wallpaper_integration.h"
 
 #include <config-kscreenlocker.h>
@@ -50,6 +51,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Qt
 #include <QAbstractNativeEventFilter>
 #include <QClipboard>
+#include <QDBusConnection>
 #include <QKeyEvent>
 #include <QMimeData>
 #include <QThread>
@@ -77,6 +79,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // this is usable to fake a "screensaver" installation for testing
 // *must* be "0" for every public commit!
 #define TEST_SCREENSAVER 0
+
+static const QString s_plasmaShellService = QStringLiteral("org.kde.plasmashell");
+static const QString s_osdServicePath = QStringLiteral("/org/kde/osdService");
+static const QString s_osdServiceInterface = QStringLiteral("org.kde.osdService");
 
 namespace ScreenLocker
 {
@@ -197,6 +203,14 @@ void UnlockApp::initialize()
     m_userImage = user.faceIconPath();
 
     installEventFilter(this);
+
+    QDBusConnection::sessionBus()
+        .connect(s_plasmaShellService, s_osdServicePath, s_osdServiceInterface, QStringLiteral("osdProgress"), this, SLOT(osdProgress(QString, int, QString)));
+    QDBusConnection::sessionBus()
+        .connect(s_plasmaShellService, s_osdServicePath, s_osdServiceInterface, QStringLiteral("osdText"), this, SLOT(osdText(QString, QString)));
+
+    connect(PowerManagement::instance(), &PowerManagement::canSuspendChanged, this, &UnlockApp::updateCanSuspend);
+    connect(PowerManagement::instance(), &PowerManagement::canHibernateChanged, this, &UnlockApp::updateCanHibernate);
 }
 
 QWindow *UnlockApp::getActiveScreen()
@@ -360,13 +374,13 @@ void UnlockApp::desktopResized()
         lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
 
         QQmlProperty sleepProperty(view->rootObject(), QStringLiteral("suspendToRamSupported"));
-        sleepProperty.write(m_canSuspend);
+        sleepProperty.write(PowerManagement::instance()->canSuspend());
         if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
             connect(view->rootObject(), SIGNAL(suspendToRam()), SLOT(suspendToRam()));
         }
 
         QQmlProperty hibernateProperty(view->rootObject(), QStringLiteral("suspendToDiskSupported"));
-        hibernateProperty.write(m_canHibernate);
+        hibernateProperty.write(PowerManagement::instance()->canHibernate());
         if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
             connect(view->rootObject(), SIGNAL(suspendToDisk()), SLOT(suspendToDisk()));
         }
@@ -631,34 +645,6 @@ void UnlockApp::setDefaultToSwitchUser(bool defaultToSwitchUser)
     m_defaultToSwitchUser = defaultToSwitchUser;
 }
 
-static void osdProgress(void *data, org_kde_ksld *org_kde_ksld, const char *icon, int32_t percent, const char *text)
-{
-    Q_UNUSED(org_kde_ksld)
-    reinterpret_cast<UnlockApp *>(data)->osdProgress(QString::fromUtf8(icon), percent, QString::fromUtf8(text));
-}
-
-static void osdText(void *data, org_kde_ksld *org_kde_ksld, const char *icon, const char *text)
-{
-    Q_UNUSED(org_kde_ksld)
-    reinterpret_cast<UnlockApp *>(data)->osdText(QString::fromUtf8(icon), QString::fromUtf8(text));
-}
-
-static void canSuspend(void *data, org_kde_ksld *org_kde_ksld, uint suspend)
-{
-    Q_UNUSED(org_kde_ksld)
-    reinterpret_cast<UnlockApp *>(data)->updateCanSuspend(suspend);
-}
-
-static void canHibernate(void *data, org_kde_ksld *org_kde_ksld, uint hibernate)
-{
-    Q_UNUSED(org_kde_ksld)
-    reinterpret_cast<UnlockApp *>(data)->updateCanHibernate(hibernate);
-}
-
-static const struct org_kde_ksld_listener s_listener {
-    osdProgress, osdText, canSuspend, canHibernate
-};
-
 void UnlockApp::setKsldSocket(int socket)
 {
     using namespace KWayland::Client;
@@ -669,14 +655,14 @@ void UnlockApp::setKsldSocket(int socket)
     EventQueue *queue = new EventQueue(m_ksldRegistry);
 
     connect(m_ksldRegistry, &Registry::interfaceAnnounced, this, [this, queue](QByteArray interface, quint32 name, quint32 version) {
+        Q_UNUSED(version)
         if (interface != QByteArrayLiteral("org_kde_ksld")) {
             return;
         }
-        m_ksldInterface = reinterpret_cast<org_kde_ksld *>(wl_registry_bind(*m_ksldRegistry, name, &org_kde_ksld_interface, version));
+        // bind version 1 as we dropped all the V2 features
+        m_ksldInterface = reinterpret_cast<org_kde_ksld *>(wl_registry_bind(*m_ksldRegistry, name, &org_kde_ksld_interface, 1));
         queue->addProxy(m_ksldInterface);
-        if (version >= 2) {
-            org_kde_ksld_add_listener(m_ksldInterface, &s_listener, this);
-        }
+
         for (auto v : qAsConst(m_views)) {
             org_kde_ksld_x11window(m_ksldInterface, v->winId());
             wl_display_flush(m_ksldConnection->display());
@@ -731,27 +717,19 @@ void UnlockApp::osdText(const QString &icon, const QString &additionalText)
     }
 }
 
-void UnlockApp::updateCanSuspend(bool set)
+void UnlockApp::updateCanSuspend()
 {
-    if (m_canSuspend == set) {
-        return;
-    }
-    m_canSuspend = set;
     for (auto it = m_views.constBegin(), end = m_views.constEnd(); it != end; ++it) {
         QQmlProperty sleepProperty((*it)->rootObject(), QStringLiteral("suspendToRamSupported"));
-        sleepProperty.write(m_canSuspend);
+        sleepProperty.write(PowerManagement::instance()->canSuspend());
     }
 }
 
-void UnlockApp::updateCanHibernate(bool set)
+void UnlockApp::updateCanHibernate()
 {
-    if (m_canHibernate == set) {
-        return;
-    }
-    m_canHibernate = set;
     for (auto it = m_views.constBegin(), end = m_views.constEnd(); it != end; ++it) {
         QQmlProperty hibernateProperty((*it)->rootObject(), QStringLiteral("suspendToDiskSupported"));
-        hibernateProperty.write(m_canHibernate);
+        hibernateProperty.write(PowerManagement::instance()->canHibernate());
     }
 }
 

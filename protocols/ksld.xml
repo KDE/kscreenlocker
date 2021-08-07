@@ -4,6 +4,7 @@
         <request name="x11window">
             <arg name="id" type="uint"/>
         </request>
+        <!-- Everything after here is deprecated -->
         <request name="suspendSystem" since="3"/>
         <request name="hibernateSystem" since="3"/>
         <event name="osdProgress" since="2">

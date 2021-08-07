@@ -11,6 +11,7 @@ set(kscreenlocker_greet_SRCS
    authenticator.cpp
    greeterapp.cpp
    main.cpp
+   powermanagement.cpp
    noaccessnetworkaccessmanagerfactory.cpp
 )
 

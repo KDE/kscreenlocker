@@ -165,7 +165,6 @@ set(ksld_SRCS
    waylandlocker.cpp
    logind.cpp
    waylandserver.cpp
-   powermanagement.cpp
    powermanagement_inhibition.cpp
 )
 

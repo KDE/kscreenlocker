@@ -65,14 +65,14 @@ public:
     void setKsldSocket(int socket);
     void setDefaultToSwitchUser(bool defaultToSwitchUser);
 
-    void osdProgress(const QString &icon, int percent, const QString &additionalText);
-    void osdText(const QString &icon, const QString &additionalText);
-    void updateCanSuspend(bool set);
-    void updateCanHibernate(bool set);
+    void updateCanSuspend();
+    void updateCanHibernate();
 
 public Q_SLOTS:
     void desktopResized();
     void onScreenAdded(QScreen *screen);
+    void osdProgress(const QString &icon, int percent, const QString &additionalText);
+    void osdText(const QString &icon, const QString &additionalText);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;

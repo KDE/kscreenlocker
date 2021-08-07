@@ -49,10 +49,6 @@ public:
 Q_SIGNALS:
     void x11WindowAdded(quint32 window);
 
-private Q_SLOTS:
-    void osdProgress(const QString &icon, int percent, const QString &additionalText);
-    void osdText(const QString &icon, const QString &additionalText);
-
 private:
     static void bind(wl_client *client, void *data, uint32_t version, uint32_t id);
     static void unbind(wl_resource *resource);
