@@ -57,7 +57,7 @@ target_link_libraries(x11LockerTest
     Qt::Test
     Qt::X11Extras
     Qt::Widgets
-    ${X11_LIBRARIES}
+    X11::X11
     XCB::XCB
     XCB::KEYSYMS
 )

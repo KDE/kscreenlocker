@@ -207,7 +207,7 @@ PRIVATE
    KF5::Package
    KF5::WindowSystem
    KF5::XmlGui
-   ${X11_LIBRARIES}
+   X11::X11
    XCB::XCB
    XCB::KEYSYMS
    KF5::WaylandServer
@@ -215,7 +215,7 @@ PRIVATE
 )
 
 if (X11_Xinput_FOUND)
-    target_link_libraries(KScreenLocker PRIVATE ${X11_Xinput_LIB})
+    target_link_libraries(KScreenLocker PRIVATE X11::Xi)
 endif()
 
 target_include_directories(KScreenLocker INTERFACE "$<INSTALL_INTERFACE:${KSLD_INCLUDEDIR}>")

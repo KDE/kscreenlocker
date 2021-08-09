@@ -47,7 +47,7 @@ target_link_libraries(kscreenlocker_greet
                         Qt::Quick
                         Qt::Qml
                         Qt::X11Extras
-                        ${X11_LIBRARIES}
+                        X11::X11
                         KF5::WaylandClient
                         Wayland::Client
                         LayerShellQt::Interface
