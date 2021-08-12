@@ -69,8 +69,6 @@ public:
     void updateCanHibernate();
 
 public Q_SLOTS:
-    void desktopResized();
-    void onScreenAdded(QScreen *screen);
     void osdProgress(const QString &icon, int percent, const QString &additionalText);
     void osdText(const QString &icon, const QString &additionalText);
 
@@ -78,6 +76,8 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 private Q_SLOTS:
+    void handleScreen(QScreen *screen);
+    KQuickAddons::QuickViewSharedEngine *createViewForScreen(QScreen *screen);
     void resetRequestIgnore();
     void suspendToRam();
     void suspendToDisk();

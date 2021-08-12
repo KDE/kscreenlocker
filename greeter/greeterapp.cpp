@@ -130,8 +130,6 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     // It's a queued connection to give the QML part time to eventually execute code connected to Authenticator::succeeded if any
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit, Qt::QueuedConnection);
     initialize();
-    connect(this, &UnlockApp::screenAdded, this, &UnlockApp::onScreenAdded);
-    connect(this, &UnlockApp::screenRemoved, this, &UnlockApp::desktopResized);
 
     if (QX11Info::isPlatformX11()) {
         installNativeEventFilter(new FocusOutEventFilter);
@@ -266,165 +264,136 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
     });
 }
 
-void UnlockApp::onScreenAdded(QScreen *screen)
-{
-    // Lambda connections can not have uniqueness constraints, ensure
-    // geometry change signals are only connected once
-    connect(screen, &QScreen::geometryChanged, this, [this, screen](const QRect &geo) {
-        screenGeometryChanged(screen, geo);
-    });
-    desktopResized();
-}
-
-void UnlockApp::screenGeometryChanged(QScreen *screen, const QRect &geo)
-{
-    // We map screens() to m_views by index and Qt is free to
-    // reorder screens, so pointer to pointer connections
-    // may not remain matched by index, perform index
-    // mapping in the change event itself
-    const int screenIndex = QGuiApplication::screens().indexOf(screen);
-    if (screenIndex < 0) {
-        qCWarning(KSCREENLOCKER_GREET) << "Screen not found, not updating geometry" << screen;
-        return;
-    }
-    if (screenIndex >= m_views.size()) {
-        qCWarning(KSCREENLOCKER_GREET) << "Screen index out of range, not updating geometry" << screenIndex;
-        return;
-    }
-    KQuickAddons::QuickViewSharedEngine *view = m_views[screenIndex];
-    view->setGeometry(geo);
-}
-
 void UnlockApp::initialViewSetup()
 {
     for (QScreen *screen : screens()) {
-        connect(screen, &QScreen::geometryChanged, this, [this, screen](const QRect &geo) {
-            screenGeometryChanged(screen, geo);
-        });
+        handleScreen(screen);
     }
-    desktopResized();
+    connect(this, &UnlockApp::screenAdded, this, &UnlockApp::handleScreen);
 }
 
-void UnlockApp::desktopResized()
+void UnlockApp::handleScreen(QScreen *screen)
 {
-    const int nScreens = screens().count();
-    // remove useless views and savers
-    while (m_views.count() > nScreens) {
-        m_views.takeLast()->deleteLater();
-    }
-
-    // extend views and savers to current demand
-    for (int i = m_views.count(); i < nScreens; ++i) {
-        // create the view
-        auto *view = new KQuickAddons::QuickViewSharedEngine();
-        view->setColor(Qt::black);
-        auto screen = QGuiApplication::screens()[i];
-        view->setGeometry(screen->geometry());
-
-        // first create KDeclarative, to be sure that it created a KIO Network Factory
-        KDeclarative::KDeclarative declarative;
-        declarative.setDeclarativeEngine(view->engine());
-        declarative.setupBindings();
-
-        if (!m_testing) {
-            if (QX11Info::isPlatformX11()) {
-                view->setFlags(Qt::X11BypassWindowManagerHint);
-            } else {
-                view->setFlags(Qt::FramelessWindowHint);
-            }
+    auto *view = createViewForScreen(screen);
+    m_views << view;
+    connect(this, &QGuiApplication::screenRemoved, view, [this, view, screen](QScreen *removedScreen) {
+        if (removedScreen != screen) {
+            return;
         }
+        m_views.removeOne(view);
+        delete view;
+    });
+}
 
-        if (m_ksldInterface) {
-            view->create();
-            org_kde_ksld_x11window(m_ksldInterface, view->winId());
-            wl_display_flush(m_ksldConnection->display());
-        }
+KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *screen)
+{
+    // create the view
+    auto *view = new KQuickAddons::QuickViewSharedEngine();
 
-        // engine stuff
-        QQmlContext *context = view->engine()->rootContext();
+    view->setColor(Qt::black);
+    view->setScreen(screen);
+    view->setGeometry(screen->geometry());
 
-        context->setContextProperty(QStringLiteral("kscreenlocker_userName"), m_userName);
-        context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), m_userImage);
-        context->setContextProperty(QStringLiteral("authenticator"), m_authenticator);
-        context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
-        context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
-        context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
-        context->setContextProperty(QStringLiteral("config"), m_lnfIntegration->configuration());
+    connect(screen, &QScreen::geometryChanged, view, [view](const QRect &geo) {
+        view->setGeometry(geo);
+    });
 
-        view->setSource(m_mainQmlPath);
-        // on error, load the fallback lockscreen to not lock the user out of the system
-        if (view->status() != QQmlComponent::Ready) {
-            static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
+    // first create KDeclarative, to be sure that it created a KIO Network Factory
+    KDeclarative::KDeclarative declarative;
+    declarative.setDeclarativeEngine(view->engine());
+    declarative.setupBindings();
 
-            qCWarning(KSCREENLOCKER_GREET) << "Failed to load lockscreen QML, falling back to built-in locker";
-
-            m_mainQmlPath = fallbackUrl;
-            view->setSource(fallbackUrl);
-        }
-        view->setResizeMode(KQuickAddons::QuickViewSharedEngine::SizeRootObjectToView);
-
-        loadWallpaperPlugin(view);
-        // overwrite the factory set by kdeclarative
-        auto oldFactory = view->engine()->networkAccessManagerFactory();
-        view->engine()->setNetworkAccessManagerFactory(nullptr);
-        delete oldFactory;
-        view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
-
-        QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
-        lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
-
-        QQmlProperty sleepProperty(view->rootObject(), QStringLiteral("suspendToRamSupported"));
-        sleepProperty.write(PowerManagement::instance()->canSuspend());
-        if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
-            connect(view->rootObject(), SIGNAL(suspendToRam()), SLOT(suspendToRam()));
-        }
-
-        QQmlProperty hibernateProperty(view->rootObject(), QStringLiteral("suspendToDiskSupported"));
-        hibernateProperty.write(PowerManagement::instance()->canHibernate());
-        if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
-            connect(view->rootObject(), SIGNAL(suspendToDisk()), SLOT(suspendToDisk()));
-        }
-
-        // verify that the engine's controller didn't change
-        Q_ASSERT(dynamic_cast<NoAccessNetworkAccessManagerFactory *>(view->engine()->networkAccessManagerFactory()));
-
-        m_views << view;
-    }
-
-    // update geometry of all views and savers
-    for (int i = 0; i < nScreens; ++i) {
-        auto *view = m_views.at(i);
-
-        auto screen = QGuiApplication::screens()[i];
-        view->setScreen(screen);
-        if (auto object = view->property("wallpaperGraphicsObject").value<KDeclarative::QmlObjectSharedEngine*>()) {
-            //initialize with our size to avoid as much resize events as possible
-            object->completeInitialization({
-                {QStringLiteral("width"), view->width()},
-                {QStringLiteral("height"), view->height()},
-            });
-        }
-
-        if (KWindowSystem::isPlatformWayland()) {
-            if (auto layerShellWindow = LayerShellQt::Window::get(view)) {
-                layerShellWindow->setExclusiveZone(-1);
-                layerShellWindow->setLayer(LayerShellQt::Window::LayerOverlay);
-            }
-        }
-
-        // on Wayland we may not use fullscreen as that puts all windows on one screen
-        if (m_testing || QX11Info::isPlatformX11()) {
-            view->show();
+    if (!m_testing) {
+        if (QX11Info::isPlatformX11()) {
+            view->setFlags(Qt::X11BypassWindowManagerHint);
         } else {
-            view->showFullScreen();
+            view->setFlags(Qt::FramelessWindowHint);
         }
-        view->raise();
-
-        auto onFrameSwapped = [this, view] {
-            markViewsAsVisible(view);
-        };
-        connect(view, &QQuickWindow::frameSwapped, this, onFrameSwapped, Qt::QueuedConnection);
     }
+
+    if (m_ksldInterface) {
+        view->create();
+        org_kde_ksld_x11window(m_ksldInterface, view->winId());
+        wl_display_flush(m_ksldConnection->display());
+    }
+
+    // engine stuff
+    QQmlContext *context = view->engine()->rootContext();
+
+    context->setContextProperty(QStringLiteral("kscreenlocker_userName"), m_userName);
+    context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), m_userImage);
+    context->setContextProperty(QStringLiteral("authenticator"), m_authenticator);
+    context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
+    context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
+    context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
+    context->setContextProperty(QStringLiteral("config"), m_lnfIntegration->configuration());
+
+    view->setSource(m_mainQmlPath);
+    // on error, load the fallback lockscreen to not lock the user out of the system
+    if (view->status() != QQmlComponent::Ready) {
+        static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
+
+        qCWarning(KSCREENLOCKER_GREET) << "Failed to load lockscreen QML, falling back to built-in locker";
+
+        m_mainQmlPath = fallbackUrl;
+        view->setSource(fallbackUrl);
+    }
+    view->setResizeMode(KQuickAddons::QuickViewSharedEngine::SizeRootObjectToView);
+
+    // overwrite the factory set by kdeclarative
+    auto oldFactory = view->engine()->networkAccessManagerFactory();
+    view->engine()->setNetworkAccessManagerFactory(nullptr);
+    delete oldFactory;
+    view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
+
+    QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
+    lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
+
+    QQmlProperty sleepProperty(view->rootObject(), QStringLiteral("suspendToRamSupported"));
+    sleepProperty.write(PowerManagement::instance()->canSuspend());
+    if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
+        connect(view->rootObject(), SIGNAL(suspendToRam()), SLOT(suspendToRam()));
+    }
+
+    QQmlProperty hibernateProperty(view->rootObject(), QStringLiteral("suspendToDiskSupported"));
+    hibernateProperty.write(PowerManagement::instance()->canHibernate());
+    if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
+        connect(view->rootObject(), SIGNAL(suspendToDisk()), SLOT(suspendToDisk()));
+    }
+
+    // verify that the engine's controller didn't change
+    Q_ASSERT(dynamic_cast<NoAccessNetworkAccessManagerFactory *>(view->engine()->networkAccessManagerFactory()));
+
+    loadWallpaperPlugin(view);
+    if (auto object = view->property("wallpaperGraphicsObject").value<KDeclarative::QmlObjectSharedEngine *>()) {
+        // initialize with our size to avoid as much resize events as possible
+        object->completeInitialization({
+            {QStringLiteral("width"), view->width()},
+            {QStringLiteral("height"), view->height()},
+        });
+    }
+
+    if (KWindowSystem::isPlatformWayland()) {
+        if (auto layerShellWindow = LayerShellQt::Window::get(view)) {
+            layerShellWindow->setExclusiveZone(-1);
+            layerShellWindow->setLayer(LayerShellQt::Window::LayerOverlay);
+        }
+    }
+
+    // on Wayland we may not use fullscreen as that puts all windows on one screen
+    if (m_testing || QX11Info::isPlatformX11()) {
+        view->show();
+    } else {
+        view->showFullScreen();
+    }
+    view->raise();
+
+    auto onFrameSwapped = [this, view] {
+        markViewsAsVisible(view);
+    };
+    connect(view, &QQuickWindow::frameSwapped, this, onFrameSwapped, Qt::QueuedConnection);
+
+    return view;
 }
 
 void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
