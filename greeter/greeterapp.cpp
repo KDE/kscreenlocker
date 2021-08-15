@@ -274,6 +274,9 @@ void UnlockApp::initialViewSetup()
 
 void UnlockApp::handleScreen(QScreen *screen)
 {
+    if (screen->geometry().isNull()) {
+        return;
+    }
     auto *view = createViewForScreen(screen);
     m_views << view;
     connect(this, &QGuiApplication::screenRemoved, view, [this, view, screen](QScreen *removedScreen) {
