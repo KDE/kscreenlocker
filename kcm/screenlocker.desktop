@@ -95,6 +95,7 @@ Comment[zh_CN]=配置锁屏
 Comment[zh_TW]=設定螢幕鎖定方式
 X-KDE-Keywords=lock,resume,screensaver,screenlock,locking,block,blocking,password,sleep,close lid,lock automatically,screen lock appearance,screen lock theme,screen lock wallpaper
 X-KDE-Keywords[ca]=bloqueig,represa,estalvi de pantalla,bloqueig de pantalla,bloca,contrasenya,adormir,tancament de tapa,bloqueig automàtic,aparença de bloqueig de pantalla,tema de bloqueig de pantalla,fons de pantalla de pantalla de bloqueig
+X-KDE-Keywords[el]=κλείδωμα,επαναφορά,προφύλαξη οθόνης,κλείδωμα οθόνης,κλείδωμα,block,blocking,κωδικός πρόσβασης,ύπνωση,close lid,κλείδωμα αυτόματα,εμφάνιση κλειδώματος οθόνης,θέμα κλειδώματος οθόνης,ταπετσαρία κλειδώματος οθόνης
 X-KDE-Keywords[en_GB]=lock,resume,screensaver,screenlock,locking,block,blocking,password,sleep,close lid,lock automatically,screen lock appearance,screen lock theme,screen lock wallpaper
 X-KDE-Keywords[es]=bloquear,continuar,salvapantallas,bloqueo de pantalla,bloqueo,contraseña,dormir,cerrar tapa,bloquear automáticamente,aspecto del bloqueo de pantalla,tema de bloqueo de pantalla,fondo del bloqueo de pantalla
 X-KDE-Keywords[eu]=giltzatu,berrekin,pantaila-babeslea,pantail-giltzatua,giltzatzea,blokeoa,blokeatzea,pasahitza,lokartu,tapa ixtea,automatikoki giltzatu,pantaila giltzatuaren itxura,pantaila giltzatuaren gaia,pantaila giltzatuaren horma-papera
