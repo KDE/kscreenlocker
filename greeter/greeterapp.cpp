@@ -469,7 +469,7 @@ void UnlockApp::suspendToRam()
     m_ignoreRequests = true;
     m_resetRequestIgnoreTimer->start();
 
-    org_kde_ksld_suspendSystem(m_ksldInterface);
+    PowerManagement::instance()->suspend();
 }
 
 void UnlockApp::suspendToDisk()
@@ -481,7 +481,7 @@ void UnlockApp::suspendToDisk()
     m_ignoreRequests = true;
     m_resetRequestIgnoreTimer->start();
 
-    org_kde_ksld_hibernateSystem(m_ksldInterface);
+    PowerManagement::instance()->hibernate();
 }
 
 void UnlockApp::setTesting(bool enable)
