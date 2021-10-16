@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "greeterapp.h"
 #include "authenticator.h"
+#include "greeterclient.h"
 #include "kscreensaversettingsbase.h"
 #include "lnf_integration.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
@@ -44,10 +45,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Plasma
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
-// KWayland
-#include <KWayland/Client/connection_thread.h>
-#include <KWayland/Client/event_queue.h>
-#include <KWayland/Client/registry.h>
 // Qt
 #include <QAbstractNativeEventFilter>
 #include <QClipboard>
@@ -66,9 +63,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QQuickView>
 
 #include <QX11Info>
-// Wayland
-#include <wayland-client.h>
-#include <wayland-ksld-client-protocol.h>
 // X11
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
@@ -147,17 +141,7 @@ UnlockApp::~UnlockApp()
     }
     qDeleteAll(m_views);
 
-    if (m_ksldInterface) {
-        org_kde_ksld_destroy(m_ksldInterface);
-    }
-    if (m_ksldRegistry) {
-        delete m_ksldRegistry;
-    }
-    if (m_ksldConnection) {
-        m_ksldConnection->deleteLater();
-        m_ksldConnectionThread->quit();
-        m_ksldConnectionThread->wait();
-    }
+    delete m_greeterClient;
 }
 
 Authenticator *UnlockApp::createAuthenticator()
@@ -314,10 +298,9 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         }
     }
 
-    if (m_ksldInterface) {
+    if (m_greeterClient) {
         view->create();
-        org_kde_ksld_x11window(m_ksldInterface, view->winId());
-        wl_display_flush(m_ksldConnection->display());
+        m_greeterClient->sendRegister(view->winId());
     }
 
     // engine stuff
@@ -619,45 +602,11 @@ void UnlockApp::setDefaultToSwitchUser(bool defaultToSwitchUser)
 
 void UnlockApp::setKsldSocket(int socket)
 {
-    using namespace KWayland::Client;
-    m_ksldConnection = new ConnectionThread;
-    m_ksldConnection->setSocketFd(socket);
+    m_greeterClient = new GreeterClient(socket);
 
-    m_ksldRegistry = new Registry();
-    EventQueue *queue = new EventQueue(m_ksldRegistry);
-
-    connect(m_ksldRegistry, &Registry::interfaceAnnounced, this, [this, queue](QByteArray interface, quint32 name, quint32 version) {
-        Q_UNUSED(version)
-        if (interface != QByteArrayLiteral("org_kde_ksld")) {
-            return;
-        }
-        // bind version 1 as we dropped all the V2 features
-        m_ksldInterface = reinterpret_cast<org_kde_ksld *>(wl_registry_bind(*m_ksldRegistry, name, &org_kde_ksld_interface, 1));
-        queue->addProxy(m_ksldInterface);
-
-        for (auto v : qAsConst(m_views)) {
-            org_kde_ksld_x11window(m_ksldInterface, v->winId());
-            wl_display_flush(m_ksldConnection->display());
-        }
-    });
-
-    connect(
-        m_ksldConnection,
-        &ConnectionThread::connected,
-        this,
-        [this, queue] {
-            m_ksldRegistry->create(m_ksldConnection);
-            queue->setup(m_ksldConnection);
-            m_ksldRegistry->setEventQueue(queue);
-            m_ksldRegistry->setup();
-            wl_display_flush(m_ksldConnection->display());
-        },
-        Qt::QueuedConnection);
-
-    m_ksldConnectionThread = new QThread(this);
-    m_ksldConnection->moveToThread(m_ksldConnectionThread);
-    m_ksldConnectionThread->start();
-    m_ksldConnection->initConnection();
+    for (auto v : qAsConst(m_views)) {
+        m_greeterClient->sendRegister(v->winId());
+    }
 }
 
 void UnlockApp::osdProgress(const QString &icon, int percent, const QString &additionalText)

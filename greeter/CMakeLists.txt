@@ -10,6 +10,7 @@ include_directories(
 set(kscreenlocker_greet_SRCS
    authenticator.cpp
    greeterapp.cpp
+   greeterclient.cpp
    main.cpp
    powermanagement.cpp
    noaccessnetworkaccessmanagerfactory.cpp
@@ -28,12 +29,6 @@ ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
 
 qt5_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 
-
-ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
-    PROTOCOL ../protocols/ksld.xml
-    BASENAME ksld
-)
-
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
 target_link_libraries(kscreenlocker_greet
@@ -49,8 +44,6 @@ target_link_libraries(kscreenlocker_greet
                         Qt::Qml
                         Qt::X11Extras
                         X11::X11
-                        KF5::WaylandClient
-                        Wayland::Client
                         LayerShellQt::Interface
                         )
 

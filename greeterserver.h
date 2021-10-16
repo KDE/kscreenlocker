@@ -20,29 +20,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SCREENLOCKER_WAYLANDSERVER_H
 #define SCREENLOCKER_WAYLANDSERVER_H
 
+#include <QLocalSocket>
 #include <QObject>
-
-struct wl_client;
-struct wl_global;
-struct wl_resource;
-
-namespace KWayland
-{
-namespace Server
-{
-class ClientConnection;
-class Display;
-}
-}
 
 namespace ScreenLocker
 {
-class WaylandServer : public QObject
+class GreeterServer : public QObject
 {
     Q_OBJECT
 public:
-    explicit WaylandServer(QObject *parent = nullptr);
-    ~WaylandServer() override;
+    enum class MessageId : quint32 {
+        RegisterWindow = 1,
+    };
+
+    explicit GreeterServer(QObject *parent = nullptr);
+    ~GreeterServer() override;
     int start();
     void stop();
 
@@ -50,19 +42,9 @@ Q_SIGNALS:
     void x11WindowAdded(quint32 window);
 
 private:
-    static void bind(wl_client *client, void *data, uint32_t version, uint32_t id);
-    static void unbind(wl_resource *resource);
-    static void x11WindowCallback(wl_client *client, wl_resource *resource, uint32_t id);
-    static void suspendSystemCallback(wl_client *client, wl_resource *resource);
-    static void hibernateSystemCallback(wl_client *client, wl_resource *resource);
-    void addResource(wl_resource *r);
-    void removeResource(wl_resource *r);
-    void sendCanSuspend();
-    void sendCanHibernate();
-    QScopedPointer<KWayland::Server::Display> m_display;
-    KWayland::Server::ClientConnection *m_allowedClient = nullptr;
-    wl_global *m_interface = nullptr;
-    QList<wl_resource *> m_resources;
+    void dispatch();
+
+    QLocalSocket *m_socket = nullptr;
 };
 
 }

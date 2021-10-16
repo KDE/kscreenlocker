@@ -81,17 +81,7 @@ add_feature_info("XInput" X11_Xinput_FOUND "Required for grabbing XInput2 device
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS X11Extras)
 
-find_package(KF5Wayland CONFIG REQUIRED)
-set_package_properties(KF5Wayland PROPERTIES
-                       TYPE REQUIRED
-                       PURPOSE "Required for building screenlocker")
-find_package(WaylandScanner)
-find_package(Wayland 1.3 COMPONENTS Client Server)
 find_package(LayerShellQt REQUIRED)
-
-set_package_properties(Wayland PROPERTIES
-                       TYPE REQUIRED
-                       PURPOSE "Required for building screenlocker")
 
 find_package(loginctl)
 set_package_properties(loginctl PROPERTIES
@@ -162,10 +152,10 @@ set(ksld_SRCS
    ksldapp.cpp
    interface.cpp
    globalaccel.cpp
+   greeterserver.cpp
    x11locker.cpp
    waylandlocker.cpp
    logind.cpp
-   waylandserver.cpp
    powermanagement_inhibition.cpp
 )
 
@@ -183,11 +173,6 @@ ecm_qt_declare_logging_category(ksld_SRCS
 qt_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
 qt_add_dbus_adaptor(ksld_SRCS ${kscreensaver_dbusXML} interface.h ScreenLocker::Interface kscreensaveradaptor KScreenSaverAdaptor)
 qt_add_dbus_interface(ksld_SRCS ${powerdevilpolicyagent_xml} powerdevilpolicyagent)
-
-ecm_add_wayland_server_protocol(ksld_SRCS
-    PROTOCOL protocols/ksld.xml
-    BASENAME ksld
-)
 
 add_library(KScreenLocker SHARED ${ksld_SRCS})
 
@@ -210,8 +195,6 @@ PRIVATE
    X11::X11
    XCB::XCB
    XCB::KEYSYMS
-   KF5::WaylandServer
-   Wayland::Server
 )
 
 if (X11_Xinput_FOUND)

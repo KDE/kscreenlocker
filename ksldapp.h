@@ -44,7 +44,7 @@ enum class EstablishLock {
 };
 
 class AbstractLocker;
-class WaylandServer;
+class GreeterServer;
 
 class KSCREENLOCKER_EXPORT KSldApp : public QObject
 {
@@ -156,7 +156,7 @@ private:
     LockState m_lockState;
     QProcess *m_lockProcess;
     AbstractLocker *m_lockWindow;
-    WaylandServer *m_waylandServer;
+    GreeterServer *m_greeterServer;
 
     /**
      * Timer to measure how long the screen is locked.

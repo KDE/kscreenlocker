@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "kscreenlocker_logging.h"
 #include <config-kscreenlocker.h>
 
-#include "waylandserver.h"
+#include "greeterserver.h"
 #include <config-X11.h>
 // KDE
 #include <KAuthorized>
@@ -80,7 +80,7 @@ KSldApp::KSldApp(QObject *parent)
     , m_lockState(Unlocked)
     , m_lockProcess(nullptr)
     , m_lockWindow(nullptr)
-    , m_waylandServer(new WaylandServer(this))
+    , m_greeterServer(new GreeterServer(this))
     , m_lockedTimer(QElapsedTimer())
     , m_idleId(0)
     , m_lockGrace(0)
@@ -245,7 +245,7 @@ void KSldApp::initialize()
         if (error == QProcess::FailedToStart) {
             qCDebug(KSCREENLOCKER) << "Greeter Process  failed to start. Trying to directly unlock again.";
             doUnlock();
-            m_waylandServer->stop();
+            m_greeterServer->stop();
             qCCritical(KSCREENLOCKER) << "Greeter Process not available";
         } else {
             qCWarning(KSCREENLOCKER) << "Greeter Process encountered an unhandled error:" << error;
@@ -551,7 +551,7 @@ void KSldApp::doUnlock()
     m_lockedTimer.invalidate();
     m_greeterCrashedCounter = 0;
     endGraceTime();
-    m_waylandServer->stop();
+    m_greeterServer->stop();
     KNotification::event(QStringLiteral("unlocked"), i18n("Screen unlocked"), QPixmap(), nullptr, KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
     Q_EMIT unlocked();
     Q_EMIT lockStateChanged();
@@ -599,7 +599,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     }
 
     // start the Wayland server
-    int fd = m_waylandServer->start();
+    int fd = m_greeterServer->start();
     if (fd == -1) {
         qCWarning(KSCREENLOCKER) << "Could not start the Wayland server.";
         Q_EMIT m_lockProcess->errorOccurred(QProcess::FailedToStart);
@@ -652,7 +652,7 @@ void KSldApp::showLockWindow()
 
         connect(m_lockWindow, &AbstractLocker::lockWindowShown, this, &KSldApp::lockScreenShown);
 
-        connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
+        connect(m_greeterServer, &GreeterServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
     m_lockWindow->showLockWindow();
     if (m_isX11) {

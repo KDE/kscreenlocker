@@ -24,21 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QGuiApplication>
 #include <QUrl>
 
-namespace KWayland
-{
-namespace Client
-{
-class ConnectionThread;
-class Registry;
-}
-}
-
 namespace KQuickAddons
 {
 class QuickViewSharedEngine;
 }
 
 class Authenticator;
+class GreeterClient;
 
 struct org_kde_ksld;
 
@@ -112,11 +104,7 @@ private:
     bool m_canHibernate = false;
     QString m_userName, m_userImage;
 
-    KWayland::Client::ConnectionThread *m_ksldConnection = nullptr;
-    KWayland::Client::Registry *m_ksldRegistry = nullptr;
-    QThread *m_ksldConnectionThread = nullptr;
-    org_kde_ksld *m_ksldInterface = nullptr;
-
+    GreeterClient *m_greeterClient = nullptr;
     WallpaperIntegration *m_wallpaperIntegration;
     LnFIntegration *m_lnfIntegration;
 };
