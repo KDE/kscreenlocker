@@ -177,7 +177,7 @@ void KSldApp::initialize()
     }
 
     // idle support
-    auto idleTimeSignal = static_cast<void (KIdleTime::*)(int)>(&KIdleTime::timeoutReached);
+    auto idleTimeSignal = static_cast<void (KIdleTime::*)(int, int)>(&KIdleTime::timeoutReached);
     connect(KIdleTime::instance(), idleTimeSignal, this, [this](int identifier) {
         if (identifier != m_idleId) {
             // not our identifier
