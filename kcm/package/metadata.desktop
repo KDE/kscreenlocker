@@ -92,7 +92,6 @@ X-KDE-PluginInfo-Email=kde@david-redondo.de
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Name=kcm_screenlocker
 X-KDE-ServiceTypes=Plasma/Generic
-X-Plasma-API=declarativeappletscript
 
 X-KDE-FormFactors=tablet,handset,desktop
 
