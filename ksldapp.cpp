@@ -243,7 +243,7 @@ void KSldApp::initialize()
     });
     connect(m_lockProcess, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
         if (error == QProcess::FailedToStart) {
-            qCDebug(KSCREENLOCKER) << "Greeter Process  failed to start. Trying to directly unlock again.";
+            qCDebug(KSCREENLOCKER, "Failed to start greeter process (%s). Trying to directly unlock again.", qPrintable(m_lockProcess->program()));
             doUnlock();
             m_waylandServer->stop();
             qCCritical(KSCREENLOCKER) << "Greeter Process not available";
