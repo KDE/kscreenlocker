@@ -31,6 +31,10 @@
     <entry key="LockOnResume" type="Bool">
         <default>true</default>
     </entry>
+    <entry key="LockOnStart" type="Bool">
+      <default>false</default>
+      <label>Defines if the session is locked on startup</label>
+    </entry>
   </group>
   <group name="Greeter">
     <entry key="Theme" type="String">

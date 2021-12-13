@@ -331,6 +331,9 @@ void KSldApp::initialize()
     if (m_logind->isLocked()) {
         lock(EstablishLock::Immediate);
     }
+    if (KScreenSaverSettings::lockOnStart()) {
+        lock(EstablishLock::Immediate);
+    }
 }
 
 void KSldApp::configure()
