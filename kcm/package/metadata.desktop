@@ -2,7 +2,7 @@
 Name=Screen Locking
 Name[ar]=قفل الشاشة
 Name[ca]=Bloqueig de pantalla
-Name[ca@valencia]=Bloqueig de la pantalla
+Name[ca@valencia]=Bloqueig de pantalla
 Name[cs]=Uzamykání obrazovky
 Name[da]=Skærmlås
 Name[de]=Bildschirmsperre
@@ -50,6 +50,7 @@ Name[zh_TW]=螢幕鎖定
 Comment=Configure screen locking
 Comment[ar]=يضبط قفل الشاشة
 Comment[ca]=Configura el bloqueig de la pantalla
+Comment[ca@valencia]=Configura el bloqueig de la pantalla
 Comment[cs]=Nastavit uzamykání obrazovky
 Comment[da]=Indstil skærmlås
 Comment[de]=Bildschirmsperre einrichten
