@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 #include <KConfigLoader>
-#include <KDeclarative/ConfigPropertyMap>
+#include <KConfigPropertyMap>
 
 #include <QFile>
 
@@ -35,7 +35,7 @@ namespace ScreenLocker
 LnFIntegration::LnFIntegration(QObject *parent)
     : QObject(parent)
 {
-    qRegisterMetaType<KDeclarative::ConfigPropertyMap *>();
+    qRegisterMetaType<KConfigPropertyMap *>();
 }
 
 LnFIntegration::~LnFIntegration() = default;
@@ -46,8 +46,7 @@ void LnFIntegration::init()
         return;
     }
     if (auto config = configScheme()) {
-        m_configuration = new KDeclarative::ConfigPropertyMap(config, this);
-        m_configuration->setAutosave(false);
+        m_configuration = new KConfigPropertyMap(config, this);
     }
 }
 

@@ -23,15 +23,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KSCREENLOCKER_WALLPAPER_INTEGRATION_H
 #define KSCREENLOCKER_WALLPAPER_INTEGRATION_H
 
+#include <KConfigPropertyMap>
 #include <KPackage/Package>
 #include <KSharedConfig>
 
 class KConfigLoader;
-
-namespace KDeclarative
-{
-class ConfigPropertyMap;
-}
 
 namespace ScreenLocker
 {
@@ -40,7 +36,7 @@ class WallpaperIntegration : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QString pluginName READ pluginName NOTIFY packageChanged)
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
+    Q_PROPERTY(KConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
 
 public:
     explicit WallpaperIntegration(QObject *parent);
@@ -63,7 +59,7 @@ public:
         return m_package;
     }
 
-    KDeclarative::ConfigPropertyMap *configuration() const
+    KConfigPropertyMap *configuration() const
     {
         return m_configuration;
     }
@@ -79,7 +75,7 @@ private:
     KPackage::Package m_package;
     KSharedConfig::Ptr m_config;
     KConfigLoader *m_configLoader = nullptr;
-    KDeclarative::ConfigPropertyMap *m_configuration = nullptr;
+    KConfigPropertyMap *m_configuration = nullptr;
 };
 
 }

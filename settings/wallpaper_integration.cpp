@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 #include <KConfigLoader>
-#include <KDeclarative/ConfigPropertyMap>
+#include <KConfigPropertyMap>
 #include <KPackage/PackageLoader>
 
 #include <QFile>
@@ -36,7 +36,7 @@ WallpaperIntegration::WallpaperIntegration(QObject *parent)
     : QObject(parent)
     , m_package(KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper")))
 {
-    qRegisterMetaType<KDeclarative::ConfigPropertyMap *>();
+    qRegisterMetaType<KConfigPropertyMap *>();
 }
 
 WallpaperIntegration::~WallpaperIntegration() = default;
@@ -47,8 +47,7 @@ void WallpaperIntegration::init()
         return;
     }
     if (auto config = configScheme()) {
-        m_configuration = new KDeclarative::ConfigPropertyMap(config, this);
-        m_configuration->setAutosave(false);
+        m_configuration = new KConfigPropertyMap(config, this);
         // potd (picture of the day) is using a kded to monitor changes and
         // cache data for the lockscreen. Let's notify it.
         m_configuration->setNotify(true);

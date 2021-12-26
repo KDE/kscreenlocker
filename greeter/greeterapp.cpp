@@ -33,8 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // KDE
 #include <KAuthorized>
+#include <KConfigPropertyMap>
 #include <KCrash>
-#include <KDeclarative/ConfigPropertyMap>
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
 #include <KDeclarative/QmlObjectSharedEngine>
 #include <KWindowSystem>

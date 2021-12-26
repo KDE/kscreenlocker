@@ -41,7 +41,7 @@ QUrl AppearanceSettings::wallpaperConfigFile() const
     return m_wallpaperConfigFile;
 }
 
-KDeclarative::ConfigPropertyMap *AppearanceSettings::wallpaperConfiguration() const
+KConfigPropertyMap *AppearanceSettings::wallpaperConfiguration() const
 {
     if (!m_wallpaperIntegration) {
         return nullptr;
@@ -49,7 +49,7 @@ KDeclarative::ConfigPropertyMap *AppearanceSettings::wallpaperConfiguration() co
     return m_wallpaperIntegration->configuration();
 }
 
-KDeclarative::ConfigPropertyMap *AppearanceSettings::lnfConfiguration() const
+KConfigPropertyMap *AppearanceSettings::lnfConfiguration() const
 {
     if (!m_lnfIntegration) {
         return nullptr;

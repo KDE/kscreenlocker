@@ -28,11 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KSharedConfig>
 
 class KConfigLoader;
-
-namespace KDeclarative
-{
-class ConfigPropertyMap;
-}
+class KConfigPropertyMap;
 
 namespace ScreenLocker
 {
@@ -40,7 +36,7 @@ class LnFIntegration : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(KDeclarative::ConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
+    Q_PROPERTY(KConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
 
 public:
     explicit LnFIntegration(QObject *parent);
@@ -63,7 +59,7 @@ public:
         return m_package;
     }
 
-    KDeclarative::ConfigPropertyMap *configuration() const
+    KConfigPropertyMap *configuration() const
     {
         return m_configuration;
     }
@@ -78,7 +74,7 @@ private:
     KPackage::Package m_package;
     KSharedConfig::Ptr m_config;
     KConfigLoader *m_configLoader = nullptr;
-    KDeclarative::ConfigPropertyMap *m_configuration = nullptr;
+    KConfigPropertyMap *m_configuration = nullptr;
 };
 
 }

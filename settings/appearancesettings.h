@@ -31,10 +31,7 @@ class WallpaperIntegration;
 class LnFIntegration;
 }
 
-namespace KDeclarative
-{
-class ConfigPropertyMap;
-}
+class KConfigPropertyMap;
 
 class AppearanceSettings : public QObject
 {
@@ -46,8 +43,8 @@ public:
     QUrl lnfConfigFile() const;
     QUrl wallpaperConfigFile() const;
 
-    KDeclarative::ConfigPropertyMap *wallpaperConfiguration() const;
-    KDeclarative::ConfigPropertyMap *lnfConfiguration() const;
+    KConfigPropertyMap *wallpaperConfiguration() const;
+    KConfigPropertyMap *lnfConfiguration() const;
 
     ScreenLocker::WallpaperIntegration *wallpaperIntegration() const;
 

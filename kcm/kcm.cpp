@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KAboutData>
 #include <KConfigLoader>
-#include <KDeclarative/ConfigPropertyMap>
+#include <KConfigPropertyMap>
 #include <KGlobalAccel>
 #include <KLocalizedString>
 #include <KPluginFactory>
@@ -50,7 +50,7 @@ ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
     qmlRegisterAnonymousType<KScreenSaverSettings>(url, 1);
     qmlRegisterAnonymousType<WallpaperInfo>(url, 1);
     qmlRegisterAnonymousType<ScreenLocker::WallpaperIntegration>(url, 1);
-    qmlRegisterAnonymousType<KDeclarative::ConfigPropertyMap>(url, 1);
+    qmlRegisterAnonymousType<KConfigPropertyMap>(url, 1);
     qmlProtectModule(url, 1);
     KAboutData *about = new KAboutData(QStringLiteral("kcm_screenlocker"), i18n("Screen Locking"), QStringLiteral("1.0"), QString(), KAboutLicense::GPL);
     about->addAuthor(i18n("Martin Gräßlin"), QString(), QStringLiteral("mgraesslin@kde.org"));
@@ -108,12 +108,12 @@ bool ScreenLockerKcm::isDefaults() const
     return m_appearanceSettings->isDefaults();
 }
 
-KDeclarative::ConfigPropertyMap *ScreenLockerKcm::wallpaperConfiguration() const
+KConfigPropertyMap *ScreenLockerKcm::wallpaperConfiguration() const
 {
     return m_appearanceSettings->wallpaperConfiguration();
 }
 
-KDeclarative::ConfigPropertyMap *ScreenLockerKcm::lnfConfiguration() const
+KConfigPropertyMap *ScreenLockerKcm::lnfConfiguration() const
 {
     return m_appearanceSettings->lnfConfiguration();
 }
