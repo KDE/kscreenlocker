@@ -41,20 +41,6 @@ add_feature_info("prctl/procctl tracing control"
                  CAN_DISABLE_PTRACE
                  "Required for disallowing ptrace on greeter and kcheckpass process")
 
-check_include_file("sys/signalfd.h" HAVE_SIGNALFD_H)
-if (NOT HAVE_SIGNALFD_H)
-    check_include_files("sys/types.h;sys/event.h" HAVE_EVENT_H)
-endif ()
-if (NOT (HAVE_SIGNALFD_H OR HAVE_EVENT_H))
-    message(FATAL_ERROR "kcheckpass either needs signalfd() or kevent()&sigtimedwait() to work")
-endif ()
-add_feature_info("sys/signalfd.h"
-                 HAVE_SIGNALFD_H
-                 "Use the signalfd() api for signalhandling")
-add_feature_info("sys/event.h"
-                 HAVE_EVENT_H
-                 "Use the kevent() and sigwaitinfo() api for signalhandling")
-
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     Crash
@@ -148,7 +134,6 @@ set(KSLD_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KScreenLocker")
 
 include(ECMQtDeclareLoggingCategory)
 
-add_subdirectory(kcheckpass)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
 add_subdirectory(settings)

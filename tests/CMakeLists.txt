@@ -7,9 +7,7 @@ add_executable(powermanagement_test powermanagementtest.cpp ../greeter/powermana
 target_link_libraries(powermanagement_test Qt::Gui Qt::DBus Qt::Quick)
 ecm_mark_as_test(powermanagement_test)
 
-include_directories(../kcheckpass/)
 add_definitions(-DQML_FILE="${CMAKE_CURRENT_SOURCE_DIR}/kcheckpass_test.qml")
-add_executable(kcheckpass_test kcheckpass_test.cpp ../greeter/authenticator.cpp)
-target_compile_definitions(kcheckpass_test PRIVATE KCHECKPASS_BIN="kcheckpass")
-target_link_libraries(kcheckpass_test KF5::CoreAddons Qt::Gui Qt::Quick)
+add_executable(kcheckpass_test kcheckpass_test.cpp)
+target_link_libraries(kcheckpass_test kscreenlocker_authenticator KF5::CoreAddons Qt::Gui Qt::Quick)
 ecm_mark_as_test(kcheckpass_test)

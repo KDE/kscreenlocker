@@ -29,28 +29,31 @@ ApplicationWindow {
             id: message
             Connections {
                 target: authenticator
-                onFailed: {
-                    message.text = "Authentication failed";
+                function onPromptForSecret() {
+                    authenticator.respond(password.text)
                 }
-                onSucceeded: {
+                function onSucceeded() {
                     message.text = "Authentication succeeded";
                 }
-                onGraceLockedChanged: {
-                    message.text = ""
+                function onFailed() {
+                    message.text = "Failed"
                 }
             }
         }
         TextField {
             id: password
-            enabled: !authenticator.graceLocked
+            enabled: true
             echoMode: TextInput.Password
         }
         Button {
             text: "Authenticate"
-            enabled: !authenticator.graceLocked
             onClicked: {
-                authenticator.tryUnlock(password.text)
+                console.log("unlock")
+                authenticator.tryUnlock()
             }
+        }
+        Item {
+            Layout.fillHeight: true
         }
     }
 }

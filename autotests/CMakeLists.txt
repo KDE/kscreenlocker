@@ -16,6 +16,21 @@ add_test(NAME ksmserver-logindTest COMMAND logindTest)
 ecm_mark_as_test(logindTest)
 
 #######################################
+# PamTest
+#######################################
+
+pkg_search_module(pam_wrapper OPTIONAL)
+if (pam_wrapper_FOUND)
+    add_executable(pamTest pamtest.cpp)
+    target_link_libraries(pamTest Qt::Test kscreenlocker_authenticator)
+    add_test(NAME ksmserver-pamTest COMMAND pamTest)
+    ecm_mark_as_test(pamTest)
+    set_property(TEST ksmserver-pamTest
+        PROPERTY
+        ENVIRONMENT LD_PRELOAD=libpam_wrapper.so)
+endif()
+
+#######################################
 # KSldTest
 #######################################
 add_executable(ksldTest ksldtest.cpp)

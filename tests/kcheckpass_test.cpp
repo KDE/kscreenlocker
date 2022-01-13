@@ -17,7 +17,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
-#include "../greeter/authenticator.h"
+#include "../greeter/pamauthenticator.h"
+#include <KUser>
 #include <QCommandLineParser>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -27,20 +28,9 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QCommandLineParser parser;
-    QCommandLineOption delayedOption(QStringLiteral("delayed"), QStringLiteral("KCheckpass is created at startup, the authentication is delayed"));
-    QCommandLineOption directOption(QStringLiteral("direct"), QStringLiteral("A new KCheckpass gets created when trying to authenticate"));
-    parser.addOption(directOption);
-    parser.addOption(delayedOption);
     parser.addHelpOption();
     parser.process(app);
-    AuthenticationMode mode = AuthenticationMode::Delayed;
-    if (parser.isSet(directOption)) {
-        mode = AuthenticationMode::Direct;
-    }
-    if (parser.isSet(directOption) && parser.isSet(delayedOption)) {
-        parser.showHelp(0);
-    }
-    Authenticator authenticator(mode);
+    PamAuthenticator authenticator("kde", KUser().loginName());
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("authenticator"), &authenticator);

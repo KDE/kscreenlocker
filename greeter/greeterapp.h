@@ -42,6 +42,8 @@ class Authenticator;
 
 struct org_kde_ksld;
 
+class PamAuthenticator;
+
 namespace ScreenLocker
 {
 class WallpaperIntegration;
@@ -90,7 +92,6 @@ private:
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
     void loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
-    Authenticator *createAuthenticator();
     QWindow *getActiveScreen();
 
     QString m_packageName;
@@ -103,7 +104,7 @@ private:
     bool m_ignoreRequests;
     bool m_immediateLock;
     bool m_runtimeInitialized;
-    Authenticator *m_authenticator;
+    PamAuthenticator *m_authenticator;
     int m_graceTime;
     bool m_noLock;
     bool m_defaultToSwitchUser;
