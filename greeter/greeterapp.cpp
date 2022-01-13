@@ -76,6 +76,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 #include <xcb/xcb.h>
 
+#include "pamauthenticator.h"
+
 // this is usable to fake a "screensaver" installation for testing
 // *must* be "0" for every public commit!
 #define TEST_SCREENSAVER 0
@@ -129,6 +131,16 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     m_authenticator = createAuthenticator();
     // It's a queued connection to give the QML part time to eventually execute code connected to Authenticator::succeeded if any
     connect(m_authenticator, &Authenticator::succeeded, this, &QCoreApplication::quit, Qt::QueuedConnection);
+
+    // TODO This needs guarding from a config or something
+    auto fingerAuthJob = new PamAuthenticator(QStringLiteral("kde-finger"), KUser().loginName());
+    connect(fingerAuthJob, &PamAuthenticator::finished, this, [](bool success) {
+        if (success) {
+            qApp->quit();
+        }
+    });
+    fingerAuthJob->authenticate();
+
     initialize();
 
     if (QX11Info::isPlatformX11()) {

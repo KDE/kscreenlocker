@@ -12,6 +12,7 @@ set(kscreenlocker_greet_SRCS
    greeterapp.cpp
    main.cpp
    powermanagement.cpp
+   pamauthenticator.cpp
    noaccessnetworkaccessmanagerfactory.cpp
 )
 
@@ -52,6 +53,7 @@ target_link_libraries(kscreenlocker_greet
                         KF5::WaylandClient
                         Wayland::Client
                         LayerShellQt::Interface
+                        ${PAM_LIBRARIES}
                         )
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
