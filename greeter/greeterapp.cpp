@@ -380,6 +380,7 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         if (auto layerShellWindow = LayerShellQt::Window::get(view)) {
             layerShellWindow->setExclusiveZone(-1);
             layerShellWindow->setLayer(LayerShellQt::Window::LayerOverlay);
+            layerShellWindow->setDesiredOutput(screen);
         }
     }
 
