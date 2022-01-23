@@ -35,35 +35,34 @@ QtControls.StackView {
     signal configurationChanged
     onSourceFileChanged: {
         if (sourceFile) {
-            var props = {}
-            var wallpaperConfig = configDialog.wallpaperConfiguration
-            for (var key in wallpaperConfig) {
+            const props = {}
+            const wallpaperConfig = configDialog.wallpaperConfiguration
+            for (const key in wallpaperConfig) {
                 props["cfg_" + key] = wallpaperConfig[key]
             }
 
-            var newItem = replace(sourceFile, props, QtControls.StackView.ReplaceTransition)
+            const newItem = replace(sourceFile, props, QtControls.StackView.ReplaceTransition)
 
-            wallpaperConfig.valueChanged.connect(function(key, value) {
+            wallpaperConfig.valueChanged.connect((key, value) => {
                 if (newItem["cfg_" + key] !== undefined) {
                     newItem["cfg_" + key] = value
                 }
             })
 
-            var createSignalHandler = function(key) {
-                return function() {
+            const createSignalHandler = key => {
+                return () => {
                     configDialog.wallpaperConfiguration[key] = newItem["cfg_" + key]
                     configurationChanged()
                 }
             }
 
-            for (var key in wallpaperConfig) {
-                var changedSignal = newItem["cfg_" + key + "Changed"]
+            for (const key in wallpaperConfig) {
+                const changedSignal = newItem["cfg_" + key + "Changed"]
                 if (changedSignal) {
                     changedSignal.connect(createSignalHandler(key))
                 }
             }
-        }
-        else {
+        } else {
             replace(empty)
         }
     }

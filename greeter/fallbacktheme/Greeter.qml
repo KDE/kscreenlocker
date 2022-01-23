@@ -123,7 +123,7 @@ Item {
     }
 
     Keys.onPressed: {
-        var alt = (event.modifiers & Qt.AltModifier);
+        const alt = event.modifiers & Qt.AltModifier;
         buttonRow.showAccel = alt;
 
         if (alt) {
@@ -133,11 +133,10 @@ Item {
             // greeter.focus = false;
             root.forceActiveFocus();
 
-            var buttons = [switchUser, unlock]
-            for (var b = 0; b < buttons.length; ++b) {
-                if (event.key == buttons[b].accelKey) {
+            for (const button of [switchUser, unlock]) {
+                if (event.key == button.accelKey) {
                     buttonRow.showAccel = false;
-                    buttons[b].clicked();
+                    button.clicked();
                     break;
                 }
             }
@@ -145,7 +144,7 @@ Item {
     }
 
     Keys.onReleased: {
-        buttonRow.showAccel = (event.modifiers & Qt.AltModifier)
+        buttonRow.showAccel = event.modifiers & Qt.AltModifier;
     }
 
     Connections {

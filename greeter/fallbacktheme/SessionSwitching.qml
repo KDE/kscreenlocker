@@ -140,12 +140,12 @@ Item {
     }
 
     Keys.onPressed: {
-        var alt = (event.modifiers & Qt.AltModifier);
+        const alt = event.modifiers & Qt.AltModifier;
         buttonRow.showAccel = alt;
 
         if (alt) {
-            var buttons = [activateSession, newSession, cancelSession];
-            for (var b = 0; b < buttons.length; ++b) {
+            const buttons = [activateSession, newSession, cancelSession];
+            for (let b = 0; b < buttons.length; ++b) {
                 if (event.key == buttons[b].accelKey) {
                     buttonRow.showAccel = false;
                     buttons[b].clicked();
@@ -156,6 +156,6 @@ Item {
     }
 
     Keys.onReleased: {
-        buttonRow.showAccel = (event.modifiers & Qt.AltModifier)
+        buttonRow.showAccel = event.modifiers & Qt.AltModifier;
     }
 }

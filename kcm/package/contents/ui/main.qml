@@ -55,12 +55,8 @@ KCM.SimpleKCM {
                 QQC2.SpinBox {
                     from: 1
                     editable: true
-                    textFromValue: function (value) {
-                        return i18np("%1 minute", "%1 minutes", value)
-                    }
-                    valueFromText: function (text) {
-                        return parseInt(text)
-                    }
+                    textFromValue: value => i18np("%1 minute", "%1 minutes", value)
+                    valueFromText: text => parseInt(text)
                     value: kcm.settings.timeout
                     onValueModified: kcm.settings.timeout = value
 
@@ -91,12 +87,8 @@ KCM.SimpleKCM {
                 from: 0
                 to: 300
                 editable: true
-                textFromValue: function (value) {
-                    return i18np("%1 second", "%1 seconds", value)
-                }
-                valueFromText: function (text) {
-                    return parseInt(text)
-                }
+                textFromValue: value => i18np("%1 second", "%1 seconds", value)
+                valueFromText: text => parseInt(text)
                 value: kcm.settings.lockGrace
                 onValueModified: kcm.settings.lockGrace = value
 
