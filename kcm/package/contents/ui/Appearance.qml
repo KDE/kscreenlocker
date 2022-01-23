@@ -21,12 +21,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
-import QtQuick 2.14
-import QtQuick.Controls 2.14 as QQC2
-import QtQuick.Layouts 1.14
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Layouts 1.15
 
-import org.kde.kcm 1.5 as KCM
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kcm 1.6 as KCM
+import org.kde.kirigami 2.19 as Kirigami
 
 Kirigami.Page {
     // Plugins expect these two properties
