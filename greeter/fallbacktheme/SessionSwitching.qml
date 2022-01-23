@@ -17,18 +17,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
+
 import QtQuick 2.0
+
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 Item {
     readonly property bool switchUserSupported: sessionsModel.canSwitchUser
 
-    implicitWidth: theme.mSize(theme.defaultFont).width * 55
-    implicitHeight: theme.mSize(theme.defaultFont).height * 25
     signal sessionActivated()
     signal newSessionStarted()
     signal switchingCanceled()
+
+    implicitWidth: theme.mSize(theme.defaultFont).width * 55
+    implicitHeight: theme.mSize(theme.defaultFont).height * 25
 
     anchors {
         fill: parent
@@ -46,6 +49,7 @@ Item {
 
         ListView {
             id: userSessionsView
+
             model: sessionsModel
             anchors.fill: parent
 
@@ -69,6 +73,7 @@ Item {
                 width: parent.width
             }
             focus: true
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: userSessionsView.currentIndex = userSessionsView.indexAt(mouse.x, mouse.y)

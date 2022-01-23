@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
 import QtQuick 2.0
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
@@ -26,8 +27,9 @@ PlasmaComponents.Button {
     property string label
     property string normalLabel
     property string accelLabel
-    text: parent.showAccel ? accelLabel : normalLabel
     property int accelKey: -1
+
+    text: parent.showAccel ? accelLabel : normalLabel
 
     onLabelChanged: {
         var i = label.indexOf('&');

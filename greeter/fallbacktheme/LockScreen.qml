@@ -17,20 +17,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
+
 import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 
 import org.kde.kquickcontrolsaddons 2.0
-
-import org.kde.plasma.private.sessions 2.0
-
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.private.sessions 2.0
 
 Item {
     id: lockScreen
-    signal unlockRequested()
+
     property alias capsLockOn: unlockUI.capsLockOn
     property bool locked: false
+
+    signal unlockRequested()
 
     // if there's no image, have a near black background
     Rectangle {
@@ -45,6 +46,7 @@ Item {
 
     Image {
         id: background
+
         anchors.fill: parent
         source: theme.wallpaperPathForSize(parent.width, parent.height)
         smooth: true
@@ -52,6 +54,7 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: dialog
+
         visible: lockScreen.locked
         anchors.centerIn: parent
         imagePath: "widgets/background"
@@ -72,6 +75,7 @@ Item {
         }
         PlasmaComponents.PageStack {
             id: mainStack
+
             clip: true
             anchors {
                 fill: parent
@@ -110,6 +114,7 @@ Item {
 
         SessionSwitching {
             id: userSessionsUI
+
             visible: false
 
             Connections {

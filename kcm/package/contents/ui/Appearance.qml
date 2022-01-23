@@ -20,25 +20,32 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
+
 import QtQuick 2.14
 import QtQuick.Controls 2.14 as QQC2
 import QtQuick.Layouts 1.14
+
 import org.kde.kcm 1.5 as KCM
 import org.kde.kirigami 2.12 as Kirigami
 
 Kirigami.Page {
-    title: i18nc("@title", "Appearance")
-    //Plugins expect these two properties
+    // Plugins expect these two properties
     property var wallpaper: kcm.wallpaperIntegration
     property var configDialog: kcm
+
+    title: i18nc("@title", "Appearance")
+
     ColumnLayout {
         anchors.fill: parent
+
         LnfConfig {
             sourceFile: kcm.lnfConfigFile
             onConfigurationChanged: kcm.updateState()
         }
+
         Kirigami.FormLayout {
             id: parentLayout // Don't change needed for correct alignment with lnf and wallpaper config
+
             QQC2.ComboBox {
                 Kirigami.FormData.label: i18n("Wallpaper type:")
                 model: kcm.availableWallpaperPlugins()
@@ -46,15 +53,18 @@ Kirigami.Page {
                 valueRole: "id"
                 currentIndex: model.findIndex(wallpaper => wallpaper["id"] === kcm.settings.wallpaperPluginId)
                 displayText: model[currentIndex]["name"]
+
                 onActivated: {
                     kcm.settings.wallpaperPluginId = model[index]["id"]
                 }
+
                 KCM.SettingStateBinding {
                     configObject: kcm.settings
                     settingName: "wallpaperPluginId"
                 }
             }
         }
+
         WallpaperConfig {
             sourceFile: kcm.wallpaperConfigFile
             onConfigurationChanged: kcm.updateState()

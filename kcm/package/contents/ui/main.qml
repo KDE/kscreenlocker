@@ -24,21 +24,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import QtQuick 2.14
 import QtQuick.Controls 2.14 as QQC2
 import QtQuick.Layouts 1.14
+
 import org.kde.kcm 1.5 as KCM
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.kquickcontrols 2.0 as KQuickControls
 
 KCM.SimpleKCM {
+    id: root
+
     implicitHeight: 800
     implicitWidth: 800
-    id: root
+
     ColumnLayout {
         spacing: 0
+
         Kirigami.FormLayout {
             RowLayout {
                 Kirigami.FormData.label: i18n("Lock screen automatically:")
                 QQC2.CheckBox {
-                    text: i18nc("First part of sentence \"Automatically after X minutes\"","After")
+                    text: i18nc("First part of sentence \"Automatically after X minutes\"", "After")
                     checked: kcm.settings.autolock
                     onToggled: kcm.settings.autolock = checked
 
@@ -47,6 +51,7 @@ KCM.SimpleKCM {
                         settingName: "Autolock"
                     }
                 }
+
                 QQC2.SpinBox {
                     from: 1
                     editable: true
@@ -65,8 +70,9 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
             QQC2.CheckBox {
-                text: i18nc("@option:check","After waking from sleep")
+                text: i18nc("@option:check", "After waking from sleep")
                 checked: kcm.settings.lockOnResume
                 onToggled: kcm.settings.lockOnResume = checked
 
