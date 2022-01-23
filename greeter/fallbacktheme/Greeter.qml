@@ -146,20 +146,21 @@ Item {
 
     Connections {
         target: authenticator
-        onFailed: {
+
+        function onFailed() {
             root.notification = i18nd("kscreenlocker_greet", "Unlocking failed");
         }
-        onGraceLockedChanged: {
+        function onGraceLockedChanged() {
             if (!authenticator.graceLocked) {
                 root.notification = "";
                 password.selectAll();
                 password.focus = true;
             }
         }
-        onMessage: function(text) {
+        function onMessage(text) {
             root.notification = text;
         }
-        onError: function(text) {
+        function onError(text) {
             root.notification = text;
         }
     }

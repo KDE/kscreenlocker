@@ -90,8 +90,13 @@ Item {
         switchUserEnabled: sessionsModel.canSwitchUser
 
         Connections {
-            onAccepted: lockScreen.unlockRequested()
-            onSwitchUserClicked: { mainStack.push(userSessionsUIComponent); mainStack.currentPage.forceActiveFocus(); }
+            function onAccepted() {
+                lockScreen.unlockRequested();
+            }
+            function onSwitchUserClicked() {
+                mainStack.push(userSessionsUIComponent);
+                mainStack.currentPage.forceActiveFocus();
+            }
         }
     }
 
@@ -108,9 +113,15 @@ Item {
             visible: false
 
             Connections {
-                onSwitchingCanceled: returnToLogin()
-                onSessionActivated: returnToLogin()
-                onNewSessionStarted: returnToLogin()
+                function onSwitchingCanceled() {
+                    returnToLogin();
+                }
+                function onSessionActivated() {
+                    returnToLogin();
+                }
+                function onNewSessionStarted() {
+                    returnToLogin();
+                }
             }
         }
     }
