@@ -1,4 +1,3 @@
-add_definitions(-DKSCREENLOCKER_UNIT_TEST)
 include(ECMMarkAsTest)
 
 #######################################

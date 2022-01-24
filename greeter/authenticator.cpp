@@ -24,6 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <config-kscreenlocker.h>
 #include <kcheckpass-enums.h>
 
+// KF
+#include <KLibexec>
+
 // Qt
 #include <QCoreApplication>
 #include <QFile>
@@ -134,7 +137,7 @@ void KCheckPass::start()
     if (!m_pid) {
         ::close(sfd[0]);
         sprintf(fdbuf, "%d", sfd[1]);
-        execlp(QFile::encodeName(QStringLiteral(KCHECKPASS_BIN)).data(), "kcheckpass", "-m", "classic", "-S", fdbuf, (char *)nullptr);
+        execlp(QFile::encodeName(KLibexec::path(KCHECKPASS_BIN)).data(), "kcheckpass", "-m", "classic", "-S", fdbuf, (char *)nullptr);
         _exit(20);
     }
     ::close(sfd[1]);

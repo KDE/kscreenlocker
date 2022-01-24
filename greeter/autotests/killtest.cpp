@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 // own
 #include <config-kscreenlocker.h>
+// KF
+#include <KLibexec>
 // Qt
 #include <QtTest>
 // system
@@ -88,7 +90,7 @@ void KillTest::testKill()
 {
     QProcess greeter(this);
     greeter.setReadChannel(QProcess::StandardOutput);
-    greeter.start(QStringLiteral(KSCREENLOCKER_GREET_BIN), QStringList({QStringLiteral("--testing")}));
+    greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN), QStringList({QStringLiteral("--testing")}));
     QVERIFY(greeter.waitForStarted());
 
     // wait some time till it's really set up
@@ -165,7 +167,7 @@ void KillTest::testImmediateKill()
     // this test ensures that the greeter indicates crashexit when a signal is sent to the greeter
     // before it had time to properly setup
     QProcess greeter(this);
-    greeter.start(QStringLiteral(KSCREENLOCKER_GREET_BIN), QStringList({QStringLiteral("--testing")}));
+    greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN), QStringList({QStringLiteral("--testing")}));
     QVERIFY(greeter.waitForStarted());
 
     // now kill

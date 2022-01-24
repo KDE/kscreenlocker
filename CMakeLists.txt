@@ -214,6 +214,12 @@ PRIVATE
    Wayland::Server
 )
 
+# The file path of kscreenlocker_greet must be relative to the KScreenLocker library.
+file(RELATIVE_PATH kscreenlocker_greeter_bin ${CMAKE_INSTALL_FULL_LIBDIR} ${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet)
+target_compile_definitions(KScreenLocker PRIVATE
+    KSCREENLOCKER_GREET_BIN="${kscreenlocker_greeter_bin}"
+)
+
 if (X11_Xinput_FOUND)
     target_link_libraries(KScreenLocker PRIVATE X11::Xi)
 endif()

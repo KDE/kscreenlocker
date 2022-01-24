@@ -38,6 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KAuthorized>
 #include <KGlobalAccel>
 #include <KIdleTime>
+#include <KLibexec>
 #include <KLocalizedString>
 #include <KNotification>
 
@@ -613,7 +614,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     args << QString::number(fd);
 
     m_lockProcess->setProcessEnvironment(env);
-    m_lockProcess->start(QStringLiteral(KSCREENLOCKER_GREET_BIN), args);
+    m_lockProcess->start(KLibexec::path(QStringLiteral(KSCREENLOCKER_GREET_BIN)), args);
     close(fd);
 }
 

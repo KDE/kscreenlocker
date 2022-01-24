@@ -54,6 +54,10 @@ target_link_libraries(kscreenlocker_greet
                         LayerShellQt::Interface
                         )
 
+target_compile_definitions(kscreenlocker_greet PRIVATE
+    KCHECKPASS_BIN="kcheckpass"
+)
+
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 
 install(DIRECTORY themes/org.kde.passworddialog DESTINATION ${KDE_INSTALL_DATADIR}/ksmserver/screenlocker)
