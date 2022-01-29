@@ -5,6 +5,7 @@ Icon=preferences-desktop-user-password
 X-KDE-Library=kcm_screenlocker
 X-KDE-ParentApp=kcontrol
 X-DocPath=kcontrol/screenlocker/index.html
+X-KDE-FormFactors=tablet,handset,desktop
 
 X-KDE-System-Settings-Parent-Category=desktopbehavior
 X-KDE-Weight=60
