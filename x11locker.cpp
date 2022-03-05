@@ -26,8 +26,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // KDE
 // Qt
 #include <QApplication>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <private/qtx11extras_p.h>
+#else
 #include <QDesktopWidget>
 #include <QX11Info>
+#endif
 // X11
 #include <X11/Xatom.h>
 #include <xcb/xcb.h>
@@ -275,7 +279,11 @@ void sendEvent(xcb_generic_event_t *event, xcb_window_t target, int x, int y)
     xcb_send_event(QX11Info::connection(), false, target, XCB_EVENT_MASK_NO_EVENT, reinterpret_cast<const char *>(&e));
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, long int *)
+#else
+bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qintptr *)
+#endif
 {
     if (eventType != QByteArrayLiteral("xcb_generic_event_t")) {
         return false;

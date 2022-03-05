@@ -23,7 +23,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KIdleTime>
 // Qt
 #include <QProcess>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <private/qtx11extras_p.h>
+#else
 #include <QX11Info>
+#endif
 #include <QtTest>
 // xcb
 #include <xcb/xcb.h>

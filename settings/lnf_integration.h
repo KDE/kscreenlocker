@@ -24,11 +24,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KSCREENLOCKER_LNF_INTEGRATION_H
 #define KSCREENLOCKER_LNF_INTEGRATION_H
 
+#include <KConfigPropertyMap>
 #include <KPackage/Package>
 #include <KSharedConfig>
 
 class KConfigLoader;
-class KConfigPropertyMap;
 
 namespace ScreenLocker
 {

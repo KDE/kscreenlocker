@@ -47,7 +47,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QKeyEvent>
 #include <QProcess>
 #include <QTimer>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <private/qtx11extras_p.h>
+#else
 #include <QX11Info>
+#endif
 // X11
 #include <X11/Xlib.h>
 #include <xcb/xcb.h>

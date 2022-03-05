@@ -98,7 +98,7 @@ void KillTest::testKill()
 
     // now kill
     QFETCH(int, signal);
-    kill(greeter.pid(), signal);
+    kill(greeter.processId(), signal);
 
     QFETCH(bool, expectedQuit);
     QCOMPARE(greeter.waitForFinished(1000), expectedQuit);
@@ -172,7 +172,7 @@ void KillTest::testImmediateKill()
 
     // now kill
     QFETCH(int, signal);
-    kill(greeter.pid(), signal);
+    kill(greeter.processId(), signal);
 
     QVERIFY(greeter.waitForFinished());
     QCOMPARE(greeter.exitStatus(), QProcess::CrashExit);

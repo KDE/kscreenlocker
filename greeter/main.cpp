@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
 
     // This allow ksmserver to know when the application has actually finished setting itself up.
     // Crucial for blocking until it is ready, ensuring locking happens before sleep, e.g.
-    std::cout << "Locked at " << QDateTime::currentDateTime().toTime_t() << std::endl;
+    std::cout << "Locked at " << QDateTime::currentDateTime().toSecsSinceEpoch() << std::endl;
 
     struct sigaction sa;
     sa.sa_handler = signalHandler;

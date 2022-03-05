@@ -20,6 +20,9 @@ ecm_mark_as_test(logindTest)
 #######################################
 add_executable(ksldTest ksldtest.cpp)
 target_link_libraries(ksldTest Qt::Test Qt::Widgets KF5::IdleTime XCB::XTEST KScreenLocker)
+if (QT_MAJOR_VERSION EQUAL "6")
+    target_link_libraries(ksldTest Qt::GuiPrivate)
+endif()
 add_test(NAME ksmserver-ksldTest COMMAND ksldTest)
 ecm_mark_as_test(ksldTest)
 
@@ -54,12 +57,16 @@ target_link_libraries(x11LockerTest
     KF5::I18n
     KF5::WindowSystem
     Qt::Test
-    Qt::X11Extras
     Qt::Widgets
     X11::X11
     XCB::XCB
     XCB::KEYSYMS
 )
+if (QT_MAJOR_VERSION EQUAL "5")
+    target_link_libraries(x11LockerTest Qt5::X11Extras)
+else()
+    target_link_libraries(x11LockerTest Qt::GuiPrivate)
+endif()
 add_test(NAME ksmserver-x11LockerTest COMMAND x11LockerTest)
 ecm_mark_as_test(x11LockerTest)
 

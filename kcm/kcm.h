@@ -22,20 +22,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KCM_H
 #define KCM_H
 
+#include <KConfigPropertyMap>
 #include <KPackage/Package>
 #include <KQuickAddons/ManagedConfigModule>
 
 #include "kscreensaversettings.h"
+#include "wallpaper_integration.h"
 
 class ScreenLockerKcmForm;
 class AppearanceSettings;
 namespace ScreenLocker
 {
-class WallpaperIntegration;
 class LnFIntegration;
 }
-
-class KConfigPropertyMap;
 
 class ScreenLockerKcm : public KQuickAddons::ManagedConfigModule
 {

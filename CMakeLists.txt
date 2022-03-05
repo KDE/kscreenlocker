@@ -6,13 +6,12 @@ set(PROJECT_VERSION "5.24.80")
 set(PROJECT_VERSION_MAJOR 5)
 
 set(QT_MIN_VERSION "5.15.0")
-set(KF5_MIN_VERSION "5.89")
+set(KF5_MIN_VERSION "5.91")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} )
 
@@ -56,6 +55,7 @@ add_feature_info("sys/event.h"
                  HAVE_EVENT_H
                  "Use the kevent() and sigwaitinfo() api for signalhandling")
 
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     Crash
                     Declarative
@@ -79,7 +79,9 @@ find_package(XCB MODULE REQUIRED COMPONENTS XCB KEYSYMS XTEST)
 set_package_properties(XCB PROPERTIES TYPE REQUIRED)
 add_feature_info("XInput" X11_Xinput_FOUND "Required for grabbing XInput2 devices in the screen locker")
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS X11Extras)
+if (QT_MAJOR_VERSION EQUAL "5")
+    find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS X11Extras)
+endif()
 
 find_package(KF5Wayland CONFIG REQUIRED)
 set_package_properties(KF5Wayland PROPERTIES
@@ -194,7 +196,6 @@ add_library(KScreenLocker SHARED ${ksld_SRCS})
 target_link_libraries(KScreenLocker
 PUBLIC
    Qt::Core
-   Qt::X11Extras
 PRIVATE
    settings
    Qt::DBus
@@ -213,6 +214,11 @@ PRIVATE
    KF5::WaylandServer
    Wayland::Server
 )
+if (QT_MAJOR_VERSION EQUAL "5")
+    target_link_libraries(KScreenLocker PUBLIC Qt5::X11Extras)
+else()
+    target_link_libraries(KScreenLocker PRIVATE Qt::GuiPrivate)
+endif()
 
 # The file path of kscreenlocker_greet must be relative to the KScreenLocker library.
 file(RELATIVE_PATH kscreenlocker_greeter_bin ${CMAKE_INSTALL_FULL_LIBDIR} ${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet)
@@ -284,7 +290,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
 		DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KScreenLocker"
 		COMPONENT Devel)
 
-install(FILES kscreenlocker.notifyrc  DESTINATION ${KDE_INSTALL_KNOTIFY5RCDIR} RENAME ksmserver.notifyrc)
+install(FILES kscreenlocker.notifyrc  DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR} RENAME ksmserver.notifyrc)
 install(FILES ${screensaver_dbusXML}
         DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR}
         RENAME kf5_org.freedesktop.ScreenSaver.xml)

@@ -26,11 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // KDE
 #include <KAuthorized>
 #include <KIdleTime>
-#include <KRandom>
 // Qt
 #include <QDBusConnection>
 #include <QDBusReply>
 #include <QDBusServiceWatcher>
+#include <QRandomGenerator>
 
 namespace ScreenLocker
 {
@@ -59,7 +59,7 @@ Interface::Interface(KSldApp *parent)
     // I make it a really random number to avoid
     // some assumptions in clients, but just increase
     // while gnome-ss creates a random number every time
-    m_next_cookie = KRandom::random() % 20000;
+    m_next_cookie = QRandomGenerator::global()->bounded(19999);
 }
 
 Interface::~Interface()
