@@ -31,7 +31,7 @@ class KScreenLockerData : public KCModuleData
     Q_OBJECT
 
 public:
-    explicit KScreenLockerData(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit KScreenLockerData(QObject *parent, const QVariantList &args);
 
     bool isDefaults() const override;
 
