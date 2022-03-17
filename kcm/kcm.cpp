@@ -39,8 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory, "kcm_screenlocker.json", registerPlugin<ScreenLockerKcm>(); registerPlugin<KScreenLockerData>();)
 
-ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
-    : KQuickAddons::ManagedConfigModule(parent, args)
+ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : KQuickAddons::ManagedConfigModule(parent, data, args)
     , m_appearanceSettings(new AppearanceSettings(this))
 {
     registerSettings(&KScreenSaverSettings::getInstance());
@@ -52,10 +52,6 @@ ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
     qmlRegisterAnonymousType<ScreenLocker::WallpaperIntegration>(url, 1);
     qmlRegisterAnonymousType<KConfigPropertyMap>(url, 1);
     qmlProtectModule(url, 1);
-    KAboutData *about = new KAboutData(QStringLiteral("kcm_screenlocker"), i18n("Screen Locking"), QStringLiteral("1.0"), QString(), KAboutLicense::GPL);
-    about->addAuthor(i18n("Martin Gräßlin"), QString(), QStringLiteral("mgraesslin@kde.org"));
-    about->addAuthor(i18n("Kevin Ottens"), QString(), QStringLiteral("kevin.ottens@enioka.com"));
-    setAboutData(about);
     connect(&KScreenSaverSettings::getInstance(),
             &KScreenSaverSettings::wallpaperPluginIdChanged,
             m_appearanceSettings,

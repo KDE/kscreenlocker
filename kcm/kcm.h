@@ -40,7 +40,7 @@ class ScreenLockerKcm : public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
 public:
-    explicit ScreenLockerKcm(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit ScreenLockerKcm(QObject *parent = nullptr, const KPluginMetaData &data = {}, const QVariantList &args = QVariantList());
 
     Q_PROPERTY(KScreenSaverSettings *settings READ settings CONSTANT)
     Q_PROPERTY(KConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY currentWallpaperChanged)
