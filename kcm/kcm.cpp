@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QVector>
 
-K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory, "screenlocker.json", registerPlugin<ScreenLockerKcm>(); registerPlugin<KScreenLockerData>();)
+K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory, "kcm_screenlocker.json", registerPlugin<ScreenLockerKcm>(); registerPlugin<KScreenLockerData>();)
 
 ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const QVariantList &args)
     : KQuickAddons::ManagedConfigModule(parent, args)
