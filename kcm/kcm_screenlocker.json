@@ -1,6 +1,11 @@
 {
     "KPlugin": {
         "Description": "Configure screen locking",
+        "Description[ca]": "Configura el bloqueig de la pantalla",
+        "Description[it]": "Configura il blocco dello schermo",
+        "Description[nl]": "Schermvergrendeling configureren",
+        "Description[uk]": "Налаштування блокування екрана",
+        "Description[x-test]": "xxConfigure screen lockingxx",
         "FormFactors": [
             "tablet",
             "handset",
