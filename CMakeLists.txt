@@ -211,7 +211,6 @@ PRIVATE
    X11::X11
    XCB::XCB
    XCB::KEYSYMS
-   KF5::WaylandServer
    Wayland::Server
 )
 if (QT_MAJOR_VERSION EQUAL "5")

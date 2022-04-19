@@ -69,16 +69,3 @@ else()
 endif()
 add_test(NAME ksmserver-x11LockerTest COMMAND x11LockerTest)
 ecm_mark_as_test(x11LockerTest)
-
-#######################################
-# NoScreensTest
-#######################################
-set(noScreensTest_SRCS noscreens.cpp)
-add_executable(noScreensTest ${noScreensTest_SRCS})
-target_link_libraries(noScreensTest
-    KScreenLocker
-    Qt::Test
-    KF5::WaylandServer
-    )
-add_test(NAME ksld-noScreensTest COMMAND noScreensTest)
-ecm_mark_as_test(noScreensTest)
