@@ -37,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KCrash>
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
 #include <KDeclarative/QmlObjectSharedEngine>
+#include <KLocalizedContext>
 #include <KWindowSystem>
 #include <kdeclarative/kdeclarative.h>
 
@@ -310,9 +311,8 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
     });
 
     // first create KDeclarative, to be sure that it created a KIO Network Factory
-    KDeclarative::KDeclarative declarative;
-    declarative.setDeclarativeEngine(view->engine());
-    declarative.setupBindings();
+    KDeclarative::KDeclarative::setupEngine(view->engine());
+    view->engine()->rootContext()->setContextObject(new KLocalizedContext(view->engine()));
 
     if (!m_testing) {
         if (QX11Info::isPlatformX11()) {
