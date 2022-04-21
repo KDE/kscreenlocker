@@ -52,6 +52,11 @@ ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const KPluginMetaData &data, c
     qmlRegisterAnonymousType<ScreenLocker::WallpaperIntegration>(url, 1);
     qmlRegisterAnonymousType<KConfigPropertyMap>(url, 1);
     qmlProtectModule(url, 1);
+
+    // Our modules will be checking the Plasmoid attached object when running from Plasma, let it load the module
+    const char *uri = "org.kde.plasma.plasmoid";
+    qmlRegisterUncreatableType<QObject>(uri, 2, 0, "PlasmoidPlaceholder", QStringLiteral("Do not create objects of type Plasmoid"));
+
     connect(&KScreenSaverSettings::getInstance(),
             &KScreenSaverSettings::wallpaperPluginIdChanged,
             m_appearanceSettings,
