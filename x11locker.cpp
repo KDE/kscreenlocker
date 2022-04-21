@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // KDE
 // Qt
 #include <QApplication>
+#include <QScreen>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <private/qtx11extras_p.h>
 #else
@@ -89,8 +90,17 @@ void X11Locker::initialize()
         }
         XFree(real);
     }
-    connect(QApplication::desktop(), &QDesktopWidget::resized, this, &X11Locker::updateGeo);
-    connect(QApplication::desktop(), &QDesktopWidget::screenCountChanged, this, &X11Locker::updateGeo);
+
+    // monitor for screen geometry changes
+    connect(qGuiApp, &QGuiApplication::screenAdded, this, [this](QScreen *screen) {
+        connect(screen, &QScreen::geometryChanged, this, &X11Locker::updateGeo);
+        updateGeo();
+    });
+    connect(qGuiApp, &QGuiApplication::screenRemoved, this, &X11Locker::updateGeo);
+    const auto screens = QGuiApplication::screens();
+    for (auto *screen : screens) {
+        connect(screen, &QScreen::geometryChanged, this, &X11Locker::updateGeo);
+    }
 }
 
 void X11Locker::showLockWindow()
@@ -525,8 +535,12 @@ void X11Locker::stayOnTop()
 
 void X11Locker::updateGeo()
 {
-    QDesktopWidget *desktop = QApplication::desktop();
-    m_background->setGeometry(desktop->geometry());
+    QRect geometry;
+    const auto screens = QGuiApplication::screens();
+    for (auto *screen : screens) {
+        geometry |= screen->geometry();
+    }
+    m_background->setGeometry(geometry);
     m_background->update();
 }
 
