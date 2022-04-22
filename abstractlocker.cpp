@@ -51,30 +51,33 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
     if (m_greeterFailure) {
         auto text = ki18n(
             "The screen locker is broken and unlocking is not possible anymore.\n"
-            "In order to unlock it either ConsoleKit or LoginD is needed, none of\n"
-            "which could be found on your system.");
+            "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
+            "of which could be found on your system.");
         auto text_ck = ki18n(
             "The screen locker is broken and unlocking is not possible anymore.\n"
-            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
             "log in as root and execute the command:\n\n"
             "# ck-unlock-session <session-name>\n\n");
         auto text_ld = ki18n(
             "The screen locker is broken and unlocking is not possible anymore.\n"
-            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
             "log in and execute the command:\n\n"
-            "loginctl unlock-session %1\n\n"
+            "loginctl unlock-session %2\n\n"
             "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-            "back to the running session (Ctrl+Alt+F%2).");
+            "back to the running session (Ctrl+Alt+F%3).");
 
         auto haveService = [](QString service) {
             return QDBusConnection::systemBus().interface()->isServiceRegistered(service);
         };
         if (haveService(QStringLiteral("org.freedesktop.ConsoleKit"))) {
-            text = text_ck;
+            auto virtualTerminalId = qgetenv("XDG_VTNR").toInt();
+            text = text_ck.subs(virtualTerminalId == 2 ? 1 : 2);
         } else if (haveService(QStringLiteral("org.freedesktop.login1"))) {
             text = text_ld;
+            auto virtualTerminalId = qgetenv("XDG_VTNR").toInt();
+            text = text.subs(virtualTerminalId == 2 ? 1 : 2);
             text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_SESSION_ID")));
-            text = text.subs(QString::fromLocal8Bit(qgetenv("XDG_VTNR")));
+            text = text.subs(virtualTerminalId);
         }
 
         p.setPen(Qt::white);
