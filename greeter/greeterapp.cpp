@@ -196,7 +196,7 @@ void UnlockApp::initialize()
     if (!KScreenSaverSettingsBase::theme().isEmpty()) {
         package.setPath(KScreenSaverSettingsBase::theme());
     }
-    QString plasmaApiVersion = package.metadata().value("X-Plasma-APIVersion", "1");
+    QString plasmaApiVersion = package.metadata().value("X-Plasma-APIVersion", QStringLiteral("1"));
     if (plasmaApiVersion.toInt() <= 1) {
         qCWarning(KSCREENLOCKER_GREET) << "Lockscreen QML outdated, falling back to default";
         package.setPath(QString());

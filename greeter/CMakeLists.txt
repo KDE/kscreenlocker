@@ -34,7 +34,7 @@ target_link_libraries(kscreenlocker_authenticator
                       ${PAM_LIBRARIES}
                      )
 
-qt5_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
+qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 
 ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
     PROTOCOL ../protocols/ksld.xml
