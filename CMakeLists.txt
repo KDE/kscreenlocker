@@ -204,10 +204,12 @@ else()
     target_link_libraries(KScreenLocker PRIVATE Qt::GuiPrivate)
 endif()
 
+set(kscreenlocker_greet_bin_abs ${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet)
 # The file path of kscreenlocker_greet must be relative to the KScreenLocker library.
-file(RELATIVE_PATH kscreenlocker_greeter_bin ${CMAKE_INSTALL_FULL_LIBDIR} ${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet)
+file(RELATIVE_PATH kscreenlocker_greet_bin_rel ${CMAKE_INSTALL_FULL_LIBDIR} ${kscreenlocker_greet_bin_abs})
 target_compile_definitions(KScreenLocker PRIVATE
-    KSCREENLOCKER_GREET_BIN="${kscreenlocker_greeter_bin}"
+    KSCREENLOCKER_GREET_BIN_ABS="${kscreenlocker_greet_bin_abs}"
+    KSCREENLOCKER_GREET_BIN_REL="${kscreenlocker_greet_bin_rel}"
 )
 
 if (X11_Xinput_FOUND)
