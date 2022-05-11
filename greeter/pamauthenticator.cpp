@@ -53,6 +53,7 @@ private:
     pam_handle_t *m_handle = nullptr; //< the actual PAM handle
     struct pam_conv m_conv;
 
+    bool m_inAuthenticate = false;
     int m_result;
 };
 
@@ -143,6 +144,10 @@ PamWorker::~PamWorker()
 
 void PamWorker::authenticate()
 {
+    if (m_inAuthenticate) {
+        return;
+    }
+    m_inAuthenticate = true;
     qCDebug(KSCREENLOCKER_GREET) << "Start auth";
     int rc = pam_authenticate(m_handle, 0); // PAM_SILENT);
     qCDebug(KSCREENLOCKER_GREET) << "Auth done RC" << rc;
@@ -152,6 +157,7 @@ void PamWorker::authenticate()
     } else {
         Q_EMIT failed();
     }
+    m_inAuthenticate = false;
 }
 
 static void fail_delay(int retval, unsigned usec_delay, void *appdata_ptr)
