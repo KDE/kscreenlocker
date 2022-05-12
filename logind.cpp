@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QCoreApplication>
 #include <QDBusConnectionInterface>
 #include <QDBusServiceWatcher>
+#include <QStandardPaths>
 
 #include <kscreenlocker_logging.h>
 
@@ -51,6 +52,12 @@ LogindIntegration::LogindIntegration(const QDBusConnection &connection, QObject 
     , m_managerInterface(nullptr)
     , m_sessionInterface(nullptr)
 {
+    // if we are inside Kwin's unit tests don't query or manipulate logind
+    // avoid connecting but keep all stubs in place
+    if (QStandardPaths::isTestModeEnabled()) {
+        return;
+    }
+
     connect(m_logindServiceWatcher, &QDBusServiceWatcher::serviceRegistered, this, &LogindIntegration::logindServiceRegistered);
     connect(m_logindServiceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this]() {
         m_connected = false;
