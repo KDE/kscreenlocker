@@ -130,23 +130,13 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_testing(false)
     , m_ignoreRequests(false)
     , m_immediateLock(false)
+    , m_authenticator(new PamAuthenticator("kde", KUser().loginName(), this))
     , m_graceTime(0)
     , m_noLock(false)
     , m_defaultToSwitchUser(false)
     , m_wallpaperIntegration(new WallpaperIntegration(this))
     , m_lnfIntegration(new LnFIntegration(this))
 {
-    m_authenticator = new PamAuthenticator("kde", KUser().loginName(), this);
-    // It's a queued connection to give the QML part time to eventually execute code connected to Authenticator::succeeded if any
-    connect(
-        m_authenticator,
-        &PamAuthenticator::succeeded,
-        this,
-        []() {
-            qApp->quit();
-        },
-        Qt::QueuedConnection);
-
     initialize();
 
     if (QX11Info::isPlatformX11()) {
@@ -339,6 +329,13 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
 
     // engine stuff
     QQmlContext *context = view->engine()->rootContext();
+    connect(view->engine(), &QQmlEngine::quit, this, [this]() {
+        if (m_authenticator->isUnlocked()) {
+            QCoreApplication::quit();
+        } else {
+            qCWarning(KSCREENLOCKER_GREET) << "Greeter tried to quit without being unlocked";
+        }
+    });
 
     context->setContextProperty(QStringLiteral("kscreenlocker_userName"), m_userName);
     context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), m_userImage);
