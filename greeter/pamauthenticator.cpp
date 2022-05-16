@@ -201,7 +201,10 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
     connect(d, &PamWorker::infoMessage, this, &PamAuthenticator::infoMessage);
     connect(d, &PamWorker::errorMessage, this, &PamAuthenticator::errorMessage);
 
-    connect(d, &PamWorker::succeeded, this, &PamAuthenticator::succeeded);
+    connect(d, &PamWorker::succeeded, this, [this]() {
+        m_unlocked = true;
+        Q_EMIT succeeded();
+    });
     connect(d, &PamWorker::failed, this, &PamAuthenticator::failed);
 
     m_thread.start();
@@ -222,8 +225,14 @@ void PamAuthenticator::init(const QString &service, const QString &user)
     });
 }
 
+bool PamAuthenticator::isUnlocked() const
+{
+    return m_unlocked;
+}
+
 void PamAuthenticator::tryUnlock()
 {
+    m_unlocked = false;
     QMetaObject::invokeMethod(d, &PamWorker::authenticate);
 }
 

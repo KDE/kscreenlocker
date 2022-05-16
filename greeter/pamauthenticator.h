@@ -33,6 +33,8 @@ public:
     PamAuthenticator(const QString &service, const QString &user, QObject *parent = nullptr);
     ~PamAuthenticator();
 
+    bool isUnlocked() const;
+
 Q_SIGNALS:
     void promptForSecret(const QString &msg);
     void prompt(const QString &msg);
@@ -50,6 +52,7 @@ protected:
     void init(const QString &service, const QString &user);
 
 private:
+    bool m_unlocked = false;
     QThread m_thread;
     PamWorker *d;
 };
