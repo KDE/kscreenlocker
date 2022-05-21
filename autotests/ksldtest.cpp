@@ -64,7 +64,7 @@ void KSldTest::testEstablishGrab()
     // to get the grab to fail we need another X client
     // we start another process to perform our grab
     QProcess keyboardGrabber;
-    keyboardGrabber.start(QStringLiteral("./keyboardGrabber"));
+    keyboardGrabber.start(QStringLiteral("./keyboardGrabber"), QStringList());
     QVERIFY(keyboardGrabber.waitForStarted());
 
     // let's add some delay to be sure that keyboardGrabber has it's X stuff done
@@ -84,7 +84,7 @@ void KSldTest::testEstablishGrab()
 
     // now the same with pointer
     QProcess pointerGrabber;
-    pointerGrabber.start(QStringLiteral("./pointerGrabber"));
+    pointerGrabber.start(QStringLiteral("./pointerGrabber"), QStringList());
     QVERIFY(pointerGrabber.waitForStarted());
 
     // let's add some delay to be sure that pointerGrabber has it's X stuff done
