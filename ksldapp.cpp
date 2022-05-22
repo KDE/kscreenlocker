@@ -44,6 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Qt
 #include <QAction>
+#include <QFile>
 #include <QKeyEvent>
 #include <QProcess>
 #include <QTimer>
