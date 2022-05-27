@@ -47,6 +47,7 @@ Kirigami.Page {
             id: parentLayout // Don't change needed for correct alignment with lnf and wallpaper config
 
             QQC2.ComboBox {
+                Layout.fillWidth: true
                 Kirigami.FormData.label: i18n("Wallpaper type:")
                 model: kcm.availableWallpaperPlugins()
                 textRole: "name"
