@@ -101,6 +101,25 @@ void disableDrKonqi()
 // that would enable drkonqi
 Q_CONSTRUCTOR_FUNCTION(disableDrKonqi)
 
+// Verify that a package or its fallback is using the right API
+bool verifyPackageApi(const KPackage::Package &package)
+{
+    if (package.metadata().value("X-Plasma-APIVersion", QStringLiteral("1")).toInt() >= 2) {
+        return true;
+    }
+
+    if (!package.filePath("lockscreenmainscript").contains(package.path())) {
+        // The current package does not contain the lock screen and we are
+        // using the fallback package. So check to see if that package has
+        // the right version instead.
+        if (package.fallbackPackage().metadata().value("X-Plasma-APIVersion", QStringLiteral("1")).toInt() >= 2) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 class FocusOutEventFilter : public QAbstractNativeEventFilter
 {
 public:
@@ -186,10 +205,9 @@ void UnlockApp::initialize()
     if (!KScreenSaverSettingsBase::theme().isEmpty()) {
         package.setPath(KScreenSaverSettingsBase::theme());
     }
-    QString plasmaApiVersion = package.metadata().value("X-Plasma-APIVersion", QStringLiteral("1"));
-    if (plasmaApiVersion.toInt() <= 1) {
+    if (!verifyPackageApi(package)) {
         qCWarning(KSCREENLOCKER_GREET) << "Lockscreen QML outdated, falling back to default";
-        package.setPath(QString());
+        package.setPath(QStringLiteral("org.kde.breeze.desktop"));
     }
 
     m_mainQmlPath = package.fileUrl("lockscreenmainscript");
