@@ -56,7 +56,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // X11
 #include <X11/Xlib.h>
 #include <xcb/xcb.h>
-#ifdef X11_Xinput_FOUND
+#if X11_Xinput_FOUND
 #include <X11/extensions/XInput2.h>
 #endif
 // other
@@ -127,7 +127,7 @@ static bool s_logindExit = false;
 
 static bool hasXInput()
 {
-#ifdef X11_Xinput_FOUND
+#if X11_Xinput_FOUND
     Display *dpy = QX11Info::display();
     int xi_opcode, event, error;
     // init XInput extension
@@ -456,7 +456,7 @@ bool KSldApp::establishGrab()
         return false;
     }
 
-#ifdef X11_Xinput_FOUND
+#if X11_Xinput_FOUND
     if (m_hasXInput2) {
         // get all devices
         Display *dpy = QX11Info::display();
@@ -537,7 +537,7 @@ void KSldApp::doUnlock()
         xcb_ungrab_keyboard(c, XCB_CURRENT_TIME);
         xcb_ungrab_pointer(c, XCB_CURRENT_TIME);
         xcb_flush(c);
-#ifdef X11_Xinput_FOUND
+#if X11_Xinput_FOUND
         if (m_hasXInput2) {
             // get all devices
             Display *dpy = QX11Info::display();
