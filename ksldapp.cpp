@@ -32,8 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "kscreenlocker_logging.h"
 #include <config-kscreenlocker.h>
 
+#include "config-unix.h"
 #include "waylandserver.h"
-#include <config-X11.h>
 // KDE
 #include <KAuthorized>
 #include <KGlobalAccel>
