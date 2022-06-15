@@ -70,6 +70,12 @@ Q_SIGNALS:
     void packageChanged();
     void configurationChanged();
 
+    /**
+     * This is to keep compatible with WallpaperInterface in plasma-framework.
+     * It doesn't have any practical use.
+     */
+    void repaintNeeded();
+
 private:
     QString m_pluginName;
     KPackage::Package m_package;
