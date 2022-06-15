@@ -65,7 +65,6 @@ void X11Locker::initialize()
 
     XWindowAttributes rootAttr;
     XGetWindowAttributes(QX11Info::display(), QX11Info::appRootWindow(), &rootAttr);
-    QApplication::desktop(); // make Qt set its event mask on the root window first
     XSelectInput(QX11Info::display(), QX11Info::appRootWindow(), SubstructureNotifyMask | rootAttr.your_event_mask);
     // Get root window size
     updateGeo();
