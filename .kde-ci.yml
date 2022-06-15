@@ -25,3 +25,5 @@ Dependencies:
     'frameworks/kwindowsystem': '@latest'
     'frameworks/kxmlgui': '@latest'
     'plasma/layer-shell-qt': '@same'
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD']
