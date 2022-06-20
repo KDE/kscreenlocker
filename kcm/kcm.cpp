@@ -24,7 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "kscreenlockerdata.h"
 #include "lnf_integration.h"
 #include "screenlocker_interface.h"
-#include "wallpaper_integration.h"
 
 #include <KAboutData>
 #include <KConfigLoader>

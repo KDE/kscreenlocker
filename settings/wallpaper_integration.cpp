@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 #include <KConfigLoader>
-#include <KConfigPropertyMap>
 #include <KPackage/PackageLoader>
 
 #include <QFile>
