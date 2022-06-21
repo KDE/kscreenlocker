@@ -61,6 +61,12 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 {
     PamWorker *c = static_cast<PamWorker *>(data);
 
+    *resp = (struct pam_response *)calloc(n, sizeof(struct pam_response));
+    if (!*resp) {
+        return PAM_BUF_ERR;
+    }
+    Q_ASSERT(resp);
+
     for (int i = 0; i < n; i++) {
         bool isSecret = false;
         switch (msg[i]->msg_style) {
@@ -68,12 +74,6 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
             isSecret = true;
             Q_FALLTHROUGH();
         case PAM_PROMPT_ECHO_ON:
-            Q_ASSERT(resp);
-            *resp = (struct pam_response *)calloc(n, sizeof(struct pam_response));
-            if (!*resp) {
-                return PAM_BUF_ERR;
-            }
-
             const QString prompt = QString::fromLocal8Bit(msg[i]->msg);
             if (isSecret) {
                 Q_EMIT c->promptForSecret(prompt);
