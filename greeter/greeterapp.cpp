@@ -363,6 +363,15 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
     context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
     context->setContextProperty(QStringLiteral("config"), m_lnfIntegration->configuration());
 
+    loadWallpaperPlugin(view);
+    if (auto object = view->property("wallpaperGraphicsObject").value<KDeclarative::QmlObjectSharedEngine *>()) {
+        // initialize with our size to avoid as much resize events as possible
+        object->completeInitialization({
+            {QStringLiteral("width"), view->width()},
+            {QStringLiteral("height"), view->height()},
+        });
+    }
+
     view->setSource(m_mainQmlPath);
     // on error, load the fallback lockscreen to not lock the user out of the system
     if (view->status() != QQmlComponent::Ready) {
@@ -398,15 +407,6 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
 
     // verify that the engine's controller didn't change
     Q_ASSERT(dynamic_cast<NoAccessNetworkAccessManagerFactory *>(view->engine()->networkAccessManagerFactory()));
-
-    loadWallpaperPlugin(view);
-    if (auto object = view->property("wallpaperGraphicsObject").value<KDeclarative::QmlObjectSharedEngine *>()) {
-        // initialize with our size to avoid as much resize events as possible
-        object->completeInitialization({
-            {QStringLiteral("width"), view->width()},
-            {QStringLiteral("height"), view->height()},
-        });
-    }
 
     if (KWindowSystem::isPlatformWayland()) {
         if (auto layerShellWindow = LayerShellQt::Window::get(view)) {
