@@ -8,6 +8,7 @@ include_directories(
 
 set(kscreenlocker_authenticator_SRCS
     pamauthenticator.cpp
+    pamauthenticator.h
 )
 
 ecm_qt_declare_logging_category(kscreenlocker_authenticator_SRCS
@@ -26,6 +27,10 @@ set(kscreenlocker_greet_SRCS
    main.cpp
    powermanagement.cpp
    noaccessnetworkaccessmanagerfactory.cpp
+   greeterapp.h
+   main.cpp
+   powermanagement.h
+   noaccessnetworkaccessmanagerfactory.h
 )
 
 add_library(kscreenlocker_authenticator OBJECT ${kscreenlocker_authenticator_SRCS})

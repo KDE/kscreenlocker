@@ -153,6 +153,15 @@ set(ksld_SRCS
    logind.cpp
    waylandserver.cpp
    powermanagement_inhibition.cpp
+   abstractlocker.h
+   ksldapp.h
+   interface.h
+   globalaccel.h
+   x11locker.h
+   waylandlocker.h
+   logind.h
+   waylandserver.h
+   powermanagement_inhibition.h
 )
 
 ecm_qt_declare_logging_category(ksld_SRCS
