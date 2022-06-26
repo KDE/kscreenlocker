@@ -4,6 +4,8 @@ add_library(settings STATIC
     wallpaper_integration.cpp
     appearancesettings.cpp
 )
+set_property(TARGET settings PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 kconfig_add_kcfg_files(settings GENERATE_MOC kscreensaversettingsbase.kcfgc)
 target_link_libraries(settings
     KF5::ConfigWidgets
