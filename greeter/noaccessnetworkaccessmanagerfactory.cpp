@@ -19,14 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "noaccessnetworkaccessmanagerfactory.h"
 
-#include <QNetworkAccessManager>
+#include <KIO/AccessManager>
 
 namespace ScreenLocker
 {
 QNetworkAccessManager *NoAccessNetworkAccessManagerFactory::create(QObject *parent)
 {
-    QNetworkAccessManager *manager = new QNetworkAccessManager(parent);
-    manager->setNetworkAccessible(QNetworkAccessManager::NotAccessible);
+    auto *manager = new KIO::AccessManager(parent);
+    manager->setExternalContentAllowed(false);
     return manager;
 }
 

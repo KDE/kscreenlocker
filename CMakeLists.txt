@@ -46,6 +46,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     Crash
                     Declarative
                     KCMUtils
+                    KIO
                     GlobalAccel
                     I18n
                     IdleTime
