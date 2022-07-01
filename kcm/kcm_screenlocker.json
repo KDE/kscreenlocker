@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Configure screen locking",
         "Description[ar]": "يضبط قفل الشاشة",
+        "Description[bg]": "Конфигуриране на заключване на екрана",
         "Description[ca@valencia]": "Configura el bloqueig de la pantalla",
         "Description[ca]": "Configura el bloqueig de la pantalla",
         "Description[cs]": "Nastavit uzamykání obrazovky",
@@ -34,6 +35,7 @@
         "Icon": "preferences-desktop-user-password",
         "Name": "Screen Locking",
         "Name[ar]": "قفل الشاشة",
+        "Name[bg]": "Заключване на екрана",
         "Name[ca@valencia]": "Bloqueig de pantalla",
         "Name[ca]": "Bloqueig de pantalla",
         "Name[cs]": "Uzamykání obrazovky",
