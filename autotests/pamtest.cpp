@@ -54,6 +54,7 @@ void PamTest::testLogin()
     QSignalSpy promptForSecretSpy(&auth, &PamAuthenticator::promptForSecret);
     QSignalSpy succeededSpy(&auth, &PamAuthenticator::succeeded);
     QSignalSpy failedSpy(&auth, &PamAuthenticator::failed);
+    QSignalSpy busyChangedSpy(&auth, &PamAuthenticator::busyChanged);
 
     // invalid password
     auth.tryUnlock();
@@ -64,12 +65,15 @@ void PamTest::testLogin()
 
     QVERIFY(promptSpy.count() == 0);
     QVERIFY(succeededSpy.count() == 0);
+    QVERIFY(busyChangedSpy.count() == 2); // changed to busy and back again.
 
     // try again, with the right password
     auth.tryUnlock();
     QVERIFY(promptForSecretSpy.wait());
     auth.respond("my_password");
     QVERIFY(succeededSpy.wait());
+
+    QVERIFY(busyChangedSpy.count() == 4);
 }
 
 QTEST_MAIN(PamTest)

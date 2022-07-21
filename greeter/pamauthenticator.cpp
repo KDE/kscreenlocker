@@ -36,6 +36,7 @@ public:
     void authenticate();
 
 Q_SIGNALS:
+    void busyChanged(bool busy);
     void promptForSecret(const QString &msg);
     void prompt(const QString &msg);
     void infoMessage(const QString &msg);
@@ -74,6 +75,8 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
             isSecret = true;
             Q_FALLTHROUGH();
         case PAM_PROMPT_ECHO_ON:
+            Q_EMIT c->busyChanged(false);
+
             const QString prompt = QString::fromLocal8Bit(msg[i]->msg);
             if (isSecret) {
                 Q_EMIT c->promptForSecret(prompt);
@@ -95,6 +98,8 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
             if (rc != 0) {
                 return rc;
             }
+
+            Q_EMIT c->busyChanged(true);
 
             resp[i]->resp = (char *)malloc(response.length() + 1);
             // on error, get rid of everything
@@ -152,6 +157,8 @@ void PamWorker::authenticate()
     int rc = pam_authenticate(m_handle, 0); // PAM_SILENT);
     qCDebug(KSCREENLOCKER_GREET) << "Auth done RC" << rc;
 
+    Q_EMIT busyChanged(false);
+
     if (rc == PAM_SUCCESS) {
         Q_EMIT succeeded();
     } else {
@@ -196,6 +203,7 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
 
     connect(&m_thread, &QThread::finished, d, &QObject::deleteLater);
 
+    connect(d, &PamWorker::busyChanged, this, &PamAuthenticator::setBusy);
     connect(d, &PamWorker::prompt, this, &PamAuthenticator::prompt);
     connect(d, &PamWorker::promptForSecret, this, &PamAuthenticator::promptForSecret);
     connect(d, &PamWorker::infoMessage, this, &PamAuthenticator::infoMessage);
@@ -223,6 +231,19 @@ void PamAuthenticator::init(const QString &service, const QString &user)
     QMetaObject::invokeMethod(d, [this, service, user]() {
         d->start(service, user);
     });
+}
+
+bool PamAuthenticator::isBusy() const
+{
+    return m_busy;
+}
+
+void PamAuthenticator::setBusy(bool busy)
+{
+    if (m_busy != busy) {
+        m_busy = busy;
+        Q_EMIT busyChanged();
+    }
 }
 
 bool PamAuthenticator::isUnlocked() const

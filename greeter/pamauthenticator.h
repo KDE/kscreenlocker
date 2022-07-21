@@ -29,13 +29,17 @@ class PamAuthenticator : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
+
 public:
     PamAuthenticator(const QString &service, const QString &user, QObject *parent = nullptr);
     ~PamAuthenticator();
 
+    bool isBusy() const;
     bool isUnlocked() const;
 
 Q_SIGNALS:
+    void busyChanged();
     void promptForSecret(const QString &msg);
     void prompt(const QString &msg);
     void infoMessage(const QString &msg);
@@ -52,6 +56,9 @@ protected:
     void init(const QString &service, const QString &user);
 
 private:
+    void setBusy(bool busy);
+
+    bool m_busy = false;
     bool m_unlocked = false;
     QThread m_thread;
     PamWorker *d;
