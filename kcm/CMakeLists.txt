@@ -12,6 +12,7 @@ qt_add_dbus_interface(screenlocker_kcm_SRCS ../dbus/org.kde.screensaver.xml scre
 
 kcoreaddons_add_plugin(kcm_screenlocker SOURCES ${screenlocker_kcm_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
+kcmutils_generate_desktop_file(kcm_screenlocker)
 target_link_libraries(kcm_screenlocker
     settings
     Qt::DBus
@@ -25,5 +26,3 @@ target_link_libraries(kcm_screenlocker
 )
 
 kpackage_install_package(package kcm_screenlocker kcms)
-
-install(FILES kcm_screenlocker.desktop DESTINATION ${KDE_INSTALL_APPDIR})
