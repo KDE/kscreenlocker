@@ -327,8 +327,6 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         view->setGeometry(geo);
     });
 
-    // first create KDeclarative, to be sure that it created a KIO Network Factory
-    KDeclarative::KDeclarative::setupEngine(view->engine());
     view->engine()->rootContext()->setContextObject(new KLocalizedContext(view->engine()));
 
     if (!m_testing) {
