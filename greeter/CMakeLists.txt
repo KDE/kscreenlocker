@@ -19,7 +19,7 @@ ecm_qt_declare_logging_category(kscreenlocker_authenticator_SRCS
     CATEGORY_NAME
         kscreenlocker_greet
     DEFAULT_SEVERITY
-        Critical
+        Info
 )
 
 set(kscreenlocker_greet_SRCS
