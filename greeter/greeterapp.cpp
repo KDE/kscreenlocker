@@ -328,6 +328,10 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
     });
 
     view->engine()->rootContext()->setContextObject(new KLocalizedContext(view->engine()));
+    auto oldFactory = view->engine()->networkAccessManagerFactory();
+    view->engine()->setNetworkAccessManagerFactory(nullptr);
+    delete oldFactory;
+    view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
 
     if (!m_testing) {
         if (QX11Info::isPlatformX11()) {
@@ -381,12 +385,6 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         view->setSource(fallbackUrl);
     }
     view->setResizeMode(KQuickAddons::QuickViewSharedEngine::SizeRootObjectToView);
-
-    // overwrite the factory set by kdeclarative
-    auto oldFactory = view->engine()->networkAccessManagerFactory();
-    view->engine()->setNetworkAccessManagerFactory(nullptr);
-    delete oldFactory;
-    view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
 
     QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
     lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
