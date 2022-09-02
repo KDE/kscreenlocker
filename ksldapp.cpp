@@ -580,12 +580,12 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
 {
     QProcessEnvironment env = m_greeterEnv;
 
-    if (m_isWayland && m_waylandFd >= 0) {
-        int socket = dup(m_waylandFd);
-        if (socket >= 0) {
-            env.insert(QStringLiteral("WAYLAND_SOCKET"), QString::number(socket));
-        }
-    }
+    // if (m_isWayland && m_waylandFd >= 0) {
+    //     int socket = dup(m_waylandFd);
+    //     if (socket >= 0) {
+    //         env.insert(QStringLiteral("WAYLAND_SOCKET"), QString::number(socket));
+    //     }
+    // }
 
     QStringList args;
     if (establishLock == EstablishLock::Immediate) {
@@ -615,8 +615,8 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
         return;
     }
 
-    args << QStringLiteral("--ksldfd");
-    args << QString::number(fd);
+    // args << QStringLiteral("--ksldfd");
+    // args << QString::number(fd);
 
     auto greeterPath = KLibexec::path(QStringLiteral(KSCREENLOCKER_GREET_BIN_REL));
     if (!QFile::exists(greeterPath)) {
