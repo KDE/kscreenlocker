@@ -160,6 +160,8 @@ void PamWorker::authenticate()
     Q_EMIT busyChanged(false);
 
     if (rc == PAM_SUCCESS) {
+        rc = pam_setcred(m_handle, PAM_REFRESH_CRED);
+        /* ignore errors on refresh credentials. If this did not work we use the old ones. */
         Q_EMIT succeeded();
     } else {
         Q_EMIT failed();
