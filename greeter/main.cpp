@@ -39,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <unistd.h>
 #endif
 
+#include <KSignalHandler>
 #include <LayerShellQt/Shell>
 
 static void signalHandler(int signum)
@@ -184,11 +185,8 @@ int main(int argc, char *argv[])
     // Crucial for blocking until it is ready, ensuring locking happens before sleep, e.g.
     std::cout << "Locked at " << QDateTime::currentDateTime().toSecsSinceEpoch() << std::endl;
 
-    struct sigaction sa;
-    sa.sa_handler = signalHandler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART;
-    sigaction(SIGTERM, &sa, nullptr);
-    sigaction(SIGUSR1, &sa, nullptr);
+    KSignalHandler::self()->watchSignal(SIGTERM);
+    KSignalHandler::self()->watchSignal(SIGUSR1);
+    QObject::connect(KSignalHandler::self(), &KSignalHandler::signalReceived, &app, &signalHandler);
     return app.exec();
 }
