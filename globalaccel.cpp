@@ -56,6 +56,7 @@ static const QMap<QString, QRegularExpression> s_shortcutWhitelist{
     {QStringLiteral("/component/KDE_Keyboard_Layout_Switcher"),
      QRegularExpression(QStringLiteral("Switch to Next Keyboard Layout|Switch keyboard layout to .*"))},
     {QStringLiteral("/component/kcm_touchpad"), QRegularExpression(QStringLiteral("Toggle Touchpad|Enable Touchpad|Disable Touchpad"))},
+    {QStringLiteral("/component/kwin"), QRegularExpression(QStringLiteral("view_zoom_in|view_zoom_out|view_actual_size"))},
 };
 
 static uint g_keyModMaskXAccel = 0;
