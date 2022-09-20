@@ -23,6 +23,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
 #include <KDeclarative/QmlObjectSharedEngine>
 #include <KLocalizedContext>
+#include <KScreenDpms/Dpms>
 #include <KWindowSystem>
 #include <kdeclarative/kdeclarative.h>
 
@@ -575,6 +576,13 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
         if (ke->key() != Qt::Key_Escape) {
             shareEvent(event, qobject_cast<KQuickAddons::QuickViewSharedEngine *>(obj));
             return false; // irrelevant
+        } else {
+            auto dpms = new KScreen::Dpms(this);
+            connect(dpms, &KScreen::Dpms::supportedChanged, this, [dpms](bool supported) {
+                if (supported) {
+                    dpms->switchMode(KScreen::Dpms::Off);
+                }
+            });
         }
         return true; // don't pass
     }

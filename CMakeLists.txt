@@ -77,6 +77,7 @@ set_package_properties(KF5Wayland PROPERTIES
 find_package(WaylandScanner)
 find_package(Wayland 1.3 COMPONENTS Client Server)
 find_package(LayerShellQt REQUIRED)
+find_package(KF5Screen REQUIRED)
 
 set_package_properties(Wayland PROPERTIES
                        TYPE REQUIRED

@@ -65,6 +65,7 @@ target_link_libraries(kscreenlocker_greet
                         KF5::WaylandClient
                         Wayland::Client
                         LayerShellQt::Interface
+                        KF5::ScreenDpms
                         )
 if (QT_MAJOR_VERSION EQUAL "5")
     target_link_libraries(kscreenlocker_greet Qt5::X11Extras)
