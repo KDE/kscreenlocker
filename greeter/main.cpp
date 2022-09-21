@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QCommandLineParser>
 #include <QDateTime>
 #include <QSessionManager>
+#include <QSurfaceFormat>
 
 #include <iostream>
 
@@ -93,6 +94,10 @@ int main(int argc, char *argv[])
 
     // Suppresses modal warnings about unwritable configuration files which may render the system inaccessible
     qputenv("KDE_HOME_READONLY", "1");
+
+    auto format = QSurfaceFormat::defaultFormat();
+    format.setOption(QSurfaceFormat::ResetNotification);
+    QSurfaceFormat::setDefaultFormat(format);
 
     ScreenLocker::UnlockApp app(argc, argv);
     app.setQuitOnLastWindowClosed(false);
