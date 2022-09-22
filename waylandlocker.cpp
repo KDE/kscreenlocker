@@ -59,10 +59,12 @@ void WaylandLocker::updateGeometryOfBackground()
 
 void WaylandLocker::showLockWindow()
 {
+    m_background->show();
 }
 
 void WaylandLocker::hideLockWindow()
 {
+    m_background->hide();
 }
 
 void WaylandLocker::addAllowedWindow(quint32 window)
