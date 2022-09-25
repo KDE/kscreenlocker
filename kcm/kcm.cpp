@@ -94,13 +94,21 @@ void ScreenLockerKcm::defaults()
 
 void ScreenLockerKcm::updateState()
 {
+    m_forceUpdateState = false;
+    settingsChanged();
+    Q_EMIT isDefaultsAppearanceChanged();
+}
+
+void ScreenLockerKcm::forceUpdateState()
+{
+    m_forceUpdateState = true;
     settingsChanged();
     Q_EMIT isDefaultsAppearanceChanged();
 }
 
 bool ScreenLockerKcm::isSaveNeeded() const
 {
-    return m_appearanceSettings->isSaveNeeded();
+    return m_forceUpdateState || m_appearanceSettings->isSaveNeeded();
 }
 
 bool ScreenLockerKcm::isDefaults() const

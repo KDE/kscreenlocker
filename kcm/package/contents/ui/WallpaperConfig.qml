@@ -33,6 +33,7 @@ QtControls.StackView {
     Layout.fillWidth: true
     property string sourceFile
     signal configurationChanged
+    signal configurationForceChanged
     onSourceFileChanged: {
         if (sourceFile) {
             const props = {}
@@ -61,6 +62,11 @@ QtControls.StackView {
                 if (changedSignal) {
                     changedSignal.connect(createSignalHandler(key))
                 }
+            }
+
+            const configurationChangedSignal = newItem.configurationChanged
+            if (configurationChangedSignal) {
+                configurationChangedSignal.connect(main.configurationForceChanged) // BUG 438585
             }
         } else {
             replace(empty)
