@@ -68,6 +68,7 @@ Kirigami.Page {
         WallpaperConfig {
             sourceFile: kcm.wallpaperConfigFile
             onConfigurationChanged: kcm.updateState()
+            onConfigurationForceChanged: kcm.forceUpdateState()
         }
     }
 }

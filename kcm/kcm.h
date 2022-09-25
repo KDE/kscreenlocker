@@ -68,6 +68,7 @@ public Q_SLOTS:
     void save() override;
     void defaults() override;
     void updateState();
+    void forceUpdateState();
 
 Q_SIGNALS:
     void currentWallpaperChanged();
@@ -82,6 +83,7 @@ private:
 
     AppearanceSettings *m_appearanceSettings;
     QString m_currentWallpaper;
+    bool m_forceUpdateState = false;
 };
 
 #endif
