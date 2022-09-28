@@ -105,7 +105,7 @@ KCM.SimpleKCM {
             KQuickControls.KeySequenceItem {
                 Kirigami.FormData.label: i18n("Keyboard shortcut:")
                 keySequence: kcm.settings.shortcut
-                onKeySequenceChanged: kcm.settings.shortcut = keySequence
+                onCaptureFinished: kcm.settings.shortcut = keySequence
 
                 KCM.SettingStateBinding {
                     configObject: kcm.settings
