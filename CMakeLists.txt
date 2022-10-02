@@ -301,4 +301,7 @@ if(BUILD_TESTING)
    add_subdirectory(autotests)
    add_subdirectory(tests)
 endif()
+
+ki18n_install(po)
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
