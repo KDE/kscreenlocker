@@ -268,7 +268,7 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
 
     auto qmlObject = new KDeclarative::QmlObjectSharedEngine(view);
     qmlObject->setInitializationDelayed(true);
-    qmlObject->setPackage(package);
+    qmlObject->setSource(QUrl::fromLocalFile(package.filePath("mainscript")));
     qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);
     view->setProperty("wallpaperGraphicsObject", QVariant::fromValue(qmlObject));
     connect(qmlObject, &KDeclarative::QmlObject::finished, this, [this, qmlObject, view] {
