@@ -89,6 +89,3 @@ msgstr "外観:"
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "設定..."
-
-#~ msgid "Screen Locking"
-#~ msgstr "スクリーンロック"
