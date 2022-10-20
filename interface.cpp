@@ -12,8 +12,10 @@ SPDX-License-Identifier: GPL-2.0-or-later
 // KDE
 #include <KAuthorized>
 #include <KIdleTime>
+#include <KWindowSystem>
 // Qt
 #include <QDBusConnection>
+#include <QDBusContext>
 #include <QDBusReply>
 #include <QDBusServiceWatcher>
 #include <QRandomGenerator>
@@ -64,6 +66,10 @@ uint Interface::GetActiveTime()
 
 uint Interface::GetSessionIdleTime()
 {
+    if (KWindowSystem::isPlatformWayland()) {
+        QDBusContext::sendErrorReply(QDBusError::NotSupported, QStringLiteral("GetSessionIdleTime is not supported on this platform"));
+        return 0;
+    }
     return KIdleTime::instance()->idleTime();
 }
 
