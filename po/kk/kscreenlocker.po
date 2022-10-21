@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2013-01-04 04:14+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sairan@computer.org"
 
-#: abstractlocker.cpp:53
+#: abstractlocker.cpp:39
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -37,7 +37,7 @@ msgid ""
 "of which could be found on your system."
 msgstr ""
 
-#: abstractlocker.cpp:57
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -48,7 +48,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: abstractlocker.cpp:62
+#: abstractlocker.cpp:48
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -61,27 +61,27 @@ msgid ""
 "back to the running session (Ctrl+Alt+F%3)."
 msgstr ""
 
-#: ksldapp.cpp:178
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "Сеансын бұғаттау"
 
-#: ksldapp.cpp:405
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr ""
 
-#: ksldapp.cpp:564
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr ""
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr ""
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr ""

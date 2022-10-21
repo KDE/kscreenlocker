@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-04-01 00:54+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2020-08-07 14:40+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -27,29 +27,29 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "matejm98mthw@gmail.com"
 
-#: package/contents/ui/Appearance.qml:36
+#: package/contents/ui/Appearance.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: package/contents/ui/Appearance.qml:50
+#: package/contents/ui/Appearance.qml:33
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Typ tapety:"
 
-#: package/contents/ui/main.qml:43
+#: package/contents/ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Zamknúť obrazovku automaticky:"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr "Po"
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:41
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -57,19 +57,19 @@ msgstr[0] "%1 minúte"
 msgstr[1] "%1 minútach"
 msgstr[2] "%1 minútach"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "Po prebudení zo spánku"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:69
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "Povoliť odomknutie bez hesla do:"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:73
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -77,17 +77,17 @@ msgstr[0] "%1 sekundy"
 msgstr[1] "%1 sekúnd"
 msgstr[2] "%1 sekúnd"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Klávesová skratka:"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:104
 #, kde-format
 msgid "Appearance:"
 msgstr "Vzhľad:"
 
-#: package/contents/ui/main.qml:122
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2017-05-16 06:54-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 
-#: abstractlocker.cpp:53
+#: abstractlocker.cpp:39
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -52,7 +52,7 @@ msgstr ""
 "\n"
 "אחרי זה החלף חזרה למופע שרץ (Ctrl+Alt+F%1)."
 
-#: abstractlocker.cpp:57
+#: abstractlocker.cpp:43
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -78,7 +78,7 @@ msgstr ""
 "\n"
 "אחרי זה החלף חזרה למופע שרץ (Ctrl+Alt+F%1)."
 
-#: abstractlocker.cpp:62
+#: abstractlocker.cpp:48
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -106,27 +106,27 @@ msgstr ""
 "\n"
 "אחרי זה החלף חזרה למופע שרץ (Ctrl+Alt+F%1)."
 
-#: ksldapp.cpp:178
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "נעל הפעלה"
 
-#: ksldapp.cpp:405
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr "המסך נעול"
 
-#: ksldapp.cpp:564
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr "המסך נפתח"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr "נועל מסך"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "מוודא שהמסך ננעל לפני כניסה לשינה"

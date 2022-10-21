@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2022-04-23 17:06+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -27,7 +27,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "freekdekruijf@kde.nl"
 
-#: abstractlocker.cpp:53
+#: abstractlocker.cpp:39
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -38,7 +38,7 @@ msgstr ""
 "mogelijk. Om te ontgrendelen is ConsoleKit of LoginD nodig, die beiden\n"
 "niet gevonden zijn op uw systeem."
 
-#: abstractlocker.cpp:57
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -57,7 +57,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:62
+#: abstractlocker.cpp:48
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -80,27 +80,27 @@ msgstr ""
 "uit. Meld u af bij de virtuele sessie door op Ctrl+D te drukken en schakel\n"
 "terug naar de actieve sessie (Ctrl+Alt+F%3)."
 
-#: ksldapp.cpp:178
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "Sessie vergrendelen"
 
-#: ksldapp.cpp:405
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr "Scherm vergrendeld"
 
-#: ksldapp.cpp:564
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Scherm ontgrendeld"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr "Schermvergrendeling"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Verzekeren dat het scherm vergrendeld wordt alvorens te gaan slapen"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2022-06-09 13:55-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "elchevive@opensuse.org"
 
-#: abstractlocker.cpp:53
+#: abstractlocker.cpp:39
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -41,7 +41,7 @@ msgstr ""
 "Para permitir o desbloqueio, o ConsoleKit ou o LoginD é necessário, mas\n"
 "nenhum deles pode ser encontrado em seu sistema."
 
-#: abstractlocker.cpp:57
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -59,7 +59,7 @@ msgstr ""
 "# ck-unlock-session <nome-da-sessão>\n"
 "\n"
 
-#: abstractlocker.cpp:62
+#: abstractlocker.cpp:48
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -81,27 +81,27 @@ msgstr ""
 "Em seguida saia da sessão virtual pressionado Ctrl+D e depois disso,\n"
 " retorne para a sessão em execução (Ctrl+Alt+F%3)."
 
-#: ksldapp.cpp:178
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "Bloquear sessão"
 
-#: ksldapp.cpp:405
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr "Tela bloqueada"
 
-#: ksldapp.cpp:564
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Tela desbloqueada"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr "Bloqueador de sessão"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Garantir que a tela fique bloqueada após o retorno da suspensão"

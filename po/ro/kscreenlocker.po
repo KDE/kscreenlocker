@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2022-04-30 12:17+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sergiu@cip.md"
 
-#: abstractlocker.cpp:53
+#: abstractlocker.cpp:39
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -39,7 +39,7 @@ msgstr ""
 "Pentru a-l debloca, aveți nevoie de ConsoleKit sau LoginD\n"
 "dar niciunul dintre ele nu e instalat în sistem."
 
-#: abstractlocker.cpp:57
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -57,7 +57,7 @@ msgstr ""
 "# ck-unlock-session <denumire-sesiune>\n"
 "\n"
 
-#: abstractlocker.cpp:62
+#: abstractlocker.cpp:48
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -78,27 +78,27 @@ msgstr ""
 "După aceea, ieșiți din sesiunea virtuală apăsând Ctrl+D și treceți\n"
 "înapoi la sesiunea activă (Ctrl+Alt+F%3)."
 
-#: ksldapp.cpp:178
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "Blochează sesiunea"
 
-#: ksldapp.cpp:405
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr "Ecran blocat"
 
-#: ksldapp.cpp:564
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ecran deblocat"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr "Blocarea ecranului"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Se asigură blocarea ecranului înainte de adormire"

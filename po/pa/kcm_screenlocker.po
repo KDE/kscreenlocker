@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-04-01 00:54+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2019-12-14 16:00-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -27,32 +27,32 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 
-#: package/contents/ui/Appearance.qml:36
+#: package/contents/ui/Appearance.qml:19
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgctxt "@title"
 msgid "Appearance"
 msgstr "ਦਿੱਖ"
 
-#: package/contents/ui/Appearance.qml:50
+#: package/contents/ui/Appearance.qml:33
 #, fuzzy, kde-format
 #| msgid "Wallpaper &type:"
 msgid "Wallpaper type:"
 msgstr "ਵਾਲਪੇਪਰ ਕਿਸਮ( &t):"
 
-#: package/contents/ui/main.qml:43
+#: package/contents/ui/main.qml:26
 #, fuzzy, kde-format
 #| msgid "Lock screen:"
 msgid "Lock screen automatically:"
 msgstr "ਲਾਕ ਸਕਰੀਨ:"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr ""
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:41
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix"
 #| msgid " minute"
@@ -62,21 +62,21 @@ msgid_plural "%1 minutes"
 msgstr[0] " ਮਿੰਟ"
 msgstr[1] " ਮਿੰਟ"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:54
 #, fuzzy, kde-format
 #| msgid "After waking from sleep"
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "ਸਲੀਪ ਤੋਂ ਜਗਾਉਣ ਦੇ ਬਾਅਦ"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:69
 #, fuzzy, kde-format
 #| msgid "Allow unlocking without password for:"
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "ਇਸ ਲਈ ਪਾਸਵਰਡ ਤੋਂ ਬਿਨਾਂ ਅਣ-ਲਾਕ ਕਰਨ ਦੀ ਸਹਿਮਤੀ ਦਿਓ:"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:73
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix"
 #| msgid " second"
@@ -86,18 +86,18 @@ msgid_plural "%1 seconds"
 msgstr[0] " ਸਕਿੰਟ"
 msgstr[1] " ਸਕਿੰਟ"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ:"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:104
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgid "Appearance:"
 msgstr "ਦਿੱਖ"
 
-#: package/contents/ui/main.qml:122
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."

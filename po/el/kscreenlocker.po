@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2021-07-03 09:26+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sstavra@gmail.com"
 
-#: abstractlocker.cpp:53
+#: abstractlocker.cpp:39
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -45,7 +45,7 @@ msgstr ""
 "Για να την ξεκλειδώσετε απαιτείται το ConsoleKit ή το LoginD, κανένα\n"
 "από τα οποία δεν βρίσκεται στο σύστημά σας."
 
-#: abstractlocker.cpp:57
+#: abstractlocker.cpp:43
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -71,7 +71,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:62
+#: abstractlocker.cpp:48
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -103,27 +103,27 @@ msgstr ""
 "Στη συνέχεια αποσυνδεθείτε από την εικονική συνεδρία με Ctrl+D και μεταβείτε "
 "πάλι στην εκτελούμενη συνεδρία (Ctrl+Alt+F%2)."
 
-#: ksldapp.cpp:178
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "Κλείδωμα συνεδρίας"
 
-#: ksldapp.cpp:405
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr "Οθόνη κλειδωμένη"
 
-#: ksldapp.cpp:564
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Οθόνη ξεκλείδωτη"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr "Κλείδωμα οθόνης"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Εξασφαλίζει ότι η οθόνη κλειδώνεται πριν την κοίμηση"

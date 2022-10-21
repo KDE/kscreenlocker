@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-04-01 00:54+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2021-07-22 13:26+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -28,31 +28,31 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "translator@legisign.org"
 
-#: package/contents/ui/Appearance.qml:36
+#: package/contents/ui/Appearance.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: package/contents/ui/Appearance.qml:50
+#: package/contents/ui/Appearance.qml:33
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Taustan tyyppi:"
 
-#: package/contents/ui/main.qml:43
+#: package/contents/ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Lukitse näyttö automaattisesti:"
 
 # Yksi vaihtoehto kohdalle ”Lock screen automatically:” (josta syystä pieni alkukirjain). ”Jälkeen 7 minuuttia” näyttää typerältä, tämä on aavistuksen parempi.
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr "ajassa"
 
 # ”minuutti(a)” aiheuttaa turhan tiiviin kentän
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:41
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -60,36 +60,36 @@ msgstr[0] "%1 min"
 msgstr[1] "%1 min"
 
 # Yksi vaihtoehto kohdalle ”Lock screen automatically:”
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "valmiustilasta herättyä"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:69
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "Lukituksen voi avata salasanatta:"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:73
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 sekunti"
 msgstr[1] "%1 sekuntia"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Pikanäppäin:"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:104
 #, kde-format
 msgid "Appearance:"
 msgstr "Ulkoasu:"
 
-#: package/contents/ui/main.qml:122
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."

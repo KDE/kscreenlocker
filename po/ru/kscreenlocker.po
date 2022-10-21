@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2022-10-21 00:48+0000\n"
 "PO-Revision-Date: 2022-08-18 09:06+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -35,7 +35,7 @@ msgstr "yur.arh@gmail.com"
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
-#: abstractlocker.cpp:53
+#: abstractlocker.cpp:39
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -49,7 +49,7 @@ msgstr ""
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
-#: abstractlocker.cpp:57
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -70,7 +70,7 @@ msgstr ""
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
-#: abstractlocker.cpp:62
+#: abstractlocker.cpp:48
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -93,27 +93,27 @@ msgstr ""
 "нажатием комбинации клавиш Ctrl+D и переключитесь\n"
 "в графический режим нажатием Ctrl+Alt+F%3."
 
-#: ksldapp.cpp:178
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "Заблокировать сеанс"
 
-#: ksldapp.cpp:405
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr "Экран заблокирован"
 
-#: ksldapp.cpp:564
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Экран разблокирован"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr "Блокировщик экрана"
 
-#: logind.cpp:175
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Обеспечивает блокировку экрана при переходе в ждущий или спящий режим"
