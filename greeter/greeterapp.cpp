@@ -683,6 +683,10 @@ void UnlockApp::osdProgress(const QString &icon, int percent, const QString &add
             continue;
         }
         osd->setProperty("osdValue", percent);
+        // HACK: if the value is >100 assume max is 150, to fix https://bugs.kde.org/show_bug.cgi?id=430536
+        // this is because the osdProgress signal does not have a maxPercent parameter
+        // it can't be fixed without breaking the DBus API so TODO KF6
+        osd->setProperty("osdMaxValue", percent > 100 ? 150 : 100);
         osd->setProperty("osdAdditionalText", additionalText);
         osd->setProperty("showingProgress", true);
         osd->setProperty("icon", icon);
