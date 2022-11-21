@@ -9,14 +9,14 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.kcm 1.6 as KCM
-import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kquickcontrols 2.0 as KQuickControls
 
 KCM.SimpleKCM {
     id: root
 
-    implicitHeight: 800
-    implicitWidth: 800
+    implicitHeight: Kirigami.Units.gridUnit * 45
+    implicitWidth: Kirigami.Units.gridUnit * 45
 
     ColumnLayout {
         spacing: 0
