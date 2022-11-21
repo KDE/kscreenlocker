@@ -6,17 +6,22 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 */
 
 import QtQuick 2.15
-import QtQuick.Controls 2.15 as QtControls
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
-QtControls.StackView {
+QQC2.StackView {
     id: main
-    Layout.fillHeight: true
-    implicitHeight: 490
-    Layout.fillWidth: true
+
     property string sourceFile
+
     signal configurationChanged
     signal configurationForceChanged
+
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+
+    implicitHeight: 490
+
     onSourceFileChanged: {
         if (sourceFile) {
             const props = {}
@@ -25,7 +30,7 @@ QtControls.StackView {
                 props["cfg_" + key] = wallpaperConfig[key]
             }
 
-            const newItem = replace(sourceFile, props, QtControls.StackView.ReplaceTransition)
+            const newItem = replace(sourceFile, props, QQC2.StackView.ReplaceTransition)
 
             wallpaperConfig.valueChanged.connect((key, value) => {
                 if (newItem["cfg_" + key] !== undefined) {
