@@ -18,6 +18,8 @@ Kirigami.Page {
 
     title: i18nc("@title", "Appearance")
 
+    padding: 6  // Layout_ChildMarginWidth from Breeze
+
     ColumnLayout {
         anchors.fill: parent
 
