@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:48+0000\n"
+"POT-Creation-Date: 2022-11-22 00:47+0000\n"
 "PO-Revision-Date: 2020-09-16 01:39+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -34,7 +34,7 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aspect"
 
-#: package/contents/ui/Appearance.qml:33
+#: package/contents/ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Tip tapet:"

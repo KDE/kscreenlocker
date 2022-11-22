@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:48+0000\n"
+"POT-Creation-Date: 2022-11-22 00:47+0000\n"
 "PO-Revision-Date: 2020-07-02 10:26+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -29,7 +29,7 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aparência"
 
-#: package/contents/ui/Appearance.qml:33
+#: package/contents/ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Tipo de papel de parede:"

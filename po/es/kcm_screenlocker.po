@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:48+0000\n"
+"POT-Creation-Date: 2022-11-22 00:47+0000\n"
 "PO-Revision-Date: 2020-07-02 17:53+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -35,7 +35,7 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aspecto visual"
 
-#: package/contents/ui/Appearance.qml:33
+#: package/contents/ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Tipo de fondo de pantalla:"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:48+0000\n"
+"POT-Creation-Date: 2022-11-22 00:47+0000\n"
 "PO-Revision-Date: 2020-10-10 09:21+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -37,7 +37,7 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Itxura"
 
-#: package/contents/ui/Appearance.qml:33
+#: package/contents/ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Horma-paper mota:"
