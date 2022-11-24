@@ -74,11 +74,11 @@ Item {
             }
             PlasmaComponents.TextField {
                 id: password
-                enabled: !authenticator.graceLocked
+                enabled: !authenticator.busy
                 echoMode: TextInput.Password
                 focus: true
-                Keys.onEnterPressed: authenticator.tryUnlock(password.text)
-                Keys.onReturnPressed: authenticator.tryUnlock(password.text)
+                Keys.onEnterPressed: authenticator.tryUnlock()
+                Keys.onReturnPressed: authenticator.tryUnlock()
                 Keys.onEscapePressed: password.text = ""
             }
         }
@@ -103,7 +103,7 @@ Item {
                 label: i18nd("kscreenlocker_greet", "Un&lock")
                 iconSource: "object-unlocked"
                 enabled: !authenticator.graceLocked
-                onClicked: authenticator.tryUnlock(password.text)
+                onClicked: authenticator.tryUnlock()
             }
         }
     }
@@ -139,18 +139,24 @@ Item {
         function onFailed() {
             root.notification = i18nd("kscreenlocker_greet", "Unlocking failed");
         }
-        function onGraceLockedChanged() {
-            if (!authenticator.graceLocked) {
+        function onBusyChanged() {
+            if (!authenticator.busy) {
                 root.notification = "";
                 password.selectAll();
                 password.focus = true;
             }
         }
-        function onMessage(text) {
+        function onInfoMessage(text) {
             root.notification = text;
         }
-        function onError(text) {
+        function onErrorMessage(text) {
             root.notification = text;
+        }
+        function onPromptForSecret() {
+            authenticator.respond(password.text);
+        }
+        function onSucceeded() {
+            Qt.quit()
         }
     }
 }
