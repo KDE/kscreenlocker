@@ -34,7 +34,7 @@ Item {
         id: background
 
         anchors.fill: parent
-        source: theme.wallpaperPathForSize(parent.width, parent.height)
+        source: "file:" + theme.wallpaperPathForSize(parent.width, parent.height)
         smooth: true
     }
 
