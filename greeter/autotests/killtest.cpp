@@ -11,6 +11,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QtTest>
 // system
 #include <signal.h>
+#include <sys/resource.h>
 
 Q_DECLARE_METATYPE(QProcess::ExitStatus)
 
@@ -77,17 +78,18 @@ void KillTest::testKill()
     QProcess greeter(this);
     greeter.setReadChannel(QProcess::StandardOutput);
     greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN_REL), QStringList({QStringLiteral("--testing")}));
-    QVERIFY(greeter.waitForStarted());
-
-    // wait some time till it's really set up
-    QTest::qSleep(5000);
+    // QTest::qSleep(2000);
+    // QVERIFY(greeter.waitForStarted());
+    // // Wait for the "locked at $time" message, so it's finished setting up
+    greeter.waitForReadyRead();
+    greeter.readAllStandardOutput();
 
     // now kill
     QFETCH(int, signal);
     kill(greeter.processId(), signal);
 
     QFETCH(bool, expectedQuit);
-    QCOMPARE(greeter.waitForFinished(1000), expectedQuit);
+    QCOMPARE(greeter.waitForFinished(2000), expectedQuit);
     if (greeter.state() == QProcess::Running) {
         greeter.terminate();
         QVERIFY(greeter.waitForFinished());

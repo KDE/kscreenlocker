@@ -141,9 +141,9 @@ int main(int argc, char *argv[])
         }
 
         // allow ptrace if testing is enabled
-#if HAVE_PR_SET_DUMPABLE
-        prctl(PR_SET_DUMPABLE, 1);
-#endif
+// #if HAVE_PR_SET_DUMPABLE
+//         prctl(PR_SET_DUMPABLE, 1);
+// #endif
 #if HAVE_PROC_TRACE_CTL
         int mode = PROC_TRACE_CTL_ENABLE;
         procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
