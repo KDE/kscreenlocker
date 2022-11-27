@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-21 00:48+0000\n"
-"PO-Revision-Date: 2022-04-23 11:14+0200\n"
+"PO-Revision-Date: 2022-11-26 14:46+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.0\n"
+"X-Generator: Lokalize 22.11.80\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -99,7 +99,7 @@ msgstr "Bloqueador de pantalla"
 #: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
-msgstr "Asegurando que la pantalla se bloquea antes de dormir"
+msgstr "Asegurando que la pantalla se bloquea antes de entrar en reposo"
 
 #~ msgid "Screen lock enabled"
 #~ msgstr "Bloqueo de pantalla activado"
