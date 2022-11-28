@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-21 00:48+0000\n"
-"PO-Revision-Date: 2022-09-30 05:55+0200\n"
+"PO-Revision-Date: 2022-11-27 06:42+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -35,6 +35,9 @@ msgid ""
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
 "of which could be found on your system."
 msgstr ""
+"ეკრანის დამბლოკავი გაფუჭებულია და ეს უკვე შეუძლებელია.\n"
+"ეკრანის განბლოკვისთვის საჭიროა ConsoleKit ან LoginD, რომლებიც\n"
+"თქვენს სისტემაში აღმოჩენილი არაა."
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -46,6 +49,12 @@ msgid ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 msgstr ""
+"ეკრანის დამბლოკავი გაფუჭებულია და განბლოკვა უკვე შეუძლებელია.\n"
+"განბლოკვისთვის გადადით ვირტუალურ ტერმინალზე (მაგ: Ctrl+Alt+F%1),\n"
+"შედით root მომხმარებლით და გაუშვით ბრძანება:\n"
+"\n"
+"# ck-unlock-session <სესიის-სახელი>\n"
+"\n"
 
 #: abstractlocker.cpp:48
 #, kde-format
@@ -59,6 +68,14 @@ msgid ""
 "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
 "back to the running session (Ctrl+Alt+F%3)."
 msgstr ""
+"ეკრანის დამბლოკავი გაფუჭებულია და განბლოკვა შეუძლებელია.\n"
+"ეკრანის განბლოკვისთვის გადადით ვირტუალურ ტერმინალზე (მაგ: Ctrl+Alt+F%1),\n"
+"შედით და გაუშვით ბრძანება:\n"
+"\n"
+"loginctl unlock-session %2\n"
+"\n"
+"შემდეგ გამოდით ვირტუალური სესიიდან Ctrl+D-ის დაჭერით, დაბრუნდით\n"
+"გრაფიკულ სესიაზე და გააგრძელეთ მუშაობა (Ctrl+Alt+F%3)."
 
 #: ksldapp.cpp:164
 #, kde-format
