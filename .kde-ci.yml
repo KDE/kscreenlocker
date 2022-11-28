@@ -20,7 +20,6 @@ Dependencies:
     'frameworks/kpackage': '@latest'
     'frameworks/kservice': '@latest'
     'frameworks/kwayland': '@latest'
-    'frameworks/kwaylandserver': '@latest'
     'frameworks/kwidgetsaddons': '@latest'
     'frameworks/kwindowsystem': '@latest'
     'frameworks/kxmlgui': '@latest'
