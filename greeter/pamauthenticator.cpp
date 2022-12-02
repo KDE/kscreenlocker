@@ -48,11 +48,11 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 {
     PamWorker *c = static_cast<PamWorker *>(data);
 
-    *resp = (struct pam_response *)calloc(n, sizeof(struct pam_response));
-    if (!*resp) {
+    if (!resp) {
         return PAM_BUF_ERR;
     }
-    Q_ASSERT(resp);
+
+    *resp = (struct pam_response *)calloc(n, sizeof(struct pam_response));
 
     for (int i = 0; i < n; i++) {
         bool isSecret = false;
