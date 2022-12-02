@@ -19,8 +19,10 @@ ecm_mark_as_test(logindTest)
 # PamTest
 #######################################
 
-pkg_search_module(pam_wrapper OPTIONAL)
-if (pam_wrapper_FOUND)
+pkg_search_module(PamWrapper pam_wrapper)
+if (PamWrapper_FOUND)
+    pkg_get_variable(PamWrapperModuleDir pam_wrapper "modules")
+    configure_file(data/test_service.in ./test_service)
     add_executable(pamTest pamtest.cpp)
     target_link_libraries(pamTest Qt::Test kscreenlocker_authenticator)
     add_test(NAME ksmserver-pamTest COMMAND pamTest)

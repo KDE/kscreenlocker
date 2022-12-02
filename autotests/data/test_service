@@ -1,4 +1,0 @@
-auth            required        /usr/lib/pam_wrapper/pam_matrix.so verbose
-account         required        /usr/lib/pam_wrapper/pam_matrix.so verbose
-password        required        /usr/lib/pam_wrapper/pam_matrix.so verbose
-session         required        /usr/lib/pam_wrapper/pam_matrix.so verbose
