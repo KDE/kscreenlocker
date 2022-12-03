@@ -41,16 +41,18 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
             "of which could be found on your system.");
         auto text_ck = ki18n(
             "The screen locker is broken and unlocking is not possible anymore.\n"
-            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
+            "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
             "log in as root and execute the command:\n\n"
             "# ck-unlock-session <session-name>\n\n");
         auto text_ld = ki18n(
             "The screen locker is broken and unlocking is not possible anymore.\n"
-            "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-            "log in and execute the command:\n\n"
+            "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
+            "log in to your account and execute the command:\n\n"
             "loginctl unlock-session %2\n\n"
             "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-            "back to the running session (Ctrl+Alt+F%3).");
+            "back to the running session (Ctrl+Alt+F%3).\n"
+            "Should you have forgotten the instructions, you can get back to this\n"
+            "screen by pressing CTRL+ALT+F%2\n\n");
 
         auto haveService = [](QString service) {
             return QDBusConnection::systemBus().interface()->isServiceRegistered(service);
