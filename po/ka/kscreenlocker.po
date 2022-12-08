@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-06 00:47+0000\n"
-"PO-Revision-Date: 2022-11-27 06:42+0100\n"
+"PO-Revision-Date: 2022-12-07 06:28+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,14 +40,7 @@ msgstr ""
 "თქვენს სისტემაში აღმოჩენილი არაა."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -64,16 +57,7 @@ msgstr ""
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3)."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -94,7 +78,10 @@ msgstr ""
 "loginctl unlock-session %2\n"
 "\n"
 "შემდეგ გამოდით ვირტუალური სესიიდან Ctrl+D-ის დაჭერით, დაბრუნდით\n"
-"გრაფიკულ სესიაზე და გააგრძელეთ მუშაობა (Ctrl+Alt+F%3)."
+"გრაფიკულ სესიაზე და გააგრძელეთ მუშაობა (Ctrl+Alt+F%3).\n"
+"თუ ინსტრუქციები აღარ გახსოვთ, ამ ეკრანზე დაბრუნება CTRL+ALT+F%2-ით "
+"შეგიძლიათ.\n"
+"\n"
 
 #: ksldapp.cpp:164
 #, kde-format
