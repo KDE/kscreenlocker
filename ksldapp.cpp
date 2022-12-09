@@ -33,6 +33,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QFile>
 #include <QKeyEvent>
 #include <QProcess>
+#include <QThread>
 #include <QTimer>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <private/qtx11extras_p.h>
@@ -219,6 +220,9 @@ void KSldApp::initialize()
         }
 
         qCWarning(KSCREENLOCKER) << "Greeter process exit unregular. Restarting lock.";
+
+        // give some extra time prior to trying again immediately
+        QThread::sleep(500);
 
         m_greeterCrashedCounter++;
         if (m_greeterCrashedCounter < 4) {
