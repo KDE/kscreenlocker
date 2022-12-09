@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SCREENLOCKER_GREETERAPP_H
 #define SCREENLOCKER_GREETERAPP_H
 
+#include <KDeclarative/QmlObjectSharedEngine>
 #include <KPackage/PackageStructure>
 #include <QGuiApplication>
 #include <QUrl>
@@ -90,7 +91,8 @@ private Q_SLOTS:
 private:
     void initialize();
     void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
-    void loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
+    KDeclarative::QmlObjectSharedEngine *loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
+    void setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperObject, KQuickAddons::QuickViewSharedEngine *view);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
     QWindow *getActiveScreen();
 
