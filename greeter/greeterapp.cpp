@@ -264,13 +264,6 @@ KDeclarative::QmlObjectSharedEngine *UnlockApp::loadWallpaperPlugin(KQuickAddons
             qCWarning(KSCREENLOCKER_GREET) << "Wallpaper needs to be a QtQuick Item";
             return;
         }
-        item->setParentItem(view->rootObject());
-        item->setZ(-1000);
-
-        // set anchors
-        QQmlExpression expr(qmlObject->engine()->rootContext(), item, QStringLiteral("parent"));
-        QQmlProperty prop(item, QStringLiteral("anchors.fill"));
-        prop.write(expr.evaluate());
 
         view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
         view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), m_wallpaperIntegration);
@@ -278,7 +271,7 @@ KDeclarative::QmlObjectSharedEngine *UnlockApp::loadWallpaperPlugin(KQuickAddons
     return qmlObject;
 }
 
-void setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperObject, KQuickAddons::QuickViewSharedEngine *view)
+void UnlockApp::setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperObject, KQuickAddons::QuickViewSharedEngine *view)
 {
     if (!wallpaperObject) {
         return;
@@ -287,7 +280,7 @@ void setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperOb
     auto item = qobject_cast<QQuickItem *>(wallpaperObject->rootObject());
     if (!item) {
         qCWarning(KSCREENLOCKER_GREET) << "Wallpaper needs to be a QtQuick Item";
-        // return;
+        return;
     }
     item->setParentItem(view->rootObject());
     item->setZ(-1000);
