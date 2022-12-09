@@ -245,12 +245,12 @@ QWindow *UnlockApp::getActiveScreen()
     return activeScreen;
 }
 
-void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
+KDeclarative::QmlObjectSharedEngine *UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
 {
     auto package = m_wallpaperIntegration->package();
     if (!package.isValid()) {
         qCWarning(KSCREENLOCKER_GREET) << "Error loading the wallpaper, no valid package loaded";
-        return;
+        return nullptr;
     }
 
     auto qmlObject = new KDeclarative::QmlObjectSharedEngine(view);
@@ -275,6 +275,27 @@ void UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
         view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
         view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), m_wallpaperIntegration);
     });
+    return qmlObject;
+}
+
+void setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperObject, KQuickAddons::QuickViewSharedEngine *view)
+{
+    if (!wallpaperObject) {
+        return;
+    }
+
+    auto item = qobject_cast<QQuickItem *>(wallpaperObject->rootObject());
+    if (!item) {
+        qCWarning(KSCREENLOCKER_GREET) << "Wallpaper needs to be a QtQuick Item";
+        // return;
+    }
+    item->setParentItem(view->rootObject());
+    item->setZ(-1000);
+
+    // set anchors
+    QQmlExpression expr(wallpaperObject->engine()->rootContext(), item, QStringLiteral("parent"));
+    QQmlProperty prop(item, QStringLiteral("anchors.fill"));
+    prop.write(expr.evaluate());
 }
 
 void UnlockApp::initialViewSetup()
@@ -352,7 +373,7 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
     context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
     context->setContextProperty(QStringLiteral("config"), m_lnfIntegration->configuration());
 
-    loadWallpaperPlugin(view);
+    auto wallpaperObj = loadWallpaperPlugin(view);
     if (auto object = view->property("wallpaperGraphicsObject").value<KDeclarative::QmlObjectSharedEngine *>()) {
         // initialize with our size to avoid as much resize events as possible
         object->completeInitialization({
@@ -372,6 +393,10 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         view->setSource(fallbackUrl);
     }
     view->setResizeMode(KQuickAddons::QuickViewSharedEngine::SizeRootObjectToView);
+
+    // we need to set this wallpaper properties separately after the lockscreen QML is loaded
+    // this is because we need to anchor to the view that gets loaded
+    setWallpaperItemProperties(wallpaperObj, view);
 
     QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
     lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
