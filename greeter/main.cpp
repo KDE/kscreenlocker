@@ -56,6 +56,10 @@ static void signalHandler(int signum)
 
 int main(int argc, char *argv[])
 {
+    // we need to handle signals immediately in case we receive them while the process is initializing
+    KSignalHandler::self()->watchSignal(SIGTERM);
+    KSignalHandler::self()->watchSignal(SIGUSR1);
+
     LayerShellQt::Shell::useLayerShell();
 
     // disable ptrace on the greeter
@@ -177,8 +181,8 @@ int main(int argc, char *argv[])
     // Crucial for blocking until it is ready, ensuring locking happens before sleep, e.g.
     std::cout << "Locked at " << QDateTime::currentDateTime().toSecsSinceEpoch() << std::endl;
 
-    KSignalHandler::self()->watchSignal(SIGTERM);
-    KSignalHandler::self()->watchSignal(SIGUSR1);
+    // only connect signal handler once we can actual handle the signal properly
     QObject::connect(KSignalHandler::self(), &KSignalHandler::signalReceived, &app, &signalHandler);
+
     return app.exec();
 }
