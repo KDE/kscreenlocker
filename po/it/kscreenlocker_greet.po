@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:48+0000\n"
+"POT-Creation-Date: 2022-12-14 00:48+0000\n"
 "PO-Revision-Date: 2016-08-28 18:54+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: main.cpp:103
+#: main.cpp:107
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr ""
 "Schermata di benvenuto per il blocca schermo dello spazio di lavoro di Plasma"
 
-#: main.cpp:107
+#: main.cpp:111
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Avvia la schermata di benvenuto in modalità di prova"
 
-#: main.cpp:110
+#: main.cpp:114
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr ""
 "Avvia la schermata di benvenuto con il tema selezionato (solo in modalità di "
 "prova)"
 
-#: main.cpp:114
+#: main.cpp:118
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Blocca immediatamente, senza contare il periodo di cortesia, ecc."
 
-#: main.cpp:116
+#: main.cpp:120
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Ritardo in millisecondi prima che l'interfaccia di blocco dell'utente sia "
 "mostrata."
 
-#: main.cpp:119
+#: main.cpp:123
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Non mostrare alcuna interfaccia di blocco utente."
 
-#: main.cpp:120
+#: main.cpp:124
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Interfaccia di cambio utente come predefinita."
 
-#: main.cpp:122
+#: main.cpp:126
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Descrittore di file per la connessione a ksld."

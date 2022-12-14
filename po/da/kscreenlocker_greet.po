@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:48+0000\n"
+"POT-Creation-Date: 2022-12-14 00:48+0000\n"
 "PO-Revision-Date: 2016-09-24 21:52+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -17,42 +17,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: main.cpp:103
+#: main.cpp:107
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Velkomstskærm til KDE Plasma arbejdsområde skærmlås"
 
-#: main.cpp:107
+#: main.cpp:111
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Starter velkomstskærmen i testtilstand"
 
-#: main.cpp:110
+#: main.cpp:114
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Starter velkomstskærmen med det valgte tema (kun i testtilstand)"
 
-#: main.cpp:114
+#: main.cpp:118
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Lås straks, ignorér fortrydelsestid o.l."
 
-#: main.cpp:116
+#: main.cpp:120
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Forsinkelse før lås bruger-grænsefladen bliver vist i millisekunder."
 
-#: main.cpp:119
+#: main.cpp:123
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Vis ikke lås bruger-grænsefladen."
 
-#: main.cpp:120
+#: main.cpp:124
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Brug \"skift bruger\"-UI'en som standard."
 
-#: main.cpp:122
+#: main.cpp:126
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Filbeskriver for forbindelse til ksld."

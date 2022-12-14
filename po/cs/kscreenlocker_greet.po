@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:48+0000\n"
+"POT-Creation-Date: 2022-12-14 00:48+0000\n"
 "PO-Revision-Date: 2021-08-19 16:59+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -21,44 +21,44 @@ msgstr ""
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 
-#: main.cpp:103
+#: main.cpp:107
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Uvítací obrazovka pro zámek obrazovky KDE Plasma Workspaces"
 
-#: main.cpp:107
+#: main.cpp:111
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Spustit sezení v testovacím režimu"
 
-#: main.cpp:110
+#: main.cpp:114
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr ""
 "Spustí uvítací obrazovku se zvoleným motivem (pouze v testovacím režimu)"
 
-#: main.cpp:114
+#: main.cpp:118
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Okamžitě uzamknout bez čekání apod."
 
-#: main.cpp:116
+#: main.cpp:120
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Nastavit zpoždění v milisekundách před tím, než se objeví zámek obrazovky."
 
-#: main.cpp:119
+#: main.cpp:123
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Nezobrazovat rozhraní pro zamčení uživatele."
 
-#: main.cpp:120
+#: main.cpp:124
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Výchozí pro přepnutí uživatelského prostředí."
 
-#: main.cpp:122
+#: main.cpp:126
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Popisovač souboru pro připojení ke ksld."
