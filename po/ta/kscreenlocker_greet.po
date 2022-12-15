@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:48+0000\n"
+"POT-Creation-Date: 2022-12-15 00:49+0000\n"
 "PO-Revision-Date: 2022-05-24 21:26+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -17,42 +17,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: main.cpp:107
+#: main.cpp:110
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr ""
 
-#: main.cpp:111
+#: main.cpp:114
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr ""
 
-#: main.cpp:114
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr ""
 
-#: main.cpp:118
+#: main.cpp:121
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "அவகாச நேரத்தை பொருட்படுத்தாமல் உடனே பூட்டு."
 
-#: main.cpp:120
+#: main.cpp:123
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "பூட்டியதற்குரிய இடைமுகப்பை காட்டுமுன் எத்தனை மில்லிநொடிகள் காத்திருக்க வேண்டும்."
 
-#: main.cpp:123
+#: main.cpp:126
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "பூட்டியதற்குரிய இடைமுகப்பை காட்டாதே"
 
-#: main.cpp:124
+#: main.cpp:127
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "பயனர் மாற்ற இடைமுகப்பை இயல்பிருப்பாக காட்டு."
 
-#: main.cpp:126
+#: main.cpp:129
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:48+0000\n"
+"POT-Creation-Date: 2022-12-15 00:49+0000\n"
 "PO-Revision-Date: 2017-05-16 06:54-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -19,42 +19,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Zanata 3.9.6\n"
 
-#: main.cpp:107
+#: main.cpp:110
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "מנהל כניסה עבור נועל המסך של KDE"
 
-#: main.cpp:111
+#: main.cpp:114
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "מפעיל את מנהל הכניסה במצב בדיקה"
 
-#: main.cpp:114
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "מפעיל את מנהל הכניסה במצב בדיקה"
 
-#: main.cpp:118
+#: main.cpp:121
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "נעל מיד, ללא המתנה."
 
-#: main.cpp:120
+#: main.cpp:123
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "המתן עד ממשק נעילת משתמש מופיעה (תוך רגע)"
 
-#: main.cpp:123
+#: main.cpp:126
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "אל תראה שום ממשק משתמש נעול."
 
-#: main.cpp:124
+#: main.cpp:127
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "ברירת מחדל להחלפת ממשק משתמש"
 
-#: main.cpp:126
+#: main.cpp:129
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "תיאור קובץ להתחברות ל־ksld"

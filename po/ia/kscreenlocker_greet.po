@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:48+0000\n"
+"POT-Creation-Date: 2022-12-15 00:49+0000\n"
 "PO-Revision-Date: 2020-02-16 22:07+0100\n"
 "Last-Translator: Giovanni Sora <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17,47 +17,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: main.cpp:107
+#: main.cpp:110
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr ""
 "Systema de benvenita pro le blocator de schermo de KDE Plasma Workspaces "
 "(Spatios de travalio de Plasma de KDE)"
 
-#: main.cpp:111
+#: main.cpp:114
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Initia le systema de benvenita de modo pro essayar"
 
-#: main.cpp:114
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr ""
 "Initia le systema de benvenita co le thema seligite (sol in modo de essayar)"
 
-#: main.cpp:118
+#: main.cpp:121
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Bloca immediatemente, ingnorante ulle tempore de gratias etc."
 
-#: main.cpp:120
+#: main.cpp:123
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Retarda usque le interfcie de usator d bloco deveni mnstrate in "
 "millisecundas."
 
-#: main.cpp:123
+#: main.cpp:126
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Non monstrar ulle interfacie de usator de bloco"
 
-#: main.cpp:124
+#: main.cpp:127
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Falle al UI de usator de commutar"
 
-#: main.cpp:126
+#: main.cpp:129
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Descriptor de file per connecter a ksld"
