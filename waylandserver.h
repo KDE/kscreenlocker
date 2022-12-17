@@ -3,8 +3,7 @@
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef SCREENLOCKER_WAYLANDSERVER_H
-#define SCREENLOCKER_WAYLANDSERVER_H
+#pragma once
 
 #include <QSocketNotifier>
 
@@ -42,5 +41,3 @@ private:
 };
 
 }
-
-#endif

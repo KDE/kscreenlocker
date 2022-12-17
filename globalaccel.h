@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2015 Martin Gräßlin <mgraesslin@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef GLOBALACCEL_H
-#define GLOBALACCEL_H
+#pragma once
 
 #include <KGlobalShortcutInfo>
 
@@ -91,5 +90,3 @@ private:
     QMap<QString, QList<KGlobalShortcutInfo>> m_shortcuts;
     xcb_key_symbols_t *m_keySymbols = nullptr;
 };
-
-#endif

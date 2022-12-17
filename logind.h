@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2014 Martin Gräßlin <mgraesslin@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef LOGIND_H
-#define LOGIND_H
+#pragma once
 
 #include <QDBusConnection>
 #include <QDBusPendingCallWatcher>
@@ -68,5 +67,3 @@ private:
     const QString *m_managerInterface;
     const QString *m_sessionInterface;
 };
-
-#endif

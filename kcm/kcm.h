@@ -6,8 +6,7 @@ SPDX-FileCopyrightText: 2020 David Redondo <kde@david-redondo.de>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef KCM_H
-#define KCM_H
+#pragma once
 
 #include <KConfigPropertyMap>
 #include <KPackage/Package>
@@ -72,5 +71,3 @@ private:
     QString m_currentWallpaper;
     bool m_forceUpdateState = false;
 };
-
-#endif

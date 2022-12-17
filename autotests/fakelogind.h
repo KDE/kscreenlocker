@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2014 Martin Gräßlin <mgraesslin@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef FAKELOGIND_H
-#define FAKELOGIND_H
+#pragma once
 
 #include <QObject>
 #include <QtDBus>
@@ -56,5 +55,3 @@ Q_SIGNALS:
 private:
     QString m_path;
 };
-
-#endif

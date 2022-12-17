@@ -4,8 +4,7 @@ SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef SCREENLOCKER_INTERFACE_H
-#define SCREENLOCKER_INTERFACE_H
+#pragma once
 
 #include <QDBusContext>
 #include <QDBusMessage>
@@ -115,5 +114,3 @@ private:
     QList<QDBusMessage> m_lockReplies;
 };
 }
-
-#endif // SCREENLOCKER_INTERFACE_H

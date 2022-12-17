@@ -6,8 +6,7 @@
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef SCREENLOCKER_KSLDAPP_H
-#define SCREENLOCKER_KSLDAPP_H
+#pragma once
 
 #include <QElapsedTimer>
 #include <QProcessEnvironment>
@@ -181,5 +180,3 @@ private:
     friend KSldTest;
 };
 } // namespace
-
-#endif // SCREENLOCKER_KSLDAPP_H

@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2015 Martin Gräßlin <mgraesslin@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef NOACCESSNETWORKACCESSMANAGERFACTORY_H
-#define NOACCESSNETWORKACCESSMANAGERFACTORY_H
+#pragma once
 
 #include <QQmlNetworkAccessManagerFactory>
 
@@ -17,5 +16,3 @@ public:
 };
 
 }
-
-#endif

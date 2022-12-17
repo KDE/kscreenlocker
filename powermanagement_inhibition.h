@@ -3,8 +3,7 @@
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef POWERMANAGEMENT_INHIBITION_H
-#define POWERMANAGEMENT_INHIBITION_H
+#pragma once
 
 #include <QObject>
 
@@ -35,5 +34,3 @@ private:
     bool m_serviceRegistered = false;
     bool m_inhibited = false;
 };
-
-#endif

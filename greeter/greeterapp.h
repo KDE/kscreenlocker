@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef SCREENLOCKER_GREETERAPP_H
-#define SCREENLOCKER_GREETERAPP_H
+#pragma once
 
 #include <KDeclarative/QmlObjectSharedEngine>
 #include <KPackage/PackageStructure>
@@ -110,5 +109,3 @@ private:
     LnFIntegration *m_lnfIntegration;
 };
 } // namespace
-
-#endif // SCREENLOCKER_GREETERAPP_H

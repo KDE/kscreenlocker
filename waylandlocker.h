@@ -4,8 +4,7 @@
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef WAYLANDLOCKER_H
-#define WAYLANDLOCKER_H
+#pragma once
 
 #include "abstractlocker.h"
 
@@ -38,5 +37,3 @@ private:
 };
 
 }
-
-#endif // WAYLANDLOCKER_H

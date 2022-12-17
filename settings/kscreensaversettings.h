@@ -2,8 +2,7 @@
 SPDX-FileCopyrightText: 2019 Kevin Ottens <kevin.ottens@enioka.com>
 SPDX-License-Identifier: GPL-2.0-or-later
 */
-#ifndef KSCREENSAVERSETTINGS_H
-#define KSCREENSAVERSETTINGS_H
+#pragma once
 
 #include <QKeySequence>
 
@@ -52,5 +51,3 @@ private:
     QVector<WallpaperInfo> m_availableWallpaperPlugins;
     KScreenSaverSettingsStore *m_store;
 };
-
-#endif // KSCREENSAVERSETTINGS_H

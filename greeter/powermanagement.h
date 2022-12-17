@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2016 Martin Gräßlin <mgraesslin@kde.org>
 
 SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
-#ifndef POWERMANAGEMENT_H
-#define POWERMANAGEMENT_H
+#pragma once
 
 #include <QObject>
 
@@ -36,5 +35,3 @@ private:
     class Private;
     QScopedPointer<Private> d;
 };
-
-#endif

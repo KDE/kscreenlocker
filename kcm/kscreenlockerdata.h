@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2020 Cyril Rossi <cyril.rossi@enioka.com>
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef KSCREENLOCKERDATA_H
-#define KSCREENLOCKERDATA_H
+#pragma once
 
 #include <QObject>
 
@@ -24,5 +23,3 @@ public:
 private:
     AppearanceSettings *m_appearanceSettings = nullptr;
 };
-
-#endif

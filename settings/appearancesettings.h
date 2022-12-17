@@ -3,8 +3,7 @@ SPDX-FileCopyrightText: 2020 Cyril Rossi <cyril.rossi@enioka.com>
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef APPEARANCESETTINGS_H
-#define APPEARANCESETTINGS_H
+#pragma once
 
 #include <QObject>
 
@@ -57,5 +56,3 @@ private:
     KCoreConfigSkeleton *m_lnfSettings = nullptr;
     QUrl m_lnfConfigFile;
 };
-
-#endif // APPEARANCESETTINGS_H

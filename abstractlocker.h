@@ -9,8 +9,7 @@
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef ABSTRACTLOCKER_H
-#define ABSTRACTLOCKER_H
+#pragma once
 
 #include <QObject>
 #include <QRasterWindow>
@@ -77,5 +76,3 @@ private:
 };
 
 }
-
-#endif // ABSTRACTLOCKER_H
