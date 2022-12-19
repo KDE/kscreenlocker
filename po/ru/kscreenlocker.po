@@ -5,23 +5,23 @@
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Alexander Potashev <aspotashev@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019.
 # Nick Shaforostoff <shafff@ukr.net>, 2016.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021, 2022.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-06 00:47+0000\n"
-"PO-Revision-Date: 2022-08-18 09:06+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
-"Language-Team: Basealt Translation Team\n"
+"PO-Revision-Date: 2022-12-18 10:41+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 21.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -50,14 +50,7 @@ msgstr ""
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -78,16 +71,7 @@ msgstr ""
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3)."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -110,7 +94,9 @@ msgstr ""
 "\n"
 "После этого выполните выход из виртуального терминала\n"
 "нажатием комбинации клавиш Ctrl+D и переключитесь\n"
-"в графический режим нажатием Ctrl+Alt+F%3."
+"в графический режим нажатием Ctrl+Alt+F%3.\n"
+"Для возврата на этот экран используйте комбинацию клавиш CTRL+ALT+F%2.\n"
+"\n"
 
 #: ksldapp.cpp:164
 #, kde-format
