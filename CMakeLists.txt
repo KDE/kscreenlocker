@@ -27,6 +27,7 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
+include(ECMDeprecationSettings)
 
 include(CheckIncludeFile)
 include(CheckSymbolExists)
@@ -133,6 +134,10 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 set(KSLD_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KScreenLocker")
 
 include(ECMQtDeclareLoggingCategory)
+
+ecm_set_disabled_deprecation_versions(QT 5.15.2
+    KF 5.101
+)
 
 add_subdirectory(greeter)
 add_subdirectory(kcm)
