@@ -53,6 +53,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     IdleTime
                     Notifications
                     Solid
+                    Wayland
                     WindowSystem
                     XmlGui
                     )
@@ -71,10 +72,6 @@ if (QT_MAJOR_VERSION EQUAL "5")
     find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS X11Extras)
 endif()
 
-find_package(KF5Wayland CONFIG REQUIRED)
-set_package_properties(KF5Wayland PROPERTIES
-                       TYPE REQUIRED
-                       PURPOSE "Required for building screenlocker")
 find_package(WaylandScanner)
 find_package(Wayland 1.3 COMPONENTS Client Server)
 find_package(LayerShellQt REQUIRED)
