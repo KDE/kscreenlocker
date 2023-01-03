@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-06 00:47+0000\n"
-"PO-Revision-Date: 2022-07-02 12:25+0200\n"
+"PO-Revision-Date: 2022-12-19 10:42+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,14 +38,7 @@ msgstr ""
 "die beide auf Ihrem System nicht gefunden wurden."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -63,16 +56,7 @@ msgstr ""
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3)."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -89,13 +73,12 @@ msgstr ""
 "Die Bildschirmsperre ist gestört und die Sitzung kann nicht wieder "
 "freigegeben\n"
 "werden. Zum Freigeben, wechseln Sie auf eine Konsole (z. B. Strg+Alt+F%1),\n"
-"melden Sie sich an und führen Sie den Befehl:\n"
+"melden Sie sich mich Ihren Zugangsdaten an und führen Sie den Befehl:\n"
 "\n"
 "loginctl unlock-session %2\n"
 "\n"
-"aus. Melden Sie sich dann mit Strg+D aus der virtuellen Sitzung ab, und "
-"wechseln\n"
-"Sie dann wieder zur laufenden Sitzung (Strg+Alt+F%3)."
+"aus. Melden Sie sich danach mit Strg+D aus der virtuellen Sitzung ab\n"
+"und wechseln Sie mit Strg+Alt+F%3 wieder zur laufenden Sitzung.\n"
 
 #: ksldapp.cpp:164
 #, kde-format
