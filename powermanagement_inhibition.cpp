@@ -82,7 +82,7 @@ void PowerManagementInhibition::inhibitionsChanged(const QList<InhibitionInfo> &
 void PowerManagementInhibition::checkInhibition()
 {
     QDBusMessage msg = QDBusMessage::createMethodCall(s_solidPowerService, s_solidPath, s_solidPowerService, QStringLiteral("HasInhibition"));
-    msg << (uint)5; // PowerDevil::PolicyAgent::RequiredPolicy::ChangeScreenSettings | PowerDevil::PolicyAgent::RequiredPolicy::InterruptSession
+    msg << (uint)4; // PowerDevil::PolicyAgent::RequiredPolicy::ChangeScreenSettings
     QDBusPendingReply<bool> pendingReply = QDBusConnection::sessionBus().asyncCall(msg);
     QDBusPendingCallWatcher *callWatcher = new QDBusPendingCallWatcher(pendingReply, this);
     connect(callWatcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *self) {
