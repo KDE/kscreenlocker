@@ -2,8 +2,8 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"kcm_screenlocker\")
 
 set(screenlocker_kcm_SRCS
-    kcm.cpp
-    kscreenlockerdata.cpp
+    kcm.cpp kcm.h
+    kscreenlockerdata.cpp kscreenlockerdata.h
 )
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
