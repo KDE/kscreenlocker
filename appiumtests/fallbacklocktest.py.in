@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2016 Microsoft Corporation. All rights reserved.
+# SPDX-FileCopyrightText: 2021-2022 Harald Sitter <sitter@kde.org>
+
+import unittest
+from appium import webdriver
+from appium.webdriver.common.appiumby import AppiumBy
+from selenium.webdriver.common.keys import Keys
+import time
+import os
+from subprocess import Popen
+
+
+class SimpleCalculatorTests(unittest.TestCase):
+
+    def startGreeter(self):
+        env = os.environ.copy();
+        env["LD_PRELOAD"] = "libpam_wrapper.so"
+        env["PAM_WRAPPER"] = "1";
+        env["PAM_WRAPPER_SERVICE_DIR"] = "@PAM_TEST_DIR@"
+        env["PAM_MATRIX_PASSWD"] = "@PAM_TEST_DIR@/test_db"
+        return Popen(["@KDE_INSTALL_FULL_LIBEXECDIR@/kscreenlocker_greet", "--testing", "--theme",  "/tmp"], env=env)
+
+    def testUnlockEnter(self):
+        process = self.startGreeter()
+        driver = webdriver.Remote(
+            command_executor='http://127.0.0.1:4723',
+            desired_capabilities={"app": str(process.pid)}
+        )
+        passwordField = driver.find_element(by=AppiumBy.CLASS_NAME, value="[password text | ]")
+        passwordField.send_keys("my_password")
+        passwordField.send_keys(Keys.ENTER)
+        self.assertEqual(process.wait(), 0)
+        driver.quit()
+
+    def testUnlockReturn(self):
+        process = self.startGreeter()
+        driver = webdriver.Remote(
+            command_executor='http://127.0.0.1:4723',
+            desired_capabilities={"app": str(process.pid)}
+        )
+        passwordField = driver.find_element(by=AppiumBy.CLASS_NAME, value="[password text | ]")
+        passwordField.send_keys("my_password")
+        passwordField.send_keys(Keys.RETURN)
+        self.assertEqual(process.wait(), 0)
+        driver.quit()
+
+    def testUnlockButton(self):
+        process = self.startGreeter()
+        driver = webdriver.Remote(
+            command_executor='http://127.0.0.1:4723',
+            desired_capabilities={"app": str(process.pid)}
+        )
+        driver.find_element(by=AppiumBy.CLASS_NAME, value="[password text | ]").send_keys("my_password")
+        driver.find_element(by=AppiumBy.NAME, value="Unlock").click()
+        self.assertEqual(process.wait(), 0)
+        driver.quit()
+
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(SimpleCalculatorTests)
+    unittest.main()
+

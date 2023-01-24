@@ -301,6 +301,7 @@ install(PROGRAMS updaters/ksreenlocker_5_3_separate_autologin.pl
                 DESTINATION ${KDE_INSTALL_DATADIR}/kconf_update)
 
 if(BUILD_TESTING)
+   add_subdirectory(appiumtests)
    add_subdirectory(autotests)
    add_subdirectory(tests)
 endif()
