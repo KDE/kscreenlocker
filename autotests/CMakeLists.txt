@@ -5,7 +5,7 @@ include(ECMMarkAsTest)
 #######################################
 set(logindTest_SRCS
     logindtest.cpp
-    fakelogind.cpp fakelogind.h
+    fakelogind.cpp
     ../logind.cpp
     ../kscreenlocker_logging.cpp
 )

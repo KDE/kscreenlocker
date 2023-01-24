@@ -1,8 +1,8 @@
 add_library(settings STATIC
-    kscreensaversettings.cpp kscreensaversettings.h
-    lnf_integration.cpp lnf_integration.h
-    wallpaper_integration.cpp wallpaper_integration.h
-    appearancesettings.cpp appearancesettings.h
+    kscreensaversettings.cpp
+    lnf_integration.cpp
+    wallpaper_integration.cpp
+    appearancesettings.cpp
 )
 set_property(TARGET settings PROPERTY POSITION_INDEPENDENT_CODE ON)
 
