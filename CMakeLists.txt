@@ -52,6 +52,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
                     I18n
                     IdleTime
                     Notifications
+                    Package
                     Solid
                     Wayland
                     WindowSystem
