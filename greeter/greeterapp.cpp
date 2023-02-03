@@ -25,7 +25,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KLocalizedContext>
 #include <KScreenDpms/Dpms>
 #include <KWindowSystem>
-#include <kdeclarative/kdeclarative.h>
 
 #include <KUser>
 // Plasma
