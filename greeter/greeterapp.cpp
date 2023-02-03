@@ -487,6 +487,11 @@ void UnlockApp::setLockedPropertyOnViews()
         QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
         lockProperty.write(true);
     }
+
+    m_turnOffTimer = new QTimer(this);
+    m_turnOffTimer->setSingleShot(true)
+    connect(m_turnOffTimer, &QTimer::timeout, this, &UnlockApp::turnOffScreen);
+    m_turnOffTimer->start(60000);
 }
 
 void UnlockApp::resetRequestIgnore()
@@ -560,6 +565,16 @@ void UnlockApp::lockImmediately()
     setLockedPropertyOnViews();
 }
 
+void ScreenLocker::UnlockApp::turnOffScreen()
+{
+    auto dpms = new KScreen::Dpms(this);
+    connect(dpms, &KScreen::Dpms::supportedChanged, this, [dpms](bool supported) {
+        if (supported) {
+            dpms->switchMode(KScreen::Dpms::Off);
+        }
+    });
+}
+
 bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
 {
     if (obj != this && event->type() == QEvent::Show) {
@@ -595,12 +610,7 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
             shareEvent(event, qobject_cast<KQuickAddons::QuickViewSharedEngine *>(obj));
             return false; // irrelevant
         } else {
-            auto dpms = new KScreen::Dpms(this);
-            connect(dpms, &KScreen::Dpms::supportedChanged, this, [dpms](bool supported) {
-                if (supported) {
-                    dpms->switchMode(KScreen::Dpms::Off);
-                }
-            });
+            turnOffScreen();
         }
         return true; // don't pass
     }

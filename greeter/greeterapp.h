@@ -80,12 +80,14 @@ private:
     void setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperObject, KQuickAddons::QuickViewSharedEngine *view);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
     QWindow *getActiveScreen();
+    void turnOffScreen();
 
     QString m_packageName;
     QUrl m_mainQmlPath;
     QList<KQuickAddons::QuickViewSharedEngine *> m_views;
     QTimer *m_resetRequestIgnoreTimer;
     QTimer *m_delayedLockTimer;
+    QTimer *m_turnOffTimer;
     KPackage::Package m_package;
     bool m_testing;
     bool m_ignoreRequests;
