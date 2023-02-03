@@ -67,9 +67,3 @@ msgstr "Per defecte, la interfície d'usuari per a canviar d'usuari."
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Descriptor de fitxer per a connectar amb el «ksld»."
-
-#~ msgid "Session"
-#~ msgstr "Sessió"
-
-#~ msgid "Location"
-#~ msgstr "Ubicació"
