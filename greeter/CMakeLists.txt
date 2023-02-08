@@ -28,7 +28,6 @@ set(kscreenlocker_greet_SRCS
    powermanagement.cpp
    noaccessnetworkaccessmanagerfactory.cpp
    greeterapp.h
-   main.cpp
    powermanagement.h
    noaccessnetworkaccessmanagerfactory.h
 )
