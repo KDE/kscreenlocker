@@ -6,13 +6,13 @@ set(PROJECT_VERSION "5.27.80")
 set(PROJECT_VERSION_MAJOR 5)
 
 set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.102.0")
+set(KF6_MIN_VERSION "5.102.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} )
 
 include(KDEInstallDirs)
@@ -43,7 +43,7 @@ add_feature_info("prctl/procctl tracing control"
                  "Required for disallowing ptrace on greeter and kcheckpass process")
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Crash
     Declarative
     KCMUtils
@@ -72,7 +72,7 @@ add_feature_info("XInput" X11_Xinput_FOUND "Required for grabbing XInput2 device
 find_package(WaylandScanner)
 find_package(Wayland 1.3 COMPONENTS Client Server)
 find_package(LayerShellQt REQUIRED)
-find_package(KF5Screen REQUIRED)
+find_package(KF6Screen REQUIRED)
 
 set_package_properties(Wayland PROPERTIES
                        TYPE REQUIRED
@@ -191,15 +191,15 @@ PUBLIC
 PRIVATE
    settings
    Qt::DBus
-   KF5::I18n
-   KF5::IdleTime
-   KF5::GlobalAccel
-   KF5::Notifications
-   KF5::CoreAddons
-   KF5::ConfigGui
-   KF5::Package
-   KF5::WindowSystem
-   KF5::XmlGui
+   KF6::I18n
+   KF6::IdleTime
+   KF6::GlobalAccel
+   KF6::Notifications
+   KF6::CoreAddons
+   KF6::ConfigGui
+   KF6::Package
+   KF6::WindowSystem
+   KF6::XmlGui
    X11::X11
    XCB::XCB
    XCB::KEYSYMS

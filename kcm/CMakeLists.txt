@@ -16,13 +16,13 @@ kcmutils_generate_desktop_file(kcm_screenlocker)
 target_link_libraries(kcm_screenlocker
     settings
     Qt::DBus
-    KF5::Declarative
-    KF5::KCMUtils
-    KF5::I18n
-    KF5::GlobalAccel
-    KF5::Package
-    KF5::QuickAddons
-    KF5::XmlGui
+    KF6::Declarative
+    KF6::KCMUtils
+    KF6::I18n
+    KF6::GlobalAccel
+    KF6::Package
+    KF6::QuickAddons
+    KF6::XmlGui
 )
 
 kpackage_install_package(package kcm_screenlocker kcms)

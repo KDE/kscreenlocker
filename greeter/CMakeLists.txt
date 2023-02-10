@@ -48,22 +48,22 @@ add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 target_link_libraries(kscreenlocker_greet
     settings
     kscreenlocker_authenticator
-    KF5::Package
-    KF5::Crash
-    KF5::I18n
-    KF5::ConfigGui
-    KF5::Declarative
-    KF5::KIOCore
-    KF5::QuickAddons
-    KF5::WindowSystem
+    KF6::Package
+    KF6::Crash
+    KF6::I18n
+    KF6::ConfigGui
+    KF6::Declarative
+    KF6::KIOCore
+    KF6::QuickAddons
+    KF6::WindowSystem
     Qt::Quick
     Qt::Qml
     Qt::GuiPrivate
     X11::X11
-    KF5::WaylandClient
+    KF6::WaylandClient
     Wayland::Client
     LayerShellQt::Interface
-    KF5::ScreenDpms
+    KF6::ScreenDpms
 )
 
 target_compile_definitions(kscreenlocker_greet PRIVATE

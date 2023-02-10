@@ -11,7 +11,7 @@ set(logindTest_SRCS
 )
 
 add_executable(logindTest ${logindTest_SRCS})
-target_link_libraries(logindTest Qt::DBus Qt::Test KF5::I18n)
+target_link_libraries(logindTest Qt::DBus Qt::Test KF6::I18n)
 add_test(NAME ksmserver-logindTest COMMAND logindTest)
 ecm_mark_as_test(logindTest)
 
@@ -36,7 +36,7 @@ endif()
 # KSldTest
 #######################################
 add_executable(ksldTest ksldtest.cpp)
-target_link_libraries(ksldTest Qt::Test Qt::Widgets KF5::IdleTime XCB::XTEST KScreenLocker)
+target_link_libraries(ksldTest Qt::Test Qt::Widgets KF6::IdleTime XCB::XTEST KScreenLocker)
 if (QT_MAJOR_VERSION EQUAL "6")
     target_link_libraries(ksldTest Qt::GuiPrivate)
 endif()
@@ -70,15 +70,16 @@ set(x11LockerTest_SRCS
 
 add_executable(x11LockerTest ${x11LockerTest_SRCS})
 target_link_libraries(x11LockerTest
-    KF5::GlobalAccel
-    KF5::I18n
-    KF5::WindowSystem
+    KF6::GlobalAccel
+    KF6::I18n
+    KF6::WindowSystem
     Qt::Test
     Qt::Widgets
     X11::X11
     XCB::XCB
     XCB::KEYSYMS
 )
+
 target_link_libraries(x11LockerTest Qt::GuiPrivate)
 
 add_test(NAME ksmserver-x11LockerTest COMMAND x11LockerTest)
