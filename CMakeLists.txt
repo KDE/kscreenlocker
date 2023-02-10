@@ -69,10 +69,6 @@ find_package(XCB MODULE REQUIRED COMPONENTS XCB KEYSYMS XTEST)
 set_package_properties(XCB PROPERTIES TYPE REQUIRED)
 add_feature_info("XInput" X11_Xinput_FOUND "Required for grabbing XInput2 devices in the screen locker")
 
-if (QT_MAJOR_VERSION EQUAL "5")
-    find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS X11Extras)
-endif()
-
 find_package(WaylandScanner)
 find_package(Wayland 1.3 COMPONENTS Client Server)
 find_package(LayerShellQt REQUIRED)
@@ -209,11 +205,8 @@ PRIVATE
    XCB::KEYSYMS
    Wayland::Server
 )
-if (QT_MAJOR_VERSION EQUAL "5")
-    target_link_libraries(KScreenLocker PUBLIC Qt5::X11Extras)
-else()
-    target_link_libraries(KScreenLocker PRIVATE Qt::GuiPrivate)
-endif()
+
+target_link_libraries(KScreenLocker PRIVATE Qt::GuiPrivate)
 
 set(kscreenlocker_greet_bin_abs ${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet)
 # The file path of kscreenlocker_greet must be relative to the KScreenLocker library.

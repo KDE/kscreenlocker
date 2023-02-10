@@ -79,10 +79,7 @@ target_link_libraries(x11LockerTest
     XCB::XCB
     XCB::KEYSYMS
 )
-if (QT_MAJOR_VERSION EQUAL "5")
-    target_link_libraries(x11LockerTest Qt5::X11Extras)
-else()
-    target_link_libraries(x11LockerTest Qt::GuiPrivate)
-endif()
+target_link_libraries(x11LockerTest Qt::GuiPrivate)
+
 add_test(NAME ksmserver-x11LockerTest COMMAND x11LockerTest)
 ecm_mark_as_test(x11LockerTest)

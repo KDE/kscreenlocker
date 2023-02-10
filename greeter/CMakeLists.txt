@@ -58,17 +58,13 @@ target_link_libraries(kscreenlocker_greet
     KF5::WindowSystem
     Qt::Quick
     Qt::Qml
+    Qt::GuiPrivate
     X11::X11
     KF5::WaylandClient
     Wayland::Client
     LayerShellQt::Interface
     KF5::ScreenDpms
 )
-if (QT_MAJOR_VERSION EQUAL "5")
-    target_link_libraries(kscreenlocker_greet Qt5::X11Extras)
-else()
-    target_link_libraries(kscreenlocker_greet Qt::GuiPrivate)
-endif()
 
 target_compile_definitions(kscreenlocker_greet PRIVATE
     KCHECKPASS_BIN="kcheckpass"
