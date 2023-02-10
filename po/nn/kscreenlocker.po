@@ -1,13 +1,13 @@
 # Translation of kscreenlocker to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2018, 2020, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2018, 2020, 2022, 2023.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-06 00:47+0000\n"
-"PO-Revision-Date: 2022-06-19 13:53+0200\n"
+"PO-Revision-Date: 2023-02-09 21:40+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -51,6 +51,14 @@ msgid ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 msgstr ""
+"Skjermlåsen er øydelagd, så det er ikkje mogleg å bruka han til å låsa opp "
+"skjermen.\n"
+"For å låsa opp skjermen, byt til ein virtuell terminal (for eksempel med "
+"«Ctrl + Alt + F%1»),\n"
+"logg inn som rotbrukar («root») og køyr denne kommandoen:\n"
+"\n"
+"# ck-unlock-session <session-name>\n"
+"\n"
 
 #: abstractlocker.cpp:48
 #, kde-format
@@ -67,6 +75,19 @@ msgid ""
 "screen by pressing CTRL+ALT+F%2\n"
 "\n"
 msgstr ""
+"Skjermlåsaren er øydelagd, og det er ikkje mogleg å låsa opp økta automatisk "
+"lenger.\n"
+"For å låsa opp økta manuelt, må du byta til ein virtuell terminal (med for "
+"eksempel «Ctrl + Alt + F%1»),\n"
+"logga inn på kontoen din og køyra denne kommandoen:\n"
+"\n"
+"loginctl unlock-session %2\n"
+"\n"
+"Logg så ut av den virtuelle økta med «Ctrl + D» og\n"
+"byt tilbake til økta som køyrer (med «Ctrl + Alt + F%3»).\n"
+"Om du gløymer desse instruksjonane, kan du komma\n"
+"tilbake til dette skjermbiletet med «Ctrl + Alt + F%2».\n"
+"\n"
 
 #: ksldapp.cpp:164
 #, kde-format
