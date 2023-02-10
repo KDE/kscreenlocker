@@ -142,7 +142,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"kscreenlocker\")
 
 set(screensaver_dbusXML dbus/org.freedesktop.ScreenSaver.xml)
 set(kscreensaver_dbusXML dbus/org.kde.screensaver.xml)
-set(powerdevilpolicyagent_xml dbus/kf5_org.kde.Solid.PowerManagement.PolicyAgent.xml)
+set(powerdevilpolicyagent_xml dbus/kf6_org.kde.Solid.PowerManagement.PolicyAgent.xml)
 
 set(ksld_SRCS
    abstractlocker.cpp
@@ -289,7 +289,7 @@ ecm_qt_install_logging_categories(
 install(FILES kscreenlocker.notifyrc  DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR} RENAME ksmserver.notifyrc)
 install(FILES ${screensaver_dbusXML}
         DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR}
-        RENAME kf5_org.freedesktop.ScreenSaver.xml)
+        RENAME kf6_org.freedesktop.ScreenSaver.xml)
 
 install(FILES ${kscreensaver_dbusXML}
         DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
