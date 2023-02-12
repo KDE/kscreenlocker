@@ -44,19 +44,19 @@ add_feature_info("prctl/procctl tracing control"
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-                    Crash
-                    Declarative
-                    KCMUtils
-                    KIO
-                    GlobalAccel
-                    I18n
-                    IdleTime
-                    Notifications
-                    Solid
-                    Wayland
-                    WindowSystem
-                    XmlGui
-                    )
+    Crash
+    Declarative
+    KCMUtils
+    KIO
+    GlobalAccel
+    I18n
+    IdleTime
+    Notifications
+    Solid
+    Wayland
+    WindowSystem
+    XmlGui
+)
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
@@ -86,16 +86,16 @@ set_package_properties(loginctl PROPERTIES
     URL "https://www.freedesktop.org/software/systemd/man/loginctl.html"
     DESCRIPTION "Send control commands to the login manager"
     TYPE RUNTIME
-    )
+)
 set(HAVE_LOGINCTL ${loginctl_FOUND})
 
-if ( NOT HAVE_LOGINCTL )
+if (NOT HAVE_LOGINCTL)
     find_package(ConsoleKit)
     set_package_properties(ConsoleKit PROPERTIES
         URL "https://github.com/ConsoleKit2/ConsoleKit2"
         DESCRIPTION "Framework for tracking user login sessions"
         TYPE RECOMMENDED
-        )
+    )
     set(HAVE_CONSOLEKIT ${ConsoleKit_FOUND})
 endif ()
 
@@ -121,9 +121,10 @@ endif ()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu90")
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KSCREENLOCKER
-                        VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kscreenlocker_version.h"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfigVersion.cmake"
-                        SOVERSION 5)
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kscreenlocker_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfigVersion.cmake"
+    SOVERSION 5
+)
 
 configure_file(config-kscreenlocker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kscreenlocker.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -168,14 +169,10 @@ set(ksld_SRCS
 )
 
 ecm_qt_declare_logging_category(ksld_SRCS
-    HEADER
-        kscreenlocker_logging.h
-    IDENTIFIER
-        KSCREENLOCKER
-    CATEGORY_NAME
-        kscreenlocker
-    DEFAULT_SEVERITY
-        Critical
+    HEADER kscreenlocker_logging.h
+    IDENTIFIER KSCREENLOCKER
+    CATEGORY_NAME kscreenlocker
+    DEFAULT_SEVERITY Critical
 )
 
 qt_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
@@ -253,8 +250,8 @@ configure_package_config_file(ScreenSaverDBusInterfaceConfig.cmake.in
 set_target_properties(KScreenLocker PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 
 install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/ScreenSaverDBusInterfaceConfig.cmake
-        DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/ScreenSaverDBusInterface")
+    ${CMAKE_CURRENT_BINARY_DIR}/ScreenSaverDBusInterfaceConfig.cmake
+    DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/ScreenSaverDBusInterface")
 
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KScreenLockerConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
