@@ -12,14 +12,10 @@ set(kscreenlocker_authenticator_SRCS
 )
 
 ecm_qt_declare_logging_category(kscreenlocker_authenticator_SRCS
-    HEADER
-        kscreenlocker_greet_logging.h
-    IDENTIFIER
-        KSCREENLOCKER_GREET
-    CATEGORY_NAME
-        kscreenlocker_greet
-    DEFAULT_SEVERITY
-        Info
+    HEADER kscreenlocker_greet_logging.h
+    IDENTIFIER KSCREENLOCKER_GREET
+    CATEGORY_NAME kscreenlocker_greet
+    DEFAULT_SEVERITY Info
 )
 
 set(kscreenlocker_greet_SRCS
@@ -34,9 +30,9 @@ set(kscreenlocker_greet_SRCS
 
 add_library(kscreenlocker_authenticator OBJECT ${kscreenlocker_authenticator_SRCS})
 target_link_libraries(kscreenlocker_authenticator
-                      Qt::Core
-                      ${PAM_LIBRARIES}
-                     )
+    Qt::Core
+    ${PAM_LIBRARIES}
+)
 
 qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 
@@ -48,24 +44,24 @@ ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
 target_link_libraries(kscreenlocker_greet
-                        settings
-                        kscreenlocker_authenticator
-                        KF5::Package
-                        KF5::Crash
-                        KF5::I18n
-                        KF5::ConfigGui
-                        KF5::Declarative
-                        KF5::KIOCore
-                        KF5::QuickAddons
-                        KF5::WindowSystem
-                        Qt::Quick
-                        Qt::Qml
-                        X11::X11
-                        KF5::WaylandClient
-                        Wayland::Client
-                        LayerShellQt::Interface
-                        KF5::ScreenDpms
-                        )
+    settings
+    kscreenlocker_authenticator
+    KF5::Package
+    KF5::Crash
+    KF5::I18n
+    KF5::ConfigGui
+    KF5::Declarative
+    KF5::KIOCore
+    KF5::QuickAddons
+    KF5::WindowSystem
+    Qt::Quick
+    Qt::Qml
+    X11::X11
+    KF5::WaylandClient
+    Wayland::Client
+    LayerShellQt::Interface
+    KF5::ScreenDpms
+)
 if (QT_MAJOR_VERSION EQUAL "5")
     target_link_libraries(kscreenlocker_greet Qt5::X11Extras)
 else()
