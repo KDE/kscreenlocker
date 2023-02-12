@@ -173,6 +173,8 @@ ecm_qt_declare_logging_category(ksld_SRCS
     IDENTIFIER KSCREENLOCKER
     CATEGORY_NAME kscreenlocker
     DEFAULT_SEVERITY Critical
+    DESCRIPTION "KScreenLocker"
+    EXPORT KSCREENLOCKER
 )
 
 qt_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
@@ -283,6 +285,12 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfig.cmake"
 			  "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfigVersion.cmake"
 		DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KScreenLocker"
 		COMPONENT Devel)
+
+ecm_qt_install_logging_categories(
+    EXPORT KSCREENLOCKER
+    FILE kscreenlocker.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
 
 install(FILES kscreenlocker.notifyrc  DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR} RENAME ksmserver.notifyrc)
 install(FILES ${screensaver_dbusXML}
