@@ -415,12 +415,8 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         }
     }
 
-    // on Wayland we may not use fullscreen as that puts all windows on one screen
-    if (m_testing || QX11Info::isPlatformX11()) {
-        view->show();
-    } else {
-        view->showFullScreen();
-    }
+    // showFullScreen is implicit on X11 (through geometry and hints) and Wayland (layer-shell)
+    view->show();
     view->raise();
 
     auto onFrameSwapped = [this, view] {
