@@ -52,7 +52,7 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
             "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
             "back to the running session (Ctrl+Alt+F%3).\n"
             "Should you have forgotten the instructions, you can get back to this\n"
-            "screen by pressing CTRL+ALT+F%2\n\n");
+            "screen by pressing Ctrl+Alt+F%3\n\n");
 
         auto haveService = [](QString service) {
             return QDBusConnection::systemBus().interface()->isServiceRegistered(service);
