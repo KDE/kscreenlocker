@@ -39,12 +39,12 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
             "The screen locker is broken and unlocking is not possible anymore.\n"
             "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
             "of which could be found on your system.");
-        auto text_ck = ki18n(
+        auto text_ck = ki18nc("%1 = other terminal",
             "The screen locker is broken and unlocking is not possible anymore.\n"
             "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
             "log in as root and execute the command:\n\n"
             "# ck-unlock-session <session-name>\n\n");
-        auto text_ld = ki18n(
+        auto text_ld = ki18nc("%1 = other terminal, %2 = session ID, %3 = this terminal",
             "The screen locker is broken and unlocking is not possible anymore.\n"
             "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
             "log in to your account and execute the command:\n\n"
