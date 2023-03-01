@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-06-17 02:10+0200\n"
+"POT-Creation-Date: 2022-12-06 00:47+0000\n"
 "PO-Revision-Date: 2017-06-10 21:26+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,7 +18,17 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: abstractlocker.cpp:53
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: abstractlocker.cpp:39
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -30,8 +40,8 @@ msgstr ""
 #| "Afterwards switch back to the running session (Ctrl+Alt+F%2)."
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
-"In order to unlock it either ConsoleKit or LoginD is needed, none of\n"
-"which could be found on your system."
+"In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
+"of which could be found on your system."
 msgstr ""
 "Zaključavač ekrana je pokvaren i otključavanje više nije moguće.\n"
 "Da biste otključali, pređite na virtuelni terminal (npr. Ctrl+Alt+F2),\n"
@@ -41,7 +51,7 @@ msgstr ""
 "\n"
 "Potom se prebacite nazad na sesiju u pogonu (Ctrl+Alt+F%2)."
 
-#: abstractlocker.cpp:56
+#: abstractlocker.cpp:43
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -53,7 +63,7 @@ msgstr ""
 #| "Afterwards switch back to the running session (Ctrl+Alt+F%2)."
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
-"In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+"In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
 "log in as root and execute the command:\n"
 "\n"
 "# ck-unlock-session <session-name>\n"
@@ -67,16 +77,28 @@ msgstr ""
 "\n"
 "Potom se prebacite nazad na sesiju u pogonu (Ctrl+Alt+F%2)."
 
-#: abstractlocker.cpp:60
-#, kde-format
+#: abstractlocker.cpp:48
+#, fuzzy, kde-format
+#| msgid ""
+#| "The screen locker is broken and unlocking is not possible anymore.\n"
+#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
+#| "log in and execute the command:\n"
+#| "\n"
+#| "loginctl unlock-session %1\n"
+#| "\n"
+#| "Afterwards switch back to the running session (Ctrl+Alt+F%2)."
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
-"In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-"log in and execute the command:\n"
+"In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
+"log in to your account and execute the command:\n"
 "\n"
-"loginctl unlock-session %1\n"
+"loginctl unlock-session %2\n"
 "\n"
-"Afterwards switch back to the running session (Ctrl+Alt+F%2)."
+"Then log out of the virtual session by pressing Ctrl+D, and switch\n"
+"back to the running session (Ctrl+Alt+F%3).\n"
+"Should you have forgotten the instructions, you can get back to this\n"
+"screen by pressing CTRL+ALT+F%2\n"
+"\n"
 msgstr ""
 "Zaključavač ekrana je pokvaren i otključavanje više nije moguće.\n"
 "Da biste otključali, pređite na virtuelni terminal (npr. Ctrl+Alt+F2),\n"
@@ -86,56 +108,39 @@ msgstr ""
 "\n"
 "Potom se prebacite nazad na sesiju u pogonu (Ctrl+Alt+F%2)."
 
-#. i18n: ectx: label, entry, group (Daemon)
-#: kcfg/kscreenlockersettings.kcfg:10
-#, kde-format
-msgid "Screen lock enabled"
-msgstr "Zaključavanje ekrana aktivno"
-
-#. i18n: ectx: whatsthis, entry, group (Daemon)
-#: kcfg/kscreenlockersettings.kcfg:11
-#, kde-format
-msgid "Sets whether the screen will be locked after the specified time."
-msgstr "Da li će ekran biti zaključan posle zadatog vremena."
-
-#. i18n: ectx: label, entry, group (Daemon)
-#: kcfg/kscreenlockersettings.kcfg:16
-#, kde-format
-msgid "Screen saver timeout"
-msgstr "Prekovreme čuvara ekrana"
-
-#. i18n: ectx: whatsthis, entry, group (Daemon)
-#: kcfg/kscreenlockersettings.kcfg:17
-#, kde-format
-msgid "Sets the minutes after which the screen is locked."
-msgstr "Broj minuta posle kojeg će ekran biti zaključan."
-
-#: kscreensaversettings.cpp:55
-#, kde-format
-msgid "Session Management"
-msgstr ""
-
-#: kscreensaversettings.cpp:58 ksldapp.cpp:173
+#: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
 msgstr "Zaključaj sesiju"
 
-#: ksldapp.cpp:411
+#: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekran zaključan"
 
-#: ksldapp.cpp:571
+#: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekran otključan"
 
-#: logind.cpp:198
+#: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
 msgstr "Zaključavač ekrana"
 
-#: logind.cpp:199
+#: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Obezbeđuje zaključavanje ekrana pre odlaska na spavanje"
+
+#~ msgid "Screen lock enabled"
+#~ msgstr "Zaključavanje ekrana aktivno"
+
+#~ msgid "Sets whether the screen will be locked after the specified time."
+#~ msgstr "Da li će ekran biti zaključan posle zadatog vremena."
+
+#~ msgid "Screen saver timeout"
+#~ msgstr "Prekovreme čuvara ekrana"
+
+#~ msgid "Sets the minutes after which the screen is locked."
+#~ msgstr "Broj minuta posle kojeg će ekran biti zaključan."

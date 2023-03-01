@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-03-19 03:24+0100\n"
+"POT-Creation-Date: 2022-11-22 00:47+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,97 +18,105 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: kcm.cpp:55
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: package/contents/ui/Appearance.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr ""
+
+#: package/contents/ui/Appearance.qml:35
+#, fuzzy, kde-format
+#| msgid "Wallpaper &Type:"
+msgid "Wallpaper type:"
+msgstr "&Tip tapeta:"
+
+#: package/contents/ui/main.qml:26
+#, fuzzy, kde-format
+#| msgid "&Lock screen on resume:"
+msgid "Lock screen automatically:"
+msgstr "&Zaključaj ekran po nastavljanju:"
+
+#: package/contents/ui/main.qml:28
+#, kde-format
+msgctxt "First part of sentence \"Automatically after X minutes\""
+msgid "After"
+msgstr ""
+
+#: package/contents/ui/main.qml:41
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for minutes"
 #| msgid " min"
 #| msgid_plural " mins"
-msgctxt "Spinbox suffix"
-msgid " minute"
-msgid_plural " minutes"
+msgid "%1 minute"
+msgid_plural "%1 minutes"
 msgstr[0] " min."
 msgstr[1] " min."
 msgstr[2] " min."
 msgstr[3] " min."
 
-#: kcm.cpp:57
+#: package/contents/ui/main.qml:54
+#, kde-format
+msgctxt "@option:check"
+msgid "After waking from sleep"
+msgstr ""
+
+#: package/contents/ui/main.qml:69
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Allow unlocking without password for:"
+msgstr ""
+
+#: package/contents/ui/main.qml:73
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for seconds"
 #| msgid " sec"
 #| msgid_plural " secs"
-msgctxt "Spinbox suffix"
-msgid " second"
-msgid_plural " seconds"
+msgid "%1 second"
+msgid_plural "%1 seconds"
 msgstr[0] " sek."
 msgstr[1] " sek."
 msgstr[2] " sek."
 msgstr[3] " sek."
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab_1)
-#: kcm.ui:19
-#, kde-format
-msgid "Activation"
-msgstr "Aktiviranje"
-
-#. i18n: ectx: property (text), widget (QLabel, label_1)
-#: kcm.ui:28
-#, fuzzy, kde-format
-#| msgid "&Lock screen on resume:"
-msgid "Lock screen:"
-msgstr "&Zaključaj ekran po nastavljanju:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Autolock)
-#: kcm.ui:40
-#, fuzzy, kde-format
-#| msgid "Lock screen automatically after:"
-msgid "Automatically after:"
-msgstr "Automatski zaključaj ekran posle:"
-
-#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_LockOnResume)
-#: kcm.ui:62
-#, kde-format
-msgid "Lock screen when waking up from suspension"
-msgstr "Zaključaj ekran po buđenju iz suspendovanosti"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_LockOnResume)
-#: kcm.ui:65
-#, kde-format
-msgid "After waking from sleep"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kcm.ui:72
-#, kde-format
-msgid "Allow unlocking without password for:"
-msgstr ""
-
-#. i18n: ectx: property (specialValueText), widget (KPluralHandlingSpinBox, kcfg_LockGrace)
-#: kcm.ui:82
-#, kde-format
-msgid "Immediately"
-msgstr "odmah"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
-#: kcm.ui:95
-#, kde-format
-msgid "The global keyboard shortcut to lock the screen."
-msgstr "Globalna prečica sa tastature za zaključavanje ekrana."
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: kcm.ui:98
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Prečica sa tastature:"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: kcm.ui:109
+#: package/contents/ui/main.qml:104
 #, kde-format
-msgid "Appearance"
+msgid "Appearance:"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: kcm.ui:144
-#, fuzzy, kde-format
-#| msgid "Wallpaper &Type:"
-msgid "Wallpaper &type:"
-msgstr "&Tip tapeta:"
+#: package/contents/ui/main.qml:105
+#, kde-format
+msgctxt "@action:button"
+msgid "Configure..."
+msgstr ""
+
+#~ msgid "Activation"
+#~ msgstr "Aktiviranje"
+
+#, fuzzy
+#~| msgid "Lock screen automatically after:"
+#~ msgid "Automatically after:"
+#~ msgstr "Automatski zaključaj ekran posle:"
+
+#~ msgid "Lock screen when waking up from suspension"
+#~ msgstr "Zaključaj ekran po buđenju iz suspendovanosti"
+
+#~ msgid "Immediately"
+#~ msgstr "odmah"
+
+#~ msgid "The global keyboard shortcut to lock the screen."
+#~ msgstr "Globalna prečica sa tastature za zaključavanje ekrana."

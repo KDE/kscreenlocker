@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-04-02 03:51+0200\n"
+"POT-Creation-Date: 2022-12-15 00:49+0000\n"
 "PO-Revision-Date: 2016-11-23 19:27+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -24,38 +24,38 @@ msgstr ""
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Поздравни дијалог закључавача екрана"
 
-#: main.cpp:115
+#: main.cpp:114
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Покреће поздравни дијалог у пробном режиму"
 
-#: main.cpp:118
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Покреће поздравни дијалог са изабраном темом (само у пробном режиму)"
 
-#: main.cpp:123
+#: main.cpp:121
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Закључај одмах, занемаривши допусно време, итд."
 
-#: main.cpp:125
+#: main.cpp:123
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Застој пре приказивања закључаног сучеља, у милисекундама."
 
-#: main.cpp:129
+#: main.cpp:126
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Без приказивања закључаног сучеља."
 
-#: main.cpp:131
+#: main.cpp:127
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Подразумевано на сучеље за промену корисника."
 
 # rewrite-msgid: /ksld/KScreenLocker daemon/
-#: main.cpp:134
+#: main.cpp:129
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Описник фајла за повезивање са демоном К‑закључавача-екрана."

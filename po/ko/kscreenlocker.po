@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2012, 2014, 2015, 2017, 2018, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2012, 2014, 2015, 2017, 2018, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-06 00:47+0000\n"
-"PO-Revision-Date: 2022-05-06 00:10+0200\n"
+"PO-Revision-Date: 2023-03-01 01:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -39,14 +39,7 @@ msgstr ""
 "현재 시스템에 둘 다 설치되어 있지 않습니다."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -63,16 +56,7 @@ msgstr ""
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3)."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -93,7 +77,10 @@ msgstr ""
 "loginctl unlock-session %2\n"
 "\n"
 "그 다음 Ctrl+D 키를 눌러서 가상 세션에서 로그아웃한 다음 실행 중인\n"
-"세션으로 돌아오십시오.(Ctrl+Alt+F%3)"
+"세션으로 돌아오십시오.(Ctrl+Alt+F%3)\n"
+"절차 중 일부가 기억나지 않으면 Ctrl+Alt+F%2 키를 눌러서\n"
+"이 화면으로 돌아올 수 있습니다\n"
+"\n"
 
 #: ksldapp.cpp:164
 #, kde-format
