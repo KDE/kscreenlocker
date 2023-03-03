@@ -66,8 +66,19 @@ target_link_libraries(kscreenlocker_greet
     KF6::ScreenDpms
 )
 
+# KSCREENLOCKER_PAM_SERVICE, if defined, will already have been
+# enclosed in double quotes by the define_pam_service macro.
+if (NOT DEFINED KSCREENLOCKER_PAM_SERVICE)
+  if (DEFINED KDE_COMMON_PAM_SERVICE)
+    set(KSCREENLOCKER_PAM_SERVICE "\"${KDE_COMMON_PAM_SERVICE}\"")
+  else()
+    set(KSCREENLOCKER_PAM_SERVICE "\"kde\"")
+  endif()
+endif()
+
 target_compile_definitions(kscreenlocker_greet PRIVATE
     KCHECKPASS_BIN="kcheckpass"
+    KSCREENLOCKER_PAM_SERVICE=${KSCREENLOCKER_PAM_SERVICE}
 )
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})

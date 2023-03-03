@@ -141,7 +141,7 @@ void PamWorker::authenticate()
     m_inAuthenticate = true;
     qCDebug(KSCREENLOCKER_GREET) << "Start auth";
     int rc = pam_authenticate(m_handle, 0); // PAM_SILENT);
-    qCDebug(KSCREENLOCKER_GREET) << "Auth done RC" << rc;
+    qCDebug(KSCREENLOCKER_GREET) << "Auth done RC" << rc << pam_strerror(m_handle, rc);
 
     Q_EMIT busyChanged(false);
 
@@ -178,7 +178,7 @@ void PamWorker::start(const QString &service, const QString &user)
         qCWarning(KSCREENLOCKER_GREET) << "[PAM] start" << pam_strerror(m_handle, m_result);
         return;
     } else {
-        qCDebug(KSCREENLOCKER_GREET) << "[PAM] Starting...";
+        qCDebug(KSCREENLOCKER_GREET) << "[PAM] Starting... using service" << service;
     }
 }
 

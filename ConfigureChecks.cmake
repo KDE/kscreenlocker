@@ -3,26 +3,25 @@ include(UnixAuth)
 set_package_properties(PAM PROPERTIES DESCRIPTION "PAM Libraries"
                        URL "https://www.kernel.org/pub/linux/libs/pam/"
                        TYPE OPTIONAL
-                       PURPOSE "Required for screen unlocking and optionally used by the KDM log in manager"
+                       PURPOSE "Required for screen unlocking"
                       )
 if(PAM_REQUIRED)
-set_package_properties(PAM PROPERTIES TYPE REQUIRED)
+    set_package_properties(PAM PROPERTIES TYPE REQUIRED)
 endif()
 include(CheckTypeSize)
 include(FindPkgConfig)
 
 if (PAM_FOUND)
-    set(KDE4_COMMON_PAM_SERVICE "kde" CACHE STRING "The PAM service to use unless overridden for a particular app.")
-
     macro(define_pam_service APP)
         string(TOUPPER ${APP}_PAM_SERVICE var)
-        set(cvar KDE4_${var})
-        set(${cvar} "${KDE4_COMMON_PAM_SERVICE}" CACHE STRING "The PAM service for ${APP}.")
+        set(cvar ${var})
+        set(${cvar} "kde" CACHE STRING "The PAM service to use for ${APP}.")
         mark_as_advanced(${cvar})
         set(${var} "\"${${cvar}}\"")
+        message(STATUS "The PAM service used by ${APP} will be ${${var}}")
     endmacro(define_pam_service)
 
-    define_pam_service(kscreensaver)
+    define_pam_service(KScreenLocker)
 endif (PAM_FOUND)
 
 check_include_files(unistd.h HAVE_UNISTD_H)
