@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-06 00:47+0000\n"
+"POT-Creation-Date: 2023-03-04 02:12+0000\n"
 "PO-Revision-Date: 2012-11-29 14:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -37,6 +37,7 @@ msgstr ""
 
 #: abstractlocker.cpp:43
 #, kde-format
+msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -48,6 +49,7 @@ msgstr ""
 
 #: abstractlocker.cpp:48
 #, kde-format
+msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -58,7 +60,7 @@ msgid ""
 "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
 "back to the running session (Ctrl+Alt+F%3).\n"
 "Should you have forgotten the instructions, you can get back to this\n"
-"screen by pressing CTRL+ALT+F%2\n"
+"screen by pressing Ctrl+Alt+F%3\n"
 "\n"
 msgstr ""
 
