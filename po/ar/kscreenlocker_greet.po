@@ -23,7 +23,7 @@ msgstr ""
 #: main.cpp:110
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
-msgstr "مرحّب لقفل شاشة مساحات عمل بلازما كدي"
+msgstr "مرحّب لقفل شاشة مساحات عمل بلازما كِيدِي"
 
 #: main.cpp:114
 #, kde-format
