@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2012, 2014, 2015, 2017, 2018, 2020, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2012, 2014, 2015, 2017, 2018, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2022-12-06 18:38+0200\n"
+"PO-Revision-Date: 2023-03-05 19:09+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -43,14 +43,7 @@ msgstr ""
 "з цих програм у вашій системі не виявлено."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -70,19 +63,7 @@ msgstr ""
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in to your account and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3).\n"
-#| "Should you have forgotten the instructions, you can get back to this\n"
-#| "screen by pressing CTRL+ALT+F%2\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -108,7 +89,7 @@ msgstr ""
 "Потім вийдіть з віртуального сеансу натисканням комбінації клавіш Ctrl+D і\n"
 "перемкніться до запущеного сеансу (Ctrl+Alt+F%3).\n"
 "Якщо ви забудете настанови, ви можете повернутися до цієї сторінки "
-"натисканням комбінації клавіш Ctrl+Alt+F%2\n"
+"натисканням комбінації клавіш Ctrl+Alt+F%3\n"
 "\n"
 
 #: ksldapp.cpp:164
