@@ -4,13 +4,13 @@
 # Andrej Vernekar <andrej.vernekar@gmail.com>, 2012.
 # Jure Repinc <jlp@holodeck1.com>, 2012.
 # Andrej Mernik <andrejm@ubuntu.si>, 2013, 2014, 2015, 2017.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021, 2022.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2022-12-07 08:14+0100\n"
+"PO-Revision-Date: 2023-03-06 08:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -44,14 +44,7 @@ msgstr ""
 "a nič od tega ni mogoče najti na vašem sistemu."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -62,27 +55,15 @@ msgid ""
 "\n"
 msgstr ""
 "Zaklep zaslona je pokvarjen in ni več mogoče odkleniti zaslona.\n"
-"Za odklepanje se preklopite v navidezni terminal s tipkovno bližnjico Ctrl"
-"+Alt+F%1,\n"
+"Za odklepanje zaslona se preklopite v navidezni terminal s tipkovno "
+"bližnjico Ctrl+Alt+F%1,\n"
 "se prijavite kot root in izvedite ukaz:\n"
 "\n"
 "# ck-unlock-session <session-name>\n"
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in to your account and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3).\n"
-#| "Should you have forgotten the instructions, you can get back to this\n"
-#| "screen by pressing CTRL+ALT+F%2\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -98,7 +79,7 @@ msgid ""
 "\n"
 msgstr ""
 "Zaklep zaslona je pokvarjen, zato ga ni več mogoče odkleniti.\n"
-"Za odklepanje zaslona SE preklopite v navidezni terminal s tipkovno "
+"Za odklepanje zaslona se preklopite v navidezni terminal s tipkovno "
 "bližnjico Ctrl+Alt+F%1,\n"
 "se prijavite na vaš račun in izvedite ukaz:\n"
 "\n"
@@ -106,8 +87,8 @@ msgstr ""
 "\n"
 "Potem se odjavite iz navidezne seje s pritiskom Ctrl+D, in se preklopite\n"
 "nazaj na tekočo sejo s (Ctrl+Alt+F%3).\n"
-"Če ste pozabili navodila, lahko pridete nazaj na ta\n"
-"zaslon s pritiskom CTRL+ALT+F%2\n"
+"Če ste medtem pozabili navodila, lahko pridete nazaj na ta\n"
+"zaslon s pritiskom Ctrl+Alt+F%3\n"
 "\n"
 
 #: ksldapp.cpp:164
