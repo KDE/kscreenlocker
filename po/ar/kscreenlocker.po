@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Safa Alfulaij <safaalfulaij@hotmail.con>, 2013, ٢٠١٥.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2022-12-22 11:07+0400\n"
+"PO-Revision-Date: 2023-03-16 11:38+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -41,14 +41,7 @@ msgstr ""
 "أيا منهما على نظامك."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -66,19 +59,7 @@ msgstr ""
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in to your account and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3).\n"
-#| "Should you have forgotten the instructions, you can get back to this\n"
-#| "screen by pressing CTRL+ALT+F%2\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -97,7 +78,7 @@ msgstr ""
 "لتتمكن من إلغاء قفل الشاشة حوّل إلى الطرفية الافتراضية (مثل Ctrl+Alt+F%1) \n"
 "ثم لج لحسابك ، ثم نفذ الأمر التالي:\n"
 "\n"
-"loginctl unlock-session %2\n"
+"loginctl unlock-session %\n"
 "\n"
 "ثم اخرج من الجلسة الافتراضية بالضغط على Ctrl+D وبدل \n"
 "إلى الجلسة المقفلة العاملة (Ctrl+Alt+F%3).\n"
