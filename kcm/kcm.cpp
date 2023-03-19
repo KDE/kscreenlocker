@@ -25,7 +25,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory, "kcm_screenlocker.json", registerPlugin<ScreenLockerKcm>(); registerPlugin<KScreenLockerData>();)
 
 ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
-    : KQuickAddons::ManagedConfigModule(parent, data, args)
+    : KQuickManagedConfigModule(parent, data, args)
     , m_appearanceSettings(new AppearanceSettings(this))
 {
     registerSettings(&KScreenSaverSettings::getInstance());
@@ -51,7 +51,7 @@ ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const KPluginMetaData &data, c
 
 void ScreenLockerKcm::load()
 {
-    ManagedConfigModule::load();
+    KQuickManagedConfigModule::load();
     m_appearanceSettings->load();
 
     updateState();
@@ -59,7 +59,7 @@ void ScreenLockerKcm::load()
 
 void ScreenLockerKcm::save()
 {
-    ManagedConfigModule::save();
+    KQuickManagedConfigModule::save();
     m_appearanceSettings->save();
 
     // reconfigure through DBus
@@ -72,7 +72,7 @@ void ScreenLockerKcm::save()
 
 void ScreenLockerKcm::defaults()
 {
-    ManagedConfigModule::defaults();
+    KQuickManagedConfigModule::defaults();
     m_appearanceSettings->defaults();
 
     updateState();

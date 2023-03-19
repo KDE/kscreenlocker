@@ -10,7 +10,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <KConfigPropertyMap>
 #include <KPackage/Package>
-#include <KQuickAddons/ManagedConfigModule>
+#include <KQuickManagedConfigModule>
 
 #include "kscreensaversettings.h"
 #include "wallpaper_integration.h"
@@ -22,7 +22,7 @@ namespace ScreenLocker
 class LnFIntegration;
 }
 
-class ScreenLockerKcm : public KQuickAddons::ManagedConfigModule
+class ScreenLockerKcm : public KQuickManagedConfigModule
 {
     Q_OBJECT
 public:
