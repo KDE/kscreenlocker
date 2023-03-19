@@ -20,11 +20,10 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KAuthorized>
 #include <KConfigPropertyMap>
 #include <KCrash>
-#include <KDeclarative/KQuickAddons/QuickViewSharedEngine>
-#include <KDeclarative/QmlObjectSharedEngine>
 #include <KLocalizedContext>
 #include <KScreenDpms/Dpms>
 #include <KWindowSystem>
+#include <PlasmaQuick/QuickViewSharedEngine>
 
 #include <KUser>
 // Plasma
@@ -231,7 +230,7 @@ QWindow *UnlockApp::getActiveScreen()
         return activeScreen;
     }
 
-    for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
+    for (PlasmaQuick::QuickViewSharedEngine *view : qAsConst(m_views)) {
         if (view->geometry().contains(QCursor::pos())) {
             activeScreen = view;
             break;
@@ -244,7 +243,7 @@ QWindow *UnlockApp::getActiveScreen()
     return activeScreen;
 }
 
-KDeclarative::QmlObjectSharedEngine *UnlockApp::loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view)
+PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view)
 {
     auto package = m_wallpaperIntegration->package();
     if (!package.isValid()) {
@@ -252,12 +251,12 @@ KDeclarative::QmlObjectSharedEngine *UnlockApp::loadWallpaperPlugin(KQuickAddons
         return nullptr;
     }
 
-    auto qmlObject = new KDeclarative::QmlObjectSharedEngine(view);
+    auto qmlObject = new PlasmaQuick::SharedQmlEngine(view);
     qmlObject->setInitializationDelayed(true);
     qmlObject->setSource(QUrl::fromLocalFile(package.filePath("mainscript")));
     qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);
     view->setProperty("wallpaperGraphicsObject", QVariant::fromValue(qmlObject));
-    connect(qmlObject, &KDeclarative::QmlObject::finished, this, [this, qmlObject, view] {
+    connect(qmlObject, &PlasmaQuick::SharedQmlEngine::finished, this, [this, qmlObject, view] {
         auto item = qobject_cast<QQuickItem *>(qmlObject->rootObject());
         if (!item) {
             qCWarning(KSCREENLOCKER_GREET) << "Wallpaper needs to be a QtQuick Item";
@@ -270,7 +269,7 @@ KDeclarative::QmlObjectSharedEngine *UnlockApp::loadWallpaperPlugin(KQuickAddons
     return qmlObject;
 }
 
-void UnlockApp::setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperObject, KQuickAddons::QuickViewSharedEngine *view)
+void UnlockApp::setWallpaperItemProperties(PlasmaQuick::SharedQmlEngine *wallpaperObject, PlasmaQuick::QuickViewSharedEngine *view)
 {
     if (!wallpaperObject) {
         return;
@@ -314,10 +313,10 @@ void UnlockApp::handleScreen(QScreen *screen)
     });
 }
 
-KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *screen)
+PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *screen)
 {
     // create the view
-    auto *view = new KQuickAddons::QuickViewSharedEngine();
+    auto *view = new PlasmaQuick::QuickViewSharedEngine();
 
     view->setColor(Qt::black);
     view->setScreen(screen);
@@ -327,7 +326,7 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         view->setGeometry(geo);
     });
 
-    view->engine()->rootContext()->setContextObject(new KLocalizedContext(view->engine()));
+    view->engine()->rootContext()->setContextObject(new KLocalizedContext(view->engine().get()));
     auto oldFactory = view->engine()->networkAccessManagerFactory();
     view->engine()->setNetworkAccessManagerFactory(nullptr);
     delete oldFactory;
@@ -349,7 +348,7 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
 
     // engine stuff
     QQmlContext *context = view->engine()->rootContext();
-    connect(view->engine(), &QQmlEngine::quit, this, [this]() {
+    connect(view->engine().get(), &QQmlEngine::quit, this, [this]() {
         if (m_authenticator->isUnlocked()) {
             QCoreApplication::quit();
         } else {
@@ -366,7 +365,7 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
     context->setContextProperty(QStringLiteral("config"), m_lnfIntegration->configuration());
 
     auto wallpaperObj = loadWallpaperPlugin(view);
-    if (auto object = view->property("wallpaperGraphicsObject").value<KDeclarative::QmlObjectSharedEngine *>()) {
+    if (auto object = view->property("wallpaperGraphicsObject").value<PlasmaQuick::SharedQmlEngine *>()) {
         // initialize with our size to avoid as much resize events as possible
         object->completeInitialization({
             {QStringLiteral("width"), view->width()},
@@ -384,7 +383,7 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
         m_mainQmlPath = fallbackUrl;
         view->setSource(fallbackUrl);
     }
-    view->setResizeMode(KQuickAddons::QuickViewSharedEngine::SizeRootObjectToView);
+    view->setResizeMode(PlasmaQuick::QuickViewSharedEngine::SizeRootObjectToView);
 
     // we need to set this wallpaper properties separately after the lockscreen QML is loaded
     // this is because we need to anchor to the view that gets loaded
@@ -427,7 +426,7 @@ KQuickAddons::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scr
     return view;
 }
 
-void UnlockApp::markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view)
+void UnlockApp::markViewsAsVisible(PlasmaQuick::QuickViewSharedEngine *view)
 {
     disconnect(view, &QQuickWindow::frameSwapped, this, nullptr);
     QQmlProperty showProperty(view->rootObject(), QStringLiteral("viewVisible"));
@@ -459,7 +458,7 @@ void UnlockApp::getFocus()
     }
     // this loop is required to make the qml/graphicsscene properly handle the shared keyboard input
     // ie. "type something into the box of every greeter"
-    for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
+    for (PlasmaQuick::QuickViewSharedEngine *view : qAsConst(m_views)) {
         if (!m_testing) {
             view->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
         }
@@ -477,7 +476,7 @@ void UnlockApp::setLockedPropertyOnViews()
     delete m_delayedLockTimer;
     m_delayedLockTimer = nullptr;
 
-    for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
+    for (PlasmaQuick::QuickViewSharedEngine *view : qAsConst(m_views)) {
         QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
         lockProperty.write(true);
     }
@@ -520,11 +519,11 @@ void UnlockApp::setTesting(bool enable)
     }
     if (enable) {
         // remove bypass window manager hint
-        for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
+        for (PlasmaQuick::QuickViewSharedEngine *view : qAsConst(m_views)) {
             view->setFlags(view->flags() & ~Qt::X11BypassWindowManagerHint);
         }
     } else {
-        for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
+        for (PlasmaQuick::QuickViewSharedEngine *view : qAsConst(m_views)) {
             view->setFlags(view->flags() | Qt::X11BypassWindowManagerHint);
         }
     }
@@ -557,8 +556,8 @@ void UnlockApp::lockImmediately()
 bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
 {
     if (obj != this && event->type() == QEvent::Show) {
-        KQuickAddons::QuickViewSharedEngine *view = nullptr;
-        for (KQuickAddons::QuickViewSharedEngine *v : qAsConst(m_views)) {
+        PlasmaQuick::QuickViewSharedEngine *view = nullptr;
+        for (PlasmaQuick::QuickViewSharedEngine *v : qAsConst(m_views)) {
             if (v == obj) {
                 view = v;
                 break;
@@ -581,12 +580,12 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
     }
 
     if (event->type() == QEvent::KeyPress) { // react if saver is visible
-        shareEvent(event, qobject_cast<KQuickAddons::QuickViewSharedEngine *>(obj));
+        shareEvent(event, qobject_cast<PlasmaQuick::QuickViewSharedEngine *>(obj));
         return false; // we don't care
     } else if (event->type() == QEvent::KeyRelease) { // conditionally reshow the saver
         QKeyEvent *ke = static_cast<QKeyEvent *>(event);
         if (ke->key() != Qt::Key_Escape) {
-            shareEvent(event, qobject_cast<KQuickAddons::QuickViewSharedEngine *>(obj));
+            shareEvent(event, qobject_cast<PlasmaQuick::QuickViewSharedEngine *>(obj));
             return false; // irrelevant
         } else {
             auto dpms = new KScreen::Dpms(this);
@@ -609,7 +608,7 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
  * even if the focus is actually on a powered off screen.
  */
 
-void UnlockApp::shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from)
+void UnlockApp::shareEvent(QEvent *e, PlasmaQuick::QuickViewSharedEngine *from)
 {
     // from can be NULL any time (because the parameter is passed as qobject_cast)
     // m_views.contains(from) is atm. supposed to be true but required if any further
@@ -620,7 +619,7 @@ void UnlockApp::shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from)
         // Any change in regarded event processing shall be tested thoroughly!
         removeEventFilter(this); // prevent recursion!
         const bool accepted = e->isAccepted(); // store state
-        for (KQuickAddons::QuickViewSharedEngine *view : qAsConst(m_views)) {
+        for (PlasmaQuick::QuickViewSharedEngine *view : qAsConst(m_views)) {
             if (view != from) {
                 QCoreApplication::sendEvent(view, e);
                 e->setAccepted(accepted);

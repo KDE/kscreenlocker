@@ -45,7 +45,6 @@ add_feature_info("prctl/procctl tracing control"
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
 find_package(KF6 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Crash
-    Declarative
     KCMUtils
     KIO
     GlobalAccel
@@ -57,6 +56,7 @@ find_package(KF6 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Wayland
     WindowSystem
     XmlGui
+    PlasmaQuick
 )
 
 find_package(X11)

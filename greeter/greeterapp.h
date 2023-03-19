@@ -5,8 +5,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 */
 #pragma once
 
-#include <KDeclarative/QmlObjectSharedEngine>
 #include <KPackage/PackageStructure>
+#include <PlasmaQuick/SharedQmlEngine>
 #include <QGuiApplication>
 #include <QUrl>
 
@@ -19,7 +19,7 @@ class Registry;
 }
 }
 
-namespace KQuickAddons
+namespace PlasmaQuick
 {
 class QuickViewSharedEngine;
 }
@@ -65,25 +65,25 @@ protected:
 
 private Q_SLOTS:
     void handleScreen(QScreen *screen);
-    KQuickAddons::QuickViewSharedEngine *createViewForScreen(QScreen *screen);
+    PlasmaQuick::QuickViewSharedEngine *createViewForScreen(QScreen *screen);
     void resetRequestIgnore();
     void suspendToRam();
     void suspendToDisk();
     void getFocus();
-    void markViewsAsVisible(KQuickAddons::QuickViewSharedEngine *view);
+    void markViewsAsVisible(PlasmaQuick::QuickViewSharedEngine *view);
     void setLockedPropertyOnViews();
 
 private:
     void initialize();
-    void shareEvent(QEvent *e, KQuickAddons::QuickViewSharedEngine *from);
-    KDeclarative::QmlObjectSharedEngine *loadWallpaperPlugin(KQuickAddons::QuickViewSharedEngine *view);
-    void setWallpaperItemProperties(KDeclarative::QmlObjectSharedEngine *wallpaperObject, KQuickAddons::QuickViewSharedEngine *view);
+    void shareEvent(QEvent *e, PlasmaQuick::QuickViewSharedEngine *from);
+    PlasmaQuick::SharedQmlEngine *loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view);
+    void setWallpaperItemProperties(PlasmaQuick::SharedQmlEngine *wallpaperObject, PlasmaQuick::QuickViewSharedEngine *view);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
     QWindow *getActiveScreen();
 
     QString m_packageName;
     QUrl m_mainQmlPath;
-    QList<KQuickAddons::QuickViewSharedEngine *> m_views;
+    QList<PlasmaQuick::QuickViewSharedEngine *> m_views;
     QTimer *m_resetRequestIgnoreTimer;
     QTimer *m_delayedLockTimer;
     KPackage::Package m_package;

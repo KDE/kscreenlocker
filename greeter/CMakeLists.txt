@@ -52,10 +52,9 @@ target_link_libraries(kscreenlocker_greet
     KF6::Crash
     KF6::I18n
     KF6::ConfigGui
-    KF6::Declarative
     KF6::KIOCore
-    KF6::QuickAddons
     KF6::WindowSystem
+    KF6::PlasmaQuick
     Qt::Quick
     Qt::Qml
     Qt::GuiPrivate
