@@ -94,12 +94,3 @@ msgstr "Aparença:"
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Configura..."
-
-#~ msgid "Screen Locking"
-#~ msgstr "Bloqueig de pantalla"
-
-#~ msgid "Martin Gräßlin"
-#~ msgstr "Martin Gräßlin"
-
-#~ msgid "Kevin Ottens"
-#~ msgstr "Kevin Ottens"
