@@ -16,7 +16,7 @@ class PamWorker : public QObject
 {
     Q_OBJECT
 public:
-    PamWorker();
+    PamWorker(QObject *parent);
     ~PamWorker();
     void start(const QString &service, const QString &user);
     void authenticate();
@@ -120,8 +120,8 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
     return PAM_SUCCESS;
 }
 
-PamWorker::PamWorker()
-    : QObject(nullptr)
+PamWorker::PamWorker(QObject *parent)
+    : QObject(parent)
 {
     m_conv = {&PamWorker::converse, this};
 }
@@ -183,13 +183,24 @@ void PamWorker::start(const QString &service, const QString &user)
 }
 
 PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, QObject *parent)
-    : QObject(parent)
+    : QThread(parent)
+    , m_service(service)
+    , m_user(user)
 {
-    d = new PamWorker;
+    connect(this, &QThread::finished, this, &QObject::deleteLater);
+    start();
+}
 
-    d->moveToThread(&m_thread);
+PamAuthenticator::~PamAuthenticator()
+{
+    quit();
+    wait();
+}
 
-    connect(&m_thread, &QThread::finished, d, &QObject::deleteLater);
+void PamAuthenticator::run()
+{
+    d = new PamWorker(this);
+    d->start(m_service, m_user);
 
     connect(d, &PamWorker::busyChanged, this, &PamAuthenticator::setBusy);
     connect(d, &PamWorker::prompt, this, &PamAuthenticator::prompt);
@@ -197,28 +208,17 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
     connect(d, &PamWorker::infoMessage, this, &PamAuthenticator::infoMessage);
     connect(d, &PamWorker::errorMessage, this, &PamAuthenticator::errorMessage);
 
+    connect(this, &PamAuthenticator::respond, d, &PamWorker::promptResponseReceived);
+    connect(this, &PamAuthenticator::tryUnlock, d, &PamWorker::authenticate);
+    connect(this, &PamAuthenticator::cancel, d, &PamWorker::cancelled);
+
     connect(d, &PamWorker::succeeded, this, [this]() {
         m_unlocked = true;
         Q_EMIT succeeded();
     });
     connect(d, &PamWorker::failed, this, &PamAuthenticator::failed);
-
-    m_thread.start();
-    init(service, user);
-}
-
-PamAuthenticator::~PamAuthenticator()
-{
-    cancel();
-    m_thread.quit();
-    m_thread.wait();
-}
-
-void PamAuthenticator::init(const QString &service, const QString &user)
-{
-    QMetaObject::invokeMethod(d, [this, service, user]() {
-        d->start(service, user);
-    });
+    QThread::exec();
+    d->cancelled();
 }
 
 bool PamAuthenticator::isBusy() const
@@ -237,27 +237,6 @@ void PamAuthenticator::setBusy(bool busy)
 bool PamAuthenticator::isUnlocked() const
 {
     return m_unlocked;
-}
-
-void PamAuthenticator::tryUnlock()
-{
-    m_unlocked = false;
-    QMetaObject::invokeMethod(d, &PamWorker::authenticate);
-}
-
-void PamAuthenticator::respond(const QByteArray &response)
-{
-    QMetaObject::invokeMethod(
-        d,
-        [this, response]() {
-            Q_EMIT d->promptResponseReceived(response);
-        },
-        Qt::QueuedConnection);
-}
-
-void PamAuthenticator::cancel()
-{
-    QMetaObject::invokeMethod(d, &PamWorker::cancelled);
 }
 
 #include "pamauthenticator.moc"

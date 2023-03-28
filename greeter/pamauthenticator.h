@@ -11,7 +11,7 @@
 
 class PamWorker;
 
-class PamAuthenticator : public QObject
+class PamAuthenticator : public QThread
 {
     Q_OBJECT
 
@@ -24,6 +24,8 @@ public:
     bool isBusy() const;
     bool isUnlocked() const;
 
+    void run();
+
 Q_SIGNALS:
     void busyChanged();
     void promptForSecret(const QString &msg);
@@ -33,7 +35,6 @@ Q_SIGNALS:
     void succeeded();
     void failed();
 
-public Q_SLOTS:
     void tryUnlock();
     void respond(const QByteArray &response);
     void cancel();
@@ -43,9 +44,10 @@ protected:
 
 private:
     void setBusy(bool busy);
+    const QString m_service;
+    const QString m_user;
 
     bool m_busy = false;
     bool m_unlocked = false;
-    QThread m_thread;
     PamWorker *d;
 };
