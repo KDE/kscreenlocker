@@ -57,7 +57,7 @@ public:
     void updateCanHibernate();
 
 public Q_SLOTS:
-    void osdProgress(const QString &icon, int percent, const QString &additionalText);
+    void osdProgress(const QString &icon, int percent, const int maximumPercent, const QString &additionalText);
     void osdText(const QString &icon, const QString &additionalText);
 
 protected:
