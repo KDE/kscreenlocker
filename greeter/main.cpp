@@ -95,6 +95,7 @@ int main(int argc, char *argv[])
     QObject::connect(KSignalHandler::self(), &KSignalHandler::signalReceived, &app, &signalHandler);
 
     app.setQuitOnLastWindowClosed(false);
+    app.setQuitLockEnabled(false);
     QCoreApplication::setApplicationName(QStringLiteral("kscreenlocker_greet"));
     QCoreApplication::setApplicationVersion(QStringLiteral("0.1"));
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
