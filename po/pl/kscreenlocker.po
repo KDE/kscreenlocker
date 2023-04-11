@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2012, 2014, 2015, 2017, 2018, 2021, 2022.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2012, 2014, 2015, 2017, 2018, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2022-12-29 10:10+0100\n"
+"PO-Revision-Date: 2023-04-10 11:20+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,14 +40,7 @@ msgstr ""
 "lecz nie można znaleźć żadnego z nich na twoim systemie."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -61,23 +54,11 @@ msgstr ""
 "Aby odblokować przełącz się do wirtualnego terminalu (np. Ctrl+Alt+F%1),\n"
 "zaloguj się jako administrator i wykonaj polecenie:\n"
 "\n"
-"# ck-unlock-session <nazwa-sesji> \n"
+"# ck-unlock-session <nazwa-posiedzenia> \n"
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in to your account and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3).\n"
-#| "Should you have forgotten the instructions, you can get back to this\n"
-#| "screen by pressing CTRL+ALT+F%2\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -98,16 +79,17 @@ msgstr ""
 "\n"
 "loginctl unlock-session %2 \n"
 "\n"
-"Następnie wyjdź z wirtualnej sesji, naciskając Ctrl+D, i przełącz się\n"
-"z powrotem do uruchomionej sesji (Ctrl+Alt+F%3).\n"
+"Następnie wyjdź z wirtualnego posiedzenia, naciskając Ctrl+D, i przełącz "
+"się\n"
+"z powrotem do uruchomionego posiedzenia (Ctrl+Alt+F%3).\n"
 "Gdy nie zapamiętasz tych kroków, to możesz do nich powrócić\n"
-"po naciśnięciu CTRL+ALT+F%2\n"
+"po naciśnięciu CTRL+ALT+F%3\n"
 "\n"
 
 #: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
-msgstr "Zablokuj sesję"
+msgstr "Zablokuj posiedzenie"
 
 #: ksldapp.cpp:391
 #, kde-format
