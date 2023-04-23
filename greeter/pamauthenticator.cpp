@@ -18,7 +18,7 @@ class PamWorker : public QObject
     Q_OBJECT
 public:
     PamWorker();
-    ~PamWorker();
+    ~PamWorker() override;
     void start(const QString &service, const QString &user);
     void authenticate();
 
