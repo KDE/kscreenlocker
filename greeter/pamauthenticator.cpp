@@ -19,6 +19,7 @@ class PamWorker : public QObject
 public:
     PamWorker();
     ~PamWorker() override;
+    Q_DISABLE_COPY_MOVE(PamWorker)
     void start(const QString &service, const QString &user);
     void authenticate();
 

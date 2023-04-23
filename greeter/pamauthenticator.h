@@ -28,6 +28,7 @@ class PamAuthenticator : public QObject
 public:
     PamAuthenticator(const QString &service, const QString &user, QObject *parent = nullptr);
     ~PamAuthenticator() override;
+    Q_DISABLE_COPY_MOVE(PamAuthenticator)
 
     bool isBusy() const;
     bool isUnlocked() const;
