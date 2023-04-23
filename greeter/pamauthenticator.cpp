@@ -8,6 +8,7 @@
 
 #include <QDebug>
 #include <QEventLoop>
+#include <QMetaMethod>
 #include <security/pam_appl.h>
 
 #include "kscreenlocker_greet_logging.h"
@@ -184,6 +185,12 @@ void PamWorker::start(const QString &service, const QString &user)
 
 PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, QObject *parent)
     : QObject(parent)
+    , m_signalsToMembers({
+          {QMetaMethod::fromSignal(&PamAuthenticator::prompt), m_prompt},
+          {QMetaMethod::fromSignal(&PamAuthenticator::promptForSecret), m_promptForSecret},
+          {QMetaMethod::fromSignal(&PamAuthenticator::infoMessage), m_infoMessage},
+          {QMetaMethod::fromSignal(&PamAuthenticator::errorMessage), m_errorMessage},
+      })
 {
     d = new PamWorker;
 
@@ -192,15 +199,29 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
     connect(&m_thread, &QThread::finished, d, &QObject::deleteLater);
 
     connect(d, &PamWorker::busyChanged, this, &PamAuthenticator::setBusy);
-    connect(d, &PamWorker::prompt, this, &PamAuthenticator::prompt);
-    connect(d, &PamWorker::promptForSecret, this, &PamAuthenticator::promptForSecret);
-    connect(d, &PamWorker::infoMessage, this, &PamAuthenticator::infoMessage);
-    connect(d, &PamWorker::errorMessage, this, &PamAuthenticator::errorMessage);
+    connect(d, &PamWorker::prompt, this, [this](const QString &msg) {
+        m_prompt = msg;
+        Q_EMIT prompt(msg);
+    });
+    connect(d, &PamWorker::promptForSecret, this, [this](const QString &msg) {
+        m_promptForSecret = msg;
+        Q_EMIT promptForSecret(msg);
+    });
+    connect(d, &PamWorker::infoMessage, this, [this](const QString &msg) {
+        m_infoMessage = msg;
+        Q_EMIT infoMessage(msg);
+    });
+    connect(d, &PamWorker::errorMessage, this, [this](const QString &msg) {
+        m_errorMessage = msg;
+        Q_EMIT errorMessage(msg);
+    });
 
     connect(d, &PamWorker::succeeded, this, [this]() {
         m_unlocked = true;
         Q_EMIT succeeded();
     });
+    // Failed is not a persistent state. When a view provides authentication that will either result in failure or success,
+    // failure simply means that the prompt is getting delayed.
     connect(d, &PamWorker::failed, this, &PamAuthenticator::failed);
 
     m_thread.start();
@@ -257,7 +278,59 @@ void PamAuthenticator::respond(const QByteArray &response)
 
 void PamAuthenticator::cancel()
 {
+    m_prompt.clear();
+    m_promptForSecret.clear();
+    m_infoMessage.clear();
+    m_errorMessage.clear();
     QMetaObject::invokeMethod(d, &PamWorker::cancelled);
+}
+
+// Force emit the signals when a view connects to them. This prevents a race condition where screens appear after
+// stateful signals (such as prompt) had been emitted and end up in an incorrect state.
+// (e.g. https://bugs.kde.org/show_bug.cgi?id=456210 where the view ends up in a no-prompt state)
+void PamAuthenticator::connectNotify(const QMetaMethod &signal)
+{
+    // TODO remove this function for Plasma 6. The properties should be bound to  so we don't need to force
+    // emit them every time a view connects.
+
+    // NOTE signals are queued because during connect qml is not yet ready to receive them
+
+    if (m_unlocked && signal == QMetaMethod::fromSignal(&PamAuthenticator::succeeded)) {
+        signal.invoke(this, Qt::QueuedConnection);
+        return;
+    }
+
+    for (const auto &[signalMethod, memberString] : m_signalsToMembers)
+    {
+        if (signal != signalMethod) {
+            continue;
+        }
+
+        if (!memberString.isNull()) {
+            signalMethod.invoke(this, Qt::QueuedConnection, Q_ARG(QString, memberString));
+            return;
+        }
+    }
+}
+
+QString PamAuthenticator::getPrompt() const
+{
+    return m_prompt;
+}
+
+QString PamAuthenticator::getPromptForSecret() const
+{
+    return m_promptForSecret;
+}
+
+QString PamAuthenticator::getInfoMessage() const
+{
+    return m_infoMessage;
+}
+
+QString PamAuthenticator::getErrorMessage() const
+{
+    return m_errorMessage;
 }
 
 #include "pamauthenticator.moc"
