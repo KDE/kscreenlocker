@@ -16,7 +16,7 @@ kcmutils_generate_desktop_file(kcm_screenlocker)
 target_link_libraries(kcm_screenlocker
     settings
     Qt::DBus
-    KF6::KCMUtils # KCModuleData
+    KF6::KCMUtilsCore # KCModuleData
     KF6::KCMUtilsQuick # KQuickManagedConfigModule
     KF6::I18n
     KF6::GlobalAccel
