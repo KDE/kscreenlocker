@@ -43,7 +43,7 @@ private:
     struct pam_conv m_conv;
 
     bool m_inAuthenticate = false;
-    int m_result;
+    int m_result = -1;
 };
 
 int PamWorker::converse(int n, const struct pam_message **msg, struct pam_response **resp, void *data)
@@ -124,8 +124,8 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 
 PamWorker::PamWorker()
     : QObject(nullptr)
+    , m_conv({&PamWorker::converse, this})
 {
-    m_conv = {&PamWorker::converse, this};
 }
 
 PamWorker::~PamWorker()
@@ -192,9 +192,8 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
           {QMetaMethod::fromSignal(&PamAuthenticator::infoMessage), m_infoMessage},
           {QMetaMethod::fromSignal(&PamAuthenticator::errorMessage), m_errorMessage},
       })
+    , d(new PamWorker)
 {
-    d = new PamWorker;
-
     d->moveToThread(&m_thread);
 
     connect(&m_thread, &QThread::finished, d, &QObject::deleteLater);
