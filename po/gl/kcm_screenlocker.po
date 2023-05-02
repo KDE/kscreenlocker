@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-22 00:47+0000\n"
-"PO-Revision-Date: 2019-08-19 20:54+0200\n"
+"PO-Revision-Date: 2023-05-01 09:28+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,76 +16,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.04.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Adrian Chaves (Gallaecio)"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "adrian@chaves.io"
 
 #: package/contents/ui/Appearance.qml:19
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Aparencia"
 
 #: package/contents/ui/Appearance.qml:35
-#, fuzzy, kde-format
-#| msgid "Wallpaper &type:"
+#, kde-format
 msgid "Wallpaper type:"
-msgstr "&Tipo de fondo de escritorio:"
+msgstr "Tipo de fondo de escritorio:"
 
 #: package/contents/ui/main.qml:26
-#, fuzzy, kde-format
-#| msgid "Lock screen:"
+#, kde-format
 msgid "Lock screen automatically:"
-msgstr "Bloquear a pantalla:"
+msgstr "Bloquear a pantalla automaticamente:"
 
 #: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
-msgstr ""
+msgstr "Despois de"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgctxt "Spinbox suffix"
-#| msgid " minute"
-#| msgid_plural " minutes"
+#, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] " minuto"
-msgstr[1] " mins"
+msgstr[0] "%1 minuto"
+msgstr[1] "%1 minutos"
 
 #: package/contents/ui/main.qml:54
-#, fuzzy, kde-format
-#| msgid "After waking from sleep"
+#, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "Tras espertar"
 
 #: package/contents/ui/main.qml:69
-#, fuzzy, kde-format
-#| msgid "Allow unlocking without password for:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
-msgstr "Permitir desbloquear sen contrasinal para:"
+msgstr "Permitir desbloquear sen contrasinal durante:"
 
 #: package/contents/ui/main.qml:73
-#, fuzzy, kde-format
-#| msgctxt "Spinbox suffix"
-#| msgid " second"
-#| msgid_plural " seconds"
+#, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
-msgstr[0] " segundo"
-msgstr[1] " segundos"
+msgstr[0] "%1 segundo"
+msgstr[1] "%1 segundos"
 
 #: package/contents/ui/main.qml:89
 #, kde-format
@@ -93,16 +82,15 @@ msgid "Keyboard shortcut:"
 msgstr "Atallo de teclado:"
 
 #: package/contents/ui/main.qml:104
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgid "Appearance:"
-msgstr "Aparencia"
+msgstr "Aparencia:"
 
 #: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
-msgstr ""
+msgstr "Configurar…"
 
 #, fuzzy
 #~| msgid "Test Screen Locker"
