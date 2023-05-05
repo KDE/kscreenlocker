@@ -25,3 +25,4 @@ Dependencies:
     'frameworks/plasma-framework': '@latest-kf6'
     'plasma/layer-shell-qt': '@same'
     'plasma/libkscreen': '@same'
+    'third-party/wayland': '@latest'
