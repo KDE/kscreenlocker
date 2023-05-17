@@ -56,8 +56,6 @@ static void signalHandler(int signum)
 
 int main(int argc, char *argv[])
 {
-    LayerShellQt::Shell::useLayerShell();
-
     // disable ptrace on the greeter
 #if HAVE_PR_SET_DUMPABLE
     prctl(PR_SET_DUMPABLE, 0);
