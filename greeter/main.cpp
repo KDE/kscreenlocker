@@ -81,6 +81,8 @@ int main(int argc, char *argv[])
 
     // Suppresses modal warnings about unwritable configuration files which may render the system inaccessible
     qputenv("KDE_HOME_READONLY", "1");
+    // Kwin will re-lock if it restarts, reconnecting would leave us with two greeters but only one functional
+    qunsetenv("QT_WAYLAND_RECONNECT");
 
     auto format = QSurfaceFormat::defaultFormat();
     format.setOption(QSurfaceFormat::ResetNotification);
