@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-10 02:04+0000\n"
+"POT-Creation-Date: 2023-05-25 02:02+0000\n"
 "PO-Revision-Date: 2016-08-27 07:49+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: main.cpp:111
+#: main.cpp:113
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr ""
 "Program pozdrawiający z blokady ekranu Przestrzeni Roboczych Plazmy dla KDE"
 
-#: main.cpp:115
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Uruchamia program pozdrawiający w trybie testowym"
 
-#: main.cpp:118
+#: main.cpp:120
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr ""
 "Uruchamia program pozdrawiający z wybranym wystrojem (tylko w trybie "
 "testowym)"
 
-#: main.cpp:122
+#: main.cpp:124
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Zablokuj natychmiast, ignorując czas na grację itp."
 
-#: main.cpp:124
+#: main.cpp:126
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Opóźnij (w milisekundach) do czasu układ blokowania użytkownika zostanie "
 "pokazany."
 
-#: main.cpp:127
+#: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Nie pokazuj żadnego układu blokowania użytkownika."
 
-#: main.cpp:128
+#: main.cpp:130
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Domyślnie przełączaj interfejs użytkownika."
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Część opisująca plik do podłączenia do ksld."

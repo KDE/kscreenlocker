@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-10 02:04+0000\n"
+"POT-Creation-Date: 2023-05-25 02:02+0000\n"
 "PO-Revision-Date: 2016-10-20 21:51+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,42 +17,42 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: main.cpp:111
+#: main.cpp:113
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE Plasma 작업 공간 잠금 화면 환영 도구"
 
-#: main.cpp:115
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "테스트 모드로 환영 도구 시작"
 
-#: main.cpp:118
+#: main.cpp:120
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "선택한 테마로 환영 도구 시작(테스트 모드에서만 가능)"
 
-#: main.cpp:122
+#: main.cpp:124
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "대기 시간을 무시하고 즉시 잠급니다."
 
-#: main.cpp:124
+#: main.cpp:126
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "밀리초 단위의 잠금 사용자 인터페이스 표시 지연 시간입니다."
 
-#: main.cpp:127
+#: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "잠금 사용자 인터페이스를 표시하지 않습니다."
 
-#: main.cpp:128
+#: main.cpp:130
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "사용자 전환 UI의 기본값입니다."
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "ksld와 연결하는 파일 설명자입니다."
