@@ -11,21 +11,18 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "lnf_integration.h"
 #include "screenlocker_interface.h"
 
-#include <KAboutData>
 #include <KConfigLoader>
 #include <KConfigPropertyMap>
 #include <KGlobalAccel>
 #include <KLocalizedString>
 #include <KPluginFactory>
 
-#include <KPackage/PackageLoader>
-
 #include <QVector>
 
 K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory, "kcm_screenlocker.json", registerPlugin<ScreenLockerKcm>(); registerPlugin<KScreenLockerData>();)
 
-ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
-    : KQuickManagedConfigModule(parent, data, args)
+ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const KPluginMetaData &data)
+    : KQuickManagedConfigModule(parent, data)
     , m_appearanceSettings(new AppearanceSettings(this))
 {
     registerSettings(&KScreenSaverSettings::getInstance());

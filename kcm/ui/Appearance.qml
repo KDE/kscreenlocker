@@ -8,7 +8,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
-import org.kde.kcm 1.6 as KCM
+import org.kde.kcmutils as KCM
 import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.Page {

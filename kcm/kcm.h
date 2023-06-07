@@ -9,7 +9,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #pragma once
 
 #include <KConfigPropertyMap>
-#include <KPackage/Package>
 #include <KQuickManagedConfigModule>
 
 #include "kscreensaversettings.h"
@@ -26,7 +25,7 @@ class ScreenLockerKcm : public KQuickManagedConfigModule
 {
     Q_OBJECT
 public:
-    explicit ScreenLockerKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    explicit ScreenLockerKcm(QObject *parent, const KPluginMetaData &data);
 
     Q_PROPERTY(KScreenSaverSettings *settings READ settings CONSTANT)
     Q_PROPERTY(KConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY currentWallpaperChanged)
