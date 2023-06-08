@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2023-06-08 02:13+0000\n"
 "PO-Revision-Date: 2022-05-21 16:53+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -17,76 +17,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.04.0\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Минчо Кондарев"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "mkondarev@yahoo.de"
-
-#: package/contents/ui/Appearance.qml:19
+#: ui/Appearance.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Външен вид"
 
-#: package/contents/ui/Appearance.qml:35
+#: ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Тип тапет:"
 
-#: package/contents/ui/main.qml:26
+#: ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Автоматично заключване на екрана:"
 
-#: package/contents/ui/main.qml:28
+#: ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr "След"
 
-#: package/contents/ui/main.qml:41
+#: ui/main.qml:41
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 минута"
 msgstr[1] "%1 минути"
 
-#: package/contents/ui/main.qml:54
+#: ui/main.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "След събуждане от приспиване"
 
-#: package/contents/ui/main.qml:69
+#: ui/main.qml:69
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "Разрешаване на отключване без парола за:"
 
-#: package/contents/ui/main.qml:73
+#: ui/main.qml:73
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 секунда"
 msgstr[1] "%1 секунди"
 
-#: package/contents/ui/main.qml:89
+#: ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Клавишна комбинация:"
 
-#: package/contents/ui/main.qml:104
+#: ui/main.qml:104
 #, kde-format
 msgid "Appearance:"
 msgstr "Външен вид:"
 
-#: package/contents/ui/main.qml:105
+#: ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Конфигуриране..."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Минчо Кондарев"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "mkondarev@yahoo.de"

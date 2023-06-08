@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2023-06-08 02:13+0000\n"
 "PO-Revision-Date: 2022-06-29 12:44+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -21,77 +21,75 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 22.04.2\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Kisaragi Hiu"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "mail@kisaragi-hiu.com"
-
-#: package/contents/ui/Appearance.qml:19
+#: ui/Appearance.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "外觀"
 
-#: package/contents/ui/Appearance.qml:35
+#: ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "桌布類型："
 
-#: package/contents/ui/main.qml:26
+#: ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "自動鎖定畫面："
 
-#: package/contents/ui/main.qml:28
+#: ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr "經過"
 
-#: package/contents/ui/main.qml:41
+#: ui/main.qml:41
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 分鐘"
 
-#: package/contents/ui/main.qml:54
+#: ui/main.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "從睡眠模式喚醒之後"
 
-#: package/contents/ui/main.qml:69
+#: ui/main.qml:69
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "不需密碼解鎖的時間長度："
 
-#: package/contents/ui/main.qml:73
+#: ui/main.qml:73
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 秒"
 
-#: package/contents/ui/main.qml:89
+#: ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "鍵盤快捷鍵："
 
-#: package/contents/ui/main.qml:104
+#: ui/main.qml:104
 #, kde-format
 msgid "Appearance:"
 msgstr "外觀："
 
-#: package/contents/ui/main.qml:105
+#: ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "設定…"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Kisaragi Hiu"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "mail@kisaragi-hiu.com"
 
 #~ msgid "Activation"
 #~ msgstr "作用"

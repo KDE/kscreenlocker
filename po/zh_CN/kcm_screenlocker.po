@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2023-06-08 02:13+0000\n"
 "PO-Revision-Date: 2023-05-22 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,76 +17,74 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/kscreenlocker/kcm_screenlocker.pot\n"
 "X-Crowdin-File-ID: 42645\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "KDE China,Coelacanthus,magsom,Guo Yunhe,Tyson Tan"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr ""
-"kde-china@kde.org,coelacanthus@kde.org,magsom@kde.org,i@guoyunhe.me,"
-"tysontan@tysontan.com"
-
-#: package/contents/ui/Appearance.qml:19
+#: ui/Appearance.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "外观"
 
-#: package/contents/ui/Appearance.qml:35
+#: ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "壁纸类型："
 
-#: package/contents/ui/main.qml:26
+#: ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "自动锁定屏幕："
 
-#: package/contents/ui/main.qml:28
+#: ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr "如果空闲"
 
-#: package/contents/ui/main.qml:41
+#: ui/main.qml:41
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 分钟"
 
-#: package/contents/ui/main.qml:54
+#: ui/main.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "从休眠恢复时锁定屏幕"
 
-#: package/contents/ui/main.qml:69
+#: ui/main.qml:69
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "锁屏多久后需要密码解锁："
 
-#: package/contents/ui/main.qml:73
+#: ui/main.qml:73
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 秒"
 
-#: package/contents/ui/main.qml:89
+#: ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "键盘快捷键："
 
-#: package/contents/ui/main.qml:104
+#: ui/main.qml:104
 #, kde-format
 msgid "Appearance:"
 msgstr "外观："
 
-#: package/contents/ui/main.qml:105
+#: ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "配置..."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "KDE China,Coelacanthus,magsom,Guo Yunhe,Tyson Tan"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr ""
+#~ "kde-china@kde.org,coelacanthus@kde.org,magsom@kde.org,i@guoyunhe.me,"
+#~ "tysontan@tysontan.com"

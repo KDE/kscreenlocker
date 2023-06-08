@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-04 02:12+0000\n"
+"POT-Creation-Date: 2023-06-08 02:13+0000\n"
 "PO-Revision-Date: 2023-03-04 19:28+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -26,16 +26,6 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Joëlle Cornavin, Maxime Corteel, Xavier Besnard"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "jcorn@free.fr, mcorteel@gmail.com, xavier.besnard@neuf.fr"
 
 #: abstractlocker.cpp:39
 #, kde-format
@@ -125,6 +115,14 @@ msgstr "Écran de verrouillage"
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "S'assure que l'écran est verrouillé avant la mise en veille"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Joëlle Cornavin, Maxime Corteel, Xavier Besnard"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "jcorn@free.fr, mcorteel@gmail.com, xavier.besnard@neuf.fr"
 
 #~ msgid "Screen lock enabled"
 #~ msgstr "Verrouillage de l'écran activé"

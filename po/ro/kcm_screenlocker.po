@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2023-06-08 02:13+0000\n"
 "PO-Revision-Date: 2020-09-16 01:39+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -18,39 +18,29 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 19.12.3\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Sergiu Bivol"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "sergiu@cip.md"
-
-#: package/contents/ui/Appearance.qml:19
+#: ui/Appearance.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Aspect"
 
-#: package/contents/ui/Appearance.qml:35
+#: ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Tip tapet:"
 
-#: package/contents/ui/main.qml:26
+#: ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Blochează ecranul automat:"
 
-#: package/contents/ui/main.qml:28
+#: ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr "După"
 
-#: package/contents/ui/main.qml:41
+#: ui/main.qml:41
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -58,19 +48,19 @@ msgstr[0] "%1 minut"
 msgstr[1] "%1 minute"
 msgstr[2] "%1 de minute"
 
-#: package/contents/ui/main.qml:54
+#: ui/main.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "La trezirea din somn"
 
-#: package/contents/ui/main.qml:69
+#: ui/main.qml:69
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "Permite deblocarea fără parolă pentru:"
 
-#: package/contents/ui/main.qml:73
+#: ui/main.qml:73
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -78,21 +68,29 @@ msgstr[0] "%1 secundă"
 msgstr[1] "%1 secunde"
 msgstr[2] "%1 de secunde"
 
-#: package/contents/ui/main.qml:89
+#: ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Scurtătură de taste:"
 
-#: package/contents/ui/main.qml:104
+#: ui/main.qml:104
 #, kde-format
 msgid "Appearance:"
 msgstr "Aspect:"
 
-#: package/contents/ui/main.qml:105
+#: ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Configurare..."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Sergiu Bivol"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "sergiu@cip.md"
 
 #~ msgid "Screen Locking"
 #~ msgstr "Blocarea ecranului"

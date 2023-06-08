@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-22 00:47+0000\n"
+"POT-Creation-Date: 2023-06-08 02:13+0000\n"
 "PO-Revision-Date: 2023-05-01 09:28+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -18,79 +18,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Adrian Chaves (Gallaecio)"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "adrian@chaves.io"
-
-#: package/contents/ui/Appearance.qml:19
+#: ui/Appearance.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Aparencia"
 
-#: package/contents/ui/Appearance.qml:35
+#: ui/Appearance.qml:35
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Tipo de fondo de escritorio:"
 
-#: package/contents/ui/main.qml:26
+#: ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Bloquear a pantalla automaticamente:"
 
-#: package/contents/ui/main.qml:28
+#: ui/main.qml:28
 #, kde-format
 msgctxt "First part of sentence \"Automatically after X minutes\""
 msgid "After"
 msgstr "Despois de"
 
-#: package/contents/ui/main.qml:41
+#: ui/main.qml:41
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minuto"
 msgstr[1] "%1 minutos"
 
-#: package/contents/ui/main.qml:54
+#: ui/main.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
 msgstr "Tras espertar"
 
-#: package/contents/ui/main.qml:69
+#: ui/main.qml:69
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Allow unlocking without password for:"
 msgstr "Permitir desbloquear sen contrasinal durante:"
 
-#: package/contents/ui/main.qml:73
+#: ui/main.qml:73
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 segundo"
 msgstr[1] "%1 segundos"
 
-#: package/contents/ui/main.qml:89
+#: ui/main.qml:89
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Atallo de teclado:"
 
-#: package/contents/ui/main.qml:104
+#: ui/main.qml:104
 #, kde-format
 msgid "Appearance:"
 msgstr "Aparencia:"
 
-#: package/contents/ui/main.qml:105
+#: ui/main.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Configurar…"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Adrian Chaves (Gallaecio)"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "adrian@chaves.io"
 
 #, fuzzy
 #~| msgid "Test Screen Locker"
