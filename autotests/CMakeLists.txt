@@ -37,9 +37,7 @@ endif()
 #######################################
 add_executable(ksldTest ksldtest.cpp)
 target_link_libraries(ksldTest Qt::Test Qt::Widgets KF6::IdleTime XCB::XTEST KScreenLocker)
-if (QT_MAJOR_VERSION EQUAL "6")
-    target_link_libraries(ksldTest Qt::GuiPrivate)
-endif()
+target_link_libraries(ksldTest Qt::GuiPrivate)
 add_test(NAME ksmserver-ksldTest COMMAND ksldTest)
 ecm_mark_as_test(ksldTest)
 
