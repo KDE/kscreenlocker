@@ -105,11 +105,3 @@ msgstr "Skjermlåsar"
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Sikrar at skjermen vert låst før maskina går i kvile/dvale"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Karl Ove Hufthammer"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "karl@huftis.org"
