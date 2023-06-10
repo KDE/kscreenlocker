@@ -8,8 +8,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "appearancesettings.h"
 #include "kscreensaversettings.h"
 
-KScreenLockerData::KScreenLockerData(QObject *parent, const QVariantList &args)
-    : KCModuleData(parent, args)
+KScreenLockerData::KScreenLockerData(QObject *parent)
+    : KCModuleData(parent)
     , m_appearanceSettings(new AppearanceSettings(this))
 {
     m_appearanceSettings->load();
