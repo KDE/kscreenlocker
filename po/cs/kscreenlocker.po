@@ -80,11 +80,3 @@ msgstr "Zámek obrazovky"
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Zajistí, že se obrazovka zamkne před přechodem do režimu spánku"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Vít Pelčák"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "vit@pelcak.org"
