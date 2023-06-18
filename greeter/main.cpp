@@ -57,6 +57,12 @@ static void signalHandler(int signum)
 
 int main(int argc, char *argv[])
 {
+    sigset_t blockedSignals;
+    sigemptyset(&blockedSignals);
+    sigaddset(&blockedSignals, SIGTERM);
+    sigaddset(&blockedSignals, SIGUSR1);
+    pthread_sigmask(SIG_BLOCK, &blockedSignals, NULL);
+
     LayerShellQt::Shell::useLayerShell();
 
     // disable ptrace on the greeter
@@ -100,6 +106,8 @@ int main(int argc, char *argv[])
 
     // only connect signal handler once we can actual handle the signal properly
     QObject::connect(KSignalHandler::self(), &KSignalHandler::signalReceived, &app, &signalHandler);
+
+    pthread_sigmask(SIG_UNBLOCK, &blockedSignals, NULL);
 
     app.setQuitOnLastWindowClosed(false);
     app.setQuitLockEnabled(false);
