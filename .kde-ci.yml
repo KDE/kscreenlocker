@@ -21,6 +21,7 @@ Dependencies:
     'frameworks/kwidgetsaddons': '@latest-kf6'
     'frameworks/kwindowsystem': '@latest-kf6'
     'frameworks/kxmlgui': '@latest-kf6'
+    'frameworks/ksvg': '@latest-kf6'
     'frameworks/plasma-framework': '@latest-kf6'
     'plasma/layer-shell-qt': '@same'
     'plasma/libkscreen': '@same'
