@@ -51,7 +51,7 @@ msgstr ""
 #: main.cpp:126
 #, kde-format
 msgid "Don't show any lock user interface."
-msgstr "Non mostrar ningunha interface de usuario de bloqueo."
+msgstr "Non amosar ningunha interface de usuario de bloqueo."
 
 #: main.cpp:127
 #, kde-format
