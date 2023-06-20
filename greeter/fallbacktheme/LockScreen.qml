@@ -8,6 +8,7 @@ import QtQuick 2.15
 
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.private.sessions 2.0
 
@@ -38,7 +39,7 @@ Item {
         smooth: true
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: dialog
 
         visible: lockScreen.locked

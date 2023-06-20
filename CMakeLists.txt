@@ -56,6 +56,7 @@ find_package(KF6 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     WindowSystem
     XmlGui
     PlasmaQuick
+    Svg
 )
 
 find_package(X11)
