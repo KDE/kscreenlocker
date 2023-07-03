@@ -9,8 +9,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KIdleTime>
 // Qt
 #include <QProcess>
-#include <QtTest>
 #include <private/qtx11extras_p.h>
+#include <QSignalSpy>
+#include <QTest>
 // xcb
 #include <xcb/xcb.h>
 #include <xcb/xtest.h>

@@ -5,7 +5,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #include <QSignalSpy>
-#include <QtTest>
+#include <QTest>
 
 #include "../greeter/pamauthenticator.h"
 

@@ -8,7 +8,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 // KF
 #include <KLibexec>
 // Qt
-#include <QtTest>
+#include <QProcess>
+#include <QTest>
 // system
 #include <signal.h>
 

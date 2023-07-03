@@ -8,8 +8,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "../x11locker.h"
 // Qt
 #include <QWindow>
-#include <QtTest>
 #include <private/qtx11extras_p.h>
+#include <QTest>
 // xcb
 #include <xcb/xcb.h>
 

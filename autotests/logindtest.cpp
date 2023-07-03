@@ -6,7 +6,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "../logind.h"
 #include "fakelogind.h"
 // Qt
-#include <QtTest>
+#include <QProcess>
+#include <QSignalSpy>
+#include <QTest>
 
 class LogindTest : public QObject
 {
