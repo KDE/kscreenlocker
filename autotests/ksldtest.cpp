@@ -9,12 +9,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KIdleTime>
 // Qt
 #include <QProcess>
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include <private/qtx11extras_p.h>
-#else
-#include <QX11Info>
-#endif
 #include <QtTest>
+#include <private/qtx11extras_p.h>
 // xcb
 #include <xcb/xcb.h>
 #include <xcb/xtest.h>

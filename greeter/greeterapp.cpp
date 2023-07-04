@@ -50,11 +50,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QQuickItem>
 #include <QQuickView>
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <private/qtx11extras_p.h>
-#else
-#include <QX11Info>
-#endif
 // Wayland
 #include <wayland-client.h>
 #include <wayland-ksld-client-protocol.h>
@@ -108,11 +104,7 @@ bool verifyPackageApi(const KPackage::Package &package)
 class FocusOutEventFilter : public QAbstractNativeEventFilter
 {
 public:
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long int *result) override
-#else
     bool nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result) override
-#endif
     {
         Q_UNUSED(result)
         if (qstrcmp(eventType, "xcb_generic_event_t") != 0) {
