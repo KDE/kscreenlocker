@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-07-05 02:51+0000\n"
 "PO-Revision-Date: 2017-05-16 06:54-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -101,17 +101,17 @@ msgstr ""
 "\n"
 "אחרי זה החלף חזרה למופע שרץ (Ctrl+Alt+F%1)."
 
-#: ksldapp.cpp:164
+#: ksldapp.cpp:160
 #, kde-format
 msgid "Lock Session"
 msgstr "נעל הפעלה"
 
-#: ksldapp.cpp:391
+#: ksldapp.cpp:387
 #, kde-format
 msgid "Screen locked"
 msgstr "המסך נעול"
 
-#: ksldapp.cpp:550
+#: ksldapp.cpp:546
 #, kde-format
 msgid "Screen unlocked"
 msgstr "המסך נפתח"

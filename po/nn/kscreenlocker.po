@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-07-05 02:51+0000\n"
 "PO-Revision-Date: 2023-03-05 12:31+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -81,17 +81,17 @@ msgstr ""
 "tilbake til dette skjermbiletet med «Ctrl + Alt + F%2».\n"
 "\n"
 
-#: ksldapp.cpp:164
+#: ksldapp.cpp:160
 #, kde-format
 msgid "Lock Session"
 msgstr "Lås økta"
 
-#: ksldapp.cpp:391
+#: ksldapp.cpp:387
 #, kde-format
 msgid "Screen locked"
 msgstr "Skjermen låst"
 
-#: ksldapp.cpp:550
+#: ksldapp.cpp:546
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Skjermen låst opp"

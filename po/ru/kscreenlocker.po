@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-07-05 02:51+0000\n"
 "PO-Revision-Date: 2022-12-18 10:41+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -109,17 +109,17 @@ msgstr ""
 "Для возврата на этот экран используйте комбинацию клавиш CTRL+ALT+F%2.\n"
 "\n"
 
-#: ksldapp.cpp:164
+#: ksldapp.cpp:160
 #, kde-format
 msgid "Lock Session"
 msgstr "Заблокировать сеанс"
 
-#: ksldapp.cpp:391
+#: ksldapp.cpp:387
 #, kde-format
 msgid "Screen locked"
 msgstr "Экран заблокирован"
 
-#: ksldapp.cpp:550
+#: ksldapp.cpp:546
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Экран разблокирован"

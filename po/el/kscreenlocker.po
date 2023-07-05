@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-07-05 02:51+0000\n"
 "PO-Revision-Date: 2021-07-03 09:26+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -98,17 +98,17 @@ msgstr ""
 "Στη συνέχεια αποσυνδεθείτε από την εικονική συνεδρία με Ctrl+D και μεταβείτε "
 "πάλι στην εκτελούμενη συνεδρία (Ctrl+Alt+F%2)."
 
-#: ksldapp.cpp:164
+#: ksldapp.cpp:160
 #, kde-format
 msgid "Lock Session"
 msgstr "Κλείδωμα συνεδρίας"
 
-#: ksldapp.cpp:391
+#: ksldapp.cpp:387
 #, kde-format
 msgid "Screen locked"
 msgstr "Οθόνη κλειδωμένη"
 
-#: ksldapp.cpp:550
+#: ksldapp.cpp:546
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Οθόνη ξεκλείδωτη"
