@@ -375,7 +375,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
     if (!establishGrab()) {
         if (attemptCount < 3) {
             qCWarning(KSCREENLOCKER) << "Could not establish screen lock. Trying again in 10ms";
-            QTimer::singleShot(10, this, [=]() {
+            QTimer::singleShot(10, this, [this, establishLock, attemptCount]() {
                 lock(establishLock, attemptCount + 1);
             });
         } else {
