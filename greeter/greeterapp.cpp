@@ -738,3 +738,5 @@ void UnlockApp::updateCanHibernate()
 }
 
 } // namespace
+
+#include "moc_greeterapp.cpp"

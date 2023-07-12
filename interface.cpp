@@ -203,3 +203,5 @@ void Interface::sendLockReplies()
 }
 
 } // namespace
+
+#include "moc_interface.cpp"

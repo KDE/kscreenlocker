@@ -115,3 +115,5 @@ void KScreenSaverSettings::setShortcut(const QKeySequence &sequence)
 }
 
 #include "kscreensaversettings.moc"
+
+#include "moc_kscreensaversettings.cpp"

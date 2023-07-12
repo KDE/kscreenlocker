@@ -160,3 +160,5 @@ void AppearanceSettings::loadLnfConfig()
     auto sourceFile = m_package.fileUrl(QByteArrayLiteral("lockscreen"), QStringLiteral("config.qml"));
     m_lnfConfigFile = sourceFile;
 }
+
+#include "moc_appearancesettings.cpp"

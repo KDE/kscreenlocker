@@ -64,3 +64,5 @@ KConfigLoader *WallpaperIntegration::configScheme()
 }
 
 }
+
+#include "moc_wallpaper_integration.cpp"

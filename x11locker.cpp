@@ -548,3 +548,5 @@ void X11Locker::addAllowedWindow(quint32 window)
 }
 
 }
+
+#include "moc_x11locker.cpp"

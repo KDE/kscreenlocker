@@ -50,3 +50,5 @@ KConfigLoader *LnFIntegration::configScheme()
 }
 
 }
+
+#include "moc_lnf_integration.cpp"

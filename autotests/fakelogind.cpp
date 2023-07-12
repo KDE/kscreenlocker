@@ -56,3 +56,5 @@ void FakeLogindSession::unlock()
 {
     Q_EMIT Unlock();
 }
+
+#include "moc_fakelogind.cpp"

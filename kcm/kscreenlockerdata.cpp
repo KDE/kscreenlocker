@@ -21,3 +21,5 @@ bool KScreenLockerData::isDefaults() const
 }
 
 #include "kscreenlockerdata.moc"
+
+#include "moc_kscreenlockerdata.cpp"

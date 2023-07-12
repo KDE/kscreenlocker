@@ -94,3 +94,5 @@ void PowerManagementInhibition::checkInhibition()
         m_inhibited = reply.value();
     });
 }
+
+#include "moc_powermanagement_inhibition.cpp"

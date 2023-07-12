@@ -334,3 +334,5 @@ QString PamAuthenticator::getErrorMessage() const
 }
 
 #include "pamauthenticator.moc"
+
+#include "moc_pamauthenticator.cpp"

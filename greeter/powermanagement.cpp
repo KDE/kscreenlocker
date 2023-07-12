@@ -168,3 +168,5 @@ bool PowerManagement::canHibernate() const
 }
 
 #include "powermanagement.moc"
+
+#include "moc_powermanagement.cpp"

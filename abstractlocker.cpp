@@ -119,3 +119,5 @@ void AbstractLocker::addAllowedWindow(quint32 windows)
 }
 
 }
+
+#include "moc_abstractlocker.cpp"

@@ -140,3 +140,5 @@ ScreenLocker::WallpaperIntegration *ScreenLockerKcm::wallpaperIntegration() cons
 }
 
 #include "kcm.moc"
+
+#include "moc_kcm.cpp"

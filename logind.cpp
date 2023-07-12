@@ -211,3 +211,5 @@ bool LogindIntegration::isLocked() const
     qCDebug(KSCREENLOCKER()) << reply.error();
     return false;
 }
+
+#include "moc_logind.cpp"

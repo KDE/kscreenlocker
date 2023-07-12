@@ -250,3 +250,5 @@ bool GlobalAccel::checkKeyPress(xcb_key_press_event_t *event)
     }
     return false;
 }
+
+#include "moc_globalaccel.cpp"

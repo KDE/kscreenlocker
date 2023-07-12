@@ -743,3 +743,5 @@ bool KSldApp::event(QEvent *event)
 }
 
 } // namespace
+
+#include "moc_ksldapp.cpp"

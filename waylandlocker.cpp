@@ -62,3 +62,5 @@ void WaylandLocker::stayOnTop()
 }
 
 }
+
+#include "moc_waylandlocker.cpp"

@@ -142,3 +142,5 @@ void WaylandServer::bind(wl_client *client, void *data, uint32_t version, uint32
 }
 
 }
+
+#include "moc_waylandserver.cpp"
