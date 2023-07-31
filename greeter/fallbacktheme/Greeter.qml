@@ -1,5 +1,6 @@
 /*
 SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
+SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -7,7 +8,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     id: root
@@ -19,117 +22,86 @@ Item {
     property bool switchUserEnabled
     property bool capsLockOn
 
-    implicitWidth: layoutItem.width + theme.mSize(theme.defaultFont).width * 4 + 12
-    implicitHeight: layoutItem.height + 12
-
-    anchors {
-        fill: parent
-        margins: 6
+    function resetFocus() {
+        password.forceActiveFocus();
     }
 
-    Column {
+    implicitWidth: layoutItem.width + Kirigami.Units.largeSpacing * 2
+    implicitHeight: layoutItem.height + Kirigami.Units.largeSpacing * 2
+
+    ColumnLayout {
         id: layoutItem
         anchors.centerIn: parent
-        spacing: theme.mSize(theme.defaultFont).height / 2
+        spacing: Kirigami.Units.largeSpacing
 
-        PlasmaComponents.Label {
+        PlasmaComponents3.Label {
             id: message
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
             text: ""
-            anchors.horizontalCenter: parent.horizontalCenter
             font.bold: true
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                }
-            }
+
+            visible: opacity > 0
             opacity: text == "" ? 0 : 1
-        }
-
-        PlasmaComponents.Label {
-            id: capsLockMessage
-            text: i18n("Warning: Caps Lock on")
-            anchors.horizontalCenter: parent.horizontalCenter
-            opacity: capsLockOn ? 1 : 0
-            height: capsLockOn ? paintedHeight : 0
-            font.bold: true
             Behavior on opacity {
                 NumberAnimation {
-                    duration: 250
+                    duration: Kirigami.Units.longDuration
                 }
             }
         }
 
-        PlasmaComponents.Label {
-            id: lockMessage
+        PlasmaComponents3.Label {
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+            text: i18n("Warning: Caps Lock on")
+            font.bold: true
+
+            visible: opacity > 0
+            opacity: root.capsLockOn ? 1 : 0
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Kirigami.Units.longDuration
+                }
+            }
+        }
+
+        PlasmaComponents3.Label {
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
             text: kscreenlocker_userName.length == 0 ? i18nd("kscreenlocker_greet", "The session is locked") :
                                                        i18nd("kscreenlocker_greet", "The session has been locked by %1", kscreenlocker_userName)
-            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        PlasmaExtras.PasswordField {
+            id: password
+            Layout.alignment: Qt.AlignHCenter
+            implicitWidth: Kirigami.Units.gridUnit * 15
+            enabled: !authenticator.busy
+            Keys.onEnterPressed: authenticator.tryUnlock()
+            Keys.onReturnPressed: authenticator.tryUnlock()
+            Keys.onEscapePressed: password.text = ""
         }
 
         RowLayout {
-            anchors.horizontalCenter: parent.horizontalCenter
-            PlasmaComponents.Label {
-                text: i18nd("kscreenlocker_greet", "Password:")
-            }
-            PlasmaComponents.TextField {
-                id: password
-                enabled: !authenticator.busy
-                echoMode: TextInput.Password
-                focus: true
-                Keys.onEnterPressed: authenticator.tryUnlock()
-                Keys.onReturnPressed: authenticator.tryUnlock()
-                Keys.onEscapePressed: password.text = ""
-            }
-        }
+            Layout.alignment: Qt.AlignHCenter
+            spacing: Kirigami.Units.largeSpacing
 
-        PlasmaComponents.ButtonRow {
-            id: buttonRow
-            property bool showAccel: false
-            exclusive: false
-            spacing: theme.mSize(theme.defaultFont).width / 2
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            AccelButton {
-                id: switchUser
-                label: i18nd("kscreenlocker_greet", "&Switch Users")
-                iconSource: "fork"
-                visible: switchUserEnabled
+            PlasmaComponents3.Button {
+                text: i18nd("kscreenlocker_greet", "&Switch Users")
+                icon.name: "system-switch-user"
+                visible: root.switchUserEnabled
                 onClicked: switchUserClicked()
             }
 
-            AccelButton {
-                id: unlock
-                label: i18nd("kscreenlocker_greet", "Un&lock")
-                iconSource: "object-unlocked"
+            PlasmaComponents3.Button {
+                text: i18nd("kscreenlocker_greet", "Un&lock")
+                icon.name: "unlock"
                 enabled: !authenticator.graceLocked
                 onClicked: authenticator.tryUnlock()
             }
         }
-    }
-
-    Keys.onPressed: {
-        const alt = event.modifiers & Qt.AltModifier;
-        buttonRow.showAccel = alt;
-
-        if (alt) {
-            // focus munging is needed otherwise the greet (QWidget)
-            // eats all the key events, even if root is added to forwardTo
-            // qml property of greeter
-            // greeter.focus = false;
-            root.forceActiveFocus();
-
-            for (const button of [switchUser, unlock]) {
-                if (event.key == button.accelKey) {
-                    buttonRow.showAccel = false;
-                    button.clicked();
-                    break;
-                }
-            }
-        }
-    }
-
-    Keys.onReleased: {
-        buttonRow.showAccel = event.modifiers & Qt.AltModifier;
     }
 
     Connections {
@@ -142,7 +114,7 @@ Item {
             if (!authenticator.busy) {
                 root.notification = "";
                 password.selectAll();
-                password.focus = true;
+                root.resetFocus();
             }
         }
         function onInfoMessage(text) {
@@ -157,5 +129,9 @@ Item {
         function onSucceeded() {
             Qt.quit()
         }
+    }
+
+    Component.onCompleted: {
+        root.resetFocus();
     }
 }

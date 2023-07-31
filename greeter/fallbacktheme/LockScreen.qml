@@ -1,15 +1,17 @@
 /*
 SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
+SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 import QtQuick 2.15
+import QtQuick.Controls as QQC2
 
-import org.kde.kquickcontrolsaddons 2.0
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kquickcontrolsaddons 2.0
 import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.private.sessions 2.0
 
 Item {
@@ -20,11 +22,11 @@ Item {
 
     signal unlockRequested()
 
-    // if there's no image, have a near black background
+    // if there's no image, have a pure black background
     Rectangle {
         width: parent.width
         height: parent.height
-        color: "#111"
+        color: "black"
     }
 
     SessionsModel {
@@ -32,10 +34,8 @@ Item {
     }
 
     Image {
-        id: background
-
         anchors.fill: parent
-        source: "file:" + theme.wallpaperPathForSize(parent.width, parent.height)
+        source: "file:" + PlasmaCore.Theme.wallpaperPathForSize(parent.width, parent.height)
         smooth: true
     }
 
@@ -44,23 +44,24 @@ Item {
 
         visible: lockScreen.locked
         anchors.centerIn: parent
+        width: mainStack.currentItem.implicitWidth + margins.left + margins.right
+        height: mainStack.currentItem.implicitHeight + margins.top + margins.bottom
         imagePath: "widgets/background"
-        width: mainStack.currentPage.implicitWidth + margins.left + margins.right
-        height: mainStack.currentPage.implicitHeight + margins.top + margins.bottom
 
         Behavior on height {
-            enabled: mainStack.currentPage != null
+            enabled: mainStack.currentItem != null
             NumberAnimation {
-                duration: 250
+                duration: Kirigami.Units.longDuration
             }
         }
         Behavior on width {
-            enabled: mainStack.currentPage != null
+            enabled: mainStack.currentItem != null
             NumberAnimation {
-                duration: 250
+                duration: Kirigami.Units.longDuration
             }
         }
-        PlasmaComponents.PageStack {
+
+        QQC2.StackView {
             id: mainStack
 
             clip: true
@@ -71,7 +72,7 @@ Item {
                 rightMargin: dialog.margins.right
                 bottomMargin: dialog.margins.bottom
             }
-            initialPage: unlockUI
+            initialItem: unlockUI
         }
     }
 
@@ -80,13 +81,21 @@ Item {
 
         switchUserEnabled: sessionsModel.canSwitchUser
 
+        visible: opacity > 0
+        opacity: mainStack.currentItem == unlockUI
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+            }
+        }
+
         Connections {
             function onAccepted() {
                 lockScreen.unlockRequested();
             }
             function onSwitchUserClicked() {
                 mainStack.push(userSessionsUIComponent);
-                mainStack.currentPage.forceActiveFocus();
+                mainStack.currentItem.forceActiveFocus();
             }
         }
     }
