@@ -98,11 +98,3 @@ msgstr "Заключване на екрана"
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Гарантиране, че екранът се заключва, преди приспиване"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Минчо Кондарев"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "mkondarev@yahoo.de"
