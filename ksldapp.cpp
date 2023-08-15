@@ -384,7 +384,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
         return;
     }
 
-    KNotification::event(QStringLiteral("locked"), i18n("Screen locked"), QPixmap(), KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
+    KNotification::event(QStringLiteral("locked"), i18n("Screen locked"), QPixmap(), nullptr, KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
 
     // blank the screen
     showLockWindow();
@@ -543,7 +543,7 @@ void KSldApp::doUnlock()
     m_greeterCrashedCounter = 0;
     endGraceTime();
     m_waylandServer->stop();
-    KNotification::event(QStringLiteral("unlocked"), i18n("Screen unlocked"), QPixmap(), KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
+    KNotification::event(QStringLiteral("unlocked"), i18n("Screen unlocked"), QPixmap(), nullptr, KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
     Q_EMIT unlocked();
     Q_EMIT lockStateChanged();
 }
