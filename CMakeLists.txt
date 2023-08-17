@@ -43,7 +43,7 @@ add_feature_info("prctl/procctl tracing control"
                  "Required for disallowing ptrace on greeter and kcheckpass process")
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
-find_package(KF6 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Crash
     KCMUtils
     KIO
