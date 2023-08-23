@@ -127,7 +127,7 @@ void AppearanceSettings::loadWallpaperConfig()
         delete m_wallpaperIntegration;
     }
 
-    m_wallpaperIntegration = new ScreenLocker::WallpaperIntegration(this);
+    m_wallpaperIntegration = new ScreenLocker::WallpaperIntegration();
     m_wallpaperIntegration->setConfig(KScreenSaverSettings::getInstance().sharedConfig());
     m_wallpaperIntegration->setPluginName(KScreenSaverSettings::getInstance().wallpaperPluginId());
     m_wallpaperIntegration->init();

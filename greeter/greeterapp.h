@@ -105,7 +105,7 @@ private:
     QThread *m_ksldConnectionThread = nullptr;
     org_kde_ksld *m_ksldInterface = nullptr;
 
-    WallpaperIntegration *m_wallpaperIntegration;
+    KPackage::Package m_wallpaperPackage;
     LnFIntegration *m_lnfIntegration;
 };
 } // namespace

@@ -118,6 +118,19 @@ public:
     }
 };
 
+class WallpaperItem : public WallpaperIntegration
+{
+    Q_OBJECT
+public:
+    explicit WallpaperItem(QQuickItem *parent = nullptr)
+        : WallpaperIntegration(parent)
+    {
+        setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
+        setPluginName(KScreenSaverSettingsBase::self()->wallpaperPluginId());
+        init();
+    }
+};
+
 // App
 UnlockApp::UnlockApp(int &argc, char **argv)
     : QGuiApplication(argc, argv)
@@ -130,7 +143,6 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_graceTime(0)
     , m_noLock(false)
     , m_defaultToSwitchUser(false)
-    , m_wallpaperIntegration(new WallpaperIntegration(this))
     , m_lnfIntegration(new LnFIntegration(this))
 {
     initialize();
@@ -189,9 +201,13 @@ void UnlockApp::initialize()
 
     m_mainQmlPath = package.fileUrl("lockscreenmainscript");
 
-    m_wallpaperIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
-    m_wallpaperIntegration->setPluginName(KScreenSaverSettingsBase::self()->wallpaperPluginId());
-    m_wallpaperIntegration->init();
+    // The root of wallpaper packages will be a WallpaperItem we provide the same API via WallpaperIntegration
+    // although with most things nooping
+    constexpr const char *uri = "org.kde.plasma.plasmoid";
+    qmlRegisterType<WallpaperItem>(uri, 2, 0, "WallpaperItem");
+
+    m_wallpaperPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper"));
+    m_wallpaperPackage.setPath(KScreenSaverSettingsBase::self()->wallpaperPluginId());
 
     m_lnfIntegration->setPackage(package);
     m_lnfIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
@@ -241,26 +257,24 @@ QWindow *UnlockApp::getActiveScreen()
 
 PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view)
 {
-    auto package = m_wallpaperIntegration->package();
-    if (!package.isValid()) {
+    if (!m_wallpaperPackage.isValid()) {
         qCWarning(KSCREENLOCKER_GREET) << "Error loading the wallpaper, no valid package loaded";
         return nullptr;
     }
 
     auto qmlObject = new PlasmaQuick::SharedQmlEngine(view);
     qmlObject->setInitializationDelayed(true);
-    qmlObject->setSource(QUrl::fromLocalFile(package.filePath("mainscript")));
-    qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), m_wallpaperIntegration);
+    qmlObject->setSource(QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
     view->setProperty("wallpaperGraphicsObject", QVariant::fromValue(qmlObject));
     connect(qmlObject, &PlasmaQuick::SharedQmlEngine::finished, this, [this, qmlObject, view] {
-        auto item = qobject_cast<QQuickItem *>(qmlObject->rootObject());
+        auto item = qobject_cast<WallpaperItem *>(qmlObject->rootObject());
         if (!item) {
-            qCWarning(KSCREENLOCKER_GREET) << "Wallpaper needs to be a QtQuick Item";
+            qCWarning(KSCREENLOCKER_GREET) << "Root item not a WallpaperItem";
             return;
-        }
-
+        };
+        qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
         view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
-        view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), m_wallpaperIntegration);
+        view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), item);
     });
     return qmlObject;
 }
@@ -740,4 +754,4 @@ void UnlockApp::updateCanHibernate()
 
 } // namespace
 
-#include "moc_greeterapp.cpp"
+#include "greeterapp.moc"

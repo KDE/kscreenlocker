@@ -14,8 +14,8 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
 namespace ScreenLocker
 {
-WallpaperIntegration::WallpaperIntegration(QObject *parent)
-    : QObject(parent)
+WallpaperIntegration::WallpaperIntegration(QQuickItem *parent)
+    : QQuickItem(parent)
     , m_package(KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper")))
 {
     qRegisterMetaType<KConfigPropertyMap *>();

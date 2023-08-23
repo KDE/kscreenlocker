@@ -8,20 +8,24 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 #include <KConfigPropertyMap>
 #include <KPackage/Package>
 #include <KSharedConfig>
+#include <QQuickItem>
 
 class KConfigLoader;
 
 namespace ScreenLocker
 {
-class WallpaperIntegration : public QObject
+
+class WallpaperIntegration : public QQuickItem
 {
     Q_OBJECT
 
     Q_PROPERTY(QString pluginName READ pluginName NOTIFY packageChanged)
     Q_PROPERTY(KConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
+    Q_PROPERTY(QQmlListProperty<QAction> contextualActions READ qmlContextualActions NOTIFY contextualActionsChanged)
+    Q_PROPERTY(bool loading MEMBER m_loading NOTIFY isLoadingChanged)
 
 public:
-    explicit WallpaperIntegration(QObject *parent);
+    explicit WallpaperIntegration(QQuickItem *parent = nullptr);
     ~WallpaperIntegration() override;
 
     void init();
@@ -48,6 +52,11 @@ public:
 
     KConfigLoader *configScheme();
 
+    QQmlListProperty<QAction> qmlContextualActions()
+    {
+        static QList<QAction *> list;
+        return {this, &list};
+    }
 Q_SIGNALS:
     void packageChanged();
     void configurationChanged();
@@ -56,7 +65,10 @@ Q_SIGNALS:
      * This is to keep compatible with WallpaperInterface in plasma-framework.
      * It doesn't have any practical use.
      */
-    void repaintNeeded();
+    void isLoadingChanged();
+    void repaintNeeded(const QColor &accentColor = Qt::transparent);
+    void openUrlRequested(const QUrl &url);
+    void contextualActionsChanged(const QList<QAction *> &actions);
 
 private:
     QString m_pluginName;
@@ -64,6 +76,7 @@ private:
     KSharedConfig::Ptr m_config;
     KConfigLoader *m_configLoader = nullptr;
     KConfigPropertyMap *m_configuration = nullptr;
+    bool m_loading = false;
 };
 
 }
