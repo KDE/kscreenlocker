@@ -12,7 +12,7 @@ qt_add_dbus_interface(screenlocker_kcm_SRCS ../dbus/org.kde.screensaver.xml scre
 
 kcmutils_add_qml_kcm(kcm_screenlocker SOURCES ${screenlocker_kcm_SRCS})
 
-target_link_libraries(kcm_screenlocker
+target_link_libraries(kcm_screenlocker PRIVATE
     settings
     Qt::DBus
     KF6::KCMUtilsCore # KCModuleData
