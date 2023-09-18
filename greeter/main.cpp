@@ -1,5 +1,6 @@
 /*
 SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
+SPDX-FileCopyrightText: 2023 Harald Sitter <sitter@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -83,6 +84,10 @@ int main(int argc, char *argv[])
     qputenv("KDE_HOME_READONLY", "1");
     // Kwin will re-lock if it restarts, reconnecting would leave us with two greeters but only one functional
     qunsetenv("QT_WAYLAND_RECONNECT");
+    // Disable QML caching to prevent cache corruption in full or near-full disk scenarios.
+    // https://bugs.kde.org/show_bug.cgi?id=471952
+    // https://bugreports.qt.io/browse/QTBUG-117130
+    qputenv("QML_DISABLE_DISK_CACHE", "1");
 
     auto format = QSurfaceFormat::defaultFormat();
     format.setOption(QSurfaceFormat::ResetNotification);
