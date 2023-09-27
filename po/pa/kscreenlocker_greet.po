@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-15 00:49+0000\n"
+"POT-Creation-Date: 2023-09-27 02:28+0000\n"
 "PO-Revision-Date: 2018-01-07 21:29-0600\n"
 "Last-Translator: A S Alam <aalam@fedoraproject.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -17,43 +17,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: main.cpp:110
+#: main.cpp:115
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE ਪਲਾਜ਼ਮਾ ਵਰਕਸਪੇਸ ਸਕਰੀਨ ਲਾਕਰ ਲਈ ਸਵਾਗਤੀ"
 
-#: main.cpp:114
+#: main.cpp:119
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "ਸਵਾਗਤੀ ਟੈਸਟਿੰਗ ਮੋਡ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: main.cpp:117
+#: main.cpp:122
 #, fuzzy, kde-format
 #| msgid "Starts the greeter in testing mode"
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "ਸਵਾਗਤੀ ਟੈਸਟਿੰਗ ਮੋਡ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: main.cpp:121
+#: main.cpp:126
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "ਕਿਸੇ ਵੀ ਛੋਟ ਦਿੱਤੇ ਸਮੇਂ ਆਦਿ ਨੂੰ ਛੱਡ ਕੇ ਤੁਰੰਤ ਲਾਕ ਕਰੋ।"
 
-#: main.cpp:123
+#: main.cpp:128
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 
-#: main.cpp:126
+#: main.cpp:131
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "ਕੋਈ ਵੀ ਲਾਕ ਵਰਤੋਂਕਾਰ ਇੰਟਰਫੇਸ ਨਾ ਦਿਖਾਉ।"
 
-#: main.cpp:127
+#: main.cpp:132
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr ""
 
-#: main.cpp:129
+#: main.cpp:134
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr ""

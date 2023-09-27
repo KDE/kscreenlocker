@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-15 00:49+0000\n"
+"POT-Creation-Date: 2023-09-27 02:28+0000\n"
 "PO-Revision-Date: 2019-11-25 23:36+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -18,43 +18,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.03.70\n"
 
-#: main.cpp:110
+#: main.cpp:115
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Üdvözlőképernyő a KDE Plasma képernyőzárolójához"
 
-#: main.cpp:114
+#: main.cpp:119
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Elindítja az üdvözlőképernyőtt teszt üzemmódban"
 
-#: main.cpp:117
+#: main.cpp:122
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr ""
 "Elindítja az üdvözlőképernyőt a kiválasztott témával (csak teszt üzemmódban)"
 
-#: main.cpp:121
+#: main.cpp:126
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Zárolás azonnal, bármely türelmi idő mellőzése, stb."
 
-#: main.cpp:123
+#: main.cpp:128
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "A zároló felület megjelenítése előtti késleltetés ezredmásodpercben."
 
-#: main.cpp:126
+#: main.cpp:131
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ne jelenjen meg zároló felület."
 
-#: main.cpp:127
+#: main.cpp:132
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "A felhasználóváltó legyen az alapértelmezett."
 
-#: main.cpp:129
+#: main.cpp:134
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Fájlleíró a ksld-hez csatlakozáshoz."

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-15 00:49+0000\n"
+"POT-Creation-Date: 2023-09-27 02:28+0000\n"
 "PO-Revision-Date: 2017-05-15 12:06+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -14,46 +14,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main.cpp:110
+#: main.cpp:115
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr ""
 "Anmeldungsdialog für die Bildschirmsperre des KDE-Plasma-Arbeitsbereichs"
 
-#: main.cpp:114
+#: main.cpp:119
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Startet das Anmeldungsfenster im Testmodus"
 
-#: main.cpp:117
+#: main.cpp:122
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr ""
 "Startet das Anmeldungsfenster mit dem ausgewählten Design (nur im Testmodus)"
 
-#: main.cpp:121
+#: main.cpp:126
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Sofort sperren, Nachfristen usw. werden ignoriert."
 
-#: main.cpp:123
+#: main.cpp:128
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Verzögerung in Millisekunden, bis die Benutzerschnittstelle zum Sperren "
 "angezeigt wird."
 
-#: main.cpp:126
+#: main.cpp:131
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Keine Benutzerschnittstelle zum Sperren anzeigen."
 
-#: main.cpp:127
+#: main.cpp:132
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Startet mit der Benutzerschnittstelle zum Benutzerwechsel."
 
-#: main.cpp:129
+#: main.cpp:134
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Datei-Deskriptor für die Verbindung zu ksld."
