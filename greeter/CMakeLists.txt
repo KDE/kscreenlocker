@@ -59,7 +59,6 @@ target_link_libraries(kscreenlocker_greet
     Qt::Qml
     Qt::GuiPrivate
     X11::X11
-    KF6::WaylandClient
     Wayland::Client
     LayerShellQt::Interface
     KF6::ScreenDpms
