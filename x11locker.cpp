@@ -303,7 +303,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
             Window root_return;
             int x_return, y_return;
             unsigned int width_return, height_return, border_width_return, depth_return;
-            for (WId window : qAsConst(m_lockWindows)) {
+            for (WId window : std::as_const(m_lockWindows)) {
                 if (XGetGeometry(QX11Info::display(),
                                  window,
                                  &root_return,
@@ -496,7 +496,7 @@ void X11Locker::stayOnTop()
     // thus avoiding possible infinite loops
     QVector<Window> stack(m_lockWindows.count() + 1);
     int count = 0;
-    for (WId w : qAsConst(m_lockWindows)) {
+    for (WId w : std::as_const(m_lockWindows)) {
         stack[count++] = w;
     }
     // finally, the lock window

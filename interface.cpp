@@ -195,7 +195,7 @@ void Interface::configure()
 
 void Interface::sendLockReplies()
 {
-    for (const QDBusMessage &reply : qAsConst(m_lockReplies)) {
+    for (const QDBusMessage &reply : std::as_const(m_lockReplies)) {
         QDBusConnection::sessionBus().send(reply);
     }
 
