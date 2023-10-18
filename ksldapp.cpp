@@ -34,8 +34,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QKeyEvent>
 #include <QProcess>
 #include <QTimer>
-#include <private/qtx11extras_p.h>
 // X11
+#include "x11info.h"
 #include <X11/Xlib.h>
 #include <xcb/xcb.h>
 #if X11_Xinput_FOUND
@@ -79,7 +79,7 @@ KSldApp::KSldApp(QObject *parent)
     , m_greeterEnv(QProcessEnvironment::systemEnvironment())
     , m_powerManagementInhibition(new PowerManagementInhibition(this))
 {
-    m_isX11 = QX11Info::isPlatformX11();
+    m_isX11 = X11Info::isPlatformX11();
     m_isWayland = QCoreApplication::instance()->property("platformName").toString().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive);
 }
 
@@ -101,7 +101,7 @@ void KSldApp::cleanUp()
     delete m_lockWindow;
 
     // Restore X screensaver parameters
-    XSetScreenSaver(QX11Info::display(), s_XTimeout, s_XInterval, s_XBlanking, s_XExposures);
+    XSetScreenSaver(X11Info::display(), s_XTimeout, s_XInterval, s_XBlanking, s_XExposures);
 }
 
 static bool s_graceTimeKill = false;
@@ -110,7 +110,7 @@ static bool s_logindExit = false;
 static bool hasXInput()
 {
 #if X11_Xinput_FOUND
-    Display *dpy = QX11Info::display();
+    Display *dpy = X11Info::display();
     int xi_opcode, event, error;
     // init XInput extension
     if (!XQueryExtension(dpy, "XInputExtension", &xi_opcode, &event, &error)) {
@@ -136,13 +136,13 @@ void KSldApp::initializeX11()
 {
     m_hasXInput2 = hasXInput();
     // Save X screensaver parameters
-    XGetScreenSaver(QX11Info::display(), &s_XTimeout, &s_XInterval, &s_XBlanking, &s_XExposures);
+    XGetScreenSaver(X11Info::display(), &s_XTimeout, &s_XInterval, &s_XBlanking, &s_XExposures);
     // And disable it. The internal X screensaver is not used at all, but we use its
     // internal idle timer (and it is also used by DPMS support in X). This timer must not
     // be altered by this code, since e.g. resetting the counter after activating our
     // screensaver would prevent DPMS from activating. We use the timer merely to detect
     // user activity.
-    XSetScreenSaver(QX11Info::display(), 0, s_XInterval, s_XBlanking, s_XExposures);
+    XSetScreenSaver(X11Info::display(), 0, s_XInterval, s_XBlanking, s_XExposures);
 }
 
 void KSldApp::initialize()
@@ -409,12 +409,12 @@ class XServerGrabber
 public:
     XServerGrabber()
     {
-        xcb_grab_server(QX11Info::connection());
+        xcb_grab_server(X11Info::connection());
     }
     ~XServerGrabber()
     {
-        xcb_ungrab_server(QX11Info::connection());
-        xcb_flush(QX11Info::connection());
+        xcb_ungrab_server(X11Info::connection());
+        xcb_flush(X11Info::connection());
     }
 };
 
@@ -426,22 +426,22 @@ bool KSldApp::establishGrab()
     if (!m_isX11) {
         return true;
     }
-    XSync(QX11Info::display(), False);
+    XSync(X11Info::display(), False);
     XServerGrabber serverGrabber;
     if (!grabKeyboard()) {
         return false;
     }
 
     if (!grabMouse()) {
-        XUngrabKeyboard(QX11Info::display(), CurrentTime);
-        XFlush(QX11Info::display());
+        XUngrabKeyboard(X11Info::display(), CurrentTime);
+        XFlush(X11Info::display());
         return false;
     }
 
 #if X11_Xinput_FOUND
     if (m_hasXInput2) {
         // get all devices
-        Display *dpy = QX11Info::display();
+        Display *dpy = X11Info::display();
         int numMasters;
         XIDeviceInfo *masters = XIQueryDevice(dpy, XIAllMasterDevices, &numMasters);
         bool success = true;
@@ -465,7 +465,7 @@ bool KSldApp::establishGrab()
             XISetMask(bitmask, XI_Leave);
             const int result = XIGrabDevice(dpy,
                                             masters[i].deviceid,
-                                            QX11Info::appRootWindow(),
+                                            X11Info::appRootWindow(),
                                             XCB_TIME_CURRENT_TIME,
                                             XCB_CURSOR_NONE,
                                             XIGrabModeAsync,
@@ -482,7 +482,7 @@ bool KSldApp::establishGrab()
             for (int i = 0; i < numMasters; ++i) {
                 XIUngrabDevice(dpy, masters[i].deviceid, XCB_TIME_CURRENT_TIME);
             }
-            xcb_connection_t *c = QX11Info::connection();
+            xcb_connection_t *c = X11Info::connection();
             xcb_ungrab_keyboard(c, XCB_CURRENT_TIME);
             xcb_ungrab_pointer(c, XCB_CURRENT_TIME);
         }
@@ -497,7 +497,7 @@ bool KSldApp::establishGrab()
 
 static bool grabKeyboard()
 {
-    int rv = XGrabKeyboard(QX11Info::display(), QX11Info::appRootWindow(), True, GrabModeAsync, GrabModeAsync, CurrentTime);
+    int rv = XGrabKeyboard(X11Info::display(), X11Info::appRootWindow(), True, GrabModeAsync, GrabModeAsync, CurrentTime);
 
     return (rv == GrabSuccess);
 }
@@ -505,7 +505,7 @@ static bool grabKeyboard()
 static bool grabMouse()
 {
 #define GRABEVENTS ButtonPressMask | ButtonReleaseMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask
-    int rv = XGrabPointer(QX11Info::display(), QX11Info::appRootWindow(), True, GRABEVENTS, GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
+    int rv = XGrabPointer(X11Info::display(), X11Info::appRootWindow(), True, GRABEVENTS, GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
 #undef GRABEVENTS
 
     return (rv == GrabSuccess);
@@ -515,14 +515,14 @@ void KSldApp::doUnlock()
 {
     qCDebug(KSCREENLOCKER) << "Grab Released";
     if (m_isX11) {
-        xcb_connection_t *c = QX11Info::connection();
+        xcb_connection_t *c = X11Info::connection();
         xcb_ungrab_keyboard(c, XCB_CURRENT_TIME);
         xcb_ungrab_pointer(c, XCB_CURRENT_TIME);
         xcb_flush(c);
 #if X11_Xinput_FOUND
         if (m_hasXInput2) {
             // get all devices
-            Display *dpy = QX11Info::display();
+            Display *dpy = X11Info::display();
             int numMasters;
             XIDeviceInfo *masters = XIQueryDevice(dpy, XIAllMasterDevices, &numMasters);
             // ungrab all devices again
@@ -652,7 +652,7 @@ void KSldApp::showLockWindow()
     }
     m_lockWindow->showLockWindow();
     if (m_isX11) {
-        XSync(QX11Info::display(), False);
+        XSync(X11Info::display(), False);
     }
 }
 

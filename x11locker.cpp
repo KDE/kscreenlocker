@@ -13,8 +13,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 // Qt
 #include <QApplication>
 #include <QScreen>
-#include <private/qtx11extras_p.h>
 // X11
+#include "x11info.h"
 #include <X11/Xatom.h>
 #include <xcb/xcb.h>
 
@@ -45,23 +45,23 @@ void X11Locker::initialize()
     qApp->installNativeEventFilter(this);
 
     XWindowAttributes rootAttr;
-    XGetWindowAttributes(QX11Info::display(), QX11Info::appRootWindow(), &rootAttr);
-    XSelectInput(QX11Info::display(), QX11Info::appRootWindow(), SubstructureNotifyMask | rootAttr.your_event_mask);
+    XGetWindowAttributes(X11Info::display(), X11Info::appRootWindow(), &rootAttr);
+    XSelectInput(X11Info::display(), X11Info::appRootWindow(), SubstructureNotifyMask | rootAttr.your_event_mask);
     // Get root window size
     updateGeo();
 
     // virtual root property
-    gXA_VROOT = XInternAtom(QX11Info::display(), "__SWM_VROOT", False);
-    gXA_SCREENSAVER_VERSION = XInternAtom(QX11Info::display(), "_SCREENSAVER_VERSION", False);
+    gXA_VROOT = XInternAtom(X11Info::display(), "__SWM_VROOT", False);
+    gXA_SCREENSAVER_VERSION = XInternAtom(X11Info::display(), "_SCREENSAVER_VERSION", False);
 
     // read the initial information about all toplevel windows
     Window r, p;
     Window *real;
     unsigned nreal;
-    if (XQueryTree(QX11Info::display(), QX11Info::appRootWindow(), &r, &p, &real, &nreal) && real != nullptr) {
+    if (XQueryTree(X11Info::display(), X11Info::appRootWindow(), &r, &p, &real, &nreal) && real != nullptr) {
         for (unsigned i = 0; i < nreal; ++i) {
             XWindowAttributes winAttr;
-            if (XGetWindowAttributes(QX11Info::display(), real[i], &winAttr)) {
+            if (XGetWindowAttributes(X11Info::display(), real[i], &winAttr)) {
                 WindowInfo info;
                 info.window = real[i];
                 info.viewable = (winAttr.map_state == IsViewable);
@@ -90,7 +90,7 @@ void X11Locker::showLockWindow()
     // Some xscreensaver hacks check for this property
     const char *version = "KDE 4.0";
 
-    XChangeProperty(QX11Info::display(),
+    XChangeProperty(X11Info::display(),
                     m_background->winId(),
                     gXA_SCREENSAVER_VERSION,
                     XA_STRING,
@@ -102,7 +102,7 @@ void X11Locker::showLockWindow()
     qCDebug(KSCREENLOCKER) << "Lock window Id: " << m_background->winId();
 
     m_background->setPosition(0, 0);
-    XSync(QX11Info::display(), False);
+    XSync(X11Info::display(), False);
 
     setVRoot(m_background->winId(), m_background->winId());
 }
@@ -117,13 +117,13 @@ void X11Locker::hideLockWindow()
     m_background->hide();
     m_background->lower();
     removeVRoot(m_background->winId());
-    XDeleteProperty(QX11Info::display(), m_background->winId(), gXA_SCREENSAVER_VERSION);
+    XDeleteProperty(X11Info::display(), m_background->winId(), gXA_SCREENSAVER_VERSION);
     if (gVRoot) {
         unsigned long vroot_data[1] = {gVRootData};
-        XChangeProperty(QX11Info::display(), gVRoot, gXA_VROOT, XA_WINDOW, 32, PropModeReplace, (unsigned char *)vroot_data, 1);
+        XChangeProperty(X11Info::display(), gVRoot, gXA_VROOT, XA_WINDOW, 32, PropModeReplace, (unsigned char *)vroot_data, 1);
         gVRoot = 0;
     }
-    XSync(QX11Info::display(), False);
+    XSync(X11Info::display(), False);
     m_allowedWindows.clear();
 }
 
@@ -141,7 +141,7 @@ void X11Locker::saveVRoot()
 {
     Window rootReturn, parentReturn, *children;
     unsigned int numChildren;
-    Window root = QX11Info::appRootWindow();
+    Window root = X11Info::appRootWindow();
 
     gVRoot = 0;
     gVRootData = 0;
@@ -149,14 +149,14 @@ void X11Locker::saveVRoot()
     int (*oldHandler)(Display *, XErrorEvent *);
     oldHandler = XSetErrorHandler(ignoreXError);
 
-    if (XQueryTree(QX11Info::display(), root, &rootReturn, &parentReturn, &children, &numChildren)) {
+    if (XQueryTree(X11Info::display(), root, &rootReturn, &parentReturn, &children, &numChildren)) {
         for (unsigned int i = 0; i < numChildren; i++) {
             Atom actual_type;
             int actual_format;
             unsigned long nitems, bytesafter;
             unsigned char *newRoot = nullptr;
 
-            if ((XGetWindowProperty(QX11Info::display(),
+            if ((XGetWindowProperty(X11Info::display(),
                                     children[i],
                                     gXA_VROOT,
                                     0,
@@ -195,14 +195,14 @@ void X11Locker::setVRoot(Window win, Window vr)
         removeVRoot(gVRoot);
     }
 
-    unsigned long rw = QX11Info::appRootWindow();
+    unsigned long rw = X11Info::appRootWindow();
     unsigned long vroot_data[1] = {vr};
 
     Window rootReturn, parentReturn, *children;
     unsigned int numChildren;
     Window top = win;
     while (1) {
-        if (!XQueryTree(QX11Info::display(), top, &rootReturn, &parentReturn, &children, &numChildren)) {
+        if (!XQueryTree(X11Info::display(), top, &rootReturn, &parentReturn, &children, &numChildren)) {
             return;
         }
         if (children) {
@@ -215,7 +215,7 @@ void X11Locker::setVRoot(Window win, Window vr)
         }
     }
 
-    XChangeProperty(QX11Info::display(), top, gXA_VROOT, XA_WINDOW, 32, PropModeReplace, (unsigned char *)vroot_data, 1);
+    XChangeProperty(X11Info::display(), top, gXA_VROOT, XA_WINDOW, 32, PropModeReplace, (unsigned char *)vroot_data, 1);
 }
 
 //---------------------------------------------------------------------------
@@ -224,7 +224,7 @@ void X11Locker::setVRoot(Window win, Window vr)
 //
 void X11Locker::removeVRoot(Window win)
 {
-    XDeleteProperty(QX11Info::display(), win, gXA_VROOT);
+    XDeleteProperty(X11Info::display(), win, gXA_VROOT);
 }
 
 void X11Locker::fakeFocusIn(WId window)
@@ -239,13 +239,13 @@ void X11Locker::fakeFocusIn(WId window)
     // window, so that it will correctly show cursor in the dialog.
     XEvent ev;
     memset(&ev, 0, sizeof(ev));
-    ev.xfocus.display = QX11Info::display();
+    ev.xfocus.display = X11Info::display();
     ev.xfocus.type = FocusIn;
     ev.xfocus.window = window;
     ev.xfocus.mode = NotifyNormal;
     ev.xfocus.detail = NotifyAncestor;
-    XSendEvent(QX11Info::display(), window, False, NoEventMask, &ev);
-    XFlush(QX11Info::display());
+    XSendEvent(X11Info::display(), window, False, NoEventMask, &ev);
+    XFlush(X11Info::display());
 
     m_focusedLockWindow = window;
 }
@@ -266,7 +266,7 @@ void sendEvent(xcb_generic_event_t *event, xcb_window_t target, int x, int y)
     e.child = target;
     e.event_x = x;
     e.event_y = y;
-    xcb_send_event(QX11Info::connection(), false, target, XCB_EVENT_MASK_NO_EVENT, reinterpret_cast<const char *>(&e));
+    xcb_send_event(X11Info::connection(), false, target, XCB_EVENT_MASK_NO_EVENT, reinterpret_cast<const char *>(&e));
 }
 
 bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qintptr *)
@@ -304,7 +304,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
             int x_return, y_return;
             unsigned int width_return, height_return, border_width_return, depth_return;
             for (WId window : std::as_const(m_lockWindows)) {
-                if (XGetGeometry(QX11Info::display(),
+                if (XGetGeometry(X11Info::display(),
                                  window,
                                  &root_return,
                                  &x_return,
@@ -336,7 +336,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
         break;
     case XCB_CONFIGURE_NOTIFY: { // from SubstructureNotifyMask on the root window
         xcb_configure_notify_event_t *xc = reinterpret_cast<xcb_configure_notify_event_t *>(event);
-        if (xc->event == QX11Info::appRootWindow()) {
+        if (xc->event == X11Info::appRootWindow()) {
             int index = findWindowInfo(xc->window);
             if (index >= 0) {
                 int index2 = xc->above_sibling ? findWindowInfo(xc->above_sibling) : 0;
@@ -360,7 +360,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
     }
     case XCB_MAP_NOTIFY: { // from SubstructureNotifyMask on the root window
         xcb_map_notify_event_t *xm = reinterpret_cast<xcb_map_notify_event_t *>(event);
-        if (xm->event == QX11Info::appRootWindow()) {
+        if (xm->event == X11Info::appRootWindow()) {
             qCDebug(KSCREENLOCKER) << "MapNotify:" << xm->window;
             int index = findWindowInfo(xm->window);
             if (index >= 0) {
@@ -392,7 +392,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
     }
     case XCB_UNMAP_NOTIFY: {
         xcb_unmap_notify_event_t *xu = reinterpret_cast<xcb_unmap_notify_event_t *>(event);
-        if (xu->event == QX11Info::appRootWindow()) {
+        if (xu->event == X11Info::appRootWindow()) {
             qCDebug(KSCREENLOCKER) << "UnmapNotify:" << xu->window;
             int index = findWindowInfo(xu->window);
             if (index >= 0) {
@@ -411,7 +411,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
     }
     case XCB_CREATE_NOTIFY: {
         xcb_create_notify_event_t *xc = reinterpret_cast<xcb_create_notify_event_t *>(event);
-        if (xc->parent == QX11Info::appRootWindow()) {
+        if (xc->parent == X11Info::appRootWindow()) {
             qCDebug(KSCREENLOCKER) << "CreateNotify:" << xc->window;
             int index = findWindowInfo(xc->window);
             if (index >= 0) {
@@ -428,7 +428,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
     }
     case XCB_DESTROY_NOTIFY: {
         xcb_destroy_notify_event_t *xd = reinterpret_cast<xcb_destroy_notify_event_t *>(event);
-        if (xd->event == QX11Info::appRootWindow()) {
+        if (xd->event == X11Info::appRootWindow()) {
             int index = findWindowInfo(xd->window);
             if (index >= 0) {
                 m_windowInfo.removeAt(index);
@@ -441,14 +441,14 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
     }
     case XCB_REPARENT_NOTIFY: {
         xcb_reparent_notify_event_t *xr = reinterpret_cast<xcb_reparent_notify_event_t *>(event);
-        if (xr->event == QX11Info::appRootWindow() && xr->parent != QX11Info::appRootWindow()) {
+        if (xr->event == X11Info::appRootWindow() && xr->parent != X11Info::appRootWindow()) {
             int index = findWindowInfo(xr->window);
             if (index >= 0) {
                 m_windowInfo.removeAt(index);
             } else {
                 qCDebug(KSCREENLOCKER) << "Unknown toplevel for ReparentNotify away";
             }
-        } else if (xr->parent == QX11Info::appRootWindow()) {
+        } else if (xr->parent == X11Info::appRootWindow()) {
             int index = findWindowInfo(xr->window);
             if (index >= 0) {
                 qCDebug(KSCREENLOCKER) << "Already existing toplevel for ReparentNotify";
@@ -463,7 +463,7 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
     }
     case XCB_CIRCULATE_NOTIFY: {
         xcb_circulate_notify_event_t *xc = reinterpret_cast<xcb_circulate_notify_event_t *>(event);
-        if (xc->event == QX11Info::appRootWindow()) {
+        if (xc->event == X11Info::appRootWindow()) {
             int index = findWindowInfo(xc->window);
             if (index >= 0) {
                 m_windowInfo.move(index, xc->place == PlaceOnTop ? m_windowInfo.size() - 1 : 0);
@@ -502,11 +502,11 @@ void X11Locker::stayOnTop()
     // finally, the lock window
     stack[count++] = m_background->winId();
     // do the actual restacking if needed
-    XRaiseWindow(QX11Info::display(), stack[0]);
+    XRaiseWindow(X11Info::display(), stack[0]);
     if (count > 1) {
-        XRestackWindows(QX11Info::display(), stack.data(), count);
+        XRestackWindows(X11Info::display(), stack.data(), count);
     }
-    XFlush(QX11Info::display());
+    XFlush(X11Info::display());
 }
 
 void X11Locker::updateGeo()

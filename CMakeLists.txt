@@ -206,8 +206,6 @@ PRIVATE
    Wayland::Server
 )
 
-target_link_libraries(KScreenLocker PRIVATE Qt::GuiPrivate)
-
 set(kscreenlocker_greet_bin_abs ${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet)
 # The file path of kscreenlocker_greet must be relative to the KScreenLocker library.
 file(RELATIVE_PATH kscreenlocker_greet_bin_rel ${CMAKE_INSTALL_FULL_LIBDIR} ${kscreenlocker_greet_bin_abs})

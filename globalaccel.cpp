@@ -13,8 +13,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QDBusPendingReply>
 #include <QKeyEvent>
 #include <QRegularExpression>
-#include <private/qtx11extras_p.h>
 
+#include "x11info.h"
 #include <X11/keysym.h>
 #include <xcb/xcb.h>
 #include <xcb/xcb_keysyms.h>
@@ -64,8 +64,8 @@ void GlobalAccel::prepare()
     // first ensure that we don't have some left over
     release();
 
-    if (QX11Info::isPlatformX11()) {
-        m_keySymbols = xcb_key_symbols_alloc(QX11Info::connection());
+    if (X11Info::isPlatformX11()) {
+        m_keySymbols = xcb_key_symbols_alloc(X11Info::connection());
         calculateGrabMasks();
     }
 
