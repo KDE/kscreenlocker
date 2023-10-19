@@ -99,7 +99,7 @@ KScreenSaverSettings::~KScreenSaverSettings()
 {
 }
 
-QVector<WallpaperInfo> KScreenSaverSettings::availableWallpaperPlugins() const
+QList<WallpaperInfo> KScreenSaverSettings::availableWallpaperPlugins() const
 {
     return m_availableWallpaperPlugins;
 }

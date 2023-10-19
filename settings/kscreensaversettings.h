@@ -33,7 +33,7 @@ public:
 
     ~KScreenSaverSettings() override;
 
-    QVector<WallpaperInfo> availableWallpaperPlugins() const;
+    QList<WallpaperInfo> availableWallpaperPlugins() const;
 
     QKeySequence shortcut() const;
     void setShortcut(const QKeySequence &sequence);
@@ -48,6 +48,6 @@ protected:
     KScreenSaverSettings(QObject *parent = nullptr);
 
 private:
-    QVector<WallpaperInfo> m_availableWallpaperPlugins;
+    QList<WallpaperInfo> m_availableWallpaperPlugins;
     KScreenSaverSettingsStore *m_store;
 };

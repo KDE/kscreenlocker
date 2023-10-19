@@ -36,7 +36,7 @@ public:
     Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
     Q_PROPERTY(bool isDefaultsAppearance READ isDefaultsAppearance NOTIFY isDefaultsAppearanceChanged)
 
-    Q_INVOKABLE QVector<WallpaperInfo> availableWallpaperPlugins()
+    Q_INVOKABLE QList<WallpaperInfo> availableWallpaperPlugins()
     {
         return KScreenSaverSettings::getInstance().availableWallpaperPlugins();
     }

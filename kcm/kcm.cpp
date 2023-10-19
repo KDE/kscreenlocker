@@ -17,7 +17,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KLocalizedString>
 #include <KPluginFactory>
 
-#include <QVector>
+#include <QList>
 
 K_PLUGIN_FACTORY_WITH_JSON(ScreenLockerKcmFactory, "kcm_screenlocker.json", registerPlugin<ScreenLockerKcm>(); registerPlugin<KScreenLockerData>();)
 
@@ -28,7 +28,7 @@ ScreenLockerKcm::ScreenLockerKcm(QObject *parent, const KPluginMetaData &data)
     registerSettings(&KScreenSaverSettings::getInstance());
 
     constexpr const char *url = "org.kde.private.kcms.screenlocker";
-    qRegisterMetaType<QVector<WallpaperInfo>>("QVector<WallpaperInfo>");
+    qRegisterMetaType<QList<WallpaperInfo>>("QList<WallpaperInfo>");
     qmlRegisterAnonymousType<KScreenSaverSettings>(url, 1);
     qmlRegisterAnonymousType<WallpaperInfo>(url, 1);
     qmlRegisterAnonymousType<ScreenLocker::WallpaperIntegration>(url, 1);

@@ -494,7 +494,7 @@ void X11Locker::stayOnTop()
     // all restacking operations will be no-op,
     // and no ConfigureNotify will be generated,
     // thus avoiding possible infinite loops
-    QVector<Window> stack(m_lockWindows.count() + 1);
+    QList<Window> stack(m_lockWindows.count() + 1);
     int count = 0;
     for (WId w : std::as_const(m_lockWindows)) {
         stack[count++] = w;
