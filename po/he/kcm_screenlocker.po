@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Zanata 3.9.6\n"
 
 #: ui/Appearance.qml:19
@@ -51,6 +52,8 @@ msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] " דקה"
 msgstr[1] " דקות"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ui/main.qml:54
 #, kde-format
@@ -73,6 +76,8 @@ msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] " שניה"
 msgstr[1] " שניות"
+msgstr[2] ""
+msgstr[3] ""
 
 #: ui/main.qml:89
 #, kde-format
