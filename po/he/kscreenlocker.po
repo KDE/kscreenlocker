@@ -4,55 +4,36 @@
 # Diego Iastrubni <elcuco@kde.org>, 2012.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2023 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-05 02:51+0000\n"
-"PO-Revision-Date: 2017-05-16 06:54-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-10-22 10:35+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: abstractlocker.cpp:39
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-sessions\n"
-#| "\n"
-#| "Afterwards switch back to the running session (Ctrl+Alt+F%1)."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
 "of which could be found on your system."
 msgstr ""
-"נועל המסך שבור ואינו יכול לפעול יותר\n"
-"בשביל לפתוח החלף לטרמינל וירטואלי (Ctrl+Alt+F2),\n"
-"התחבר, והרץ את הפקודה הבאה:\n"
-"\n"
-"loginctl unlock-sessions\n"
-"\n"
-"אחרי זה החלף חזרה למופע שרץ (Ctrl+Alt+F%1)."
+"נועל המסך פגום ולא ניתן לנעול עוד.\n"
+"כדי לנעול אותו צריך או את ConsoleKit או את LoginD, אף\n"
+"אחד מהם לא נמצא מותקן במערכת שלך."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-sessions\n"
-#| "\n"
-#| "Afterwards switch back to the running session (Ctrl+Alt+F%1)."
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -62,24 +43,14 @@ msgid ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 msgstr ""
-"נועל המסך שבור ואינו יכול לפעול יותר\n"
-"בשביל לפתוח החלף לטרמינל וירטואלי (Ctrl+Alt+F2),\n"
-"התחבר, והרץ את הפקודה הבאה:\n"
+"נועל המסך פגום ולא ניתן לנעול עוד.\n"
+"כדי לנעול אותו יש לעבור למסוף וירטואלי (למשל עם Ctrl+Alt+F%1),\n"
+"להיכנס כמשתמש על (root) ולהריץ את הפקודה: \n"
+"‎# ck-unlock-session <session-name>\n"
 "\n"
-"loginctl unlock-sessions\n"
-"\n"
-"אחרי זה החלף חזרה למופע שרץ (Ctrl+Alt+F%1)."
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-sessions\n"
-#| "\n"
-#| "Afterwards switch back to the running session (Ctrl+Alt+F%1)."
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -94,18 +65,21 @@ msgid ""
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
 msgstr ""
-"נועל המסך שבור ואינו יכול לפעול יותר\n"
-"בשביל לפתוח החלף לטרמינל וירטואלי (Ctrl+Alt+F2),\n"
-"התחבר, והרץ את הפקודה הבאה:\n"
+"נועל המסך פגום ולא ניתן לשחרר עוד.\n"
+"כדי לשחרר אותו יש לעבור למסוף וירטואלי (למשל עם Ctrl+Alt+F%1),\n"
+"להיכנס לחשבון שלך ולהריץ את הפקודה: \n"
+"loginctl unlock-session %2\n"
 "\n"
-"loginctl unlock-sessions\n"
+"לאחר מכן לצאת מההפעלה הווירטואלית על ידי לחיצה על Ctrl+D, ולעבור\n"
+"בחזרה להפעלה הפעילה (Ctrl+Alt+F%3).\n"
+"במקרה ששכחת את ההנחיות תוך כדי ביצוע, אפשר לחזור למסך הזה\n"
+"בלחיצה על Ctrl+Alt+F%3\n"
 "\n"
-"אחרי זה החלף חזרה למופע שרץ (Ctrl+Alt+F%1)."
 
 #: ksldapp.cpp:160
 #, kde-format
 msgid "Lock Session"
-msgstr "נעל הפעלה"
+msgstr "נעילת הפעלה"
 
 #: ksldapp.cpp:387
 #, kde-format
@@ -115,7 +89,7 @@ msgstr "המסך נעול"
 #: ksldapp.cpp:546
 #, kde-format
 msgid "Screen unlocked"
-msgstr "המסך נפתח"
+msgstr "המסך משוחרר"
 
 #: logind.cpp:161
 #, kde-format
@@ -125,7 +99,7 @@ msgstr "נועל מסך"
 #: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
-msgstr "מוודא שהמסך ננעל לפני כניסה לשינה"
+msgstr "מוודא שהמסך ננעל לפני כניסה למצב שינה"
 
 #~ msgid "Screen lock enabled"
 #~ msgstr "מסך נעילה מאופשר"
