@@ -136,6 +136,7 @@ private:
     void showLockWindow();
     void hideLockWindow();
     void doUnlock();
+    void lockProcessRequestedUnlock();
     bool isFdoPowerInhibited() const;
 
     LockState m_lockState;

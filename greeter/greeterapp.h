@@ -28,7 +28,7 @@ class Authenticator;
 
 struct org_kde_ksld;
 
-class PamAuthenticator;
+class PamAuthenticators;
 
 namespace ScreenLocker
 {
@@ -91,7 +91,7 @@ private:
     bool m_ignoreRequests;
     bool m_immediateLock;
     bool m_runtimeInitialized;
-    PamAuthenticator *m_authenticator;
+    PamAuthenticators *m_authenticators;
     int m_graceTime;
     bool m_noLock;
     bool m_defaultToSwitchUser;

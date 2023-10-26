@@ -106,6 +106,7 @@ void KSldApp::cleanUp()
 
 static bool s_graceTimeKill = false;
 static bool s_logindExit = false;
+static bool s_lockProcessRequestedExit = false;
 
 static bool hasXInput()
 {
@@ -192,8 +193,19 @@ void KSldApp::initialize()
     m_lockProcess->setProcessChannelMode(QProcess::ForwardedErrorChannel);
     m_lockProcess->setReadChannel(QProcess::StandardOutput);
     auto finishedSignal = static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished);
+    connect(m_lockProcess, &QProcess::readyRead, this, [this] {
+        const auto str = QString::fromLocal8Bit(m_lockProcess->readLine());
+        if (str == QStringLiteral("Unlocked\n")) {
+            lockProcessRequestedUnlock();
+        }
+    });
     connect(m_lockProcess, finishedSignal, this, [this](int exitCode, QProcess::ExitStatus exitStatus) {
         qCDebug(KSCREENLOCKER) << "Greeter process exitted with status:" << exitStatus << "exit code:" << exitCode;
+
+        if (s_lockProcessRequestedExit) {
+            qCDebug(KSCREENLOCKER) << "Lock process had requested exit; we already did the unlock process elsewhere";
+            return;
+        }
 
         const bool regularExit = !exitCode && exitStatus == QProcess::NormalExit;
         if (regularExit || s_graceTimeKill || s_logindExit) {
@@ -322,6 +334,14 @@ void KSldApp::initialize()
     if (KScreenSaverSettings::lockOnStart()) {
         lock(EstablishLock::Immediate);
     }
+}
+
+void KSldApp::lockProcessRequestedUnlock()
+{
+    s_graceTimeKill = false;
+    s_logindExit = false;
+    s_lockProcessRequestedExit = true;
+    doUnlock();
 }
 
 void KSldApp::configure()

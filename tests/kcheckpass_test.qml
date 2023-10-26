@@ -15,7 +15,7 @@ ApplicationWindow {
             id: message
             Connections {
                 target: authenticator
-                function onPromptForSecret() {
+                function onPromptForSecretChanged() {
                     authenticator.respond(password.text)
                 }
                 function onSucceeded() {

@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.kscreenlocker 1.0 as ScreenLocker
 
 Item {
     id: root
@@ -79,9 +80,21 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             implicitWidth: Kirigami.Units.gridUnit * 15
             enabled: !authenticator.busy
-            Keys.onEnterPressed: authenticator.tryUnlock()
-            Keys.onReturnPressed: authenticator.tryUnlock()
+            Keys.onEnterPressed: authenticator.startAuthenticating()
+            Keys.onReturnPressed: authenticator.startAuthenticating()
             Keys.onEscapePressed: password.text = ""
+        }
+
+        PlasmaComponents3.Label {
+            visible: authenticator.authenticatorTypes & ScreenLocker.Authenticator.Fingerprint
+            text: i18nd("kscreenlocker_greet", "(or place your fingerprint on the reader)")
+            Layout.fillWidth: true
+        }
+
+        PlasmaComponents3.Label {
+            visible: authenticator.authenticatorTypes & ScreenLocker.Authenticator.Smartcard
+            text: i18nd("kscreenlocker_greet", "(or use your smartcard)")
+            Layout.fillWidth: true
         }
 
         RowLayout {
@@ -99,7 +112,7 @@ Item {
                 text: i18nd("kscreenlocker_greet", "Un&lock")
                 icon.name: "unlock"
                 enabled: !authenticator.graceLocked
-                onClicked: authenticator.tryUnlock()
+                onClicked: authenticator.startAuthenticating()
             }
         }
     }
@@ -117,13 +130,13 @@ Item {
                 root.resetFocus();
             }
         }
-        function onInfoMessage(text) {
-            root.notification = text;
+        function onInfoMessageChanged() {
+            root.notification = Qt.binding(() => authenticator.infoMessage);
         }
-        function onErrorMessage(text) {
-            root.notification = text;
+        function onErrorMessageChanged() {
+            root.notification = Qt.binding(() => authenticator.errorMessage);
         }
-        function onPromptForSecret() {
+        function onPromptForSecretChanged() {
             authenticator.respond(password.text);
         }
         function onSucceeded() {

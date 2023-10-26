@@ -22,6 +22,10 @@ public:
     Q_DISABLE_COPY_MOVE(PamWorker)
     void start(const QString &service, const QString &user);
     void authenticate();
+    inline auto debug()
+    {
+        return qUtf8Printable(QStringLiteral("[PAM worker ") + m_service + QChar(']'));
+    }
 
 Q_SIGNALS:
     void busyChanged(bool busy);
@@ -31,6 +35,8 @@ Q_SIGNALS:
     void errorMessage(const QString &msg);
     void failed();
     void succeeded();
+    void unavailabilityChanged(bool unavailable);
+    void inAuthenticateChanged(bool inAuthenticate);
 
     // internal
     void promptResponseReceived(const QByteArray &prompt);
@@ -42,8 +48,10 @@ private:
     pam_handle_t *m_handle = nullptr; //< the actual PAM handle
     struct pam_conv m_conv;
 
+    bool m_unavailable = false;
     bool m_inAuthenticate = false;
     int m_result = -1;
+    QString m_service;
 };
 
 int PamWorker::converse(int n, const struct pam_message **msg, struct pam_response **resp, void *data)
@@ -72,18 +80,24 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
                 Q_EMIT c->prompt(prompt);
             }
 
+            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message:" << (isSecret ? "Echo-off prompt:" : "Echo-on prompt:") << prompt;
+
             QByteArray response;
             QEventLoop e;
             QObject::connect(c, &PamWorker::promptResponseReceived, &e, [&](const QByteArray &_response) {
+                qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Received response, exiting nested event loop";
                 response = _response;
                 e.exit(0);
             });
             QObject::connect(c, &PamWorker::cancelled, &e, [&]() {
+                qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Received cancellation, exiting with PAM_CONV_ERR";
                 e.exit(PAM_CONV_ERR);
             });
 
+            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Starting nested event loop to await response";
             int rc = e.exec();
             if (rc != 0) {
+                qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Nested event loop's exit code was not zero, bailing";
                 return rc;
             }
 
@@ -107,14 +121,16 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
             break;
         }
         case PAM_ERROR_MSG:
-            qCDebug(KSCREENLOCKER_GREET) << QString::fromLocal8Bit(msg[i]->msg);
+            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message: Error message:" << QString::fromLocal8Bit(msg[i]->msg);
             Q_EMIT c->errorMessage(QString::fromLocal8Bit(msg[i]->msg));
             break;
         case PAM_TEXT_INFO:
             // if there's only the info message, let's predict the prompts too
-            qCDebug(KSCREENLOCKER_GREET) << QString::fromLocal8Bit(msg[i]->msg);
+            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message: Info message:" << QString::fromLocal8Bit(msg[i]->msg);
             Q_EMIT c->infoMessage(QString::fromLocal8Bit(msg[i]->msg));
+            break;
         default:
+            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message: Unhandled message type:" << msg[i]->msg_style;
             break;
         }
     }
@@ -137,13 +153,14 @@ PamWorker::~PamWorker()
 
 void PamWorker::authenticate()
 {
-    if (m_inAuthenticate) {
+    if (m_inAuthenticate || m_unavailable) {
         return;
     }
     m_inAuthenticate = true;
-    qCDebug(KSCREENLOCKER_GREET) << "Start auth";
+    Q_EMIT inAuthenticateChanged(m_inAuthenticate);
+    qCDebug(KSCREENLOCKER_GREET) << debug() << "Authenticate: Starting authentication";
     int rc = pam_authenticate(m_handle, 0); // PAM_SILENT);
-    qCDebug(KSCREENLOCKER_GREET) << "Auth done RC" << rc << pam_strerror(m_handle, rc);
+    qCDebug(KSCREENLOCKER_GREET) << debug() << "Authenticate: Authentication done, result code:" << rc << pam_strerror(m_handle, rc);
 
     Q_EMIT busyChanged(false);
 
@@ -151,10 +168,14 @@ void PamWorker::authenticate()
         rc = pam_setcred(m_handle, PAM_REFRESH_CRED);
         /* ignore errors on refresh credentials. If this did not work we use the old ones. */
         Q_EMIT succeeded();
+    } else if (rc == PAM_AUTHINFO_UNAVAIL || rc == PAM_MODULE_UNKNOWN) {
+        m_unavailable = true;
+        Q_EMIT unavailabilityChanged(m_unavailable);
     } else {
         Q_EMIT failed();
     }
     m_inAuthenticate = false;
+    Q_EMIT inAuthenticateChanged(m_inAuthenticate);
 }
 
 static void fail_delay(int retval, unsigned usec_delay, void *appdata_ptr)
@@ -166,6 +187,7 @@ static void fail_delay(int retval, unsigned usec_delay, void *appdata_ptr)
 
 void PamWorker::start(const QString &service, const QString &user)
 {
+    m_service = service;
     if (user.isEmpty())
         m_result = pam_start(qPrintable(service), nullptr, &m_conv, &m_handle);
     else
@@ -177,14 +199,14 @@ void PamWorker::start(const QString &service, const QString &user)
 #endif
 
     if (m_result != PAM_SUCCESS) {
-        qCWarning(KSCREENLOCKER_GREET) << "[PAM] start" << pam_strerror(m_handle, m_result);
+        qCWarning(KSCREENLOCKER_GREET) << debug() << "start: error starting, result code:" << m_result << pam_strerror(m_handle, m_result);
         return;
     } else {
-        qCDebug(KSCREENLOCKER_GREET) << "[PAM] Starting... using service" << service;
+        qCDebug(KSCREENLOCKER_GREET) << debug() << "start: successfully started";
     }
 }
 
-PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, QObject *parent)
+PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, NoninteractiveAuthenticatorTypes types, QObject *parent)
     : QObject(parent)
     , m_signalsToMembers({
           {QMetaMethod::fromSignal(&PamAuthenticator::prompt), m_prompt},
@@ -192,6 +214,8 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
           {QMetaMethod::fromSignal(&PamAuthenticator::infoMessage), m_infoMessage},
           {QMetaMethod::fromSignal(&PamAuthenticator::errorMessage), m_errorMessage},
       })
+    , m_service(service)
+    , m_authenticatorType(types)
     , d(new PamWorker)
 {
     d->moveToThread(&m_thread);
@@ -214,6 +238,15 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
     connect(d, &PamWorker::errorMessage, this, [this](const QString &msg) {
         m_errorMessage = msg;
         Q_EMIT errorMessage(msg);
+    });
+
+    connect(d, &PamWorker::inAuthenticateChanged, this, [this](bool isInAuthenticate) {
+        m_inAuthentication = isInAuthenticate;
+        Q_EMIT availableChanged();
+    });
+    connect(d, &PamWorker::unavailabilityChanged, this, [this](bool isUnavailable) {
+        m_unavailable = isUnavailable;
+        Q_EMIT availableChanged();
     });
 
     connect(d, &PamWorker::succeeded, this, [this]() {
@@ -245,6 +278,16 @@ void PamAuthenticator::init(const QString &service, const QString &user)
 bool PamAuthenticator::isBusy() const
 {
     return m_busy;
+}
+
+bool PamAuthenticator::isAvailable() const
+{
+    return m_inAuthentication && !m_unavailable;
+}
+
+PamAuthenticator::NoninteractiveAuthenticatorTypes PamAuthenticator::authenticatorType() const
+{
+    return m_authenticatorType;
 }
 
 void PamAuthenticator::setBusy(bool busy)
@@ -285,34 +328,6 @@ void PamAuthenticator::cancel()
     QMetaObject::invokeMethod(d, &PamWorker::cancelled);
 }
 
-// Force emit the signals when a view connects to them. This prevents a race condition where screens appear after
-// stateful signals (such as prompt) had been emitted and end up in an incorrect state.
-// (e.g. https://bugs.kde.org/show_bug.cgi?id=456210 where the view ends up in a no-prompt state)
-void PamAuthenticator::connectNotify(const QMetaMethod &signal)
-{
-    // TODO remove this function for Plasma 6. The properties should be bound to  so we don't need to force
-    // emit them every time a view connects.
-
-    // NOTE signals are queued because during connect qml is not yet ready to receive them
-
-    if (m_unlocked && signal == QMetaMethod::fromSignal(&PamAuthenticator::succeeded)) {
-        signal.invoke(this, Qt::QueuedConnection);
-        return;
-    }
-
-    for (const auto &[signalMethod, memberString] : m_signalsToMembers)
-    {
-        if (signal != signalMethod) {
-            continue;
-        }
-
-        if (!memberString.isNull()) {
-            signalMethod.invoke(this, Qt::QueuedConnection, Q_ARG(QString, memberString));
-            return;
-        }
-    }
-}
-
 QString PamAuthenticator::getPrompt() const
 {
     return m_prompt;
@@ -331,6 +346,11 @@ QString PamAuthenticator::getInfoMessage() const
 QString PamAuthenticator::getErrorMessage() const
 {
     return m_errorMessage;
+}
+
+QString PamAuthenticator::service() const
+{
+    return m_service;
 }
 
 #include "pamauthenticator.moc"

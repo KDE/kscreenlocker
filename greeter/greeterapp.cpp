@@ -12,6 +12,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "wallpaper_integration.h"
 
 #include <config-kscreenlocker.h>
+#include <iostream>
 #include <kscreenlocker_greet_logging.h>
 
 #include <LayerShellQt/Window>
@@ -59,6 +60,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <xcb/xcb.h>
 
 #include "pamauthenticator.h"
+#include "pamauthenticators.h"
 
 // this is usable to fake a "screensaver" installation for testing
 // *must* be "0" for every public commit!
@@ -138,12 +140,16 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_testing(false)
     , m_ignoreRequests(false)
     , m_immediateLock(false)
-    , m_authenticator(new PamAuthenticator(KSCREENLOCKER_PAM_SERVICE, KUser().loginName(), this))
     , m_graceTime(0)
     , m_noLock(false)
     , m_defaultToSwitchUser(false)
     , m_lnfIntegration(new LnFIntegration(this))
 {
+    auto interactive = std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SERVICE, KUser().loginName());
+    std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
+    noninteractive.push_back(std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, KUser().loginName(), PamAuthenticator::Fingerprint));
+    noninteractive.push_back(std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SMARTCARD_SERVICE, KUser().loginName(), PamAuthenticator::Smartcard));
+    m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
     initialize();
 
     if (QX11Info::isPlatformX11()) {
@@ -293,6 +299,16 @@ void UnlockApp::setWallpaperItemProperties(PlasmaQuick::SharedQmlEngine *wallpap
 
 void UnlockApp::initialViewSetup()
 {
+    qmlRegisterUncreatableType<PamAuthenticator>("org.kde.kscreenlocker",
+                                                 1,
+                                                 0,
+                                                 "Authenticator",
+                                                 QStringLiteral("authenticators must be obtained from the context"));
+    qmlRegisterUncreatableType<PamAuthenticators>("org.kde.kscreenlocker",
+                                                  1,
+                                                  0,
+                                                  "Authenticators",
+                                                  QStringLiteral("authenticators must be obtained from the context"));
     for (QScreen *screen : screens()) {
         handleScreen(screen);
     }
@@ -352,7 +368,8 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     // engine stuff
     QQmlContext *context = view->engine()->rootContext();
     connect(view->engine().get(), &QQmlEngine::quit, this, [this]() {
-        if (m_authenticator->isUnlocked()) {
+        if (m_authenticators->isUnlocked()) {
+            std::cout << "Unlocked" << std::endl;
             QCoreApplication::quit();
         } else {
             qCWarning(KSCREENLOCKER_GREET) << "Greeter tried to quit without being unlocked";
@@ -361,7 +378,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
 
     context->setContextProperty(QStringLiteral("kscreenlocker_userName"), m_userName);
     context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), m_userImage);
-    context->setContextProperty(QStringLiteral("authenticator"), m_authenticator);
+    context->setContextProperty(QStringLiteral("authenticator"), m_authenticators);
     context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
     context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
     context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
@@ -382,6 +399,9 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
 
         qCWarning(KSCREENLOCKER_GREET) << "Failed to load lockscreen QML, falling back to built-in locker";
+        for (const auto &error : view->errors()) {
+            qCWarning(KSCREENLOCKER_GREET) << error;
+        }
 
         m_mainQmlPath = fallbackUrl;
         view->setSource(fallbackUrl);
@@ -499,6 +519,7 @@ void UnlockApp::suspendToRam()
 
     m_ignoreRequests = true;
     m_resetRequestIgnoreTimer->start();
+    m_authenticators->cancel();
 
     PowerManagement::instance()->suspend();
 }
@@ -511,6 +532,7 @@ void UnlockApp::suspendToDisk()
 
     m_ignoreRequests = true;
     m_resetRequestIgnoreTimer->start();
+    m_authenticators->cancel();
 
     PowerManagement::instance()->hibernate();
 }
