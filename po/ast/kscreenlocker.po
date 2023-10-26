@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the kscreenlocker package.
 #
-# Enol P. <enolp@softastur.org>, 2023.
+# SPDX-FileCopyrightText: 2023 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-05 02:51+0000\n"
-"PO-Revision-Date: 2023-05-03 21:17+0200\n"
+"PO-Revision-Date: 2023-10-25 09:52+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: abstractlocker.cpp:39
 #, kde-format
@@ -24,6 +24,9 @@ msgid ""
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
 "of which could be found on your system."
 msgstr ""
+"El bloquiador de la pantalla ta estropiáu ya xá nun se pue desbloquiar.\n"
+"Pa desbloquialu precises ConsoleKit o LoginD, mas nengunu d'ellos\n"
+" s'atopó nel sistema."
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -36,6 +39,12 @@ msgid ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 msgstr ""
+"El bloquiador de la pantalla ta estropiáu ya xá nun se pue desbloquiar.\n"
+"Pa desbloquialu, cambia a una terminal virtual (p. ex., Ctrl+Alt+F%1),\n"
+" anicia la sesión como root ya executa'l comandu:\n"
+"\n"
+"# ck-unlock-session <session-name>\n"
+"\n"
 
 #: abstractlocker.cpp:48
 #, kde-format
@@ -53,6 +62,17 @@ msgid ""
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
 msgstr ""
+"El bloquiador de la pantalla ta estropiáu ya xá nun se pue desbloquiar.\n"
+"Pa desbloquialu, cambia a una terminal virtual (p. ex., Ctrl+Alt+F%1),\n"
+" anicia la sesión na to cuenta ya executa'l comandu:\n"
+"\n"
+"loginctl unlock-session %2\n"
+"\n"
+"Dempués zarra la sesión virtual primiendo Ctrl+D y volvi cambiar a la\n"
+"sesión n'execución (Ctrl+Alt+F%3).\n"
+"Si escaeces estes instrucciones, pues volver a esta pantalla primiendo\n"
+"Ctrl+Alt+F%3\n"
+"\n"
 
 #: ksldapp.cpp:160
 #, kde-format
