@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 
     qCDebug(KSCREENLOCKER_GREET) << "Greeter is starting up.";
 
-    KLocalizedString::setApplicationDomain("kscreenlocker_greet");
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("kscreenlocker_greet"));
 
     // explicitly disable input methods on x11 as it makes it impossible to unlock, see BUG 306932
     // but explicitly set on screen keyboard such as maliit is allowed
