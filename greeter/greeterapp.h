@@ -100,7 +100,9 @@ private:
     bool m_canHibernate = false;
     QString m_userName, m_userImage;
 
-    wl_display *m_display = nullptr;
+    KWayland::Client::ConnectionThread *m_ksldConnection = nullptr;
+    KWayland::Client::Registry *m_ksldRegistry = nullptr;
+    QThread *m_ksldConnectionThread = nullptr;
     org_kde_ksld *m_ksldInterface = nullptr;
 
     KPackage::Package m_wallpaperPackage;

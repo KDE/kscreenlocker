@@ -52,6 +52,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     IdleTime
     Notifications
     Solid
+    Wayland
     WindowSystem
     XmlGui
     PlasmaQuick
