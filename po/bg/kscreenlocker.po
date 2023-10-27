@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-05 02:51+0000\n"
+"POT-Creation-Date: 2023-10-27 01:41+0000\n"
 "PO-Revision-Date: 2023-03-08 22:36+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -74,17 +74,17 @@ msgstr ""
 "екран като натиснете CTRL+ALT+F%2\n"
 "\n"
 
-#: ksldapp.cpp:160
+#: ksldapp.cpp:161
 #, kde-format
 msgid "Lock Session"
 msgstr "Заключване на сесията"
 
-#: ksldapp.cpp:387
+#: ksldapp.cpp:407
 #, kde-format
 msgid "Screen locked"
 msgstr "Екранът е заключен"
 
-#: ksldapp.cpp:546
+#: ksldapp.cpp:566
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Екранът е отключен"

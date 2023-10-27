@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-05 02:51+0000\n"
+"POT-Creation-Date: 2023-10-27 01:41+0000\n"
 "PO-Revision-Date: 2023-03-10 19:26+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -74,17 +74,17 @@ msgstr ""
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:160
+#: ksldapp.cpp:161
 #, kde-format
 msgid "Lock Session"
 msgstr "Lock Session"
 
-#: ksldapp.cpp:387
+#: ksldapp.cpp:407
 #, kde-format
 msgid "Screen locked"
 msgstr "Screen locked"
 
-#: ksldapp.cpp:546
+#: ksldapp.cpp:566
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Screen unlocked"
