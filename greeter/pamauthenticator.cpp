@@ -22,10 +22,6 @@ public:
     Q_DISABLE_COPY_MOVE(PamWorker)
     void start(const QString &service, const QString &user);
     void authenticate();
-    inline auto debug()
-    {
-        return qUtf8Printable(QStringLiteral("[PAM worker ") + m_service + QChar(']'));
-    }
 
 Q_SIGNALS:
     void busyChanged(bool busy);
@@ -80,24 +76,28 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
                 Q_EMIT c->prompt(prompt);
             }
 
-            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message:" << (isSecret ? "Echo-off prompt:" : "Echo-on prompt:") << prompt;
+            qCDebug(KSCREENLOCKER_GREET,
+                    "[PAM worker %s] Message: %s: %s",
+                    qUtf8Printable(c->m_service),
+                    (isSecret ? "Echo-off prompt" : "Echo-on prompt"),
+                    qUtf8Printable(prompt));
 
             QByteArray response;
             QEventLoop e;
             QObject::connect(c, &PamWorker::promptResponseReceived, &e, [&](const QByteArray &_response) {
-                qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Received response, exiting nested event loop";
+                qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Received response, exiting nested event loop", qUtf8Printable(c->m_service));
                 response = _response;
                 e.exit(0);
             });
             QObject::connect(c, &PamWorker::cancelled, &e, [&]() {
-                qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Received cancellation, exiting with PAM_CONV_ERR";
+                qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Received cancellation, exiting with PAM_CONV_ERR", qUtf8Printable(c->m_service));
                 e.exit(PAM_CONV_ERR);
             });
 
-            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Starting nested event loop to await response";
+            qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Starting nested event loop to await response", qUtf8Printable(c->m_service));
             int rc = e.exec();
             if (rc != 0) {
-                qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Nested event loop's exit code was not zero, bailing";
+                qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Nested event loop's exit code was not zero, bailing", qUtf8Printable(c->m_service));
                 return rc;
             }
 
@@ -120,17 +120,21 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 
             break;
         }
-        case PAM_ERROR_MSG:
-            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message: Error message:" << QString::fromLocal8Bit(msg[i]->msg);
-            Q_EMIT c->errorMessage(QString::fromLocal8Bit(msg[i]->msg));
+        case PAM_ERROR_MSG: {
+            const QString error = QString::fromLocal8Bit(msg[i]->msg);
+            qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Message: Error message: %s", qUtf8Printable(c->m_service), qUtf8Printable(error));
+            Q_EMIT c->errorMessage(error);
             break;
-        case PAM_TEXT_INFO:
+        }
+        case PAM_TEXT_INFO: {
             // if there's only the info message, let's predict the prompts too
-            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message: Info message:" << QString::fromLocal8Bit(msg[i]->msg);
-            Q_EMIT c->infoMessage(QString::fromLocal8Bit(msg[i]->msg));
+            const QString info = QString::fromLocal8Bit(msg[i]->msg);
+            qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Message: Info message: %s", qUtf8Printable(c->m_service), qUtf8Printable(info));
+            Q_EMIT c->infoMessage(info);
             break;
+        }
         default:
-            qCDebug(KSCREENLOCKER_GREET) << c->debug() << "Message: Unhandled message type:" << msg[i]->msg_style;
+            qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Message: Unhandled message type: %d", qUtf8Printable(c->m_service), msg[i]->msg_style);
             break;
         }
     }
@@ -158,9 +162,13 @@ void PamWorker::authenticate()
     }
     m_inAuthenticate = true;
     Q_EMIT inAuthenticateChanged(m_inAuthenticate);
-    qCDebug(KSCREENLOCKER_GREET) << debug() << "Authenticate: Starting authentication";
+    qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Authenticate: Starting authentication", qUtf8Printable(m_service));
     int rc = pam_authenticate(m_handle, 0); // PAM_SILENT);
-    qCDebug(KSCREENLOCKER_GREET) << debug() << "Authenticate: Authentication done, result code:" << rc << pam_strerror(m_handle, rc);
+    qCDebug(KSCREENLOCKER_GREET,
+            "[PAM worker %s] Authenticate: Authentication done, result code: %d (%s)",
+            qUtf8Printable(m_service),
+            rc,
+            pam_strerror(m_handle, rc));
 
     Q_EMIT busyChanged(false);
 
@@ -199,10 +207,14 @@ void PamWorker::start(const QString &service, const QString &user)
 #endif
 
     if (m_result != PAM_SUCCESS) {
-        qCWarning(KSCREENLOCKER_GREET) << debug() << "start: error starting, result code:" << m_result << pam_strerror(m_handle, m_result);
+        qCWarning(KSCREENLOCKER_GREET,
+                  "[PAM worker %s] start: error starting, result code: %d (%s)",
+                  qUtf8Printable(m_service),
+                  m_result,
+                  pam_strerror(m_handle, m_result));
         return;
     } else {
-        qCDebug(KSCREENLOCKER_GREET) << debug() << "start: successfully started";
+        qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] start: successfully started", qUtf8Printable(m_service));
     }
 }
 
