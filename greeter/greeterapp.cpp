@@ -30,16 +30,13 @@ SPDX-License-Identifier: GPL-2.0-or-later
 // Plasma
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
-// KWayland
-#include <KWayland/Client/connection_thread.h>
-#include <KWayland/Client/event_queue.h>
-#include <KWayland/Client/registry.h>
 // Qt
 #include <QAbstractNativeEventFilter>
 #include <QClipboard>
 #include <QDBusConnection>
 #include <QKeyEvent>
 #include <QMimeData>
+#include <QSocketNotifier>
 #include <QThread>
 #include <QTimer>
 #include <qscreen.h>
@@ -72,6 +69,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 static const QString s_plasmaShellService = QStringLiteral("org.kde.plasmashell");
 static const QString s_osdServicePath = QStringLiteral("/org/kde/osdService");
 static const QString s_osdServiceInterface = QStringLiteral("org.kde.osdService");
+
+using namespace Qt::Literals;
 
 namespace ScreenLocker
 {
@@ -172,14 +171,7 @@ UnlockApp::~UnlockApp()
     if (m_ksldInterface) {
         org_kde_ksld_destroy(m_ksldInterface);
     }
-    if (m_ksldRegistry) {
-        delete m_ksldRegistry;
-    }
-    if (m_ksldConnection) {
-        m_ksldConnection->deleteLater();
-        m_ksldConnectionThread->quit();
-        m_ksldConnectionThread->wait();
-    }
+    wl_display_disconnect(m_display);
 }
 
 void UnlockApp::initialize()
@@ -370,7 +362,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     if (m_ksldInterface) {
         view->create();
         org_kde_ksld_x11window(m_ksldInterface, view->winId());
-        wl_display_flush(m_ksldConnection->display());
+        wl_display_flush(m_display);
     }
 
     // engine stuff
@@ -687,45 +679,29 @@ void UnlockApp::setDefaultToSwitchUser(bool defaultToSwitchUser)
 
 void UnlockApp::setKsldSocket(int socket)
 {
-    using namespace KWayland::Client;
-    m_ksldConnection = new ConnectionThread;
-    m_ksldConnection->setSocketFd(socket);
-
-    m_ksldRegistry = new Registry();
-    EventQueue *queue = new EventQueue(m_ksldRegistry);
-
-    connect(m_ksldRegistry, &Registry::interfaceAnnounced, this, [this, queue](QByteArray interface, quint32 name, quint32 version) {
+    m_display = wl_display_connect_to_fd(socket);
+    auto socketnotifier = new QSocketNotifier(socket, QSocketNotifier::Read, this);
+    connect(socketnotifier, &QSocketNotifier::activated, this, [this] {
+        wl_display_dispatch(m_display);
+    });
+    auto registry = wl_display_get_registry(m_display);
+    auto globalAdded = [](void *data, struct wl_registry *registry, uint32_t name, const char *interface, uint32_t version) {
         Q_UNUSED(version)
-        if (interface != QByteArrayLiteral("org_kde_ksld")) {
+        if (interface != "org_kde_ksld"_ba) {
             return;
         }
+        auto self = static_cast<UnlockApp *>(data);
         // bind version 1 as we dropped all the V2 features
-        m_ksldInterface = reinterpret_cast<org_kde_ksld *>(wl_registry_bind(*m_ksldRegistry, name, &org_kde_ksld_interface, 1));
-        queue->addProxy(m_ksldInterface);
-
-        for (auto v : std::as_const(m_views)) {
-            org_kde_ksld_x11window(m_ksldInterface, v->winId());
-            wl_display_flush(m_ksldConnection->display());
+        self->m_ksldInterface = static_cast<org_kde_ksld *>(wl_registry_bind(registry, name, &org_kde_ksld_interface, 1));
+        for (auto v : std::as_const(self->m_views)) {
+            org_kde_ksld_x11window(self->m_ksldInterface, v->winId());
+            wl_display_flush(self->m_display);
         }
-    });
-
-    connect(
-        m_ksldConnection,
-        &ConnectionThread::connected,
-        this,
-        [this, queue] {
-            m_ksldRegistry->create(m_ksldConnection);
-            queue->setup(m_ksldConnection);
-            m_ksldRegistry->setEventQueue(queue);
-            m_ksldRegistry->setup();
-            wl_display_flush(m_ksldConnection->display());
-        },
-        Qt::QueuedConnection);
-
-    m_ksldConnectionThread = new QThread(this);
-    m_ksldConnection->moveToThread(m_ksldConnectionThread);
-    m_ksldConnectionThread->start();
-    m_ksldConnection->initConnection();
+    };
+    auto noopGlobalRemove = [](void *, struct wl_registry *, uint32_t) {};
+    static const wl_registry_listener registryListener = wl_registry_listener{globalAdded, noopGlobalRemove};
+    wl_registry_add_listener(registry, &registryListener, this);
+    wl_display_flush(m_display);
 }
 
 void UnlockApp::osdProgress(const QString &icon, int percent, int maximumPercent, const QString &additionalText)
