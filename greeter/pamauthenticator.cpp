@@ -206,7 +206,7 @@ void PamWorker::start(const QString &service, const QString &user)
     }
 }
 
-PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, NoninteractiveAuthenticatorTypes types, QObject *parent)
+PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, NoninteractiveAuthenticatorType::Types types, QObject *parent)
     : QObject(parent)
     , m_signalsToMembers({
           {QMetaMethod::fromSignal(&PamAuthenticator::prompt), m_prompt},
@@ -285,7 +285,7 @@ bool PamAuthenticator::isAvailable() const
     return m_inAuthentication && !m_unavailable;
 }
 
-PamAuthenticator::NoninteractiveAuthenticatorTypes PamAuthenticator::authenticatorType() const
+NoninteractiveAuthenticatorType::Types PamAuthenticator::authenticatorType() const
 {
     return m_authenticatorType;
 }

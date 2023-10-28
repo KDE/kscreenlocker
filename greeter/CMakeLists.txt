@@ -7,6 +7,9 @@ include_directories(
 )
 
 set(kscreenlocker_authenticator_SRCS
+    authenticatorsstate.h
+    abstractauthenticators.cpp
+    noninteractiveauthenticatortype.h
     pamauthenticators.cpp
     pamauthenticators.h
     pamauthenticator.cpp
@@ -86,6 +89,15 @@ target_compile_definitions(kscreenlocker_greet PRIVATE
     KSCREENLOCKER_PAM_FINGERPRINT_SERVICE=${KSCREENLOCKER_PAM_FINGERPRINT_SERVICE}
     KSCREENLOCKER_PAM_SMARTCARD_SERVICE=${KSCREENLOCKER_PAM_SMARTCARD_SERVICE}
 )
+
+ecm_add_qml_module(kscreenlocker URI org.kde.kscreenlocker GENERATE_PLUGIN_SOURCE VERSION 1.0)
+target_compile_definitions(kscreenlocker PRIVATE BUILD_DECLARATIVE)
+target_sources(kscreenlocker PRIVATE
+    abstractauthenticators.cpp
+    noninteractiveauthenticatortype.h
+    authenticatorsstate.h
+)
+ecm_finalize_qml_module(kscreenlocker)
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 

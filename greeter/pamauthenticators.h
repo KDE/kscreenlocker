@@ -10,7 +10,9 @@
 #include <QObject>
 #include <memory>
 
-class PamAuthenticators : public QObject
+#include "abstractauthenticators.h"
+
+class PamAuthenticators : public AbstractAuthenticators
 {
     Q_OBJECT
 
@@ -18,7 +20,6 @@ class PamAuthenticators : public QObject
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
 
     Q_PROPERTY(QString prompt READ prompt NOTIFY promptChanged)
-    Q_PROPERTY(QString promptForSecret READ promptForSecret NOTIFY promptForSecretChanged)
 
     Q_PROPERTY(QString infoMessage READ infoMessage NOTIFY infoMessageChanged)
     Q_PROPERTY(QString errorMessage READ errorMessage NOTIFY errorMessageChanged)
@@ -26,28 +27,14 @@ class PamAuthenticators : public QObject
     // this property true if any of the authenticators' unlocked properties are true
     Q_PROPERTY(bool unlocked READ isUnlocked NOTIFY succeeded)
 
-    // this property is a sum of the noninteractive authenticators' flags
-    Q_PROPERTY(PamAuthenticator::NoninteractiveAuthenticatorTypes authenticatorTypes READ authenticatorTypes NOTIFY authenticatorTypesChanged)
-
-    Q_PROPERTY(AuthenticatorsState state READ state NOTIFY stateChanged)
-
 public:
-    PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interactive,
-                      std::vector<std::unique_ptr<PamAuthenticator>> &&noninteractive,
-                      QObject *parent = nullptr);
+    explicit PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interactive,
+                               std::vector<std::unique_ptr<PamAuthenticator>> &&noninteractive,
+                               QObject *parent = nullptr);
     ~PamAuthenticators() override;
 
-    enum AuthenticatorsState {
-        Idle,
-        Authenticating,
-        Failed,
-    };
-    Q_ENUM(AuthenticatorsState)
-
-    AuthenticatorsState state() const;
-    Q_SIGNAL void stateChanged();
-    Q_INVOKABLE void startAuthenticating();
-    Q_INVOKABLE void stopAuthenticating();
+    Q_INVOKABLE void startAuthenticating() override;
+    Q_INVOKABLE void stopAuthenticating() override;
 
     // these properties delegate to the interactive authenticator
     bool isBusy() const;
@@ -55,33 +42,26 @@ public:
 
     QString prompt() const;
     Q_SIGNAL void promptChanged();
-    QString promptForSecret() const;
-    Q_SIGNAL void promptForSecretChanged();
+    QString promptForSecret() const override;
     QString infoMessage() const;
     Q_SIGNAL void infoMessageChanged();
     QString errorMessage() const;
     Q_SIGNAL void errorMessageChanged();
 
     // these delegate to interactive authenticator
-    Q_INVOKABLE void respond(const QByteArray &response);
-    Q_INVOKABLE void cancel();
+    Q_INVOKABLE void respond(const QByteArray &response) override;
+    Q_INVOKABLE void cancel() override;
 
     // this property is true if any of the authenticators' unlocked properties are true
     bool isUnlocked() const;
-    Q_SIGNAL void succeeded();
 
-    PamAuthenticator::NoninteractiveAuthenticatorTypes authenticatorTypes() const;
-    Q_SIGNAL void authenticatorTypesChanged();
-
-    Q_SIGNAL void failed(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
-    Q_SIGNAL void noninteractiveError(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
-    Q_SIGNAL void noninteractiveInfo(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
+    Q_SIGNAL void noninteractiveError(NoninteractiveAuthenticatorType::Types what, QObject *authenticator);
+    Q_SIGNAL void noninteractiveInfo(NoninteractiveAuthenticatorType::Types what, QObject *authenticator);
 
 private:
-    struct Private;
-    QScopedPointer<Private> d;
+    void recomputeNoninteractiveAuthenticationTypes();
+    void cancelNoninteractive();
 
-    // convenience internal function for setting state,
-    // should not be exposed to outsiders
-    void setState(AuthenticatorsState state);
+    std::unique_ptr<PamAuthenticator> m_interactive;
+    std::vector<std::unique_ptr<PamAuthenticator>> m_noninteractive;
 };

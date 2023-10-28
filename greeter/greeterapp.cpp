@@ -147,8 +147,10 @@ UnlockApp::UnlockApp(int &argc, char **argv)
 {
     auto interactive = std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SERVICE, KUser().loginName());
     std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
-    noninteractive.push_back(std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, KUser().loginName(), PamAuthenticator::Fingerprint));
-    noninteractive.push_back(std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SMARTCARD_SERVICE, KUser().loginName(), PamAuthenticator::Smartcard));
+    noninteractive.push_back(
+        std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, KUser().loginName(), NoninteractiveAuthenticatorType::Fingerprint));
+    noninteractive.push_back(
+        std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SMARTCARD_SERVICE, KUser().loginName(), NoninteractiveAuthenticatorType::Smartcard));
     m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
     initialize();
 
@@ -299,16 +301,6 @@ void UnlockApp::setWallpaperItemProperties(PlasmaQuick::SharedQmlEngine *wallpap
 
 void UnlockApp::initialViewSetup()
 {
-    qmlRegisterUncreatableType<PamAuthenticator>("org.kde.kscreenlocker",
-                                                 1,
-                                                 0,
-                                                 "Authenticator",
-                                                 QStringLiteral("authenticators must be obtained from the context"));
-    qmlRegisterUncreatableType<PamAuthenticators>("org.kde.kscreenlocker",
-                                                  1,
-                                                  0,
-                                                  "Authenticators",
-                                                  QStringLiteral("authenticators must be obtained from the context"));
     for (QScreen *screen : screens()) {
         handleScreen(screen);
     }
