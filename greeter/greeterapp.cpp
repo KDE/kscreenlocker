@@ -171,7 +171,9 @@ UnlockApp::~UnlockApp()
     if (m_ksldInterface) {
         org_kde_ksld_destroy(m_ksldInterface);
     }
-    wl_display_disconnect(m_display);
+    if (m_display) {
+        wl_display_disconnect(m_display);
+    }
 }
 
 void UnlockApp::initialize()
