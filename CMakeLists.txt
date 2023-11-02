@@ -119,7 +119,6 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu90")
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KSCREENLOCKER
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kscreenlocker_version.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KScreenLockerConfigVersion.cmake"
-    SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 
 configure_file(config-kscreenlocker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kscreenlocker.h)
