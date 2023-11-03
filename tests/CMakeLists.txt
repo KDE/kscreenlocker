@@ -1,5 +1,5 @@
 add_executable(kscreenlocker_test kscreenlocker_main.cpp)
-target_link_libraries(kscreenlocker_test KScreenLocker Qt::Widgets KF6::I18n)
+target_link_libraries(kscreenlocker_test KScreenLocker Qt::Gui KF6::I18n)
 ecm_mark_as_test(kscreenlocker_test)
 
 add_definitions(-DQML_PATH="${CMAKE_CURRENT_SOURCE_DIR}/powermanagement.qml")

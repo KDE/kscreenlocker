@@ -4,12 +4,12 @@ SPDX-FileCopyrightText: 2014 Martin Gräßlin <mgraesslin@kde.org>
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "../ksldapp.h"
-#include <QApplication>
 #include <QCommandLineParser>
+#include <QGuiApplication>
 
 int main(int argc, char **argv)
 {
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
     ScreenLocker::KSldApp locker(&app);
     locker.initialize();
-    QObject::connect(&locker, &ScreenLocker::KSldApp::unlocked, &app, &QApplication::quit);
+    QObject::connect(&locker, &ScreenLocker::KSldApp::unlocked, &app, &QGuiApplication::quit);
     locker.lock(ScreenLocker::EstablishLock::Immediate);
 
     return app.exec();
