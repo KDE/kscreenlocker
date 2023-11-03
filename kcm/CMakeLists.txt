@@ -19,5 +19,4 @@ target_link_libraries(kcm_screenlocker PRIVATE
     KF6::KCMUtilsQuick # KQuickManagedConfigModule
     KF6::I18n
     KF6::GlobalAccel
-    KF6::XmlGui
 )

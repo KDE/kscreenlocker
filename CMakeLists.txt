@@ -198,7 +198,6 @@ PRIVATE
    KF6::ConfigGui
    KF6::Package
    KF6::WindowSystem
-   KF6::XmlGui
    X11::X11
    XCB::XCB
    XCB::KEYSYMS
