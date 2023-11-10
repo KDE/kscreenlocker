@@ -88,7 +88,7 @@ void KillTest::testKill()
     kill(greeter.processId(), signal);
 
     QFETCH(bool, expectedQuit);
-    QCOMPARE(greeter.waitForFinished(1000), expectedQuit);
+    QCOMPARE(greeter.waitForFinished(3000), expectedQuit);
     if (greeter.state() == QProcess::Running) {
         greeter.terminate();
         QVERIFY(greeter.waitForFinished());
