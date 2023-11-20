@@ -64,7 +64,7 @@ PamAuthenticators::PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interac
         });
         connect(noninteractive.get(), &PamAuthenticator::failed, this, [this, &noninteractive] {
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Non-interactive authenticator" << qUtf8Printable(noninteractive->service()) << "failed";
-            setState(AuthenticatorsState::Failed);
+            //            setState(AuthenticatorsState::Failed);
             d->cancelNoninteractive();
             Q_EMIT failed(noninteractive->authenticatorType(), noninteractive.get());
         });
