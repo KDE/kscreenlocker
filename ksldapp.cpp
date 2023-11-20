@@ -406,6 +406,8 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 
     KNotification::event(QStringLiteral("locked"), i18n("Screen locked"), QPixmap(), KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
 
+    s_lockProcessRequestedExit = false;
+
     // blank the screen
     showLockWindow();
 
