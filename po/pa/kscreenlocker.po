@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-27 01:41+0000\n"
+"POT-Creation-Date: 2023-11-21 01:35+0000\n"
 "PO-Revision-Date: 2018-01-07 21:29-0600\n"
 "Last-Translator: A S Alam <aalam@fedoraproject.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -64,7 +64,7 @@ msgstr "ਸ਼ੈਸ਼ਨ ਲਾਕ ਕਰੋ"
 msgid "Screen locked"
 msgstr "ਸਕਰੀਨ ਲਾਕ ਹੈ"
 
-#: ksldapp.cpp:566
+#: ksldapp.cpp:568
 #, kde-format
 msgid "Screen unlocked"
 msgstr "ਸਕਰੀਨ ਅਣ-ਲਾਕ ਹੈ"

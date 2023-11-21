@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kde 49i410\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-27 01:41+0000\n"
+"POT-Creation-Date: 2023-11-21 01:35+0000\n"
 "PO-Revision-Date: 2015-01-07 00:34+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -67,7 +67,7 @@ msgstr "Zaključaj sesiju"
 msgid "Screen locked"
 msgstr ""
 
-#: ksldapp.cpp:566
+#: ksldapp.cpp:568
 #, kde-format
 msgid "Screen unlocked"
 msgstr ""

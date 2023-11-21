@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-27 01:41+0000\n"
+"POT-Creation-Date: 2023-11-21 01:35+0000\n"
 "PO-Revision-Date: 2022-12-18 10:41+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -119,7 +119,7 @@ msgstr "Заблокировать сеанс"
 msgid "Screen locked"
 msgstr "Экран заблокирован"
 
-#: ksldapp.cpp:566
+#: ksldapp.cpp:568
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Экран разблокирован"
