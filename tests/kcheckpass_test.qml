@@ -9,15 +9,17 @@ import QtQuick.Layouts 1.3
 
 ApplicationWindow {
     visible: true
+
+    Component.onCompleted: authenticator.startAuthenticating()
+
+
+
     ColumnLayout {
         anchors.fill: parent
         Label {
             id: message
             Connections {
                 target: authenticator
-                function onPromptForSecretChanged() {
-                    authenticator.respond(password.text)
-                }
                 function onSucceeded() {
                     message.text = "Authentication succeeded";
                 }
@@ -32,10 +34,17 @@ ApplicationWindow {
             echoMode: TextInput.Password
         }
         Button {
-            text: "Authenticate"
+            text: "Respond"
             onClicked: {
-                console.log("unlock")
-                authenticator.tryUnlock()
+                console.log("respond")
+                authenticator.respond(password.text)
+            }
+        }
+        Button {
+            text: "Stop"
+            onClicked: {
+                console.log("cancel")
+                authenticator.stopAuthenticating()
             }
         }
         Item {
