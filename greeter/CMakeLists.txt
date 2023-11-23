@@ -56,7 +56,7 @@ target_link_libraries(kscreenlocker_greet
     KF6::ConfigGui
     KF6::KIOCore
     KF6::WindowSystem
-    KF6::PlasmaQuick
+    Plasma::PlasmaQuick
     Qt::Quick
     Qt::Qml
     Qt::GuiPrivate
