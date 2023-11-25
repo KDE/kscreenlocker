@@ -21,7 +21,7 @@ Dependencies:
     'frameworks/kwindowsystem': '@latest-kf6'
     'frameworks/kxmlgui': '@latest-kf6'
     'frameworks/ksvg': '@latest-kf6'
-    'plasma/plasma-framework': '@same'
+    'plasma/libplasma': '@same'
     'plasma/layer-shell-qt': '@same'
     'plasma/libkscreen': '@same'
     'third-party/wayland': '@latest'
