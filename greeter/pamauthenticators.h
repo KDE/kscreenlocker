@@ -40,7 +40,6 @@ public:
     enum AuthenticatorsState {
         Idle,
         Authenticating,
-        Failed,
     };
     Q_ENUM(AuthenticatorsState)
 
