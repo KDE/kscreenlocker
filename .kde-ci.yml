@@ -25,3 +25,6 @@ Dependencies:
     'plasma/layer-shell-qt': '@same'
     'plasma/libkscreen': '@same'
     'third-party/wayland': '@latest'
+
+Options:
+  require-passing-tests-on: ['@all']
