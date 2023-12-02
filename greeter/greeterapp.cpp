@@ -713,8 +713,9 @@ void UnlockApp::osdProgress(const QString &icon, int percent, int maximumPercent
         if (!osd) {
             continue;
         }
-        osd->setProperty("osdValue", percent);
+        // Update max value first to prevent value from being clamped
         osd->setProperty("osdMaxValue", maximumPercent);
+        osd->setProperty("osdValue", percent);
         osd->setProperty("osdAdditionalText", additionalText);
         osd->setProperty("showingProgress", true);
         osd->setProperty("icon", icon);
