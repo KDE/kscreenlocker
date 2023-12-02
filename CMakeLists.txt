@@ -291,11 +291,6 @@ install(FILES ${screensaver_dbusXML}
 install(FILES ${kscreensaver_dbusXML}
         DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
 
-
-install(FILES   updaters/kscreenlocker.upd DESTINATION ${KDE_INSTALL_DATADIR}/kconf_update)
-install(PROGRAMS updaters/ksreenlocker_5_3_separate_autologin.pl
-                DESTINATION ${KDE_INSTALL_DATADIR}/kconf_update)
-
 if(BUILD_TESTING)
    add_subdirectory(autotests)
    add_subdirectory(tests)
