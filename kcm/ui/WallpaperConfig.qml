@@ -26,7 +26,7 @@ QQC2.StackView {
 
     onSourceFileChanged: {
         if (sourceFile) {
-            const props = {}
+            const props = {"configDialog": configDialog}
             const wallpaperConfig = configDialog.wallpaperConfiguration
             for (const key in wallpaperConfig) {
                 props["cfg_" + key] = wallpaperConfig[key]
