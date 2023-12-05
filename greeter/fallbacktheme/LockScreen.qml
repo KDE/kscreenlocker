@@ -1,29 +1,36 @@
 /*
-SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
-SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
+    SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
+    SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
 
-SPDX-License-Identifier: GPL-2.0-or-later
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
+import QtQuick
 import QtQuick.Controls as QQC2
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
-import org.kde.kquickcontrolsaddons 2.0
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.private.sessions 2.0
+import org.kde.kquickcontrolsaddons
+import org.kde.ksvg as KSvg
+import org.kde.plasma.private.sessions
 
 Item {
-    id: lockScreen
+    id: root
 
-    property alias capsLockOn: unlockUI.capsLockOn
+    // Note: This property is set from C++
     property bool locked: false
 
-    signal unlockRequested()
+    readonly property bool capsLockOn: keystateSourceLoader.item?.data?.["Caps Lock"]?.["Locked"] ?? false
+
+    Loader {
+        id: keystateSourceLoader
+        source: Qt.resolvedUrl("./KeyState.qml")
+    }
 
     // if there's no image, have a pure black background
     Rectangle {
+        z: -1
         width: parent.width
         height: parent.height
         color: "black"
@@ -42,20 +49,20 @@ Item {
     KSvg.FrameSvgItem {
         id: dialog
 
-        visible: lockScreen.locked
+        visible: root.locked
         anchors.centerIn: parent
-        width: mainStack.currentItem.implicitWidth + margins.left + margins.right
-        height: mainStack.currentItem.implicitHeight + margins.top + margins.bottom
+        width: (mainStack.currentItem?.implicitWidth ?? 0) + margins.left + margins.right
+        height: (mainStack.currentItem?.implicitHeight ?? 0) + margins.top + margins.bottom
         imagePath: "widgets/background"
 
         Behavior on height {
-            enabled: mainStack.currentItem != null
+            enabled: mainStack.currentItem !== null
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
             }
         }
         Behavior on width {
-            enabled: mainStack.currentItem != null
+            enabled: mainStack.currentItem !== null
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
             }
@@ -80,23 +87,20 @@ Item {
         id: unlockUI
 
         switchUserEnabled: sessionsModel.canSwitchUser
+        capsLockOn: root.capsLockOn
 
         visible: opacity > 0
-        opacity: mainStack.currentItem == unlockUI
+        opacity: mainStack.currentItem === unlockUI ? 1 : 0
+
         Behavior on opacity {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
             }
         }
 
-        Connections {
-            function onAccepted() {
-                lockScreen.unlockRequested();
-            }
-            function onSwitchUserClicked() {
-                mainStack.push(userSessionsUIComponent);
-                mainStack.currentItem.forceActiveFocus();
-            }
+        onSwitchUserClicked: {
+            mainStack.push(userSessionsUIComponent, { sessionsModel });
+            mainStack.currentItem.forceActiveFocus();
         }
     }
 
@@ -113,16 +117,14 @@ Item {
 
             visible: false
 
-            Connections {
-                function onSwitchingCanceled() {
-                    returnToLogin();
-                }
-                function onSessionActivated() {
-                    returnToLogin();
-                }
-                function onNewSessionStarted() {
-                    returnToLogin();
-                }
+            onSwitchingCanceled: {
+                root.returnToLogin();
+            }
+            onSessionActivated: {
+                root.returnToLogin();
+            }
+            onNewSessionStarted: {
+                root.returnToLogin();
             }
         }
     }
