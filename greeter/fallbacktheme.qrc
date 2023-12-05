@@ -1,7 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
  <qresource>
-    <file>fallbacktheme/SessionSwitching.qml</file>
-    <file>fallbacktheme/LockScreen.qml</file>
     <file>fallbacktheme/Greeter.qml</file>
+    <file>fallbacktheme/KeyState.qml</file>
+    <file>fallbacktheme/LockScreen.qml</file>
+    <file>fallbacktheme/SessionSwitching.qml</file>
  </qresource>
 </RCC>

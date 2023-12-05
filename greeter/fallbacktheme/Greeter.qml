@@ -1,23 +1,24 @@
 /*
-SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
-SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
+    SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
+    SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
 
-SPDX-License-Identifier: GPL-2.0-or-later
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kscreenlocker 1.0 as ScreenLocker
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kscreenlocker as ScreenLocker
 
 Item {
     id: root
 
     signal switchUserClicked()
-    signal canceled()
 
     property alias notification: message.text
     property bool switchUserEnabled
@@ -29,6 +30,10 @@ Item {
 
     implicitWidth: layoutItem.width + Kirigami.Units.largeSpacing * 2
     implicitHeight: layoutItem.height + Kirigami.Units.largeSpacing * 2
+
+    QQC2.StackView.onActivated: {
+        resetFocus();
+    }
 
     ColumnLayout {
         id: layoutItem
@@ -44,7 +49,7 @@ Item {
             font.bold: true
 
             visible: opacity > 0
-            opacity: text == "" ? 0 : 1
+            opacity: text === "" ? 0 : 1
             Behavior on opacity {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
@@ -72,8 +77,9 @@ Item {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
-            text: kscreenlocker_userName.length == 0 ? i18nd("kscreenlocker_greet", "The session is locked") :
-                                                       i18nd("kscreenlocker_greet", "The session has been locked by %1", kscreenlocker_userName)
+            text: kscreenlocker_userName.length === 0
+                ? i18nd("kscreenlocker_greet", "The session is locked")
+                : i18nd("kscreenlocker_greet", "The session has been locked by %1", kscreenlocker_userName)
         }
         PlasmaExtras.PasswordField {
             id: password
@@ -82,7 +88,7 @@ Item {
             enabled: !authenticator.busy
             Keys.onEnterPressed: authenticator.startAuthenticating()
             Keys.onReturnPressed: authenticator.startAuthenticating()
-            Keys.onEscapePressed: password.text = ""
+            Keys.onEscapePressed: clear()
         }
 
         PlasmaComponents3.Label {
@@ -105,7 +111,7 @@ Item {
                 text: i18nd("kscreenlocker_greet", "&Switch Users")
                 icon.name: "system-switch-user"
                 visible: root.switchUserEnabled
-                onClicked: switchUserClicked()
+                onClicked: root.switchUserClicked()
             }
 
             PlasmaComponents3.Button {
@@ -142,9 +148,5 @@ Item {
         function onSucceeded() {
             Qt.quit()
         }
-    }
-
-    Component.onCompleted: {
-        root.resetFocus();
     }
 }
