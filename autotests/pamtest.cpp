@@ -31,6 +31,8 @@ PamTest::PamTest()
     qputenv("PAM_WRAPPER_DEBUGLEVEL", "2"); // DEBUG level
     qputenv("PAM_WRAPPER_SERVICE_DIR", QFINDTESTDATA("data").toUtf8());
     qputenv("PAM_MATRIX_PASSWD", QFINDTESTDATA("data/test_db").toUtf8());
+
+    qInfo() << "Service dir:" << QFINDTESTDATA("data").toUtf8();
 }
 
 void PamTest::testLogin()

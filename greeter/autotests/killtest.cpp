@@ -11,6 +11,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QProcess>
 #include <QTest>
 // system
+#include <QSignalSpy>
 #include <signal.h>
 
 Q_DECLARE_METATYPE(QProcess::ExitStatus)
@@ -77,22 +78,32 @@ void KillTest::testKill()
 {
     QProcess greeter(this);
     greeter.setReadChannel(QProcess::StandardOutput);
-    greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN_REL), QStringList({QStringLiteral("--testing")}));
-    QVERIFY(greeter.waitForStarted());
 
-    // wait some time till it's really set up
-    QTest::qSleep(5000);
+    QSignalSpy spy(&greeter, &QProcess::readyReadStandardOutput);
+
+    greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN_REL), QStringList({QStringLiteral("--testing")}));
+
+    spy.wait(5000);
+    QCOMPARE(spy.count(), 1); // make sure the signal was emitted exactly one time
+    QList<QVariant> arguments = spy.takeFirst(); // take the first signal
+
+    qInfo() << "Greeter should be ready now. Sending signal...";
 
     // now kill
     QFETCH(int, signal);
     kill(greeter.processId(), signal);
 
+    qInfo() << "Waiting for process to exit or crash...";
+
     QFETCH(bool, expectedQuit);
     QCOMPARE(greeter.waitForFinished(3000), expectedQuit);
     if (greeter.state() == QProcess::Running) {
+        qInfo() << "It's still running, attempting to terminate!";
         greeter.terminate();
         QVERIFY(greeter.waitForFinished());
     } else {
+        qInfo() << greeter.exitCode() << greeter.readAllStandardOutput() << greeter.readAllStandardError();
+
         QFETCH(QProcess::ExitStatus, exitStatus);
         QCOMPARE(greeter.exitStatus(), exitStatus);
 
