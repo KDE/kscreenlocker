@@ -20,16 +20,20 @@ ecm_mark_as_test(logindTest)
 #######################################
 
 pkg_search_module(PamWrapper pam_wrapper)
-if (PamWrapper_FOUND)
+# We're turning it off on the CI until pam_wrapper 1.15 is available on our image (which adds sanitizer support.)
+# see https://invent.kde.org/plasma/kscreenlocker/-/issues/11 for more details
+if (PamWrapper_FOUND AND NOT "$ENV{KDECI_BUILD}" STREQUAL "TRUE")
     pkg_get_variable(PamWrapperModuleDir pam_wrapper "modules")
     configure_file(data/test_service.in ./test_service)
     add_executable(pamTest pamtest.cpp)
     target_link_libraries(pamTest Qt::Test kscreenlocker_authenticator)
     add_test(NAME ksmserver-pamTest COMMAND pamTest)
+    # they made a mistake in the env name, so set both old and new
+    set_tests_properties(ksmserver-pamTest PROPERTIES ENVIRONMENT "UID_WRAPPER_DISABLE_DEEPBIND=1;PAM_WRAPPER_DISABLE_DEEPBIND=1")
     ecm_mark_as_test(pamTest)
     set_property(TEST ksmserver-pamTest
-        PROPERTY
-        ENVIRONMENT LD_PRELOAD=libpam_wrapper.so)
+            PROPERTY
+            ENVIRONMENT "LD_PRELOAD=libpam_wrapper.so;ASAN_OPTIONS=verify_asan_link_order=0")
 endif()
 
 #######################################
