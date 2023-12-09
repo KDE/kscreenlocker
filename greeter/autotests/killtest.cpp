@@ -9,6 +9,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KLibexec>
 // Qt
 #include <QProcess>
+#include <QSignalSpy>
 #include <QTest>
 // system
 #include <signal.h>
@@ -76,12 +77,16 @@ void KillTest::testKill_data()
 void KillTest::testKill()
 {
     QProcess greeter(this);
+    QSignalSpy spy(&greeter, &QProcess::readyReadStandardOutput);
+
     greeter.setReadChannel(QProcess::StandardOutput);
     greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN_REL), QStringList({QStringLiteral("--testing")}));
-    QVERIFY(greeter.waitForStarted());
 
-    // wait some time till it's really set up
-    QTest::qSleep(5000);
+    // Wait for the "locked at" message as an indication that the greeter is ready
+    spy.wait(5000);
+    QCOMPARE(spy.count(), 1);
+
+    QVERIFY(greeter.readAllStandardOutput().contains(QByteArrayLiteral("Locked at")));
 
     // now kill
     QFETCH(int, signal);
