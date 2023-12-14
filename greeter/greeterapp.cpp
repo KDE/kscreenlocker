@@ -407,6 +407,14 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
 
         m_mainQmlPath = fallbackUrl;
         view->setSource(fallbackUrl);
+
+        if (view->status() != QQmlComponent::Ready) {
+            qCWarning(KSCREENLOCKER_GREET) << "Failed to load the fallback lockscreen QML, something went really wrong! Terminating...";
+            for (const auto &error : view->errors()) {
+                qCWarning(KSCREENLOCKER_GREET) << error;
+            }
+            std::terminate();
+        }
     }
     view->setResizeMode(PlasmaQuick::QuickViewSharedEngine::SizeRootObjectToView);
 
