@@ -12,6 +12,9 @@ import org.kde.kcmutils as KCM
 import org.kde.kirigami 2.20 as Kirigami
 
 Kirigami.Page {
+    // The following two must be set for correct alignment with wallpaper config
+    id: appearanceRoot
+    property alias parentLayout: parentLayout
     // Plugins expect these two properties
     property var wallpaper: kcm.wallpaperIntegration
     property var configDialog: kcm
