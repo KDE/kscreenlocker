@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-12-19 01:34+0000\n"
 "PO-Revision-Date: 2021-07-03 09:06+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.04.2\n"
 
-#: ui/Appearance.qml:19
+#: ui/Appearance.qml:22
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: ui/Appearance.qml:35
+#: ui/Appearance.qml:38
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Τύπος ταπετσαρίας:"

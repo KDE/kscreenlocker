@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-12-19 01:34+0000\n"
 "PO-Revision-Date: 2023-09-16 18:25+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -23,13 +23,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: ui/Appearance.qml:19
+#: ui/Appearance.qml:22
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Apparence"
 
-#: ui/Appearance.qml:35
+#: ui/Appearance.qml:38
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Type de fond d'écran :"

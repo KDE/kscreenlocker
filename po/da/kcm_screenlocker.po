@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-12-19 01:34+0000\n"
 "PO-Revision-Date: 2020-10-04 17:09+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.04.2\n"
 
-#: ui/Appearance.qml:19
+#: ui/Appearance.qml:22
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Udseende"
 
-#: ui/Appearance.qml:35
+#: ui/Appearance.qml:38
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Baggrundsbilledetype:"

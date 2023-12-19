@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-08 02:13+0000\n"
+"POT-Creation-Date: 2023-12-19 01:34+0000\n"
 "PO-Revision-Date: 2020-07-02 12:40+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 
-#: ui/Appearance.qml:19
+#: ui/Appearance.qml:22
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: ui/Appearance.qml:35
+#: ui/Appearance.qml:38
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Typ tapety:"
