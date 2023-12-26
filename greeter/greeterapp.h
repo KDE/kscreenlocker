@@ -46,6 +46,9 @@ public:
 
     void setTesting(bool enable);
     void setTheme(const QString &theme);
+    static void listThemes();
+    static QStringList themesPluginIds();
+
     void setImmediateLock(bool immediateLock);
     void lockImmediately();
     void setGraceTime(int milliseconds);

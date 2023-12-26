@@ -74,6 +74,7 @@ static const QString s_osdServiceInterface = u"org.kde.osdService"_s;
 
 static const QString s_fallbackThemeName = u"fallback"_s;
 static const QUrl s_fallbackUrl = QUrl(u"qrc:/fallbacktheme/LockScreen.qml"_s);
+static const QString s_lookAndFeelPackageFormat = u"Plasma/LookAndFeel"_s;
 
 namespace ScreenLocker
 {
@@ -188,7 +189,7 @@ void UnlockApp::initialize()
     connect(m_resetRequestIgnoreTimer, &QTimer::timeout, this, &UnlockApp::resetRequestIgnore);
 
     KScreenSaverSettingsBase::self()->load();
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
+    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(s_lookAndFeelPackageFormat);
     KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
     m_packageName = cg.readEntry("LookAndFeelPackage", QString());
     if (!m_packageName.isEmpty()) {
@@ -576,11 +577,31 @@ void UnlockApp::setTheme(const QString &theme)
         m_mainQmlPath = s_fallbackUrl;
     } else {
         m_packageName = theme;
-        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
+        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(s_lookAndFeelPackageFormat);
         package.setPath(m_packageName);
 
         m_mainQmlPath = package.fileUrl("lockscreenmainscript");
     }
+}
+
+void UnlockApp::listThemes()
+{
+    const auto themes = themesPluginIds();
+    for (const auto &theme : themes) {
+        std::cout << qPrintable(theme) << std::endl;
+    }
+}
+
+QStringList UnlockApp::themesPluginIds()
+{
+    const auto packages = KPackage::PackageLoader::self()->listPackages(s_lookAndFeelPackageFormat);
+    QStringList pluginIds;
+    pluginIds.reserve(packages.size());
+    for (const auto &package : packages) {
+        pluginIds << package.pluginId();
+    }
+    pluginIds.sort();
+    return pluginIds;
 }
 
 void UnlockApp::setImmediateLock(bool immediate)

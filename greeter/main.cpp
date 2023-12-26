@@ -11,6 +11,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QSessionManager>
 #include <QSurfaceFormat>
 
+#include <cstdlib>
 #include <iostream>
 
 #include <signal.h>
@@ -125,6 +126,7 @@ int main(int argc, char *argv[])
                                    i18n("Starts the greeter with the selected theme (only in Testing mode)."),
                                    QStringLiteral("theme"),
                                    QStringLiteral(""));
+    QCommandLineOption listThemesOption(QStringLiteral("list-themes"), i18n("List installed themes (only in Testing mode)."));
 
     QCommandLineOption immediateLockOption(QStringLiteral("immediateLock"), i18n("Lock immediately, ignoring any grace time etc."));
     QCommandLineOption graceTimeOption(QStringLiteral("graceTime"),
@@ -138,6 +140,7 @@ int main(int argc, char *argv[])
 
     parser.addOption(testingOption);
     parser.addOption(themeOption);
+    parser.addOption(listThemesOption);
     parser.addOption(immediateLockOption);
     parser.addOption(graceTimeOption);
     parser.addOption(nolockOption);
@@ -148,6 +151,11 @@ int main(int argc, char *argv[])
     if (parser.isSet(testingOption)) {
         app.setTesting(true);
         app.setImmediateLock(true);
+
+        if (parser.isSet(listThemesOption)) {
+            app.listThemes();
+            return EXIT_SUCCESS;
+        }
 
         // parse theme option
         const QString theme = parser.value(themeOption);
