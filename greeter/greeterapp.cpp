@@ -62,15 +62,18 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "pamauthenticator.h"
 #include "pamauthenticators.h"
 
+using namespace Qt::Literals;
+
 // this is usable to fake a "screensaver" installation for testing
 // *must* be "0" for every public commit!
 #define TEST_SCREENSAVER 0
 
-static const QString s_plasmaShellService = QStringLiteral("org.kde.plasmashell");
-static const QString s_osdServicePath = QStringLiteral("/org/kde/osdService");
-static const QString s_osdServiceInterface = QStringLiteral("org.kde.osdService");
+static const QString s_plasmaShellService = u"org.kde.plasmashell"_s;
+static const QString s_osdServicePath = u"/org/kde/osdService"_s;
+static const QString s_osdServiceInterface = u"org.kde.osdService"_s;
 
-using namespace Qt::Literals;
+static const QString s_fallbackThemeName = u"fallback"_s;
+static const QUrl s_fallbackUrl = QUrl(u"qrc:/fallbacktheme/LockScreen.qml"_s);
 
 namespace ScreenLocker
 {
@@ -398,15 +401,13 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     view->setSource(m_mainQmlPath);
     // on error, load the fallback lockscreen to not lock the user out of the system
     if (view->status() != QQmlComponent::Ready) {
-        static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
-
         qCWarning(KSCREENLOCKER_GREET) << "Failed to load lockscreen QML, falling back to built-in locker";
         for (const auto &error : view->errors()) {
             qCWarning(KSCREENLOCKER_GREET) << error;
         }
 
-        m_mainQmlPath = fallbackUrl;
-        view->setSource(fallbackUrl);
+        m_mainQmlPath = s_fallbackUrl;
+        view->setSource(s_fallbackUrl);
 
         if (view->status() != QQmlComponent::Ready) {
             qCWarning(KSCREENLOCKER_GREET) << "Failed to load the fallback lockscreen QML, something went really wrong! Terminating...";
@@ -570,11 +571,16 @@ void UnlockApp::setTheme(const QString &theme)
         return;
     }
 
-    m_packageName = theme;
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
-    package.setPath(m_packageName);
+    if (theme == s_fallbackThemeName) {
+        m_packageName = s_fallbackThemeName;
+        m_mainQmlPath = s_fallbackUrl;
+    } else {
+        m_packageName = theme;
+        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
+        package.setPath(m_packageName);
 
-    m_mainQmlPath = package.fileUrl("lockscreenmainscript");
+        m_mainQmlPath = package.fileUrl("lockscreenmainscript");
+    }
 }
 
 void UnlockApp::setImmediateLock(bool immediate)
