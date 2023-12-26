@@ -119,10 +119,10 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.addVersionOption();
 
-    QCommandLineOption testingOption(QStringLiteral("testing"), i18n("Starts the greeter in testing mode"));
+    QCommandLineOption testingOption(QStringLiteral("testing"), i18n("Starts the greeter in testing mode."));
 
     QCommandLineOption themeOption(QStringLiteral("theme"),
-                                   i18n("Starts the greeter with the selected theme (only in Testing mode)"),
+                                   i18n("Starts the greeter with the selected theme (only in Testing mode)."),
                                    QStringLiteral("theme"),
                                    QStringLiteral(""));
 
