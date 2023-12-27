@@ -22,6 +22,10 @@ class PowerManagementInhibition;
 
 namespace ScreenLocker
 {
+
+/**
+ * Enum for the different ways to establish a lock.
+ */
 enum class EstablishLock {
     Immediate, /// Require password from the start. Use if invoked explicitly by the user
     Delayed, /// Allow the user to log back in without a password for a configured grace time.
