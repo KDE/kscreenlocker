@@ -46,6 +46,18 @@ enum class EstablishLock {
 class AbstractLocker;
 class WaylandServer;
 
+/**
+ * @class KSldApp
+ * @brief The KSldApp class represents the application responsible for screen locking.
+ *
+ * KSldApp provides functionality for acquiring and releasing screen locks, managing lock states,
+ * handling user activity, and interacting with the lock window. It also includes methods for
+ * configuring the lock screen behavior and managing power management inhibition.
+ *
+ * KSldApp implements the D-Bus interface "org.kde.ksld.App".
+ *
+ * @note KSldApp is primarily used internally by the KDE screen locker component.
+ */
 class KSCREENLOCKER_EXPORT KSldApp : public QObject
 {
     Q_OBJECT
