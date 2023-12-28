@@ -63,6 +63,14 @@ KConfigLoader *WallpaperIntegration::configScheme()
     return m_configLoader;
 }
 
+QColor WallpaperIntegration::accentColor() const
+{
+    return QColor();
+}
+
+void WallpaperIntegration::setAccentColor(const QColor &)
+{
+}
 }
 
 #include "moc_wallpaper_integration.cpp"

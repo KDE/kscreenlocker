@@ -23,6 +23,7 @@ class WallpaperIntegration : public QQuickItem
     Q_PROPERTY(KConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
     Q_PROPERTY(QQmlListProperty<QAction> contextualActions READ qmlContextualActions NOTIFY contextualActionsChanged)
     Q_PROPERTY(bool loading MEMBER m_loading NOTIFY isLoadingChanged)
+    Q_PROPERTY(QColor accentColor READ accentColor WRITE setAccentColor NOTIFY accentColorChanged)
 
 public:
     explicit WallpaperIntegration(QQuickItem *parent = nullptr);
@@ -57,6 +58,10 @@ public:
         static QList<QAction *> list;
         return {this, &list};
     }
+
+    QColor accentColor() const;
+    void setAccentColor(const QColor &newColor);
+
 Q_SIGNALS:
     void packageChanged();
     void configurationChanged();
@@ -66,7 +71,7 @@ Q_SIGNALS:
      * It doesn't have any practical use.
      */
     void isLoadingChanged();
-    void repaintNeeded(const QColor &accentColor = Qt::transparent);
+    void accentColorChanged();
     void openUrlRequested(const QUrl &url);
     void contextualActionsChanged(const QList<QAction *> &actions);
 
