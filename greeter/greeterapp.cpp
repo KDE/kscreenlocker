@@ -625,7 +625,14 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
         } else {
             auto dpms = new KScreen::Dpms(this);
             if (dpms->isSupported()) {
+                connect(dpms, &KScreen::Dpms::hasPendingChangesChanged, this, [dpms](bool hasPendingChanges) {
+                    if (!hasPendingChanges) {
+                        dpms->deleteLater();
+                    }
+                });
                 dpms->switchMode(KScreen::Dpms::Off);
+            } else {
+                dpms->deleteLater();
             }
         }
         return true; // don't pass
