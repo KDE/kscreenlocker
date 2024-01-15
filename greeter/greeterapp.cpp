@@ -624,11 +624,9 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
             return false; // irrelevant
         } else {
             auto dpms = new KScreen::Dpms(this);
-            connect(dpms, &KScreen::Dpms::supportedChanged, this, [dpms](bool supported) {
-                if (supported) {
-                    dpms->switchMode(KScreen::Dpms::Off);
-                }
-            });
+            if (dpms->isSupported()) {
+                dpms->switchMode(KScreen::Dpms::Off);
+            }
         }
         return true; // don't pass
     }
