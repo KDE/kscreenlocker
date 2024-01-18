@@ -3,28 +3,24 @@
 #
 # Balázs Úr <urbalazs@gmail.com>, 2012.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2014, 2020.
-# Kristof Kiszel <kiszel.kristof@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2021, 2024 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-21 01:35+0000\n"
-"PO-Revision-Date: 2021-09-22 09:18+0200\n"
-"Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
+"PO-Revision-Date: 2024-01-17 22:35+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.03.80\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: abstractlocker.cpp:39
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it either ConsoleKit or LoginD is needed, none of\n"
-#| "which could be found on your system."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
@@ -35,14 +31,7 @@ msgstr ""
 "egyik sem található a rendszeren."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -53,23 +42,14 @@ msgid ""
 "\n"
 msgstr ""
 "A képernyőzároló hibás, nincs többé lehetőség a feloldásra.\n"
-"A feloldáshoz váltson az egyik virtuális terminálra (például Ctrl+Alt+F2),\n"
+"A feloldáshoz váltson az egyik virtuális terminálra (például Ctrl+Alt+F%1),\n"
 "jelentkezzen be root felhasználóként és adja ki a következő parancsot:\n"
 "\n"
 "# ck-unlock-session <munkamenet-neve>\n"
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %1\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%2)."
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -85,13 +65,14 @@ msgid ""
 "\n"
 msgstr ""
 "A képernyőzároló hibás, nincs többé lehetőség a feloldásra.\n"
-"A feloldáshoz váltson az egyik virtuális terminálra (például Ctrl+Alt+F2),\n"
+"A feloldáshoz váltson az egyik virtuális terminálra (például Ctrl+Alt+F%1),\n"
 "jelentkezzen be és adja ki a következő parancsot:\n"
 "\n"
-"loginctl unlock-session %1\n"
+"loginctl unlock-session %2\n"
 "\n"
 "Ezután jelentkezzen ki a virtuális munkamenetből a Ctrl+D megnyomásával, és "
-"váltson vissza a futó munkamenetre (Ctrl+Alt+F%2)."
+"váltson vissza a futó munkamenetre (Ctrl+Alt+F%3).\n"
+"\n"
 
 #: ksldapp.cpp:161
 #, kde-format
