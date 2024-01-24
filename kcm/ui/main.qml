@@ -68,7 +68,7 @@ KCM.SimpleKCM {
             QQC2.SpinBox {
                 Kirigami.FormData.label: i18nc("@label:spinbox", "Allow unlocking without password for:")
                 from: 0
-                to: 300
+                to: 3600
                 editable: true
                 textFromValue: value => i18np("%1 second", "%1 seconds", value)
                 valueFromText: text => parseInt(text)
