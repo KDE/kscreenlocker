@@ -615,13 +615,15 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
     }
 
     if (event->type() == QEvent::KeyPress) { // react if saver is visible
+        obj->event(event);
         shareEvent(event, qobject_cast<PlasmaQuick::QuickViewSharedEngine *>(obj));
-        return false; // we don't care
+        return true;
     } else if (event->type() == QEvent::KeyRelease) { // conditionally reshow the saver
         QKeyEvent *ke = static_cast<QKeyEvent *>(event);
         if (ke->key() != Qt::Key_Escape) {
+            obj->event(event);
             shareEvent(event, qobject_cast<PlasmaQuick::QuickViewSharedEngine *>(obj));
-            return false; // irrelevant
+            return true;
         } else {
             auto dpms = new KScreen::Dpms(this);
             if (dpms->isSupported()) {
