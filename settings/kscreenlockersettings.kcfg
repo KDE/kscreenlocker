@@ -12,7 +12,6 @@
     </entry>
     <entry key="Timeout" type="Int">
       <default>5</default>
-      <min>1</min>
       <label>Screen saver timeout</label>
       <whatsthis>Sets the minutes after which the screen is locked.</whatsthis>
     </entry>
@@ -22,9 +21,7 @@
       <whatsthis></whatsthis>
     </entry>
     <entry key="LockGrace" type="Int">
-      <default>5</default>
-      <min>0</min>
-      <max>3600</max>
+      <default>60</default>
       <label></label>
       <whatsthis></whatsthis>
     </entry>
