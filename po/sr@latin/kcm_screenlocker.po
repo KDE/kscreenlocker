@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-19 01:34+0000\n"
+"POT-Creation-Date: 2024-02-14 00:39+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -30,19 +30,135 @@ msgstr ""
 msgid "Wallpaper type:"
 msgstr "&Tip tapeta:"
 
-#: ui/main.qml:26
+#: ui/DurationPromptDialog.qml:77
+#, kde-format
+msgctxt "@action:button"
+msgid "Confirm"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:115
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgctxt "The unit of the time input field"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] " min."
+msgstr[1] " min."
+msgstr[2] " min."
+msgstr[3] " min."
+
+#: ui/DurationPromptDialog.qml:120
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for seconds"
+#| msgid " sec"
+#| msgid_plural " secs"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] " sek."
+msgstr[1] " sek."
+msgstr[2] " sek."
+msgstr[3] " sek."
+
+#: ui/DurationPromptDialog.qml:129
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgctxt "The unit of the time input field"
+msgid "minutes"
+msgstr " min."
+
+#: ui/DurationPromptDialog.qml:136
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for seconds"
+#| msgid " sec"
+#| msgid_plural " secs"
+msgctxt "The unit of the time input field"
+msgid "seconds"
+msgstr " sek."
+
+#: ui/main.qml:23
+#, kde-format
+msgctxt "Screen will not lock automatically"
+msgid "Never"
+msgstr ""
+
+#: ui/main.qml:24 ui/main.qml:36
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgid "1 minute"
+msgstr " min."
+
+#: ui/main.qml:25 ui/main.qml:37
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgid "2 minutes"
+msgstr " min."
+
+#: ui/main.qml:26 ui/main.qml:38
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgid "5 minutes"
+msgstr " min."
+
+#: ui/main.qml:27 ui/main.qml:39
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgid "10 minutes"
+msgstr " min."
+
+#: ui/main.qml:28 ui/main.qml:40
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgid "15 minutes"
+msgstr " min."
+
+#: ui/main.qml:29
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for minutes"
+#| msgid " min"
+#| msgid_plural " mins"
+msgid "30 minutes"
+msgstr " min."
+
+#: ui/main.qml:30 ui/main.qml:41
+#, kde-format
+msgctxt "To add a custom value, not in the predefined list"
+msgid "Custom"
+msgstr ""
+
+#: ui/main.qml:35
+#, kde-format
+msgctxt "The grace period is disabled"
+msgid "Require password immediately"
+msgstr ""
+
+#: ui/main.qml:50
 #, fuzzy, kde-format
 #| msgid "&Lock screen on resume:"
 msgid "Lock screen automatically:"
 msgstr "&Zaključaj ekran po nastavljanju:"
 
-#: ui/main.qml:28
-#, kde-format
-msgctxt "First part of sentence \"Automatically after X minutes\""
-msgid "After"
-msgstr ""
-
-#: ui/main.qml:41
+#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for minutes"
 #| msgid " min"
@@ -54,19 +170,20 @@ msgstr[1] " min."
 msgstr[2] " min."
 msgstr[3] " min."
 
-#: ui/main.qml:54
-#, kde-format
+#: ui/main.qml:96
+#, fuzzy, kde-format
+#| msgid "Lock screen when waking up from suspension"
 msgctxt "@option:check"
-msgid "After waking from sleep"
-msgstr ""
+msgid "Lock after waking from sleep"
+msgstr "Zaključaj ekran po buđenju iz suspendovanosti"
 
-#: ui/main.qml:69
+#: ui/main.qml:112
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Allow unlocking without password for:"
+msgctxt "First part of sentence \"Delay before password required: X minutes\""
+msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:73
+#: ui/main.qml:166 ui/main.qml:376
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for seconds"
 #| msgid " sec"
@@ -78,20 +195,26 @@ msgstr[1] " sek."
 msgstr[2] " sek."
 msgstr[3] " sek."
 
-#: ui/main.qml:89
+#: ui/main.qml:184
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Prečica sa tastature:"
 
-#: ui/main.qml:104
+#: ui/main.qml:199
 #, kde-format
 msgid "Appearance:"
 msgstr ""
 
-#: ui/main.qml:105
+#: ui/main.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
+msgstr ""
+
+#: ui/main.qml:269 ui/main.qml:329
+#, kde-format
+msgctxt "@title:window"
+msgid "Custom Duration"
 msgstr ""
 
 #~ msgid "Activation"
@@ -101,9 +224,6 @@ msgstr ""
 #~| msgid "Lock screen automatically after:"
 #~ msgid "Automatically after:"
 #~ msgstr "Automatski zaključaj ekran posle:"
-
-#~ msgid "Lock screen when waking up from suspension"
-#~ msgstr "Zaključaj ekran po buđenju iz suspendovanosti"
 
 #~ msgid "Immediately"
 #~ msgstr "odmah"

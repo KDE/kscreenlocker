@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-19 01:34+0000\n"
+"POT-Creation-Date: 2024-02-14 00:39+0000\n"
 "PO-Revision-Date: 2022-05-23 11:13+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -31,19 +31,139 @@ msgstr "Внешний вид"
 msgid "Wallpaper type:"
 msgstr "Тип обоев:"
 
-#: ui/main.qml:26
+#: ui/DurationPromptDialog.qml:77
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Configure..."
+msgctxt "@action:button"
+msgid "Confirm"
+msgstr "Настроить..."
+
+#: ui/DurationPromptDialog.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr ""
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/DurationPromptDialog.qml:115
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "%1 минуту"
+msgstr[1] "%1 минуты"
+msgstr[2] "%1 минут"
+msgstr[3] "%1 минуту"
+
+# "Требовать пароль через: [...]" --aspotashev
+#: ui/DurationPromptDialog.qml:120
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "%1 секунды"
+msgstr[1] "%1 секунд"
+msgstr[2] "%1 секунд"
+msgstr[3] "%1 секунды"
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/DurationPromptDialog.qml:129
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minutes"
+msgstr "%1 минуту"
+
+# "Требовать пароль через: [...]" --aspotashev
+#: ui/DurationPromptDialog.qml:136
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "seconds"
+msgstr "%1 секунды"
+
+#: ui/main.qml:23
+#, fuzzy, kde-format
+#| msgid "Never"
+msgctxt "Screen will not lock automatically"
+msgid "Never"
+msgstr "никогда"
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/main.qml:24 ui/main.qml:36
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "1 minute"
+msgstr "%1 минуту"
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/main.qml:25 ui/main.qml:37
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "2 minutes"
+msgstr "%1 минуту"
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/main.qml:26 ui/main.qml:38
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "5 minutes"
+msgstr "%1 минуту"
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/main.qml:27 ui/main.qml:39
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "10 minutes"
+msgstr "%1 минуту"
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/main.qml:28 ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "15 minutes"
+msgstr "%1 минуту"
+
+# "Блокировать экран автоматически после: [...]" --aspotashev
+#: ui/main.qml:29
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "30 minutes"
+msgstr "%1 минуту"
+
+#: ui/main.qml:30 ui/main.qml:41
+#, kde-format
+msgctxt "To add a custom value, not in the predefined list"
+msgid "Custom"
+msgstr ""
+
+#: ui/main.qml:35
+#, fuzzy, kde-format
+#| msgid "Re&quire password after locking:"
+msgctxt "The grace period is disabled"
+msgid "Require password immediately"
+msgstr "Требовать пароль через:"
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Автоматически блокировать экран:"
 
-#: ui/main.qml:28
-#, kde-format
-msgctxt "First part of sentence \"Automatically after X minutes\""
-msgid "After"
-msgstr "При отсутствии активности в течение"
-
 # "Блокировать экран автоматически после: [...]" --aspotashev
-#: ui/main.qml:41
+#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -52,20 +172,22 @@ msgstr[1] "%1 минуты"
 msgstr[2] "%1 минут"
 msgstr[3] "%1 минуту"
 
-#: ui/main.qml:54
-#, kde-format
+#: ui/main.qml:96
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "After waking from sleep"
 msgctxt "@option:check"
-msgid "After waking from sleep"
+msgid "Lock after waking from sleep"
 msgstr "После выхода из ждущего режима"
 
-#: ui/main.qml:69
+#: ui/main.qml:112
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Allow unlocking without password for:"
-msgstr "Разблокировать без пароля в течение:"
+msgctxt "First part of sentence \"Delay before password required: X minutes\""
+msgid "Delay before password required:"
+msgstr ""
 
 # "Требовать пароль через: [...]" --aspotashev
-#: ui/main.qml:73
+#: ui/main.qml:166 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -74,21 +196,36 @@ msgstr[1] "%1 секунд"
 msgstr[2] "%1 секунд"
 msgstr[3] "%1 секунды"
 
-#: ui/main.qml:89
+#: ui/main.qml:184
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Комбинация клавиш:"
 
-#: ui/main.qml:104
+#: ui/main.qml:199
 #, kde-format
 msgid "Appearance:"
 msgstr "Внешний вид:"
 
-#: ui/main.qml:105
+#: ui/main.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Настроить..."
+
+#: ui/main.qml:269 ui/main.qml:329
+#, fuzzy, kde-format
+#| msgid "Custom Background:"
+msgctxt "@title:window"
+msgid "Custom Duration"
+msgstr "Нестандартный фон:"
+
+#~ msgctxt "First part of sentence \"Automatically after X minutes\""
+#~ msgid "After"
+#~ msgstr "При отсутствии активности в течение"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Allow unlocking without password for:"
+#~ msgstr "Разблокировать без пароля в течение:"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -131,9 +268,6 @@ msgstr "Настроить..."
 #~ msgid "Lock Session"
 #~ msgstr "Заблокировать сеанс"
 
-#~ msgid "Re&quire password after locking:"
-#~ msgstr "Требовать пароль через:"
-
 #~ msgid "&Lock screen on resume:"
 #~ msgstr "Бло&кировать при возобновлении работы:"
 
@@ -149,11 +283,5 @@ msgstr "Настроить..."
 #~ msgid "Select image"
 #~ msgstr "Выбор изображения"
 
-#~ msgid "Custom Background:"
-#~ msgstr "Нестандартный фон:"
-
 #~ msgid "..."
 #~ msgstr "..."
-
-#~ msgid "Never"
-#~ msgstr "никогда"

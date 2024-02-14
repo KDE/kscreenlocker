@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-19 01:34+0000\n"
+"POT-Creation-Date: 2024-02-14 00:39+0000\n"
 "PO-Revision-Date: 2020-07-02 10:26+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -24,58 +24,178 @@ msgstr "Aparência"
 msgid "Wallpaper type:"
 msgstr "Tipo de papel de parede:"
 
-#: ui/main.qml:26
+#: ui/DurationPromptDialog.qml:77
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Configure..."
+msgctxt "@action:button"
+msgid "Confirm"
+msgstr "Configurar..."
+
+#: ui/DurationPromptDialog.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:115
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "%1 minuto"
+msgstr[1] "%1 minutos"
+
+#: ui/DurationPromptDialog.qml:120
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "%1 segundo"
+msgstr[1] "%1 segundos"
+
+#: ui/DurationPromptDialog.qml:129
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minutes"
+msgstr "%1 minuto"
+
+#: ui/DurationPromptDialog.qml:136
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "seconds"
+msgstr "%1 segundo"
+
+#: ui/main.qml:23
+#, kde-format
+msgctxt "Screen will not lock automatically"
+msgid "Never"
+msgstr ""
+
+#: ui/main.qml:24 ui/main.qml:36
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "1 minute"
+msgstr "%1 minuto"
+
+#: ui/main.qml:25 ui/main.qml:37
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "2 minutes"
+msgstr "%1 minuto"
+
+#: ui/main.qml:26 ui/main.qml:38
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "5 minutes"
+msgstr "%1 minuto"
+
+#: ui/main.qml:27 ui/main.qml:39
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "10 minutes"
+msgstr "%1 minuto"
+
+#: ui/main.qml:28 ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "15 minutes"
+msgstr "%1 minuto"
+
+#: ui/main.qml:29
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "30 minutes"
+msgstr "%1 minuto"
+
+#: ui/main.qml:30 ui/main.qml:41
+#, kde-format
+msgctxt "To add a custom value, not in the predefined list"
+msgid "Custom"
+msgstr ""
+
+#: ui/main.qml:35
+#, kde-format
+msgctxt "The grace period is disabled"
+msgid "Require password immediately"
+msgstr ""
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Bloquear o ecrã automaticamente:"
 
-#: ui/main.qml:28
-#, kde-format
-msgctxt "First part of sentence \"Automatically after X minutes\""
-msgid "After"
-msgstr "Ao fim de"
-
-#: ui/main.qml:41
+#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minuto"
 msgstr[1] "%1 minutos"
 
-#: ui/main.qml:54
-#, kde-format
+#: ui/main.qml:96
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "After waking from sleep"
 msgctxt "@option:check"
-msgid "After waking from sleep"
+msgid "Lock after waking from sleep"
 msgstr "Depois de retomar da suspensão"
 
-#: ui/main.qml:69
+#: ui/main.qml:112
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Allow unlocking without password for:"
-msgstr "Permitir o desbloqueio sem senha durante:"
+msgctxt "First part of sentence \"Delay before password required: X minutes\""
+msgid "Delay before password required:"
+msgstr ""
 
-#: ui/main.qml:73
+#: ui/main.qml:166 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 segundo"
 msgstr[1] "%1 segundos"
 
-#: ui/main.qml:89
+#: ui/main.qml:184
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Atalho de teclado:"
 
-#: ui/main.qml:104
+#: ui/main.qml:199
 #, kde-format
 msgid "Appearance:"
 msgstr "Aparência:"
 
-#: ui/main.qml:105
+#: ui/main.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Configurar..."
+
+#: ui/main.qml:269 ui/main.qml:329
+#, kde-format
+msgctxt "@title:window"
+msgid "Custom Duration"
+msgstr ""
+
+#~ msgctxt "First part of sentence \"Automatically after X minutes\""
+#~ msgid "After"
+#~ msgstr "Ao fim de"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Allow unlocking without password for:"
+#~ msgstr "Permitir o desbloqueio sem senha durante:"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

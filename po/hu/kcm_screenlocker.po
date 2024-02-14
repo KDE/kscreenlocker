@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-19 01:34+0000\n"
+"POT-Creation-Date: 2024-02-14 00:39+0000\n"
 "PO-Revision-Date: 2020-12-25 11:40+0100\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -29,58 +29,181 @@ msgstr "Megjelenés"
 msgid "Wallpaper type:"
 msgstr "Háttérképtípus:"
 
-#: ui/main.qml:26
+#: ui/DurationPromptDialog.qml:77
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Configure..."
+msgctxt "@action:button"
+msgid "Confirm"
+msgstr "Beállítás…"
+
+#: ui/DurationPromptDialog.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:115
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "%1 perc"
+msgstr[1] "%1 perc"
+
+#: ui/DurationPromptDialog.qml:120
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "%1 másodperc"
+msgstr[1] "%1 másodperc"
+
+#: ui/DurationPromptDialog.qml:129
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minutes"
+msgstr "%1 perc"
+
+#: ui/DurationPromptDialog.qml:136
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "seconds"
+msgstr "%1 másodperc"
+
+#: ui/main.qml:23
+#, fuzzy, kde-format
+#| msgid "Never"
+msgctxt "Screen will not lock automatically"
+msgid "Never"
+msgstr "Soha"
+
+#: ui/main.qml:24 ui/main.qml:36
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "1 minute"
+msgstr "%1 perc"
+
+#: ui/main.qml:25 ui/main.qml:37
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "2 minutes"
+msgstr "%1 perc"
+
+#: ui/main.qml:26 ui/main.qml:38
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "5 minutes"
+msgstr "%1 perc"
+
+#: ui/main.qml:27 ui/main.qml:39
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "10 minutes"
+msgstr "%1 perc"
+
+#: ui/main.qml:28 ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "15 minutes"
+msgstr "%1 perc"
+
+#: ui/main.qml:29
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "30 minutes"
+msgstr "%1 perc"
+
+#: ui/main.qml:30 ui/main.qml:41
+#, kde-format
+msgctxt "To add a custom value, not in the predefined list"
+msgid "Custom"
+msgstr ""
+
+#: ui/main.qml:35
+#, fuzzy, kde-format
+#| msgid "Re&quire password after locking:"
+msgctxt "The grace period is disabled"
+msgid "Require password immediately"
+msgstr "Jelszó ké&rése zárolás után:"
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Képernyő automatikus zárolása:"
 
-#: ui/main.qml:28
-#, kde-format
-msgctxt "First part of sentence \"Automatically after X minutes\""
-msgid "After"
-msgstr "Ennyi idő után"
-
-#: ui/main.qml:41
+#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 perc"
 msgstr[1] "%1 perc"
 
-#: ui/main.qml:54
-#, kde-format
+#: ui/main.qml:96
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "After waking from sleep"
 msgctxt "@option:check"
-msgid "After waking from sleep"
+msgid "Lock after waking from sleep"
 msgstr "Alvó állapotból visszatéréskor"
 
-#: ui/main.qml:69
+#: ui/main.qml:112
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Allow unlocking without password for:"
-msgstr "Jelszó nélküli feloldás időkorlátja:"
+msgctxt "First part of sentence \"Delay before password required: X minutes\""
+msgid "Delay before password required:"
+msgstr ""
 
-#: ui/main.qml:73
+#: ui/main.qml:166 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 másodperc"
 msgstr[1] "%1 másodperc"
 
-#: ui/main.qml:89
+#: ui/main.qml:184
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Billentyűparancs:"
 
-#: ui/main.qml:104
+#: ui/main.qml:199
 #, kde-format
 msgid "Appearance:"
 msgstr "Megjelenés:"
 
-#: ui/main.qml:105
+#: ui/main.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Beállítás…"
+
+#: ui/main.qml:269 ui/main.qml:329
+#, fuzzy, kde-format
+#| msgid "Custom Background:"
+msgctxt "@title:window"
+msgid "Custom Duration"
+msgstr "Egyéni háttér:"
+
+#~ msgctxt "First part of sentence \"Automatically after X minutes\""
+#~ msgid "After"
+#~ msgstr "Ennyi idő után"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Allow unlocking without password for:"
+#~ msgstr "Jelszó nélküli feloldás időkorlátja:"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -123,9 +246,6 @@ msgstr "Beállítás…"
 #~ msgid "Lock Session"
 #~ msgstr "Munkamenet zárolása"
 
-#~ msgid "Re&quire password after locking:"
-#~ msgstr "Jelszó ké&rése zárolás után:"
-
 #~ msgid "&Lock screen on resume:"
 #~ msgstr "&Képernyő zárolása ébredéskor:"
 
@@ -141,14 +261,8 @@ msgstr "Beállítás…"
 #~ msgid "Select image"
 #~ msgstr "Kép kiválasztása"
 
-#~ msgid "Custom Background:"
-#~ msgstr "Egyéni háttér:"
-
 #~ msgid "..."
 #~ msgstr "…"
-
-#~ msgid "Never"
-#~ msgstr "Soha"
 
 #~ msgid "Form"
 #~ msgstr "Űrlap"

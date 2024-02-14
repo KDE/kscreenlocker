@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-19 01:34+0000\n"
+"POT-Creation-Date: 2024-02-14 00:39+0000\n"
 "PO-Revision-Date: 2023-11-07 21:27+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -28,57 +28,145 @@ msgstr ""
 msgid "Wallpaper type:"
 msgstr ""
 
-#: ui/main.qml:26
+#: ui/DurationPromptDialog.qml:77
+#, kde-format
+msgctxt "@action:button"
+msgid "Confirm"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:115
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ui/DurationPromptDialog.qml:120
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ui/DurationPromptDialog.qml:129
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "minutes"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:136
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "seconds"
+msgstr ""
+
+#: ui/main.qml:23
+#, kde-format
+msgctxt "Screen will not lock automatically"
+msgid "Never"
+msgstr ""
+
+#: ui/main.qml:24 ui/main.qml:36
+#, kde-format
+msgid "1 minute"
+msgstr ""
+
+#: ui/main.qml:25 ui/main.qml:37
+#, kde-format
+msgid "2 minutes"
+msgstr ""
+
+#: ui/main.qml:26 ui/main.qml:38
+#, kde-format
+msgid "5 minutes"
+msgstr ""
+
+#: ui/main.qml:27 ui/main.qml:39
+#, kde-format
+msgid "10 minutes"
+msgstr ""
+
+#: ui/main.qml:28 ui/main.qml:40
+#, kde-format
+msgid "15 minutes"
+msgstr ""
+
+#: ui/main.qml:29
+#, kde-format
+msgid "30 minutes"
+msgstr ""
+
+#: ui/main.qml:30 ui/main.qml:41
+#, kde-format
+msgctxt "To add a custom value, not in the predefined list"
+msgid "Custom"
+msgstr ""
+
+#: ui/main.qml:35
+#, kde-format
+msgctxt "The grace period is disabled"
+msgid "Require password immediately"
+msgstr ""
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr ""
 
-#: ui/main.qml:28
-#, kde-format
-msgctxt "First part of sentence \"Automatically after X minutes\""
-msgid "After"
-msgstr ""
-
-#: ui/main.qml:41
+#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ui/main.qml:54
+#: ui/main.qml:96
 #, kde-format
 msgctxt "@option:check"
-msgid "After waking from sleep"
+msgid "Lock after waking from sleep"
 msgstr ""
 
-#: ui/main.qml:69
+#: ui/main.qml:112
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Allow unlocking without password for:"
+msgctxt "First part of sentence \"Delay before password required: X minutes\""
+msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:73
+#: ui/main.qml:166 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ui/main.qml:89
+#: ui/main.qml:184
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr ""
 
-#: ui/main.qml:104
+#: ui/main.qml:199
 #, kde-format
 msgid "Appearance:"
 msgstr ""
 
-#: ui/main.qml:105
+#: ui/main.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
+msgstr ""
+
+#: ui/main.qml:269 ui/main.qml:329
+#, kde-format
+msgctxt "@title:window"
+msgid "Custom Duration"
 msgstr ""
 
 #~ msgctxt "NAME OF TRANSLATORS"

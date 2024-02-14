@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-19 01:34+0000\n"
+"POT-Creation-Date: 2024-02-14 00:39+0000\n"
 "PO-Revision-Date: 2020-08-07 14:40+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -28,18 +28,126 @@ msgstr "Vzhľad"
 msgid "Wallpaper type:"
 msgstr "Typ tapety:"
 
-#: ui/main.qml:26
+#: ui/DurationPromptDialog.qml:77
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Configure..."
+msgctxt "@action:button"
+msgid "Confirm"
+msgstr "Nastaviť..."
+
+#: ui/DurationPromptDialog.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:115
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "%1 minúte"
+msgstr[1] "%1 minútach"
+msgstr[2] "%1 minútach"
+
+#: ui/DurationPromptDialog.qml:120
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "%1 sekundy"
+msgstr[1] "%1 sekúnd"
+msgstr[2] "%1 sekúnd"
+
+#: ui/DurationPromptDialog.qml:129
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgctxt "The unit of the time input field"
+msgid "minutes"
+msgstr "%1 minúte"
+
+#: ui/DurationPromptDialog.qml:136
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "seconds"
+msgstr "%1 sekundy"
+
+#: ui/main.qml:23
+#, fuzzy, kde-format
+#| msgid "Never"
+msgctxt "Screen will not lock automatically"
+msgid "Never"
+msgstr "Nikdy"
+
+#: ui/main.qml:24 ui/main.qml:36
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "1 minute"
+msgstr "%1 minúte"
+
+#: ui/main.qml:25 ui/main.qml:37
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "2 minutes"
+msgstr "%1 minúte"
+
+#: ui/main.qml:26 ui/main.qml:38
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "5 minutes"
+msgstr "%1 minúte"
+
+#: ui/main.qml:27 ui/main.qml:39
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "10 minutes"
+msgstr "%1 minúte"
+
+#: ui/main.qml:28 ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "15 minutes"
+msgstr "%1 minúte"
+
+#: ui/main.qml:29
+#, fuzzy, kde-format
+#| msgid "%1 minute"
+#| msgid_plural "%1 minutes"
+msgid "30 minutes"
+msgstr "%1 minúte"
+
+#: ui/main.qml:30 ui/main.qml:41
+#, kde-format
+msgctxt "To add a custom value, not in the predefined list"
+msgid "Custom"
+msgstr ""
+
+#: ui/main.qml:35
+#, fuzzy, kde-format
+#| msgid "Re&quire password after locking:"
+msgctxt "The grace period is disabled"
+msgid "Require password immediately"
+msgstr "Vyžadovať heslo po zamknutí:"
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Zamknúť obrazovku automaticky:"
 
-#: ui/main.qml:28
-#, kde-format
-msgctxt "First part of sentence \"Automatically after X minutes\""
-msgid "After"
-msgstr "Po"
-
-#: ui/main.qml:41
+#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -47,19 +155,21 @@ msgstr[0] "%1 minúte"
 msgstr[1] "%1 minútach"
 msgstr[2] "%1 minútach"
 
-#: ui/main.qml:54
-#, kde-format
+#: ui/main.qml:96
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "After waking from sleep"
 msgctxt "@option:check"
-msgid "After waking from sleep"
+msgid "Lock after waking from sleep"
 msgstr "Po prebudení zo spánku"
 
-#: ui/main.qml:69
+#: ui/main.qml:112
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Allow unlocking without password for:"
-msgstr "Povoliť odomknutie bez hesla do:"
+msgctxt "First part of sentence \"Delay before password required: X minutes\""
+msgid "Delay before password required:"
+msgstr ""
 
-#: ui/main.qml:73
+#: ui/main.qml:166 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -67,21 +177,36 @@ msgstr[0] "%1 sekundy"
 msgstr[1] "%1 sekúnd"
 msgstr[2] "%1 sekúnd"
 
-#: ui/main.qml:89
+#: ui/main.qml:184
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Klávesová skratka:"
 
-#: ui/main.qml:104
+#: ui/main.qml:199
 #, kde-format
 msgid "Appearance:"
 msgstr "Vzhľad:"
 
-#: ui/main.qml:105
+#: ui/main.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Nastaviť..."
+
+#: ui/main.qml:269 ui/main.qml:329
+#, fuzzy, kde-format
+#| msgid "Custom Background:"
+msgctxt "@title:window"
+msgid "Custom Duration"
+msgstr "Vlastné pozadie:"
+
+#~ msgctxt "First part of sentence \"Automatically after X minutes\""
+#~ msgid "After"
+#~ msgstr "Po"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Allow unlocking without password for:"
+#~ msgstr "Povoliť odomknutie bez hesla do:"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -124,9 +249,6 @@ msgstr "Nastaviť..."
 #~ msgid "Lock Session"
 #~ msgstr "Zamknúť sedenie"
 
-#~ msgid "Re&quire password after locking:"
-#~ msgstr "Vyžadovať heslo po zamknutí:"
-
 #~ msgid "&Lock screen on resume:"
 #~ msgstr "Zamknúť obrazovku po prebudení:"
 
@@ -142,14 +264,8 @@ msgstr "Nastaviť..."
 #~ msgid "Select image"
 #~ msgstr "Vybrať obrázok"
 
-#~ msgid "Custom Background:"
-#~ msgstr "Vlastné pozadie:"
-
 #~ msgid "..."
 #~ msgstr "..."
-
-#~ msgid "Never"
-#~ msgstr "Nikdy"
 
 #~ msgid "Form"
 #~ msgstr "Formulár"
