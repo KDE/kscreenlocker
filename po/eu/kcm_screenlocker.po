@@ -1,17 +1,16 @@
 # Translation for kcm_screenlocker.po to Euskara/Basque (eu).
-# Copyright (C) 2017-2018, Free Software Foundation.
-# Copyright (C) 2019-2020, This file is copyright:
+# Copyright (C) 2017-2024 This file is copyright:
 # This file is distributed under the same license as the kscreenlocker package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@euskalnet.net>.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2017, 2018, 2019, 2020.
+# SPDX-FileCopyrightText: 2017, 2018, 2019, 2020, 2024 Iñigo Salvador Azurmendi <xalba@ni.eus>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-19 01:34+0000\n"
-"PO-Revision-Date: 2020-10-10 09:21+0200\n"
+"PO-Revision-Date: 2024-02-14 23:11+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -48,7 +47,7 @@ msgstr "Epea"
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "minutu %1"
-msgstr[1] "%1  minutu"
+msgstr[1] "%1 minutu"
 
 #: ui/main.qml:54
 #, kde-format
