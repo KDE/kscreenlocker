@@ -31,56 +31,46 @@ msgid "Wallpaper type:"
 msgstr "Typ tapety:"
 
 #: ui/DurationPromptDialog.qml:77
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Confirm"
-msgstr "Nastavit..."
+msgstr "Potvrdit"
 
 #: ui/DurationPromptDialog.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: ui/DurationPromptDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "%1 minuta"
-msgstr[1] "%1 minuty"
-msgstr[2] "%1 minut"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: ui/DurationPromptDialog.qml:120
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 sekunda"
-msgstr[1] "%1 sekundy"
-msgstr[2] "%1 sekund"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: ui/DurationPromptDialog.qml:129
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minutes"
-msgstr "%1 minuta"
+msgstr ""
 
 #: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "seconds"
-msgstr "%1 sekunda"
+msgstr ""
 
 #: ui/main.qml:23
 #, kde-format
@@ -89,46 +79,34 @@ msgid "Never"
 msgstr ""
 
 #: ui/main.qml:24 ui/main.qml:36
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "1 minute"
-msgstr "%1 minuta"
+msgstr ""
 
 #: ui/main.qml:25 ui/main.qml:37
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "2 minutes"
-msgstr "%1 minuta"
+msgstr "2 minuty"
 
 #: ui/main.qml:26 ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "5 minutes"
-msgstr "%1 minuta"
+msgstr "5 minut"
 
 #: ui/main.qml:27 ui/main.qml:39
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "10 minutes"
-msgstr "%1 minuta"
+msgstr "10 minut"
 
 #: ui/main.qml:28 ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "15 minutes"
-msgstr "%1 minuta"
+msgstr "15 minut"
 
 #: ui/main.qml:29
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "30 minutes"
-msgstr "%1 minuta"
+msgstr "30 minut"
 
 #: ui/main.qml:30 ui/main.qml:41
 #, kde-format
@@ -156,12 +134,10 @@ msgstr[1] "%1 minuty"
 msgstr[2] "%1 minut"
 
 #: ui/main.qml:96
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "After waking from sleep"
+#, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
-msgstr "Po probuzení ze spánku"
+msgstr ""
 
 #: ui/main.qml:112
 #, kde-format
@@ -198,11 +174,3 @@ msgstr "Nastavit..."
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr ""
-
-#~ msgctxt "First part of sentence \"Automatically after X minutes\""
-#~ msgid "After"
-#~ msgstr "Po"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Allow unlocking without password for:"
-#~ msgstr "Povolit odemčení bez hesla pro:"
