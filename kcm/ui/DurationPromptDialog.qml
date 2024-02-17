@@ -59,7 +59,7 @@ Kirigami.Dialog {
      *
      * Can be either `DurationPromptDialog.ValueType.Minutes` or `DurationPromptDialog.ValueType.Seconds`.
      */
-    property var valueType
+    property int valueType
 
     /**
      * @brief The possible units of the value of the input field.
