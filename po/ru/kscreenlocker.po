@@ -5,14 +5,14 @@
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Alexander Potashev <aspotashev@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019.
 # Nick Shaforostoff <shafff@ukr.net>, 2016.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021, 2022, 2023.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021, 2022, 2023, 2024.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-21 01:35+0000\n"
-"PO-Revision-Date: 2023-12-27 10:08+0300\n"
+"PO-Revision-Date: 2024-02-18 10:36+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -113,7 +113,8 @@ msgstr "Блокировщик экрана"
 #: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
-msgstr "Обеспечивает блокировку экрана при переходе в ждущий или спящий режим"
+msgstr ""
+"Обеспечивает блокировку экрана при переходе в спящий режим или гибернации"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
