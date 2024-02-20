@@ -21,7 +21,7 @@
       <whatsthis></whatsthis>
     </entry>
     <entry key="LockGrace" type="Int">
-      <default>60</default>
+      <default>5</default>
       <label></label>
       <whatsthis></whatsthis>
     </entry>
