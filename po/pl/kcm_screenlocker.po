@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-14 00:39+0000\n"
-"PO-Revision-Date: 2021-03-21 08:26+0100\n"
+"PO-Revision-Date: 2024-02-24 17:00+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 20.12.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -30,118 +30,94 @@ msgid "Wallpaper type:"
 msgstr "Rodzaj tapety:"
 
 #: ui/DurationPromptDialog.qml:77
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Confirm"
-msgstr "Ustawienia..."
+msgstr "Potwierdź"
 
 #: ui/DurationPromptDialog.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 #: ui/DurationPromptDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "%1 minucie"
-msgstr[1] "%1 minutach"
-msgstr[2] "%1 minutach"
+msgstr[0] "minuta"
+msgstr[1] "minuty"
+msgstr[2] "minut"
 
 #: ui/DurationPromptDialog.qml:120
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 sekundę"
-msgstr[1] "%1 sekundy"
-msgstr[2] "%1 sekund"
+msgstr[0] "sekunda"
+msgstr[1] "sekundy"
+msgstr[2] "sekund"
 
 #: ui/DurationPromptDialog.qml:129
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minutes"
-msgstr "%1 minucie"
+msgstr "minuty"
 
 #: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "seconds"
-msgstr "%1 sekundę"
+msgstr "sekundy"
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgid "Never"
+#, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Nigdy"
 
 #: ui/main.qml:24 ui/main.qml:36
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "1 minute"
-msgstr "%1 minucie"
+msgstr "1 minucie"
 
 #: ui/main.qml:25 ui/main.qml:37
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "2 minutes"
-msgstr "%1 minucie"
+msgstr "2 minutach"
 
 #: ui/main.qml:26 ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "5 minutes"
-msgstr "%1 minucie"
+msgstr "5 minutach"
 
 #: ui/main.qml:27 ui/main.qml:39
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "10 minutes"
-msgstr "%1 minucie"
+msgstr "10 minutach"
 
 #: ui/main.qml:28 ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "15 minutes"
-msgstr "%1 minucie"
+msgstr "15 minutach"
 
 #: ui/main.qml:29
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "30 minutes"
-msgstr "%1 minucie"
+msgstr "30 minutach"
 
 #: ui/main.qml:30 ui/main.qml:41
 #, kde-format
 msgctxt "To add a custom value, not in the predefined list"
 msgid "Custom"
-msgstr ""
+msgstr "Własna"
 
 #: ui/main.qml:35
-#, fuzzy, kde-format
-#| msgid "Re&quire password after locking:"
+#, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
-msgstr "Wymagaj hasła po zablokowaniu:"
+msgstr "Zapytaj o hasło natychmiastowo"
 
 #: ui/main.qml:50
 #, kde-format
@@ -157,18 +133,16 @@ msgstr[1] "%1 minutach"
 msgstr[2] "%1 minutach"
 
 #: ui/main.qml:96
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "After waking from sleep"
+#, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
-msgstr "Po wybudzeniu z uśpienia"
+msgstr "Zablokuj po wybudzeniu z uśpienia"
 
 #: ui/main.qml:112
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
-msgstr ""
+msgstr "Opóźnij przed zapytaniem o hasło:"
 
 #: ui/main.qml:166 ui/main.qml:376
 #, kde-format
@@ -195,11 +169,10 @@ msgid "Configure..."
 msgstr "Ustawienia..."
 
 #: ui/main.qml:269 ui/main.qml:329
-#, fuzzy, kde-format
-#| msgid "Custom Background:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
-msgstr "Własne tło:"
+msgstr "Własny czas trwania"
 
 #~ msgctxt "First part of sentence \"Automatically after X minutes\""
 #~ msgid "After"
