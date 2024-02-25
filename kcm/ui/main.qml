@@ -33,10 +33,10 @@ KCM.SimpleKCM {
     /// The options for the grace period.
     property var lockGraceOptions: [
         { index: 0, text: i18nc("The grace period is disabled", "Require password immediately"), unit: "minutes", value: 0 },
-        { index: 1, text: i18n("1 minute"), unit: "minutes", value: 1 },
-        { index: 2, text: i18n("2 minutes"), unit: "minutes", value: 2 },
-        { index: 3, text: i18n("5 minutes"), unit: "minutes", value: 5 },
-        { index: 4, text: i18n("10 minutes"), unit: "minutes", value: 10 },
+        { index: 1, text: i18n("5 seconds"), unit: "seconds", value: 5 },
+        { index: 2, text: i18n("30 seconds"), unit: "seconds", value: 30 },
+        { index: 3, text: i18n("1 minute"), unit: "minutes", value: 1 },
+        { index: 4, text: i18n("5 minutes"), unit: "minutes", value: 5 },
         { index: 5, text: i18n("15 minutes"), unit: "minutes", value: 15 },
         { index: 6, text: i18nc("To add a custom value, not in the predefined list", "Custom"), value: -1 },
     ]
