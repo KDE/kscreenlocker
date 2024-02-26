@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-02-26 00:38+0000\n"
 "PO-Revision-Date: 2024-02-18 16:17+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -74,22 +74,22 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "ஒருபோதும் வேண்டாம்"
 
-#: ui/main.qml:24 ui/main.qml:36
+#: ui/main.qml:24 ui/main.qml:38
 #, kde-format
 msgid "1 minute"
 msgstr "1 நிமிடம்"
 
-#: ui/main.qml:25 ui/main.qml:37
+#: ui/main.qml:25
 #, kde-format
 msgid "2 minutes"
 msgstr "2 நிமிடம்"
 
-#: ui/main.qml:26 ui/main.qml:38
+#: ui/main.qml:26 ui/main.qml:39
 #, kde-format
 msgid "5 minutes"
 msgstr "5 நிமிடம்"
 
-#: ui/main.qml:27 ui/main.qml:39
+#: ui/main.qml:27
 #, kde-format
 msgid "10 minutes"
 msgstr "10 நிமிடம்"
@@ -115,6 +115,20 @@ msgstr "வேறு"
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "கடவுச்சொல்லை உடனே கேள்"
+
+#: ui/main.qml:36
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgid "5 seconds"
+msgstr "நொடி"
+
+#: ui/main.qml:37
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgid "30 seconds"
+msgstr "நொடி"
 
 #: ui/main.qml:50
 #, kde-format

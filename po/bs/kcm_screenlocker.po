@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bosnianuniversetranslation\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-02-26 00:38+0000\n"
 "PO-Revision-Date: 2015-02-15 19:44+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -84,25 +84,25 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Nikad"
 
-#: ui/main.qml:24 ui/main.qml:36
+#: ui/main.qml:24 ui/main.qml:38
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "1 minute"
 msgstr " min"
 
-#: ui/main.qml:25 ui/main.qml:37
+#: ui/main.qml:25
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "2 minutes"
 msgstr " min"
 
-#: ui/main.qml:26 ui/main.qml:38
+#: ui/main.qml:26 ui/main.qml:39
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "5 minutes"
 msgstr " min"
 
-#: ui/main.qml:27 ui/main.qml:39
+#: ui/main.qml:27
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "10 minutes"
@@ -132,6 +132,18 @@ msgstr ""
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "Za&htijevaj lozinku nakon zaključavanja:"
+
+#: ui/main.qml:36
+#, fuzzy, kde-format
+#| msgid " sec"
+msgid "5 seconds"
+msgstr " sek."
+
+#: ui/main.qml:37
+#, fuzzy, kde-format
+#| msgid " sec"
+msgid "30 seconds"
+msgstr " sek."
 
 #: ui/main.qml:50
 #, fuzzy, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-02-26 00:38+0000\n"
 "PO-Revision-Date: 2020-10-04 17:09+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -85,28 +85,28 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Aldrig"
 
-#: ui/main.qml:24 ui/main.qml:36
+#: ui/main.qml:24 ui/main.qml:38
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "1 minute"
 msgstr "%1 minut"
 
-#: ui/main.qml:25 ui/main.qml:37
+#: ui/main.qml:25
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "2 minutes"
 msgstr "%1 minut"
 
-#: ui/main.qml:26 ui/main.qml:38
+#: ui/main.qml:26 ui/main.qml:39
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "5 minutes"
 msgstr "%1 minut"
 
-#: ui/main.qml:27 ui/main.qml:39
+#: ui/main.qml:27
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
@@ -139,6 +139,20 @@ msgstr ""
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "&Kræv adgangskode efter låsning:"
+
+#: ui/main.qml:36
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgid "5 seconds"
+msgstr "%1 sekund"
+
+#: ui/main.qml:37
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgid "30 seconds"
+msgstr "%1 sekund"
 
 #: ui/main.qml:50
 #, kde-format

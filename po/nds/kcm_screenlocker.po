@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-02-26 00:38+0000\n"
 "PO-Revision-Date: 2014-08-11 12:49+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -79,25 +79,25 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Nienich"
 
-#: ui/main.qml:24 ui/main.qml:36
+#: ui/main.qml:24 ui/main.qml:38
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "1 minute"
 msgstr " Min."
 
-#: ui/main.qml:25 ui/main.qml:37
+#: ui/main.qml:25
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "2 minutes"
 msgstr " Min."
 
-#: ui/main.qml:26 ui/main.qml:38
+#: ui/main.qml:26 ui/main.qml:39
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "5 minutes"
 msgstr " Min."
 
-#: ui/main.qml:27 ui/main.qml:39
+#: ui/main.qml:27
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "10 minutes"
@@ -127,6 +127,18 @@ msgstr ""
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "Na't &Passwoort fragen na't Afsluten na:"
+
+#: ui/main.qml:36
+#, fuzzy, kde-format
+#| msgid " sec"
+msgid "5 seconds"
+msgstr " Sek."
+
+#: ui/main.qml:37
+#, fuzzy, kde-format
+#| msgid " sec"
+msgid "30 seconds"
+msgstr " Sek."
 
 #: ui/main.qml:50
 #, fuzzy, kde-format

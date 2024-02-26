@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-02-26 00:38+0000\n"
 "PO-Revision-Date: 2024-02-14 14:28+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -74,22 +74,22 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Mai"
 
-#: ui/main.qml:24 ui/main.qml:36
+#: ui/main.qml:24 ui/main.qml:38
 #, kde-format
 msgid "1 minute"
 msgstr "1 minuto"
 
-#: ui/main.qml:25 ui/main.qml:37
+#: ui/main.qml:25
 #, kde-format
 msgid "2 minutes"
 msgstr "2 minuti"
 
-#: ui/main.qml:26 ui/main.qml:38
+#: ui/main.qml:26 ui/main.qml:39
 #, kde-format
 msgid "5 minutes"
 msgstr "5 minuti"
 
-#: ui/main.qml:27 ui/main.qml:39
+#: ui/main.qml:27
 #, kde-format
 msgid "10 minutes"
 msgstr "10 minuti"
@@ -115,6 +115,20 @@ msgstr "Personalizzato"
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "Richiedi la password immediatamente"
+
+#: ui/main.qml:36
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgid "5 seconds"
+msgstr "secondi"
+
+#: ui/main.qml:37
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgid "30 seconds"
+msgstr "secondi"
 
 #: ui/main.qml:50
 #, kde-format

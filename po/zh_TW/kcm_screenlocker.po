@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-02-26 00:38+0000\n"
 "PO-Revision-Date: 2024-02-19 08:02+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -76,22 +76,22 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "永不"
 
-#: ui/main.qml:24 ui/main.qml:36
+#: ui/main.qml:24 ui/main.qml:38
 #, kde-format
 msgid "1 minute"
 msgstr "1 分鐘"
 
-#: ui/main.qml:25 ui/main.qml:37
+#: ui/main.qml:25
 #, kde-format
 msgid "2 minutes"
 msgstr "2 分鐘"
 
-#: ui/main.qml:26 ui/main.qml:38
+#: ui/main.qml:26 ui/main.qml:39
 #, kde-format
 msgid "5 minutes"
 msgstr "5 分鐘"
 
-#: ui/main.qml:27 ui/main.qml:39
+#: ui/main.qml:27
 #, kde-format
 msgid "10 minutes"
 msgstr "10 分鐘"
@@ -117,6 +117,20 @@ msgstr "自訂"
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "馬上要求密碼"
+
+#: ui/main.qml:36
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgid "5 seconds"
+msgstr "秒"
+
+#: ui/main.qml:37
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgid "30 seconds"
+msgstr "秒"
 
 #: ui/main.qml:50
 #, kde-format
