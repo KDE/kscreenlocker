@@ -90,6 +90,10 @@ KCM.SimpleKCM {
                     configObject: kcm.settings
                     settingName: "Timeout"
                 }
+
+                function resetIndex() {
+                    timeoutComboBox.currentIndex = timeoutOptionsCurrentIndexForSavedValue();
+                }
             }
 
             QQC2.CheckBox {
@@ -173,6 +177,10 @@ KCM.SimpleKCM {
                     extraEnabledConditions: kcm.settings.autolock
                     configObject: kcm.settings
                     settingName: "LockGrace"
+                }
+
+                function resetIndex() {
+                    lockGraceComboBox.currentIndex = lockGraceOptionsCurrentIndexForSavedValue();
                 }
             }
 
@@ -380,6 +388,28 @@ KCM.SimpleKCM {
                 lockGraceComboBox.model = root.lockGraceOptions;
                 lockGraceComboBox.currentIndex = customIndex;
             }
+        }
+    }
+
+    /// Connection to ensure the combo boxes are reset when the KCM's `Defaults` 
+    /// or `Reset` buttons are clicked.
+    Connections {
+        target: kcm
+
+        /// The KCM `Defaults` button was clicked.
+        function onDefaultsCalled() {
+            resetComboBoxes();
+        }
+
+        /// The KCM `Reset` button was clicked.
+        function onLoadCalled() {
+            resetComboBoxes();
+        }
+
+        /// Set the combo boxes to the saved values.
+        function resetComboBoxes() {
+            timeoutComboBox.resetIndex();
+            lockGraceComboBox.resetIndex();
         }
     }
 }

@@ -57,7 +57,18 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void currentWallpaperChanged();
+
+    /**
+     * Emitted when the defaults function is called.
+     */
+    void defaultsCalled();
+
     void isDefaultsAppearanceChanged();
+
+    /**
+     * Emitted when the load function is called.
+     */
+    void loadCalled();
 
 private:
     bool isSaveNeeded() const override;

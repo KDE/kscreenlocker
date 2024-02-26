@@ -52,6 +52,7 @@ void ScreenLockerKcm::load()
     m_appearanceSettings->load();
 
     updateState();
+    Q_EMIT loadCalled();
 }
 
 void ScreenLockerKcm::save()
@@ -73,6 +74,7 @@ void ScreenLockerKcm::defaults()
     m_appearanceSettings->defaults();
 
     updateState();
+    Q_EMIT defaultsCalled();
 }
 
 void ScreenLockerKcm::updateState()
