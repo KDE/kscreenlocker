@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-26 00:38+0000\n"
-"PO-Revision-Date: 2024-02-14 23:13+0100\n"
+"POT-Creation-Date: 2024-02-27 00:38+0000\n"
+"PO-Revision-Date: 2024-02-27 00:10+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -120,67 +120,63 @@ msgid "Require password immediately"
 msgstr "Eskatu pasahitza berehala"
 
 #: ui/main.qml:36
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "5 seconds"
-msgstr "segundo"
+msgstr "5 segundo"
 
 #: ui/main.qml:37
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "30 seconds"
-msgstr "segundo"
+msgstr "30 segundo"
 
 #: ui/main.qml:50
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Giltzatu pantaila automatikoki:"
 
-#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
+#: ui/main.qml:84 ui/main.qml:169 ui/main.qml:310 ui/main.qml:382
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "minutu %1"
 msgstr[1] "%1 minutu"
 
-#: ui/main.qml:96
+#: ui/main.qml:100
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "Giltzatu loalditik esnatu ondoren"
 
-#: ui/main.qml:112
+#: ui/main.qml:116
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "Pasahitza eskatu aurreko atzerapena:"
 
-#: ui/main.qml:166 ui/main.qml:376
+#: ui/main.qml:170 ui/main.qml:384
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "segundo %1"
 msgstr[1] "%1 segundo"
 
-#: ui/main.qml:184
+#: ui/main.qml:192
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Teklatuko Lasterbidea:"
 
-#: ui/main.qml:199
+#: ui/main.qml:207
 #, kde-format
 msgid "Appearance:"
 msgstr "Itxura:"
 
-#: ui/main.qml:200
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Konfiguratu..."
 
-#: ui/main.qml:269 ui/main.qml:329
+#: ui/main.qml:277 ui/main.qml:337
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"

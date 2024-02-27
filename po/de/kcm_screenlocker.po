@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-26 00:38+0000\n"
+"POT-Creation-Date: 2024-02-27 00:38+0000\n"
 "PO-Revision-Date: 2021-04-24 10:37+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -156,14 +156,14 @@ msgstr "%1 Sekunde"
 msgid "Lock screen automatically:"
 msgstr "Bildschirm automatisch sperren:"
 
-#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
+#: ui/main.qml:84 ui/main.qml:169 ui/main.qml:310 ui/main.qml:382
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 Minute"
 msgstr[1] "%1 Minuten"
 
-#: ui/main.qml:96
+#: ui/main.qml:100
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "After waking from sleep"
@@ -171,36 +171,36 @@ msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "Nach Standby"
 
-#: ui/main.qml:112
+#: ui/main.qml:116
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:166 ui/main.qml:376
+#: ui/main.qml:170 ui/main.qml:384
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 Sekunde"
 msgstr[1] "%1 Sekunden"
 
-#: ui/main.qml:184
+#: ui/main.qml:192
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Tastatur-Kurzbefehl:"
 
-#: ui/main.qml:199
+#: ui/main.qml:207
 #, kde-format
 msgid "Appearance:"
 msgstr "Erscheinungsbild:"
 
-#: ui/main.qml:200
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Einrichten ..."
 
-#: ui/main.qml:269 ui/main.qml:329
+#: ui/main.qml:277 ui/main.qml:337
 #, fuzzy, kde-format
 #| msgid "Custom Background:"
 msgctxt "@title:window"

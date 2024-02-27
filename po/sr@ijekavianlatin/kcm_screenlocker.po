@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-26 00:38+0000\n"
+"POT-Creation-Date: 2024-02-27 00:38+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -174,7 +174,7 @@ msgstr " sek."
 msgid "Lock screen automatically:"
 msgstr "&Zaključaj ekran po nastavljanju:"
 
-#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
+#: ui/main.qml:84 ui/main.qml:169 ui/main.qml:310 ui/main.qml:382
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for minutes"
 #| msgid " min"
@@ -186,20 +186,20 @@ msgstr[1] " min."
 msgstr[2] " min."
 msgstr[3] " min."
 
-#: ui/main.qml:96
+#: ui/main.qml:100
 #, fuzzy, kde-format
 #| msgid "Lock screen when waking up from suspension"
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "Zaključaj ekran po buđenju iz suspendovanosti"
 
-#: ui/main.qml:112
+#: ui/main.qml:116
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:166 ui/main.qml:376
+#: ui/main.qml:170 ui/main.qml:384
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for seconds"
 #| msgid " sec"
@@ -211,23 +211,23 @@ msgstr[1] " sek."
 msgstr[2] " sek."
 msgstr[3] " sek."
 
-#: ui/main.qml:184
+#: ui/main.qml:192
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Prečica sa tastature:"
 
-#: ui/main.qml:199
+#: ui/main.qml:207
 #, kde-format
 msgid "Appearance:"
 msgstr ""
 
-#: ui/main.qml:200
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr ""
 
-#: ui/main.qml:269 ui/main.qml:329
+#: ui/main.qml:277 ui/main.qml:337
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"

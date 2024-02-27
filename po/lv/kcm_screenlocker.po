@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-26 00:38+0000\n"
+"POT-Creation-Date: 2024-02-27 00:38+0000\n"
 "PO-Revision-Date: 2024-02-19 18:38+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -138,7 +138,7 @@ msgstr "sekundes"
 msgid "Lock screen automatically:"
 msgstr "Ekrānu slēgt automātiski:"
 
-#: ui/main.qml:84 ui/main.qml:165 ui/main.qml:302 ui/main.qml:374
+#: ui/main.qml:84 ui/main.qml:169 ui/main.qml:310 ui/main.qml:382
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -146,19 +146,19 @@ msgstr[0] "%1 minūte"
 msgstr[1] "%1 minūtes"
 msgstr[2] "%1 minūšu"
 
-#: ui/main.qml:96
+#: ui/main.qml:100
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "Slēgt pēc pamošanās no miega"
 
-#: ui/main.qml:112
+#: ui/main.qml:116
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "Aizture pirms paroles pieprasīšanas"
 
-#: ui/main.qml:166 ui/main.qml:376
+#: ui/main.qml:170 ui/main.qml:384
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -166,23 +166,23 @@ msgstr[0] "%1 sekunde"
 msgstr[1] "%1 sekundes"
 msgstr[2] "%1 sekunžu"
 
-#: ui/main.qml:184
+#: ui/main.qml:192
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Tastatūras saīsne:"
 
-#: ui/main.qml:199
+#: ui/main.qml:207
 #, kde-format
 msgid "Appearance:"
 msgstr "Izskats:"
 
-#: ui/main.qml:200
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
 msgstr "Konfigurēt..."
 
-#: ui/main.qml:269 ui/main.qml:329
+#: ui/main.qml:277 ui/main.qml:337
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
