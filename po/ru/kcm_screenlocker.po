@@ -2,15 +2,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Alexander Potashev <aspotashev@gmail.com>, 2014, 2015, 2016, 2018.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2020.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2020, 2024.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-27 00:38+0000\n"
-"PO-Revision-Date: 2022-05-23 11:13+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"PO-Revision-Date: 2024-02-27 21:48+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 21.08.3\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -32,117 +32,94 @@ msgid "Wallpaper type:"
 msgstr "Тип обоев:"
 
 #: ui/DurationPromptDialog.qml:77
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Confirm"
-msgstr "Настроить..."
+msgstr "Подтвердить"
 
 #: ui/DurationPromptDialog.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "%1 минуту"
-msgstr[1] "%1 минуты"
-msgstr[2] "%1 минут"
-msgstr[3] "%1 минуту"
+msgstr[0] "минуту"
+msgstr[1] "минуты"
+msgstr[2] "минут"
+msgstr[3] "минуту"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:120
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 секунды"
-msgstr[1] "%1 секунд"
-msgstr[2] "%1 секунд"
-msgstr[3] "%1 секунды"
+msgstr[0] "секунду"
+msgstr[1] "секунд"
+msgstr[2] "секунд"
+msgstr[3] "секунду"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:129
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minutes"
-msgstr "%1 минуту"
+msgstr "минут"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "seconds"
-msgstr "%1 секунды"
+msgstr "секунд"
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgid "Never"
+#, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
-msgstr "никогда"
+msgstr "Никогда"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/main.qml:24 ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "1 minute"
-msgstr "%1 минуту"
+msgstr "1 минуты"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "2 minutes"
-msgstr "%1 минуту"
+msgstr "2 минут"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/main.qml:26 ui/main.qml:39
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "5 minutes"
-msgstr "%1 минуту"
+msgstr "5 минут"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/main.qml:27
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "10 minutes"
-msgstr "%1 минуту"
+msgstr "10 минут"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/main.qml:28 ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "15 minutes"
-msgstr "%1 минуту"
+msgstr "15 минут"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/main.qml:29
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "30 minutes"
-msgstr "%1 минуту"
+msgstr "30 минут"
 
 #: ui/main.qml:30 ui/main.qml:41
 #, kde-format
@@ -151,32 +128,27 @@ msgid "Custom"
 msgstr ""
 
 #: ui/main.qml:35
-#, fuzzy, kde-format
-#| msgid "Re&quire password after locking:"
+#, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
-msgstr "Требовать пароль через:"
+msgstr "Требовать пароль немедленно"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/main.qml:36
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgid "5 seconds"
-msgstr "%1 секунды"
+msgstr "1 секунду"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/main.qml:37
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgid "30 seconds"
-msgstr "%1 секунды"
+msgstr "30 секунд"
 
 #: ui/main.qml:50
 #, kde-format
 msgid "Lock screen automatically:"
-msgstr "Автоматически блокировать экран:"
+msgstr "Блокировать экран автоматически после:"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/main.qml:84 ui/main.qml:169 ui/main.qml:310 ui/main.qml:382
@@ -189,18 +161,16 @@ msgstr[2] "%1 минут"
 msgstr[3] "%1 минуту"
 
 #: ui/main.qml:100
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "After waking from sleep"
+#, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
-msgstr "После выхода из ждущего режима"
+msgstr "Блокировать после выхода из спящего режима"
 
 #: ui/main.qml:116
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
-msgstr ""
+msgstr "Требовать пароль через:"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/main.qml:170 ui/main.qml:384
