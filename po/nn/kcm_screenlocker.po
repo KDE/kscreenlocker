@@ -208,11 +208,3 @@ msgstr "Set opp …"
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr ""
-
-#~ msgctxt "First part of sentence \"Automatically after X minutes\""
-#~ msgid "After"
-#~ msgstr "Etter"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Allow unlocking without password for:"
-#~ msgstr "Tillat opplåsing utan passord i:"

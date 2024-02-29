@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-27 00:38+0000\n"
-"PO-Revision-Date: 2024-02-19 08:02+0900\n"
+"PO-Revision-Date: 2024-02-29 02:55+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -119,18 +119,14 @@ msgid "Require password immediately"
 msgstr "馬上要求密碼"
 
 #: ui/main.qml:36
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "5 seconds"
-msgstr "秒"
+msgstr "5 秒"
 
 #: ui/main.qml:37
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "30 seconds"
-msgstr "秒"
+msgstr "30 秒"
 
 #: ui/main.qml:50
 #, kde-format
