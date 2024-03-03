@@ -157,4 +157,4 @@ msgstr "Descriptor de fișier pentru conectarea la ksld."
 
 #~ msgctxt "EMAIL OF TRANSLATORS"
 #~ msgid "Your emails"
-#~ msgstr "sergiu@ase.md"
+#~ msgstr "sergiu@cip.md"
