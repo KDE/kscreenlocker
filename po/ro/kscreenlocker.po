@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Sergiu Bivol <sergiu@cip.md>, 2012, 2014, 2015, 2020, 2021, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2012, 2014, 2015, 2020, 2021, 2022, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-21 01:35+0000\n"
-"PO-Revision-Date: 2022-04-30 12:17+0100\n"
+"PO-Revision-Date: 2024-02-25 13:50+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -30,14 +30,7 @@ msgstr ""
 "dar niciunul dintre ele nu e instalat în sistem."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -47,7 +40,7 @@ msgid ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 msgstr ""
-"Blocajul ecranului e defect și deblocarea nu mai e posibilă.\n"
+"Blocajul ecranului e stricat și deblocarea nu mai e posibilă.\n"
 "Pentru a-l debloca, treceți la un terminal virtual (de ex. cu Ctrl+Alt+F"
 "%1),\n"
 "autentificați-vă ca root și executați comanda:\n"
@@ -56,16 +49,7 @@ msgstr ""
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3)."
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -80,14 +64,17 @@ msgid ""
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
 msgstr ""
-"Blocajul ecranului e defect și deblocarea nu mai e posibilă.\n"
-"Pentru a-l debloca, treceți la un terminal virtual\n"
-"(de ex. cu Ctrl+Alt+F%1), autentificați-vă și executați comanda:\n"
+"Blocajul ecranului e stricat și deblocarea nu mai e posibilă.\n"
+"Pentru a-l debloca, treceți la un terminal virtual (de exemplu,\n"
+"cu Ctrl+Alt+F%1), autentificați-vă cu propriul cont și executați:\n"
 "\n"
 "loginctl unlock-session %2\n"
 "\n"
 "După aceea, ieșiți din sesiunea virtuală apăsând Ctrl+D și treceți\n"
-"înapoi la sesiunea activă (Ctrl+Alt+F%3)."
+"înapoi la sesiunea activă (Ctrl+Alt+F%3).\n"
+"În caz că uitați instrucțiunile, puteți reveni la acest ecran\n"
+"apăsând Ctrl+Alt+F%3\n"
+"\n"
 
 #: ksldapp.cpp:161
 #, kde-format

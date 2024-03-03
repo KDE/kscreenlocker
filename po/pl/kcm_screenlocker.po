@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-27 00:38+0000\n"
-"PO-Revision-Date: 2024-02-24 17:00+0100\n"
+"PO-Revision-Date: 2024-03-02 12:51+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -120,18 +120,14 @@ msgid "Require password immediately"
 msgstr "Zapytaj o hasło natychmiastowo"
 
 #: ui/main.qml:36
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "5 seconds"
-msgstr "sekundy"
+msgstr "5 sekund"
 
 #: ui/main.qml:37
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "30 seconds"
-msgstr "sekundy"
+msgstr "30 sekund"
 
 #: ui/main.qml:50
 #, kde-format
