@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kscreenlocker package.
 #
-# Kishore G <kishore96@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-21 01:35+0000\n"
-"PO-Revision-Date: 2022-12-06 19:49+0530\n"
+"PO-Revision-Date: 2024-03-08 19:45+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: abstractlocker.cpp:39
 #, kde-format
@@ -29,14 +29,7 @@ msgstr ""
 "இவையிரண்டும் உங்கள் கணினியில் இல்லை."
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -54,19 +47,7 @@ msgstr ""
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in to your account and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3).\n"
-#| "Should you have forgotten the instructions, you can get back to this\n"
-#| "screen by pressing CTRL+ALT+F%2\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -89,7 +70,7 @@ msgstr ""
 "\n"
 "அதன் பின் Ctrl+D எனும் விசைக்கூட்டை அழுத்தி மெய்நிகர் அமர்விலிருந்து வெளியேறி,\n"
 "இப்போதுள்ள அமர்வுக்கு மாறுங்கள் (Ctrl+Alt+F%3).\n"
-"இக்கட்டளைகள் நீங்கள் மறந்தால், இவற்றைக் மறுபடியும் காண CTRL+ALT+F%2 எனும் விசைக்கூட்டை "
+"இக்கட்டளைகள் நீங்கள் மறந்தால், இவற்றைக் மறுபடியும் காண Ctrl+Alt+F%3 எனும் விசைக்கூட்டை "
 "அழுத்தலாம்\n"
 "\n"
 
