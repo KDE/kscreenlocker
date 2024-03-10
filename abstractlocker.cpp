@@ -12,9 +12,10 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "abstractlocker.h"
 
 #include <QApplication>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QPainter>
 #include <QScreen>
-#include <QtDBus>
 
 #include <KLocalizedString>
 
@@ -40,19 +41,19 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
             "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
             "of which could be found on your system.");
         auto text_ck = ki18nc("%1 = other terminal",
-            "The screen locker is broken and unlocking is not possible anymore.\n"
-            "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-            "log in as root and execute the command:\n\n"
-            "# ck-unlock-session <session-name>\n\n");
+                              "The screen locker is broken and unlocking is not possible anymore.\n"
+                              "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
+                              "log in as root and execute the command:\n\n"
+                              "# ck-unlock-session <session-name>\n\n");
         auto text_ld = ki18nc("%1 = other terminal, %2 = session ID, %3 = this terminal",
-            "The screen locker is broken and unlocking is not possible anymore.\n"
-            "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-            "log in to your account and execute the command:\n\n"
-            "loginctl unlock-session %2\n\n"
-            "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-            "back to the running session (Ctrl+Alt+F%3).\n"
-            "Should you have forgotten the instructions, you can get back to this\n"
-            "screen by pressing Ctrl+Alt+F%3\n\n");
+                              "The screen locker is broken and unlocking is not possible anymore.\n"
+                              "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
+                              "log in to your account and execute the command:\n\n"
+                              "loginctl unlock-session %2\n\n"
+                              "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
+                              "back to the running session (Ctrl+Alt+F%3).\n"
+                              "Should you have forgotten the instructions, you can get back to this\n"
+                              "screen by pressing Ctrl+Alt+F%3\n\n");
 
         auto haveService = [](QString service) {
             return QDBusConnection::systemBus().interface()->isServiceRegistered(service);
