@@ -1,12 +1,11 @@
 # Translation of kcm_screenlocker to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2016, 2018, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-27 00:38+0000\n"
-"PO-Revision-Date: 2020-11-21 15:51+0100\n"
+"PO-Revision-Date: 2024-03-09 19:10+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -31,108 +30,86 @@ msgid "Wallpaper type:"
 msgstr "Type bakgrunn:"
 
 #: ui/DurationPromptDialog.qml:77
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Confirm"
-msgstr "Set opp …"
+msgstr "Stadfest"
 
 #: ui/DurationPromptDialog.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: ui/DurationPromptDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "%1 minutt"
-msgstr[1] "%1 minutt"
+msgstr[0] "minutt"
+msgstr[1] "minutt"
 
 #: ui/DurationPromptDialog.qml:120
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 sekund"
-msgstr[1] "%1 sekund"
+msgstr[0] "sekund"
+msgstr[1] "sekund"
 
 #: ui/DurationPromptDialog.qml:129
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minutes"
-msgstr "%1 minutt"
+msgstr "minutt"
 
 #: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "seconds"
-msgstr "%1 sekund"
+msgstr "sekund"
 
 #: ui/main.qml:23
 #, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
-msgstr ""
+msgstr "Aldri"
 
 #: ui/main.qml:24 ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "1 minute"
-msgstr "%1 minutt"
+msgstr "1 minutt"
 
 #: ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "2 minutes"
-msgstr "%1 minutt"
+msgstr "2 minutt"
 
 #: ui/main.qml:26 ui/main.qml:39
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "5 minutes"
-msgstr "%1 minutt"
+msgstr "5 minutt"
 
 #: ui/main.qml:27
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "10 minutes"
-msgstr "%1 minutt"
+msgstr "10 minutt"
 
 #: ui/main.qml:28 ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "15 minutes"
-msgstr "%1 minutt"
+msgstr "15 minutt"
 
 #: ui/main.qml:29
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "30 minutes"
-msgstr "%1 minutt"
+msgstr "30 minutt"
 
 #: ui/main.qml:30 ui/main.qml:41
 #, kde-format
 msgctxt "To add a custom value, not in the predefined list"
 msgid "Custom"
-msgstr ""
+msgstr "Tilpassa"
 
 #: ui/main.qml:35
 #, kde-format
@@ -141,18 +118,14 @@ msgid "Require password immediately"
 msgstr ""
 
 #: ui/main.qml:36
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgid "5 seconds"
-msgstr "%1 sekund"
+msgstr "5 sekund"
 
 #: ui/main.qml:37
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgid "30 seconds"
-msgstr "%1 sekund"
+msgstr "30 sekund"
 
 #: ui/main.qml:50
 #, kde-format
@@ -207,4 +180,4 @@ msgstr "Set opp …"
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
-msgstr ""
+msgstr "Sjølvvalt tidslengd"

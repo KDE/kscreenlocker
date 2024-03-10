@@ -1,11 +1,12 @@
+# SPDX-FileCopyrightText: 2024 Ryuichi Yamada <ryuichi_ya220@outlook.jp>
 # Tomohiro Hyakutake <tomhioo@outlook.jp>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-27 00:38+0000\n"
-"PO-Revision-Date: 2021-09-26 22:11+0900\n"
-"Last-Translator: Ryunosuke Toda <toda.ryunosuke@gmail.com>\n"
+"PO-Revision-Date: 2024-03-04 20:35+0900\n"
+"Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -28,112 +29,90 @@ msgid "Wallpaper type:"
 msgstr "壁紙の種類:"
 
 #: ui/DurationPromptDialog.qml:77
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Confirm"
-msgstr "設定..."
+msgstr "確認"
 
 #: ui/DurationPromptDialog.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: ui/DurationPromptDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "%1 分"
+msgstr[0] " 分"
 
 #: ui/DurationPromptDialog.qml:120
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 秒"
+msgstr[0] " 秒"
 
 #: ui/DurationPromptDialog.qml:129
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "minutes"
-msgstr "%1 分"
+msgstr " 分"
 
 #: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "seconds"
-msgstr "%1 秒"
+msgstr " 秒"
 
 #: ui/main.qml:23
 #, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
-msgstr ""
+msgstr "しない"
 
 #: ui/main.qml:24 ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "1 minute"
-msgstr "%1 分"
+msgstr "1 分"
 
 #: ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "2 minutes"
-msgstr "%1 分"
+msgstr "2 分"
 
 #: ui/main.qml:26 ui/main.qml:39
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "5 minutes"
-msgstr "%1 分"
+msgstr "5 分"
 
 #: ui/main.qml:27
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "10 minutes"
-msgstr "%1 分"
+msgstr "10 分"
 
 #: ui/main.qml:28 ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "15 minutes"
-msgstr "%1 分"
+msgstr "15 分"
 
 #: ui/main.qml:29
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "30 minutes"
-msgstr "%1 分"
+msgstr "30 分"
 
 #: ui/main.qml:30 ui/main.qml:41
 #, kde-format
 msgctxt "To add a custom value, not in the predefined list"
 msgid "Custom"
-msgstr ""
+msgstr "カスタム"
 
 #: ui/main.qml:35
 #, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
-msgstr ""
+msgstr "すぐにパスワードを要求する"
 
 #: ui/main.qml:36
 #, fuzzy, kde-format
@@ -161,18 +140,16 @@ msgid_plural "%1 minutes"
 msgstr[0] "%1 分"
 
 #: ui/main.qml:100
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "After waking from sleep"
+#, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
-msgstr "スリープからの復帰時"
+msgstr "スリープからの復帰時にロック"
 
 #: ui/main.qml:116
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
-msgstr ""
+msgstr "パスワードを要求するまでの時間:"
 
 #: ui/main.qml:170 ui/main.qml:384
 #, kde-format
@@ -200,12 +177,4 @@ msgstr "設定..."
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
-msgstr ""
-
-#~ msgctxt "First part of sentence \"Automatically after X minutes\""
-#~ msgid "After"
-#~ msgstr "経過後"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Allow unlocking without password for:"
-#~ msgstr "パスワードなしでのロック解除を許可する時間:"
+msgstr "時間を指定"
