@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-21 01:35+0000\n"
+"POT-Creation-Date: 2024-03-11 00:39+0000\n"
 "PO-Revision-Date: 2023-03-06 08:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Lokalize 22.12.2\n"
 
-#: abstractlocker.cpp:39
+#: abstractlocker.cpp:40
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Če ga želite odkleniti, potrebujete bodisi ConsoleKit ali LoginD,\n"
 "a nič od tega ni mogoče najti na vašem sistemu."
 
-#: abstractlocker.cpp:43
+#: abstractlocker.cpp:44
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -52,7 +52,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:48
+#: abstractlocker.cpp:49
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""

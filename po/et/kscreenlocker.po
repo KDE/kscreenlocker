@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-21 01:35+0000\n"
+"POT-Creation-Date: 2024-03-11 00:39+0000\n"
 "PO-Revision-Date: 2019-10-31 00:12+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 19.08.1\n"
 
-#: abstractlocker.cpp:39
+#: abstractlocker.cpp:40
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Lahtilukustamiseks on vajalik ConsoleKit või LoginD, aga kumbagi\n"
 "sinu süsteemist ei leitud."
 
-#: abstractlocker.cpp:43
+#: abstractlocker.cpp:44
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -57,7 +57,7 @@ msgstr ""
 "# ck-unlock-session <seansi nimi>\n"
 "\n"
 
-#: abstractlocker.cpp:48
+#: abstractlocker.cpp:49
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
