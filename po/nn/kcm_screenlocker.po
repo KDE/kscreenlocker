@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-27 00:38+0000\n"
-"PO-Revision-Date: 2024-03-09 19:10+0100\n"
+"PO-Revision-Date: 2024-03-17 11:04+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -115,7 +115,7 @@ msgstr "Tilpassa"
 #, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
-msgstr ""
+msgstr "Krev passord med ein gong"
 
 #: ui/main.qml:36
 #, kde-format
@@ -140,18 +140,16 @@ msgstr[0] "%1 minutt"
 msgstr[1] "%1 minutt"
 
 #: ui/main.qml:100
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "After waking from sleep"
+#, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
-msgstr "Etter oppstart frå dvale-/kvilemodus"
+msgstr "Lås ved oppstart frå dvale-/kvilemodus"
 
 #: ui/main.qml:116
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
-msgstr ""
+msgstr "Tid før krav om passordinnlogging:"
 
 #: ui/main.qml:170 ui/main.qml:384
 #, kde-format
