@@ -92,7 +92,7 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
 
 void BackgroundWindow::emergencyShow()
 {
-    qCDebug(KSCREENLOCKER) << "BackgroundWindow::emergencyShow() called";
+    qCDebug(KSCREENLOCKER) << "Emergency showing BackgroundWindow";
     m_greeterFailure = true;
     update();
     show();

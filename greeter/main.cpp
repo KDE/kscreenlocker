@@ -33,8 +33,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 static void signalHandler(int signum)
 {
-    qCDebug(KSCREENLOCKER_GREET) << "Greeter received signal" << signum;
-
     ScreenLocker::UnlockApp *instance = qobject_cast<ScreenLocker::UnlockApp *>(QCoreApplication::instance());
 
     if (!instance) {
@@ -156,8 +154,6 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     if (parser.isSet(testingOption)) {
-        qCDebug(KSCREENLOCKER_GREET) << "Greeter is running in testing mode";
-
         app.setTesting(true);
         app.setImmediateLock(true);
 

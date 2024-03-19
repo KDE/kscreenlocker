@@ -25,6 +25,11 @@
       <label></label>
       <whatsthis></whatsthis>
     </entry>
+    <entry key="RequirePassword" type="Bool">
+      <default>true</default>
+      <label>Require password</label>
+      <whatsthis>Sets whether the password is required to unlock the screen.</whatsthis>
+    </entry>
     <entry key="LockOnResume" type="Bool">
         <default>true</default>
     </entry>
