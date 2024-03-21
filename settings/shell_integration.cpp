@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2017 David Edmundson <davidedmundson@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
-#include "lnf_integration.h"
+#include "shell_integration.h"
 
 #include <KConfig>
 #include <KConfigGroup>
@@ -14,15 +14,15 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
 namespace ScreenLocker
 {
-LnFIntegration::LnFIntegration(QObject *parent)
+ShellIntegration::ShellIntegration(QObject *parent)
     : QObject(parent)
 {
     qRegisterMetaType<KConfigPropertyMap *>();
 }
 
-LnFIntegration::~LnFIntegration() = default;
+ShellIntegration::~ShellIntegration() = default;
 
-void LnFIntegration::init()
+void ShellIntegration::init()
 {
     if (!m_package.isValid()) {
         return;
@@ -32,7 +32,18 @@ void LnFIntegration::init()
     }
 }
 
-KConfigLoader *LnFIntegration::configScheme()
+QString ShellIntegration::defaultShell() const
+{
+    KSharedConfig::Ptr startupConf = KSharedConfig::openConfig(QStringLiteral("plasmashellrc"));
+    KConfigGroup startupConfGroup(startupConf, QStringLiteral("Shell"));
+    const QString defaultValue = qEnvironmentVariable("PLASMA_DEFAULT_SHELL", "org.kde.plasma.desktop");
+    QString value = startupConfGroup.readEntry("ShellPackage", defaultValue);
+
+    // In the global theme an empty value was written, make sure we still return a shell package
+    return value.isEmpty() ? defaultValue : value;
+}
+
+KConfigLoader *ShellIntegration::configScheme()
 {
     if (!m_configLoader) {
         const QString xmlPath = m_package.filePath(QByteArrayLiteral("lockscreen"), QStringLiteral("config.xml"));
@@ -51,4 +62,4 @@ KConfigLoader *LnFIntegration::configScheme()
 
 }
 
-#include "moc_lnf_integration.cpp"
+#include "moc_shell_integration.cpp"

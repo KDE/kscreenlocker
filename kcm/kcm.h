@@ -18,7 +18,7 @@ class ScreenLockerKcmForm;
 class AppearanceSettings;
 namespace ScreenLocker
 {
-class LnFIntegration;
+class ShellIntegration;
 }
 
 class ScreenLockerKcm : public KQuickManagedConfigModule

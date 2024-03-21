@@ -13,7 +13,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 namespace ScreenLocker
 {
 class WallpaperIntegration;
-class LnFIntegration;
+class ShellIntegration;
 }
 
 class KConfigPropertyMap;
@@ -52,7 +52,7 @@ private:
     ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
     KCoreConfigSkeleton *m_wallpaperSettings = nullptr;
     QUrl m_wallpaperConfigFile;
-    ScreenLocker::LnFIntegration *m_lnfIntegration = nullptr;
+    ScreenLocker::ShellIntegration *m_lnfIntegration = nullptr;
     KCoreConfigSkeleton *m_lnfSettings = nullptr;
     QUrl m_lnfConfigFile;
 };

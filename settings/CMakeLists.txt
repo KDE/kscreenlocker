@@ -1,6 +1,6 @@
 add_library(settings STATIC
     kscreensaversettings.cpp
-    lnf_integration.cpp
+    shell_integration.cpp
     wallpaper_integration.cpp
     appearancesettings.cpp
 )

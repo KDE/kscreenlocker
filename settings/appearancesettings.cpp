@@ -9,7 +9,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KPackage/PackageLoader>
 
 #include "kscreensaversettings.h"
-#include "lnf_integration.h"
+#include "shell_integration.h"
 #include "wallpaper_integration.h"
 
 AppearanceSettings::AppearanceSettings(QObject *parent)
@@ -151,7 +151,7 @@ void AppearanceSettings::loadLnfConfig()
         m_package.setPath(packageName);
     }
 
-    m_lnfIntegration = new ScreenLocker::LnFIntegration(this);
+    m_lnfIntegration = new ScreenLocker::ShellIntegration(this);
     m_lnfIntegration->setPackage(m_package);
     m_lnfIntegration->setConfig(KScreenSaverSettings::getInstance().sharedConfig());
     m_lnfIntegration->init();
