@@ -23,14 +23,14 @@ QQC2.StackView {
         pop()
         if (sourceFile) {
             const props = {}
-            const lnfConfiguration = configDialog.lnfConfiguration
-            for (const key in lnfConfiguration) {
-                props["cfg_" + key] = lnfConfiguration[key]
+            const shellConfiguration = configDialog.shellConfiguration
+            for (const key in shellConfiguration) {
+                props["cfg_" + key] = shellConfiguration[key]
             }
 
             const newItem = push(sourceFile, props, QQC2.StackView.ReplaceTransition)
 
-            lnfConfiguration.valueChanged.connect((key, value) => {
+            shellConfiguration.valueChanged.connect((key, value) => {
                 if (newItem["cfg_" + key] !== undefined) {
                     newItem["cfg_" + key] = value
                 }
@@ -38,12 +38,12 @@ QQC2.StackView {
 
             const createSignalHandler = key => {
                 return () => {
-                    configDialog.lnfConfiguration[key] = newItem["cfg_" + key]
+                    configDialog.shellConfiguration[key] = newItem["cfg_" + key]
                     configurationChanged()
                 }
             }
 
-            for (const key in lnfConfiguration) {
+            for (const key in shellConfiguration) {
                 const changedSignal = newItem["cfg_" + key + "Changed"]
                 if (changedSignal) {
                     changedSignal.connect(createSignalHandler(key))
