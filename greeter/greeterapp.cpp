@@ -548,6 +548,8 @@ void UnlockApp::suspendToDisk()
 
 void UnlockApp::setTesting(bool enable)
 {
+    qCDebug(KSCREENLOCKER_GREET) << "Testing mode enabled:" << enable;
+
     m_testing = enable;
     if (m_views.isEmpty()) {
         return;

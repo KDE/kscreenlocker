@@ -43,6 +43,11 @@ enum class EstablishLock {
     DefaultToSwitchUser,
 };
 
+/**
+ * @returns a string representation of the given EstablishLock value.
+ **/
+QString establishLockToString(EstablishLock establishLock);
+
 class AbstractLocker;
 class WaylandServer;
 
