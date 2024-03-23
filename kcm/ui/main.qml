@@ -45,6 +45,22 @@ KCM.SimpleKCM {
         spacing: 0
 
         Kirigami.FormLayout {
+            ComboBoxWithCustomValue {
+                Kirigami.FormData.label: i18n("Test ComboBox")
+                id: testComboBox
+                model: [
+                    { index: 0, text: i18nc("Screen will not lock automatically", "Never"), value: 0 },
+                    { index: 1, text: i18n("1 minute"), value: 1 },
+                    { index: 2, text: i18n("2 minutes"), value: 2 },
+                    { index: 3, text: i18n("5 minutes"), value: 5 },
+                    { index: 4, text: i18n("10 minutes"), value: 10 },
+                    { index: 5, text: i18n("15 minutes"), value: 15 },
+                    { index: 6, text: i18n("30 minutes"), value: 30 },
+                ]
+                textRole: "text"
+                currentIndex: timeoutOptionsCurrentIndexForSavedValue()
+            }
+
             QQC2.ComboBox {
                 id: timeoutComboBox
                 Kirigami.FormData.label: i18n("Lock screen automatically:")
