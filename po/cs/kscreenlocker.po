@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2020-07-02 12:41+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 
-#: abstractlocker.cpp:40
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -27,7 +27,7 @@ msgid ""
 "of which could be found on your system."
 msgstr ""
 
-#: abstractlocker.cpp:44
+#: abstractlocker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -39,7 +39,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: abstractlocker.cpp:49
+#: abstractlocker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -56,17 +56,17 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ksldapp.cpp:161
+#: ksldapp.cpp:182
 #, kde-format
 msgid "Lock Session"
 msgstr "Uzamknout sezení"
 
-#: ksldapp.cpp:407
+#: ksldapp.cpp:441
 #, kde-format
 msgid "Screen locked"
 msgstr "Obrazovka uzamčena"
 
-#: ksldapp.cpp:568
+#: ksldapp.cpp:609
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Obrazovka odemknuta"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 00:38+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2023-12-03 20:39+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -17,42 +17,42 @@ msgstr ""
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.3\n"
 
-#: main.cpp:126
+#: main.cpp:128
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Kveðjuviðmót fyrir KDE Plasma skjálæsinguna"
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Byrjar kveðjuviðmótið í prufusniði"
 
-#: main.cpp:133
+#: main.cpp:135
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Byrjar kveðjuviðmótið með valda þemana (aðeins í prufusniði)"
 
-#: main.cpp:137
+#: main.cpp:139
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Læsa strax, hunsa allan náðartíma o.s.frv."
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Bið þar til læsiviðmótið birtist í millisekúndum."
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ekki sýna neitt læsiviðmót."
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Fara sjálfgefið í viðmót til að skipta um notanda."
 
-#: main.cpp:145
+#: main.cpp:147
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Skráarlýsir fyrir tengingu við ksld."

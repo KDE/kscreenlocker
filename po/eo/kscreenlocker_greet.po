@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 00:38+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2023-05-06 19:01+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,42 +18,42 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: main.cpp:126
+#: main.cpp:128
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Salutilo por la KDE Plasma Workspaces Ekranŝlosilo"
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Lanĉas la salutilon en prova reĝimo"
 
-#: main.cpp:133
+#: main.cpp:135
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Lanĉas la salutilon kun la elektita temo (nur en Testa reĝimo)"
 
-#: main.cpp:137
+#: main.cpp:139
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Ŝlosi tuj, ignorante ajnan gracan tempon ktp."
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Prokrasto ĝis la ŝlosila uzantinterfaco montriĝas en milisekundoj."
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ne montri ajnan seruran uzantinterfacon."
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Defaŭlte al la ŝanĝa uzanto UI."
 
-#: main.cpp:145
+#: main.cpp:147
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Dosiera priskribilo por konekti al ksld."

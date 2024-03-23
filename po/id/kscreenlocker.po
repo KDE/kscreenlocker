@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2019-05-26 09:50+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: abstractlocker.cpp:40
+#: abstractlocker.cpp:43
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -31,7 +31,7 @@ msgstr ""
 "Agar bisa melepas-kuncinya diperlukanlah baik itu ConsoleKit atau LoginD,\n"
 "yang tidak terdapat pada sistemmu."
 
-#: abstractlocker.cpp:44
+#: abstractlocker.cpp:47
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -56,7 +56,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:49
+#: abstractlocker.cpp:52
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -88,17 +88,17 @@ msgstr ""
 "\n"
 "Kemudian beralih kembali ke sesi yang berjalan (Ctrl+Alt+F%2)."
 
-#: ksldapp.cpp:161
+#: ksldapp.cpp:182
 #, kde-format
 msgid "Lock Session"
 msgstr "Sesi Kunci"
 
-#: ksldapp.cpp:407
+#: ksldapp.cpp:441
 #, kde-format
 msgid "Screen locked"
 msgstr "Layar dikunci"
 
-#: ksldapp.cpp:568
+#: ksldapp.cpp:609
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Layar dilepas-kunci"

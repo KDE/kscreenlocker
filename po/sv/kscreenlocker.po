@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2022-04-24 11:17+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: abstractlocker.cpp:40
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -28,7 +28,7 @@ msgstr ""
 "För att låsa upp behövs antingen ConsoleKit eller LoginD. Ingen av dessa\n"
 "gick att hitta på systemet."
 
-#: abstractlocker.cpp:44
+#: abstractlocker.cpp:47
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -53,7 +53,7 @@ msgstr ""
 "# ck-unlock-session <sessionsnamn>\n"
 "\n"
 
-#: abstractlocker.cpp:49
+#: abstractlocker.cpp:52
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -87,17 +87,17 @@ msgstr ""
 "Logga därefter ut från den virtuella sessionen genom att trycka på Ctrl+D, "
 "och byt tillbaka till sessionen som kör (Ctrl+Alt+F%3)."
 
-#: ksldapp.cpp:161
+#: ksldapp.cpp:182
 #, kde-format
 msgid "Lock Session"
 msgstr "Lås session"
 
-#: ksldapp.cpp:407
+#: ksldapp.cpp:441
 #, kde-format
 msgid "Screen locked"
 msgstr "Skärm låst"
 
-#: ksldapp.cpp:568
+#: ksldapp.cpp:609
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Skärm upplåst"

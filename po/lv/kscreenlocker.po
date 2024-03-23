@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2024-02-19 18:33+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "2);\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: abstractlocker.cpp:40
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Lai atslēgtu, nepieciešams „ConsoleKit“ vai „LoginD“, bet neviens\n"
 "no tiem sistēmā nav atrasts."
 
-#: abstractlocker.cpp:44
+#: abstractlocker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -49,7 +49,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:49
+#: abstractlocker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -78,17 +78,17 @@ msgstr ""
 "Ja neatceraties instrukcijas, varat atgriezties šajā ekrānā, spiežot „Ctrl"
 "+Alt+F%3“\n"
 
-#: ksldapp.cpp:161
+#: ksldapp.cpp:182
 #, kde-format
 msgid "Lock Session"
 msgstr "Slēgt sesiju"
 
-#: ksldapp.cpp:407
+#: ksldapp.cpp:441
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekrāns ir slēgts"
 
-#: ksldapp.cpp:568
+#: ksldapp.cpp:609
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekrāns ir atslēgts"

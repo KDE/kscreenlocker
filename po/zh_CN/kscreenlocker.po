@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2024-03-17 20:42\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/kscreenlocker/kscreenlocker.pot\n"
 "X-Crowdin-File-ID: 43547\n"
 
-#: abstractlocker.cpp:40
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -28,7 +28,7 @@ msgstr ""
 "要解锁系统，您需要 ConsoleKit 或者 LoginD，\n"
 "但是在本机系统中无法找到它们。"
 
-#: abstractlocker.cpp:44
+#: abstractlocker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -46,7 +46,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:49
+#: abstractlocker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -72,17 +72,17 @@ msgstr ""
 "如果你忘记了本指引的内容，可以按 Ctrl+Alt+F%3 返回到此屏幕。\n"
 "\n"
 
-#: ksldapp.cpp:161
+#: ksldapp.cpp:182
 #, kde-format
 msgid "Lock Session"
 msgstr "锁定会话"
 
-#: ksldapp.cpp:407
+#: ksldapp.cpp:441
 #, kde-format
 msgid "Screen locked"
 msgstr "屏幕已锁定"
 
-#: ksldapp.cpp:568
+#: ksldapp.cpp:609
 #, kde-format
 msgid "Screen unlocked"
 msgstr "屏幕已解锁"

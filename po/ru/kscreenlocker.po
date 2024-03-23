@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2024-02-18 10:36+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
-#: abstractlocker.cpp:40
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -39,7 +39,7 @@ msgstr ""
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
-#: abstractlocker.cpp:44
+#: abstractlocker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -61,7 +61,7 @@ msgstr ""
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
 # BUGME: please add ctxt telling about the above. --aspotashev
-#: abstractlocker.cpp:49
+#: abstractlocker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -90,17 +90,17 @@ msgstr ""
 "Для возврата на этот экран используйте комбинацию клавиш CTRL+ALT+F%2.\n"
 "\n"
 
-#: ksldapp.cpp:161
+#: ksldapp.cpp:182
 #, kde-format
 msgid "Lock Session"
 msgstr "Заблокировать сеанс"
 
-#: ksldapp.cpp:407
+#: ksldapp.cpp:441
 #, kde-format
 msgid "Screen locked"
 msgstr "Экран заблокирован"
 
-#: ksldapp.cpp:568
+#: ksldapp.cpp:609
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Экран разблокирован"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2022-12-12 17:29+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-POFile-SpellExtra: DPMS unlock loginctl sessions session ck ConsoleKit\n"
 "X-POFile-SpellExtra: LoginD\n"
 
-#: abstractlocker.cpp:40
+#: abstractlocker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -27,7 +27,7 @@ msgstr ""
 "nenhum\n"
 "foi encontrado no seu sistema."
 
-#: abstractlocker.cpp:44
+#: abstractlocker.cpp:47
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -53,7 +53,7 @@ msgstr ""
 "# ck-unlock-session <nome-sessão>\n"
 "\n"
 
-#: abstractlocker.cpp:49
+#: abstractlocker.cpp:52
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -94,17 +94,17 @@ msgstr ""
 "se carregar em Ctrl+Alt+F%2\n"
 "\n"
 
-#: ksldapp.cpp:161
+#: ksldapp.cpp:182
 #, kde-format
 msgid "Lock Session"
 msgstr "Bloquear a Sessão"
 
-#: ksldapp.cpp:407
+#: ksldapp.cpp:441
 #, kde-format
 msgid "Screen locked"
 msgstr "Ecrã bloqueado"
 
-#: ksldapp.cpp:568
+#: ksldapp.cpp:609
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ecrã desbloqueado"
