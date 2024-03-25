@@ -198,7 +198,7 @@ void UnlockApp::initialize()
 
     if (!verifyPackageApi(package)) {
         qCWarning(KSCREENLOCKER_GREET) << "Lockscreen QML outdated, falling back to default";
-        package.setPath(QStringLiteral("org.kde.breeze.desktop"));
+        package.setPath(QStringLiteral("org.kde.plasma.desktop"));
     }
 
     m_mainQmlPath = package.fileUrl("lockscreenmainscript");
