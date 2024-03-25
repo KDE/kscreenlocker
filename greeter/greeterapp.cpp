@@ -191,9 +191,6 @@ void UnlockApp::initialize()
     if (!m_packageName.isEmpty()) {
         package.setPath(m_packageName);
     }
-    if (!KScreenSaverSettingsBase::theme().isEmpty()) {
-        package.setPath(KScreenSaverSettingsBase::theme());
-    }
 
     if (!verifyPackageApi(package)) {
         qCWarning(KSCREENLOCKER_GREET) << "Lockscreen QML outdated, falling back to default";
