@@ -1,31 +1,32 @@
+# translation of kscreenlocker.pot to Esperanto
+# Copyright (C) 2022 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kscreenlocker package.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-06 00:47+0000\n"
-"PO-Revision-Date: 2024-03-28 19:24\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2023-05-06 19:01+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/kscreenlocker/kscreenlocker.pot\n"
-"X-Crowdin-File-ID: 2615\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Guo Yunhe, Tyson Tan"
+msgstr ""
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "i@guoyunhe.me, tds00@qq.com"
+msgstr ""
 
 #: abstractlocker.cpp:39
 #, kde-format
@@ -34,9 +35,9 @@ msgid ""
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
 "of which could be found on your system."
 msgstr ""
-"锁屏程序已经损坏，无法解锁。\n"
-"要解锁系统，您需要 ConsoleKit 或者 LoginD，\n"
-"但是在本机系统中无法找到它们。"
+"La ekranŝlosilo estas rompita kaj malŝlosado ne plu eblas.\n"
+"Por malŝlosi ĝin necesas ĉu ConsoleKit aŭ LoginD, nek\n"
+"o kiuj troviĝas en via sistemo."
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -48,9 +49,9 @@ msgid ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 msgstr ""
-"锁屏程序已经损坏，无法解锁。\n"
-"要解锁系统，请切换至虚拟终端 (例如按 Ctrl+Alt+F%1)，\n"
-"登录为 root 身份并执行以下命令：\n"
+"La ekranŝlosilo estas rompita kaj malŝlosado ne plu eblas.\n"
+"Por malŝlosi ĝin, ŝanĝu al virtuala terminalo (ekz. Ctrl+Alt+F%1),\n"
+"ensalutu kiel radiko kaj plenumu la komandon:\n"
 "\n"
 "# ck-unlock-session <session-name>\n"
 "\n"
@@ -70,37 +71,28 @@ msgid ""
 "screen by pressing CTRL+ALT+F%2\n"
 "\n"
 msgstr ""
-"锁屏程序已经损坏，无法解锁。\n"
-"要解锁系统，请切换至虚拟终端 (例如按 Ctrl+Alt+F%1)，\n"
-"登录并执行以下命令：\n"
-"\n"
-"loginctl unlock-session %2\n"
-"\n"
-"然后按 Ctrl+D 注销登录，并切换回正在运行的会话 (Ctrl+Alt+F%3)。\n"
-"如果你忘记了这些指令，可以按 CTRL+ALT+F%2 回到这个屏幕。\n"
-"\n"
 
 #: ksldapp.cpp:164
 #, kde-format
 msgid "Lock Session"
-msgstr "锁定会话"
+msgstr "Ŝlosi Seancon"
 
 #: ksldapp.cpp:391
 #, kde-format
 msgid "Screen locked"
-msgstr "屏幕已锁定"
+msgstr "Ekrano ŝlosita"
 
 #: ksldapp.cpp:550
 #, kde-format
 msgid "Screen unlocked"
-msgstr "屏幕已解锁"
+msgstr "Ekrano malŝlosita"
 
 #: logind.cpp:161
 #, kde-format
 msgid "Screen Locker"
-msgstr "锁屏程序"
+msgstr "Ekrana Ŝlosilo"
 
 #: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
-msgstr "确保在休眠前锁定屏幕"
+msgstr "Certigante, ke la ekrano estas ŝlosita antaŭ dormi"
