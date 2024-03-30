@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 01:42+0000\n"
+"POT-Creation-Date: 2024-03-30 02:20+0000\n"
 "PO-Revision-Date: 2023-01-18 22:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -18,42 +18,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.12.1\n"
 
-#: main.cpp:118
+#: main.cpp:126
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE Plasma Çalışma Alanı Ekran kilitleyicisi için Karşılayıcı"
 
-#: main.cpp:122
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Karşılayıcıyı, sınama kipinde başlatır"
 
-#: main.cpp:125
+#: main.cpp:133
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Karşılayıcıyı, seçili tema kullanarak başlatır (yalnızca Tt kipinde)"
 
-#: main.cpp:129
+#: main.cpp:137
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Erteleme süresini yok sayarak hemen kilitle."
 
-#: main.cpp:131
+#: main.cpp:139
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Milisaniye türünden kilitli arayüzün gösterilmesi için gecikme zamanı."
 
-#: main.cpp:134
+#: main.cpp:142
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Kilit kullanıcı arayüzü gösterme."
 
-#: main.cpp:135
+#: main.cpp:143
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Kullanıcı arayüzü değiştirme olarak öntanımlı kıl."
 
-#: main.cpp:137
+#: main.cpp:145
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Ksld bağlantısı için dosya tanımlayıcı."

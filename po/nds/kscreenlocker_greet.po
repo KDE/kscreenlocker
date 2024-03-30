@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 01:42+0000\n"
+"POT-Creation-Date: 2024-03-30 02:20+0000\n"
 "PO-Revision-Date: 2014-05-28 11:32+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-doc@kde.org>\n"
@@ -17,43 +17,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: main.cpp:118
+#: main.cpp:126
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Anmellpleger för't Schirmslott vun de KDE-Plasma-Arbeitrebeden"
 
-#: main.cpp:122
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Röppt den Anmellpleger in Tastbedrief op"
 
-#: main.cpp:125
+#: main.cpp:133
 #, fuzzy, kde-format
 #| msgid "Starts the greeter in testing mode"
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Röppt den Anmellpleger in Tastbedrief op"
 
-#: main.cpp:129
+#: main.cpp:137
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Fuurts afsluten, keen Töövtieden usw. beachten"
 
-#: main.cpp:131
+#: main.cpp:139
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Töövtiet in Millisekunnen, ehr de Schirmslott-Böversiet wiest warrt"
 
-#: main.cpp:134
+#: main.cpp:142
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Gor keen Schirmslott-Böversiet wiesen"
 
-#: main.cpp:135
+#: main.cpp:143
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr ""
 
-#: main.cpp:137
+#: main.cpp:145
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr ""

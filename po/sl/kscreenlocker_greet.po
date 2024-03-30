@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 01:42+0000\n"
+"POT-Creation-Date: 2024-03-30 02:20+0000\n"
 "PO-Revision-Date: 2016-08-29 22:43+0200\n"
 "Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -20,42 +20,42 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: main.cpp:118
+#: main.cpp:126
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Pozdravni zaslon za zaklep zaslona delovnega prostora KDE Plasma"
 
-#: main.cpp:122
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Pozdravni zaslon bo zagnan v načinu preizkušanja"
 
-#: main.cpp:125
+#: main.cpp:133
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Pozdravni zaslon bo zagnan z izbrano temo (samo v načinu preizkušanja)"
 
-#: main.cpp:129
+#: main.cpp:137
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Zakleni takoj, brez upoštevanja odloga, itd."
 
-#: main.cpp:131
+#: main.cpp:139
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Zakasnitev v milisekundah do prikaza vmesnika za uporabniški zaklep."
 
-#: main.cpp:134
+#: main.cpp:142
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ne prikaži vmesnika za uporabniški zaklep."
 
-#: main.cpp:135
+#: main.cpp:143
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Naj bo privzet uporabniški vmesnik za preklop uporabnikov."
 
-#: main.cpp:137
+#: main.cpp:145
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Opisovalnik datoteke za povezovanje s ksld."

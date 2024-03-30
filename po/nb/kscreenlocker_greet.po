@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 01:42+0000\n"
+"POT-Creation-Date: 2024-03-30 02:20+0000\n"
 "PO-Revision-Date: 2018-06-27 19:08+0100\n"
 "Last-Translator: Øystein Steffensen-Alværvik <ystein@posteo.net>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -20,42 +20,42 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: main.cpp:118
+#: main.cpp:126
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Velkomstbilde for skjermlåser i KDE Plasma-arbeidsområde"
 
-#: main.cpp:122
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Starter velkomstbildet i testmodus"
 
-#: main.cpp:125
+#: main.cpp:133
 #, kde-format
 msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgstr "Starter velkomstbildet med det valgte temaet (bare i testmodus)"
 
-#: main.cpp:129
+#: main.cpp:137
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Lås straks, uten å ta hensyn til ventetid e.l."
 
-#: main.cpp:131
+#: main.cpp:139
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Forsinkelse i millisekunder til låsebildet vises."
 
-#: main.cpp:134
+#: main.cpp:142
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ikke vis noe låsebilde."
 
-#: main.cpp:135
+#: main.cpp:143
 #, kde-format
 msgid "Default to the switch user UI."
 msgstr "Vis brukerbytteskjerm som standard."
 
-#: main.cpp:137
+#: main.cpp:145
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Filbeskrivelse for tilkobling til ksld."
