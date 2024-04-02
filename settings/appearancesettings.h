@@ -13,7 +13,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 namespace ScreenLocker
 {
 class WallpaperIntegration;
-class LnFIntegration;
+class ShellIntegration;
 }
 
 class KConfigPropertyMap;
@@ -25,11 +25,11 @@ class AppearanceSettings : public QObject
 public:
     explicit AppearanceSettings(QObject *parent = nullptr);
 
-    QUrl lnfConfigFile() const;
+    QUrl shellConfigFile() const;
     QUrl wallpaperConfigFile() const;
 
     KConfigPropertyMap *wallpaperConfiguration() const;
-    KConfigPropertyMap *lnfConfiguration() const;
+    KConfigPropertyMap *shellConfiguration() const;
 
     ScreenLocker::WallpaperIntegration *wallpaperIntegration() const;
 
@@ -46,13 +46,13 @@ Q_SIGNALS:
     void currentWallpaperChanged();
 
 private:
-    void loadLnfConfig();
+    void loadShellConfig();
 
     KPackage::Package m_package;
     ScreenLocker::WallpaperIntegration *m_wallpaperIntegration = nullptr;
     KCoreConfigSkeleton *m_wallpaperSettings = nullptr;
     QUrl m_wallpaperConfigFile;
-    ScreenLocker::LnFIntegration *m_lnfIntegration = nullptr;
-    KCoreConfigSkeleton *m_lnfSettings = nullptr;
-    QUrl m_lnfConfigFile;
+    ScreenLocker::ShellIntegration *m_shellIntegration = nullptr;
+    KCoreConfigSkeleton *m_shellSettings = nullptr;
+    QUrl m_shellConfigFile;
 };

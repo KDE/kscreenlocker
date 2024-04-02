@@ -6,9 +6,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "greeterapp.h"
 #include "kscreensaversettingsbase.h"
-#include "lnf_integration.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
 #include "powermanagement.h"
+#include "shell_integration.h"
 #include "wallpaper_integration.h"
 
 #include <config-kscreenlocker.h>
@@ -143,7 +143,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_graceTime(0)
     , m_noLock(false)
     , m_defaultToSwitchUser(false)
-    , m_lnfIntegration(new LnFIntegration(this))
+    , m_shellIntegration(new ShellIntegration(this))
 {
     auto interactive = std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SERVICE, KUser().loginName());
     std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
@@ -185,18 +185,16 @@ void UnlockApp::initialize()
     connect(m_resetRequestIgnoreTimer, &QTimer::timeout, this, &UnlockApp::resetRequestIgnore);
 
     KScreenSaverSettingsBase::self()->load();
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
-    KConfigGroup cg(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
-    m_packageName = cg.readEntry("LookAndFeelPackage", QString());
+    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Shell"));
+    m_packageName = m_shellIntegration->defaultShell();
+
     if (!m_packageName.isEmpty()) {
         package.setPath(m_packageName);
     }
-    if (!KScreenSaverSettingsBase::theme().isEmpty()) {
-        package.setPath(KScreenSaverSettingsBase::theme());
-    }
+
     if (!verifyPackageApi(package)) {
         qCWarning(KSCREENLOCKER_GREET) << "Lockscreen QML outdated, falling back to default";
-        package.setPath(QStringLiteral("org.kde.breeze.desktop"));
+        package.setPath(QStringLiteral("org.kde.plasma.desktop"));
     }
 
     m_mainQmlPath = package.fileUrl("lockscreenmainscript");
@@ -209,9 +207,9 @@ void UnlockApp::initialize()
     m_wallpaperPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper"));
     m_wallpaperPackage.setPath(KScreenSaverSettingsBase::self()->wallpaperPluginId());
 
-    m_lnfIntegration->setPackage(package);
-    m_lnfIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
-    m_lnfIntegration->init();
+    m_shellIntegration->setPackage(package);
+    m_shellIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
+    m_shellIntegration->init();
 
     const KUser user;
     const QString fullName = user.property(KUser::FullName).toString();
@@ -384,7 +382,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
     context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
     context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
-    context->setContextProperty(QStringLiteral("config"), m_lnfIntegration->configuration());
+    context->setContextProperty(QStringLiteral("config"), m_shellIntegration->configuration());
 
     auto wallpaperObj = loadWallpaperPlugin(view);
     if (auto object = view->property("wallpaperGraphicsObject").value<PlasmaQuick::SharedQmlEngine *>()) {

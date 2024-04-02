@@ -26,13 +26,13 @@ Kirigami.Page {
     ColumnLayout {
         anchors.fill: parent
 
-        LnfConfig {
-            sourceFile: kcm.lnfConfigFile
+        ShellConfig {
+            sourceFile: kcm.shellConfigFile
             onConfigurationChanged: kcm.updateState()
         }
 
         Kirigami.FormLayout {
-            id: parentLayout // Don't change needed for correct alignment with lnf and wallpaper config
+            id: parentLayout // Don't change needed for correct alignment with shell and wallpaper config
 
             QQC2.ComboBox {
                 Kirigami.FormData.label: i18n("Wallpaper type:")

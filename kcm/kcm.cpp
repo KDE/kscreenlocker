@@ -8,8 +8,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "kcm.h"
 #include "appearancesettings.h"
 #include "kscreenlockerdata.h"
-#include "lnf_integration.h"
 #include "screenlocker_interface.h"
+#include "shell_integration.h"
 
 #include <KConfigLoader>
 #include <KConfigPropertyMap>
@@ -106,9 +106,9 @@ KConfigPropertyMap *ScreenLockerKcm::wallpaperConfiguration() const
     return m_appearanceSettings->wallpaperConfiguration();
 }
 
-KConfigPropertyMap *ScreenLockerKcm::lnfConfiguration() const
+KConfigPropertyMap *ScreenLockerKcm::shellConfiguration() const
 {
-    return m_appearanceSettings->lnfConfiguration();
+    return m_appearanceSettings->shellConfiguration();
 }
 
 KScreenSaverSettings *ScreenLockerKcm::settings() const
@@ -126,9 +126,9 @@ bool ScreenLockerKcm::isDefaultsAppearance() const
     return m_appearanceSettings->isDefaults();
 }
 
-QUrl ScreenLockerKcm::lnfConfigFile() const
+QUrl ScreenLockerKcm::shellConfigFile() const
 {
-    return m_appearanceSettings->lnfConfigFile();
+    return m_appearanceSettings->shellConfigFile();
 }
 
 QUrl ScreenLockerKcm::wallpaperConfigFile() const

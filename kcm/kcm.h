@@ -18,7 +18,7 @@ class ScreenLockerKcmForm;
 class AppearanceSettings;
 namespace ScreenLocker
 {
-class LnFIntegration;
+class ShellIntegration;
 }
 
 class ScreenLockerKcm : public KQuickManagedConfigModule
@@ -29,8 +29,8 @@ public:
 
     Q_PROPERTY(KScreenSaverSettings *settings READ settings CONSTANT)
     Q_PROPERTY(KConfigPropertyMap *wallpaperConfiguration READ wallpaperConfiguration NOTIFY currentWallpaperChanged)
-    Q_PROPERTY(KConfigPropertyMap *lnfConfiguration READ lnfConfiguration CONSTANT)
-    Q_PROPERTY(QUrl lnfConfigFile READ lnfConfigFile CONSTANT)
+    Q_PROPERTY(KConfigPropertyMap *shellConfiguration READ shellConfiguration CONSTANT)
+    Q_PROPERTY(QUrl shellConfigFile READ shellConfigFile CONSTANT)
     Q_PROPERTY(QUrl wallpaperConfigFile READ wallpaperConfigFile NOTIFY currentWallpaperChanged)
     Q_PROPERTY(ScreenLocker::WallpaperIntegration *wallpaperIntegration READ wallpaperIntegration NOTIFY currentWallpaperChanged)
     Q_PROPERTY(QString currentWallpaper READ currentWallpaper NOTIFY currentWallpaperChanged)
@@ -42,7 +42,7 @@ public:
     }
 
     KScreenSaverSettings *settings() const;
-    QUrl lnfConfigFile() const;
+    QUrl shellConfigFile() const;
     QUrl wallpaperConfigFile() const;
     ScreenLocker::WallpaperIntegration *wallpaperIntegration() const;
     QString currentWallpaper() const;
@@ -75,7 +75,7 @@ private:
     bool isDefaults() const override;
 
     KConfigPropertyMap *wallpaperConfiguration() const;
-    KConfigPropertyMap *lnfConfiguration() const;
+    KConfigPropertyMap *shellConfiguration() const;
 
     AppearanceSettings *m_appearanceSettings;
     QString m_currentWallpaper;

@@ -14,17 +14,19 @@ class KConfigLoader;
 
 namespace ScreenLocker
 {
-class LnFIntegration : public QObject
+class ShellIntegration : public QObject
 {
     Q_OBJECT
 
     Q_PROPERTY(KConfigPropertyMap *configuration READ configuration NOTIFY configurationChanged)
 
 public:
-    explicit LnFIntegration(QObject *parent);
-    ~LnFIntegration() override;
+    explicit ShellIntegration(QObject *parent);
+    ~ShellIntegration() override;
 
     void init();
+
+    QString defaultShell() const;
 
     void setConfig(const KSharedConfig::Ptr &config)
     {

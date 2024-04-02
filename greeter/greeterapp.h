@@ -33,7 +33,7 @@ class PamAuthenticators;
 namespace ScreenLocker
 {
 class WallpaperIntegration;
-class LnFIntegration;
+class ShellIntegration;
 
 class UnlockApp : public QGuiApplication
 {
@@ -104,6 +104,6 @@ private:
     org_kde_ksld *m_ksldInterface = nullptr;
 
     KPackage::Package m_wallpaperPackage;
-    LnFIntegration *m_lnfIntegration;
+    ShellIntegration *m_shellIntegration;
 };
 } // namespace
