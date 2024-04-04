@@ -4,13 +4,13 @@
 # Andrej Vernekar <andrej.vernekar@gmail.com>, 2012.
 # Jure Repinc <jlp@holodeck1.com>, 2012.
 # Andrej Mernik <andrejm@ubuntu.si>, 2013, 2014, 2015, 2017.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2024 Matjaž Jeran <matjaz.jeran@amis.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-23 00:38+0000\n"
-"PO-Revision-Date: 2023-03-06 08:21+0100\n"
+"PO-Revision-Date: 2024-04-03 09:09+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -104,7 +104,7 @@ msgstr "Zaklep zaslona"
 #: logind.cpp:161
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
-msgstr "Zagotavljanje, da se zaslon zaklene pred prehodom v pripravljenost"
+msgstr "Zagotavljanje, da se zaslon zaklene pred prehodom v spanje"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
