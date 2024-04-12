@@ -29,8 +29,8 @@ Item {
         color: "black"
     }
 
-    SessionsModel {
-        id: sessionsModel
+    SessionManagement {
+        id: sessionManagment
     }
 
     Image {
@@ -79,7 +79,7 @@ Item {
     Greeter {
         id: unlockUI
 
-        switchUserEnabled: sessionsModel.canSwitchUser
+        switchUserEnabled: sessionManagment.canSwitchUser
 
         visible: opacity > 0
         opacity: mainStack.currentItem == unlockUI
@@ -94,8 +94,7 @@ Item {
                 lockScreen.unlockRequested();
             }
             function onSwitchUserClicked() {
-                mainStack.push(userSessionsUIComponent);
-                mainStack.currentItem.forceActiveFocus();
+                sessionManagment.switchUser();
             }
         }
     }
@@ -103,27 +102,5 @@ Item {
     function returnToLogin() {
         mainStack.pop();
         unlockUI.resetFocus();
-    }
-
-    Component {
-        id: userSessionsUIComponent
-
-        SessionSwitching {
-            id: userSessionsUI
-
-            visible: false
-
-            Connections {
-                function onSwitchingCanceled() {
-                    returnToLogin();
-                }
-                function onSessionActivated() {
-                    returnToLogin();
-                }
-                function onNewSessionStarted() {
-                    returnToLogin();
-                }
-            }
-        }
     }
 }
