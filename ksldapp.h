@@ -255,6 +255,11 @@ Q_SIGNALS:
      */
     void lockStateChanged();
 
+    /**
+     * Emitted when the lock state is about to change to @p to state.
+     */
+    void lockStateAboutToChange(LockState to);
+
 private Q_SLOTS:
 
     /**

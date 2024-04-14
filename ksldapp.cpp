@@ -445,6 +445,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
     // blank the screen
     showLockWindow();
 
+    Q_EMIT lockStateAboutToChange(AcquiringLock);
     m_lockState = AcquiringLock;
 
     setForceSoftwareRendering(false);
@@ -601,6 +602,7 @@ void KSldApp::doUnlock()
     // delete the window again, to get rid of event filter
     delete m_lockWindow;
     m_lockWindow = nullptr;
+    Q_EMIT lockStateAboutToChange(Unlocked);
     m_lockState = Unlocked;
     m_lockedTimer.invalidate();
     m_greeterCrashedCounter = 0;
@@ -809,6 +811,7 @@ void KSldApp::lockScreenShown()
     if (m_lockState == Locked) {
         return;
     }
+    Q_EMIT lockStateAboutToChange(Locked);
     m_lockState = Locked;
     m_lockedTimer.restart();
     Q_EMIT locked();
