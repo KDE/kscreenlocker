@@ -55,6 +55,7 @@ KCM.SimpleKCM {
         Kirigami.FormLayout {
             QQC2.ComboBox {
                 id: timeoutComboBox
+                Layout.fillWidth: true
                 Kirigami.FormData.label: i18n("Lock screen automatically:")
                 textRole: "text"
                 model: root.timeoutOptions
@@ -121,6 +122,7 @@ KCM.SimpleKCM {
 
             QQC2.ComboBox {
                 id: lockGraceComboBox
+                Layout.fillWidth: true
                 Kirigami.FormData.label: i18nc("First part of sentence \"Delay before password required: X minutes\"", "Delay before password required:")
                 textRole: "text"
                 model: root.lockGraceOptions
