@@ -18,6 +18,14 @@ KCM.SimpleKCM {
     implicitHeight: Kirigami.Units.gridUnit * 45
     implicitWidth: Kirigami.Units.gridUnit * 45
 
+    actions:  [
+        Kirigami.Action {
+            text: i18nc("@action:button", "Configure Appearance…")
+            icon.name: "edit-image-symbolic"
+            onTriggered: kcm.push("Appearance.qml")
+        }
+    ]
+
     /// The options for the timeout before the screen locks.
     property var timeoutOptions: [
         { index: 0, text: i18nc("Screen will not lock automatically", "Never"), value: 0 },
@@ -196,21 +204,6 @@ KCM.SimpleKCM {
                 KCM.SettingStateBinding {
                     configObject: kcm.settings
                     settingName: "shortcut"
-                }
-            }
-
-            Item {
-                Kirigami.FormData.isSection: true
-            }
-
-            QQC2.Button {
-                Kirigami.FormData.label: i18n("Appearance:")
-                text: i18nc("@action:button", "Configure...")
-                icon.name: "preferences-desktop-theme"
-                onClicked: kcm.push("Appearance.qml")
-
-                KCM.SettingHighlighter {
-                    highlight: !kcm.isDefaultsAppearance
                 }
             }
         }
