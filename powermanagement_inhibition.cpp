@@ -15,8 +15,24 @@ SPDX-License-Identifier: GPL-2.0-or-later
 static const QString s_solidPowerService = QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent");
 static const QString s_solidPath = QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent");
 
-Q_DECLARE_METATYPE(QList<InhibitionInfo>)
-Q_DECLARE_METATYPE(InhibitionInfo)
+Q_DECLARE_METATYPE(QList<SolidInhibition>)
+Q_DECLARE_METATYPE(SolidInhibition)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const SolidInhibition &inhibition)
+{
+    argument.beginStructure();
+    argument << inhibition.cookie << inhibition.appName << inhibition.reason;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, SolidInhibition &inhibition)
+{
+    argument.beginStructure();
+    argument >> inhibition.cookie >> inhibition.appName >> inhibition.reason;
+    argument.endStructure();
+    return argument;
+}
 
 PowerManagementInhibition::PowerManagementInhibition(QObject *parent)
     : QObject(parent)
@@ -24,8 +40,8 @@ PowerManagementInhibition::PowerManagementInhibition(QObject *parent)
                                                          QDBusConnection::sessionBus(),
                                                          QDBusServiceWatcher::WatchForUnregistration | QDBusServiceWatcher::WatchForRegistration))
 {
-    qDBusRegisterMetaType<QList<InhibitionInfo>>();
-    qDBusRegisterMetaType<InhibitionInfo>();
+    qDBusRegisterMetaType<QList<SolidInhibition>>();
+    qDBusRegisterMetaType<SolidInhibition>();
 
     connect(m_solidPowerServiceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this] {
         m_serviceRegistered = false;
@@ -72,7 +88,7 @@ void PowerManagementInhibition::update()
     checkInhibition();
 }
 
-void PowerManagementInhibition::inhibitionsChanged(const QList<InhibitionInfo> &added, const QStringList &removed)
+void PowerManagementInhibition::inhibitionsChanged(const QList<SolidInhibition> &added, const QList<uint> &removed)
 {
     Q_UNUSED(added)
     Q_UNUSED(removed)

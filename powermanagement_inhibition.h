@@ -9,7 +9,11 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 class QDBusServiceWatcher;
 
-using InhibitionInfo = QPair<QString, QString>;
+struct SolidInhibition {
+    uint cookie;
+    QString appName;
+    QString reason;
+};
 
 class PowerManagementInhibition : public QObject
 {
@@ -24,7 +28,7 @@ public:
     }
 
 private Q_SLOTS:
-    void inhibitionsChanged(const QList<InhibitionInfo> &added, const QStringList &removed);
+    void inhibitionsChanged(const QList<SolidInhibition> &added, const QList<uint> &removed);
 
 private:
     void checkInhibition();
