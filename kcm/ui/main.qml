@@ -270,10 +270,9 @@ KCM.SimpleKCM {
         DurationPromptDialog {
             id: customTimeoutPromptDialog
             title: i18nc("@title:window", "Custom Duration")
-            subtitle: timeoutComboBox.Kirigami.FormData.label
+            label: timeoutComboBox.Kirigami.FormData.label
 
             acceptsMinutes: true
-            acceptsSeconds: false
             valueType: DurationPromptDialog.ValueType.Minutes
 
             onAccepted: function() {
@@ -330,10 +329,10 @@ KCM.SimpleKCM {
         DurationPromptDialog {
             id: customLockGracePromptDialog
             title: i18nc("@title:window", "Custom Duration")
-            subtitle: lockGraceComboBox.Kirigami.FormData.label
+            label: lockGraceComboBox.Kirigami.FormData.label
 
-            acceptsMinutes: true
             acceptsSeconds: true
+            acceptsMinutes: true
 
             onAccepted: function() {
                 const isMinutes = customLockGracePromptDialog.valueType === DurationPromptDialog.ValueType.Minutes;
