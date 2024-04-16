@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-27 00:38+0000\n"
+"POT-Creation-Date: 2024-04-16 00:39+0000\n"
 "PO-Revision-Date: 2024-02-26 12:14+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -73,112 +73,116 @@ msgid "seconds"
 msgstr "segons"
 
 #: ui/main.qml:23
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Appearance"
+msgctxt "@action:button"
+msgid "Configure Appearance…"
+msgstr "Aparença"
+
+#: ui/main.qml:31
 #, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Mai"
 
-#: ui/main.qml:24 ui/main.qml:38
+#: ui/main.qml:32 ui/main.qml:46
 #, kde-format
 msgid "1 minute"
 msgstr "1 minut"
 
-#: ui/main.qml:25
+#: ui/main.qml:33
 #, kde-format
 msgid "2 minutes"
 msgstr "2 minuts"
 
-#: ui/main.qml:26 ui/main.qml:39
+#: ui/main.qml:34 ui/main.qml:47
 #, kde-format
 msgid "5 minutes"
 msgstr "5 minuts"
 
-#: ui/main.qml:27
+#: ui/main.qml:35
 #, kde-format
 msgid "10 minutes"
 msgstr "10 minuts"
 
-#: ui/main.qml:28 ui/main.qml:40
+#: ui/main.qml:36 ui/main.qml:48
 #, kde-format
 msgid "15 minutes"
 msgstr "15 minuts"
 
-#: ui/main.qml:29
+#: ui/main.qml:37
 #, kde-format
 msgid "30 minutes"
 msgstr "30 minuts"
 
-#: ui/main.qml:30 ui/main.qml:41
+#: ui/main.qml:38 ui/main.qml:49
 #, kde-format
 msgctxt "To add a custom value, not in the predefined list"
 msgid "Custom"
 msgstr "Personalitzat"
 
-#: ui/main.qml:35
+#: ui/main.qml:43
 #, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "Sol·licita la contrasenya immediatament"
 
-#: ui/main.qml:36
+#: ui/main.qml:44
 #, kde-format
 msgid "5 seconds"
 msgstr "5 segons"
 
-#: ui/main.qml:37
+#: ui/main.qml:45
 #, kde-format
 msgid "30 seconds"
 msgstr "30 segons"
 
-#: ui/main.qml:50
+#: ui/main.qml:59
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Bloqueja automàticament la pantalla:"
 
-#: ui/main.qml:84 ui/main.qml:169 ui/main.qml:310 ui/main.qml:382
+#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:377
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minut"
 msgstr[1] "%1 minuts"
 
-#: ui/main.qml:100
+#: ui/main.qml:109
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "Bloqueja després de despertar-se"
 
-#: ui/main.qml:116
+#: ui/main.qml:126
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "Retard abans de sol·licitar la contrasenya:"
 
-#: ui/main.qml:170 ui/main.qml:384
+#: ui/main.qml:180 ui/main.qml:379
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 segon"
 msgstr[1] "%1 segons"
 
-#: ui/main.qml:192
+#: ui/main.qml:202
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Drecera del teclat:"
 
-#: ui/main.qml:207
-#, kde-format
-msgid "Appearance:"
-msgstr "Aparença:"
-
-#: ui/main.qml:208
-#, kde-format
-msgctxt "@action:button"
-msgid "Configure..."
-msgstr "Configura..."
-
-#: ui/main.qml:277 ui/main.qml:337
+#: ui/main.qml:272 ui/main.qml:332
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "Duració personalitzada"
+
+#~ msgid "Appearance:"
+#~ msgstr "Aparença:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Configure..."
+#~ msgstr "Configura..."
