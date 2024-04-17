@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-16 00:39+0000\n"
-"PO-Revision-Date: 2024-02-26 13:13+0300\n"
+"PO-Revision-Date: 2024-04-16 06:16+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -70,12 +70,10 @@ msgid "seconds"
 msgstr "saniye"
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "Görünüş"
+msgstr "Görünüşü Yapılandır…"
 
 #: ui/main.qml:31
 #, kde-format
