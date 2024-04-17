@@ -75,9 +75,13 @@ Kirigami.Dialog {
     padding: Kirigami.Units.largeSpacing
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
-    implicitWidth: Math.max(contentItem.implicitWidth + leftPadding + rightPadding, root.implicitHeaderWidth, root.implicitFooterWidth)
+    // FIXME: KF 6.3 and up doesn't need content.implicitWidth as part of preferredWidth, it will
+    //        automatically expand to implicit content size. Remove this once we can rely on KF 6.3.
+    preferredWidth: Math.max(content.implicitWidth,
+                             Kirigami.Units.gridUnit * 10, implicitHeaderWidth, implicitFooterWidth)
 
-    contentItem: RowLayout {
+    RowLayout {
+        id: content
         spacing: 0
 
         Item {

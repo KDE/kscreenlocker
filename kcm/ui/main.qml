@@ -274,6 +274,8 @@ KCM.SimpleKCM {
 
             acceptsUnits: [DurationPromptDialog.Unit.Minutes]
 
+            parent: QQC2.Overlay.overlay // FIXME: remove once we can depend on Frameworks 6.2
+
             onAccepted: function() {
                 setCustomTimeout(customTimeoutPromptDialog.value);
                 customTimeoutPromptDialog.close();
@@ -331,6 +333,8 @@ KCM.SimpleKCM {
             label: lockGraceComboBox.Kirigami.FormData.label
 
             acceptsUnits: [DurationPromptDialog.Unit.Seconds, DurationPromptDialog.Unit.Minutes]
+
+            parent: QQC2.Overlay.overlay // FIXME: remove once we can depend on Frameworks 6.2
 
             onAccepted: function() {
                 const isMinutes = customLockGracePromptDialog.unit === DurationPromptDialog.Unit.Minutes;
