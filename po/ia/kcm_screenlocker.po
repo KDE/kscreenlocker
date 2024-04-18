@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-16 00:39+0000\n"
-"PO-Revision-Date: 2024-02-26 10:44+0100\n"
+"PO-Revision-Date: 2024-04-17 14:30+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -69,12 +69,10 @@ msgid "seconds"
 msgstr "secundas"
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "Apparentia"
+msgstr "Configura apparentia…"
 
 #: ui/main.qml:31
 #, kde-format
