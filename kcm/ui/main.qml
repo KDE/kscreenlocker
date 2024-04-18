@@ -139,9 +139,9 @@ KCM.SimpleKCM {
                         const currentOptionIndex = lockGraceOptionsCurrentIndexForSavedValue();
                         const currentOption = root.lockGraceOptions[currentOptionIndex];
 
-                        customLockGracePromptDialogLoader.item.valueType = (currentOption.unit === "minutes")
-                            ? DurationPromptDialog.ValueType.Minutes
-                            : DurationPromptDialog.ValueType.Seconds;
+                        customLockGracePromptDialogLoader.item.unit = (currentOption.unit === "minutes")
+                            ? DurationPromptDialog.Unit.Minutes
+                            : DurationPromptDialog.Unit.Seconds;
 
                         customLockGracePromptDialogLoader.item.value = currentOption.value;
                         customLockGracePromptDialogLoader.item.open();
@@ -272,8 +272,7 @@ KCM.SimpleKCM {
             title: i18nc("@title:window", "Custom Duration")
             label: timeoutComboBox.Kirigami.FormData.label
 
-            acceptsMinutes: true
-            valueType: DurationPromptDialog.ValueType.Minutes
+            acceptsUnits: [DurationPromptDialog.Unit.Minutes]
 
             onAccepted: function() {
                 setCustomTimeout(customTimeoutPromptDialog.value);
@@ -331,11 +330,10 @@ KCM.SimpleKCM {
             title: i18nc("@title:window", "Custom Duration")
             label: lockGraceComboBox.Kirigami.FormData.label
 
-            acceptsSeconds: true
-            acceptsMinutes: true
+            acceptsUnits: [DurationPromptDialog.Unit.Seconds, DurationPromptDialog.Unit.Minutes]
 
             onAccepted: function() {
-                const isMinutes = customLockGracePromptDialog.valueType === DurationPromptDialog.ValueType.Minutes;
+                const isMinutes = customLockGracePromptDialog.unit === DurationPromptDialog.Unit.Minutes;
                 setCustomLockGrace(customLockGracePromptDialog.value, isMinutes);
                 customLockGracePromptDialog.close();
             }
