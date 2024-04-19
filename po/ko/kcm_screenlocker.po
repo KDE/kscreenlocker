@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-04-19 00:39+0000\n"
 "PO-Revision-Date: 2024-02-17 15:09+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -28,19 +28,24 @@ msgstr "모양"
 msgid "Wallpaper type:"
 msgstr "배경 그림 종류:"
 
-#: ui/DurationPromptDialog.qml:77
-#, kde-format
-msgctxt "@action:button"
-msgid "Confirm"
-msgstr "확인"
+#: ui/DurationPromptDialog.qml:114
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "second"
+#| msgid_plural "seconds"
+msgctxt "The unit of the time input field"
+msgid "millisecond"
+msgid_plural "milliseconds"
+msgstr[0] "초"
 
-#: ui/DurationPromptDialog.qml:85
+#: ui/DurationPromptDialog.qml:116
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr "취소"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "초"
 
-#: ui/DurationPromptDialog.qml:115
+#: ui/DurationPromptDialog.qml:118
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
@@ -50,21 +55,91 @@ msgstr[0] "분"
 #: ui/DurationPromptDialog.qml:120
 #, kde-format
 msgctxt "The unit of the time input field"
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "초"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:122
 #, kde-format
 msgctxt "The unit of the time input field"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+
+#: ui/DurationPromptDialog.qml:124
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] ""
+
+#: ui/DurationPromptDialog.qml:126
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "month"
+msgid_plural "months"
+msgstr[0] ""
+
+#: ui/DurationPromptDialog.qml:128
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "year"
+msgid_plural "years"
+msgstr[0] ""
+
+#: ui/DurationPromptDialog.qml:155
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "milliseconds"
+msgstr "초"
+
+#: ui/DurationPromptDialog.qml:157
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "seconds"
+msgstr "초"
+
+#: ui/DurationPromptDialog.qml:159
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "minutes"
+msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "분"
 
-#: ui/DurationPromptDialog.qml:136
+#: ui/DurationPromptDialog.qml:161
 #, kde-format
-msgctxt "The unit of the time input field"
-msgid "seconds"
-msgstr "초"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "hours"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:163
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "days"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:165
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "weeks"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:167
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "months"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:169
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "years"
+msgstr ""
 
 #: ui/main.qml:23
 #, fuzzy, kde-format
@@ -141,7 +216,7 @@ msgstr "초"
 msgid "Lock screen automatically:"
 msgstr "자동으로 화면을 잠글 시간:"
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:377
+#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:303 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -159,7 +234,7 @@ msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "암호 요구까지 기다릴 시간:"
 
-#: ui/main.qml:180 ui/main.qml:379
+#: ui/main.qml:180 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -170,11 +245,19 @@ msgstr[0] "%1초"
 msgid "Keyboard shortcut:"
 msgstr "키보드 단축키:"
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:272 ui/main.qml:330
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "사용자 정의 시간"
+
+#~ msgctxt "@action:button"
+#~ msgid "Confirm"
+#~ msgstr "확인"
+
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "취소"
 
 #~ msgid "Appearance:"
 #~ msgstr "모양:"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-04-19 00:39+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -30,19 +30,33 @@ msgstr ""
 msgid "Wallpaper type:"
 msgstr "&Тип тапета:"
 
-#: ui/DurationPromptDialog.qml:77
-#, kde-format
-msgctxt "@action:button"
-msgid "Confirm"
-msgstr ""
+#: ui/DurationPromptDialog.qml:114
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for seconds"
+#| msgid " sec"
+#| msgid_plural " secs"
+msgctxt "The unit of the time input field"
+msgid "millisecond"
+msgid_plural "milliseconds"
+msgstr[0] " сек."
+msgstr[1] " сек."
+msgstr[2] " сек."
+msgstr[3] " сек."
 
-#: ui/DurationPromptDialog.qml:85
-#, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr ""
+#: ui/DurationPromptDialog.qml:116
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for seconds"
+#| msgid " sec"
+#| msgid_plural " secs"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] " сек."
+msgstr[1] " сек."
+msgstr[2] " сек."
+msgstr[3] " сек."
 
-#: ui/DurationPromptDialog.qml:115
+#: ui/DurationPromptDialog.qml:118
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for minutes"
 #| msgid " min"
@@ -56,35 +70,111 @@ msgstr[2] " мин."
 msgstr[3] " мин."
 
 #: ui/DurationPromptDialog.qml:120
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: ui/DurationPromptDialog.qml:122
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: ui/DurationPromptDialog.qml:124
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: ui/DurationPromptDialog.qml:126
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "month"
+msgid_plural "months"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: ui/DurationPromptDialog.qml:128
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "year"
+msgid_plural "years"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: ui/DurationPromptDialog.qml:155
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for seconds"
 #| msgid " sec"
 #| msgid_plural " secs"
-msgctxt "The unit of the time input field"
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] " сек."
-msgstr[1] " сек."
-msgstr[2] " сек."
-msgstr[3] " сек."
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "milliseconds"
+msgstr " сек."
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:157
+#, fuzzy, kde-format
+#| msgctxt "Spinbox suffix. Short for seconds"
+#| msgid " sec"
+#| msgid_plural " secs"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "seconds"
+msgstr " сек."
+
+#: ui/DurationPromptDialog.qml:159
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for minutes"
 #| msgid " min"
 #| msgid_plural " mins"
-msgctxt "The unit of the time input field"
+msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr " мин."
 
-#: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgctxt "Spinbox suffix. Short for seconds"
-#| msgid " sec"
-#| msgid_plural " secs"
-msgctxt "The unit of the time input field"
-msgid "seconds"
-msgstr " сек."
+#: ui/DurationPromptDialog.qml:161
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "hours"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:163
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "days"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:165
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "weeks"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:167
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "months"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:169
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "years"
+msgstr ""
 
 #: ui/main.qml:23
 #, kde-format
@@ -180,7 +270,7 @@ msgstr " сек."
 msgid "Lock screen automatically:"
 msgstr "&Закључај екран по настављању:"
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:377
+#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:303 ui/main.qml:374
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for minutes"
 #| msgid " min"
@@ -205,7 +295,7 @@ msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:180 ui/main.qml:379
+#: ui/main.qml:180 ui/main.qml:376
 #, fuzzy, kde-format
 #| msgctxt "Spinbox suffix. Short for seconds"
 #| msgid " sec"
@@ -222,7 +312,7 @@ msgstr[3] " сек."
 msgid "Keyboard shortcut:"
 msgstr "Пречица са тастатуре:"
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:272 ui/main.qml:330
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"

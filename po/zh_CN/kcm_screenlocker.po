@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
-"PO-Revision-Date: 2024-04-16 13:58\n"
+"POT-Creation-Date: 2024-04-19 00:39+0000\n"
+"PO-Revision-Date: 2024-04-18 19:49\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -28,19 +28,24 @@ msgstr "外观"
 msgid "Wallpaper type:"
 msgstr "壁纸类型："
 
-#: ui/DurationPromptDialog.qml:77
-#, kde-format
-msgctxt "@action:button"
-msgid "Confirm"
-msgstr "确认"
+#: ui/DurationPromptDialog.qml:114
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "second"
+#| msgid_plural "seconds"
+msgctxt "The unit of the time input field"
+msgid "millisecond"
+msgid_plural "milliseconds"
+msgstr[0] "秒"
 
-#: ui/DurationPromptDialog.qml:85
+#: ui/DurationPromptDialog.qml:116
 #, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr "取消"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "秒"
 
-#: ui/DurationPromptDialog.qml:115
+#: ui/DurationPromptDialog.qml:118
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
@@ -50,29 +55,97 @@ msgstr[0] "分钟"
 #: ui/DurationPromptDialog.qml:120
 #, kde-format
 msgctxt "The unit of the time input field"
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "秒"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:122
 #, kde-format
 msgctxt "The unit of the time input field"
-msgid "minutes"
-msgstr "分钟"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
 
-#: ui/DurationPromptDialog.qml:136
+#: ui/DurationPromptDialog.qml:124
 #, kde-format
 msgctxt "The unit of the time input field"
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] ""
+
+#: ui/DurationPromptDialog.qml:126
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "month"
+msgid_plural "months"
+msgstr[0] ""
+
+#: ui/DurationPromptDialog.qml:128
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "year"
+msgid_plural "years"
+msgstr[0] ""
+
+#: ui/DurationPromptDialog.qml:155
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "milliseconds"
+msgstr "秒"
+
+#: ui/DurationPromptDialog.qml:157
+#, fuzzy, kde-format
+#| msgctxt "The unit of the time input field"
+#| msgid "seconds"
+msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "秒"
 
-#: ui/main.qml:23
+#: ui/DurationPromptDialog.qml:159
 #, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#| msgctxt "The unit of the time input field"
+#| msgid "minutes"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "minutes"
+msgstr "分钟"
+
+#: ui/DurationPromptDialog.qml:161
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "hours"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:163
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "days"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:165
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "weeks"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:167
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "months"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:169
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "years"
+msgstr ""
+
+#: ui/main.qml:23
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "外观"
+msgstr "配置外观…"
 
 #: ui/main.qml:31
 #, kde-format
@@ -137,7 +210,7 @@ msgstr "30 秒"
 msgid "Lock screen automatically:"
 msgstr "自动锁定屏幕："
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:377
+#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:303 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -155,7 +228,7 @@ msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "需要输入密码解锁的宽限延迟："
 
-#: ui/main.qml:180 ui/main.qml:379
+#: ui/main.qml:180 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -166,15 +239,16 @@ msgstr[0] "%1 秒"
 msgid "Keyboard shortcut:"
 msgstr "键盘快捷键："
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:272 ui/main.qml:330
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "自定义时间"
 
-#~ msgid "Appearance:"
-#~ msgstr "外观："
+#~ msgctxt "@action:button"
+#~ msgid "Confirm"
+#~ msgstr "确认"
 
 #~ msgctxt "@action:button"
-#~ msgid "Configure..."
-#~ msgstr "配置..."
+#~ msgid "Cancel"
+#~ msgstr "取消"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-04-19 00:39+0000\n"
 "PO-Revision-Date: 2020-10-23 11:15+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -29,21 +29,27 @@ msgstr "Välimus"
 msgid "Wallpaper type:"
 msgstr "Taustapildi tüüp:"
 
-#: ui/DurationPromptDialog.qml:77
+#: ui/DurationPromptDialog.qml:114
 #, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
-msgctxt "@action:button"
-msgid "Confirm"
-msgstr "Seadista ..."
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "millisecond"
+msgid_plural "milliseconds"
+msgstr[0] "%1 sekund"
+msgstr[1] "%1 sekundit"
 
-#: ui/DurationPromptDialog.qml:85
-#, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr ""
+#: ui/DurationPromptDialog.qml:116
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "%1 sekund"
+msgstr[1] "%1 sekundit"
 
-#: ui/DurationPromptDialog.qml:115
+#: ui/DurationPromptDialog.qml:118
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
@@ -54,30 +60,98 @@ msgstr[0] "%1 minutit"
 msgstr[1] "%1 minutit"
 
 #: ui/DurationPromptDialog.qml:120
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ui/DurationPromptDialog.qml:122
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ui/DurationPromptDialog.qml:124
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ui/DurationPromptDialog.qml:126
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "month"
+msgid_plural "months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ui/DurationPromptDialog.qml:128
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "year"
+msgid_plural "years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ui/DurationPromptDialog.qml:155
 #, fuzzy, kde-format
 #| msgid "%1 second"
 #| msgid_plural "%1 seconds"
-msgctxt "The unit of the time input field"
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "%1 sekund"
-msgstr[1] "%1 sekundit"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "milliseconds"
+msgstr "%1 sekund"
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:157
+#, fuzzy, kde-format
+#| msgid "%1 second"
+#| msgid_plural "%1 seconds"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "seconds"
+msgstr "%1 sekund"
+
+#: ui/DurationPromptDialog.qml:159
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
-msgctxt "The unit of the time input field"
+msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "%1 minutit"
 
-#: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgid "%1 second"
-#| msgid_plural "%1 seconds"
-msgctxt "The unit of the time input field"
-msgid "seconds"
-msgstr "%1 sekund"
+#: ui/DurationPromptDialog.qml:161
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "hours"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:163
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "days"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:165
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "weeks"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:167
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "months"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:169
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "years"
+msgstr ""
 
 #: ui/main.qml:23
 #, fuzzy, kde-format
@@ -167,7 +241,7 @@ msgstr "%1 sekund"
 msgid "Lock screen automatically:"
 msgstr "Ekraani automaatne lukustamine:"
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:377
+#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:303 ui/main.qml:374
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -188,7 +262,7 @@ msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:180 ui/main.qml:379
+#: ui/main.qml:180 ui/main.qml:376
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -200,12 +274,19 @@ msgstr[1] "%1 sekundit"
 msgid "Keyboard shortcut:"
 msgstr "Kiirklahv: "
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:272 ui/main.qml:330
 #, fuzzy, kde-format
 #| msgid "Custom Background:"
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "Kohandatud taust:"
+
+#, fuzzy
+#~| msgctxt "@action:button"
+#~| msgid "Configure..."
+#~ msgctxt "@action:button"
+#~ msgid "Confirm"
+#~ msgstr "Seadista ..."
 
 #~ msgid "Appearance:"
 #~ msgstr "Välimus:"

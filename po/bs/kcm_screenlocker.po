@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bosnianuniversetranslation\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-04-19 00:39+0000\n"
 "PO-Revision-Date: 2015-02-15 19:44+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -31,19 +31,27 @@ msgstr ""
 msgid "Wallpaper type:"
 msgstr ""
 
-#: ui/DurationPromptDialog.qml:77
-#, kde-format
-msgctxt "@action:button"
-msgid "Confirm"
-msgstr ""
+#: ui/DurationPromptDialog.qml:114
+#, fuzzy, kde-format
+#| msgid " sec"
+msgctxt "The unit of the time input field"
+msgid "millisecond"
+msgid_plural "milliseconds"
+msgstr[0] " sek."
+msgstr[1] " sek."
+msgstr[2] " sek."
 
-#: ui/DurationPromptDialog.qml:85
-#, kde-format
-msgctxt "@action:button"
-msgid "Cancel"
-msgstr ""
+#: ui/DurationPromptDialog.qml:116
+#, fuzzy, kde-format
+#| msgid " sec"
+msgctxt "The unit of the time input field"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] " sek."
+msgstr[1] " sek."
+msgstr[2] " sek."
 
-#: ui/DurationPromptDialog.qml:115
+#: ui/DurationPromptDialog.qml:118
 #, fuzzy, kde-format
 #| msgid " min"
 msgctxt "The unit of the time input field"
@@ -54,28 +62,100 @@ msgstr[1] " min"
 msgstr[2] " min"
 
 #: ui/DurationPromptDialog.qml:120
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ui/DurationPromptDialog.qml:122
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ui/DurationPromptDialog.qml:124
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ui/DurationPromptDialog.qml:126
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "month"
+msgid_plural "months"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ui/DurationPromptDialog.qml:128
+#, kde-format
+msgctxt "The unit of the time input field"
+msgid "year"
+msgid_plural "years"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ui/DurationPromptDialog.qml:155
 #, fuzzy, kde-format
 #| msgid " sec"
-msgctxt "The unit of the time input field"
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] " sek."
-msgstr[1] " sek."
-msgstr[2] " sek."
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "milliseconds"
+msgstr " sek."
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:157
+#, fuzzy, kde-format
+#| msgid " sec"
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "seconds"
+msgstr " sek."
+
+#: ui/DurationPromptDialog.qml:159
 #, fuzzy, kde-format
 #| msgid " min"
-msgctxt "The unit of the time input field"
+msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr " min"
 
-#: ui/DurationPromptDialog.qml:136
-#, fuzzy, kde-format
-#| msgid " sec"
-msgctxt "The unit of the time input field"
-msgid "seconds"
-msgstr " sek."
+#: ui/DurationPromptDialog.qml:161
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "hours"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:163
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "days"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:165
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "weeks"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:167
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "months"
+msgstr ""
+
+#: ui/DurationPromptDialog.qml:169
+#, kde-format
+msgctxt "@text:radiobutton Unit of the time input field"
+msgid "years"
+msgstr ""
 
 #: ui/main.qml:23
 #, kde-format
@@ -157,7 +237,7 @@ msgstr " sek."
 msgid "Lock screen automatically:"
 msgstr "&Zaključaj ekran nakon:"
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:377
+#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:303 ui/main.qml:374
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "%1 minute"
@@ -178,7 +258,7 @@ msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:180 ui/main.qml:379
+#: ui/main.qml:180 ui/main.qml:376
 #, fuzzy, kde-format
 #| msgid " sec"
 msgid "%1 second"
@@ -192,7 +272,7 @@ msgstr[2] " sek."
 msgid "Keyboard shortcut:"
 msgstr ""
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:272 ui/main.qml:330
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
