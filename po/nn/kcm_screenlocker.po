@@ -257,18 +257,3 @@ msgstr "Snøggtast:"
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "Sjølvvalt tidslengd"
-
-#~ msgctxt "@action:button"
-#~ msgid "Confirm"
-#~ msgstr "Stadfest"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Avbryt"
-
-#~ msgid "Appearance:"
-#~ msgstr "Utsjånad:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure..."
-#~ msgstr "Set opp …"
