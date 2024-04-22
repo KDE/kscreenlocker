@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-19 00:39+0000\n"
-"PO-Revision-Date: 2024-04-18 18:23+0200\n"
+"PO-Revision-Date: 2024-04-21 09:30+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -30,15 +30,12 @@ msgid "Wallpaper type:"
 msgstr "Tipo de fondo de escritorio:"
 
 #: ui/DurationPromptDialog.qml:114
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "second"
-#| msgid_plural "seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
-msgstr[0] "segundo"
-msgstr[1] "segundos"
+msgstr[0] "milisegundo"
+msgstr[1] "milisegundos"
 
 #: ui/DurationPromptDialog.qml:116
 #, kde-format
@@ -61,61 +58,55 @@ msgstr[1] "minutos"
 msgctxt "The unit of the time input field"
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "hora"
+msgstr[1] "horas"
 
 #: ui/DurationPromptDialog.qml:122
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "día"
+msgstr[1] "días"
 
 #: ui/DurationPromptDialog.qml:124
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
 msgid_plural "weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "semana"
+msgstr[1] "semanas"
 
 #: ui/DurationPromptDialog.qml:126
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
 msgid_plural "months"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "mes"
+msgstr[1] "meses"
 
 #: ui/DurationPromptDialog.qml:128
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
 msgid_plural "years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ano"
+msgstr[1] "anos"
 
 #: ui/DurationPromptDialog.qml:155
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
-msgstr "segundos"
+msgstr "milisegundos"
 
 #: ui/DurationPromptDialog.qml:157
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "segundos"
 
 #: ui/DurationPromptDialog.qml:159
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "minutes"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "minutos"
@@ -124,31 +115,31 @@ msgstr "minutos"
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
-msgstr ""
+msgstr "horas"
 
 #: ui/DurationPromptDialog.qml:163
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
-msgstr ""
+msgstr "días"
 
 #: ui/DurationPromptDialog.qml:165
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
-msgstr ""
+msgstr "semanas"
 
 #: ui/DurationPromptDialog.qml:167
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
-msgstr ""
+msgstr "meses"
 
 #: ui/DurationPromptDialog.qml:169
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
-msgstr ""
+msgstr "anos"
 
 #: ui/main.qml:23
 #, kde-format

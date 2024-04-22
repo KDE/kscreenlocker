@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-19 00:39+0000\n"
-"PO-Revision-Date: 2024-02-18 16:17+0530\n"
+"PO-Revision-Date: 2024-04-21 21:46+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -29,15 +29,12 @@ msgid "Wallpaper type:"
 msgstr "பின்புல படத்தின் வகை:"
 
 #: ui/DurationPromptDialog.qml:114
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "second"
-#| msgid_plural "seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
-msgstr[0] "நொடி"
-msgstr[1] "நொடி"
+msgstr[0] "மில்லிநொடி"
+msgstr[1] "மில்லிநொடி"
 
 #: ui/DurationPromptDialog.qml:116
 #, kde-format
@@ -60,61 +57,55 @@ msgstr[1] "நிமிடம்"
 msgctxt "The unit of the time input field"
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "மணிநேரம்"
+msgstr[1] "மணிநேரம்"
 
 #: ui/DurationPromptDialog.qml:122
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "நாள்"
+msgstr[1] "நாட்கள்"
 
 #: ui/DurationPromptDialog.qml:124
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
 msgid_plural "weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "வாரம்"
+msgstr[1] "வாரங்கள்"
 
 #: ui/DurationPromptDialog.qml:126
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
 msgid_plural "months"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "மாதம்"
+msgstr[1] "மாதங்கள்"
 
 #: ui/DurationPromptDialog.qml:128
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
 msgid_plural "years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ஆண்டு"
+msgstr[1] "ஆண்டுகள்"
 
 #: ui/DurationPromptDialog.qml:155
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
-msgstr "நொடி"
+msgstr "மில்லிநொடி"
 
 #: ui/DurationPromptDialog.qml:157
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "நொடி"
 
 #: ui/DurationPromptDialog.qml:159
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "minutes"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "நிமிடம்"
@@ -123,39 +114,37 @@ msgstr "நிமிடம்"
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
-msgstr ""
+msgstr "மணிநேரம்"
 
 #: ui/DurationPromptDialog.qml:163
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
-msgstr ""
+msgstr "நாட்கள்"
 
 #: ui/DurationPromptDialog.qml:165
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
-msgstr ""
+msgstr "வாரங்கள்"
 
 #: ui/DurationPromptDialog.qml:167
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
-msgstr ""
+msgstr "மாதங்கள்"
 
 #: ui/DurationPromptDialog.qml:169
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
-msgstr ""
+msgstr "ஆண்டுகள்"
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "தோற்றம்"
+msgstr "தோற்றத்தை அமை…"
 
 #: ui/main.qml:31
 #, kde-format
@@ -206,18 +195,14 @@ msgid "Require password immediately"
 msgstr "கடவுச்சொல்லை உடனே கேள்"
 
 #: ui/main.qml:44
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "5 seconds"
-msgstr "நொடி"
+msgstr "5 நொடி"
 
 #: ui/main.qml:45
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgid "30 seconds"
-msgstr "நொடி"
+msgstr "30 நொடி"
 
 #: ui/main.qml:59
 #, kde-format
@@ -229,7 +214,7 @@ msgstr "திரையை தானாக பூட்டு:"
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 நிமிடம்"
-msgstr[1] "%1 நிமிடங்கள்"
+msgstr[1] "%1 நிமிடம்"
 
 #: ui/main.qml:109
 #, kde-format
@@ -248,7 +233,7 @@ msgstr "இவ்வளவு நேரத்திற்கு கடவுச�
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 நொடி"
-msgstr[1] "%1 நொடிகள்"
+msgstr[1] "%1 நொடி"
 
 #: ui/main.qml:202
 #, kde-format
