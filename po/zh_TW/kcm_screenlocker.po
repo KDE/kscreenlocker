@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-19 00:39+0000\n"
-"PO-Revision-Date: 2024-02-29 02:55+0900\n"
+"PO-Revision-Date: 2024-04-22 16:30+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -33,14 +33,11 @@ msgid "Wallpaper type:"
 msgstr "桌布類型："
 
 #: ui/DurationPromptDialog.qml:114
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "second"
-#| msgid_plural "seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
-msgstr[0] "秒"
+msgstr[0] "毫秒"
 
 #: ui/DurationPromptDialog.qml:116
 #, kde-format
@@ -61,56 +58,50 @@ msgstr[0] "分鐘"
 msgctxt "The unit of the time input field"
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
+msgstr[0] "小時"
 
 #: ui/DurationPromptDialog.qml:122
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
+msgstr[0] "天"
 
 #: ui/DurationPromptDialog.qml:124
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
 msgid_plural "weeks"
-msgstr[0] ""
+msgstr[0] "週"
 
 #: ui/DurationPromptDialog.qml:126
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
 msgid_plural "months"
-msgstr[0] ""
+msgstr[0] "個月"
 
 #: ui/DurationPromptDialog.qml:128
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
 msgid_plural "years"
-msgstr[0] ""
+msgstr[0] "年"
 
 #: ui/DurationPromptDialog.qml:155
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
-msgstr "秒"
+msgstr "毫秒"
 
 #: ui/DurationPromptDialog.qml:157
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "秒"
 
 #: ui/DurationPromptDialog.qml:159
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "minutes"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "分鐘"
@@ -119,39 +110,37 @@ msgstr "分鐘"
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
-msgstr ""
+msgstr "小時"
 
 #: ui/DurationPromptDialog.qml:163
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
-msgstr ""
+msgstr "天"
 
 #: ui/DurationPromptDialog.qml:165
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
-msgstr ""
+msgstr "週"
 
 #: ui/DurationPromptDialog.qml:167
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
-msgstr ""
+msgstr "個月"
 
 #: ui/DurationPromptDialog.qml:169
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
-msgstr ""
+msgstr "年"
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "外觀"
+msgstr "設定外觀…"
 
 #: ui/main.qml:31
 #, kde-format
