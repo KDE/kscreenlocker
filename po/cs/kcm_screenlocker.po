@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-19 00:39+0000\n"
-"PO-Revision-Date: 2024-04-03 11:44+0200\n"
+"PO-Revision-Date: 2024-04-17 09:34+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -32,16 +32,13 @@ msgid "Wallpaper type:"
 msgstr "Typ tapety:"
 
 #: ui/DurationPromptDialog.qml:114
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "second"
-#| msgid_plural "seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
-msgstr[0] "sekunda"
-msgstr[1] "sekundy"
-msgstr[2] "sekund"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: ui/DurationPromptDialog.qml:116
 #, kde-format
@@ -107,28 +104,22 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: ui/DurationPromptDialog.qml:155
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
-msgstr "sekund"
+msgstr ""
 
 #: ui/DurationPromptDialog.qml:157
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
-msgstr "sekund"
+msgstr ""
 
 #: ui/DurationPromptDialog.qml:159
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "minutes"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
-msgstr "minut"
+msgstr ""
 
 #: ui/DurationPromptDialog.qml:161
 #, kde-format
@@ -161,12 +152,10 @@ msgid "years"
 msgstr ""
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "Vzhled"
+msgstr "Nastavit vzhled..."
 
 #: ui/main.qml:31
 #, kde-format
@@ -269,18 +258,3 @@ msgstr "Klávesová zkratka:"
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "Vlastní doba"
-
-#~ msgctxt "@action:button"
-#~ msgid "Confirm"
-#~ msgstr "Potvrdit"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Zrušit"
-
-#~ msgid "Appearance:"
-#~ msgstr "Vzhled:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure..."
-#~ msgstr "Nastavit..."
