@@ -264,16 +264,15 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
     qmlObject->setInitializationDelayed(true);
     qmlObject->setSource(QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
     view->setProperty("wallpaperGraphicsObject", QVariant::fromValue(qmlObject));
-    connect(qmlObject, &PlasmaQuick::SharedQmlEngine::finished, this, [this, qmlObject, view] {
-        auto item = qobject_cast<WallpaperItem *>(qmlObject->rootObject());
-        if (!item) {
-            qCWarning(KSCREENLOCKER_GREET) << "Root item not a WallpaperItem";
-            return;
-        };
+
+    auto item = qobject_cast<WallpaperItem *>(qmlObject->rootObject());
+    if (item) {
         qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
         view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
         view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), item);
-    });
+    } else {
+        qCWarning(KSCREENLOCKER_GREET) << "Root item not a WallpaperItem";
+    }
     return qmlObject;
 }
 
