@@ -74,6 +74,7 @@ Kirigami.Dialog {
 
     padding: Kirigami.Units.largeSpacing
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+    showCloseButton: false
 
     // FIXME: KF 6.3 and up doesn't need content.implicitWidth as part of preferredWidth, it will
     //        automatically expand to implicit content size. Remove this once we can rely on KF 6.3.
