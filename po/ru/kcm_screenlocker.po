@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Alexander Potashev <aspotashev@gmail.com>, 2014, 2015, 2016, 2018.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2020, 2024.
+# SPDX-FileCopyrightText: 2019, 2020, 2024 Alexander Yavorsky <kekcuha@gmail.com>
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-19 00:39+0000\n"
-"PO-Revision-Date: 2024-02-27 21:48+0300\n"
+"PO-Revision-Date: 2024-05-06 09:21+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -33,17 +33,14 @@ msgstr "Тип обоев:"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:114
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "second"
-#| msgid_plural "seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
-msgstr[0] "секунду"
-msgstr[1] "секунд"
-msgstr[2] "секунд"
-msgstr[3] "секунду"
+msgstr[0] "миллисекунду"
+msgstr[1] "миллисекунды"
+msgstr[2] "миллисекунд"
+msgstr[3] "миллисекунду"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:116
@@ -72,115 +69,107 @@ msgstr[3] "минуту"
 msgctxt "The unit of the time input field"
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "час"
+msgstr[1] "часа"
+msgstr[2] "часов"
+msgstr[3] "час"
 
 #: ui/DurationPromptDialog.qml:122
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "день"
+msgstr[1] "дня"
+msgstr[2] "дней"
+msgstr[3] "день"
 
 #: ui/DurationPromptDialog.qml:124
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
 msgid_plural "weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "неделю"
+msgstr[1] "недели"
+msgstr[2] "недель"
+msgstr[3] "неделю"
 
 #: ui/DurationPromptDialog.qml:126
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
 msgid_plural "months"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "месяц"
+msgstr[1] "месяца"
+msgstr[2] "месяцев"
+msgstr[3] "месяц"
 
 #: ui/DurationPromptDialog.qml:128
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
 msgid_plural "years"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "год"
+msgstr[1] "года"
+msgstr[2] "лет"
+msgstr[3] "год"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:155
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
-msgstr "секунд"
+msgstr "миллисекунды"
 
 # "Требовать пароль через: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:157
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
-msgstr "секунд"
+msgstr "секунды"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
 #: ui/DurationPromptDialog.qml:159
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "minutes"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
-msgstr "минут"
+msgstr "минуты"
 
 #: ui/DurationPromptDialog.qml:161
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
-msgstr ""
+msgstr "часы"
 
 #: ui/DurationPromptDialog.qml:163
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
-msgstr ""
+msgstr "дни"
 
 #: ui/DurationPromptDialog.qml:165
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
-msgstr ""
+msgstr "недели"
 
 #: ui/DurationPromptDialog.qml:167
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
-msgstr ""
+msgstr "месяцы"
 
 #: ui/DurationPromptDialog.qml:169
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
-msgstr ""
+msgstr "года"
 
 #: ui/main.qml:23
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "Внешний вид"
+msgstr "Настроить внешний вид…"
 
 #: ui/main.qml:31
 #, kde-format
@@ -228,7 +217,7 @@ msgstr "30 минут"
 #, kde-format
 msgctxt "To add a custom value, not in the predefined list"
 msgid "Custom"
-msgstr ""
+msgstr "Другой"
 
 #: ui/main.qml:43
 #, kde-format
@@ -291,11 +280,10 @@ msgid "Keyboard shortcut:"
 msgstr "Комбинация клавиш:"
 
 #: ui/main.qml:272 ui/main.qml:330
-#, fuzzy, kde-format
-#| msgid "Custom Background:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
-msgstr "Нестандартный фон:"
+msgstr "Нестандартная продолжительность"
 
 #~ msgctxt "@action:button"
 #~ msgid "Confirm"
