@@ -83,4 +83,4 @@ msgstr "Aparença:"
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
-msgstr "Configura..."
+msgstr "Configura…"
