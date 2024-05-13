@@ -58,9 +58,9 @@ KCM.SimpleKCM {
                 }
                 onCustomRequest: {
                     // Pass the current value to the dialog so it can be pre-filled in the input field.
-                    customTimeoutPromptDialogLoader.load();
-                    customTimeoutPromptDialogLoader.item.value = kcm.settings.timeout;
-                    customTimeoutPromptDialogLoader.item.open();
+                    customDurationPromptDialogLoader.load(customTimeoutPromptDialogComponent);
+                    customDurationPromptDialogLoader.item.value = kcm.settings.timeout;
+                    customDurationPromptDialogLoader.item.open();
                 }
                 onConfiguredValueOptionMissing: {
                     customOptions = [{
@@ -150,13 +150,13 @@ KCM.SimpleKCM {
                         ? model[currentOptionIndex]
                         : { seconds: kcm.settings.lockGrace, unit: DurationPromptDialog.Unit.Seconds };
 
-                    customLockGracePromptDialogLoader.load();
-                    customLockGracePromptDialogLoader.item.unit = currentOption.unit;
-                    customLockGracePromptDialogLoader.item.value =
+                    customDurationPromptDialogLoader.load(customLockGracePromptDialogComponent);
+                    customDurationPromptDialogLoader.item.unit = currentOption.unit;
+                    customDurationPromptDialogLoader.item.value =
                         currentOption.unit === DurationPromptDialog.Unit.Minutes
                             ? (currentOption.seconds / 60)
                             : currentOption.seconds;
-                    customLockGracePromptDialogLoader.item.open();
+                    customDurationPromptDialogLoader.item.open();
                 }
                 onConfiguredValueOptionMissing: {
                     const isMinutes = configuredValue % 60 === 0 &&
@@ -226,26 +226,13 @@ KCM.SimpleKCM {
 
     /// Dialog handled by a Loader to avoid loading it until it is needed.
     Loader {
-        id: customTimeoutPromptDialogLoader
+        id: customDurationPromptDialogLoader
         anchors.centerIn: parent
 
-        /// Load the dialog if it is not already loaded.
-        function load() {
-            if (status === Loader.Null) {
-                sourceComponent = customTimeoutPromptDialogComponent;
-            }
-        }
-    }
-
-    /// Dialog handled by a Loader to avoid loading it until it is needed.
-    Loader {
-        id: customLockGracePromptDialogLoader
-        anchors.centerIn: parent
-
-        /// Load the dialog if it is not already loaded.
-        function load() {
-            if (status === Loader.Null) {
-                sourceComponent = customLockGracePromptDialogComponent;
+        /// Load the dialog if it is not already loaded, or change it for a different one.
+        function load(component) {
+            if (sourceComponent !== component) {
+                sourceComponent = component;
             }
         }
     }
