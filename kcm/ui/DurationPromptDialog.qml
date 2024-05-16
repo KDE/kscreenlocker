@@ -64,10 +64,10 @@ Kirigami.Dialog {
      *
      * The value will have been updated when the user accepts the dialog.
      */
-    property alias value: customDurationInput.value
+    property alias value: durationValueSpinBox.value
 
-    property alias from: customDurationInput.from
-    property alias to: customDurationInput.to
+    property alias from: durationValueSpinBox.from
+    property alias to: durationValueSpinBox.to
 
     /**
      * @brief The unit of the value of the input field, of type `DurationPromptDialog.Unit`.
@@ -88,9 +88,9 @@ Kirigami.Dialog {
 
     onOpened: {
         // `focus: true` is not enough, because the OK button wants focus and gets priority.
-        customDurationInput.forceActiveFocus()
+        durationValueSpinBox.forceActiveFocus()
         // Set SpinBox width once, don't resize it if `to` changes based on unit changes.
-        customDurationInput.Layout.preferredWidth = customDurationInput.implicitWidth;
+        durationValueSpinBox.Layout.preferredWidth = durationValueSpinBox.implicitWidth;
     }
 
     RowLayout {
@@ -103,7 +103,7 @@ Kirigami.Dialog {
             id: labelItem
             visible: (root.label?.length ?? 0) > 0
 
-            Kirigami.MnemonicData.enabled: visible && customDurationInput.enabled
+            Kirigami.MnemonicData.enabled: visible && durationValueSpinBox.enabled
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
             Kirigami.MnemonicData.label: root.label ?? ""
             text: Kirigami.MnemonicData.richTextLabel
@@ -113,13 +113,13 @@ Kirigami.Dialog {
             spacing: Kirigami.Units.smallSpacing
 
             QQC2.SpinBox {
-                id: customDurationInput
+                id: durationValueSpinBox
                 from: 0
                 to: 9999
 
                 Shortcut {
                     sequence: labelItem.Kirigami.MnemonicData.sequence
-                    onActivated: { customDurationInput.forceActiveFocus(); }
+                    onActivated: { durationValueSpinBox.forceActiveFocus(); }
                 }
                 Keys.onReturnPressed: { root.accept(); }
             }
@@ -202,8 +202,8 @@ Kirigami.Dialog {
                         Keys.onReturnPressed: { root.accept(); }
                         Keys.onUpPressed: { const prev = repeater.itemAt(index - 1); if (prev) prev.focus = true; }
                         Keys.onDownPressed: { const next = repeater.itemAt(index + 1); if (next) next.focus = true; }
-                        Keys.onLeftPressed: { if (!LayoutMirroring.enabled) customDurationInput.forceActiveFocus(); }
-                        Keys.onRightPressed: { if (LayoutMirroring.enabled) customDurationInput.forceActiveFocus(); }
+                        Keys.onLeftPressed: { if (!LayoutMirroring.enabled) durationValueSpinBox.forceActiveFocus(); }
+                        Keys.onRightPressed: { if (LayoutMirroring.enabled) durationValueSpinBox.forceActiveFocus(); }
                     }
                 }
             }
