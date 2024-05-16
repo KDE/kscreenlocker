@@ -43,6 +43,9 @@ int WaylandServer::start()
     stop();
 
     m_display = wl_display_create();
+    if (!m_display) {
+        return -1;
+    }
 
     wl_event_loop *eventLoop = wl_display_get_event_loop(m_display);
     const int fd = wl_event_loop_get_fd(eventLoop);
