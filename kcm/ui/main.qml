@@ -287,6 +287,7 @@ KCM.SimpleKCM {
             title: i18nc("@title:window", "Custom Duration")
             label: timeoutComboBox.Kirigami.FormData.label
 
+            from: 1
             acceptsUnits: [DurationPromptDialog.Unit.Minutes]
 
             parent: QQC2.Overlay.overlay // FIXME: remove once we can depend on Frameworks 6.2
@@ -347,6 +348,7 @@ KCM.SimpleKCM {
             title: i18nc("@title:window", "Custom Duration")
             label: lockGraceComboBox.Kirigami.FormData.label
 
+            from: 1
             acceptsUnits: [DurationPromptDialog.Unit.Seconds, DurationPromptDialog.Unit.Minutes]
 
             parent: QQC2.Overlay.overlay // FIXME: remove once we can depend on Frameworks 6.2

@@ -64,7 +64,10 @@ Kirigami.Dialog {
      *
      * The value will have been updated when the user accepts the dialog.
      */
-    property int value
+    property alias value: customDurationInput.value
+
+    property alias from: customDurationInput.from
+    property alias to: customDurationInput.to
 
     /**
      * @brief The unit of the value of the input field, of type `DurationPromptDialog.Unit`.
@@ -83,8 +86,12 @@ Kirigami.Dialog {
     preferredWidth: Math.max(content.implicitWidth,
                              Kirigami.Units.gridUnit * 10, implicitHeaderWidth, implicitFooterWidth)
 
-    // focus: true is not enough, because the OK button wants focus and gets priority
-    onOpened: customDurationInput.forceActiveFocus()
+    onOpened: {
+        // `focus: true` is not enough, because the OK button wants focus and gets priority.
+        customDurationInput.forceActiveFocus()
+        // Set SpinBox width once, don't resize it if `to` changes based on unit changes.
+        customDurationInput.Layout.preferredWidth = customDurationInput.implicitWidth;
+    }
 
     RowLayout {
         id: content
@@ -109,16 +116,7 @@ Kirigami.Dialog {
                 id: customDurationInput
                 from: 0
                 to: 9999
-                onValueModified: { root.value = value; }
 
-                Connections {
-                    target: root
-                    function onVisibleChanged() {
-                        if (root.visible) {
-                            customDurationInput.value = root.value;
-                        }
-                    }
-                }
                 Shortcut {
                     sequence: labelItem.Kirigami.MnemonicData.sequence
                     onActivated: { customDurationInput.forceActiveFocus(); }
