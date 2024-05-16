@@ -3,6 +3,8 @@
     SPDX-FileCopyrightText: 2024 Jakob Petsovits <jpetso@petsovits.com>
 
     SPDX-License-Identifier: LGPL-2.1-or-later
+
+    Originating from kcm_screenlocker. Upstream any changes there until it goes into Kirigami (Addons).
 */
 
 import QtQuick
@@ -83,11 +85,8 @@ Kirigami.Dialog {
 
     RowLayout {
         id: content
+        anchors.centerIn: parent
         spacing: 0
-
-        Item {
-            Layout.fillWidth: true
-        }
 
         RowLayout {
             spacing: Kirigami.Units.smallSpacing
@@ -132,7 +131,7 @@ Kirigami.Dialog {
                 case DurationPromptDialog.Unit.Years:
                     return i18ncp("The unit of the time input field", "year", "years", val);
                 }
-                console.log("invalid unit in unitSuffixForValue()");
+                console.warn("invalid unit in unitSuffixForValue()");
             }
 
             QQC2.Label {
@@ -173,7 +172,7 @@ Kirigami.Dialog {
                     case DurationPromptDialog.Unit.Years:
                         return i18nc("@text:radiobutton Unit of the time input field", "years");
                     }
-                    console.log("invalid unit in radioButtonLabelForValue()");
+                    console.warn("invalid unit in radioButtonLabelForValue()");
                 }
 
                 Repeater {
@@ -187,10 +186,6 @@ Kirigami.Dialog {
                     }
                 }
             }
-        }
-
-        Item {
-            Layout.fillWidth: true
         }
     }
 }
