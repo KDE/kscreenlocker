@@ -83,24 +83,33 @@ Kirigami.Dialog {
     preferredWidth: Math.max(content.implicitWidth,
                              Kirigami.Units.gridUnit * 10, implicitHeaderWidth, implicitFooterWidth)
 
+    // focus: true is not enough, because the OK button wants focus and gets priority
+    onOpened: customDurationInput.forceActiveFocus()
+
     RowLayout {
         id: content
         anchors.centerIn: parent
-        spacing: 0
+
+        spacing: Kirigami.Units.largeSpacing
+
+        QQC2.Label {
+            id: labelItem
+            visible: (root.label?.length ?? 0) > 0
+
+            Kirigami.MnemonicData.enabled: visible && customDurationInput.enabled
+            Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
+            Kirigami.MnemonicData.label: root.label ?? ""
+            text: Kirigami.MnemonicData.richTextLabel
+        }
 
         RowLayout {
             spacing: Kirigami.Units.smallSpacing
-
-            QQC2.Label {
-                text: label
-                visible: (label?.length ?? 0) > 0
-            }
 
             QQC2.SpinBox {
                 id: customDurationInput
                 from: 0
                 to: 9999
-                onValueModified: root.value = value;
+                onValueModified: { root.value = value; }
 
                 Connections {
                     target: root
@@ -110,6 +119,11 @@ Kirigami.Dialog {
                         }
                     }
                 }
+                Shortcut {
+                    sequence: labelItem.Kirigami.MnemonicData.sequence
+                    onActivated: { customDurationInput.forceActiveFocus(); }
+                }
+                Keys.onReturnPressed: { root.accept(); }
             }
 
             function unitSuffixForValue(val, unit) {
@@ -176,13 +190,22 @@ Kirigami.Dialog {
                 }
 
                 Repeater {
+                    id: repeater
                     model: acceptsUnits
 
                     QQC2.RadioButton {
+                        required property int index
                         required property int modelData
+
                         text: parent.labelForUnit(modelData)
                         checked: unit === modelData
                         onClicked: unit = modelData
+
+                        Keys.onReturnPressed: { root.accept(); }
+                        Keys.onUpPressed: { const prev = repeater.itemAt(index - 1); if (prev) prev.focus = true; }
+                        Keys.onDownPressed: { const next = repeater.itemAt(index + 1); if (next) next.focus = true; }
+                        Keys.onLeftPressed: { if (!LayoutMirroring.enabled) customDurationInput.forceActiveFocus(); }
+                        Keys.onRightPressed: { if (LayoutMirroring.enabled) customDurationInput.forceActiveFocus(); }
                     }
                 }
             }
