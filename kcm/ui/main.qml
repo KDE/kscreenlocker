@@ -35,7 +35,7 @@ KCM.SimpleKCM {
         { index: 4, text: i18n("10 minutes"), value: 10 },
         { index: 5, text: i18n("15 minutes"), value: 15 },
         { index: 6, text: i18n("30 minutes"), value: 30 },
-        { index: 7, text: i18nc("To add a custom value, not in the predefined list", "Custom"), value: -1 },
+        { index: 7, text: i18nc("@option:combobox Choose a custom value outside the list of preset values", "Custom…"), value: -1 },
     ]
 
     /// The options for the grace period.
@@ -46,7 +46,7 @@ KCM.SimpleKCM {
         { index: 3, text: i18n("1 minute"), unit: "minutes", value: 1 },
         { index: 4, text: i18n("5 minutes"), unit: "minutes", value: 5 },
         { index: 5, text: i18n("15 minutes"), unit: "minutes", value: 15 },
-        { index: 6, text: i18nc("To add a custom value, not in the predefined list", "Custom"), value: -1 },
+        { index: 6, text: i18nc("@option:combobox Choose a custom value outside the list of preset values", "Custom…"), value: -1 },
     ]
 
     ColumnLayout {
