@@ -41,12 +41,13 @@ KCM.SimpleKCM {
     /// The options for the grace period.
     property var lockGraceOptions: [
         { index: 0, text: i18nc("The grace period is disabled", "Require password immediately"), unit: "minutes", value: 0 },
-        { index: 1, text: i18n("5 seconds"), unit: "seconds", value: 5 },
-        { index: 2, text: i18n("30 seconds"), unit: "seconds", value: 30 },
-        { index: 3, text: i18n("1 minute"), unit: "minutes", value: 1 },
-        { index: 4, text: i18n("5 minutes"), unit: "minutes", value: 5 },
-        { index: 5, text: i18n("15 minutes"), unit: "minutes", value: 15 },
-        { index: 6, text: i18nc("@option:combobox Choose a custom value outside the list of preset values", "Custom…"), value: -1 },
+        { index: 1, text: i18nc("Password not required", "Never require password"), unit: "minutes", value: 0, skipPassword: true },
+        { index: 2, text: i18n("5 seconds"), unit: "seconds", value: 5 },
+        { index: 3, text: i18n("30 seconds"), unit: "seconds", value: 30 },
+        { index: 4, text: i18n("1 minute"), unit: "minutes", value: 1 },
+        { index: 5, text: i18n("5 minutes"), unit: "minutes", value: 5 },
+        { index: 6, text: i18n("15 minutes"), unit: "minutes", value: 15 },
+        { index: 7, text: i18nc("@option:combobox Choose a custom value outside the list of preset values", "Custom…"), value: -1 },
     ]
 
     ColumnLayout {
@@ -131,6 +132,13 @@ KCM.SimpleKCM {
                 onCurrentIndexChanged: {
                     if (currentIndex === -1) {
                         return;
+                    }
+
+                    if (model[currentIndex].skipPassword === true) {
+                        kcm.settings.requirePassword = false;
+                        return;
+                    } else {
+                        kcm.settings.requirePassword = true;
                     }
 
                     if (model[currentIndex].value === -1) {
@@ -232,6 +240,13 @@ KCM.SimpleKCM {
     /// Return the index of the lockGrace option that matches the saved value.
     function lockGraceOptionsCurrentIndexForSavedValue() {
         let targetOption;
+
+        // If the user has disabled the password requirement, select the "Never require password" option.
+        if (!kcm.settings.requirePassword) {
+            targetOption = root.lockGraceOptions.find(function (item) { return item.skipPassword === true });
+            return targetOption.index;
+        }
+
         const savedValueInSeconds = kcm.settings.lockGrace;
         const isMinutes = savedValueInSeconds % 60 === 0;
 

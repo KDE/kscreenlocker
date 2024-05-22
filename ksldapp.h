@@ -449,6 +449,15 @@ private:
     PowerManagementInhibition *m_powerManagementInhibition;
 
     /**
+     * Whether the lock screen should require a password to unlock.
+     *
+     * If this is false the lock screen will be dismissed on user activity,
+     * without requiring a password. This allows users to use the lock screen
+     * as a screen saver.
+     **/
+    bool m_requirePassword = true;
+
+    /**
      * @brief The file descriptor for the Wayland connection.
      *
      * This file descriptor is used to establish the Wayland connection for the

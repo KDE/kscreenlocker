@@ -169,6 +169,8 @@ void KSldApp::initialize()
 {
     qCDebug(KSCREENLOCKER) << "Initializing";
 
+    m_requirePassword = KScreenSaverSettings::requirePassword();
+
     if (m_isX11) {
         initializeX11();
     }
@@ -183,7 +185,12 @@ void KSldApp::initialize()
         KGlobalAccel::self()->setGlobalShortcut(a, KScreenSaverSettings::defaultShortcuts());
         connect(a, &QAction::triggered, this, [this]() {
             qCDebug(KSCREENLOCKER) << "Locking session due to global shortcut";
-            lock(EstablishLock::Immediate);
+            const EstablishLock lockType = m_requirePassword ? EstablishLock::Immediate : EstablishLock::Delayed;
+            m_inGraceTime = !m_requirePassword;
+            if (m_inGraceTime) {
+                m_lockGrace = -1;
+            }
+            lock(lockType);
         });
     }
 
@@ -405,6 +412,7 @@ void KSldApp::configure()
             m_logind->uninhibit();
         }
     }
+    m_requirePassword = KScreenSaverSettings::requirePassword();
 }
 
 void KSldApp::lock(EstablishLock establishLock, int attemptCount)
@@ -649,7 +657,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
         args << QStringLiteral("--graceTime");
         args << QString::number(m_lockGrace);
     }
-    if (m_lockGrace == -1) {
+    if (m_lockGrace == -1 || !m_requirePassword) {
         args << QStringLiteral("--nolock");
     }
     if (m_forceSoftwareRendering) {
@@ -681,9 +689,13 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
 
 void KSldApp::userActivity()
 {
+    if (m_lockState != Locked) {
+        return;
+    }
+
     qCDebug(KSCREENLOCKER) << "User activity detected. lockState:" << m_lockState;
 
-    if (isGraceTime()) {
+    if (isGraceTime() || !m_requirePassword) {
         unlock();
     }
     if (m_lockWindow) {
@@ -706,7 +718,7 @@ void KSldApp::showLockWindow()
                 &AbstractLocker::userActivity,
                 m_lockWindow,
                 [this]() {
-                    if (isGraceTime()) {
+                    if (isGraceTime() || !m_requirePassword) {
                         unlock();
                     }
                 },
@@ -769,11 +781,10 @@ void KSldApp::unlock()
 {
     qCDebug(KSCREENLOCKER) << "Unlock requested";
 
-    if (!isGraceTime()) {
-        return;
+    if (isGraceTime() || !m_requirePassword) {
+        s_graceTimeKill = true;
+        m_lockProcess->terminate();
     }
-    s_graceTimeKill = true;
-    m_lockProcess->terminate();
 }
 
 void KSldApp::inhibit()
