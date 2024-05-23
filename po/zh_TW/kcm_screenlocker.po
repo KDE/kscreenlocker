@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-08 00:39+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2024-04-22 16:30+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -148,7 +148,7 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "永不"
 
-#: ui/main.qml:32 ui/main.qml:46
+#: ui/main.qml:32 ui/main.qml:47
 #, kde-format
 msgid "1 minute"
 msgstr "1 分鐘"
@@ -158,7 +158,7 @@ msgstr "1 分鐘"
 msgid "2 minutes"
 msgstr "2 分鐘"
 
-#: ui/main.qml:34 ui/main.qml:47
+#: ui/main.qml:34 ui/main.qml:48
 #, kde-format
 msgid "5 minutes"
 msgstr "5 分鐘"
@@ -168,7 +168,7 @@ msgstr "5 分鐘"
 msgid "10 minutes"
 msgstr "10 分鐘"
 
-#: ui/main.qml:36 ui/main.qml:48
+#: ui/main.qml:36 ui/main.qml:49
 #, kde-format
 msgid "15 minutes"
 msgstr "15 分鐘"
@@ -178,10 +178,13 @@ msgstr "15 分鐘"
 msgid "30 minutes"
 msgstr "30 分鐘"
 
-#: ui/main.qml:38 ui/main.qml:49
-#, kde-format
-msgctxt "To add a custom value, not in the predefined list"
-msgid "Custom"
+#: ui/main.qml:38 ui/main.qml:50
+#, fuzzy, kde-format
+#| msgctxt "To add a custom value, not in the predefined list"
+#| msgid "Custom"
+msgctxt ""
+"@option:combobox Choose a custom value outside the list of preset values"
+msgid "Custom…"
 msgstr "自訂"
 
 #: ui/main.qml:43
@@ -192,49 +195,55 @@ msgstr "馬上要求密碼"
 
 #: ui/main.qml:44
 #, kde-format
+msgctxt "Password not required"
+msgid "Never require password"
+msgstr ""
+
+#: ui/main.qml:45
+#, kde-format
 msgid "5 seconds"
 msgstr "5 秒"
 
-#: ui/main.qml:45
+#: ui/main.qml:46
 #, kde-format
 msgid "30 seconds"
 msgstr "30 秒"
 
-#: ui/main.qml:59
+#: ui/main.qml:60
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "自動鎖定畫面："
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:378
+#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:320 ui/main.qml:393
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 分鐘"
 
-#: ui/main.qml:109
+#: ui/main.qml:110
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "從睡眠模式醒來之後鎖定畫面"
 
-#: ui/main.qml:126
+#: ui/main.qml:127
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "需要密碼之前的延遲時間："
 
-#: ui/main.qml:180 ui/main.qml:380
+#: ui/main.qml:188 ui/main.qml:395
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 秒"
 
-#: ui/main.qml:202
+#: ui/main.qml:210
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "鍵盤快捷鍵："
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:287 ui/main.qml:347
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"

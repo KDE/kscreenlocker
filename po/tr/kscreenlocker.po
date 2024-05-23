@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2023-06-15 23:16+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -76,17 +76,17 @@ msgstr ""
 "düğmelerine basarak geri dönebilirsiniz.\n"
 "\n"
 
-#: ksldapp.cpp:182
+#: ksldapp.cpp:184
 #, kde-format
 msgid "Lock Session"
 msgstr "Oturumu Kilitle"
 
-#: ksldapp.cpp:441
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekran kilitlendi"
 
-#: ksldapp.cpp:609
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekran kilidi açıldı"

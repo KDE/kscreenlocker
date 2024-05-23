@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2023-03-05 19:09+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -82,17 +82,17 @@ msgstr ""
 "натисканням комбінації клавіш Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:182
+#: ksldapp.cpp:184
 #, kde-format
 msgid "Lock Session"
 msgstr "Заблокувати сеанс"
 
-#: ksldapp.cpp:441
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "Екран заблоковано"
 
-#: ksldapp.cpp:609
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Екран розблоковано"

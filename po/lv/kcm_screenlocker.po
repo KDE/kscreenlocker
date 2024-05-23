@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-08 00:39+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2024-03-04 16:04+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -172,7 +172,7 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Nekad"
 
-#: ui/main.qml:32 ui/main.qml:46
+#: ui/main.qml:32 ui/main.qml:47
 #, kde-format
 msgid "1 minute"
 msgstr "1 minūte"
@@ -182,7 +182,7 @@ msgstr "1 minūte"
 msgid "2 minutes"
 msgstr "2 minūtes"
 
-#: ui/main.qml:34 ui/main.qml:47
+#: ui/main.qml:34 ui/main.qml:48
 #, kde-format
 msgid "5 minutes"
 msgstr "5 minūtes"
@@ -192,7 +192,7 @@ msgstr "5 minūtes"
 msgid "10 minutes"
 msgstr "10 minūšu"
 
-#: ui/main.qml:36 ui/main.qml:48
+#: ui/main.qml:36 ui/main.qml:49
 #, kde-format
 msgid "15 minutes"
 msgstr "15 minūšu"
@@ -202,10 +202,13 @@ msgstr "15 minūšu"
 msgid "30 minutes"
 msgstr "30 minūšu"
 
-#: ui/main.qml:38 ui/main.qml:49
-#, kde-format
-msgctxt "To add a custom value, not in the predefined list"
-msgid "Custom"
+#: ui/main.qml:38 ui/main.qml:50
+#, fuzzy, kde-format
+#| msgctxt "To add a custom value, not in the predefined list"
+#| msgid "Custom"
+msgctxt ""
+"@option:combobox Choose a custom value outside the list of preset values"
+msgid "Custom…"
 msgstr "Pielāgots"
 
 #: ui/main.qml:43
@@ -216,20 +219,26 @@ msgstr "Nekavējoties pieprasīt paroli"
 
 #: ui/main.qml:44
 #, kde-format
+msgctxt "Password not required"
+msgid "Never require password"
+msgstr ""
+
+#: ui/main.qml:45
+#, kde-format
 msgid "5 seconds"
 msgstr "5 sekundes"
 
-#: ui/main.qml:45
+#: ui/main.qml:46
 #, kde-format
 msgid "30 seconds"
 msgstr "30 sekunžu"
 
-#: ui/main.qml:59
+#: ui/main.qml:60
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Ekrānu slēgt automātiski:"
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:378
+#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:320 ui/main.qml:393
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -237,19 +246,19 @@ msgstr[0] "%1 minūte"
 msgstr[1] "%1 minūtes"
 msgstr[2] "%1 minūšu"
 
-#: ui/main.qml:109
+#: ui/main.qml:110
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "Slēgt pēc pamošanās no miega"
 
-#: ui/main.qml:126
+#: ui/main.qml:127
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "Aizture pirms paroles pieprasīšanas"
 
-#: ui/main.qml:180 ui/main.qml:380
+#: ui/main.qml:188 ui/main.qml:395
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -257,12 +266,12 @@ msgstr[0] "%1 sekunde"
 msgstr[1] "%1 sekundes"
 msgstr[2] "%1 sekunžu"
 
-#: ui/main.qml:202
+#: ui/main.qml:210
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Tastatūras saīsne:"
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:287 ui/main.qml:347
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"

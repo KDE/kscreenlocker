@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2022-04-09 19:23+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -91,17 +91,17 @@ msgstr ""
 "Potom sa odhláste z virtuálneho sedenia stlačením Ctrl+D, a prepnite\n"
 "naspäť na spustené sedenie (Ctrl+Alt+F%2)."
 
-#: ksldapp.cpp:182
+#: ksldapp.cpp:184
 #, kde-format
 msgid "Lock Session"
 msgstr "Zamknúť sedenie"
 
-#: ksldapp.cpp:441
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "Obrazovka zamknutá"
 
-#: ksldapp.cpp:609
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Obrazovka odomknutá"

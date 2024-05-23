@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bosnianuniversetranslation\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-08 00:39+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2015-02-15 19:44+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -170,7 +170,7 @@ msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Nikad"
 
-#: ui/main.qml:32 ui/main.qml:46
+#: ui/main.qml:32 ui/main.qml:47
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "1 minute"
@@ -182,7 +182,7 @@ msgstr " min"
 msgid "2 minutes"
 msgstr " min"
 
-#: ui/main.qml:34 ui/main.qml:47
+#: ui/main.qml:34 ui/main.qml:48
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "5 minutes"
@@ -194,7 +194,7 @@ msgstr " min"
 msgid "10 minutes"
 msgstr " min"
 
-#: ui/main.qml:36 ui/main.qml:48
+#: ui/main.qml:36 ui/main.qml:49
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "15 minutes"
@@ -206,10 +206,11 @@ msgstr " min"
 msgid "30 minutes"
 msgstr " min"
 
-#: ui/main.qml:38 ui/main.qml:49
+#: ui/main.qml:38 ui/main.qml:50
 #, kde-format
-msgctxt "To add a custom value, not in the predefined list"
-msgid "Custom"
+msgctxt ""
+"@option:combobox Choose a custom value outside the list of preset values"
+msgid "Custom…"
 msgstr ""
 
 #: ui/main.qml:43
@@ -220,24 +221,30 @@ msgid "Require password immediately"
 msgstr "Za&htijevaj lozinku nakon zaključavanja:"
 
 #: ui/main.qml:44
+#, kde-format
+msgctxt "Password not required"
+msgid "Never require password"
+msgstr ""
+
+#: ui/main.qml:45
 #, fuzzy, kde-format
 #| msgid " sec"
 msgid "5 seconds"
 msgstr " sek."
 
-#: ui/main.qml:45
+#: ui/main.qml:46
 #, fuzzy, kde-format
 #| msgid " sec"
 msgid "30 seconds"
 msgstr " sek."
 
-#: ui/main.qml:59
+#: ui/main.qml:60
 #, fuzzy, kde-format
 #| msgid "&Lock screen after:"
 msgid "Lock screen automatically:"
 msgstr "&Zaključaj ekran nakon:"
 
-#: ui/main.qml:93 ui/main.qml:179 ui/main.qml:305 ui/main.qml:378
+#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:320 ui/main.qml:393
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "%1 minute"
@@ -246,19 +253,19 @@ msgstr[0] " min"
 msgstr[1] " min"
 msgstr[2] " min"
 
-#: ui/main.qml:109
+#: ui/main.qml:110
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr ""
 
-#: ui/main.qml:126
+#: ui/main.qml:127
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr ""
 
-#: ui/main.qml:180 ui/main.qml:380
+#: ui/main.qml:188 ui/main.qml:395
 #, fuzzy, kde-format
 #| msgid " sec"
 msgid "%1 second"
@@ -267,12 +274,12 @@ msgstr[0] " sek."
 msgstr[1] " sek."
 msgstr[2] " sek."
 
-#: ui/main.qml:202
+#: ui/main.qml:210
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr ""
 
-#: ui/main.qml:272 ui/main.qml:332
+#: ui/main.qml:287 ui/main.qml:347
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
