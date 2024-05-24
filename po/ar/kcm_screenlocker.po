@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
 "PO-Revision-Date: 2024-05-02 11:30+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -30,7 +30,7 @@ msgstr "المظهر"
 msgid "Wallpaper type:"
 msgstr "نوع الخلفيّة:"
 
-#: ui/DurationPromptDialog.qml:119
+#: ui/DurationPromptDialog.qml:130
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
@@ -42,7 +42,7 @@ msgstr[3] "ميلي ثانية"
 msgstr[4] "ميلي ثانية"
 msgstr[5] "ميلي ثانية"
 
-#: ui/DurationPromptDialog.qml:121
+#: ui/DurationPromptDialog.qml:132
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
@@ -54,7 +54,7 @@ msgstr[3] "ثواني"
 msgstr[4] "ثانية"
 msgstr[5] "ثانية"
 
-#: ui/DurationPromptDialog.qml:123
+#: ui/DurationPromptDialog.qml:134
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
@@ -66,7 +66,7 @@ msgstr[3] "دقائق"
 msgstr[4] "دقيقة"
 msgstr[5] "دقيقة"
 
-#: ui/DurationPromptDialog.qml:125
+#: ui/DurationPromptDialog.qml:136
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "hour"
@@ -78,7 +78,7 @@ msgstr[3] "ساعات"
 msgstr[4] "ساعة"
 msgstr[5] "ساعة"
 
-#: ui/DurationPromptDialog.qml:127
+#: ui/DurationPromptDialog.qml:138
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
@@ -90,7 +90,7 @@ msgstr[3] "أيام"
 msgstr[4] "يوما"
 msgstr[5] "يوم"
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:140
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
@@ -102,7 +102,7 @@ msgstr[3] "أسابيع"
 msgstr[4] "أسبوعًا"
 msgstr[5] "أسبوع"
 
-#: ui/DurationPromptDialog.qml:131
+#: ui/DurationPromptDialog.qml:142
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
@@ -114,7 +114,7 @@ msgstr[3] "أشهر"
 msgstr[4] "شهرا"
 msgstr[5] "شهر"
 
-#: ui/DurationPromptDialog.qml:133
+#: ui/DurationPromptDialog.qml:144
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
@@ -126,49 +126,49 @@ msgstr[3] "سنوات"
 msgstr[4] "سنة"
 msgstr[5] "سنة"
 
-#: ui/DurationPromptDialog.qml:160
+#: ui/DurationPromptDialog.qml:171
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
 msgstr "ميلي ثانية"
 
-#: ui/DurationPromptDialog.qml:162
+#: ui/DurationPromptDialog.qml:173
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "ثانية"
 
-#: ui/DurationPromptDialog.qml:164
+#: ui/DurationPromptDialog.qml:175
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "دقيقة"
 
-#: ui/DurationPromptDialog.qml:166
+#: ui/DurationPromptDialog.qml:177
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
 msgstr "ساعات"
 
-#: ui/DurationPromptDialog.qml:168
+#: ui/DurationPromptDialog.qml:179
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
 msgstr "أيام"
 
-#: ui/DurationPromptDialog.qml:170
+#: ui/DurationPromptDialog.qml:181
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
 msgstr "أسابيع"
 
-#: ui/DurationPromptDialog.qml:172
+#: ui/DurationPromptDialog.qml:183
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
 msgstr "أشهر"
 
-#: ui/DurationPromptDialog.qml:174
+#: ui/DurationPromptDialog.qml:185
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
@@ -252,7 +252,7 @@ msgstr "30 ثانية"
 msgid "Lock screen automatically:"
 msgstr "اقفل الشّاشة آليا:"
 
-#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:320 ui/main.qml:393
+#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:321 ui/main.qml:395
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -275,7 +275,7 @@ msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "المهلة قبل طلب كلمة السر:"
 
-#: ui/main.qml:188 ui/main.qml:395
+#: ui/main.qml:188 ui/main.qml:397
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -291,7 +291,7 @@ msgstr[5] "%1 ثانية"
 msgid "Keyboard shortcut:"
 msgstr "اختصار لوحة المفاتيح:"
 
-#: ui/main.qml:287 ui/main.qml:347
+#: ui/main.qml:287 ui/main.qml:348
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"

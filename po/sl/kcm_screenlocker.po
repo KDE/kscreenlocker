@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
-"PO-Revision-Date: 2024-04-19 06:45+0200\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
+"PO-Revision-Date: 2024-05-23 08:58+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -31,7 +31,7 @@ msgstr "Videz"
 msgid "Wallpaper type:"
 msgstr "Vrsta slike ozadja:"
 
-#: ui/DurationPromptDialog.qml:119
+#: ui/DurationPromptDialog.qml:130
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
@@ -41,7 +41,7 @@ msgstr[1] "milisekunda"
 msgstr[2] "milisekundi"
 msgstr[3] "milisekunde"
 
-#: ui/DurationPromptDialog.qml:121
+#: ui/DurationPromptDialog.qml:132
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
@@ -51,7 +51,7 @@ msgstr[1] "sekundi"
 msgstr[2] "sekunde"
 msgstr[3] "sekund"
 
-#: ui/DurationPromptDialog.qml:123
+#: ui/DurationPromptDialog.qml:134
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
@@ -61,7 +61,7 @@ msgstr[1] "minuti"
 msgstr[2] "minute"
 msgstr[3] "minut"
 
-#: ui/DurationPromptDialog.qml:125
+#: ui/DurationPromptDialog.qml:136
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "hour"
@@ -71,7 +71,7 @@ msgstr[1] "ura"
 msgstr[2] "uri"
 msgstr[3] "ure"
 
-#: ui/DurationPromptDialog.qml:127
+#: ui/DurationPromptDialog.qml:138
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
@@ -81,7 +81,7 @@ msgstr[1] "dan"
 msgstr[2] "dneva"
 msgstr[3] "dni"
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:140
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
@@ -91,7 +91,7 @@ msgstr[1] "teden"
 msgstr[2] "tedna"
 msgstr[3] "tedni"
 
-#: ui/DurationPromptDialog.qml:131
+#: ui/DurationPromptDialog.qml:142
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
@@ -101,7 +101,7 @@ msgstr[1] "mesec"
 msgstr[2] "meseca"
 msgstr[3] "meseci"
 
-#: ui/DurationPromptDialog.qml:133
+#: ui/DurationPromptDialog.qml:144
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
@@ -111,49 +111,49 @@ msgstr[1] "leto"
 msgstr[2] "leti"
 msgstr[3] "leta"
 
-#: ui/DurationPromptDialog.qml:160
+#: ui/DurationPromptDialog.qml:171
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
 msgstr "milisekund"
 
-#: ui/DurationPromptDialog.qml:162
+#: ui/DurationPromptDialog.qml:173
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "sekund"
 
-#: ui/DurationPromptDialog.qml:164
+#: ui/DurationPromptDialog.qml:175
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "minut"
 
-#: ui/DurationPromptDialog.qml:166
+#: ui/DurationPromptDialog.qml:177
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
 msgstr "ur"
 
-#: ui/DurationPromptDialog.qml:168
+#: ui/DurationPromptDialog.qml:179
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
 msgstr "dni"
 
-#: ui/DurationPromptDialog.qml:170
+#: ui/DurationPromptDialog.qml:181
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
 msgstr "tednov"
 
-#: ui/DurationPromptDialog.qml:172
+#: ui/DurationPromptDialog.qml:183
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
 msgstr "mesecev"
 
-#: ui/DurationPromptDialog.qml:174
+#: ui/DurationPromptDialog.qml:185
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
@@ -202,13 +202,11 @@ msgid "30 minutes"
 msgstr "30 minut"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "Po meri"
+msgstr "Po meri…"
 
 #: ui/main.qml:43
 #, kde-format
@@ -220,7 +218,7 @@ msgstr "Takoj zahtevaj geslo"
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "Nikoli ne zahtevaj gesla"
 
 #: ui/main.qml:45
 #, kde-format
@@ -237,7 +235,7 @@ msgstr "30 sekund"
 msgid "Lock screen automatically:"
 msgstr "Samodejno zakleni zaslon:"
 
-#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:320 ui/main.qml:393
+#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:321 ui/main.qml:395
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -258,7 +256,7 @@ msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "Zakasnitev pred zahtevanim geslom:"
 
-#: ui/main.qml:188 ui/main.qml:395
+#: ui/main.qml:188 ui/main.qml:397
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -272,7 +270,7 @@ msgstr[3] "%1 sekund"
 msgid "Keyboard shortcut:"
 msgstr "Tipkovna bližnjica:"
 
-#: ui/main.qml:287 ui/main.qml:347
+#: ui/main.qml:287 ui/main.qml:348
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"

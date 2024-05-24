@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
 "PO-Revision-Date: 2024-05-06 09:21+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -32,7 +32,7 @@ msgid "Wallpaper type:"
 msgstr "Тип обоев:"
 
 # "Требовать пароль через: [...]" --aspotashev
-#: ui/DurationPromptDialog.qml:119
+#: ui/DurationPromptDialog.qml:130
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
@@ -43,7 +43,7 @@ msgstr[2] "миллисекунд"
 msgstr[3] "миллисекунду"
 
 # "Требовать пароль через: [...]" --aspotashev
-#: ui/DurationPromptDialog.qml:121
+#: ui/DurationPromptDialog.qml:132
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
@@ -54,7 +54,7 @@ msgstr[2] "секунд"
 msgstr[3] "секунду"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
-#: ui/DurationPromptDialog.qml:123
+#: ui/DurationPromptDialog.qml:134
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
@@ -64,7 +64,7 @@ msgstr[1] "минуты"
 msgstr[2] "минут"
 msgstr[3] "минуту"
 
-#: ui/DurationPromptDialog.qml:125
+#: ui/DurationPromptDialog.qml:136
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "hour"
@@ -74,7 +74,7 @@ msgstr[1] "часа"
 msgstr[2] "часов"
 msgstr[3] "час"
 
-#: ui/DurationPromptDialog.qml:127
+#: ui/DurationPromptDialog.qml:138
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
@@ -84,7 +84,7 @@ msgstr[1] "дня"
 msgstr[2] "дней"
 msgstr[3] "день"
 
-#: ui/DurationPromptDialog.qml:129
+#: ui/DurationPromptDialog.qml:140
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
@@ -94,7 +94,7 @@ msgstr[1] "недели"
 msgstr[2] "недель"
 msgstr[3] "неделю"
 
-#: ui/DurationPromptDialog.qml:131
+#: ui/DurationPromptDialog.qml:142
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
@@ -104,7 +104,7 @@ msgstr[1] "месяца"
 msgstr[2] "месяцев"
 msgstr[3] "месяц"
 
-#: ui/DurationPromptDialog.qml:133
+#: ui/DurationPromptDialog.qml:144
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
@@ -115,51 +115,51 @@ msgstr[2] "лет"
 msgstr[3] "год"
 
 # "Требовать пароль через: [...]" --aspotashev
-#: ui/DurationPromptDialog.qml:160
+#: ui/DurationPromptDialog.qml:171
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
 msgstr "миллисекунды"
 
 # "Требовать пароль через: [...]" --aspotashev
-#: ui/DurationPromptDialog.qml:162
+#: ui/DurationPromptDialog.qml:173
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "секунды"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
-#: ui/DurationPromptDialog.qml:164
+#: ui/DurationPromptDialog.qml:175
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "минуты"
 
-#: ui/DurationPromptDialog.qml:166
+#: ui/DurationPromptDialog.qml:177
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
 msgstr "часы"
 
-#: ui/DurationPromptDialog.qml:168
+#: ui/DurationPromptDialog.qml:179
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
 msgstr "дни"
 
-#: ui/DurationPromptDialog.qml:170
+#: ui/DurationPromptDialog.qml:181
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
 msgstr "недели"
 
-#: ui/DurationPromptDialog.qml:172
+#: ui/DurationPromptDialog.qml:183
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
 msgstr "месяцы"
 
-#: ui/DurationPromptDialog.qml:174
+#: ui/DurationPromptDialog.qml:185
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
@@ -252,7 +252,7 @@ msgid "Lock screen automatically:"
 msgstr "Блокировать экран автоматически после:"
 
 # "Блокировать экран автоматически после: [...]" --aspotashev
-#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:320 ui/main.qml:393
+#: ui/main.qml:94 ui/main.qml:187 ui/main.qml:321 ui/main.qml:395
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -274,7 +274,7 @@ msgid "Delay before password required:"
 msgstr "Требовать пароль через:"
 
 # "Требовать пароль через: [...]" --aspotashev
-#: ui/main.qml:188 ui/main.qml:395
+#: ui/main.qml:188 ui/main.qml:397
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -288,7 +288,7 @@ msgstr[3] "%1 секунды"
 msgid "Keyboard shortcut:"
 msgstr "Комбинация клавиш:"
 
-#: ui/main.qml:287 ui/main.qml:347
+#: ui/main.qml:287 ui/main.qml:348
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
