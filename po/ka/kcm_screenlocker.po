@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-04-19 13:45+0200\n"
+"PO-Revision-Date: 2024-05-24 16:33+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -184,13 +184,11 @@ msgid "30 minutes"
 msgstr "30 წუთი"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "მორგებული"
+msgstr "ხელით…"
 
 #: ui/main.qml:43
 #, kde-format
@@ -202,7 +200,7 @@ msgstr "პაროლი დაუყოვნებლივი მოთხ�
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "არასდროს მოითხოვო პაროლი"
 
 #: ui/main.qml:45
 #, kde-format
