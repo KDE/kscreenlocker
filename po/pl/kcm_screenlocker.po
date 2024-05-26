@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-04-28 11:51+0200\n"
+"PO-Revision-Date: 2024-05-25 12:31+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -192,25 +192,23 @@ msgid "30 minutes"
 msgstr "30 minutach"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "Własna"
+msgstr "Własna…"
 
 #: ui/main.qml:43
 #, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
-msgstr "Zapytaj o hasło natychmiastowo"
+msgstr "Pytaj o hasło natychmiastowo"
 
 #: ui/main.qml:44
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "Nigdy nie pytaj o hasło"
 
 #: ui/main.qml:45
 #, kde-format
