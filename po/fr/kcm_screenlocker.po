@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-04-26 11:09+0200\n"
+"PO-Revision-Date: 2024-05-24 09:08+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -189,13 +189,11 @@ msgid "30 minutes"
 msgstr "30 minutes"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "Personnalisé"
+msgstr "Personnalisé..."
 
 #: ui/main.qml:43
 #, kde-format
@@ -207,7 +205,7 @@ msgstr "Demander un mot de passe immédiatement"
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "Ne jamais demander de mot de passe"
 
 #: ui/main.qml:45
 #, kde-format

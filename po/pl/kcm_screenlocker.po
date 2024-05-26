@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-04-28 11:51+0200\n"
+"PO-Revision-Date: 2024-05-25 12:31+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -204,7 +204,7 @@ msgstr "Własna"
 #, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
-msgstr "Zapytaj o hasło natychmiastowo"
+msgstr "Pytaj o hasło natychmiastowo"
 
 #: ui/main.qml:44
 #, kde-format
