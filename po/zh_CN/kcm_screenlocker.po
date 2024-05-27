@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kscreenlocker/kcm_screenlocker.pot\n"
-"X-Crowdin-File-ID: 42645\n"
+"X-Crowdin-File: /kf6-stable/messages/kscreenlocker/kcm_screenlocker.pot\n"
+"X-Crowdin-File-ID: 51104\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -175,13 +175,11 @@ msgid "30 minutes"
 msgstr "30 分钟"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "自定义"
+msgstr ""
 
 #: ui/main.qml:43
 #, kde-format
