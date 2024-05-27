@@ -175,13 +175,11 @@ msgid "30 minutes"
 msgstr "30 分钟"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "自定义"
+msgstr ""
 
 #: ui/main.qml:43
 #, kde-format
