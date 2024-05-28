@@ -179,7 +179,7 @@ msgstr "30 分钟"
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr ""
+msgstr "自定义…"
 
 #: ui/main.qml:43
 #, kde-format
@@ -191,7 +191,7 @@ msgstr "锁屏后立即需要输入密码解锁"
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "不要求密码解锁"
 
 #: ui/main.qml:45
 #, kde-format

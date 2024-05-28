@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-04-20 00:13+0200\n"
+"PO-Revision-Date: 2024-05-27 17:25+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -186,13 +186,11 @@ msgid "30 minutes"
 msgstr "30 minutu"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "Neurrira"
+msgstr "Neurrira..."
 
 #: ui/main.qml:43
 #, kde-format
@@ -204,7 +202,7 @@ msgstr "Eskatu pasahitza berehala"
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "Ez eskatu pasahitzik inoiz"
 
 #: ui/main.qml:45
 #, kde-format
