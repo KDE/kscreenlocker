@@ -252,26 +252,3 @@ msgstr "Клавишна комбинация:"
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "Друга продължителност"
-
-#~ msgctxt "@action:button"
-#~ msgid "Confirm"
-#~ msgstr "Потвърдете"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Отказ"
-
-#~ msgid "Appearance:"
-#~ msgstr "Външен вид:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure..."
-#~ msgstr "Конфигуриране..."
-
-#~ msgctxt "First part of sentence \"Automatically after X minutes\""
-#~ msgid "After"
-#~ msgstr "След"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Allow unlocking without password for:"
-#~ msgstr "Разрешаване на отключване без парола за:"
