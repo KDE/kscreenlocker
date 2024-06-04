@@ -93,8 +93,8 @@ void GlobalAccel::components(QDBusPendingCallWatcher *self)
     for (const auto &path : reply.value()) {
         const QString objectPath = path.path();
         bool whitelisted = false;
-        for (auto it = s_shortcutWhitelist.begin(); it != s_shortcutWhitelist.end(); ++it) {
-            if (objectPath == it.key()) {
+        for (const auto &[key, value] : s_shortcutWhitelist.asKeyValueRange()) {
+            if (objectPath == key) {
                 whitelisted = true;
                 break;
             }
@@ -133,11 +133,11 @@ void GlobalAccel::components(QDBusPendingCallWatcher *self)
                     // this should not happen, just for safety
                     return;
                 }
-                const auto s = reply.value();
-                for (auto it = s.begin(); it != s.end(); ++it) {
-                    auto matches = whitelist.value().match((*it).uniqueName());
+                const auto shortcuts = reply.value();
+                for (const auto &shortcut : shortcuts) {
+                    auto matches = whitelist.value().match(shortcut.uniqueName());
                     if (matches.hasMatch()) {
-                        infos.append(*it);
+                        infos.append(shortcut);
                     }
                 }
                 m_shortcuts.insert(objectPath, infos);
@@ -174,10 +174,10 @@ bool GlobalAccel::keyEvent(QKeyEvent *event)
 
     const QKeySequence seq(keyCodeQt | keyModQt);
     // let's check whether we have a mapping shortcut
-    for (auto it = m_shortcuts.constBegin(); it != m_shortcuts.constEnd(); ++it) {
-        for (const auto &info : it.value()) {
+    for (const auto &[key, value] : std::as_const(m_shortcuts).asKeyValueRange()) {
+        for (const auto &info : value) {
             if (info.keys().contains(seq)) {
-                auto signal = QDBusMessage::createMethodCall(s_kglobalAccelService, it.key(), s_componentInterface, QStringLiteral("invokeShortcut"));
+                auto signal = QDBusMessage::createMethodCall(s_kglobalAccelService, key, s_componentInterface, QStringLiteral("invokeShortcut"));
                 signal.setArguments(QList<QVariant>{QVariant(info.uniqueName())});
                 QDBusConnection::sessionBus().asyncCall(signal);
                 return true;
@@ -238,10 +238,10 @@ bool GlobalAccel::checkKeyPress(xcb_key_press_event_t *event)
 
     const QKeySequence seq(keyCodeQt | keyModQt);
     // let's check whether we have a mapping shortcut
-    for (auto it = m_shortcuts.begin(); it != m_shortcuts.end(); ++it) {
-        for (const auto &info : it.value()) {
+    for (const auto &[key, value] : std::as_const(m_shortcuts).asKeyValueRange()) {
+        for (const auto &info : value) {
             if (info.keys().contains(seq)) {
-                auto signal = QDBusMessage::createMethodCall(s_kglobalAccelService, it.key(), s_componentInterface, QStringLiteral("invokeShortcut"));
+                auto signal = QDBusMessage::createMethodCall(s_kglobalAccelService, key, s_componentInterface, QStringLiteral("invokeShortcut"));
                 signal.setArguments(QList<QVariant>{QVariant(info.uniqueName())});
                 QDBusConnection::sessionBus().asyncCall(signal);
                 return true;
