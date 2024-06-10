@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2012, 2013, 2014, 2015, 2016.
+# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2012, 2013, 2014, 2015, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2016-08-25 14:49+0100\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -158,7 +158,7 @@ msgstr "Fildeskriptor för att ansluta till ksld."
 
 #~ msgctxt "EMAIL OF TRANSLATORS"
 #~ msgid "Your emails"
-#~ msgstr "stefan.asserhall@bredband.net"
+#~ msgstr "stefan.asserhall@gmail.com"
 
 #~ msgid "The current session will be hidden "
 #~ msgstr "Nuvarande session kommer att döljas "
