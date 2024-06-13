@@ -25,6 +25,7 @@ Kirigami.Page {
 
     ColumnLayout {
         anchors.fill: parent
+        spacing: Kirigami.Units.smallSpacing
 
         ShellConfig {
             sourceFile: kcm.shellConfigFile
@@ -57,6 +58,8 @@ Kirigami.Page {
             sourceFile: kcm.wallpaperConfigFile
             onConfigurationChanged: kcm.updateState()
             onConfigurationForceChanged: kcm.forceUpdateState()
+            // Cancel out page margins so it touches the edges
+            Layout.margins: -appearanceRoot.padding
         }
     }
 }
