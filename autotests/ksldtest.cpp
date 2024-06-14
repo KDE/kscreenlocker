@@ -7,14 +7,17 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "../ksldapp.h"
 // KDE Frameworks
 #include <KIdleTime>
+#include <KWindowSystem>
 // Qt
 #include <QProcess>
-#include <private/qtx11extras_p.h>
 #include <QSignalSpy>
 #include <QTest>
+#include <private/qtx11extras_p.h>
 // xcb
 #include <xcb/xcb.h>
 #include <xcb/xtest.h>
+// POSIX
+#include <sys/socket.h> // socketpair
 
 class KSldTest : public QObject
 {
@@ -35,6 +38,10 @@ void KSldTest::initTestCase()
 
 void KSldTest::testEstablishGrab()
 {
+    if (!KWindowSystem::isPlatformX11()) {
+        QSKIP("keyboard and pointer grabbing by other processes is only possible on X11");
+    }
+
     ScreenLocker::KSldApp ksld;
     ksld.initialize();
     QVERIFY(ksld.establishGrab());
@@ -90,6 +97,13 @@ void KSldTest::testActivateOnTimeout()
     ScreenLocker::KSldApp ksld;
     ksld.initialize();
 
+    if (KWindowSystem::isPlatformWayland()) {
+        // without having a wayland fd, the app will follow the X11 code path
+        int sx[2];
+        QCOMPARE(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx), 0);
+        ksld.setWaylandFd(sx[1]);
+    }
+
     // we need to modify the idle timeout of KSLD, it's in minutes we cannot wait that long
     if (ksld.idleId() != 0) {
         // remove old Idle id
@@ -120,6 +134,10 @@ void KSldTest::testActivateOnTimeout()
 
 void KSldTest::testGraceTimeUnlocking()
 {
+    if (!KWindowSystem::isPlatformX11()) {
+        QSKIP("XCB fake input won't work on Wayland");
+    }
+
     // this time verifies that the screen gets unlocked during grace time by simulated user activity
     ScreenLocker::KSldApp ksld(this);
     ksld.initialize();
