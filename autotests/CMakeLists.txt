@@ -40,8 +40,15 @@ endif()
 # KSldTest
 #######################################
 add_executable(ksldTest ksldtest.cpp)
-target_link_libraries(ksldTest Qt::Test Qt::Widgets KF6::IdleTime XCB::XTEST KScreenLocker)
-target_link_libraries(ksldTest Qt::GuiPrivate)
+target_link_libraries(ksldTest
+    Qt::GuiPrivate
+    Qt::Test
+    Qt::Widgets
+    KF6::IdleTime
+    KF6::WindowSystem
+    XCB::XTEST
+    KScreenLocker
+)
 add_test(NAME ksmserver-ksldTest COMMAND ksldTest)
 ecm_mark_as_test(ksldTest)
 

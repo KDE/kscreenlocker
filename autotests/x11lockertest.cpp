@@ -6,10 +6,12 @@ SPDX-License-Identifier: GPL-2.0-or-later
 */
 // own
 #include "../x11locker.h"
+// KDE Frameworks
+#include <KWindowSystem>
 // Qt
+#include <QTest>
 #include <QWindow>
 #include <private/qtx11extras_p.h>
-#include <QTest>
 // xcb
 #include <xcb/xcb.h>
 
@@ -86,6 +88,10 @@ void LockWindowTest::initTestCase()
 
 void LockWindowTest::testBlankScreen()
 {
+    if (!KWindowSystem::isPlatformX11()) {
+        QSKIP("test requires X11");
+    }
+
     // create and show a dummy window to ensure the background doesn't start as black
     QWidget dummy;
     dummy.setWindowFlags(Qt::X11BypassWindowManagerHint);
@@ -160,6 +166,10 @@ void LockWindowTest::testBlankScreen()
 
 void LockWindowTest::testEmergencyShow()
 {
+    if (!KWindowSystem::isPlatformX11()) {
+        QSKIP("test requires X11");
+    }
+
     QWidget dummy;
     dummy.setWindowFlags(Qt::X11BypassWindowManagerHint);
     QPalette p;
