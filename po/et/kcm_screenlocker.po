@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-24 00:40+0000\n"
+"POT-Creation-Date: 2024-06-14 00:40+0000\n"
 "PO-Revision-Date: 2020-10-23 11:15+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -24,7 +24,7 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Välimus"
 
-#: ui/Appearance.qml:38
+#: ui/Appearance.qml:39
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Taustapildi tüüp:"

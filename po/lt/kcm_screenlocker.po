@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-24 00:40+0000\n"
+"POT-Creation-Date: 2024-06-14 00:40+0000\n"
 "PO-Revision-Date: 2024-03-05 00:09+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -28,7 +28,7 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Išvaizda"
 
-#: ui/Appearance.qml:38
+#: ui/Appearance.qml:39
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Darbalaukio fono tipas:"
