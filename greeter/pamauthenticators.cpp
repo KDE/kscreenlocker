@@ -16,6 +16,7 @@ struct PamAuthenticators::Private {
     std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
     PamAuthenticator::NoninteractiveAuthenticatorTypes computedTypes = PamAuthenticator::NoninteractiveAuthenticatorType::None;
     AuthenticatorsState state = AuthenticatorsState::Idle;
+    bool graceLocked = false;
 
     void recomputeNoninteractiveAuthenticationTypes()
     {
@@ -117,7 +118,7 @@ PamAuthenticators::AuthenticatorsState PamAuthenticators::state() const
 
 void PamAuthenticators::startAuthenticating()
 {
-    if (d->state == AuthenticatorsState::Authenticating) {
+    if (d->state == AuthenticatorsState::Authenticating || d->graceLocked) {
         return;
     }
 
@@ -191,4 +192,9 @@ void PamAuthenticators::cancel()
 PamAuthenticator::NoninteractiveAuthenticatorTypes PamAuthenticators::authenticatorTypes() const
 {
     return d->computedTypes;
+}
+
+void PamAuthenticators::setGraceLocked(bool b)
+{
+    d->graceLocked = b;
 }

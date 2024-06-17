@@ -501,8 +501,10 @@ void UnlockApp::getFocus()
     activeScreen->requestActivate();
 }
 
-void UnlockApp::setLockedPropertyOnViews()
+void UnlockApp::graceLockEnded()
 {
+    m_authenticators->setGraceLocked(false);
+
     delete m_delayedLockTimer;
     m_delayedLockTimer = nullptr;
 
@@ -584,7 +586,7 @@ void UnlockApp::setImmediateLock(bool immediate)
 void UnlockApp::lockImmediately()
 {
     setImmediateLock(true);
-    setLockedPropertyOnViews();
+    graceLockEnded();
 }
 
 bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
@@ -674,9 +676,10 @@ void UnlockApp::setGraceTime(int milliseconds)
     if (milliseconds < 0 || m_delayedLockTimer || m_noLock || m_immediateLock) {
         return;
     }
+    m_authenticators->setGraceLocked(true);
     m_delayedLockTimer = new QTimer(this);
     m_delayedLockTimer->setSingleShot(true);
-    connect(m_delayedLockTimer, &QTimer::timeout, this, &UnlockApp::setLockedPropertyOnViews);
+    connect(m_delayedLockTimer, &QTimer::timeout, this, &UnlockApp::graceLockEnded);
     m_delayedLockTimer->start(m_graceTime);
 }
 
