@@ -237,14 +237,18 @@ void KSldApp::initialize()
             return;
         }
 
+        if (s_graceTimeKill) {
+            qCDebug(KSCREENLOCKER) << "screen locker killed due to grace time.";
+            s_graceTimeKill = false;
+            s_logindExit = false;
+            return;
+        }
         const bool regularExit = !exitCode && exitStatus == QProcess::NormalExit;
-        if (regularExit || s_graceTimeKill || s_logindExit) {
+        if (regularExit || s_logindExit) {
             // unlock process finished successfully - we can remove the lock grab
 
             if (regularExit) {
                 qCDebug(KSCREENLOCKER) << "Unlocking now on regular exit.";
-            } else if (s_graceTimeKill) {
-                qCDebug(KSCREENLOCKER) << "Unlocking anyway due to grace time.";
             } else {
                 Q_ASSERT(s_logindExit);
                 qCDebug(KSCREENLOCKER) << "Unlocking anyway since forced through logind.";
@@ -784,6 +788,8 @@ void KSldApp::unlock()
     qCDebug(KSCREENLOCKER) << "Unlock requested";
 
     if (isGraceTime() || !m_requirePassword) {
+        // the process might take some time to exit; don't wait for that to happen
+        doUnlock();
         s_graceTimeKill = true;
         m_lockProcess->terminate();
     }
