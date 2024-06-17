@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-04-21 21:46+0530\n"
+"PO-Revision-Date: 2024-06-16 17:38+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -183,13 +183,11 @@ msgid "30 minutes"
 msgstr "30 நிமிடம்"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "வேறு"
+msgstr "விருப்பமானது…"
 
 #: ui/main.qml:43
 #, kde-format
@@ -201,7 +199,7 @@ msgstr "கடவுச்சொல்லை உடனே கேள்"
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "கடவுச்சொல் ஒருபோதும் கேட்காதே"
 
 #: ui/main.qml:45
 #, kde-format
