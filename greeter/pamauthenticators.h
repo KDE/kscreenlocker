@@ -76,6 +76,8 @@ public:
     Q_SIGNAL void noninteractiveError(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
     Q_SIGNAL void noninteractiveInfo(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
 
+    void setGraceLocked(bool b);
+
 private:
     struct Private;
     QScopedPointer<Private> d;
