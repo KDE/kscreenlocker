@@ -487,7 +487,7 @@ bool KSldApp::establishGrab()
     qCDebug(KSCREENLOCKER) << "Establishing grab";
 
     if (m_isWayland) {
-        return m_waylandFd >= 0;
+        return true;
     }
     if (!m_isX11) {
         return true;
@@ -634,6 +634,8 @@ void KSldApp::setWaylandFd(int fd)
 void KSldApp::startLockProcess(EstablishLock establishLock)
 {
     qCDebug(KSCREENLOCKER) << "Starting lock process with establishLock:" << establishLockToString(establishLock);
+
+    Q_EMIT aboutToStartGreeter();
 
     QProcessEnvironment env = m_greeterEnv;
 
