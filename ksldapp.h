@@ -241,6 +241,11 @@ Q_SIGNALS:
     void aboutToLock();
 
     /**
+     * Emitted before the greeter is (re)started
+     */
+    void aboutToStartGreeter();
+
+    /**
      * Emitted when the screen has been locked.
      */
     void locked();
