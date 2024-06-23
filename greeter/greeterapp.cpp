@@ -185,19 +185,8 @@ void UnlockApp::initialize()
     connect(m_resetRequestIgnoreTimer, &QTimer::timeout, this, &UnlockApp::resetRequestIgnore);
 
     KScreenSaverSettingsBase::self()->load();
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Shell"));
-    m_packageName = m_shellIntegration->defaultShell();
 
-    if (!m_packageName.isEmpty()) {
-        package.setPath(m_packageName);
-    }
-
-    if (!verifyPackageApi(package)) {
-        qCWarning(KSCREENLOCKER_GREET) << "Lockscreen QML outdated, falling back to default";
-        package.setPath(QStringLiteral("org.kde.plasma.desktop"));
-    }
-
-    m_mainQmlPath = package.fileUrl("lockscreenmainscript");
+    setShell(m_shellIntegration->defaultShell());
 
     // The root of wallpaper packages will be a WallpaperItem we provide the same API via WallpaperIntegration
     // although with most things nooping
@@ -206,10 +195,6 @@ void UnlockApp::initialize()
 
     m_wallpaperPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper"));
     m_wallpaperPackage.setPath(KScreenSaverSettingsBase::self()->wallpaperPluginId());
-
-    m_shellIntegration->setPackage(package);
-    m_shellIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
-    m_shellIntegration->init();
 
     const KUser user;
     const QString fullName = user.property(KUser::FullName).toString();
@@ -565,17 +550,25 @@ void UnlockApp::setTesting(bool enable)
     }
 }
 
-void UnlockApp::setTheme(const QString &theme)
+void UnlockApp::setShell(const QString &shell)
 {
-    if (theme.isEmpty() || !m_testing) {
-        return;
+    m_packageName = shell;
+    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Shell"));
+
+    if (!m_packageName.isEmpty()) {
+        package.setPath(m_packageName);
     }
 
-    m_packageName = theme;
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
-    package.setPath(m_packageName);
+    if (!verifyPackageApi(package)) {
+        qCWarning(KSCREENLOCKER_GREET) << "Lockscreen QML outdated, falling back to default";
+        package.setPath(QStringLiteral("org.kde.plasma.desktop"));
+    }
 
     m_mainQmlPath = package.fileUrl("lockscreenmainscript");
+
+    m_shellIntegration->setPackage(package);
+    m_shellIntegration->setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
+    m_shellIntegration->init();
 }
 
 void UnlockApp::setImmediateLock(bool immediate)

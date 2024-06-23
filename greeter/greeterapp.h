@@ -45,7 +45,7 @@ public:
     void initialViewSetup();
 
     void setTesting(bool enable);
-    void setTheme(const QString &theme);
+    void setShell(const QString &shell);
     void setImmediateLock(bool immediateLock);
     void lockImmediately();
     void setGraceTime(int milliseconds);

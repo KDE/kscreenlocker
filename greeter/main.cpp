@@ -131,9 +131,9 @@ int main(int argc, char *argv[])
 
     QCommandLineOption testingOption(QStringLiteral("testing"), i18n("Starts the greeter in testing mode"));
 
-    QCommandLineOption themeOption(QStringLiteral("theme"),
-                                   i18n("Starts the greeter with the selected theme (only in Testing mode)"),
-                                   QStringLiteral("theme"),
+    QCommandLineOption shellOption(QStringLiteral("shell"),
+                                   i18n("Starts the greeter with the selected shell theme (only in Testing mode)"),
+                                   QStringLiteral("shell"),
                                    QStringLiteral(""));
 
     QCommandLineOption immediateLockOption(QStringLiteral("immediateLock"), i18n("Lock immediately, ignoring any grace time etc."));
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
     QCommandLineOption waylandFdOption(QStringLiteral("ksldfd"), i18n("File descriptor for connecting to ksld."), QStringLiteral("fd"));
 
     parser.addOption(testingOption);
-    parser.addOption(themeOption);
+    parser.addOption(shellOption);
     parser.addOption(immediateLockOption);
     parser.addOption(graceTimeOption);
     parser.addOption(nolockOption);
@@ -161,10 +161,10 @@ int main(int argc, char *argv[])
         app.setTesting(true);
         app.setImmediateLock(true);
 
-        // parse theme option
-        const QString theme = parser.value(themeOption);
-        if (!theme.isEmpty()) {
-            app.setTheme(theme);
+        // parse shell option
+        const QString shell = parser.value(shellOption);
+        if (!shell.isEmpty()) {
+            app.setShell(shell);
         }
 
         // allow ptrace if testing is enabled
