@@ -31,6 +31,8 @@ class PamAuthenticators : public QObject
 
     Q_PROPERTY(AuthenticatorsState state READ state NOTIFY stateChanged)
 
+    Q_PROPERTY(bool hadPrompt READ hadPrompt NOTIFY hadPromptChanged)
+
 public:
     PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interactive,
                       std::vector<std::unique_ptr<PamAuthenticator>> &&noninteractive,
@@ -77,6 +79,9 @@ public:
     Q_SIGNAL void noninteractiveInfo(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
 
     void setGraceLocked(bool b);
+
+    bool hadPrompt() const;
+    Q_SIGNAL void hadPromptChanged();
 
 private:
     struct Private;
