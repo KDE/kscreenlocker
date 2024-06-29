@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-06-29 00:40+0000\n"
 "PO-Revision-Date: 2020-02-16 22:07+0100\n"
 "Last-Translator: Giovanni Sora <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -30,8 +30,9 @@ msgid "Starts the greeter in testing mode"
 msgstr "Initia le systema de benvenita de modo pro essayar"
 
 #: main.cpp:135
-#, kde-format
-msgid "Starts the greeter with the selected theme (only in Testing mode)"
+#, fuzzy, kde-format
+#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
+msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "Initia le systema de benvenita co le thema seligite (sol in modo de essayar)"
 

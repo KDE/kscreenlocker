@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-06-29 00:40+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -28,8 +28,9 @@ msgid "Starts the greeter in testing mode"
 msgstr "以测试模式启动欢迎画面"
 
 #: main.cpp:135
-#, kde-format
-msgid "Starts the greeter with the selected theme (only in Testing mode)"
+#, fuzzy, kde-format
+#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
+msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "用指定主题启动欢迎画面 (仅在测试模式中)"
 
 #: main.cpp:139
