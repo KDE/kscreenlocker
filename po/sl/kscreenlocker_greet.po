@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2016-08-29 22:43+0200\n"
-"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"PO-Revision-Date: 2024-06-29 06:54+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: main.cpp:128
 #, kde-format
@@ -31,10 +31,10 @@ msgid "Starts the greeter in testing mode"
 msgstr "Pozdravni zaslon bo zagnan v načinu preizkušanja"
 
 #: main.cpp:135
-#, fuzzy, kde-format
-#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
+#, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
-msgstr "Pozdravni zaslon bo zagnan z izbrano temo (samo v načinu preizkušanja)"
+msgstr ""
+"Zažene pozdravni program z izbrano temo lupine (samo v načinu testiranja)"
 
 #: main.cpp:139
 #, kde-format

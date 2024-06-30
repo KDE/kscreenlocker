@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Eloy Cuadra <ecuadra@eloihr.net>, 2012, 2013, 2014, 2015, 2016.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2016-08-27 20:54+0200\n"
+"PO-Revision-Date: 2024-06-29 21:37+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #: main.cpp:128
 #, kde-format
@@ -29,11 +29,11 @@ msgid "Starts the greeter in testing mode"
 msgstr "Inicia la bienvenida en modo de pruebas"
 
 #: main.cpp:135
-#, fuzzy, kde-format
-#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
+#, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
-"Inicia la bienvenida con el tema seleccionado (solo en modo de pruebas)"
+"Inicia la bienvenida con el tema seleccionado en la interfaz gráfica (solo "
+"en modo de pruebas)"
 
 #: main.cpp:139
 #, kde-format
