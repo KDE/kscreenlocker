@@ -30,7 +30,7 @@ msgstr "以测试模式启动欢迎画面"
 #: main.cpp:135
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
-msgstr ""
+msgstr "用指定 Shell 主题启动欢迎画面 (仅在测试模式中)"
 
 #: main.cpp:139
 #, kde-format
