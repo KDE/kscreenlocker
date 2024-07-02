@@ -17,6 +17,7 @@ struct PamAuthenticators::Private {
     PamAuthenticator::NoninteractiveAuthenticatorTypes computedTypes = PamAuthenticator::NoninteractiveAuthenticatorType::None;
     AuthenticatorsState state = AuthenticatorsState::Idle;
     bool graceLocked = false;
+    bool hadPrompt = false;
 
     void recomputeNoninteractiveAuthenticationTypes()
     {
@@ -83,10 +84,18 @@ PamAuthenticators::PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interac
         Q_EMIT busyChanged();
     });
     connect(d->interactive.get(), &PamAuthenticator::prompt, this, [this] {
+        if (!d->hadPrompt) {
+            d->hadPrompt = true;
+            Q_EMIT hadPromptChanged();
+        }
         qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Normal prompt from interactive authenticator" << qUtf8Printable(d->interactive->service());
         Q_EMIT promptChanged();
     });
     connect(d->interactive.get(), &PamAuthenticator::promptForSecret, this, [this] {
+        if (!d->hadPrompt) {
+            d->hadPrompt = true;
+            Q_EMIT hadPromptChanged();
+        }
         qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Secret prompt from interactive authenticator" << qUtf8Printable(d->interactive->service());
         Q_EMIT promptForSecretChanged();
     });
@@ -197,4 +206,9 @@ PamAuthenticator::NoninteractiveAuthenticatorTypes PamAuthenticators::authentica
 void PamAuthenticators::setGraceLocked(bool b)
 {
     d->graceLocked = b;
+}
+
+bool PamAuthenticators::hadPrompt() const
+{
+    return d->hadPrompt;
 }
