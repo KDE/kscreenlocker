@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-05-08 19:34+0200\n"
+"PO-Revision-Date: 2024-07-06 16:45+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -184,13 +184,11 @@ msgid "30 minutes"
 msgstr "30 minutt"
 
 #: ui/main.qml:38 ui/main.qml:50
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "Tilpassa"
+msgstr "Tilpassa …"
 
 #: ui/main.qml:43
 #, kde-format
@@ -202,7 +200,7 @@ msgstr "Krev passord med ein gong"
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "Krev aldri passord"
 
 #: ui/main.qml:45
 #, kde-format
@@ -217,7 +215,7 @@ msgstr "30 sekund"
 #: ui/main.qml:60
 #, kde-format
 msgid "Lock screen automatically:"
-msgstr "Lås skjermen automatisk:"
+msgstr "Lås skjermen automatisk etter:"
 
 #: ui/main.qml:94 ui/main.qml:187 ui/main.qml:321 ui/main.qml:395
 #, kde-format
