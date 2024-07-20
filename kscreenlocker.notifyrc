@@ -154,7 +154,7 @@ Comment[ta]=துரை பூட்டப்பட்டுள்ளது
 Comment[tr]=Ekran kilitlendi
 Comment[uk]=Екран було заблоковано
 Comment[x-test]=xxThe screen has been lockedxx
-Comment[zh_CN]=屏幕已经被锁定
+Comment[zh_CN]=屏幕已锁定
 Comment[zh_TW]=螢幕已鎖定
 Action=None
 
@@ -260,6 +260,6 @@ Comment[ta]=திரைப்பூட்டு திறக்கப்பட�
 Comment[tr]=Ekran kilidi açıldı
 Comment[uk]=Екран було розблоковано
 Comment[x-test]=xxThe screen has been unlockedxx
-Comment[zh_CN]=屏幕已经被解锁
+Comment[zh_CN]=屏幕已解除锁定
 Comment[zh_TW]=螢幕已解除鎖定
 Action=None
