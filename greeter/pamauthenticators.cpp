@@ -69,6 +69,10 @@ PamAuthenticators::PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interac
             Q_EMIT failed(noninteractive->authenticatorType(), noninteractive.get());
         });
         connect(noninteractive.get(), &PamAuthenticator::infoMessage, this, [this, &noninteractive]() {
+            if (!d->hadPrompt) {
+                d->hadPrompt = true;
+                Q_EMIT hadPromptChanged();
+            }
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Info message from non-interactive authenticator" << qUtf8Printable(noninteractive->service());
             Q_EMIT noninteractiveInfo(noninteractive->authenticatorType(), noninteractive.get());
         });
