@@ -115,7 +115,8 @@ void KSldTest::testActivateOnTimeout()
     QVERIFY(lockStateChangedSpy.isValid());
 
     // let's wait the double of the idle timeout
-    QVERIFY(lockStateChangedSpy.wait(10000));
+    QVERIFY2(lockStateChangedSpy.wait(10000),
+             "If running the test locally, make sure you're not moving the mouse or otherwise interrupting this test's idle check.");
     QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::AcquiringLock);
 
     // let's simulate unlock to get rid of started greeter process
