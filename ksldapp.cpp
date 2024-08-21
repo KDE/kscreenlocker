@@ -679,7 +679,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
 
     auto greeterPath = KLibexec::path(QStringLiteral(KSCREENLOCKER_GREET_BIN_REL));
     if (!QFile::exists(greeterPath)) {
-        greeterPath = KSCREENLOCKER_GREET_BIN_ABS;
+        greeterPath = QStringLiteral(KSCREENLOCKER_GREET_BIN_ABS);
     }
 
     qCDebug(KSCREENLOCKER) << "Starting greeter process. Args:" << args;

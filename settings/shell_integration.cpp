@@ -36,7 +36,7 @@ QString ShellIntegration::defaultShell() const
 {
     KSharedConfig::Ptr startupConf = KSharedConfig::openConfig(QStringLiteral("plasmashellrc"));
     KConfigGroup startupConfGroup(startupConf, QStringLiteral("Shell"));
-    const QString defaultValue = qEnvironmentVariable("PLASMA_DEFAULT_SHELL", "org.kde.plasma.desktop");
+    const QString defaultValue = qEnvironmentVariable("PLASMA_DEFAULT_SHELL", QStringLiteral("org.kde.plasma.desktop"));
     QString value = startupConfGroup.readEntry("ShellPackage", defaultValue);
 
     // In the global theme an empty value was written, make sure we still return a shell package
@@ -48,7 +48,7 @@ KConfigLoader *ShellIntegration::configScheme()
     if (!m_configLoader) {
         const QString xmlPath = m_package.filePath(QByteArrayLiteral("lockscreen"), QStringLiteral("config.xml"));
 
-        const KConfigGroup cfg = m_config->group("Greeter").group("LnF");
+        const KConfigGroup cfg = m_config->group(QStringLiteral("Greeter")).group(QStringLiteral("LnF"));
 
         if (xmlPath.isEmpty()) {
             m_configLoader = new KConfigLoader(cfg, nullptr, this);

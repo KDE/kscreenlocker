@@ -80,7 +80,7 @@ void KillTest::testKill()
     QSignalSpy spy(&greeter, &QProcess::readyReadStandardOutput);
 
     greeter.setReadChannel(QProcess::StandardOutput);
-    greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN_REL), QStringList({QStringLiteral("--testing")}));
+    greeter.start(KLibexec::path(QStringLiteral(KSCREENLOCKER_GREET_BIN_REL)), QStringList({QStringLiteral("--testing")}));
 
     // Wait for the "locked at" message as an indication that the greeter is ready
     spy.wait(5000);
@@ -159,7 +159,7 @@ void KillTest::testImmediateKill()
     // this test ensures that the greeter indicates crashexit when a signal is sent to the greeter
     // before it had time to properly setup
     QProcess greeter(this);
-    greeter.start(KLibexec::path(KSCREENLOCKER_GREET_BIN_REL), QStringList({QStringLiteral("--testing")}));
+    greeter.start(KLibexec::path(QStringLiteral(KSCREENLOCKER_GREET_BIN_REL)), QStringList({QStringLiteral("--testing")}));
     QVERIFY(greeter.waitForStarted());
 
     // now kill

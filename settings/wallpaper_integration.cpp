@@ -51,7 +51,7 @@ KConfigLoader *WallpaperIntegration::configScheme()
     if (!m_configLoader) {
         const QString xmlPath = m_package.filePath(QByteArrayLiteral("config"), QStringLiteral("main.xml"));
 
-        const KConfigGroup cfg = m_config->group("Greeter").group("Wallpaper").group(m_pluginName);
+        const KConfigGroup cfg = m_config->group(QStringLiteral("Greeter")).group(QStringLiteral("Wallpaper")).group(m_pluginName);
 
         if (xmlPath.isEmpty()) {
             m_configLoader = new KConfigLoader(cfg, nullptr, this);

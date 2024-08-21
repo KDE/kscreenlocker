@@ -86,7 +86,7 @@ Q_CONSTRUCTOR_FUNCTION(disableDrKonqi)
 // Verify that a package or its fallback is using the right API
 bool verifyPackageApi(const KPackage::Package &package)
 {
-    if (package.metadata().value("X-Plasma-APIVersion", QStringLiteral("1")).toInt() >= 2) {
+    if (package.metadata().value(QStringLiteral("X-Plasma-APIVersion"), QStringLiteral("1")).toInt() >= 2) {
         return true;
     }
 
@@ -94,7 +94,7 @@ bool verifyPackageApi(const KPackage::Package &package)
         // The current package does not contain the lock screen and we are
         // using the fallback package. So check to see if that package has
         // the right version instead.
-        if (package.fallbackPackage().metadata().value("X-Plasma-APIVersion", QStringLiteral("1")).toInt() >= 2) {
+        if (package.fallbackPackage().metadata().value(QStringLiteral("X-Plasma-APIVersion"), QStringLiteral("1")).toInt() >= 2) {
             return true;
         }
     }
@@ -108,7 +108,7 @@ public:
     bool nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result) override
     {
         Q_UNUSED(result)
-        if (qstrcmp(eventType, "xcb_generic_event_t") != 0) {
+        if (eventType != QByteArrayLiteral("xcb_generic_event_t")) {
             return false;
         }
         xcb_generic_event_t *event = reinterpret_cast<xcb_generic_event_t *>(message);
@@ -145,10 +145,12 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_defaultToSwitchUser(false)
     , m_shellIntegration(new ShellIntegration(this))
 {
-    auto interactive = std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SERVICE, KUser().loginName());
+    auto interactive = std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SERVICE), KUser().loginName());
     std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
-    noninteractive.push_back(std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, KUser().loginName(), PamAuthenticator::Fingerprint));
-    noninteractive.push_back(std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_SMARTCARD_SERVICE, KUser().loginName(), PamAuthenticator::Smartcard));
+    noninteractive.push_back(
+        std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE), KUser().loginName(), PamAuthenticator::Fingerprint));
+    noninteractive.push_back(
+        std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SMARTCARD_SERVICE), KUser().loginName(), PamAuthenticator::Smartcard));
     m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
     initialize();
 

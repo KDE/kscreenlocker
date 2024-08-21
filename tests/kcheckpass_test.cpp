@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.process(app);
-    PamAuthenticator authenticator("kde", KUser().loginName());
+    PamAuthenticator authenticator(QStringLiteral("kde"), KUser().loginName());
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("authenticator"), &authenticator);
