@@ -58,7 +58,7 @@ void KSldTest::testEstablishGrab()
     QVERIFY(keyboardGrabber.waitForStarted());
 
     // let's add some delay to be sure that keyboardGrabber has it's X stuff done
-    QTest::qWait(100);
+    QTest::qWait(std::chrono::milliseconds{100});
 
     // now grabbing should fail
     QVERIFY(!ksld.establishGrab());
@@ -78,7 +78,7 @@ void KSldTest::testEstablishGrab()
     QVERIFY(pointerGrabber.waitForStarted());
 
     // let's add some delay to be sure that pointerGrabber has it's X stuff done
-    QTest::qWait(100);
+    QTest::qWait(std::chrono::milliseconds{100});
 
     // now grabbing should fail
     QVERIFY(!ksld.establishGrab());
@@ -109,13 +109,13 @@ void KSldTest::testActivateOnTimeout()
         // remove old Idle id
         KIdleTime::instance()->removeIdleTimeout(ksld.idleId());
     }
-    ksld.setIdleId(KIdleTime::instance()->addIdleTimeout(5000));
+    ksld.setIdleId(KIdleTime::instance()->addIdleTimeout(std::chrono::seconds{5}));
 
     QSignalSpy lockStateChangedSpy(&ksld, &ScreenLocker::KSldApp::lockStateChanged);
     QVERIFY(lockStateChangedSpy.isValid());
 
     // let's wait the double of the idle timeout
-    QVERIFY2(lockStateChangedSpy.wait(10000),
+    QVERIFY2(lockStateChangedSpy.wait(std::chrono::seconds{10}),
              "If running the test locally, make sure you're not moving the mouse or otherwise interrupting this test's idle check.");
     QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::AcquiringLock);
 
@@ -148,7 +148,7 @@ void KSldTest::testGraceTimeUnlocking()
         // remove old Idle id
         KIdleTime::instance()->removeIdleTimeout(ksld.idleId());
     }
-    ksld.setIdleId(KIdleTime::instance()->addIdleTimeout(5000));
+    ksld.setIdleId(KIdleTime::instance()->addIdleTimeout(std::chrono::seconds{5}));
     // infinite
     ksld.setGraceTime(-1);
 
@@ -158,7 +158,7 @@ void KSldTest::testGraceTimeUnlocking()
     QVERIFY(unlockedSpy.isValid());
 
     // let's wait quite some time to give the greeter a chance to come up
-    QVERIFY(lockedSpy.wait(30000));
+    QVERIFY(lockedSpy.wait(std::chrono::seconds{30}));
     QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Locked);
 
     // let's simulate unlock by faking input
@@ -169,7 +169,7 @@ void KSldTest::testGraceTimeUnlocking()
 
     // now let's test again without grace time
     ksld.setGraceTime(0);
-    QVERIFY(lockedSpy.wait(30000));
+    QVERIFY(lockedSpy.wait(std::chrono::seconds{30}));
     QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Locked);
 
     xcb_test_fake_input(QX11Info::connection(), XCB_MOTION_NOTIFY, 0, XCB_TIME_CURRENT_TIME, XCB_WINDOW_NONE, cursorPos.x(), cursorPos.y(), 0);
