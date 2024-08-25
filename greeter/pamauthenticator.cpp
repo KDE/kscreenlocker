@@ -45,7 +45,7 @@ private:
     struct pam_conv m_conv;
 
     bool m_unavailable = false;
-    bool m_inAuthenticate = false;
+    bool m_inAuthenticate = false, m_cancelled = false;
     int m_result = -1;
     QString m_service;
 };
@@ -56,6 +56,11 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 
     if (!resp) {
         return PAM_BUF_ERR;
+    }
+
+    if (c->m_cancelled) {
+        qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Was cancelled, returning with PAM_CONV_ERR", qUtf8Printable(c->m_service));
+        return PAM_CONV_ERR;
     }
 
     *resp = (struct pam_response *)calloc(n, sizeof(struct pam_response));
@@ -90,6 +95,8 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
                 e.exit(0);
             });
             QObject::connect(c, &PamWorker::cancelled, &e, [&]() {
+                // Set m_cancelled here as well in case converse is called again before returning to the event loop.
+                c->m_cancelled = true;
                 qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Received cancellation, exiting with PAM_CONV_ERR", qUtf8Printable(c->m_service));
                 e.exit(PAM_CONV_ERR);
             });
@@ -146,6 +153,7 @@ PamWorker::PamWorker()
     : QObject(nullptr)
     , m_conv({&PamWorker::converse, this})
 {
+    QObject::connect(this, &PamWorker::cancelled, this, [&]() { m_cancelled = true; });
 }
 
 PamWorker::~PamWorker()
@@ -161,6 +169,7 @@ void PamWorker::authenticate()
         return;
     }
     m_inAuthenticate = true;
+    m_cancelled = false;
     Q_EMIT inAuthenticateChanged(m_inAuthenticate);
     qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Authenticate: Starting authentication", qUtf8Printable(m_service));
     int rc = pam_authenticate(m_handle, 0); // PAM_SILENT);
