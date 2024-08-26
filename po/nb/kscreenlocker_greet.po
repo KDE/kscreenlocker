@@ -32,7 +32,6 @@ msgstr "Starter velkomstbildet i testmodus"
 
 #: main.cpp:135
 #, fuzzy, kde-format
-#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "Starter velkomstbildet med det valgte temaet (bare i testmodus)"
 
