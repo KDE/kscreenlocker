@@ -3,7 +3,7 @@
 # Frank Steinmetzger <dev-kde@felsenfleischer.de>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2023-05-21 23:31+0200\n"
