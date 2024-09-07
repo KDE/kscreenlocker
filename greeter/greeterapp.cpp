@@ -320,7 +320,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     // create the view
     auto *view = new PlasmaQuick::QuickViewSharedEngine();
 
-    view->setColor(Qt::black);
+    view->setColor(Qt::red);
     view->setScreen(screen);
     view->setGeometry(screen->geometry());
 

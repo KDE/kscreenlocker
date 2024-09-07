@@ -101,7 +101,7 @@ void X11Locker::showLockWindow()
 
     qCDebug(KSCREENLOCKER) << "Lock window Id: " << m_background->winId();
 
-    m_background->setPosition(0, 0);
+    m_background->setPosition(500, 500);
     XSync(X11Info::display(), False);
 
     setVRoot(m_background->winId(), m_background->winId());
@@ -516,7 +516,7 @@ void X11Locker::updateGeo()
     for (auto *screen : screens) {
         geometry |= screen->geometry();
     }
-    m_background->setGeometry(geometry);
+    m_background->setGeometry(QRect(500, 500, 1000, 1000));
     m_background->update();
 }
 
