@@ -5,6 +5,7 @@ set(CMAKE_C_STANDARD 99)
 set(PROJECT_VERSION "6.1.90")
 set(PROJECT_VERSION_MAJOR 6)
 
+set(PROJECT_DEP_VERSION "6.1.80")
 set(QT_MIN_VERSION "6.7.0")
 set(KF6_MIN_VERSION "6.5.0")
 
@@ -56,7 +57,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Svg
 )
 
-find_package(PlasmaQuick ${PROJECT_VERSION} REQUIRED)
+find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
