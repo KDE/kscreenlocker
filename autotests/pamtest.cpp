@@ -35,7 +35,7 @@ PamTest::PamTest()
 
 void PamTest::testLogin()
 {
-    PamAuthenticator auth("test_service", "test_user");
+    PamAuthenticator auth(QStringLiteral("test_service"), QStringLiteral("test_user"));
     QSignalSpy promptSpy(&auth, &PamAuthenticator::prompt);
     QSignalSpy promptForSecretSpy(&auth, &PamAuthenticator::promptForSecret);
     QSignalSpy succeededSpy(&auth, &PamAuthenticator::succeeded);
