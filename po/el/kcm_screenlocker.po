@@ -167,8 +167,7 @@ msgid "Lock screen automatically:"
 msgstr "Αυτόματο κλείδωμα οθόνης:"
 
 #: ui/main.qml:42
-#, fuzzy, kde-format
-#| msgid "Never"
+#, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Ποτέ"
