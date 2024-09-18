@@ -110,11 +110,14 @@
     "X-KDE-Keywords[es]": "bloquear,continuar,salvapantallas,bloqueo de pantalla,bloqueo,contraseña,dormir,cerrar tapa,bloquear automáticamente,aspecto del bloqueo de pantalla,tema de bloqueo de pantalla,fondo del bloqueo de pantalla,pantalla de bloqueo,bloquear,bloquear pantalla",
     "X-KDE-Keywords[fr]": "verrouiller, continuer, économiseur d'écran, verrouillage, bloquer, blocage, mot de passe, veille, basculer l'écran, verrouillage automatique, apparence de l'écran de verrouillage, thème de l'écran de verrouillage, fond d'écran de verrouillage, écran de verrouillage, verouillage de l'écran",
     "X-KDE-Keywords[he]": "נעילה,המשך,שומר מסך,נעילת מסך,מסך נעילה,נעילה,חסימה,חסום,סיסמה,שינה,סגירת מסך,נעילה אוטומטית,מראה מסך נעילה,ערכת עיצוב מסך נעילה,תמונת רקע למסך נעילה,ערכת נושא מסך נעילה",
+    "X-KDE-Keywords[ia]": "bloca,resume,salvator de schermo,bloco de schermo,blocar,contrasigno,dormi,close lid,bloca automaticamente,apparentia de bloco de schermo,thema de bloco de schermo,tapete de papiro de bloco de schermo,lockscreen, bloca schermo",
     "X-KDE-Keywords[it]": "blocco,riprendi,salvaschermo,blocco schermo,blocco,password,sospensione,chiusura coperchio,blocco automatico,aspetto blocco schermo,tema blocco schermo,sfondo blocco schermo,schermata di blocco",
     "X-KDE-Keywords[ka]": "lock,resume,screensaver,screenlock,locking,block,blocking,password,sleep,close lid,lock automatically,screen lock appearance,screen lock theme,screen lock wallpaper,lockscreen,lock screen",
+    "X-KDE-Keywords[ru]": "lock,resume,screensaver,screenlock,locking,block,blocking,password,sleep,close lid,lock automatically,screen lock appearance,screen lock theme,screen lock wallpaper,блокировать,заблокировать,возобновить,хранитель экрана,блокировка,блок,блокирование,пароль,сон,закрыть крышку,блокировать автоматически,внешний вид блокировки экрана,тема блокировки экрана,обои блокировки экрана,экран блокировки",
     "X-KDE-Keywords[sl]": "zakleni,nadaljuj,ohranjevalnik zaslona,zaklep zaslona,zaklepanje,blokiranje,geslo,spanje,zapri pokrov,samodejno zaklepanje,videz zaklepa zaslona,tema zaklepanja zaslona,ozadje zaklenjenega zaslona,zaklenjen zaslon,zaklep zaslona",
     "X-KDE-Keywords[sv]": "lås,återuppta,skärmsläckare,skärmlåsning,låsning,blockera,lösenord,viloläge,stänga lock,lås automatiskt,skärmlåsutseende,skärmlåstema,skärmlåsunderlägg,lås skärm",
     "X-KDE-Keywords[tr]": "kilit,sürdür,ekran koruyucu,ekran kilidi,kilitleme,engel,engelleme,parola,uyku,kapağı kapat,otomatik kilitle,kendiliğinden kilitle,ekran kilidi görünümü,ekran kilidi teması,ekran kilidi duvar kağıdı,kilit ekranı",
+    "X-KDE-Keywords[zh_TW]": "鎖定,恢復,鎖定畫面,螢幕保護程式,螢幕保護,螢幕鎖定,密碼,睡眠,關閉上蓋,自動鎖定,螢幕鎖定外觀,鎖定畫面主題,鎖定畫面桌布",
     "X-KDE-System-Settings-Parent-Category": "security-privacy",
     "X-KDE-Weight": 10
 }
