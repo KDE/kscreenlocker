@@ -173,11 +173,9 @@ msgid "Never"
 msgstr "Ποτέ"
 
 #: ui/main.qml:43 ui/main.qml:128
-#, fuzzy, kde-format
-#| msgid "%1 minute"
-#| msgid_plural "%1 minutes"
+#, kde-format
 msgid "1 minute"
-msgstr "%1 λεπτό"
+msgstr "1 λεπτό"
 
 #: ui/main.qml:44
 #, fuzzy, kde-format
