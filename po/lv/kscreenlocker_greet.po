@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2024-02-19 18:24+0200\n"
+"PO-Revision-Date: 2024-09-24 17:06+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: main.cpp:128
 #, kde-format
@@ -30,10 +30,10 @@ msgid "Starts the greeter in testing mode"
 msgstr "Palaiž sveicinātāju testēšanas režīmā"
 
 #: main.cpp:135
-#, fuzzy, kde-format
-#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
+#, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
-msgstr "Palaiž sveicinātāju ar izvēlēto motīvu (tikai testēšanas režīmā)"
+msgstr ""
+"Palaiž sveicinātāju ar izvēlēto čaulas motīvu (tikai testēšanas režīmā)"
 
 #: main.cpp:139
 #, kde-format

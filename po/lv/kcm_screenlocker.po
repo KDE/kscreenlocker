@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-23 00:40+0000\n"
-"PO-Revision-Date: 2024-03-04 16:04+0200\n"
+"PO-Revision-Date: 2024-09-24 17:05+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: ui/Appearance.qml:22
 #, kde-format
@@ -30,16 +30,13 @@ msgid "Wallpaper type:"
 msgstr "Tapetes tips:"
 
 #: ui/DurationPromptDialog.qml:130
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "second"
-#| msgid_plural "seconds"
+#, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
-msgstr[0] "sekundi"
-msgstr[1] "sekundes"
-msgstr[2] "sekunžu"
+msgstr[0] "milisekundi"
+msgstr[1] "milisekundes"
+msgstr[2] "milisekunžu"
 
 #: ui/DurationPromptDialog.qml:132
 #, kde-format
@@ -64,66 +61,60 @@ msgstr[2] "minūšu"
 msgctxt "The unit of the time input field"
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "stundu"
+msgstr[1] "stundām"
+msgstr[2] "stundu"
 
 #: ui/DurationPromptDialog.qml:138
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "dienu"
+msgstr[1] "dienām"
+msgstr[2] "dienu"
 
 #: ui/DurationPromptDialog.qml:140
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
 msgid_plural "weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "nedēļu"
+msgstr[1] "nedēļām"
+msgstr[2] "nedēļu"
 
 #: ui/DurationPromptDialog.qml:142
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
 msgid_plural "months"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "mēnesi"
+msgstr[1] "mēnešiem"
+msgstr[2] "mēnešu"
 
 #: ui/DurationPromptDialog.qml:144
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
 msgid_plural "years"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "gadu"
+msgstr[1] "gadiem"
+msgstr[2] "gadu"
 
 #: ui/DurationPromptDialog.qml:171
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
-msgstr "sekundes"
+msgstr "milisekundes"
 
 #: ui/DurationPromptDialog.qml:173
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "seconds"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "sekundes"
 
 #: ui/DurationPromptDialog.qml:175
-#, fuzzy, kde-format
-#| msgctxt "The unit of the time input field"
-#| msgid "minutes"
+#, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "minūtes"
@@ -132,44 +123,42 @@ msgstr "minūtes"
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
-msgstr ""
+msgstr "stundas"
 
 #: ui/DurationPromptDialog.qml:179
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
-msgstr ""
+msgstr "dienas"
 
 #: ui/DurationPromptDialog.qml:181
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
-msgstr ""
+msgstr "nedēļas"
 
 #: ui/DurationPromptDialog.qml:183
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
-msgstr ""
+msgstr "mēneši"
 
 #: ui/DurationPromptDialog.qml:185
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
-msgstr ""
+msgstr "gadi"
 
 #: ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "Izskats"
+msgstr "Konfigurēt izskatu…"
 
 #: ui/main.qml:37
 #, kde-format
 msgid "Lock screen automatically:"
-msgstr "Ekrānu slēgt automātiski:"
+msgstr "Ekrānu slēgt automātiski pēc:"
 
 #: ui/main.qml:42
 #, kde-format
@@ -180,17 +169,17 @@ msgstr "Nekad"
 #: ui/main.qml:43 ui/main.qml:128
 #, kde-format
 msgid "1 minute"
-msgstr "1 minūte"
+msgstr "1 minūtes"
 
 #: ui/main.qml:44
 #, kde-format
 msgid "2 minutes"
-msgstr "2 minūtes"
+msgstr "2 minūtēm"
 
 #: ui/main.qml:45 ui/main.qml:129
 #, kde-format
 msgid "5 minutes"
-msgstr "5 minūtes"
+msgstr "5 minūtēm"
 
 #: ui/main.qml:46
 #, kde-format
@@ -208,13 +197,11 @@ msgid "30 minutes"
 msgstr "30 minūšu"
 
 #: ui/main.qml:49 ui/main.qml:131
-#, fuzzy, kde-format
-#| msgctxt "To add a custom value, not in the predefined list"
-#| msgid "Custom"
+#, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "Pielāgots"
+msgstr "Pielāgot…"
 
 #: ui/main.qml:67 ui/main.qml:167
 #, kde-format
@@ -240,7 +227,7 @@ msgstr "Slēgt pēc pamošanās no miega"
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
-msgstr "Aizture pirms paroles pieprasīšanas"
+msgstr "Aizture pirms paroles pieprasīšanas:"
 
 #: ui/main.qml:124
 #, kde-format
@@ -252,7 +239,7 @@ msgstr "Nekavējoties pieprasīt paroli"
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "Nekad neprasīt paroli"
 
 #: ui/main.qml:126
 #, kde-format
