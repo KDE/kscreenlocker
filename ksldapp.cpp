@@ -701,7 +701,7 @@ void KSldApp::userActivity()
         unlock();
     }
     if (m_lockWindow) {
-        m_lockWindow->userActivity();
+        Q_EMIT m_lockWindow->userActivity();
     }
 }
 
