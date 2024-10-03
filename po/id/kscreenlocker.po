@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-10-03 00:40+0000\n"
 "PO-Revision-Date: 2019-05-26 09:50+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -93,12 +93,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Sesi Kunci"
 
-#: ksldapp.cpp:449
+#: ksldapp.cpp:453
 #, kde-format
 msgid "Screen locked"
 msgstr "Layar dikunci"
 
-#: ksldapp.cpp:617
+#: ksldapp.cpp:621
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Layar dilepas-kunci"

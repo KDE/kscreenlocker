@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-10-03 00:40+0000\n"
 "PO-Revision-Date: 2023-05-06 19:01+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -80,12 +80,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Ŝlosi Seancon"
 
-#: ksldapp.cpp:449
+#: ksldapp.cpp:453
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekrano ŝlosita"
 
-#: ksldapp.cpp:617
+#: ksldapp.cpp:621
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekrano malŝlosita"
