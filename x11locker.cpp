@@ -86,6 +86,7 @@ void X11Locker::initialize()
 void X11Locker::showLockWindow()
 {
     m_background->hide();
+    m_background->lower();
 
     // Some xscreensaver hacks check for this property
     const char *version = "KDE 4.0";
