@@ -1,0 +1,57 @@
+# Sanskrit translations for kscreenlocker package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kscreenlocker package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kscreenlocker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.cpp:128
+#, kde-format
+msgid "Greeter for the KDE Plasma Workspaces Screen locker"
+msgstr "KDE Plasma Workspaces Screen locker इत्यस्य अभिवादनम्"
+
+#: main.cpp:132
+#, kde-format
+msgid "Starts the greeter in testing mode"
+msgstr "परीक्षणविधाने अभिवादकं आरभते"
+
+#: main.cpp:135
+#, kde-format
+msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
+msgstr "चयनितेन शेल् विषयेण सह अभिवादकं आरभते (केवलं Testing मोड् मध्ये)"
+
+#: main.cpp:139
+#, kde-format
+msgid "Lock immediately, ignoring any grace time etc."
+msgstr "तत्क्षणं तालान् स्थापयन्तु, कस्यापि अनुग्रहसमयादिना अवहेलना।"
+
+#: main.cpp:141
+#, kde-format
+msgid "Delay till the lock user interface gets shown in milliseconds."
+msgstr "यावत् lock उपयोक्तृ-अन्तरफलकं मिलीसेकेण्ड्-मध्ये दर्शितं न भवति तावत् विलम्बं कुर्वन्तु ।"
+
+#: main.cpp:144
+#, kde-format
+msgid "Don't show any lock user interface."
+msgstr "किमपि लॉक् उपयोक्तृ-अन्तरफलकं न दर्शयन्तु ।"
+
+#: main.cpp:145
+#, kde-format
+msgid "Default to the switch user UI."
+msgstr "स्विच उपयोक्तृ UI कृते पूर्वनिर्धारितम्।"
+
+#: main.cpp:147
+#, kde-format
+msgid "File descriptor for connecting to ksld."
+msgstr "ksld इत्यनेन सह सम्बद्धतायै सञ्चिकावर्णकः ।"
