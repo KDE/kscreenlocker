@@ -22,6 +22,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KConfigPropertyMap>
 #include <KCrash>
 #include <KLocalizedContext>
+#include <KLocalizedQmlContext>
 #include <KScreenDpms/Dpms>
 #include <KWindowSystem>
 #include <PlasmaQuick/QuickViewSharedEngine>
@@ -331,7 +332,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     });
 
     view->engine()->setProperty("_kirigamiTheme", QStringLiteral("KirigamiPlasmaStyle"));
-    view->engine()->rootContext()->setContextObject(new KLocalizedContext(view->engine().get()));
+    view->engine()->rootContext()->setContextObject(new KLocalizedQmlContext(view->engine().get()));
     auto oldFactory = view->engine()->networkAccessManagerFactory();
     view->engine()->setNetworkAccessManagerFactory(nullptr);
     delete oldFactory;
