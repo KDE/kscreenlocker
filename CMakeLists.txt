@@ -104,9 +104,24 @@ add_feature_info("Unlock broken screenlocker"
                  HAVE_UNLOCK_CAPABILITY
                  "Needed for emergency unlock in case that the greeter is broken. In case your distribution does not provide loginctl or consolekit please contact plasma-devel@kde.org to discuss alternatives.")
 
-option(PAM_REQUIRED "Require building with PAM" ON)
+find_package(PAM REQUIRED)
+set_package_properties(PAM PROPERTIES DESCRIPTION "PAM Libraries"
+                       URL "https://www.kernel.org/pub/linux/libs/pam/"
+                       TYPE REQUIRED
+                       PURPOSE "Required for screen unlocking"
+                      )
+macro(define_pam_service APP)
+    string(TOUPPER ${APP}_PAM_SERVICE var)
+    set(cvar ${var})
+    set(${cvar} "kde" CACHE STRING "The PAM service to use for ${APP}.")
+    mark_as_advanced(${cvar})
+    set(${var} "\"${${cvar}}\"")
+    message(STATUS "The PAM service used by ${APP} will be ${${var}}")
+endmacro(define_pam_service)
 
-include(ConfigureChecks.cmake)
+define_pam_service(KScreenLocker)
+
+set(CMAKE_EXTRA_INCLUDE_FILES sys/socket.h)
 
 configure_file(config-unix.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-unix.h )
 
