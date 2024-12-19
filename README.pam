@@ -1,8 +1,8 @@
-KScrenLocker and PAM
---------------------
+KScreenLocker and PAM
+---------------------
 
-KScreenLocker can be configured to support the PAM ("Pluggable Authentication
-Modules") system for password checking (for unlocking the display).
+KScreenLocker requires the PAM ("Pluggable Authentication Modules") system
+for password checking (for unlocking the display).
 
 PAM is a flexible application-transparent configurable user-authentication 
 system found on FreeBSD, Solaris, and Linux (and maybe other unixes).
@@ -23,10 +23,8 @@ configure script.
 Using PAM
 ---------
 
-By default, PAM is automatically used, if it is found.
-
-If PAM is found, Plasma by default uses the PAM service "kde". You may
-override it for KScreenLocker by using -DKSCREENLOCKER_PAM_SERVICE=<service>.
+Plasma by default uses the PAM service "kde".  You may override it for
+KScreenLocker by using -DKSCREENLOCKER_PAM_SERVICE=<service>.
 
 A valid PAM service definition must be specified, either by installing
 files into /etc/pam.d/ or by adding service configuration to /etc/pam.conf.
