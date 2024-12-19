@@ -92,4 +92,6 @@ install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 
 install(DIRECTORY themes/org.kde.passworddialog DESTINATION ${KDE_INSTALL_DATADIR}/ksmserver/screenlocker)
 
-add_subdirectory(autotests)
+if(BUILD_TESTING)
+    add_subdirectory(autotests)
+endif()
