@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-23 00:40+0000\n"
-"PO-Revision-Date: 2024-12-14 01:42+0530\n"
+"PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -28,7 +28,7 @@ msgstr "स्वरूपम्‌"
 #: ui/Appearance.qml:39
 #, kde-format
 msgid "Wallpaper type:"
-msgstr "वॉलपेपर प्रकारः : १."
+msgstr "वॉलपेपर प्रकारः :"
 
 #: ui/DurationPromptDialog.qml:130
 #, kde-format
@@ -151,7 +151,7 @@ msgstr "रूपं विन्यस्तं कुर्वन्तु..."
 #: ui/main.qml:37
 #, kde-format
 msgid "Lock screen automatically:"
-msgstr "स्वयमेव पटलं ताडयन्तु : १."
+msgstr "स्वयमेव पटलं ताडयन्तु :"
 
 #: ui/main.qml:42
 #, kde-format
@@ -219,7 +219,7 @@ msgstr "निद्रातः जागरणानन्तरं ताल�
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
-msgstr "गुप्तशब्दस्य आवश्यकतायाः पूर्वं विलम्बः : १."
+msgstr "गुप्तशब्दस्य आवश्यकतायाः पूर्वं विलम्बः :"
 
 #: ui/main.qml:124
 #, kde-format
@@ -253,4 +253,4 @@ msgstr[1] "%1 सेकण्ड्"
 #: ui/main.qml:215
 #, kde-format
 msgid "Keyboard shortcut:"
-msgstr "कीबोर्ड शॉर्टकट् : १."
+msgstr "कीबोर्ड शॉर्टकट् :"
