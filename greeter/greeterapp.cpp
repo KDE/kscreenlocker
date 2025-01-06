@@ -619,7 +619,7 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
         if (ke->key() != Qt::Key_Escape) {
             shareEvent(event, qobject_cast<PlasmaQuick::QuickViewSharedEngine *>(obj));
             return false; // irrelevant
-        } else {
+        } else if (!m_testing) { // don't turn screen off in testing mode.
             auto dpms = new KScreen::Dpms(this);
             if (dpms->isSupported()) {
                 connect(dpms, &KScreen::Dpms::hasPendingChangesChanged, this, [dpms](bool hasPendingChanges) {
