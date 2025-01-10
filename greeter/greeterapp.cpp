@@ -612,12 +612,10 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
     }
 
     if (event->type() == QEvent::KeyPress) { // react if saver is visible
-        shareEvent(event, qobject_cast<PlasmaQuick::QuickViewSharedEngine *>(obj));
         return false; // we don't care
     } else if (event->type() == QEvent::KeyRelease) { // conditionally reshow the saver
         QKeyEvent *ke = static_cast<QKeyEvent *>(event);
         if (ke->key() != Qt::Key_Escape) {
-            shareEvent(event, qobject_cast<PlasmaQuick::QuickViewSharedEngine *>(obj));
             return false; // irrelevant
         } else if (!m_testing) { // don't turn screen off in testing mode.
             auto dpms = new KScreen::Dpms(this);
@@ -636,34 +634,6 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
     }
 
     return false;
-}
-
-/*
- * This function forwards an event from one greeter window to all others
- * It's used to have the keyboard operate on all greeter windows (on every screen)
- * at once so that the user gets visual feedback on the screen he's looking at -
- * even if the focus is actually on a powered off screen.
- */
-
-void UnlockApp::shareEvent(QEvent *e, PlasmaQuick::QuickViewSharedEngine *from)
-{
-    // from can be NULL any time (because the parameter is passed as qobject_cast)
-    // m_views.contains(from) is atm. supposed to be true but required if any further
-    // QQuickView are added (which are not part of m_views)
-    // this makes "from" an optimization (nullptr check aversion)
-    if (from && m_views.contains(from)) {
-        // NOTICE any recursion in the event sharing will prevent authentication on multiscreen setups!
-        // Any change in regarded event processing shall be tested thoroughly!
-        removeEventFilter(this); // prevent recursion!
-        const bool accepted = e->isAccepted(); // store state
-        for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
-            if (view != from) {
-                QCoreApplication::sendEvent(view, e);
-                e->setAccepted(accepted);
-            }
-        }
-        installEventFilter(this);
-    }
 }
 
 void UnlockApp::setGraceTime(int milliseconds)

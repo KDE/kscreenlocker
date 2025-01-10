@@ -75,7 +75,6 @@ private Q_SLOTS:
 
 private:
     void initialize();
-    void shareEvent(QEvent *e, PlasmaQuick::QuickViewSharedEngine *from);
     PlasmaQuick::SharedQmlEngine *loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view);
     void setWallpaperItemProperties(PlasmaQuick::SharedQmlEngine *wallpaperObject, PlasmaQuick::QuickViewSharedEngine *view);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
