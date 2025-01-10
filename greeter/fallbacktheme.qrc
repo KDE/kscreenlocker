@@ -2,5 +2,7 @@
  <qresource>
     <file>fallbacktheme/LockScreen.qml</file>
     <file>fallbacktheme/Greeter.qml</file>
+    <file>fallbacktheme/PasswordSync.qml</file>
+    <file>fallbacktheme/qmldir</file>
  </qresource>
 </RCC>
