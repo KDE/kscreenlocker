@@ -80,9 +80,19 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             implicitWidth: Kirigami.Units.gridUnit * 15
             enabled: !authenticator.busy
+            text: PasswordSync.password
             Keys.onEnterPressed: authenticator.startAuthenticating()
             Keys.onReturnPressed: authenticator.startAuthenticating()
-            Keys.onEscapePressed: password.text = ""
+            Keys.onEscapePressed: {
+                password.text = ""
+                password.text = Qt.binding(() => PasswordSync.password)
+            }
+        }
+
+        Binding {
+            target: PasswordSync
+            property: "password"
+            value: password.text
         }
 
         PlasmaComponents3.Label {
