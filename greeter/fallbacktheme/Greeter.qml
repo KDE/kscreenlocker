@@ -80,9 +80,16 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             implicitWidth: Kirigami.Units.gridUnit * 15
             enabled: !authenticator.busy
+            text: ScreenLocker.PasswordSingleton.password
             Keys.onEnterPressed: authenticator.startAuthenticating()
             Keys.onReturnPressed: authenticator.startAuthenticating()
             Keys.onEscapePressed: password.text = ""
+        }
+
+        Binding {
+            target: ScreenLocker.PasswordSingleton
+            property: "password"
+            value: password.text
         }
 
         PlasmaComponents3.Label {

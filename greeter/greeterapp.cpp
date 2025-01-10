@@ -179,6 +179,25 @@ UnlockApp::~UnlockApp()
     }
 }
 
+class PasswordSingleton : public QObject
+{
+    Q_OBJECT
+    QML_SINGLETON
+    QML_ELEMENT
+
+    Q_PROPERTY(QString password MEMBER m_password NOTIFY passwordChanged)
+public:
+    PasswordSingleton(QObject *parent = nullptr)
+        : QObject(parent)
+    {
+    }
+
+    Q_SIGNAL void passwordChanged();
+
+protected:
+    QString m_password;
+};
+
 void UnlockApp::initialize()
 {
     // set up the request ignore timeout, so that multiple requests to sleep/suspend/shutdown
@@ -190,6 +209,10 @@ void UnlockApp::initialize()
     KScreenSaverSettingsBase::self()->load();
 
     setShell(m_shellIntegration->defaultShell());
+
+    qmlRegisterSingletonType<PasswordSingleton>("org.kde.kscreenlocker", 1, 0, "PasswordSingleton", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return new PasswordSingleton();
+    });
 
     // The root of wallpaper packages will be a WallpaperItem we provide the same API via WallpaperIntegration
     // although with most things nooping
@@ -337,6 +360,11 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     view->engine()->setNetworkAccessManagerFactory(nullptr);
     delete oldFactory;
     view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
+
+    auto passwordSingleton = view->engine()->singletonInstance<PasswordSingleton *>("org.kde.kscreenlocker", "PasswordSingleton");
+    connect(passwordSingleton, &PasswordSingleton::passwordChanged, this, [this, view]() {
+        updatePasswordSingletons(view);
+    });
 
     if (!m_testing) {
         if (QX11Info::isPlatformX11()) {
@@ -663,6 +691,18 @@ void UnlockApp::shareEvent(QEvent *e, PlasmaQuick::QuickViewSharedEngine *from)
             }
         }
         installEventFilter(this);
+    }
+}
+
+void UnlockApp::updatePasswordSingletons(PlasmaQuick::QuickViewSharedEngine *from)
+{
+    auto fromPasswordSingleton = from->engine()->singletonInstance<PasswordSingleton *>("org.kde.kscreenlocker", "PasswordSingleton");
+    const QString password = fromPasswordSingleton->property("password").toString();
+    for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
+        if (view != from) {
+            auto passwordSingleton = view->engine()->singletonInstance<PasswordSingleton *>("org.kde.kscreenlocker", "PasswordSingleton");
+            passwordSingleton->setProperty("password", password);
+        }
     }
 }
 
