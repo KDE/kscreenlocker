@@ -180,6 +180,9 @@ void KSldApp::initialize()
         qCDebug(KSCREENLOCKER) << "Configuring Lock Action";
         QAction *a = new QAction(this);
         a->setObjectName(QStringLiteral("Lock Session"));
+        // The following properties are set manually because we do not depend
+        // on KXmlGui and therefore cannot use KActionCollection.
+        a->setProperty("componentDisplayName", i18nc("Name of a category in System Settings' Shortcuts KCM; match it exactly", "Session Management"));
         a->setProperty("componentName", QStringLiteral("ksmserver"));
         a->setText(i18n("Lock Session"));
         KGlobalAccel::self()->setGlobalShortcut(a, KScreenSaverSettings::defaultShortcuts());
