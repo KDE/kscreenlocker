@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-01-22 00:42+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -74,17 +74,24 @@ msgstr ""
 "Ctrl+Alt+F%3 दबावन् स्क्रीन् भवति\n"
 "\n"
 
-#: ksldapp.cpp:184
+#: ksldapp.cpp:185
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr ""
+
+#: ksldapp.cpp:187
 #, kde-format
 msgid "Lock Session"
 msgstr "ताला सत्रम्"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:456
 #, kde-format
 msgid "Screen locked"
 msgstr "स्क्रीन तालाबद्धा"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:624
 #, kde-format
 msgid "Screen unlocked"
 msgstr "स्क्रीन अनलॉक् अभवत्"

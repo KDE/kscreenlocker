@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-01-22 00:42+0000\n"
 "PO-Revision-Date: 2023-03-05 19:09+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -82,17 +82,25 @@ msgstr ""
 "натисканням комбінації клавіш Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:184
+#: ksldapp.cpp:185
+#, fuzzy, kde-format
+#| msgid "Session Management"
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Керування сеансами"
+
+#: ksldapp.cpp:187
 #, kde-format
 msgid "Lock Session"
 msgstr "Заблокувати сеанс"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:456
 #, kde-format
 msgid "Screen locked"
 msgstr "Екран заблоковано"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:624
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Екран розблоковано"
@@ -131,6 +139,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Визначає проміжок часу бездіяльності у хвилинах, перш ніж буде "
 #~ "заблоковано екран."
-
-#~ msgid "Session Management"
-#~ msgstr "Керування сеансами"

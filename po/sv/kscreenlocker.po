@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-01-22 00:42+0000\n"
 "PO-Revision-Date: 2024-06-21 10:40+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -74,17 +74,25 @@ msgstr ""
 "här sidan genom att trycka på Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:184
+#: ksldapp.cpp:185
+#, fuzzy, kde-format
+#| msgid "Session Management"
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Sessionshantering"
+
+#: ksldapp.cpp:187
 #, kde-format
 msgid "Lock Session"
 msgstr "Lås session"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:456
 #, kde-format
 msgid "Screen locked"
 msgstr "Skärm låst"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:624
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Skärm upplåst"
@@ -118,9 +126,6 @@ msgstr "Försäkra att skärmen låses innan viloläge aktiveras"
 
 #~ msgid "Sets the minutes after which the screen is locked."
 #~ msgstr "Ställer in antal minuter innan skärmen låses."
-
-#~ msgid "Session Management"
-#~ msgstr "Sessionshantering"
 
 #~ msgid "<qt><nobr><b>Automatic Log Out</b></nobr></qt>"
 #~ msgstr "<qt><nobr><b>Logga ut automatiskt</b></nobr></qt>"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-01-22 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -72,17 +72,24 @@ msgstr ""
 "如果你忘记了本指引的内容，可以按 Ctrl+Alt+F%3 返回到此屏幕。\n"
 "\n"
 
-#: ksldapp.cpp:184
+#: ksldapp.cpp:185
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr ""
+
+#: ksldapp.cpp:187
 #, kde-format
 msgid "Lock Session"
 msgstr "锁定会话"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:456
 #, kde-format
 msgid "Screen locked"
 msgstr "屏幕已锁定"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:624
 #, kde-format
 msgid "Screen unlocked"
 msgstr "屏幕已解锁"

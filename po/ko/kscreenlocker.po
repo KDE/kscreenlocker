@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-01-22 00:42+0000\n"
 "PO-Revision-Date: 2023-04-22 00:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -74,17 +74,25 @@ msgstr ""
 "이 화면으로 돌아올 수 있습니다\n"
 "\n"
 
-#: ksldapp.cpp:184
+#: ksldapp.cpp:185
+#, fuzzy, kde-format
+#| msgid "Session Management"
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "세션 관리"
+
+#: ksldapp.cpp:187
 #, kde-format
 msgid "Lock Session"
 msgstr "세션 잠금"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:456
 #, kde-format
 msgid "Screen locked"
 msgstr "화면 잠김"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:624
 #, kde-format
 msgid "Screen unlocked"
 msgstr "화면 잠금 풀림"
@@ -118,9 +126,6 @@ msgstr "대기 모드로 진입하기 전에 화면이 잠길 수 있도록 함"
 
 #~ msgid "Sets the minutes after which the screen is locked."
 #~ msgstr "화면 보호기를 시작할 시간을 분 단위로 설정합니다."
-
-#~ msgid "Session Management"
-#~ msgstr "세션 관리"
 
 #~ msgid "<qt><nobr><b>Automatic Log Out</b></nobr></qt>"
 #~ msgstr "<qt><nobr><b>자동 로그아웃</b></nobr></qt>"

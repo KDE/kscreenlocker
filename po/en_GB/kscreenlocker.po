@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-01-22 00:42+0000\n"
 "PO-Revision-Date: 2023-03-10 19:26+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -74,17 +74,25 @@ msgstr ""
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:184
+#: ksldapp.cpp:185
+#, fuzzy, kde-format
+#| msgid "Session Management"
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Session Management"
+
+#: ksldapp.cpp:187
 #, kde-format
 msgid "Lock Session"
 msgstr "Lock Session"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:456
 #, kde-format
 msgid "Screen locked"
 msgstr "Screen locked"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:624
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Screen unlocked"
@@ -118,6 +126,3 @@ msgstr "Ensuring that the screen gets locked before going to sleep"
 
 #~ msgid "Sets the minutes after which the screen is locked."
 #~ msgstr "Sets the minutes after which the screen is locked."
-
-#~ msgid "Session Management"
-#~ msgstr "Session Management"
