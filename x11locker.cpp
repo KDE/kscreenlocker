@@ -384,10 +384,11 @@ bool X11Locker::nativeEventFilter(const QByteArray &eventType, void *message, qi
             if (xm->window == m_background->winId()) {
                 m_background->update();
                 Q_EMIT lockWindowShown();
-                return false;
+                ret = false;
+            } else {
+                ret = true;
             }
             stayOnTop();
-            ret = true;
         }
         break;
     }
