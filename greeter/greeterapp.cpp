@@ -346,12 +346,6 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         }
     }
 
-    if (m_ksldInterface) {
-        view->create();
-        org_kde_ksld_x11window(m_ksldInterface, view->winId());
-        wl_display_flush(m_display);
-    }
-
     // engine stuff
     QQmlContext *context = view->engine()->rootContext();
     connect(view->engine().get(), &QQmlEngine::quit, this, [this]() {
@@ -439,6 +433,10 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
 
     auto onFrameSwapped = [this, view] {
         markViewsAsVisible(view);
+        if (m_ksldInterface) {
+            org_kde_ksld_x11window(m_ksldInterface, view->winId());
+            wl_display_flush(m_display);
+        }
     };
     connect(view, &QQuickWindow::frameSwapped, this, onFrameSwapped, static_cast<Qt::ConnectionType>(Qt::QueuedConnection | Qt::SingleShotConnection));
 
