@@ -60,7 +60,6 @@ target_link_libraries(kscreenlocker_greet
     Plasma::PlasmaQuick
     Qt::Quick
     Qt::Qml
-    Qt::GuiPrivate
     X11::X11
     Wayland::Client
     LayerShellQt::Interface

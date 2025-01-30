@@ -49,7 +49,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QQuickItem>
 #include <QQuickView>
 
-#include <private/qtx11extras_p.h>
 // Wayland
 #include <wayland-client.h>
 #include <wayland-ksld-client-protocol.h>
@@ -155,7 +154,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
     initialize();
 
-    if (QX11Info::isPlatformX11()) {
+    if (KWindowSystem::isPlatformX11()) {
         installNativeEventFilter(new FocusOutEventFilter);
     }
 }
@@ -339,7 +338,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
 
     if (!m_testing) {
-        if (QX11Info::isPlatformX11()) {
+        if (KWindowSystem::isPlatformX11()) {
             view->setFlags(Qt::X11BypassWindowManagerHint);
         } else {
             view->setFlags(Qt::FramelessWindowHint);
@@ -595,16 +594,17 @@ bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
                 break;
             }
         }
-        if (view && view->winId() && QX11Info::isPlatformX11()) {
+        if (view && view->winId() && KWindowSystem::isPlatformX11()) {
             // showing greeter view window, set property
-            static Atom tag = XInternAtom(QX11Info::display(), "_KDE_SCREEN_LOCKER", False);
-            XChangeProperty(QX11Info::display(), view->winId(), tag, tag, 32, PropModeReplace, nullptr, 0);
+            auto x11App = qGuiApp->nativeInterface<QNativeInterface::QX11Application>();
+            static Atom tag = XInternAtom(x11App->display(), "_KDE_SCREEN_LOCKER", False);
+            XChangeProperty(x11App->display(), view->winId(), tag, tag, 32, PropModeReplace, nullptr, 0);
         }
         // no further processing
         return false;
     }
 
-    if (event->type() == QEvent::MouseButtonPress && QX11Info::isPlatformX11()) {
+    if (event->type() == QEvent::MouseButtonPress && KWindowSystem::isPlatformX11()) {
         if (getActiveScreen()) {
             getActiveScreen()->requestActivate();
         }
