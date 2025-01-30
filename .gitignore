@@ -5,4 +5,4 @@
 /cmake-build*
 .cache
 CMakeLists.txt.user
-/build-*
+/build*
