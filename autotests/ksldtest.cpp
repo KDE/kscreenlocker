@@ -5,12 +5,14 @@ SPDX-License-Identifier: GPL-2.0-or-later
 */
 // own
 #include "../ksldapp.h"
+#include "kscreensaversettings.h"
 // KDE Frameworks
 #include <KIdleTime>
 #include <KWindowSystem>
 // Qt
 #include <QProcess>
 #include <QSignalSpy>
+#include <QStandardPaths>
 #include <QTest>
 #include <private/qtx11extras_p.h>
 // xcb
@@ -24,9 +26,12 @@ class KSldTest : public QObject
     Q_OBJECT
 private Q_SLOTS:
     void initTestCase();
+    void cleanup();
     void testEstablishGrab();
     void testActivateOnTimeout();
     void testGraceTimeUnlocking();
+    void testLockAfterInhibit();
+    void testRestartIdlePeriodAfterInhibit();
 };
 
 void KSldTest::initTestCase()
@@ -34,6 +39,13 @@ void KSldTest::initTestCase()
     QCoreApplication::setAttribute(Qt::AA_ForceRasterWidgets);
     // change to the build bin dir
     QDir::setCurrent(QCoreApplication::applicationDirPath());
+    QStandardPaths::setTestModeEnabled(true);
+}
+
+void KSldTest::cleanup()
+{
+    KScreenSaverSettings::self()->setDefaults();
+    KScreenSaverSettings::self()->save();
 }
 
 void KSldTest::testEstablishGrab()
@@ -186,6 +198,88 @@ void KSldTest::testGraceTimeUnlocking()
         break;
     }
     QVERIFY(unlockedSpy.wait());
+}
+
+void KSldTest::testLockAfterInhibit()
+{
+    KScreenSaverSettings::setTimeout(1 / 60.0); // 1 second
+    KScreenSaverSettings::self()->save();
+
+    ScreenLocker::KSldApp ksld;
+    if (KWindowSystem::isPlatformWayland()) {
+        // without having a wayland fd, the app will follow the X11 code path
+        int sx[2];
+        QCOMPARE(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx), 0);
+        ksld.setWaylandFd(sx[1]);
+    }
+
+    QSignalSpy lockStateChangedSpy(&ksld, &ScreenLocker::KSldApp::lockStateChanged);
+    QVERIFY(lockStateChangedSpy.isValid());
+
+    QSignalSpy idleSpy(KIdleTime::instance(), &KIdleTime::timeoutReached);
+    QVERIFY(idleSpy.isValid());
+
+    ksld.inhibit();
+    ksld.initialize();
+
+    QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
+    QCOMPARE(lockStateChangedSpy.count(), 0);
+    QVERIFY(!lockStateChangedSpy.wait(std::chrono::seconds{2}));
+
+    ksld.uninhibit();
+
+    QVERIFY(idleSpy.wait());
+    QCOMPARE_NE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
+
+    const auto children = ksld.children();
+    for (auto it = children.begin(); it != children.end(); ++it) {
+        if (qstrcmp((*it)->metaObject()->className(), "LogindIntegration") != 0) {
+            continue;
+        }
+        QMetaObject::invokeMethod(*it, "requestUnlock");
+        break;
+    }
+    QTRY_COMPARE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
+}
+
+void KSldTest::testRestartIdlePeriodAfterInhibit()
+{
+    KScreenSaverSettings::setTimeout(2 / 60.0); // 2 seconds
+    KScreenSaverSettings::self()->save();
+
+    ScreenLocker::KSldApp ksld;
+    if (KWindowSystem::isPlatformWayland()) {
+        // without having a wayland fd, the app will follow the X11 code path
+        int sx[2];
+        QCOMPARE(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sx), 0);
+        ksld.setWaylandFd(sx[1]);
+    }
+
+    QSignalSpy lockStateChangedSpy(&ksld, &ScreenLocker::KSldApp::lockStateChanged);
+    QVERIFY(lockStateChangedSpy.isValid());
+
+    ksld.inhibit();
+    ksld.initialize();
+
+    QVERIFY(!lockStateChangedSpy.wait(std::chrono::milliseconds(1800)));
+
+    ksld.uninhibit();
+
+    QVERIFY(!lockStateChangedSpy.wait(std::chrono::milliseconds(500)));
+    QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
+
+    QVERIFY(lockStateChangedSpy.wait(std::chrono::seconds(2)));
+    QCOMPARE_NE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
+
+    const auto children = ksld.children();
+    for (auto it = children.begin(); it != children.end(); ++it) {
+        if (qstrcmp((*it)->metaObject()->className(), "LogindIntegration") != 0) {
+            continue;
+        }
+        QMetaObject::invokeMethod(*it, "requestUnlock");
+        break;
+    }
+    QTRY_COMPARE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
 }
 
 QTEST_MAIN(KSldTest)

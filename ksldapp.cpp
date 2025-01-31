@@ -197,6 +197,8 @@ void KSldApp::initialize()
         });
     }
 
+    connect(m_powerManagementInhibition, &PowerManagementInhibition::inhibitedChanged, this, &KSldApp::updateIdleTimeout);
+
     // idle support
     auto idleTimeSignal = static_cast<void (KIdleTime::*)(int, int)>(&KIdleTime::timeoutReached);
     connect(KIdleTime::instance(), idleTimeSignal, this, [this](int identifier) {
@@ -207,8 +209,9 @@ void KSldApp::initialize()
         if (lockState() != Unlocked) {
             return;
         }
-        if (m_inhibitCounter // either we got a direct inhibit request thru our outdated o.f.Screensaver iface ...
-            || isFdoPowerInhibited()) { // ... or the newer one at o.f.PowerManagement.Inhibit
+        if (isInhibited()) {
+            // either we got a direct inhibit request thru our outdated o.f.Screensaver iface ...
+            // ... or the newer one at o.f.PowerManagement.Inhibit
             // there is at least one process blocking the auto lock of screen locker
             return;
         }
@@ -399,13 +402,7 @@ void KSldApp::configure()
         KIdleTime::instance()->removeIdleTimeout(m_idleId);
         m_idleId = 0;
     }
-    const int timeout = KScreenSaverSettings::timeout();
-    // screen saver enabled means there is an auto lock timer
-    // timeout > 0 is for backwards compatibility with old configs
-    if (KScreenSaverSettings::autolock() && timeout > 0) {
-        // timeout stored in minutes
-        m_idleId = KIdleTime::instance()->addIdleTimeout(timeout * 1000 * 60);
-    }
+    updateIdleTimeout();
     if (KScreenSaverSettings::lock()) {
         // lockGrace is stored in seconds
         m_lockGrace = KScreenSaverSettings::lockGrace() * 1000;
@@ -626,10 +623,9 @@ void KSldApp::doUnlock()
     Q_EMIT lockStateChanged();
 }
 
-bool KSldApp::isFdoPowerInhibited() const
+bool KSldApp::isInhibited() const
 {
-    qCDebug(KSCREENLOCKER) << "Checking if power management is inhibited";
-    return m_powerManagementInhibition->isInhibited();
+    return m_inhibitCounter || m_powerManagementInhibition->isInhibited();
 }
 
 void KSldApp::setWaylandFd(int fd)
@@ -802,12 +798,31 @@ void KSldApp::inhibit()
 {
     qCDebug(KSCREENLOCKER) << "Inhibit requested";
     ++m_inhibitCounter;
+    updateIdleTimeout();
 }
 
 void KSldApp::uninhibit()
 {
     qCDebug(KSCREENLOCKER) << "Uninhibit requested";
     --m_inhibitCounter;
+    updateIdleTimeout();
+}
+
+void KSldApp::updateIdleTimeout()
+{
+    const bool hasTimeout = m_idleId;
+    const bool timeoutConfigured = KScreenSaverSettings::autolock() && KScreenSaverSettings::timeout() > 0;
+    const bool inhibited = isInhibited();
+    if (hasTimeout && inhibited) {
+        KIdleTime::instance()->removeIdleTimeout(m_idleId);
+        m_idleId = 0;
+    } else if (!hasTimeout && !inhibited && timeoutConfigured) {
+        std::chrono::duration<double, std::chrono::minutes::period> timeout(KScreenSaverSettings::timeout());
+        if (QGuiApplication::platformName() == QLatin1StringView("xcb")) {
+            timeout += std::chrono::milliseconds(KIdleTime::instance()->idleTime());
+        }
+        m_idleId = KIdleTime::instance()->addIdleTimeout(std::chrono::duration_cast<std::chrono::milliseconds>(timeout));
+    }
 }
 
 void KSldApp::solidSuspend()

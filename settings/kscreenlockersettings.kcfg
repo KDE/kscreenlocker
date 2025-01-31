@@ -10,7 +10,7 @@
       <label>Screen lock enabled</label>
       <whatsthis>Sets whether the screen will be locked after the specified time.</whatsthis>
     </entry>
-    <entry key="Timeout" type="Int">
+    <entry key="Timeout" type="Double">
       <default>5</default>
       <label>Screen saver timeout</label>
       <whatsthis>Sets the minutes after which the screen is locked.</whatsthis>

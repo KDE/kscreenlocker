@@ -91,7 +91,10 @@ void PowerManagementInhibition::checkInhibition()
         if (!reply.isValid()) {
             return;
         }
-        m_inhibited = reply.value();
+        if (m_inhibited != reply.value()) {
+            m_inhibited = reply.value();
+            Q_EMIT inhibitedChanged();
+        }
     });
 }
 

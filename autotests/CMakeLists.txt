@@ -47,6 +47,7 @@ target_link_libraries(ksldTest
     KF6::IdleTime
     KF6::WindowSystem
     XCB::XTEST
+    settings
     KScreenLocker
 )
 add_test(NAME ksmserver-ksldTest COMMAND ksldTest)

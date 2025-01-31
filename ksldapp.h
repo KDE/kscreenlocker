@@ -346,12 +346,9 @@ private:
      */
     void lockProcessRequestedUnlock();
 
-    /**
-     * @brief Checks whether the FDO (FreeDesktop.org) power is inhibited or not.
-     *
-     * @return true if the FDO power is inhibited, false otherwise.
-     */
-    bool isFdoPowerInhibited() const;
+    bool isInhibited() const;
+
+    void updateIdleTimeout();
 
     /**
      * @brief The current state of the lock.
