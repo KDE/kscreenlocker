@@ -4,6 +4,8 @@ SPDX-FileCopyrightText: 2023 Harald Sitter <sitter@kde.org>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
+#include <KAboutData>
+#include <KCrash>
 #include <KLocalizedString>
 
 #include <QCommandLineParser>
@@ -67,15 +69,6 @@ int main(int argc, char *argv[])
 
     LayerShellQt::Shell::useLayerShell();
 
-    // disable ptrace on the greeter
-#if HAVE_PR_SET_DUMPABLE
-    prctl(PR_SET_DUMPABLE, 0);
-#endif
-#if HAVE_PROC_TRACE_CTL
-    int mode = PROC_TRACE_CTL_DISABLE;
-    procctl(P_PID, getpid(), PROC_TRACE_CTL, &mode);
-#endif
-
     qCDebug(KSCREENLOCKER_GREET) << "Greeter is starting up.";
 
     KLocalizedString::setApplicationDomain(QByteArrayLiteral("kscreenlocker_greet"));
@@ -113,9 +106,11 @@ int main(int argc, char *argv[])
 
     app.setQuitOnLastWindowClosed(false);
     app.setQuitLockEnabled(false);
-    QCoreApplication::setApplicationName(QStringLiteral("kscreenlocker_greet"));
-    QCoreApplication::setApplicationVersion(QStringLiteral("0.1"));
-    QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
+
+    KAboutData about(QStringLiteral("kscreenlocker_greet"), QString(), QStringLiteral(WORKSPACE_VERSION_STRING));
+    KAboutData::setApplicationData(about);
+
+    KCrash::initialize();
 
     // disable session management for the greeter
     auto disableSessionManagement = [](QSessionManager &sm) {
