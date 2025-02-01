@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['@all']
-  'require':
+ - 'on': ['@all']
+   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
     'frameworks/kauth': '@latest-kf6'
     'frameworks/kcmutils': '@latest-kf6'
@@ -27,11 +27,11 @@ Dependencies:
     'third-party/wayland': '@latest'
 
 RuntimeDependencies:
-- 'on': ['@all']
-  'require':
+ - 'on': ['@all']
+   'require':
     'frameworks/kdeclarative': '@latest-kf6'
     'plasma/plasma-workspace': '@latest-kf6'
 
 Options:
-  require-passing-tests-on: ['@all']
-  run-gcovr: true
+ require-passing-tests-on: ['@all']
+ run-gcovr: true
