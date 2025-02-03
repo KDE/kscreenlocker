@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <X11/Xlib.h>
+#include <xcb/xcb.h>
 
 #include <QGuiApplication>
 #include <QString>
@@ -30,8 +30,11 @@ namespace X11Info
     return qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->connection();
 }
 
-[[nodiscard]] inline Window appRootWindow()
+[[nodiscard]] inline xcb_window_t appRootWindow()
 {
-    return DefaultRootWindow(display());
+    const xcb_setup_t *const setup = xcb_get_setup(connection());
+    xcb_screen_iterator_t it = xcb_setup_roots_iterator(setup);
+    xcb_screen_t *xcbScreen = it.data;
+    return xcbScreen->root;
 }
 }
