@@ -23,6 +23,8 @@ public:
         return m_inhibited;
     }
 
+    Q_SIGNAL void inhibitedChanged();
+
 private Q_SLOTS:
     void inhibitionsChanged(const QList<InhibitionInfo> &added, const QStringList &removed);
 
