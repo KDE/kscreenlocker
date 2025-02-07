@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-02-07 02:41+0000\n"
 "PO-Revision-Date: 2024-01-23 01:55+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -87,12 +87,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Užrakinti sesiją"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:450
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekranas užrakintas"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:618
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekranas atrakintas"

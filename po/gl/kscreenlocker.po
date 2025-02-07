@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-03 00:40+0000\n"
+"POT-Creation-Date: 2025-02-07 02:41+0000\n"
 "PO-Revision-Date: 2023-05-01 09:53+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -87,12 +87,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Bloquear a sesión"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:450
 #, kde-format
 msgid "Screen locked"
 msgstr "A pantalla está bloqueada"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:618
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Desbloqueouse a pantalla"
