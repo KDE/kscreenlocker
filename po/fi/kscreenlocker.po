@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-22 00:42+0000\n"
+"POT-Creation-Date: 2025-02-07 00:44+0000\n"
 "PO-Revision-Date: 2024-06-29 12:35+0300\n"
 "Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -88,12 +88,12 @@ msgstr "Istunnonhallinta"
 msgid "Lock Session"
 msgstr "Lukitse istunto"
 
-#: ksldapp.cpp:456
+#: ksldapp.cpp:453
 #, kde-format
 msgid "Screen locked"
 msgstr "Näyttö lukittu"
 
-#: ksldapp.cpp:624
+#: ksldapp.cpp:621
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Näytön lukitus avattu"

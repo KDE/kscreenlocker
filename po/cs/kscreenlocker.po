@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-22 00:42+0000\n"
+"POT-Creation-Date: 2025-02-07 00:44+0000\n"
 "PO-Revision-Date: 2020-07-02 12:41+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -68,12 +68,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Uzamknout sezení"
 
-#: ksldapp.cpp:456
+#: ksldapp.cpp:453
 #, kde-format
 msgid "Screen locked"
 msgstr "Obrazovka uzamčena"
 
-#: ksldapp.cpp:624
+#: ksldapp.cpp:621
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Obrazovka odemknuta"
