@@ -53,6 +53,11 @@ PamAuthenticators::PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interac
         d->cancelNoninteractive();
         Q_EMIT failed(PamAuthenticator::NoninteractiveAuthenticatorType::None, d->interactive.get());
     });
+    connect(d->interactive.get(), &PamAuthenticator::loginFailedDelayStarted, this, [this](const uint uSecDelay) noexcept -> void {
+        qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Delay started on login failure for interactive authenticator" << qUtf8Printable(d->interactive->service())
+        << "duration:" << uSecDelay;
+        Q_EMIT loginFailedDelayStarted(PamAuthenticator::NoninteractiveAuthenticatorType::None, d->interactive.get(), uSecDelay);
+    });
     for (auto &&noninteractive : d->noninteractive) {
         connect(noninteractive.get(), &PamAuthenticator::succeeded, this, [this, &noninteractive] {
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Success from non-interactive authenticator" << qUtf8Printable(noninteractive->service());
@@ -67,6 +72,11 @@ PamAuthenticators::PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interac
         connect(noninteractive.get(), &PamAuthenticator::failed, this, [this, &noninteractive] {
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Non-interactive authenticator" << qUtf8Printable(noninteractive->service()) << "failed";
             Q_EMIT failed(noninteractive->authenticatorType(), noninteractive.get());
+        });
+        connect(noninteractive.get(), &PamAuthenticator::loginFailedDelayStarted, this, [this, &noninteractive](const uint uSecDelay) noexcept -> void {
+            qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Delay started on login failure for non-interactive authenticator" << qUtf8Printable(noninteractive->service())
+            << "duration:" << uSecDelay;
+            Q_EMIT loginFailedDelayStarted(noninteractive->authenticatorType(), noninteractive.get(), uSecDelay);
         });
         connect(noninteractive.get(), &PamAuthenticator::infoMessage, this, [this, &noninteractive]() {
             if (!d->hadPrompt) {

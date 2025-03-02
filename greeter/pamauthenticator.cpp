@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QEventLoop>
 #include <QMetaMethod>
+#include <QThread>
 #include <security/pam_appl.h>
 
 #include "kscreenlocker_greet_logging.h"
@@ -30,6 +31,7 @@ Q_SIGNALS:
     void infoMessage(const QString &msg);
     void errorMessage(const QString &msg);
     void failed();
+    void loginFailedDelayStarted(const uint uSecDelay);
     void succeeded();
     void unavailabilityChanged(bool unavailable);
     void inAuthenticateChanged(bool inAuthenticate);
@@ -188,9 +190,19 @@ void PamWorker::authenticate()
 
 static void fail_delay(int retval, unsigned usec_delay, void *appdata_ptr)
 {
-    Q_UNUSED(retval);
-    Q_UNUSED(usec_delay);
-    Q_UNUSED(appdata_ptr);
+    auto* worker = reinterpret_cast< PamWorker* >(appdata_ptr); // Refer the pam_conv (@sa m_conv) structure for info on appdata_ptr
+    if (!worker) {
+        qCFatal(KSCREENLOCKER_GREET) << "[PAM worker] appdata_ptr not convertible to a valid PamWorker! Cannot apply fail delay";
+        return;
+    }
+    if (retval == PAM_SUCCESS) {
+        qCDebug(KSCREENLOCKER_GREET) << "[PAM worker] Fail delay function was called, but authentication result was a success!";
+        return;
+    }
+    Q_EMIT worker->loginFailedDelayStarted(usec_delay);
+    if (usec_delay > 0u) {
+        QThread::usleep(usec_delay); // This calls nanosleep as of Qt 6.8. It also handles EINTR (restarts the sleep with the remainder duration when interrupted), but not EFAULT or EINVAL.
+    }
 }
 
 void PamWorker::start(const QString &service, const QString &user)
@@ -202,8 +214,10 @@ void PamWorker::start(const QString &service, const QString &user)
         m_result = pam_start(qPrintable(service), qPrintable(user), &m_conv, &m_handle);
 
     // get errors quicker
-#ifdef PAM_FAIL_DELAY
-    pam_set_item(m_handle, PAM_FAIL_DELAY, (void *)fail_delay);
+#if defined(HAVE_PAM_FAIL_DELAY)
+    pam_set_item(m_handle, PAM_FAIL_DELAY, reinterpret_cast< void* >(fail_delay));
+#else
+    Q_UNUSED(fail_delay);
 #endif
 
     if (m_result != PAM_SUCCESS) {
@@ -268,6 +282,7 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
     // Failed is not a persistent state. When a view provides authentication that will either result in failure or success,
     // failure simply means that the prompt is getting delayed.
     connect(d, &PamWorker::failed, this, &PamAuthenticator::failed);
+    connect(d, &PamWorker::loginFailedDelayStarted, this, &PamAuthenticator::loginFailedDelayStarted);
 
     m_thread.start();
     init(service, user);

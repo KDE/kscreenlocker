@@ -65,6 +65,7 @@ Q_SIGNALS:
     void succeeded();
     void failed();
     void availableChanged();
+    void loginFailedDelayStarted(const uint uSecDelay);
 
 public Q_SLOTS:
     void tryUnlock();

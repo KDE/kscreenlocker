@@ -77,6 +77,7 @@ public:
     Q_SIGNAL void failed(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
     Q_SIGNAL void noninteractiveError(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
     Q_SIGNAL void noninteractiveInfo(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator);
+    Q_SIGNAL void loginFailedDelayStarted(PamAuthenticator::NoninteractiveAuthenticatorTypes what, PamAuthenticator *authenticator, const uint uSecDelay);
 
     void setGraceLocked(bool b);
 
