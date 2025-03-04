@@ -10,6 +10,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QDBusMetaType>
 #include <QDBusPendingReply>
 #include <QKeyEvent>
 #include <QRegularExpression>
@@ -53,6 +54,8 @@ static void calculateGrabMasks()
 GlobalAccel::GlobalAccel(QObject *parent)
     : QObject(parent)
 {
+    qDBusRegisterMetaType<KGlobalShortcutInfo>();
+    qDBusRegisterMetaType<QList<KGlobalShortcutInfo>>();
 }
 
 void GlobalAccel::prepare()
