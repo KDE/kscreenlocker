@@ -24,9 +24,9 @@ QQC2.StackView {
         if (sourceFile) {
             const props = {}
             const shellConfiguration = configDialog.shellConfiguration
-            for (const key in shellConfiguration) {
+            shellConfiguration.keys().forEach(key => {
                 props["cfg_" + key] = shellConfiguration[key]
-            }
+            });
 
             const newItem = push(sourceFile, props, QQC2.StackView.ReplaceTransition)
 
