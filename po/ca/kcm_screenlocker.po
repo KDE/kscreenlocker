@@ -256,34 +256,3 @@ msgstr[1] "%1 segons"
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Drecera del teclat:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Confirm"
-#~ msgstr "Confirma"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Cancel·la"
-
-#~ msgid "Appearance:"
-#~ msgstr "Aparença:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure..."
-#~ msgstr "Configura..."
-
-#~ msgctxt "First part of sentence \"Automatically after X minutes\""
-#~ msgid "After"
-#~ msgstr "Després de"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Allow unlocking without password for:"
-#~ msgstr "Permet el desbloqueig sense contrasenya durant:"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Josep M. Ferrer"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "txemaq@gmail.com"
