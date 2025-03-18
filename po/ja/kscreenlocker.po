@@ -1,10 +1,10 @@
-# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Ryuichi Yamada <ryuichi_ya220@outlook.jp>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-06 00:47+0000\n"
-"PO-Revision-Date: 2022-08-10 12:27+0900\n"
+"PO-Revision-Date: 2025-03-15 14:28+0900\n"
 "Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,14 +38,7 @@ msgstr ""
 "どちらともシステム上に見つかりませんでした。"
 
 #: abstractlocker.cpp:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -55,23 +48,14 @@ msgid ""
 "\n"
 msgstr ""
 "スクリーンロッカーが壊れているため、アンロックできません。\n"
-"アンロックするには、仮想ターミナルに切り替えて(例: Ctrl+Alt+F%1)\n"
+"アンロックするには、仮想ターミナルに切り替えて (例: Ctrl+Alt+F%1)\n"
 "root としてログインし、以下のコマンドを実行してください:\n"
 "\n"
 "# ck-unlock-session <session-name>\n"
 "\n"
 
 #: abstractlocker.cpp:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3)."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
@@ -87,12 +71,15 @@ msgid ""
 msgstr ""
 "スクリーンロッカーが壊れているため、アンロックできません。\n"
 "アンロックするには、仮想ターミナルに切り替えて (例: Ctrl+Alt+F%1)\n"
-"root としてログインし、以下のコマンドを実行してください:\n"
+"あなたのアカウントにログインし、以下のコマンドを実行してください:\n"
 "\n"
 "loginctl unlock-session %2\n"
 "\n"
 "その後、Ctrl+D を押して仮想セッションからログアウトし、\n"
-"実行中のセッションに戻ってください。(Ctrl+Alt+F%3)"
+"実行中のセッションに戻ってください。(Ctrl+Alt+F%3)\n"
+"手順を忘れた場合は、Ctrl+Alt+F%2を押すと\n"
+"この画面に戻ることができます。\n"
+"\n"
 
 #: ksldapp.cpp:164
 #, kde-format
