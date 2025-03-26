@@ -11,7 +11,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kcmutils as KCM
 import org.kde.kirigami 2.20 as Kirigami
 
-Kirigami.Page {
+Kirigami.ScrollablePage {
     // The following two must be set for correct alignment with wallpaper config
     id: appearanceRoot
     property alias parentLayout: parentLayout
@@ -24,7 +24,8 @@ Kirigami.Page {
     padding: 6  // Layout_ChildMarginWidth from Breeze
 
     ColumnLayout {
-        anchors.fill: parent
+        height: Math.max(implicitHeight, appearanceRoot.availableHeight)
+        width: appearanceRoot.availableWidth
         spacing: Kirigami.Units.smallSpacing
 
         ShellConfig {

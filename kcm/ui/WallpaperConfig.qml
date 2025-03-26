@@ -22,7 +22,7 @@ QQC2.StackView {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    implicitHeight: Kirigami.Units.gridUnit * 30
+    implicitHeight: main.empty ? 0 : (currentItem?.implicitHeight ?? 0)
 
     onSourceFileChanged: {
         if (sourceFile) {
