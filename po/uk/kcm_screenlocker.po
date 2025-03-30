@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_screenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-23 00:40+0000\n"
+"POT-Creation-Date: 2025-03-30 00:43+0000\n"
 "PO-Revision-Date: 2024-05-23 06:24+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
@@ -26,7 +26,7 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Вигляд"
 
-#: ui/Appearance.qml:39
+#: ui/Appearance.qml:40
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Тип фонового зображення:"
