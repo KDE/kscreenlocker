@@ -44,7 +44,7 @@ Kirigami.ScrollablePage {
                 currentIndex: model.findIndex(wallpaper => wallpaper["id"] === kcm.settings.wallpaperPluginId)
                 displayText: model[currentIndex]["name"]
 
-                onActivated: {
+                onActivated: index => {
                     kcm.settings.wallpaperPluginId = model[index]["id"]
                 }
 
