@@ -14,12 +14,32 @@ class QDBusServiceWatcher;
 
 namespace ScreenLocker
 {
+
+class PowerInhibitor : public QObject
+{
+    Q_OBJECT
+
+public:
+    PowerInhibitor(const QString &applicationName, const QString &reason);
+    void release();
+
+private:
+    ~PowerInhibitor() override;
+
+    void inhibit(const QString &applicationName, const QString &reason);
+    void uninhibit();
+
+    std::optional<uint> m_cookie;
+    bool m_failed = false;
+    bool m_released = false;
+};
+
 class InhibitRequest
 {
 public:
     QString dbusid;
     uint cookie;
-    uint powerdevilcookie;
+    PowerInhibitor *powerInhibitor = nullptr;
 };
 
 class KSldApp;

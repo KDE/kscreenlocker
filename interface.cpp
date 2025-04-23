@@ -5,6 +5,7 @@ SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "interface.h"
+#include "kscreenlocker_logging.h"
 #include "kscreensaveradaptor.h"
 #include "ksldapp.h"
 #include "powerdevilpolicyagent.h"
@@ -16,6 +17,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 // Qt
 #include <QDBusConnection>
 #include <QDBusContext>
+#include <QDBusPendingCallWatcher>
 #include <QDBusReply>
 #include <QDBusServiceWatcher>
 #include <QRandomGenerator>
@@ -23,6 +25,65 @@ SPDX-License-Identifier: GPL-2.0-or-later
 namespace ScreenLocker
 {
 const uint ChangeScreenSettings = 4;
+
+PowerInhibitor::PowerInhibitor(const QString &applicationName, const QString &reason)
+{
+    inhibit(applicationName, reason);
+}
+
+PowerInhibitor::~PowerInhibitor()
+{
+}
+
+void PowerInhibitor::release()
+{
+    m_released = true;
+    // TODO: See how to clean up this code.
+    if (m_failed) {
+        deleteLater();
+    } else if (m_cookie) {
+        uninhibit();
+    }
+}
+
+void PowerInhibitor::inhibit(const QString &applicationName, const QString &reason)
+{
+    OrgKdeSolidPowerManagementPolicyAgentInterface policyAgent(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
+                                                               QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
+                                                               QDBusConnection::sessionBus());
+    QDBusPendingReply<uint> reply = policyAgent.AddInhibition(ChangeScreenSettings, applicationName, reason);
+
+    auto watcher = new QDBusPendingCallWatcher(reply, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
+        QDBusPendingReply<uint> reply = *watcher;
+        watcher->deleteLater();
+
+        if (!reply.isValid()) {
+            qCWarning(KSCREENLOCKER) << "org.kde.Solid.PowerManagement.PolicyAgent.AddInhibition failed:" << reply.error();
+            m_failed = true;
+        } else {
+            m_cookie = reply.value();
+        }
+
+        if (m_released) {
+            if (m_failed) {
+                deleteLater();
+            } else {
+                uninhibit();
+            }
+        }
+    });
+}
+
+void PowerInhibitor::uninhibit()
+{
+    OrgKdeSolidPowerManagementPolicyAgentInterface policyAgent(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
+                                                               QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
+                                                               QDBusConnection::sessionBus());
+    policyAgent.ReleaseInhibition(m_cookie.value());
+
+    deleteLater();
+}
 
 Interface::Interface(KSldApp *parent)
     : QObject(parent)
@@ -112,15 +173,10 @@ bool Interface::SetActive(bool state)
 
 uint Interface::Inhibit(const QString &application_name, const QString &reason_for_inhibit)
 {
-    OrgKdeSolidPowerManagementPolicyAgentInterface policyAgent(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
-                                                               QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
-                                                               QDBusConnection::sessionBus());
-    QDBusReply<uint> reply = policyAgent.AddInhibition(ChangeScreenSettings, application_name, reason_for_inhibit);
-
     InhibitRequest sr;
     sr.cookie = m_next_cookie++;
     sr.dbusid = message().service();
-    sr.powerdevilcookie = reply.isValid() ? reply : 0;
+    sr.powerInhibitor = new PowerInhibitor(application_name, reason_for_inhibit);
     m_requests.append(sr);
     m_serviceWatcher->addWatchedService(sr.dbusid);
     KSldApp::self()->inhibit();
@@ -132,12 +188,7 @@ void Interface::UnInhibit(uint cookie)
     QMutableListIterator<InhibitRequest> it(m_requests);
     while (it.hasNext()) {
         if (it.next().cookie == cookie) {
-            if (uint powerdevilcookie = it.value().powerdevilcookie) {
-                OrgKdeSolidPowerManagementPolicyAgentInterface policyAgent(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
-                                                                           QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
-                                                                           QDBusConnection::sessionBus());
-                policyAgent.ReleaseInhibition(powerdevilcookie);
-            }
+            it.value().powerInhibitor->release();
             it.remove();
             KSldApp::self()->uninhibit();
             break;
