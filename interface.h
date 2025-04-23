@@ -10,6 +10,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QDBusMessage>
 #include <QObject>
 
+#include <expected>
+
 class QDBusServiceWatcher;
 
 namespace ScreenLocker
@@ -29,8 +31,7 @@ private:
     void inhibit(const QString &applicationName, const QString &reason);
     void uninhibit();
 
-    std::optional<uint> m_cookie;
-    bool m_failed = false;
+    std::optional<std::expected<uint, QDBusError>> m_cookie;
     bool m_released = false;
 };
 

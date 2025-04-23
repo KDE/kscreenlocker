@@ -38,10 +38,7 @@ PowerInhibitor::~PowerInhibitor()
 void PowerInhibitor::release()
 {
     m_released = true;
-    // TODO: See how to clean up this code.
-    if (m_failed) {
-        deleteLater();
-    } else if (m_cookie) {
+    if (m_cookie.has_value()) {
         uninhibit();
     }
 }
@@ -60,27 +57,25 @@ void PowerInhibitor::inhibit(const QString &applicationName, const QString &reas
 
         if (!reply.isValid()) {
             qCWarning(KSCREENLOCKER) << "org.kde.Solid.PowerManagement.PolicyAgent.AddInhibition failed:" << reply.error();
-            m_failed = true;
+            m_cookie = std::unexpected(reply.error());
         } else {
             m_cookie = reply.value();
         }
 
         if (m_released) {
-            if (m_failed) {
-                deleteLater();
-            } else {
-                uninhibit();
-            }
+            uninhibit();
         }
     });
 }
 
 void PowerInhibitor::uninhibit()
 {
-    OrgKdeSolidPowerManagementPolicyAgentInterface policyAgent(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
-                                                               QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
-                                                               QDBusConnection::sessionBus());
-    policyAgent.ReleaseInhibition(m_cookie.value());
+    if (const auto &result = m_cookie.value()) {
+        OrgKdeSolidPowerManagementPolicyAgentInterface policyAgent(QStringLiteral("org.kde.Solid.PowerManagement.PolicyAgent"),
+                                                                   QStringLiteral("/org/kde/Solid/PowerManagement/PolicyAgent"),
+                                                                   QDBusConnection::sessionBus());
+        policyAgent.ReleaseInhibition(result.value());
+    }
 
     deleteLater();
 }
