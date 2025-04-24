@@ -183,6 +183,7 @@ bool GlobalAccel::keyEvent(QKeyEvent *event)
                 auto signal = QDBusMessage::createMethodCall(s_kglobalAccelService, key, s_componentInterface, QStringLiteral("invokeShortcut"));
                 signal.setArguments(QList<QVariant>{QVariant(info.uniqueName())});
                 QDBusConnection::sessionBus().asyncCall(signal);
+                event->setAccepted(true);
                 return true;
             }
         }
