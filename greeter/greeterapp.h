@@ -85,7 +85,6 @@ private:
     QList<PlasmaQuick::QuickViewSharedEngine *> m_views;
     QTimer *m_resetRequestIgnoreTimer;
     QTimer *m_delayedLockTimer;
-    KPackage::Package m_package;
     bool m_testing;
     bool m_ignoreRequests;
     bool m_immediateLock;
