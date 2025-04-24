@@ -19,6 +19,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 // KDE
 #include <KAuthorized>
+#include <KConfigLoader>
 #include <KConfigPropertyMap>
 #include <KCrash>
 #include <KLocalizedContext>
@@ -35,6 +36,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QAbstractNativeEventFilter>
 #include <QClipboard>
 #include <QDBusConnection>
+#include <QFile>
 #include <QKeyEvent>
 #include <QMimeData>
 #include <QSocketNotifier>
@@ -119,19 +121,6 @@ public:
     }
 };
 
-class WallpaperItem : public WallpaperIntegration
-{
-    Q_OBJECT
-public:
-    explicit WallpaperItem(QQuickItem *parent = nullptr)
-        : WallpaperIntegration(parent)
-    {
-        setConfig(KScreenSaverSettingsBase::self()->sharedConfig());
-        setPluginName(KScreenSaverSettingsBase::self()->wallpaperPluginId());
-        init();
-    }
-};
-
 // App
 UnlockApp::UnlockApp(int &argc, char **argv)
     : QGuiApplication(argc, argv)
@@ -190,11 +179,6 @@ void UnlockApp::initialize()
 
     setShell(m_shellIntegration->defaultShell());
 
-    // The root of wallpaper packages will be a WallpaperItem we provide the same API via WallpaperIntegration
-    // although with most things nooping
-    constexpr const char *uri = "org.kde.plasma.plasmoid";
-    qmlRegisterType<WallpaperItem>(uri, 2, 0, "WallpaperItem");
-
     m_wallpaperPackage = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper"));
     m_wallpaperPackage.setPath(KScreenSaverSettingsBase::self()->wallpaperPluginId());
 
@@ -252,14 +236,9 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
     qmlObject->setSource(QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
     view->setProperty("wallpaperGraphicsObject", QVariant::fromValue(qmlObject));
 
-    auto item = qobject_cast<WallpaperItem *>(qmlObject->rootObject());
-    if (item) {
-        qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
-        view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), item);
-        view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), item);
-    } else {
-        qCWarning(KSCREENLOCKER_GREET) << "Root item not a WallpaperItem";
-    }
+    qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
+    view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
+    view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), qmlObject->rootObject());
     return qmlObject;
 }
 
@@ -370,12 +349,35 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
     context->setContextProperty(QStringLiteral("config"), m_shellIntegration->configuration());
 
+    const QString xmlPath = m_wallpaperPackage.filePath(QByteArrayLiteral("config"), QStringLiteral("main.xml"));
+
+    const KConfigGroup cfg = KScreenSaverSettingsBase::self()
+                                 ->sharedConfig()
+                                 ->group(QStringLiteral("Greeter"))
+                                 .group(QStringLiteral("Wallpaper"))
+                                 .group(KScreenSaverSettingsBase::self()->wallpaperPluginId());
+
+    KConfigLoader *configLoader;
+    if (xmlPath.isEmpty()) {
+        configLoader = new KConfigLoader(cfg, nullptr, this);
+    } else {
+        QFile file(xmlPath);
+        configLoader = new KConfigLoader(cfg, &file, this);
+    }
+
+    KConfigPropertyMap *config = new KConfigPropertyMap(configLoader, this);
+    // potd (picture of the day) is using a kded to monitor changes and
+    // cache data for the lockscreen. Let's notify it.
+    config->setNotify(true);
+
     auto wallpaperObj = loadWallpaperPlugin(view);
     if (auto object = view->property("wallpaperGraphicsObject").value<PlasmaQuick::SharedQmlEngine *>()) {
         // initialize with our size to avoid as much resize events as possible
         object->completeInitialization({
             {QStringLiteral("width"), view->width()},
             {QStringLiteral("height"), view->height()},
+            {u"configuration"_s, QVariant::fromValue(config)},
+            {u"pluginName"_s, KScreenSaverSettingsBase::self()->wallpaperPluginId()},
         });
     }
 
@@ -734,5 +736,3 @@ void UnlockApp::updateCanHibernate()
 }
 
 } // namespace
-
-#include "greeterapp.moc"
