@@ -1,13 +1,14 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for kscreenlocker.po package.
+# Copyright (C) 2012-2025 This file is copyright:
+# This file is distributed under the same license as the kscreenlocker package.
 #
 # SPDX-FileCopyrightText: 2012, 2014, 2015, 2017, 2018, 2020, 2021, 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-07 00:44+0000\n"
-"PO-Revision-Date: 2025-01-23 01:42+0100\n"
+"PO-Revision-Date: 2025-05-18 14:20+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -107,75 +108,3 @@ msgstr "Bloqueador de pantalla"
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Asegurando que la pantalla se bloquea antes de entrar en reposo"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Eloy Cuadra"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "ecuadra@eloihr.net"
-
-#~ msgid "Screen lock enabled"
-#~ msgstr "Bloqueo de pantalla activado"
-
-#~ msgid "Sets whether the screen will be locked after the specified time."
-#~ msgstr "Establece si la pantalla se bloqueará tras el tiempo indicado."
-
-#~ msgid "Screen saver timeout"
-#~ msgstr "Tiempo de espera del salvapantallas"
-
-#~ msgid "Sets the minutes after which the screen is locked."
-#~ msgstr "Fija los minutos tras los que se bloqueará la pantalla."
-
-#~ msgid "<qt><nobr><b>Automatic Log Out</b></nobr></qt>"
-#~ msgstr "<qt><nobr><b>Terminar la sesión automáticamente</b></nobr></qt>"
-
-#~ msgid ""
-#~ "<qt>To prevent being logged out, resume using this session by moving the "
-#~ "mouse or pressing a key.</qt>"
-#~ msgstr ""
-#~ "<qt>Para impedir que termine la sesión, siga usándola moviendo el ratón o "
-#~ "pulsando una tecla.</qt>"
-
-#~ msgid "Time Remaining:"
-#~ msgstr "Tiempo restante:"
-
-#~ msgid ""
-#~ "<qt><nobr>You will be automatically logged out in 1 second</nobr></qt>"
-#~ msgid_plural ""
-#~ "<qt><nobr>You will be automatically logged out in %1 seconds</nobr></qt>"
-#~ msgstr[0] ""
-#~ "<qt><nobr>Su sesión terminará automáticamente en 1 segundo</nobr></qt>"
-#~ msgstr[1] ""
-#~ "<qt><nobr>Su sesión terminará automáticamente en %1 segundos</nobr></qt>"
-
-#~ msgid "Enable screen saver"
-#~ msgstr "Activar el salvapantallas"
-
-#~ msgid "Enables the screen saver."
-#~ msgstr "Activa el salvapantallas."
-
-#~ msgid "Suspend screen saver when DPMS kicks in"
-#~ msgstr "Suspender el salvapantallas cuando DPMS entra en acción"
-
-#~ msgid ""
-#~ "Usually the screen saver is suspended when display power saving kicks "
-#~ "in,\n"
-#~ "       as nothing can be seen on the screen anyway, obviously. However, "
-#~ "some screen savers\n"
-#~ "       actually perform useful computations, so it is not desirable to "
-#~ "suspend them."
-#~ msgstr ""
-#~ "Normalmente, el salvapantallas se suspende cuando entra en "
-#~ "funcionamiento\n"
-#~ "       el ahorro de energía, ya que la pantalla deja de ser visible. No "
-#~ "obstante, algunos salvapantallas\n"
-#~ "       realizan en realidad cálculos útiles, por lo que no es deseable "
-#~ "que se suspendan."
-
-#~ msgid "Enable legacy X screen saver"
-#~ msgstr "Activar salvapantallas heredados de X"
-
-#~ msgid "Uses an X screensaver with the screen locker."
-#~ msgstr "Usa un salvapantallas de X con el bloqueador de pantalla."

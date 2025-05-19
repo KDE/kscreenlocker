@@ -1,15 +1,15 @@
-# Spanish translations for screenlocker_kcm.po package.
-# Copyright (C) 2014 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Spanish translations for kcm_screenlocker.po package.
+# Copyright (C) 2014-2025 This file is copyright:
+# This file is distributed under the same license as the kscreenlocker package.
 # Automatically generated, 2014.
-# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: screenlocker_kcm\n"
+"Project-Id-Version: kcm_screenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-30 00:43+0000\n"
-"PO-Revision-Date: 2024-05-23 17:22+0200\n"
+"PO-Revision-Date: 2025-05-18 14:19+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -146,7 +146,7 @@ msgstr "años"
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
-msgstr "Configurar aspecto visual..."
+msgstr "Configurar aspecto visual…"
 
 #: ui/main.qml:37
 #, kde-format
@@ -194,7 +194,7 @@ msgstr "30 minutos"
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr "Personalizado..."
+msgstr "Personalizado…"
 
 #: ui/main.qml:67 ui/main.qml:167
 #, kde-format
@@ -254,88 +254,3 @@ msgstr[1] "%1 segundos"
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Atajo de teclado:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Confirm"
-#~ msgstr "Confirmar"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgid "Appearance:"
-#~ msgstr "Aspecto visual"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure..."
-#~ msgstr "Configurar..."
-
-#~ msgctxt "First part of sentence \"Automatically after X minutes\""
-#~ msgid "After"
-#~ msgstr "Tras"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Allow unlocking without password for:"
-#~ msgstr "Permitir desbloquear sin contraseña para:"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Eloy Cuadra"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "ecuadra@eloihr.net"
-
-#~ msgid "Screen Locking"
-#~ msgstr "Bloqueo de pantalla"
-
-#~ msgid "Martin Gräßlin"
-#~ msgstr "Martin Gräßlin"
-
-#~ msgid "Kevin Ottens"
-#~ msgstr "Kevin Ottens"
-
-#~ msgid "Activation"
-#~ msgstr "Activación"
-
-#~ msgid "Automatically after:"
-#~ msgstr "Automáticamente tras:"
-
-#~ msgid "Lock screen when waking up from suspension"
-#~ msgstr "Bloquear la pantalla al despertar de una suspensión"
-
-#~ msgid "Immediately"
-#~ msgstr "Inmediatamente"
-
-#~ msgid "The global keyboard shortcut to lock the screen."
-#~ msgstr "El acceso rápido de teclado global para bloquear la pantalla."
-
-#~ msgid "Error"
-#~ msgstr "Error"
-
-#~ msgid "Failed to successfully test the screen locker."
-#~ msgstr "No se ha podido probar con éxito el bloqueador de la pantalla."
-
-#~ msgid "Lock Session"
-#~ msgstr "Bloquear sesión"
-
-#~ msgid "&Lock screen on resume:"
-#~ msgstr "B&loquear la pantalla tras reanudar:"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Fondo del escritorio"
-
-#~ msgid "Load from file..."
-#~ msgstr "Cargar de archivo..."
-
-#~ msgid "Clear Image"
-#~ msgstr "Borrar imagen"
-
-#~ msgid "Select image"
-#~ msgstr "Seleccionar imagen"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "Form"
-#~ msgstr "Formulario"
