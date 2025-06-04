@@ -32,9 +32,19 @@ ApplicationWindow {
             echoMode: TextInput.Password
         }
         Button {
+            text: "Cancel"
+            onClicked: {
+                console.log("cancel")
+                authenticator.cancel()
+            }
+        }
+
+        Button {
             text: "Authenticate"
             onClicked: {
+
                 console.log("unlock")
+
                 authenticator.tryUnlock()
             }
         }
