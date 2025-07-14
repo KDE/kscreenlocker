@@ -51,7 +51,7 @@ msgstr "დაბლოკვის მომხმარებლის ინ�
 #: main.cpp:145
 #, kde-format
 msgid "Default to the switch user UI."
-msgstr "ნაგულისხმებად მომხმარებლის UI-ზე გადართვა."
+msgstr "ნაგულისხმევად მომხმარებლის UI-ზე გადართვა."
 
 #: main.cpp:147
 #, kde-format
