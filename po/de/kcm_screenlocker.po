@@ -89,7 +89,7 @@ msgstr "Erscheinungsbild:"
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure..."
-msgstr "Einrichten …"
+msgstr "Einrichten …"
 
 #~ msgid "Screen Locking"
 #~ msgstr "Bildschirmsperre"
