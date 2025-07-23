@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2024-06-29 06:54+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -19,6 +19,38 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.4.4\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Pozor: Caps Lock (velike črke) je vključen"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "Seja je zaklenjena"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "Sejo je zaklenil uporabnik %1"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "P&reklopi uporabnike"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Odk&leni"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Odklepanje ni uspelo"
 
 #: main.cpp:128
 #, kde-format
@@ -67,26 +99,8 @@ msgstr "Opisovalnik datoteke za povezovanje s ksld."
 #~ msgid "Location"
 #~ msgstr "Mesto"
 
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Pozor: Caps Lock (velike črke) je vključen"
-
-#~ msgid "The session is locked"
-#~ msgstr "Seja je zaklenjena"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "Sejo je zaklenil uporabnik %1"
-
 #~ msgid "Password:"
 #~ msgstr "Geslo:"
-
-#~ msgid "&Switch Users"
-#~ msgstr "P&reklopi uporabnike"
-
-#~ msgid "Un&lock"
-#~ msgstr "Odk&leni"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "Odklepanje ni uspelo"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2024-06-30 11:18+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -24,6 +24,38 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Avertissement : verrouillage des majuscules activé"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "La session est verrouillée"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "La session a été verrouillée par %1"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "Changer d'utili&sateur"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Déverroui&ller"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Échec du déverrouillage"
 
 #: main.cpp:128
 #, kde-format
@@ -76,24 +108,6 @@ msgstr "Fichier descripteur pour la connexion à « ksld »."
 
 #~ msgid "Location"
 #~ msgstr "Emplacement"
-
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Avertissement : verrouillage des majuscules activé"
-
-#~ msgid "The session is locked"
-#~ msgstr "La session est verrouillée"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "La session a été verrouillée par %1"
-
-#~ msgid "&Switch Users"
-#~ msgstr "Changer d'utili&sateur"
-
-#~ msgid "Un&lock"
-#~ msgstr "Déverroui&ller"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "Échec du déverrouillage"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

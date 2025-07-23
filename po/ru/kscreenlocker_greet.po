@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2024-09-16 17:22+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -20,6 +20,38 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.08.5\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Внимание: нажата клавиша Caps Lock"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "Сеанс заблокирован"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "Сеанс заблокирован пользователем %1"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "&Переключить пользователя"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Раз&блокировать"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Ошибка разблокировки"
 
 #: main.cpp:128
 #, kde-format
@@ -68,24 +100,6 @@ msgstr "Файловый дескриптор для подключения к k
 
 #~ msgid "Location"
 #~ msgstr "Расположение"
-
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Внимание: нажата клавиша Caps Lock"
-
-#~ msgid "The session is locked"
-#~ msgstr "Сеанс заблокирован"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "Сеанс заблокирован пользователем %1"
-
-#~ msgid "&Switch Users"
-#~ msgstr "&Переключить пользователя"
-
-#~ msgid "Un&lock"
-#~ msgstr "Раз&блокировать"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "Ошибка разблокировки"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

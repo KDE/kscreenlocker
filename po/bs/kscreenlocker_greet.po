@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kde 49i410\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2015-02-04 15:48+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -19,6 +19,38 @@ msgstr ""
 "X-Generator: Launchpad (build 17331)\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr ""
 
 #: main.cpp:128
 #, kde-format

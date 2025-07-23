@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2018-01-07 21:29-0600\n"
 "Last-Translator: A S Alam <aalam@fedoraproject.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "ਸਾਵਧਾਨ: ਕੈਪਸ ਲਾਕ ਚਾਲੂ ਹੈ"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "ਸ਼ੈਸ਼ਨ ਲਾਕ ਹੈ"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "ਇਹ ਸ਼ੈਸ਼ਨ %1 ਵਲੋਂ ਲਾਕ ਕੀਤਾ ਹੈ"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "ਯੂਜ਼ਰ ਬਦਲੋ(&S)"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "ਅਣ-ਲਾਕ(&l)"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "ਅਣਲਾਕ ਕਰਨਾ ਫੇਲ੍ਹ ਹੈ"
 
 #: main.cpp:128
 #, kde-format
@@ -63,24 +95,6 @@ msgstr ""
 
 #~ msgid "Location"
 #~ msgstr "ਟਿਕਾਣਾ"
-
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "ਸਾਵਧਾਨ: ਕੈਪਸ ਲਾਕ ਚਾਲੂ ਹੈ"
-
-#~ msgid "The session is locked"
-#~ msgstr "ਸ਼ੈਸ਼ਨ ਲਾਕ ਹੈ"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "ਇਹ ਸ਼ੈਸ਼ਨ %1 ਵਲੋਂ ਲਾਕ ਕੀਤਾ ਹੈ"
-
-#~ msgid "&Switch Users"
-#~ msgstr "ਯੂਜ਼ਰ ਬਦਲੋ(&S)"
-
-#~ msgid "Un&lock"
-#~ msgstr "ਅਣ-ਲਾਕ(&l)"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "ਅਣਲਾਕ ਕਰਨਾ ਫੇਲ੍ਹ ਹੈ"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

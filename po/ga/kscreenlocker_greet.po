@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2012-11-29 14:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -16,6 +16,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+#, fuzzy
+#| msgid "Switch User"
+msgid "&Switch Users"
+msgstr "Athraigh an tÚsáideoir"
+
+#: fallbacktheme/Greeter.qml:122
+#, fuzzy
+#| msgid "Unlock"
+msgid "Un&lock"
+msgstr "Díghlasáil"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr ""
 
 #: main.cpp:128
 #, kde-format
@@ -62,16 +98,6 @@ msgstr ""
 
 #~ msgid "Location"
 #~ msgstr "Suíomh"
-
-#, fuzzy
-#~| msgid "Switch User"
-#~ msgid "&Switch Users"
-#~ msgstr "Athraigh an tÚsáideoir"
-
-#, fuzzy
-#~| msgid "Unlock"
-#~ msgid "Un&lock"
-#~ msgstr "Díghlasáil"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

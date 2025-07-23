@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2013-02-23 17:39+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Lokalize 1.5\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "इशारा : Caps Lock चालू आहे"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "सत्र कुलूपबंद केलेले आहे"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "%1 याने सत्र कुलूपबंद केलेले आहे"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "वापरकर्ते बदला (&S)"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "कुलूप काढून टाका (&L)"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "कुलूप काढताना अपयश"
 
 #: main.cpp:128
 #, kde-format
@@ -63,24 +95,6 @@ msgstr ""
 
 #~ msgid "Location"
 #~ msgstr "स्थान"
-
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "इशारा : Caps Lock चालू आहे"
-
-#~ msgid "The session is locked"
-#~ msgstr "सत्र कुलूपबंद केलेले आहे"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "%1 याने सत्र कुलूपबंद केलेले आहे"
-
-#~ msgid "&Switch Users"
-#~ msgstr "वापरकर्ते बदला (&S)"
-
-#~ msgid "Un&lock"
-#~ msgstr "कुलूप काढून टाका (&L)"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "कुलूप काढताना अपयश"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

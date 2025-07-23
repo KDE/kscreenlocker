@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2024-08-20 00:06+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 23.08.5\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "경고: Caps Lock이 켜져 있음"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "이 세션은 잠겨 있습니다"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "이 세션은 %1이(가) 잠갔습니다"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "사용자 전환(&S)"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "잠금 해제(&L)"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "잠금 해제 실패"
 
 #: main.cpp:128
 #, kde-format
@@ -63,26 +95,8 @@ msgstr "ksld와 연결하는 파일 설명자입니다."
 #~ msgid "Location"
 #~ msgstr "위치"
 
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "경고: Caps Lock이 켜져 있음"
-
-#~ msgid "The session is locked"
-#~ msgstr "이 세션은 잠겨 있습니다"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "이 세션은 %1이(가) 잠갔습니다"
-
 #~ msgid "Password:"
 #~ msgstr "암호:"
-
-#~ msgid "&Switch Users"
-#~ msgstr "사용자 전환(&S)"
-
-#~ msgid "Un&lock"
-#~ msgstr "잠금 해제(&L)"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "잠금 해제 실패"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

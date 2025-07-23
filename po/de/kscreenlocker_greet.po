@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2025-07-11 09:11+0200\n"
 "Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -15,6 +15,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 25.04.3\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr ""
+"Achtung: Die Feststelltaste ist eingerastet (durchgängige Großschreibung)"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "Die Sitzung ist gesperrt"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "Die Sitzung wurde durch %1 gesperrt"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "Benutzer wech&seln"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Sperre aufheben"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Aufheben der Sperre fehlgeschlagen"
 
 #: main.cpp:128
 #, kde-format
@@ -67,27 +100,8 @@ msgstr "Datei-Deskriptor für die Verbindung zu ksld."
 #~ msgid "Location"
 #~ msgstr "Ort"
 
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr ""
-#~ "Achtung: Die Feststelltaste ist eingerastet (durchgängige Großschreibung)"
-
-#~ msgid "The session is locked"
-#~ msgstr "Die Sitzung ist gesperrt"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "Die Sitzung wurde durch %1 gesperrt"
-
 #~ msgid "Password:"
 #~ msgstr "Passwort:"
-
-#~ msgid "&Switch Users"
-#~ msgstr "Benutzer wech&seln"
-
-#~ msgid "Un&lock"
-#~ msgstr "Sperre aufheben"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "Aufheben der Sperre fehlgeschlagen"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

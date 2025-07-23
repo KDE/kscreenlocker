@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2013-01-29 02:07+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Ескерту: Caps Lock қосылып тұр"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "Сеанс бұғатталған"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "Сеансты %1 бұғаттаған"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "Пайдаланушыны &ауыстыру"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Бұғатын &шешу"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Бұғатты шешу жаңылды"
 
 #: main.cpp:128
 #, kde-format
@@ -63,24 +95,6 @@ msgstr ""
 
 #~ msgid "Location"
 #~ msgstr "Орыны"
-
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Ескерту: Caps Lock қосылып тұр"
-
-#~ msgid "The session is locked"
-#~ msgstr "Сеанс бұғатталған"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "Сеансты %1 бұғаттаған"
-
-#~ msgid "&Switch Users"
-#~ msgstr "Пайдаланушыны &ауыстыру"
-
-#~ msgid "Un&lock"
-#~ msgstr "Бұғатын &шешу"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "Бұғатты шешу жаңылды"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

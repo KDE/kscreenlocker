@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 02:38+0000\n"
 "PO-Revision-Date: 2024-07-01 11:01+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Aviso: tu ha active le Caps Lock"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "Le ssesion es blocate"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "Le session ha essite blocate per %1"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "&Commuta usatores"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Dis&bloca"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Il falleva disblocar"
 
 #: main.cpp:128
 #, kde-format
@@ -69,26 +101,8 @@ msgstr "Descriptor de file per connecter a ksld"
 #~ msgid "Location"
 #~ msgstr "Location"
 
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Aviso: tu ha active le Caps Lock"
-
-#~ msgid "The session is locked"
-#~ msgstr "Le ssesion es blocate"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "Le session ha essite blocate per %1"
-
 #~ msgid "Password:"
 #~ msgstr "Contrasigno:"
-
-#~ msgid "&Switch Users"
-#~ msgstr "&Commuta usatores"
-
-#~ msgid "Un&lock"
-#~ msgstr "Dis&bloca"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "Il falleva disblocar"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"
