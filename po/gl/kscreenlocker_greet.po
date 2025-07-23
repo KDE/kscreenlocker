@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 00:44+0000\n"
 "PO-Revision-Date: 2024-07-02 17:47+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -18,6 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.05.1\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Aviso: O bloqueo das maiúsculas está aceso"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "A sesión está trancada"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "A sesión foi trancada por %1"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "&Trocar de usuario"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "&Desatrancar"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Fallou o desbloqueo"
 
 #: main.cpp:128
 #, kde-format
@@ -70,26 +102,8 @@ msgstr "Descriptor de ficheiro para conectar a KSLD."
 #~ msgid "Location"
 #~ msgstr "Lugar"
 
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Aviso: O bloqueo das maiúsculas está aceso"
-
-#~ msgid "The session is locked"
-#~ msgstr "A sesión está trancada"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "A sesión foi trancada por %1"
-
 #~ msgid "Password:"
 #~ msgstr "Contrasinal:"
-
-#~ msgid "&Switch Users"
-#~ msgstr "&Trocar de usuario"
-
-#~ msgid "Un&lock"
-#~ msgstr "&Desatrancar"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "Fallou o desbloqueo"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

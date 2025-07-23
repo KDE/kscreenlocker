@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 00:44+0000\n"
 "PO-Revision-Date: 2024-09-26 15:22+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -18,6 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.08.0\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Figyelem: a Caps Lock be van nyomva"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "A munkamenet zárolt"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "A munkamenetet %1 zárolta"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "&Felhasználóváltás"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Fel&oldás"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "A feloldás nem sikerült"
 
 #: main.cpp:128
 #, kde-format
@@ -65,24 +97,6 @@ msgstr "Fájlleíró a ksld-hez csatlakozáshoz."
 
 #~ msgid "Location"
 #~ msgstr "Hely"
-
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Figyelem: a Caps Lock be van nyomva"
-
-#~ msgid "The session is locked"
-#~ msgstr "A munkamenet zárolt"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "A munkamenetet %1 zárolta"
-
-#~ msgid "&Switch Users"
-#~ msgstr "&Felhasználóváltás"
-
-#~ msgid "Un&lock"
-#~ msgstr "Fel&oldás"
-
-#~ msgid "Unlocking failed"
-#~ msgstr "A feloldás nem sikerült"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2025-07-23 00:44+0000\n"
 "PO-Revision-Date: 2014-03-27 16:40+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Asteme: Madjuscules eclawêyes"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "Li session est eclawêye"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "Li session a stî eclawêye pa %1"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr ""
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "Di&scandjî d' uzeu"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Dizec&lawer"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr ""
 
 #: main.cpp:128
 #, kde-format
@@ -65,21 +97,6 @@ msgstr ""
 
 #~ msgid "Location"
 #~ msgstr "Eplaeçmint"
-
-#~ msgid "Warning: Caps Lock on"
-#~ msgstr "Asteme: Madjuscules eclawêyes"
-
-#~ msgid "The session is locked"
-#~ msgstr "Li session est eclawêye"
-
-#~ msgid "The session has been locked by %1"
-#~ msgstr "Li session a stî eclawêye pa %1"
-
-#~ msgid "&Switch Users"
-#~ msgstr "Di&scandjî d' uzeu"
-
-#~ msgid "Un&lock"
-#~ msgstr "Dizec&lawer"
 
 #~ msgctxt ""
 #~ "thesession name and the location where the session is running (what vt)"
