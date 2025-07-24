@@ -23,15 +23,15 @@ msgstr ""
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
-msgstr ""
+msgstr "Varování: CapsLock zapnut"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr ""
+msgstr "Sezení je uzamčeno"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr ""
+msgstr "Sezení bylo uzamčeno uživatelem %1"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
@@ -43,15 +43,15 @@ msgstr ""
 
 #: fallbacktheme/Greeter.qml:115
 msgid "&Switch Users"
-msgstr ""
+msgstr "&Přepnout uživatele"
 
 #: fallbacktheme/Greeter.qml:122
 msgid "Un&lock"
-msgstr ""
+msgstr "Odem&knout"
 
 #: fallbacktheme/Greeter.qml:134
 msgid "Unlocking failed"
-msgstr ""
+msgstr "Odemčení selhalo"
 
 #: main.cpp:128
 #, kde-format
