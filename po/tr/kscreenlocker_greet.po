@@ -8,47 +8,47 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-23 02:38+0000\n"
-"PO-Revision-Date: 2025-02-15 12:05+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"PO-Revision-Date: 2025-07-24 20:18+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
-msgstr ""
+msgstr "Uyarı: Büyük Harf düğmesi açık"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr ""
+msgstr "Oturum kilitli"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr ""
+msgstr "Oturum %1 tarafından kilitlendi"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(veya parmağınızı okuyucuya taratın)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(veya akıllı kartınızı kullanın)"
 
 #: fallbacktheme/Greeter.qml:115
 msgid "&Switch Users"
-msgstr ""
+msgstr "&Kullanıcı Değiştir"
 
 #: fallbacktheme/Greeter.qml:122
 msgid "Un&lock"
-msgstr ""
+msgstr "Kilidi &Aç"
 
 #: fallbacktheme/Greeter.qml:134
 msgid "Unlocking failed"
-msgstr ""
+msgstr "Kilit açılamadı"
 
 #: main.cpp:128
 #, kde-format

@@ -19,35 +19,35 @@ msgstr ""
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
-msgstr ""
+msgstr "警告：大写锁定开启"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr ""
+msgstr "会话已锁定"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr ""
+msgstr "会话已被 %1 锁定"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(或者在指纹传感器上扫描您的指纹)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(或扫描您的智能卡)"
 
 #: fallbacktheme/Greeter.qml:115
 msgid "&Switch Users"
-msgstr ""
+msgstr "切换用户(&S)"
 
 #: fallbacktheme/Greeter.qml:122
 msgid "Un&lock"
-msgstr ""
+msgstr "解锁(&L)"
 
 #: fallbacktheme/Greeter.qml:134
 msgid "Unlocking failed"
-msgstr ""
+msgstr "解锁失败"
 
 #: main.cpp:128
 #, kde-format
