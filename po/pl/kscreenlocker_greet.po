@@ -18,14 +18,20 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 
 #: fallbacktheme/Greeter.qml:59
+#, fuzzy
+#| msgid "Warning: Caps Lock on"
 msgid "Warning: Caps Lock on"
 msgstr "Uwaga: Caps Lock jest włączony"
 
 #: fallbacktheme/Greeter.qml:75
+#, fuzzy
+#| msgid "The session is locked"
 msgid "The session is locked"
 msgstr "Sesja jest zablokowana"
 
 #: fallbacktheme/Greeter.qml:76
+#, fuzzy
+#| msgid "The session has been locked by %1"
 msgid "The session has been locked by %1"
 msgstr "Sesja została zablokowana przez %1"
 
@@ -38,14 +44,20 @@ msgid "(or use your smartcard)"
 msgstr ""
 
 #: fallbacktheme/Greeter.qml:115
+#, fuzzy
+#| msgid "&Switch Users"
 msgid "&Switch Users"
 msgstr "&Przełącz użytkowników"
 
 #: fallbacktheme/Greeter.qml:122
+#, fuzzy
+#| msgid "Un&lock"
 msgid "Un&lock"
 msgstr "Odb&lokuj"
 
 #: fallbacktheme/Greeter.qml:134
+#, fuzzy
+#| msgid "Unlocking failed"
 msgid "Unlocking failed"
 msgstr "Odblokowanie nie udało się"
 
