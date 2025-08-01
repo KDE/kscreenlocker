@@ -20,14 +20,20 @@ msgstr ""
 "X-Generator: Lokalize 24.08.2\n"
 
 #: fallbacktheme/Greeter.qml:59
+#, fuzzy
+#| msgid "Warning: Caps Lock on"
 msgid "Warning: Caps Lock on"
 msgstr "<b>Varoitus: Vaihtolukko on käytössä</b>"
 
 #: fallbacktheme/Greeter.qml:75
+#, fuzzy
+#| msgid "The session is locked"
 msgid "The session is locked"
 msgstr "Istunto on lukittu"
 
 #: fallbacktheme/Greeter.qml:76
+#, fuzzy
+#| msgid "The session has been locked by %1"
 msgid "The session has been locked by %1"
 msgstr "%1 on lukinnut istunnon"
 
@@ -40,14 +46,20 @@ msgid "(or use your smartcard)"
 msgstr ""
 
 #: fallbacktheme/Greeter.qml:115
+#, fuzzy
+#| msgid "&Switch Users"
 msgid "&Switch Users"
 msgstr "&Vaihda käyttäjiä"
 
 #: fallbacktheme/Greeter.qml:122
+#, fuzzy
+#| msgid "Un&lock"
 msgid "Un&lock"
 msgstr "&Avaa lukitus"
 
 #: fallbacktheme/Greeter.qml:134
+#, fuzzy
+#| msgid "Unlocking failed"
 msgid "Unlocking failed"
 msgstr "Lukituksen avaaminen epäonnistui"
 
