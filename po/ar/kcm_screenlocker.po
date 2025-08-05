@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-22 00:47+0000\n"
-"PO-Revision-Date: 2025-08-03 12:04+0400\n"
+"PO-Revision-Date: 2025-08-04 12:12+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -44,7 +44,7 @@ msgstr "نوع الخلفيّة:"
 #: package/contents/ui/main.qml:26
 #, kde-format
 msgid "Lock screen automatically:"
-msgstr "اقفل الشّاشة آليا:"
+msgstr "اقفل الشّاشة آليّا:"
 
 #: package/contents/ui/main.qml:28
 #, kde-format
@@ -67,7 +67,7 @@ msgstr[5] "%1 دقيقة"
 #, kde-format
 msgctxt "@option:check"
 msgid "After waking from sleep"
-msgstr "بعد صحو من النوم"
+msgstr "بعد صحو من التعليق"
 
 #: package/contents/ui/main.qml:69
 #, kde-format
