@@ -229,7 +229,7 @@ void KSldTest::testLockAfterInhibit()
     ksld.uninhibit();
 
     QVERIFY(idleSpy.wait());
-    QCOMPARE_NE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
+    QTRY_COMPARE(ksld.lockState(), ScreenLocker::KSldApp::Locked);
 
     const auto children = ksld.children();
     for (auto it = children.begin(); it != children.end(); ++it) {
