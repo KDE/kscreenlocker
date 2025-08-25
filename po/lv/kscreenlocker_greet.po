@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the kscreenlocker package.
 #
 # Maris Nartiss <maris.kde@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-23 00:44+0000\n"
-"PO-Revision-Date: 2024-09-24 17:06+0300\n"
+"PO-Revision-Date: 2025-08-22 15:03+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -17,44 +17,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
-msgstr ""
+msgstr "Uzmanību: ir ieslēgts burtslēga taustiņš"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr ""
+msgstr "Sesija ir bloķēta"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr ""
+msgstr "Sesiju ir bloķējis %1"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(vai novietojiet pirkstgalu uz pirkstu nospieduma lasītāja)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(vai izmantojiet viedkarti)"
 
 #: fallbacktheme/Greeter.qml:115
 msgid "&Switch Users"
-msgstr ""
+msgstr "&Pārslēgt lietotājus"
 
 #: fallbacktheme/Greeter.qml:122
 msgid "Un&lock"
-msgstr ""
+msgstr "At&bloķēt"
 
 #: fallbacktheme/Greeter.qml:134
 msgid "Unlocking failed"
-msgstr ""
+msgstr "Atbloķēšana neizdevās"
 
 #: main.cpp:128
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
-msgstr "KDE „Plasma“ darbvirsmas ekrāna slēdzēja sveicinātājs"
+msgstr "KDE „Plasma“ darbvirsmas ekrāna bloķētāja sveicinātājs"
 
 #: main.cpp:132
 #, kde-format
@@ -70,17 +70,17 @@ msgstr ""
 #: main.cpp:139
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
-msgstr "Slēgt nekavējoties. Ignorēt jebkādu gaidīšanas laiku u.tml."
+msgstr "Bloķēt nekavējoties. Ignorēt jebkādu gaidīšanas laiku u.tml."
 
 #: main.cpp:141
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
-msgstr "Noildze slēgšanas saskarnes parādīšanai (milisekundēs)."
+msgstr "Noildze bloķēšanas saskarnes parādīšanai (milisekundēs)."
 
 #: main.cpp:144
 #, kde-format
 msgid "Don't show any lock user interface."
-msgstr "Nerādīt slēgšanas saskarni"
+msgstr "Nerādīt bloķēšanas saskarni"
 
 #: main.cpp:145
 #, kde-format
