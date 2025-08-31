@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2012, 2016, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2012, 2016, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2013, 2014, 2015, 2016.
 #
 # KDE Finnish translation sprint participants:
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-23 02:38+0000\n"
-"PO-Revision-Date: 2024-10-16 20:40+0300\n"
+"PO-Revision-Date: 2025-07-31 09:48+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -17,49 +17,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: fallbacktheme/Greeter.qml:59
-#, fuzzy
-#| msgid "Warning: Caps Lock on"
 msgid "Warning: Caps Lock on"
-msgstr "<b>Varoitus: Vaihtolukko on käytössä</b>"
+msgstr "Varoitus: vaihtolukko käytössä"
 
 #: fallbacktheme/Greeter.qml:75
-#, fuzzy
-#| msgid "The session is locked"
 msgid "The session is locked"
 msgstr "Istunto on lukittu"
 
 #: fallbacktheme/Greeter.qml:76
-#, fuzzy
-#| msgid "The session has been locked by %1"
 msgid "The session has been locked by %1"
 msgstr "%1 on lukinnut istunnon"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(tai lue sormenjälki)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(tai lue älykortti)"
 
 #: fallbacktheme/Greeter.qml:115
-#, fuzzy
-#| msgid "&Switch Users"
 msgid "&Switch Users"
-msgstr "&Vaihda käyttäjiä"
+msgstr "&Vaihda käyttäjää"
 
 #: fallbacktheme/Greeter.qml:122
-#, fuzzy
-#| msgid "Un&lock"
 msgid "Un&lock"
 msgstr "&Avaa lukitus"
 
 #: fallbacktheme/Greeter.qml:134
-#, fuzzy
-#| msgid "Unlocking failed"
 msgid "Unlocking failed"
 msgstr "Lukituksen avaaminen epäonnistui"
 
