@@ -51,7 +51,6 @@ public:
     void setGraceTime(int milliseconds);
     void setNoLock(bool noLock);
     void setKsldSocket(int socket);
-    void setDefaultToSwitchUser(bool defaultToSwitchUser);
 
     void updateCanSuspend();
     void updateCanHibernate();
@@ -92,7 +91,6 @@ private:
     PamAuthenticators *m_authenticators;
     int m_graceTime;
     bool m_noLock;
-    bool m_defaultToSwitchUser;
 
     bool m_canSuspend = false;
     bool m_canHibernate = false;

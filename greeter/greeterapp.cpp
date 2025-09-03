@@ -131,7 +131,6 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_immediateLock(false)
     , m_graceTime(0)
     , m_noLock(false)
-    , m_defaultToSwitchUser(false)
     , m_shellIntegration(new ShellIntegration(this))
 {
     auto interactive = std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SERVICE), KUser().loginName());
@@ -346,7 +345,6 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     context->setContextProperty(QStringLiteral("authenticator"), m_authenticators);
     context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
     context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
-    context->setContextProperty(QStringLiteral("defaultToSwitchUser"), m_defaultToSwitchUser);
     context->setContextProperty(QStringLiteral("config"), m_shellIntegration->configuration());
 
     const QString xmlPath = m_wallpaperPackage.filePath(QByteArrayLiteral("config"), QStringLiteral("main.xml"));
@@ -654,11 +652,6 @@ void UnlockApp::setGraceTime(int milliseconds)
 void UnlockApp::setNoLock(bool noLock)
 {
     m_noLock = noLock;
-}
-
-void UnlockApp::setDefaultToSwitchUser(bool defaultToSwitchUser)
-{
-    m_defaultToSwitchUser = defaultToSwitchUser;
 }
 
 void UnlockApp::setKsldSocket(int socket)

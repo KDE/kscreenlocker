@@ -36,11 +36,6 @@ enum class EstablishLock {
      * Allow the user to log back in without a password for a configured grace time.
      */
     Delayed,
-
-    /**
-     * UI should default to showing the "switch user dialog".
-     */
-    DefaultToSwitchUser,
 };
 
 /**
