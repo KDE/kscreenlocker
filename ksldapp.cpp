@@ -58,8 +58,6 @@ QString establishLockToString(EstablishLock establishLock)
         return QStringLiteral("Immediate");
     case EstablishLock::Delayed:
         return QStringLiteral("Delayed");
-    case EstablishLock::DefaultToSwitchUser:
-        return QStringLiteral("DefaultToSwitchUser");
     }
     Q_UNREACHABLE();
 }
@@ -652,10 +650,6 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
     QStringList args;
     if (establishLock == EstablishLock::Immediate) {
         args << QStringLiteral("--immediateLock");
-    }
-    if (establishLock == EstablishLock::DefaultToSwitchUser) {
-        args << QStringLiteral("--immediateLock");
-        args << QStringLiteral("--switchuser");
     }
 
     if (m_lockGrace > 0) {
