@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2014-05-28 11:32+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-doc@kde.org>\n"
@@ -80,12 +80,7 @@ msgstr "Töövtiet in Millisekunnen, ehr de Schirmslott-Böversiet wiest warrt"
 msgid "Don't show any lock user interface."
 msgstr "Gor keen Schirmslott-Böversiet wiesen"
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr ""
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2024-07-06 02:09+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -83,15 +83,13 @@ msgstr "Delsa, kol užrakto naudotojo sąsaja bus rodoma, milisekundėmis."
 msgid "Don't show any lock user interface."
 msgstr "Nerodyti jokios užrakto naudotojo sąsajos."
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "Pereiti į naudotojų perjungimo naudotojo sąsają."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Failo deskriptorius, skirtas prisijungimui prie ksld."
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "Pereiti į naudotojų perjungimo naudotojo sąsają."
 
 #~ msgid "Session"
 #~ msgstr "Sesija"

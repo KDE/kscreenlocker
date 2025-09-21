@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2018-01-07 21:29-0600\n"
 "Last-Translator: A S Alam <aalam@fedoraproject.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -80,12 +80,7 @@ msgstr ""
 msgid "Don't show any lock user interface."
 msgstr "ਕੋਈ ਵੀ ਲਾਕ ਵਰਤੋਂਕਾਰ ਇੰਟਰਫੇਸ ਨਾ ਦਿਖਾਉ।"
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr ""
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr ""

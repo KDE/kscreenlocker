@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2025-08-03 12:20+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -79,12 +79,10 @@ msgstr "பூட்டியதற்குரிய இடைமுகப்�
 msgid "Don't show any lock user interface."
 msgstr "பூட்டியதற்குரிய இடைமுகப்பை காட்டாதே"
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "பயனர் மாற்ற இடைமுகப்பை இயல்பிருப்பாக காட்டு."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "ksld-உடன் இணைய பயன்படுத்த வேண்டிய கோப்பு"
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "பயனர் மாற்ற இடைமுகப்பை இயல்பிருப்பாக காட்டு."

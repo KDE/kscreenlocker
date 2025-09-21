@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -79,12 +79,10 @@ msgstr "यावत् lock उपयोक्तृ-अन्तरफलक�
 msgid "Don't show any lock user interface."
 msgstr "किमपि लॉक् उपयोक्तृ-अन्तरफलकं न दर्शयन्तु ।"
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "स्विच उपयोक्तृ UI कृते पूर्वनिर्धारितम्।"
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "ksld इत्यनेन सह सम्बद्धतायै सञ्चिकावर्णकः ।"
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "स्विच उपयोक्तृ UI कृते पूर्वनिर्धारितम्।"

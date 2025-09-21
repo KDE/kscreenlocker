@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2024-06-29 11:25+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -80,15 +80,13 @@ msgstr "Delay till the lock user interface gets shown in milliseconds."
 msgid "Don't show any lock user interface."
 msgstr "Do not show any lock user interface."
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "Default to the switch user UI."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "File descriptor for connecting to ksld."
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "Default to the switch user UI."
 
 #~ msgid "Session"
 #~ msgstr "Session"

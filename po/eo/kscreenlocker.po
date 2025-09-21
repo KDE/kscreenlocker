@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-07 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2023-05-06 19:01+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -75,24 +75,24 @@ msgstr ""
 "ekrano premante Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:185
+#: ksldapp.cpp:183
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
 msgstr ""
 
-#: ksldapp.cpp:187
+#: ksldapp.cpp:185
 #, kde-format
 msgid "Lock Session"
 msgstr "Ŝlosi Seancon"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:451
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekrano ŝlosita"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:619
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekrano malŝlosita"

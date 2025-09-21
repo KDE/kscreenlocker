@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-07 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2025-01-22 09:30+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -82,24 +82,24 @@ msgstr ""
 "натисканням комбінації клавіш Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:185
+#: ksldapp.cpp:183
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
 msgstr "Керування сеансами"
 
-#: ksldapp.cpp:187
+#: ksldapp.cpp:185
 #, kde-format
 msgid "Lock Session"
 msgstr "Заблокувати сеанс"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:451
 #, kde-format
 msgid "Screen locked"
 msgstr "Екран заблоковано"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:619
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Екран розблоковано"

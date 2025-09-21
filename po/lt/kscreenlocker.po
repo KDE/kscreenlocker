@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-07 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2025-01-27 14:13+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -82,24 +82,24 @@ msgstr ""
 "paspausdami Vald+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:185
+#: ksldapp.cpp:183
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
 msgstr "Seanso tvarkytuvė"
 
-#: ksldapp.cpp:187
+#: ksldapp.cpp:185
 #, kde-format
 msgid "Lock Session"
 msgstr "Užrakinti sesiją"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:451
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekranas užrakintas"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:619
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekranas atrakintas"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2024-06-29 10:05+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -80,12 +80,10 @@ msgstr "Prokrasto ĝis la ŝlosila uzantinterfaco montriĝas en milisekundoj."
 msgid "Don't show any lock user interface."
 msgstr "Ne montri ajnan seruran uzantinterfacon."
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "Defaŭlte al la ŝanĝa uzanto UI."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Dosiera priskribilo por konekti al ksld."
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "Defaŭlte al la ŝanĝa uzanto UI."

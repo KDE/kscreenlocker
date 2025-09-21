@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-07 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2017-06-10 21:26+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -100,24 +100,24 @@ msgstr ""
 "\n"
 "Потом се пребаците назад на сесију у погону (Ctrl+Alt+F%2)."
 
-#: ksldapp.cpp:185
+#: ksldapp.cpp:183
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
 msgstr ""
 
-#: ksldapp.cpp:187
+#: ksldapp.cpp:185
 #, kde-format
 msgid "Lock Session"
 msgstr "Закључај сесију"
 
-#: ksldapp.cpp:453
+#: ksldapp.cpp:451
 #, kde-format
 msgid "Screen locked"
 msgstr "Екран закључан"
 
-#: ksldapp.cpp:621
+#: ksldapp.cpp:619
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Екран откључан"

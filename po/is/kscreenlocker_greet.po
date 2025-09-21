@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2024-06-29 14:54+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -79,12 +79,10 @@ msgstr "Bið þar til læsiviðmótið birtist í millisekúndum."
 msgid "Don't show any lock user interface."
 msgstr "Ekki sýna neitt læsiviðmót."
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "Fara sjálfgefið í viðmót til að skipta um notanda."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Skráarlýsir fyrir tengingu við ksld."
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "Fara sjálfgefið í viðmót til að skipta um notanda."

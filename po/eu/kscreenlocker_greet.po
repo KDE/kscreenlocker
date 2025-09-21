@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2025-07-23 13:03+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -86,12 +86,10 @@ msgstr ""
 msgid "Don't show any lock user interface."
 msgstr "Ez erakutsi erabiltzailea giltzatzeko interfazerik."
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "Lehenetsi aldatu erabiltzailea erabiltzaile interfazera."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "ksld-ra konektatzeko fitxategi deskriptorea."
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "Lehenetsi aldatu erabiltzailea erabiltzaile interfazera."

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2024-07-06 15:02+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -80,12 +80,10 @@ msgstr "Forseinking i millisekund til låsarbiletet vert vist."
 msgid "Don't show any lock user interface."
 msgstr "Ikkje vis noko låsarbilete."
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr "Vis brukarbyteskjerm som standard."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Filskildring for kopling til ksld."
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr "Vis brukarbyteskjerm som standard."

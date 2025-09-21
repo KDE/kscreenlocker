@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
 "PO-Revision-Date: 2025-07-23 11:18+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -90,13 +90,11 @@ msgstr ""
 msgid "Don't show any lock user interface."
 msgstr "No mostres cap interfície de bloqueig d'usuari."
 
-#: main.cpp:145
-#, kde-format
-msgid "Default to the switch user UI."
-msgstr ""
-"De manera predeterminada, la interfície d'usuari per a canviar d'usuari."
-
-#: main.cpp:147
+#: main.cpp:146
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Descriptor de fitxer per a connectar amb «ksld»."
+
+#~ msgid "Default to the switch user UI."
+#~ msgstr ""
+#~ "De manera predeterminada, la interfície d'usuari per a canviar d'usuari."
