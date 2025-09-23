@@ -128,6 +128,7 @@
     "X-KDE-Keywords[sv]": "lås,återuppta,skärmsläckare,skärmlåsning,låsning,blockera,lösenord,viloläge,stänga lock,lås automatiskt,skärmlåsutseende,skärmlåstema,skärmlåsunderlägg",
     "X-KDE-Keywords[tr]": "kilit,sürdür,ekran koruyucu,ekran kilidi,kilitleme,engel,engelleme,parola,uyku,kapağı kapat,otomatik kilitle,kendiliğinden kilitle,ekran kilidi görünümü,ekran kilidi teması,ekran kilidi duvar kağıdı",
     "X-KDE-Keywords[uk]": "lock,resume,screensaver,screenlock,locking,block,blocking,password,sleep,close lid,lock automatically,screen lock appearance,screen lock theme,screen lock wallpaper,блокування,відновлення,зберігач екрана,блокування екрана,блокування,блок,пароль,присипляння,закриття кришки,автоматичне блокування,вигляд,тема блокування екрана,шпалери блокування екрана,тло блокування екрана,фон блокування екрана",
+    "X-KDE-Keywords[zh_TW]": "鎖定,恢復,螢幕保護程式,螢幕保護,螢幕鎖定,密碼,睡眠,關閉上蓋,自動鎖定,螢幕鎖定外觀,鎖定畫面主題,鎖定畫面桌布",
     "X-KDE-System-Settings-Parent-Category": "desktopbehavior",
     "X-KDE-Weight": 60
 }
