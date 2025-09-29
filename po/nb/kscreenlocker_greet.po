@@ -86,6 +86,3 @@ msgstr "Ikke vis noe låsebilde."
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Filbeskrivelse for tilkobling til ksld."
-
-#~ msgid "Default to the switch user UI."
-#~ msgstr "Vis brukerbytteskjerm som standard."

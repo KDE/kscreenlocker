@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kscreenlocker package.
 #
-# Kheyyam <xxmn77@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Kheyyam <xxmn77@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-21 00:43+0000\n"
-"PO-Revision-Date: 2022-07-01 16:00+0400\n"
-"Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
+"PO-Revision-Date: 2025-09-28 23:03+0400\n"
+"Last-Translator: linux <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -29,14 +29,7 @@ msgstr ""
 "biri sisteminizdə tapılmır."
 
 #: abstractlocker.cpp:47
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in as root and execute the command:\n"
-#| "\n"
-#| "# ck-unlock-session <session-name>\n"
-#| "\n"
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -47,23 +40,14 @@ msgid ""
 "\n"
 msgstr ""
 "Ekran kilidləyici pozulub və artıq kiliddən çıxarmaq mümkün deyil.\n"
-"Kiliddən şıxarmaq üçün vurtual terminalı açın (məs., Ctrl+Alt+F%1 ilə), bu "
-"əmri icra etmək üçün kök (root) istifadəçi kimi daxil olun:\n"
+"Kiliddən şıxarmaq üçün vurtual terminalı açın (məs., Ctrl+Alt+F%1 ilə),\n"
+"kök (root) istifadəçi kimi daxil olun və bu əmri icra edin:\n"
 "\n"
 "# ck-unlock-session <sessiyanın adı>\n"
 "\n"
 
 #: abstractlocker.cpp:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %2\n"
-#| "\n"
-#| "Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-#| "back to the running session (Ctrl+Alt+F%3)."
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -79,20 +63,22 @@ msgid ""
 "\n"
 msgstr ""
 "Ekran kilidləyici pozulub və artıq kiliddən çıxarmaq mümkün deyil.\n"
-"Kilidi açmaq üçün virtual terminala keçin (məs., Ctrl+Alt+F%1 ilə) üçün, "
-"daxil olun və bu əmri icra edin:\n"
+"Kilidi açmaq üçün virtual terminala keçin (məs., Ctrl+Alt+F%1 ilə),\n"
+"hesabınıza daxil olun və bu əmri icra edin:\n"
 "\n"
 "loginctl-unlock-session %2\n"
 "\n"
-"Sonra Ctrl+D basmaqla virtual terminaldan çıxın və başladılmış sessiyaya "
-"daxil olun (Ctrl+Alt+F%3)."
+"Sonra Ctrl+D basmaqla virtual terminaldan çıxın və başladılmış sessiyaya\n"
+"daxil olun (Ctrl+Alt+F%3). Bu təlimatı unutduğunuz halda Ctrl+Alt+F%3\n"
+"düymələri ilə bu ekrana qayıda bilərsiniz\n"
+"\n"
 
 #: ksldapp.cpp:183
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
-msgstr ""
+msgstr "Sessiyaların idarə edilməsi"
 
 #: ksldapp.cpp:185
 #, kde-format
