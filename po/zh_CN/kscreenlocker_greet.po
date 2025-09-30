@@ -83,6 +83,3 @@ msgstr "不显示锁屏界面。"
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "连接到 ksld 的文件描述符。"
-
-#~ msgid "Default to the switch user UI."
-#~ msgstr "默认为切换用户界面。"
