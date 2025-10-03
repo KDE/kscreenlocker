@@ -89,6 +89,3 @@ msgstr "Nezobrazovat rozhraní pro zamčení uživatele."
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Popisovač souboru pro připojení ke ksld."
-
-#~ msgid "Default to the switch user UI."
-#~ msgstr "Výchozí pro přepnutí uživatelského prostředí."
