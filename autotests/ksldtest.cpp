@@ -263,12 +263,16 @@ void KSldTest::testRestartIdlePeriodAfterInhibit()
 
     QVERIFY(!lockStateChangedSpy.wait(std::chrono::milliseconds(1800)));
 
+
+    QElapsedTimer unlockTimer;
+    unlockTimer.start();
     ksld.uninhibit();
 
-    QVERIFY(!lockStateChangedSpy.wait(std::chrono::milliseconds(500)));
-    QCOMPARE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
+    QVERIFY(lockStateChangedSpy.wait(std::chrono::seconds(5)));
 
-    QVERIFY(lockStateChangedSpy.wait(std::chrono::seconds(2)));
+    const auto timerTestThreshold = std::chrono::seconds(1);
+    // check it's around 2 seconds, but with some leniency because we're backed by a coarse timer
+    QVERIFY(std::chrono::abs(unlockTimer.durationElapsed() - std::chrono::seconds(2)) < timerTestThreshold);
     QCOMPARE_NE(ksld.lockState(), ScreenLocker::KSldApp::Unlocked);
 
     const auto children = ksld.children();
