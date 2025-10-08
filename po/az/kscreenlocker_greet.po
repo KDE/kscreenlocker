@@ -1,0 +1,86 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kscreenlocker package.
+#
+# SPDX-FileCopyrightText: 2025 linux <xxmn77@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: kscreenlocker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"PO-Revision-Date: 2025-09-28 23:25+0400\n"
+"Last-Translator: linux <xxmn77@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.08.1\n"
+
+#: fallbacktheme/Greeter.qml:59
+msgid "Warning: Caps Lock on"
+msgstr "Xəbərdarlıq: Caps Lock açıq"
+
+#: fallbacktheme/Greeter.qml:75
+msgid "The session is locked"
+msgstr "Sessiya kilidlənib"
+
+#: fallbacktheme/Greeter.qml:76
+msgid "The session has been locked by %1"
+msgstr "Sessiya %1 tərəfindən kilidlənib"
+
+#: fallbacktheme/Greeter.qml:100
+msgid "(or place your fingerprint on the reader)"
+msgstr "(və ya barmağınızı oxuyucuya yerləşdirin)"
+
+#: fallbacktheme/Greeter.qml:106
+msgid "(or use your smartcard)"
+msgstr "(və ya smart kartdan istifadə edin)"
+
+#: fallbacktheme/Greeter.qml:115
+msgid "&Switch Users"
+msgstr "&İstiifadəçini dəyişmək"
+
+#: fallbacktheme/Greeter.qml:122
+msgid "Un&lock"
+msgstr "Ki&liddən çıxartmaq"
+
+#: fallbacktheme/Greeter.qml:134
+msgid "Unlocking failed"
+msgstr "Kiliddən çıxarılmadı"
+
+#: main.cpp:128
+#, kde-format
+msgid "Greeter for the KDE Plasma Workspaces Screen locker"
+msgstr "KDE Plasma iş sahələri ekran kilidləyicisi ilə salamlaşma"
+
+#: main.cpp:132
+#, kde-format
+msgid "Starts the greeter in testing mode"
+msgstr "Salamlayıcını sınaq rejimində başlatmaq"
+
+#: main.cpp:135
+#, kde-format
+msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
+msgstr ""
+"Slamlayıcını seçilmiş üz qabığı mövzusu ilə başladır (yalnız sınaq rejimində)"
+
+#: main.cpp:139
+#, kde-format
+msgid "Lock immediately, ignoring any grace time etc."
+msgstr "Ekranı dərhal, gecikmə olmadan kilidləmək"
+
+#: main.cpp:141
+#, kde-format
+msgid "Delay till the lock user interface gets shown in milliseconds."
+msgstr "İstifadəçi interfeysi göstərilmədən öncə millisaniyərlə gecikmə."
+
+#: main.cpp:144
+#, kde-format
+msgid "Don't show any lock user interface."
+msgstr "Ekran kilidlənməsini göstərməmək."
+
+#: main.cpp:146
+#, kde-format
+msgid "File descriptor for connecting to ksld."
+msgstr "ksld ilə bağlantı üçün fayl deskriptoru"
