@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-21 00:43+0000\n"
-"PO-Revision-Date: 2024-08-20 00:06+0200\n"
+"PO-Revision-Date: 2025-10-09 01:02+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
@@ -23,19 +23,19 @@ msgstr "경고: Caps Lock이 켜져 있음"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr "이 세션은 잠겨 있습니다"
+msgstr "세션이 잠김"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr "이 세션은 %1이(가) 잠갔습니다"
+msgstr "%1 님이 세션을 잠갔음"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(또는 인식기에 지문 스캔)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(또는 스마트카드 사용)"
 
 #: fallbacktheme/Greeter.qml:115
 msgid "&Switch Users"
