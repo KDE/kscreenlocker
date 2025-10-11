@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-21 00:43+0000\n"
-"PO-Revision-Date: 2024-07-06 02:09+0300\n"
+"PO-Revision-Date: 2025-10-10 23:44+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,39 +17,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
-msgstr ""
+msgstr "Įspėjimas: Įjungtos didžiosios raidės"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr ""
+msgstr "Seansas užrakintas"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr ""
+msgstr "%1 užrakino seansą"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(arba padėkite ant skaitytuvo piršto atspaudą)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(arba naudokite lustinę kortelę)"
 
 #: fallbacktheme/Greeter.qml:115
 msgid "&Switch Users"
-msgstr ""
+msgstr "Perjungti naudotoju&s"
 
 #: fallbacktheme/Greeter.qml:122
 msgid "Un&lock"
-msgstr ""
+msgstr "At&rakinti"
 
 #: fallbacktheme/Greeter.qml:134
 msgid "Unlocking failed"
-msgstr ""
+msgstr "Atrakinti nepavyko"
 
 #: main.cpp:128
 #, kde-format
