@@ -1,65 +1,54 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-23 00:44+0000\n"
-"PO-Revision-Date: 2024-07-20 10:42+0200\n"
+"PO-Revision-Date: 2025-10-25 09:37+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: fallbacktheme/Greeter.qml:59
-#, fuzzy
-#| msgid "Warning: Caps Lock on"
 msgid "Warning: Caps Lock on"
-msgstr "Uwaga: Caps Lock jest włączony"
+msgstr "Ostrzeżenie: Włączony klawisz Caps Lock"
 
 #: fallbacktheme/Greeter.qml:75
-#, fuzzy
-#| msgid "The session is locked"
 msgid "The session is locked"
-msgstr "Sesja jest zablokowana"
+msgstr "Posiedzenie jest zablokowane"
 
 #: fallbacktheme/Greeter.qml:76
-#, fuzzy
-#| msgid "The session has been locked by %1"
 msgid "The session has been locked by %1"
-msgstr "Sesja została zablokowana przez %1"
+msgstr "Posiedzenie zablokował %1"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(lub umieść swój palec na czytniku linii papilarnych)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(lub użyj karty inteligentnej)"
 
 #: fallbacktheme/Greeter.qml:115
-#, fuzzy
-#| msgid "&Switch Users"
 msgid "&Switch Users"
 msgstr "&Przełącz użytkowników"
 
 #: fallbacktheme/Greeter.qml:122
-#, fuzzy
-#| msgid "Un&lock"
 msgid "Un&lock"
 msgstr "Odb&lokuj"
 
 #: fallbacktheme/Greeter.qml:134
-#, fuzzy
-#| msgid "Unlocking failed"
 msgid "Unlocking failed"
-msgstr "Odblokowanie nie udało się"
+msgstr "Nie udało się odblokować"
 
 #: main.cpp:128
 #, kde-format
