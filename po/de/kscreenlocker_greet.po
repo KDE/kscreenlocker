@@ -1,63 +1,51 @@
 # SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n@prly.mozmail.com>
 # SPDX-FileCopyrightText: 2012, 2016 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2017 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-21 00:43+0000\n"
-"PO-Revision-Date: 2025-07-11 09:11+0200\n"
-"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
+"PO-Revision-Date: 2025-10-24 21:56+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: fallbacktheme/Greeter.qml:59
-#, fuzzy
-#| msgid "Warning: Caps Lock on"
 msgid "Warning: Caps Lock on"
-msgstr ""
-"Achtung: Die Feststelltaste ist eingerastet (durchgängige Großschreibung)"
+msgstr "Warnung: Feststelltaste ist aktiviert"
 
 #: fallbacktheme/Greeter.qml:75
-#, fuzzy
-#| msgid "The session is locked"
 msgid "The session is locked"
 msgstr "Die Sitzung ist gesperrt"
 
 #: fallbacktheme/Greeter.qml:76
-#, fuzzy
-#| msgid "The session has been locked by %1"
 msgid "The session has been locked by %1"
 msgstr "Die Sitzung wurde durch %1 gesperrt"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(alternativ: Fingerabdruckscanner verwenden)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(oder Smartcard verwenden)"
 
 #: fallbacktheme/Greeter.qml:115
-#, fuzzy
-#| msgid "&Switch Users"
 msgid "&Switch Users"
-msgstr "Benutzer wech&seln"
+msgstr "Benutzer &wechseln"
 
 #: fallbacktheme/Greeter.qml:122
-#, fuzzy
-#| msgid "Un&lock"
 msgid "Un&lock"
-msgstr "Sperre aufheben"
+msgstr "&Entsperren"
 
 #: fallbacktheme/Greeter.qml:134
-#, fuzzy
-#| msgid "Unlocking failed"
 msgid "Unlocking failed"
 msgstr "Aufheben der Sperre fehlgeschlagen"
 
