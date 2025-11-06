@@ -8,7 +8,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <QCommandLineParser>
 #include <QDateTime>
-#include <QSessionManager>
 #include <QSurfaceFormat>
 
 #include <iostream>
@@ -101,6 +100,9 @@ int main(int argc, char *argv[])
     format.setOption(QSurfaceFormat::ResetNotification);
     QSurfaceFormat::setDefaultFormat(format);
 
+    // disable session management for the greeter
+    QCoreApplication::setAttribute(Qt::AA_DisableSessionManager);
+
     ScreenLocker::UnlockApp app(argc, argv);
 
     KSignalHandler::self()->watchSignal(SIGTERM);
@@ -116,13 +118,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(QStringLiteral("kscreenlocker_greet"));
     QCoreApplication::setApplicationVersion(QStringLiteral("0.1"));
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
-
-    // disable session management for the greeter
-    auto disableSessionManagement = [](QSessionManager &sm) {
-        sm.setRestartHint(QSessionManager::RestartNever);
-    };
-    QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
-    QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(i18n("Greeter for the KDE Plasma Workspaces Screen locker"));
