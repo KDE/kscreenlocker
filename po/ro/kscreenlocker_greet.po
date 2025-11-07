@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"POT-Creation-Date: 2025-11-07 00:44+0000\n"
 "PO-Revision-Date: 2025-10-19 23:03+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -50,39 +50,39 @@ msgstr "Deb&lochează"
 msgid "Unlocking failed"
 msgstr "Deblocare eșuată"
 
-#: main.cpp:128
+#: main.cpp:123
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Ecran de salut pentru blocarea ecranului din Plasma Workspaces"
 
-#: main.cpp:132
+#: main.cpp:127
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Pornește ecranul de salut în regim de testare"
 
-#: main.cpp:135
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "Pornește ecranul de salut cu tematica aleasă a învelișului (doar în regim de "
 "testare)"
 
-#: main.cpp:139
+#: main.cpp:134
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Blochează imediat, ignorând orice interval de grație"
 
-#: main.cpp:141
+#: main.cpp:136
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Întârziere până la afișarea interfeței de blocare, în milisecunde"
 
-#: main.cpp:144
+#: main.cpp:139
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Nu arăta nicio interfață de blocare."
 
-#: main.cpp:146
+#: main.cpp:141
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Descriptor de fișier pentru conectarea la ksld."

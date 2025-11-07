@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"POT-Creation-Date: 2025-11-07 00:44+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -49,37 +49,37 @@ msgstr ""
 msgid "Unlocking failed"
 msgstr ""
 
-#: main.cpp:128
+#: main.cpp:123
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE Plasma Workspaces Screen locker इत्यस्य अभिवादनम्"
 
-#: main.cpp:132
+#: main.cpp:127
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "परीक्षणविधाने अभिवादकं आरभते"
 
-#: main.cpp:135
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "चयनितेन शेल् विषयेण सह अभिवादकं आरभते (केवलं Testing मोड् मध्ये)"
 
-#: main.cpp:139
+#: main.cpp:134
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "तत्क्षणं तालान् स्थापयन्तु, कस्यापि अनुग्रहसमयादिना अवहेलना।"
 
-#: main.cpp:141
+#: main.cpp:136
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "यावत् lock उपयोक्तृ-अन्तरफलकं मिलीसेकेण्ड्-मध्ये दर्शितं न भवति तावत् विलम्बं कुर्वन्तु ।"
 
-#: main.cpp:144
+#: main.cpp:139
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "किमपि लॉक् उपयोक्तृ-अन्तरफलकं न दर्शयन्तु ।"
 
-#: main.cpp:146
+#: main.cpp:141
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "ksld इत्यनेन सह सम्बद्धतायै सञ्चिकावर्णकः ।"

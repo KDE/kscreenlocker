@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"POT-Creation-Date: 2025-11-07 00:44+0000\n"
 "PO-Revision-Date: 2018-01-07 21:29-0600\n"
 "Last-Translator: A S Alam <aalam@fedoraproject.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -49,38 +49,38 @@ msgstr "ਅਣ-ਲਾਕ(&l)"
 msgid "Unlocking failed"
 msgstr "ਅਣਲਾਕ ਕਰਨਾ ਫੇਲ੍ਹ ਹੈ"
 
-#: main.cpp:128
+#: main.cpp:123
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE ਪਲਾਜ਼ਮਾ ਵਰਕਸਪੇਸ ਸਕਰੀਨ ਲਾਕਰ ਲਈ ਸਵਾਗਤੀ"
 
-#: main.cpp:132
+#: main.cpp:127
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "ਸਵਾਗਤੀ ਟੈਸਟਿੰਗ ਮੋਡ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: main.cpp:135
+#: main.cpp:130
 #, fuzzy, kde-format
 #| msgid "Starts the greeter in testing mode"
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "ਸਵਾਗਤੀ ਟੈਸਟਿੰਗ ਮੋਡ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: main.cpp:139
+#: main.cpp:134
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "ਕਿਸੇ ਵੀ ਛੋਟ ਦਿੱਤੇ ਸਮੇਂ ਆਦਿ ਨੂੰ ਛੱਡ ਕੇ ਤੁਰੰਤ ਲਾਕ ਕਰੋ।"
 
-#: main.cpp:141
+#: main.cpp:136
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 
-#: main.cpp:144
+#: main.cpp:139
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "ਕੋਈ ਵੀ ਲਾਕ ਵਰਤੋਂਕਾਰ ਇੰਟਰਫੇਸ ਨਾ ਦਿਖਾਉ।"
 
-#: main.cpp:146
+#: main.cpp:141
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr ""

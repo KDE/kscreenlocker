@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"POT-Creation-Date: 2025-11-07 00:44+0000\n"
 "PO-Revision-Date: 2025-10-10 23:44+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -51,39 +51,39 @@ msgstr "At&rakinti"
 msgid "Unlocking failed"
 msgstr "Atrakinti nepavyko"
 
-#: main.cpp:128
+#: main.cpp:123
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Pasisveikinimo langas, skirtas KDE Plasma darbo sričių ekrano užraktui"
 
-#: main.cpp:132
+#: main.cpp:127
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Paleidžia pasisveikinimo langą testavimo veiksenoje"
 
-#: main.cpp:135
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "Paleidžia pasisveikinimo langą naudojant pasirinktą apvalkalo "
 "apipavidalinimą (tik testavimo veiksenoje)"
 
-#: main.cpp:139
+#: main.cpp:134
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Nedelsiant užrakinti, nepaisant jokio malonės laiko ir t.t."
 
-#: main.cpp:141
+#: main.cpp:136
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Delsa, kol užrakto naudotojo sąsaja bus rodoma, milisekundėmis."
 
-#: main.cpp:144
+#: main.cpp:139
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Nerodyti jokios užrakto naudotojo sąsajos."
 
-#: main.cpp:146
+#: main.cpp:141
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Failo deskriptorius, skirtas prisijungimui prie ksld."

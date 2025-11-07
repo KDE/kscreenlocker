@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"POT-Creation-Date: 2025-11-07 00:44+0000\n"
 "PO-Revision-Date: 2016-08-31 22:29+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -47,40 +47,40 @@ msgstr "Odomknúť"
 msgid "Unlocking failed"
 msgstr "Odomknutie zlyhalo"
 
-#: main.cpp:128
+#: main.cpp:123
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Uvítač pre zamykač obrazovky KDE pracovnej plochy Plasma"
 
-#: main.cpp:132
+#: main.cpp:127
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Spustí uvítač v testovacom režime"
 
-#: main.cpp:135
+#: main.cpp:130
 #, fuzzy, kde-format
 #| msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "Spustí uvítač s vybranou témou (iba v testovacom režime)"
 
-#: main.cpp:139
+#: main.cpp:134
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Zamknúť okamžite, ignorovať milostný čas atď."
 
-#: main.cpp:141
+#: main.cpp:136
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Oneskorenie, kým sa zobrazí zamykacie používateľské rozhranie v "
 "milisekundách."
 
-#: main.cpp:144
+#: main.cpp:139
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Nezobraziť žiadne zamykacie používateľské rozhranie."
 
-#: main.cpp:146
+#: main.cpp:141
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Popisovač súboru na pripojenie k ksld."

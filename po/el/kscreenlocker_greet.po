@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"POT-Creation-Date: 2025-11-07 00:44+0000\n"
 "PO-Revision-Date: 2024-09-20 09:37+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -53,17 +53,17 @@ msgstr "Ξεκ&λείδωμα"
 msgid "Unlocking failed"
 msgstr "Το ξεκλείδωμα απέτυχε"
 
-#: main.cpp:128
+#: main.cpp:123
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Πρόγραμμα χαιρετισμού για το κλείδωμα της οθόνης KDE Plasma Workspaces"
 
-#: main.cpp:132
+#: main.cpp:127
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Εκκινεί το πρόγραμμα χαιρετισμού σε δοκιμαστική λειτουργία"
 
-#: main.cpp:135
+#: main.cpp:130
 #, fuzzy, kde-format
 #| msgid "Starts the greeter with the selected theme (only in Testing mode)"
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
@@ -71,24 +71,24 @@ msgstr ""
 "Εκκινεί το πρόγραμμα χαιρετισμού με το επιλεγμένο θέμα (μόνο σε δοκιμαστική "
 "λειτουργία)"
 
-#: main.cpp:139
+#: main.cpp:134
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Άμεσο κλείδωμα, με αγνόησή οποιουδήποτε χρονικού ορίου."
 
-#: main.cpp:141
+#: main.cpp:136
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Καθυστέρηση μέχρι το γραφικό περιβάλλον κλειδώματος να εμφανιστεί, σε "
 "χιλιοστά του δευτερολέπτου."
 
-#: main.cpp:144
+#: main.cpp:139
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Καμιά εμφάνιση γραφικού περιβάλλοντος κλειδώματος."
 
-#: main.cpp:146
+#: main.cpp:141
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Περιγραφέας αρχείου για σύνδεση με ksld."

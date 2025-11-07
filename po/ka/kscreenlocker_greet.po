@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-21 00:43+0000\n"
+"POT-Creation-Date: 2025-11-07 00:44+0000\n"
 "PO-Revision-Date: 2025-07-23 03:53+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -50,37 +50,37 @@ msgstr "განბ&ლოკვა"
 msgid "Unlocking failed"
 msgstr "განბლოკვის შეცდომა"
 
-#: main.cpp:128
+#: main.cpp:123
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE Plasma სამუშაო გარემოს ეკრანის დამბლოკის შემგებებელი"
 
-#: main.cpp:132
+#: main.cpp:127
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "შემგებებლის სატესტო რეჟიმში გაშვება"
 
-#: main.cpp:135
+#: main.cpp:130
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "შემგებებებლის მითითებული გარსის თემით გაშვება (მხოლოდ სატესტო რეჟიმში)"
 
-#: main.cpp:139
+#: main.cpp:134
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "მაშინვე დაბლოკვა და ყველაფერი სხვის იგნორი."
 
-#: main.cpp:141
+#: main.cpp:136
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "ბლოკის ჩვენების ინტერფეისის ჩვენების დაყოვნება, მილიწამებში."
 
-#: main.cpp:144
+#: main.cpp:139
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "დაბლოკვის მომხმარებლის ინტერფეისი ნაჩვენები არ იქნება."
 
-#: main.cpp:146
+#: main.cpp:141
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "ფაილის დესკრიპტორი ksld-სთან მისაერთებლად."
