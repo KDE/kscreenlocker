@@ -85,6 +85,3 @@ msgstr "Без показване на потребителски интерфе
 #, kde-format
 msgid "File descriptor for connecting to ksld."
 msgstr "Файлов дескриптор за свързване към ksld."
-
-#~ msgid "Default to the switch user UI."
-#~ msgstr "По подразбиране за интерфейс на превключване на потребител."
