@@ -23,6 +23,7 @@ public:
     Q_DISABLE_COPY_MOVE(PamWorker)
     void start(const QString &service, const QString &user);
     void authenticate();
+    void startFailedDelay(uint useconds);
 
 Q_SIGNALS:
     void busyChanged(bool busy);
@@ -48,6 +49,7 @@ private:
 
     bool m_unavailable = false;
     bool m_inAuthenticate = false;
+    std::chrono::steady_clock::time_point m_nextAttemptAllowedTime;
     int m_result = -1;
     QString m_service;
 };
@@ -147,6 +149,7 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 PamWorker::PamWorker()
     : QObject(nullptr)
     , m_conv({&PamWorker::converse, this})
+    , m_nextAttemptAllowedTime(std::chrono::steady_clock::now())
 {
 }
 
@@ -160,6 +163,9 @@ PamWorker::~PamWorker()
 void PamWorker::authenticate()
 {
     if (m_inAuthenticate || m_unavailable) {
+        return;
+    } else if (std::chrono::steady_clock::now() < m_nextAttemptAllowedTime) {
+        qCCritical(KSCREENLOCKER_GREET, "[PAM worker %s] Authentication attempt too soon. This shouldn't happen!", qUtf8Printable(m_service));
         return;
     }
     m_inAuthenticate = true;
@@ -188,6 +194,12 @@ void PamWorker::authenticate()
     Q_EMIT inAuthenticateChanged(m_inAuthenticate);
 }
 
+void PamWorker::startFailedDelay(uint useconds)
+{
+    m_nextAttemptAllowedTime = std::chrono::steady_clock::now() + std::chrono::microseconds(useconds);
+    Q_EMIT loginFailedDelayStarted(useconds);
+}
+
 static void fail_delay(int retval, unsigned usec_delay, void *appdata_ptr)
 {
     auto* worker = reinterpret_cast< PamWorker* >(appdata_ptr); // Refer the pam_conv (@sa m_conv) structure for info on appdata_ptr
@@ -199,10 +211,7 @@ static void fail_delay(int retval, unsigned usec_delay, void *appdata_ptr)
         qCDebug(KSCREENLOCKER_GREET) << "[PAM worker] Fail delay function was called, but authentication result was a success!";
         return;
     }
-    Q_EMIT worker->loginFailedDelayStarted(usec_delay);
-    if (usec_delay > 0u) {
-        QThread::usleep(usec_delay); // This calls nanosleep as of Qt 6.8. It also handles EINTR (restarts the sleep with the remainder duration when interrupted), but not EFAULT or EINVAL.
-    }
+    worker->startFailedDelay(usec_delay);
 }
 
 void PamWorker::start(const QString &service, const QString &user)
