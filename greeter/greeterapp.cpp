@@ -368,6 +368,13 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     // cache data for the lockscreen. Let's notify it.
     config->setNotify(true);
 
+    // keep lockscreen animated wallpapers from pausing
+    if (KScreenSaverSettingsBase::self()->wallpaperPluginId() == QStringLiteral("org.kde.image")) {
+        if (!cfg.hasKey("ForceImageAnimation")) {
+            config->insert(QStringLiteral("ForceImageAnimation"), true);
+        }
+    }
+
     auto wallpaperObj = loadWallpaperPlugin(view);
     if (auto object = view->property("wallpaperGraphicsObject").value<PlasmaQuick::SharedQmlEngine *>()) {
         // initialize with our size to avoid as much resize events as possible
