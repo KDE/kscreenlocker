@@ -2,14 +2,15 @@
 # This file is distributed under the same license as the kscreenlocker package.
 #
 # SPDX-FileCopyrightText: 2023, 2024 Guðmundur Erlingsson <gudmundure@gmail.com>
+# SPDX-FileCopyrightText: 2025 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:41+0000\n"
-"PO-Revision-Date: 2024-06-29 14:54+0000\n"
-"Last-Translator: Gummi <gudmundure@gmail.com>\n"
-"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-12-07 10:52+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,35 +20,35 @@ msgstr ""
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
-msgstr ""
+msgstr "Aðvörun: Caps Lock hástafalás er á"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr ""
+msgstr "Setan er læst"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr ""
+msgstr "Setunni var læst af %1"
 
 #: fallbacktheme/Greeter.qml:100
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(eða settu fingrafarið þitt á lesarann)"
 
 #: fallbacktheme/Greeter.qml:106
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(eða notaðu snjallkortið þitt)"
 
 #: fallbacktheme/Greeter.qml:115
 msgid "&Switch Users"
-msgstr ""
+msgstr "&Skipta um notendur"
 
 #: fallbacktheme/Greeter.qml:122
 msgid "Un&lock"
-msgstr ""
+msgstr "Af&læsa"
 
 #: fallbacktheme/Greeter.qml:134
 msgid "Unlocking failed"
-msgstr ""
+msgstr "Mistókst að aflæsa"
 
 #: main.cpp:128
 #, kde-format
