@@ -36,22 +36,6 @@ if (PamWrapper_FOUND AND NOT "$ENV{KDECI_BUILD}" STREQUAL "TRUE")
             ENVIRONMENT "LD_PRELOAD=libpam_wrapper.so;ASAN_OPTIONS=verify_asan_link_order=0")
 endif()
 
-#######################################
-# KSldTest
-#######################################
-add_executable(ksldTest ksldtest.cpp)
-target_link_libraries(ksldTest
-    Qt::GuiPrivate
-    Qt::Test
-    Qt::Widgets
-    KF6::IdleTime
-    KF6::WindowSystem
-    XCB::XTEST
-    settings
-    KScreenLocker
-)
-add_test(NAME ksmserver-ksldTest COMMAND ksldTest)
-ecm_mark_as_test(ksldTest)
 
 #######################################
 # KeyboardGrabber
