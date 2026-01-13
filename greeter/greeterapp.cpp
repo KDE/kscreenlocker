@@ -211,12 +211,14 @@ QWindow *UnlockApp::getActiveScreen()
     }
 
     for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
+        qDebug() << "!!!!" << "Cursor pos was" << QCursor::pos();
         if (view->geometry().contains(QCursor::pos())) {
             activeScreen = view;
             break;
         }
     }
     if (!activeScreen) {
+        qDebug() << "!!!!" << "Failed to determine activeScreen via cursor pos";
         activeScreen = m_views.first();
     }
 
