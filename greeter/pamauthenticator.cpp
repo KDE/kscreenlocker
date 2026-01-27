@@ -255,7 +255,9 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
 {
     d->moveToThread(&m_thread);
 
-    connect(&m_thread, &QThread::finished, d, &QObject::deleteLater);
+    connect(&m_thread, &QThread::finished, d, [worker = d]() {
+        delete worker;
+    });
 
     connect(d, &PamWorker::busyChanged, this, &PamAuthenticator::setBusy);
     connect(d, &PamWorker::prompt, this, [this](const QString &msg) {
