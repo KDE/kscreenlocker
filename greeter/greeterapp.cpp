@@ -336,7 +336,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
             std::cout << "Unlocked" << std::endl;
             // Quit without exit handlers
             // This is because:
-            // - the pam_unix backend will always report a failed login if we complete the converse method not matter what exit code we use
+            // - the pam_unix backend will always report a failed login if we complete the converse method no matter what exit code we use
             // - the fprintd backend sometimes takes a long time
             _exit(0);
         } else {
