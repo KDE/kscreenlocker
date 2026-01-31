@@ -13,6 +13,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <config-kscreenlocker.h>
 #include <iostream>
+#include <unistd.h>
 #include <kscreenlocker_greet_logging.h>
 
 #include <LayerShellQt/Window>
