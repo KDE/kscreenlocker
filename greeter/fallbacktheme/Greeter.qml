@@ -17,7 +17,6 @@ Item {
     id: root
 
     signal switchUserClicked()
-    signal canceled()
 
     property alias notification: message.text
     property bool switchUserEnabled

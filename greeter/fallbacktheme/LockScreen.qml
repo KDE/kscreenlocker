@@ -81,14 +81,7 @@ Item {
             }
         }
 
-        Connections {
-            function onAccepted() {
-                lockScreen.unlockRequested();
-            }
-            function onSwitchUserClicked() {
-                sessionManagment.switchUser();
-            }
-        }
+        onSwitchUserClicked: sessionManagment.switchUser()
     }
 
     function returnToLogin() {
