@@ -36,8 +36,8 @@ Item {
 
         visible: lockScreen.locked
         anchors.centerIn: parent
-        width: mainStack.currentItem.implicitWidth + margins.left + margins.right
-        height: mainStack.currentItem.implicitHeight + margins.top + margins.bottom
+        width: (mainStack.currentItem?.implicitWidth ?? 0) + margins.left + margins.right
+        height: (mainStack.currentItem?.implicitHeight ?? 0) + margins.top + margins.bottom
         imagePath: "widgets/background"
 
         Behavior on height {
