@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-03 00:48+0000\n"
 "PO-Revision-Date: 2025-07-24 19:50+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -18,35 +18,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.04.3\n"
 
-#: fallbacktheme/Greeter.qml:59
+#: fallbacktheme/Greeter.qml:58
 msgid "Warning: Caps Lock on"
 msgstr "Advertencia: Bloqueo de mayúsculas activado"
 
-#: fallbacktheme/Greeter.qml:75
+#: fallbacktheme/Greeter.qml:74
 msgid "The session is locked"
 msgstr "La sesión está bloqueada"
 
-#: fallbacktheme/Greeter.qml:76
+#: fallbacktheme/Greeter.qml:75
 msgid "The session has been locked by %1"
 msgstr "La sesión ha sido bloqueada por %1"
 
-#: fallbacktheme/Greeter.qml:100
+#: fallbacktheme/Greeter.qml:99
 msgid "(or place your fingerprint on the reader)"
 msgstr "(o coloque el dedo en el lector de huellas)"
 
-#: fallbacktheme/Greeter.qml:106
+#: fallbacktheme/Greeter.qml:105
 msgid "(or use your smartcard)"
 msgstr "(o use su tarjeta inteligente)"
 
-#: fallbacktheme/Greeter.qml:115
+#: fallbacktheme/Greeter.qml:114
 msgid "&Switch Users"
 msgstr "&Cambiar usuarios"
 
-#: fallbacktheme/Greeter.qml:122
+#: fallbacktheme/Greeter.qml:121
 msgid "Un&lock"
 msgstr "Desb&loquear"
 
-#: fallbacktheme/Greeter.qml:134
+#: fallbacktheme/Greeter.qml:133
 msgid "Unlocking failed"
 msgstr "El desbloqueo ha fallado"
 
