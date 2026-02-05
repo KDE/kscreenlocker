@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-05 02:40+0000\n"
 "PO-Revision-Date: 2013-01-29 02:07+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -17,35 +17,35 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: fallbacktheme/Greeter.qml:59
+#: fallbacktheme/Greeter.qml:58
 msgid "Warning: Caps Lock on"
 msgstr "Ескерту: Caps Lock қосылып тұр"
 
-#: fallbacktheme/Greeter.qml:75
+#: fallbacktheme/Greeter.qml:74
 msgid "The session is locked"
 msgstr "Сеанс бұғатталған"
 
-#: fallbacktheme/Greeter.qml:76
+#: fallbacktheme/Greeter.qml:75
 msgid "The session has been locked by %1"
 msgstr "Сеансты %1 бұғаттаған"
 
-#: fallbacktheme/Greeter.qml:100
+#: fallbacktheme/Greeter.qml:99
 msgid "(or place your fingerprint on the reader)"
 msgstr ""
 
-#: fallbacktheme/Greeter.qml:106
+#: fallbacktheme/Greeter.qml:105
 msgid "(or use your smartcard)"
 msgstr ""
 
-#: fallbacktheme/Greeter.qml:115
+#: fallbacktheme/Greeter.qml:114
 msgid "&Switch Users"
 msgstr "Пайдаланушыны &ауыстыру"
 
-#: fallbacktheme/Greeter.qml:122
+#: fallbacktheme/Greeter.qml:121
 msgid "Un&lock"
 msgstr "Бұғатын &шешу"
 
-#: fallbacktheme/Greeter.qml:134
+#: fallbacktheme/Greeter.qml:133
 msgid "Unlocking failed"
 msgstr "Бұғатты шешу жаңылды"
 

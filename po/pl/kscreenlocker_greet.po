@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-05 02:40+0000\n"
 "PO-Revision-Date: 2025-10-25 09:37+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -18,35 +18,35 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 25.08.2\n"
 
-#: fallbacktheme/Greeter.qml:59
+#: fallbacktheme/Greeter.qml:58
 msgid "Warning: Caps Lock on"
 msgstr "Ostrzeżenie: Włączony klawisz Caps Lock"
 
-#: fallbacktheme/Greeter.qml:75
+#: fallbacktheme/Greeter.qml:74
 msgid "The session is locked"
 msgstr "Posiedzenie jest zablokowane"
 
-#: fallbacktheme/Greeter.qml:76
+#: fallbacktheme/Greeter.qml:75
 msgid "The session has been locked by %1"
 msgstr "Posiedzenie zablokował %1"
 
-#: fallbacktheme/Greeter.qml:100
+#: fallbacktheme/Greeter.qml:99
 msgid "(or place your fingerprint on the reader)"
 msgstr "(lub umieść swój palec na czytniku linii papilarnych)"
 
-#: fallbacktheme/Greeter.qml:106
+#: fallbacktheme/Greeter.qml:105
 msgid "(or use your smartcard)"
 msgstr "(lub użyj karty inteligentnej)"
 
-#: fallbacktheme/Greeter.qml:115
+#: fallbacktheme/Greeter.qml:114
 msgid "&Switch Users"
 msgstr "&Przełącz użytkowników"
 
-#: fallbacktheme/Greeter.qml:122
+#: fallbacktheme/Greeter.qml:121
 msgid "Un&lock"
 msgstr "Odb&lokuj"
 
-#: fallbacktheme/Greeter.qml:134
+#: fallbacktheme/Greeter.qml:133
 msgid "Unlocking failed"
 msgstr "Nie udało się odblokować"
 

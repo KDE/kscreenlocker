@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-05 02:40+0000\n"
 "PO-Revision-Date: 2025-08-08 02:35+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -19,35 +19,35 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 25.07.70\n"
 
-#: fallbacktheme/Greeter.qml:59
+#: fallbacktheme/Greeter.qml:58
 msgid "Warning: Caps Lock on"
 msgstr "警告：大寫鎖定已開啟"
 
-#: fallbacktheme/Greeter.qml:75
+#: fallbacktheme/Greeter.qml:74
 msgid "The session is locked"
 msgstr "工作階段已鎖定"
 
-#: fallbacktheme/Greeter.qml:76
+#: fallbacktheme/Greeter.qml:75
 msgid "The session has been locked by %1"
 msgstr "工作階段已被 %1 鎖定"
 
-#: fallbacktheme/Greeter.qml:100
+#: fallbacktheme/Greeter.qml:99
 msgid "(or place your fingerprint on the reader)"
 msgstr "（或是在將您的指紋放在辨識器上）"
 
-#: fallbacktheme/Greeter.qml:106
+#: fallbacktheme/Greeter.qml:105
 msgid "(or use your smartcard)"
 msgstr "（或是使用您的智慧卡）"
 
-#: fallbacktheme/Greeter.qml:115
+#: fallbacktheme/Greeter.qml:114
 msgid "&Switch Users"
 msgstr "切換使用者(&S)"
 
-#: fallbacktheme/Greeter.qml:122
+#: fallbacktheme/Greeter.qml:121
 msgid "Un&lock"
 msgstr "解除鎖定(&L)"
 
-#: fallbacktheme/Greeter.qml:134
+#: fallbacktheme/Greeter.qml:133
 msgid "Unlocking failed"
 msgstr "解除鎖定失敗"
 
