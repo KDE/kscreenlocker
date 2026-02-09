@@ -148,6 +148,7 @@ void LogindIntegration::commonServiceRegistered(QDBusPendingCallWatcher *watcher
 
 void LogindIntegration::inhibit()
 {
+    m_wantsSuspendInhibited = true;
     if (m_inhibitFileDescriptor.isValid()) {
         return;
     }
@@ -168,15 +169,15 @@ void LogindIntegration::inhibit()
             return;
         }
         reply.value().swap(m_inhibitFileDescriptor);
-        Q_EMIT inhibited();
+        if (!m_wantsSuspendInhibited) {
+            m_inhibitFileDescriptor = QDBusUnixFileDescriptor{};
+        }
     });
 }
 
 void LogindIntegration::uninhibit()
 {
-    if (!m_inhibitFileDescriptor.isValid()) {
-        return;
-    }
+    m_wantsSuspendInhibited = false;
     m_inhibitFileDescriptor = QDBusUnixFileDescriptor();
 }
 

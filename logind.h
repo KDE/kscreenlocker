@@ -43,7 +43,6 @@ Q_SIGNALS:
     void requestUnlock();
     void connectedChanged();
     void prepareForSleep(bool);
-    void inhibited();
 
 private:
     friend class LogindTest;
@@ -61,6 +60,7 @@ private:
     QDBusServiceWatcher *m_logindServiceWatcher;
     bool m_connected;
     QDBusUnixFileDescriptor m_inhibitFileDescriptor;
+    bool m_wantsSuspendInhibited = false;
     const QString *m_service;
     const QString *m_path;
     QString m_sessionPath;

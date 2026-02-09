@@ -255,6 +255,9 @@ Q_SIGNALS:
      */
     void lockStateChanged();
 
+    void inhibitSuspend();
+    void uninhibitSuspend();
+
 private Q_SLOTS:
 
     /**
