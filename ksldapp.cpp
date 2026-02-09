@@ -319,13 +319,8 @@ void KSldApp::initialize()
         }
         if (KScreenSaverSettings::lockOnResume()) {
             qCDebug(KSCREENLOCKER) << "Prepare for sleep called, locking now";
+            Q_EMIT inhibitSuspend();
             lock(EstablishLock::Immediate);
-        }
-    });
-    connect(m_logind, &LogindIntegration::inhibited, this, [this]() {
-        // if we are already locked, we immediately remove the inhibition lock
-        if (m_lockState == KSldApp::Locked) {
-            m_logind->uninhibit();
         }
     });
     connect(m_logind, &LogindIntegration::connectedChanged, this, [this]() {
@@ -333,15 +328,20 @@ void KSldApp::initialize()
             return;
         }
         if (m_lockState == ScreenLocker::KSldApp::Unlocked && KScreenSaverSettings::lockOnResume()) {
-            m_logind->inhibit();
+            Q_EMIT inhibitSuspend();
         }
         if (m_logind->isLocked()) {
             qCDebug(KSCREENLOCKER) << "LogindIntegration::connectedChanged signal received, locking now";
             lock(EstablishLock::Immediate);
         }
     });
+    if (m_isX11) {
+        // on Wayland, KWin handles this, but on X11 we need to handle it ourselves
+        connect(this, &KSldApp::inhibitSuspend, m_logind, &LogindIntegration::inhibit);
+        connect(this, &KSldApp::uninhibitSuspend, m_logind, &LogindIntegration::uninhibit);
+    }
     connect(this, &KSldApp::locked, this, [this]() {
-        m_logind->uninhibit();
+        Q_EMIT uninhibitSuspend();
         m_logind->setLocked(true);
         if (m_lockGrace > 0 && m_inGraceTime) {
             m_graceTimer->start(m_lockGrace);
@@ -350,7 +350,7 @@ void KSldApp::initialize()
     connect(this, &KSldApp::unlocked, this, [this]() {
         m_logind->setLocked(false);
         if (KScreenSaverSettings::lockOnResume()) {
-            m_logind->inhibit();
+            Q_EMIT inhibitSuspend();
         }
     });
 
@@ -407,12 +407,10 @@ void KSldApp::configure()
     } else {
         m_lockGrace = -1;
     }
-    if (m_logind && m_logind->isConnected()) {
-        if (KScreenSaverSettings::lockOnResume() && !m_logind->isInhibited()) {
-            m_logind->inhibit();
-        } else if (!KScreenSaverSettings::lockOnResume() && m_logind->isInhibited()) {
-            m_logind->uninhibit();
-        }
+    if (KScreenSaverSettings::lockOnResume()) {
+        Q_EMIT inhibitSuspend();
+    } else {
+        Q_EMIT uninhibitSuspend();
     }
     m_requirePassword = KScreenSaverSettings::requirePassword();
 }
