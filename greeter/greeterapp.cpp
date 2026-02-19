@@ -441,6 +441,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
             layerShellWindow->setExclusiveZone(-1);
             layerShellWindow->setLayer(LayerShellQt::Window::LayerTop);
             layerShellWindow->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityExclusive);
+            layerShellWindow->setScreen(screen);
         }
     }
 
