@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-03-03 00:48+0000\n"
 "PO-Revision-Date: 2025-05-16 14:52+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -68,22 +68,22 @@ msgstr "Správa sezení"
 msgid "Lock Session"
 msgstr "Uzamknout sezení"
 
-#: ksldapp.cpp:451
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "Obrazovka uzamčena"
 
-#: ksldapp.cpp:619
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Obrazovka odemknuta"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Screen Locker"
 msgstr "Zámek obrazovky"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Zajistí, že se obrazovka zamkne před přechodem do režimu spánku"

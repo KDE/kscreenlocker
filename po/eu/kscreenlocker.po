@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-03-03 00:48+0000\n"
 "PO-Revision-Date: 2025-01-22 08:26+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -91,22 +91,22 @@ msgstr "Saio-kudeaketa"
 msgid "Lock Session"
 msgstr "Giltzatu saioa"
 
-#: ksldapp.cpp:451
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "Pantaila giltzatuta"
 
-#: ksldapp.cpp:619
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Pantaila giltzatu gabe"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Screen Locker"
 msgstr "Pantaila giltzatzailea"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Lotara joan aurretik pantaila giltzatzen dela ziurtatzea"

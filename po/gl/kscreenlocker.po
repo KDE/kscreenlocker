@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-03-03 00:48+0000\n"
 "PO-Revision-Date: 2025-01-25 11:54+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -94,22 +94,22 @@ msgstr "Xestión de sesións"
 msgid "Lock Session"
 msgstr "Bloquear a sesión"
 
-#: ksldapp.cpp:451
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "A pantalla está bloqueada"
 
-#: ksldapp.cpp:619
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Desbloqueouse a pantalla"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Screen Locker"
 msgstr "Bloqueador da pantalla"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Asegúrase de que a pantalla se bloquea antes de irse durmir."

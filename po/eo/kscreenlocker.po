@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-03-03 00:48+0000\n"
 "PO-Revision-Date: 2023-05-06 19:01+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -87,22 +87,22 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Ŝlosi Seancon"
 
-#: ksldapp.cpp:451
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekrano ŝlosita"
 
-#: ksldapp.cpp:619
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekrano malŝlosita"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Screen Locker"
 msgstr "Ekrana Ŝlosilo"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "Certigante, ke la ekrano estas ŝlosita antaŭ dormi"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-03-03 00:48+0000\n"
 "PO-Revision-Date: 2024-01-28 19:09-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -66,22 +66,22 @@ msgstr ""
 msgid "Lock Session"
 msgstr "ਸ਼ੈਸ਼ਨ ਲਾਕ ਕਰੋ"
 
-#: ksldapp.cpp:451
+#: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
 msgstr "ਸਕਰੀਨ ਲਾਕ ਹੈ"
 
-#: ksldapp.cpp:619
+#: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
 msgstr "ਸਕਰੀਨ ਅਣ-ਲਾਕ ਹੈ"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Screen Locker"
 msgstr "ਸਕਰੀਨ ਲਾਕਰ"
 
-#: logind.cpp:161
+#: logind.cpp:162
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
 msgstr "ਸਲੀਪ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਸਕਰੀਨ ਦੇ ਲਾਕ ਹੋਣ ਨੂੰ ਯਕੀਨੀ ਬਣਾਓ"
