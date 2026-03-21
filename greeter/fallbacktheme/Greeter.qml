@@ -21,6 +21,7 @@ Item {
     property alias notification: message.text
     property bool switchUserEnabled
     property bool capsLockOn
+    property bool authSucceeded: false
 
     function resetFocus() {
         password.forceActiveFocus();
@@ -79,6 +80,7 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             implicitWidth: Kirigami.Units.gridUnit * 15
             enabled: !authenticator.busy
+            placeholderText: authenticator.promptForSecret || i18nd("kscreenlocker_greet", "Password")
             text: PasswordSync.password
             Keys.onEnterPressed: authenticator.startAuthenticating()
             Keys.onReturnPressed: authenticator.startAuthenticating()
@@ -133,7 +135,7 @@ Item {
             root.notification = i18nd("kscreenlocker_greet", "Unlocking failed");
         }
         function onBusyChanged() {
-            if (!authenticator.busy) {
+            if (!authenticator.busy && !root.authSucceeded) {
                 root.notification = "";
                 password.selectAll();
                 root.resetFocus();
@@ -149,6 +151,7 @@ Item {
             authenticator.respond(password.text);
         }
         function onSucceeded() {
+            root.authSucceeded = true
             Qt.quit()
         }
     }

@@ -196,10 +196,8 @@ void PamWorker::authenticate()
             rc,
             pam_strerror(m_handle, rc));
 
-    Q_EMIT busyChanged(false);
-
     if (rc == PAM_SUCCESS) {
-        rc = pam_setcred(m_handle, PAM_REFRESH_CRED);
+        pam_setcred(m_handle, PAM_REFRESH_CRED);
         /* ignore errors on refresh credentials. If this did not work we use the old ones. */
         Q_EMIT succeeded();
     } else if (rc == PAM_AUTHINFO_UNAVAIL || rc == PAM_MODULE_UNKNOWN) {
@@ -208,6 +206,7 @@ void PamWorker::authenticate()
     } else {
         Q_EMIT failed();
     }
+    Q_EMIT busyChanged(false);
     m_inAuthenticate = false;
     Q_EMIT inAuthenticateChanged(m_inAuthenticate);
 }
