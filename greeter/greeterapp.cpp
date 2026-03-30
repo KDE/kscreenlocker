@@ -33,6 +33,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
 // Plasma
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
+
+#include <Plasma/Plasma>
+
 // Qt
 #include <QAbstractNativeEventFilter>
 #include <QClipboard>
@@ -309,7 +312,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         view->setGeometry(geo);
     });
 
-    view->engine()->setProperty("_kirigamiTheme", QStringLiteral("KirigamiPlasmaStyle"));
+    Plasma::setupPlasmaStyle(view->engine().get());
     view->engine()->rootContext()->setContextObject(new KLocalizedQmlContext(view->engine().get()));
     auto oldFactory = view->engine()->networkAccessManagerFactory();
     view->engine()->setNetworkAccessManagerFactory(nullptr);
