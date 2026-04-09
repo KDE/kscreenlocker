@@ -12,8 +12,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: fallbacktheme/Greeter.qml:58
 msgid "Warning: Caps Lock on"
@@ -29,11 +29,11 @@ msgstr "Sedenie zamkol %1"
 
 #: fallbacktheme/Greeter.qml:99
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(alebo priložte prst na čítačku)"
 
 #: fallbacktheme/Greeter.qml:105
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(alebo použite svoju čipovú kartu)"
 
 #: fallbacktheme/Greeter.qml:114
 msgid "&Switch Users"
@@ -58,8 +58,7 @@ msgid "Starts the greeter in testing mode"
 msgstr "Spustí uvítač v testovacom režime"
 
 #: main.cpp:130
-#, fuzzy, kde-format
-#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
+#, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "Spustí uvítač s vybranou témou (iba v testovacom režime)"
 
