@@ -166,6 +166,7 @@ void PamWorker::authenticate()
         return;
     } else if (std::chrono::steady_clock::now() < m_nextAttemptAllowedTime) {
         qCCritical(KSCREENLOCKER_GREET, "[PAM worker %s] Authentication attempt too soon. This shouldn't happen!", qUtf8Printable(m_service));
+        Q_EMIT failed();
         return;
     }
     m_inAuthenticate = true;
