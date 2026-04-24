@@ -355,21 +355,20 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
     context->setContextProperty(QStringLiteral("config"), m_shellIntegration->configuration());
 
-    const QString xmlPath = m_wallpaperPackage.filePath(QByteArrayLiteral("config"), QStringLiteral("main.xml"));
-
     const KConfigGroup cfg = KScreenSaverSettingsBase::self()
                                  ->sharedConfig()
                                  ->group(QStringLiteral("Greeter"))
                                  .group(QStringLiteral("Wallpaper"))
                                  .group(KScreenSaverSettingsBase::self()->wallpaperPluginId());
 
-    KConfigLoader *configLoader;
-    if (xmlPath.isEmpty()) {
-        configLoader = new KConfigLoader(cfg, nullptr, this);
-    } else {
+    auto configLoader = [&] {
+        const QString xmlPath = m_wallpaperPackage.filePath(QByteArrayLiteral("config"), QStringLiteral("main.xml"));
+        if (xmlPath.isEmpty()) {
+            return new KConfigLoader(cfg, nullptr, this);
+        }
         QFile file(xmlPath);
-        configLoader = new KConfigLoader(cfg, &file, this);
-    }
+        return new KConfigLoader(cfg, &file, this);
+    }();
 
     KConfigPropertyMap *config = new KConfigPropertyMap(configLoader, this);
     // potd (picture of the day) is using a kded to monitor changes and
