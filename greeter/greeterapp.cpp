@@ -64,6 +64,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <fixx11h.h>
 //
 #include <xcb/xcb.h>
+#include <xcb/xcb_event.h>
 
 #include "pamauthenticator.h"
 #include "pamauthenticators.h"
@@ -117,11 +118,8 @@ public:
         if (eventType != QByteArrayLiteral("xcb_generic_event_t")) {
             return false;
         }
-        xcb_generic_event_t *event = reinterpret_cast<xcb_generic_event_t *>(message);
-        if ((event->response_type & ~0x80) == XCB_FOCUS_OUT) {
-            return true;
-        }
-        return false;
+        auto event = static_cast<xcb_generic_event_t *>(message);
+        return XCB_EVENT_RESPONSE_TYPE(event) == XCB_FOCUS_OUT;
     }
 };
 
