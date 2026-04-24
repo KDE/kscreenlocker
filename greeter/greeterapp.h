@@ -87,7 +87,6 @@ private:
     bool m_testing;
     bool m_ignoreRequests;
     bool m_immediateLock;
-    bool m_runtimeInitialized;
     PamAuthenticators *m_authenticators;
     int m_graceTime;
     bool m_noLock;
