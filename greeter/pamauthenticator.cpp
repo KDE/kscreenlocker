@@ -6,6 +6,8 @@
 
 #include "pamauthenticator.h"
 
+#include <algorithm>
+
 #include <QDebug>
 #include <QEventLoop>
 #include <QMetaMethod>
@@ -13,6 +15,24 @@
 #include <security/pam_appl.h>
 
 #include "kscreenlocker_greet_logging.h"
+
+using namespace Qt::StringLiterals;
+
+namespace
+{
+template<typename Output, typename Input>
+Output narrow(Input i)
+{
+    Output o = i;
+    if (i != Input(o)) {
+        std::abort();
+    }
+    if (const auto sameSignedness = (std::is_signed_v<Input> && std::is_signed_v<Output>); !sameSignedness && ((i < Input{}) != (o < Output{}))) {
+        std::abort();
+    }
+    return o;
+}
+} // namespace
 
 class PamWorker : public QObject
 {
@@ -59,21 +79,28 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
     PamWorker *c = static_cast<PamWorker *>(data);
 
     if (!resp) {
+        qCWarning(KSCREENLOCKER_GREET) << "[PAM worker] Converse called with null resp pointer";
         return PAM_BUF_ERR;
     }
 
-    *resp = (struct pam_response *)calloc(n, sizeof(struct pam_response));
+    const auto nSize = narrow<size_t>(n);
 
-    for (int i = 0; i < n; i++) {
+    *resp = std::make_unique<struct pam_response[]>(nSize).release();
+    auto responses = std::span{*resp, nSize};
+
+    auto messages = std::span{msg, nSize};
+    Q_ASSERT_X(responses.size() == messages.size(), Q_FUNC_INFO, "Number of PAM messages and responses should be the same");
+
+    for (const auto &[pamMessage, pamResponse] : std::views::zip(messages, responses)) {
         bool isSecret = false;
-        switch (msg[i]->msg_style) {
+        switch (pamMessage->msg_style) {
         case PAM_PROMPT_ECHO_OFF: {
             isSecret = true;
             Q_FALLTHROUGH();
         case PAM_PROMPT_ECHO_ON:
             Q_EMIT c->busyChanged(false);
 
-            const QString prompt = QString::fromLocal8Bit(msg[i]->msg);
+            const QString prompt = QString::fromLocal8Bit(pamMessage->msg);
             if (isSecret) {
                 Q_EMIT c->promptForSecret(prompt);
             } else {
@@ -99,6 +126,7 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
             });
 
             qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Starting nested event loop to await response", qUtf8Printable(c->m_service));
+            // We are in a non-gui thread. It should be mostly fine to exec() here.
             int rc = e.exec();
             if (rc != 0) {
                 qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Nested event loop's exit code was not zero, bailing", qUtf8Printable(c->m_service));
@@ -107,38 +135,27 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 
             Q_EMIT c->busyChanged(true);
 
-            resp[i]->resp = (char *)malloc(response.length() + 1);
-            // on error, get rid of everything
-            if (!resp[i]->resp) {
-                for (int j = 0; j < n; j++) {
-                    free(resp[i]->resp);
-                    resp[i]->resp = nullptr;
-                }
-                free(*resp);
-                *resp = nullptr;
-                return PAM_BUF_ERR;
-            }
-
-            memcpy(resp[i]->resp, response.constData(), response.length());
-            resp[i]->resp[response.length()] = '\0';
+            const auto responseLengthIncludingNull = response.length() + 1; // QByteArray holds an implicit \0 at the end.
+            pamResponse.resp = std::make_unique<char[]>(responseLengthIncludingNull).release();
+            std::copy_n(response.constData(), responseLengthIncludingNull, pamResponse.resp);
 
             break;
         }
         case PAM_ERROR_MSG: {
-            const QString error = QString::fromLocal8Bit(msg[i]->msg);
+            const QString error = QString::fromLocal8Bit(pamMessage->msg);
             qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Message: Error message: %s", qUtf8Printable(c->m_service), qUtf8Printable(error));
             Q_EMIT c->errorMessage(error);
             break;
         }
         case PAM_TEXT_INFO: {
             // if there's only the info message, let's predict the prompts too
-            const QString info = QString::fromLocal8Bit(msg[i]->msg);
+            const QString info = QString::fromLocal8Bit(pamMessage->msg);
             qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Message: Info message: %s", qUtf8Printable(c->m_service), qUtf8Printable(info));
             Q_EMIT c->infoMessage(info);
             break;
         }
         default:
-            qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Message: Unhandled message type: %d", qUtf8Printable(c->m_service), msg[i]->msg_style);
+            qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Message: Unhandled message type: %d", qUtf8Printable(c->m_service), pamMessage->msg_style);
             break;
         }
     }
