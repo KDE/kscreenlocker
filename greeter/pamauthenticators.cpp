@@ -203,13 +203,13 @@ QString PamAuthenticators::errorMessage() const
 void PamAuthenticators::respond(const QByteArray &response)
 {
     qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: responding to interactive authenticator";
-    return d->interactive->respond(response);
+    d->interactive->respond(response);
 }
 
 void PamAuthenticators::cancel()
 {
     qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: cancelling interactive authenticator";
-    return d->interactive->cancel();
+    d->interactive->cancel();
 }
 
 PamAuthenticator::NoninteractiveAuthenticatorTypes PamAuthenticators::authenticatorTypes() const
