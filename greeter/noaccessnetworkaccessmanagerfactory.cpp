@@ -23,11 +23,14 @@ public:
         setUrl(req.url());
         setOperation(op);
         setError(QNetworkReply::ContentAccessDenied, QStringLiteral("Blocked request."));
-        const auto networkError = error();
-        QMetaObject::invokeMethod(this, &QNetworkReply::errorOccurred, Qt::QueuedConnection, networkError);
-
-        setFinished(true);
-        Q_EMIT QMetaObject::invokeMethod(this, &QNetworkReply::finished, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(
+            this,
+            [this] {
+                Q_EMIT errorOccurred(error());
+                setFinished(true);
+                Q_EMIT finished();
+            },
+            Qt::QueuedConnection);
     }
     qint64 readData(char * /*data*/, qint64 /*maxSize*/) override
     {
