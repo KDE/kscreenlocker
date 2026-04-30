@@ -34,3 +34,8 @@ set(ksmserver-pamTest-environment
 )
 set_tests_properties(ksmserver-pamTest PROPERTIES ENVIRONMENT "${ksmserver-pamTest-environment}")
 ecm_mark_as_test(pamTest)
+
+add_test(NAME kcm_smoketest COMMAND kcmshell6 --smoke-test kcm_screenlocker)
+set_tests_properties(kcm_smoketest PROPERTIES
+    ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
+)
