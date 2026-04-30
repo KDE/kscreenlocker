@@ -1,6 +1,28 @@
 remove_definitions(-DTRANSLATION_DOMAIN=\"kscreenlocker\")
 add_definitions(-DTRANSLATION_DOMAIN=\"kscreenlocker_greet\")
 
+# KSCREENLOCKER_PAM_SERVICE, if defined, will already have been
+# enclosed in double quotes by the define_pam_service macro.
+if (NOT DEFINED KSCREENLOCKER_PAM_PASSWORD_SERVICE)
+  set(KSCREENLOCKER_PAM_PASSWORD_SERVICE "\"kde\"")
+endif()
+
+if (NOT DEFINED KSCREENLOCKER_PAM_FINGERPRINT_SERVICE)
+  set(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE "\"kde-fingerprint\"")
+endif()
+
+if (NOT DEFINED KSCREENLOCKER_PAM_SMARTCARD_SERVICE)
+  set(KSCREENLOCKER_PAM_SMARTCARD_SERVICE "\"kde-smartcard\"")
+endif()
+
+if(NOT DEFINED KSCREENLOCKER_PAM_FACE_SERVICE)
+  set(KSCREENLOCKER_PAM_FACE_SERVICE "\"kde-face\"")
+endif()
+
+if(NOT DEFINED KSCREENLOCKER_PAM_UNIVERSAL2FACTOR_SERVICE)
+  set(KSCREENLOCKER_PAM_UNIVERSAL2FACTOR_SERVICE "\"kde-u2f\"")
+endif()
+
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}/../
@@ -11,6 +33,7 @@ set(kscreenlocker_authenticator_SRCS
     pamauthenticators.h
     pamauthenticator.cpp
     pamauthenticator.h
+    pamauthenticatormodel.cpp
 )
 
 ecm_qt_declare_logging_category(kscreenlocker_authenticator_SRCS
@@ -36,6 +59,14 @@ add_library(kscreenlocker_authenticator OBJECT ${kscreenlocker_authenticator_SRC
 target_link_libraries(kscreenlocker_authenticator
     Qt::Core
     ${PAM_LIBRARIES}
+    KF6::ConfigCore
+)
+target_compile_definitions(kscreenlocker_authenticator PRIVATE
+    KSCREENLOCKER_PAM_SERVICE=${KSCREENLOCKER_PAM_SERVICE}
+    KSCREENLOCKER_PAM_FINGERPRINT_SERVICE=${KSCREENLOCKER_PAM_FINGERPRINT_SERVICE}
+    KSCREENLOCKER_PAM_SMARTCARD_SERVICE=${KSCREENLOCKER_PAM_SMARTCARD_SERVICE}
+    KSCREENLOCKER_PAM_FACE_SERVICE=${KSCREENLOCKER_PAM_FACE_SERVICE}
+    KSCREENLOCKER_PAM_UNIVERSAL2FACTOR_SERVICE=${KSCREENLOCKER_PAM_UNIVERSAL2FACTOR_SERVICE}
 )
 
 qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
@@ -64,27 +95,6 @@ target_link_libraries(kscreenlocker_greet
     Wayland::Client
     LayerShellQt::Interface
     KF6::ScreenDpms
-)
-
-# KSCREENLOCKER_PAM_SERVICE, if defined, will already have been
-# enclosed in double quotes by the define_pam_service macro.
-if (NOT DEFINED KSCREENLOCKER_PAM_PASSWORD_SERVICE)
-  set(KSCREENLOCKER_PAM_PASSWORD_SERVICE "\"kde\"")
-endif()
-
-if (NOT DEFINED KSCREENLOCKER_PAM_FINGERPRINT_SERVICE)
-  set(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE "\"kde-fingerprint\"")
-endif()
-
-if (NOT DEFINED KSCREENLOCKER_PAM_SMARTCARD_SERVICE)
-  set(KSCREENLOCKER_PAM_SMARTCARD_SERVICE "\"kde-smartcard\"")
-endif()
-
-target_compile_definitions(kscreenlocker_greet PRIVATE
-    KCHECKPASS_BIN="kcheckpass"
-    KSCREENLOCKER_PAM_SERVICE=${KSCREENLOCKER_PAM_SERVICE}
-    KSCREENLOCKER_PAM_FINGERPRINT_SERVICE=${KSCREENLOCKER_PAM_FINGERPRINT_SERVICE}
-    KSCREENLOCKER_PAM_SMARTCARD_SERVICE=${KSCREENLOCKER_PAM_SMARTCARD_SERVICE}
 )
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})

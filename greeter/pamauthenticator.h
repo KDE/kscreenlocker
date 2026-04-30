@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2020 David Edmundson <davidedmundson@kde.org>
+    SPDX-FileCopyrightText: 2026 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -28,10 +29,13 @@ class PamAuthenticator : public QObject
     Q_PROPERTY(bool unlocked READ isUnlocked NOTIFY succeeded)
 
 public:
+#warning replace these with the other enum in PamAuthenticators also the flags aspect is unused
     enum NoninteractiveAuthenticatorType {
         None = 0,
         Fingerprint = 1 << 0,
         Smartcard = 2 << 0,
+        Face = 3 << 0,
+        Universal2Factor = 4 << 0,
     };
     Q_DECLARE_FLAGS(NoninteractiveAuthenticatorTypes, NoninteractiveAuthenticatorType)
     Q_FLAG(NoninteractiveAuthenticatorTypes)
@@ -91,6 +95,7 @@ private:
     bool m_unavailable = false;
     NoninteractiveAuthenticatorTypes m_authenticatorType;
     QThread m_thread;
+    bool m_interruptable = false;
     PamWorker *d;
 };
 

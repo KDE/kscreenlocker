@@ -67,6 +67,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <xcb/xcb_event.h>
 
 #include "pamauthenticator.h"
+#include "pamauthenticatormodel.h"
 #include "pamauthenticators.h"
 
 // this is usable to fake a "screensaver" installation for testing
@@ -135,13 +136,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_noLock(false)
     , m_shellIntegration(new ShellIntegration(this))
 {
-    auto interactive = std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SERVICE), KUser().loginName());
-    std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
-    noninteractive.push_back(
-        std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE), KUser().loginName(), PamAuthenticator::Fingerprint));
-    noninteractive.push_back(
-        std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SMARTCARD_SERVICE), KUser().loginName(), PamAuthenticator::Smartcard));
-    m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
+    m_authenticators = new PamAuthenticators(KUser().loginName(), this);
     initialize();
 
     if (KWindowSystem::isPlatformX11()) {
@@ -275,6 +270,10 @@ void UnlockApp::initialViewSetup()
                                                   0,
                                                   "Authenticators",
                                                   QStringLiteral("authenticators must be obtained from the context"));
+    qmlRegisterType<PAMAuthenticatorModel>("org.kde.kscreenlocker",
+                                           1,
+                                           0,
+                                           "AuthenticatorModel");
     for (QScreen *screen : screens()) {
         handleScreen(screen);
     }

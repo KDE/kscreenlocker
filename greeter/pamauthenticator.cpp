@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2020 David Edmundson <davidedmundson@kde.org>
+    SPDX-FileCopyrightText: 2026 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -7,15 +8,19 @@
 #include "pamauthenticator.h"
 
 #include <algorithm>
+#include <csignal>
 
 #include <QDebug>
+#include <QElapsedTimer>
 #include <QEventLoop>
 #include <QMetaMethod>
 #include <QThread>
+#include <QtConcurrent/QtConcurrentRun>
 #include <security/pam_appl.h>
 
 #include "kscreenlocker_greet_logging.h"
 
+using namespace std::chrono_literals;
 using namespace Qt::StringLiterals;
 
 namespace
@@ -38,7 +43,7 @@ class PamWorker : public QObject
 {
     Q_OBJECT
 public:
-    PamWorker();
+    PamWorker(bool fingerprint);
     ~PamWorker() override;
     Q_DISABLE_COPY_MOVE(PamWorker)
     void start(const QString &service, const QString &user);
@@ -60,10 +65,12 @@ Q_SIGNALS:
     // internal
     void promptResponseReceived(const QByteArray &prompt);
     void cancelled();
+    void interrupt();
 
 private:
     static int converse(int n, const struct pam_message **msg, struct pam_response **resp, void *data);
 
+    bool m_fingerprint;
     pam_handle_t *m_handle = nullptr; //< the actual PAM handle
     struct pam_conv m_conv;
 
@@ -163,9 +170,10 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
     return PAM_SUCCESS;
 }
 
-PamWorker::PamWorker()
+PamWorker::PamWorker(bool fingerprint)
     : QObject(nullptr)
-    , m_conv({&PamWorker::converse, this})
+    , m_fingerprint(fingerprint)
+    , m_conv({.conv=&PamWorker::converse, .appdata_ptr=this})
     , m_nextAttemptAllowedTime(std::chrono::steady_clock::now())
 {
 }
@@ -186,9 +194,30 @@ void PamWorker::authenticate()
         Q_EMIT failed();
         return;
     }
+
     m_inAuthenticate = true;
     Q_EMIT inAuthenticateChanged(m_inAuthenticate);
+    auto scopedAuthenticate = qScopeGuard([this] {
+        m_inAuthenticate = false;
+        Q_EMIT inAuthenticateChanged(m_inAuthenticate);
+    });
+
     qCDebug(KSCREENLOCKER_GREET, "[PAM worker %s] Authenticate: Starting authentication", qUtf8Printable(m_service));
+
+    auto converseThread = pthread_self();
+    auto interruptConnection = connect(
+        this,
+        &PamWorker::interrupt,
+        this,
+        [&converseThread] {
+            // This is a direct call coming from the other thread. Only do thread-safe things here!
+            pthread_kill(converseThread, SIGINT);
+        },
+        Qt::DirectConnection);
+
+    QElapsedTimer timer;
+    timer.start();
+
     int rc = pam_authenticate(m_handle, 0); // PAM_SILENT);
     qCDebug(KSCREENLOCKER_GREET,
             "[PAM worker %s] Authenticate: Authentication done, result code: %d (%s)",
@@ -196,20 +225,34 @@ void PamWorker::authenticate()
             rc,
             pam_strerror(m_handle, rc));
 
+        qCWarning(KSCREENLOCKER_GREET) << timer.elapsed() << "ms elapsed during pam_authenticate call for service" << qUtf8Printable(m_service) << "with result code" << rc;
+
+    disconnect(interruptConnection);
+
     Q_EMIT busyChanged(false);
 
     if (rc == PAM_SUCCESS) {
         rc = pam_setcred(m_handle, PAM_REFRESH_CRED);
         /* ignore errors on refresh credentials. If this did not work we use the old ones. */
         Q_EMIT succeeded();
+    } else if (rc == PAM_AUTHINFO_UNAVAIL && m_fingerprint) {
+        // For fingerprint authentication, PAM_AUTHINFO_UNAVAIL can mean any number of things, but luckily most of them
+        // are fixed by simply restarting the authentication. The notable case we want to catch here is timeouts.
+        constexpr auto pam_fprintMinimumTimeout = 250ms;
+        // Unless this error was returned suspiciously fast. Then it probably was an actual problem.
+        if (timer.durationElapsed() <= pam_fprintMinimumTimeout) {
+            qCWarning(KSCREENLOCKER_GREET) << "Unexpectedly short auth error on fingerprint reader" << timer.durationElapsed();
+            m_unavailable = true;
+            Q_EMIT unavailabilityChanged(m_unavailable);
+            return;
+        }
+        return;
     } else if (rc == PAM_AUTHINFO_UNAVAIL || rc == PAM_MODULE_UNKNOWN) {
         m_unavailable = true;
         Q_EMIT unavailabilityChanged(m_unavailable);
     } else {
         Q_EMIT failed();
     }
-    m_inAuthenticate = false;
-    Q_EMIT inAuthenticateChanged(m_inAuthenticate);
 }
 
 void PamWorker::startFailedDelay(uint useconds)
@@ -269,11 +312,45 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
       })
     , m_service(service)
     , m_authenticatorType(types)
-    , d(new PamWorker)
+    , d(new PamWorker(types.testFlag(PamAuthenticator::Fingerprint)))
 {
     d->moveToThread(&m_thread);
-
     connect(&m_thread, &QThread::finished, d, &QObject::deleteLater);
+
+    if (types == NoninteractiveAuthenticatorType::Fingerprint) {
+        QMetaObject::invokeMethod(
+            d,
+            [this] {
+                struct sigaction action = {};
+                action.sa_sigaction = +[](int signal, [[maybe_unused]] siginfo_t *info, [[maybe_unused]] void *context) {
+                    if (signal == SIGINT) {
+                        // We are trying to mitigate a race condition here. There is a time window between authenticate starting
+                        // and the pam module setting up its signal handler. To prevent us from doing an unhandled SIGINT
+                        // kill the logic here comes into play. Unless the pam module overrides this handler we'll get
+                        // SIGINT and defer it a number of times. If the module doesn't eventually end up handling
+                        // it we discard the signal under the assumption that the module just doesn't support interruption.
+                        thread_local auto count = 4;
+                        if (count-- <= 0) {
+                            qWarning() << "ignoring SIGINT, too many already" << pthread_self();
+                            return;
+                        }
+                        QFuture<void> foo = QtConcurrent::run([thread = pthread_self()] {
+                            QThread::sleep(4ms);
+                            pthread_kill(thread, SIGINT);
+                        });
+                        return;
+                    }
+                    raise(signal);
+                };
+                auto interruptable = (sigaction(SIGINT, &action, nullptr) != -1);
+                // Inform the front object about the interruptability of the worker object. This prevents racing between
+                // this setup routine and the cancellation logic in PamAuthenticator.
+                QMetaObject::invokeMethod(this, [this, interruptable] {
+                    m_interruptable = interruptable;
+                });
+            },
+            Qt::QueuedConnection);
+    }
 
     connect(d, &PamWorker::busyChanged, this, &PamAuthenticator::setBusy);
     connect(d, &PamWorker::prompt, this, [this](const QString &msg) {
@@ -375,6 +452,9 @@ void PamAuthenticator::respond(const QByteArray &response)
 
 void PamAuthenticator::cancel()
 {
+    if (m_interruptable) {
+        Q_EMIT d->interrupt(); // This is a direct call across the thread boundary!
+    }
     m_prompt.clear();
     m_promptForSecret.clear();
     m_infoMessage.clear();
