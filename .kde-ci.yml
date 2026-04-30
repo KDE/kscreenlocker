@@ -35,3 +35,4 @@ RuntimeDependencies:
 Options:
  require-passing-tests-on: ['@all']
  run-gcovr: true
+ enable-lsan: True
