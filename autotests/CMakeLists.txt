@@ -78,3 +78,8 @@ target_link_libraries(x11LockerTest Qt::GuiPrivate)
 
 add_test(NAME ksmserver-x11LockerTest COMMAND x11LockerTest)
 ecm_mark_as_test(x11LockerTest)
+
+add_test(NAME kcm_smoketest COMMAND kcmshell6 --smoke-test kcm_screenlocker)
+set_tests_properties(kcm_smoketest PROPERTIES
+    ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
+)
