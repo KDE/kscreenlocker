@@ -85,7 +85,7 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
 
     const auto nSize = narrow<size_t>(n);
 
-    *resp = std::make_unique<struct pam_response[]>(nSize).release();
+    *resp = static_cast<struct pam_response *>(calloc(n, sizeof(struct pam_response)));
     auto responses = std::span{*resp, nSize};
 
     auto messages = std::span{msg, nSize};
@@ -136,7 +136,7 @@ int PamWorker::converse(int n, const struct pam_message **msg, struct pam_respon
             Q_EMIT c->busyChanged(true);
 
             const auto responseLengthIncludingNull = response.length() + 1; // QByteArray holds an implicit \0 at the end.
-            pamResponse.resp = std::make_unique<char[]>(responseLengthIncludingNull).release();
+            pamResponse.resp = static_cast<char *>(malloc(responseLengthIncludingNull));
             std::copy_n(response.constData(), responseLengthIncludingNull, pamResponse.resp);
 
             break;
