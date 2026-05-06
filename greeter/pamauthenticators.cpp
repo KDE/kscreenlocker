@@ -97,6 +97,10 @@ PamAuthenticators::PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interac
         qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Interactive authenticator" << qUtf8Printable(d->interactive->service()) << "changed business";
         Q_EMIT busyChanged();
     });
+    connect(d->interactive.get(), &PamAuthenticator::inPasswordDelayChanged, this, [this] {
+        qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Interactive authenticator" << qUtf8Printable(d->interactive->service()) << "changed pam timeout";
+        Q_EMIT inPasswordDelayChanged();
+    });
     connect(d->interactive.get(), &PamAuthenticator::prompt, this, [this] {
         if (!d->hadPrompt) {
             d->hadPrompt = true;
@@ -178,6 +182,11 @@ void PamAuthenticators::setState(AuthenticatorsState state)
 bool PamAuthenticators::isBusy() const
 {
     return d->interactive->isBusy();
+}
+
+bool PamAuthenticators::inPasswordDelay() const
+{
+    return d->interactive->inPasswordDelay();
 }
 
 QString PamAuthenticators::prompt() const

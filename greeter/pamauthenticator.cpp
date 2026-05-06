@@ -12,6 +12,7 @@
 #include <QEventLoop>
 #include <QMetaMethod>
 #include <QThread>
+#include <QTimer>
 #include <security/pam_appl.h>
 
 #include "kscreenlocker_greet_logging.h"
@@ -56,6 +57,7 @@ Q_SIGNALS:
     void succeeded();
     void unavailabilityChanged(bool unavailable);
     void inAuthenticateChanged(bool inAuthenticate);
+    void inPasswordDelayChanged(bool timeout);
 
     // internal
     void promptResponseReceived(const QByteArray &prompt);
@@ -181,10 +183,6 @@ void PamWorker::authenticate()
 {
     if (m_inAuthenticate || m_unavailable) {
         return;
-    } else if (std::chrono::steady_clock::now() < m_nextAttemptAllowedTime) {
-        qCCritical(KSCREENLOCKER_GREET, "[PAM worker %s] Authentication attempt too soon. This shouldn't happen!", qUtf8Printable(m_service));
-        Q_EMIT failed();
-        return;
     }
     m_inAuthenticate = true;
     Q_EMIT inAuthenticateChanged(m_inAuthenticate);
@@ -214,6 +212,10 @@ void PamWorker::authenticate()
 void PamWorker::startFailedDelay(uint useconds)
 {
     m_nextAttemptAllowedTime = std::chrono::steady_clock::now() + std::chrono::microseconds(useconds);
+    Q_EMIT inPasswordDelayChanged(true);
+    QTimer::singleShot(useconds / 1000, this, [this]() {
+        Q_EMIT inPasswordDelayChanged(false);
+    });
     Q_EMIT loginFailedDelayStarted(useconds);
 }
 
@@ -275,6 +277,7 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
     connect(&m_thread, &QThread::finished, d, &QObject::deleteLater);
 
     connect(d, &PamWorker::busyChanged, this, &PamAuthenticator::setBusy);
+    connect(d, &PamWorker::inPasswordDelayChanged, this, &PamAuthenticator::setInPasswordDelay);
     connect(d, &PamWorker::prompt, this, [this](const QString &msg) {
         m_prompt = msg;
         Q_EMIT prompt(msg);
@@ -404,6 +407,17 @@ QString PamAuthenticator::getErrorMessage() const
 QString PamAuthenticator::service() const
 {
     return m_service;
+}
+
+bool PamAuthenticator::inPasswordDelay() const
+{
+    return m_inPasswordDelay;
+}
+
+void PamAuthenticator::setInPasswordDelay(bool timeout)
+{
+    m_inPasswordDelay = timeout;
+    Q_EMIT inPasswordDelayChanged();
 }
 
 #include "pamauthenticator.moc"

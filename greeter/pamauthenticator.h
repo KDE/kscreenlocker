@@ -16,6 +16,7 @@ class PamAuthenticator : public QObject
     Q_OBJECT
 
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
+    Q_PROPERTY(bool inPasswordDelay READ inPasswordDelay NOTIFY inPasswordDelayChanged)
     Q_PROPERTY(bool available READ isAvailable NOTIFY availableChanged)
     Q_PROPERTY(NoninteractiveAuthenticatorTypes authenticatorType READ authenticatorType CONSTANT)
 
@@ -56,6 +57,10 @@ public:
 
     QString service() const;
 
+    bool inPasswordDelay() const;
+
+    void setInPasswordDelay(bool timeout);
+
 Q_SIGNALS:
     void busyChanged();
     void promptForSecret(const QString &msg);
@@ -66,6 +71,7 @@ Q_SIGNALS:
     void failed();
     void availableChanged();
     void loginFailedDelayStarted(const uint uSecDelay);
+    void inPasswordDelayChanged();
 
 public Q_SLOTS:
     void tryUnlock();
@@ -89,6 +95,7 @@ private:
     bool m_unlocked = false;
     bool m_inAuthentication = false;
     bool m_unavailable = false;
+    bool m_inPasswordDelay = false;
     NoninteractiveAuthenticatorTypes m_authenticatorType;
     QThread m_thread;
     PamWorker *d;

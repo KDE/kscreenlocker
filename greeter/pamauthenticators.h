@@ -16,6 +16,7 @@ class PamAuthenticators : public QObject
 
     // these properties delegate to the interactive authenticator
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
+    Q_PROPERTY(bool inPasswordDelay READ inPasswordDelay NOTIFY inPasswordDelayChanged)
 
     Q_PROPERTY(QString prompt READ prompt NOTIFY promptChanged)
     Q_PROPERTY(QString promptForSecret READ promptForSecret NOTIFY promptForSecretChanged)
@@ -53,6 +54,8 @@ public:
     // these properties delegate to the interactive authenticator
     bool isBusy() const;
     Q_SIGNAL void busyChanged();
+    bool inPasswordDelay() const;
+    Q_SIGNAL void inPasswordDelayChanged();
 
     QString prompt() const;
     Q_SIGNAL void promptChanged();
