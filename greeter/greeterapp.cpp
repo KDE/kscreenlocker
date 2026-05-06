@@ -7,9 +7,10 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "greeterapp.h"
 #include "kscreensaversettingsbase.h"
 #include "noaccessnetworkaccessmanagerfactory.h"
-#include "powermanagement.h"
 #include "shell_integration.h"
 #include "wallpaper_integration.h"
+
+#include "../logind.h"
 
 #include <config-kscreenlocker.h>
 #include <iostream>
@@ -126,14 +127,13 @@ public:
 // App
 UnlockApp::UnlockApp(int &argc, char **argv)
     : QGuiApplication(argc, argv)
-    , m_resetRequestIgnoreTimer(new QTimer(this))
     , m_delayedLockTimer(nullptr)
     , m_testing(false)
-    , m_ignoreRequests(false)
     , m_immediateLock(false)
     , m_graceTime(0)
     , m_noLock(false)
     , m_shellIntegration(new ShellIntegration(this))
+    , m_logindIntegration(new LogindIntegration(this))
 {
     auto interactive = std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SERVICE), KUser().loginName());
     std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
@@ -142,6 +142,9 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     noninteractive.push_back(
         std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SMARTCARD_SERVICE), KUser().loginName(), PamAuthenticator::Smartcard));
     m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
+    connect(m_logindIntegration, &LogindIntegration::prepareForSleep, m_authenticators, [this] {
+        m_authenticators->cancel();
+    });
     initialize();
 
     if (KWindowSystem::isPlatformX11()) {
@@ -170,12 +173,6 @@ UnlockApp::~UnlockApp()
 
 void UnlockApp::initialize()
 {
-    // set up the request ignore timeout, so that multiple requests to sleep/suspend/shutdown
-    // are not processed in quick (and confusing) succession)
-    m_resetRequestIgnoreTimer->setSingleShot(true);
-    m_resetRequestIgnoreTimer->setInterval(2000);
-    connect(m_resetRequestIgnoreTimer, &QTimer::timeout, this, &UnlockApp::resetRequestIgnore);
-
     KScreenSaverSettingsBase::self()->load();
 
     setShell(m_shellIntegration->defaultShell());
@@ -199,9 +196,6 @@ void UnlockApp::initialize()
                                           SLOT(osdProgress(QString, int, int, QString)));
     QDBusConnection::sessionBus()
         .connect(s_plasmaShellService, s_osdServicePath, s_osdServiceInterface, QStringLiteral("osdText"), this, SLOT(osdText(QString, QString)));
-
-    connect(PowerManagement::instance(), &PowerManagement::canSuspendChanged, this, &UnlockApp::updateCanSuspend);
-    connect(PowerManagement::instance(), &PowerManagement::canHibernateChanged, this, &UnlockApp::updateCanHibernate);
 }
 
 QWindow *UnlockApp::getActiveScreen()
@@ -421,18 +415,6 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
     lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
 
-    QQmlProperty sleepProperty(view->rootObject(), QStringLiteral("suspendToRamSupported"));
-    sleepProperty.write(PowerManagement::instance()->canSuspend());
-    if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToRam()").constData()) != -1) {
-        connect(view->rootObject(), SIGNAL(suspendToRam()), SLOT(suspendToRam()));
-    }
-
-    QQmlProperty hibernateProperty(view->rootObject(), QStringLiteral("suspendToDiskSupported"));
-    hibernateProperty.write(PowerManagement::instance()->canHibernate());
-    if (view->rootObject() && view->rootObject()->metaObject()->indexOfSignal(QMetaObject::normalizedSignature("suspendToDisk()").constData()) != -1) {
-        connect(view->rootObject(), SIGNAL(suspendToDisk()), SLOT(suspendToDisk()));
-    }
-
     // verify that the engine's controller didn't change
     Q_ASSERT(dynamic_cast<NoAccessNetworkAccessManagerFactory *>(view->engine()->networkAccessManagerFactory()));
 
@@ -512,37 +494,6 @@ void UnlockApp::graceLockEnded()
         QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
         lockProperty.write(true);
     }
-}
-
-void UnlockApp::resetRequestIgnore()
-{
-    m_ignoreRequests = false;
-}
-
-void UnlockApp::suspendToRam()
-{
-    if (m_ignoreRequests) {
-        return;
-    }
-
-    m_ignoreRequests = true;
-    m_resetRequestIgnoreTimer->start();
-    m_authenticators->cancel();
-
-    PowerManagement::instance()->suspend();
-}
-
-void UnlockApp::suspendToDisk()
-{
-    if (m_ignoreRequests) {
-        return;
-    }
-
-    m_ignoreRequests = true;
-    m_resetRequestIgnoreTimer->start();
-    m_authenticators->cancel();
-
-    PowerManagement::instance()->hibernate();
 }
 
 void UnlockApp::setTesting(bool enable)
@@ -722,22 +673,6 @@ void UnlockApp::osdText(const QString &icon, const QString &additionalText)
         osd->setProperty("osdValue", additionalText);
         osd->setProperty("icon", icon);
         QMetaObject::invokeMethod(osd, "show");
-    }
-}
-
-void UnlockApp::updateCanSuspend()
-{
-    for (auto it = m_views.constBegin(), end = m_views.constEnd(); it != end; ++it) {
-        QQmlProperty sleepProperty((*it)->rootObject(), QStringLiteral("suspendToRamSupported"));
-        sleepProperty.write(PowerManagement::instance()->canSuspend());
-    }
-}
-
-void UnlockApp::updateCanHibernate()
-{
-    for (auto it = m_views.constBegin(), end = m_views.constEnd(); it != end; ++it) {
-        QQmlProperty hibernateProperty((*it)->rootObject(), QStringLiteral("suspendToDiskSupported"));
-        hibernateProperty.write(PowerManagement::instance()->canHibernate());
     }
 }
 

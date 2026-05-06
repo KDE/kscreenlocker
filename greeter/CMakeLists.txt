@@ -25,11 +25,20 @@ ecm_qt_declare_logging_category(kscreenlocker_authenticator_SRCS
 set(kscreenlocker_greet_SRCS
    greeterapp.cpp
    main.cpp
-   powermanagement.cpp
    noaccessnetworkaccessmanagerfactory.cpp
+   ../logind.cpp
    greeterapp.h
-   powermanagement.h
    noaccessnetworkaccessmanagerfactory.h
+   ../logind.h
+)
+
+ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
+    HEADER kscreenlocker_logging.h
+    IDENTIFIER KSCREENLOCKER
+    CATEGORY_NAME kscreenlocker
+    DEFAULT_SEVERITY Warning
+    DESCRIPTION "KScreenLocker"
+    EXPORT KSCREENLOCKER
 )
 
 add_library(kscreenlocker_authenticator OBJECT ${kscreenlocker_authenticator_SRCS})
@@ -58,6 +67,7 @@ target_link_libraries(kscreenlocker_greet
     KF6::WindowSystem
     KF6::I18nQml
     Plasma::PlasmaQuick
+    Qt::DBus
     Qt::Quick
     Qt::Qml
     X11::X11

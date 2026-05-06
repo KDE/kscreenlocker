@@ -25,6 +25,7 @@ class QuickViewSharedEngine;
 }
 
 class Authenticator;
+class LogindIntegration;
 
 struct org_kde_ksld;
 
@@ -65,9 +66,6 @@ protected:
 private Q_SLOTS:
     void handleScreen(QScreen *screen);
     PlasmaQuick::QuickViewSharedEngine *createViewForScreen(QScreen *screen);
-    void resetRequestIgnore();
-    void suspendToRam();
-    void suspendToDisk();
     void getFocus();
     void markViewsAsVisible(PlasmaQuick::QuickViewSharedEngine *view);
     void graceLockEnded();
@@ -82,17 +80,13 @@ private:
     QString m_packageName;
     QUrl m_mainQmlPath;
     QList<PlasmaQuick::QuickViewSharedEngine *> m_views;
-    QTimer *m_resetRequestIgnoreTimer;
     QTimer *m_delayedLockTimer;
     bool m_testing;
-    bool m_ignoreRequests;
     bool m_immediateLock;
     PamAuthenticators *m_authenticators;
     int m_graceTime;
     bool m_noLock;
 
-    bool m_canSuspend = false;
-    bool m_canHibernate = false;
     QString m_userName, m_userImage;
 
     wl_display *m_display = nullptr;
@@ -100,5 +94,6 @@ private:
 
     KPackage::Package m_wallpaperPackage;
     ShellIntegration *m_shellIntegration;
+    LogindIntegration *m_logindIntegration;
 };
 } // namespace
