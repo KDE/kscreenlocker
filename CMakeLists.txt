@@ -189,7 +189,6 @@ ecm_qt_declare_logging_category(ksld_SRCS
     HEADER kscreenlocker_logging.h
     IDENTIFIER KSCREENLOCKER
     CATEGORY_NAME kscreenlocker
-    DEFAULT_SEVERITY Warning
     DESCRIPTION "KScreenLocker"
     EXPORT KSCREENLOCKER
 )

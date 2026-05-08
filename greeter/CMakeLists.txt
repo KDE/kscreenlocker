@@ -17,7 +17,6 @@ ecm_qt_declare_logging_category(kscreenlocker_authenticator_SRCS
     HEADER kscreenlocker_greet_logging.h
     IDENTIFIER KSCREENLOCKER_GREET
     CATEGORY_NAME kscreenlocker_greet
-    DEFAULT_SEVERITY Info
     DESCRIPTION "KScreenLocker (greeter)"
     EXPORT KSCREENLOCKER
 )
@@ -36,7 +35,6 @@ ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
     HEADER kscreenlocker_logging.h
     IDENTIFIER KSCREENLOCKER
     CATEGORY_NAME kscreenlocker
-    DEFAULT_SEVERITY Warning
     DESCRIPTION "KScreenLocker"
     EXPORT KSCREENLOCKER
 )
