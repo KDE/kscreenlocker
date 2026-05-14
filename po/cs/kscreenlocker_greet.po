@@ -35,7 +35,7 @@ msgstr "Sezení bylo uzamčeno uživatelem %1"
 
 #: fallbacktheme/Greeter.qml:83
 msgid "Password"
-msgstr ""
+msgstr "Heslo"
 
 #: fallbacktheme/Greeter.qml:101
 msgid "(or place your fingerprint on the reader)"

@@ -28,10 +28,8 @@ msgid "The session has been locked by %1"
 msgstr "Sedenie zamkol %1"
 
 #: fallbacktheme/Greeter.qml:83
-#, fuzzy
-#| msgid "Password:"
 msgid "Password"
-msgstr "Heslo:"
+msgstr "Heslo"
 
 #: fallbacktheme/Greeter.qml:101
 msgid "(or place your fingerprint on the reader)"
