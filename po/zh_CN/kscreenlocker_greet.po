@@ -31,7 +31,7 @@ msgstr "会话已被 %1 锁定"
 
 #: fallbacktheme/Greeter.qml:83
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: fallbacktheme/Greeter.qml:101
 msgid "(or place your fingerprint on the reader)"
