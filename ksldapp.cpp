@@ -215,8 +215,6 @@ void KSldApp::initialize()
         }
         if (m_lockGrace) { // short-circuit if grace time is zero
             m_inGraceTime = true;
-        } else if (m_lockGrace == -1) {
-            m_inGraceTime = true; // if no timeout configured, grace time lasts forever
         }
 
         qCDebug(KSCREENLOCKER) << "Idle timeout reached. Locking now.";
