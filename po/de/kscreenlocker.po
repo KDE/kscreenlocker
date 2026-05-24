@@ -1,13 +1,13 @@
-# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
-# SPDX-FileCopyrightText: 2012, 2014, 2015, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
-# SPDX-FileCopyrightText: 2012, 2013, 2015, 2017, 2018, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2012, 2014-2015, 2022-2023 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2012-2013, 2015, 2017-2018, 2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2023 Frank Steinmetzger <dev-kde@felsenfleischer.de>
+# SPDX-FileCopyrightText: 2025-2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-03 00:48+0000\n"
-"PO-Revision-Date: 2025-07-11 09:12+0200\n"
+"PO-Revision-Date: 2026-05-21 14:52+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -42,8 +42,10 @@ msgid ""
 msgstr ""
 "Die Bildschirmsperre ist gestört und die Sitzung kann nicht wieder "
 "freigegeben\n"
-"werden. Zum Freigeben wechseln Sie auf eine Konsole (z. B. Strg+Alt+F%1),\n"
-"melden Sie sich als Systemverwalter an und führen Sie diesen Befehl:\n"
+"werden. Zum Freigeben wechseln Sie zu einer Konsole (z. B. mit Strg+Alt+F"
+"%1),\n"
+"melden Sie sich als Systemverwalter an und führen Sie den folgenden Befehl "
+"aus:\n"
 "\n"
 "# ck-unlock-session <session-name>\n"
 "\n"
@@ -66,12 +68,14 @@ msgid ""
 msgstr ""
 "Die Bildschirmsperre ist gestört und die Sitzung kann nicht wieder "
 "freigegeben\n"
-"werden. Zum Freigeben wechseln Sie auf eine Konsole (z. B. Strg+Alt+F%1),\n"
-"melden Sie sich mit Ihren Zugangsdaten an und führen Sie den Befehl:\n"
+"werden. Zum Freigeben wechseln Sie zu einer Konsole (z. B. mit Strg+Alt+F"
+"%1),\n"
+"melden Sie sich mit Ihren Zugangsdaten an und führen Sie den folgenden "
+"Befehl aus:\n"
 "\n"
 "loginctl unlock-session %2\n"
 "\n"
-"aus. Melden Sie sich danach mit Strg+D aus der virtuellen Sitzung ab\n"
+"Melden Sie sich danach mit Strg+D aus der virtuellen Sitzung ab\n"
 "und wechseln Sie mit Strg+Alt+F%3 wieder zur laufenden Sitzung.\n"
 
 #: ksldapp.cpp:183
