@@ -262,12 +262,6 @@ void PamWorker::start(const QString &service, const QString &user)
 
 PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, NoninteractiveAuthenticatorTypes types, QObject *parent)
     : QObject(parent)
-    , m_signalsToMembers({
-          {QMetaMethod::fromSignal(&PamAuthenticator::prompt), m_prompt},
-          {QMetaMethod::fromSignal(&PamAuthenticator::promptForSecret), m_promptForSecret},
-          {QMetaMethod::fromSignal(&PamAuthenticator::infoMessage), m_infoMessage},
-          {QMetaMethod::fromSignal(&PamAuthenticator::errorMessage), m_errorMessage},
-      })
     , m_service(service)
     , m_authenticatorType(types)
     , d(new PamWorker)

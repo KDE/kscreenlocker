@@ -84,7 +84,6 @@ protected:
 private:
     void setBusy(bool busy);
 
-    const std::vector<std::pair<QMetaMethod, const QString &>> m_signalsToMembers;
     // NOTE Don't forget to reset in cancel as necessary
     QString m_prompt;
     QString m_promptForSecret;
