@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-03 00:48+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-05-31 19:41-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -24,6 +25,10 @@ msgid ""
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
 "of which could be found on your system."
 msgstr ""
+"ئېكران قۇلۇپلاش پىروگراممىسى بۇزۇلغان ئەمدى ئېكران قۇلۇپىنى ئاچقىلى "
+"بولمايدۇ.\n"
+"قۇلۇپ ئېچىشتا ConsoleKit ياكى LoginD كېرەك، ئەمما سىستېمىدا ھېچقايسىسى "
+"تېپىلمىدى."
 
 #: abstractlocker.cpp:47
 #, kde-format
@@ -36,6 +41,13 @@ msgid ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 msgstr ""
+"ئېكران قۇلۇپلاش پىروگراممىسى بۇزۇلغان ئەمدى ئېكران قۇلۇپىنى ئاچقىلى "
+"بولمايدۇ.\n"
+"قۇلۇپ ئېچىشتا مەۋھۇم تېرمىنالغا ئالمىشىپ (مەسىلەن، Ctrl+Alt+F%1)، \n"
+"ئالىي باشقۇرغۇچى root سالاھىيىتىدە تىزىمغا كىرىپ بۇيرۇق ئىجرا قىلىش كېرەك:\n"
+"\n"
+"# ck-unlock-session <session-name>\n"
+"\n"
 
 #: abstractlocker.cpp:52
 #, kde-format
@@ -53,38 +65,50 @@ msgid ""
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
 msgstr ""
+"ئېكران قۇلۇپلاش پىروگراممىسى بۇزۇلغان ئەمدى ئېكران قۇلۇپىنى ئاچقىلى "
+"بولمايدۇ.\n"
+"قۇلۇپ ئېچىشتا مەۋھۇم تېرمىنالغا ئالمىشىپ (مەسىلەن، Ctrl+Alt+F%1)، \n"
+"ھېسابىڭىزدا تىزىمغا كىرىپ بۇيرۇق ئىجرا قىلىش كېرەك:\n"
+"\n"
+"loginctl unlock-session %2\n"
+"\n"
+"ئاندىن كېيىن Ctrl+D نى بېسىپ مەۋھۇم تېرمىنالدىن تىزىمدىن چىقىپ،  ئىجرا "
+"قىلىنىۋاتقان جەريانچاق (Ctrl+Alt+F%3) قا قايتىڭ.\n"
+"ئەگەر بۇ تەرتىپنى ئۇنتۇپ قالغان بولسىڭىز Ctrl+Alt+F%3 نى بېسىپ بۇ ئېكرانغا "
+"قايتالايسىز\n"
+"\n"
 
 #: ksldapp.cpp:183
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
-msgstr ""
+msgstr "جەريانچاق باشقۇرۇش"
 
 #: ksldapp.cpp:185
 #, kde-format
 msgid "Lock Session"
-msgstr "ئەڭگىمەنى قۇلۇپلاش"
+msgstr "جەريانچاقنى قۇلۇپلا"
 
 #: ksldapp.cpp:449
 #, kde-format
 msgid "Screen locked"
-msgstr ""
+msgstr "ئېكران قۇلۇپلانغان"
 
 #: ksldapp.cpp:617
 #, kde-format
 msgid "Screen unlocked"
-msgstr ""
+msgstr "ئېكران قۇلۇپى ئوچۇق"
 
 #: logind.cpp:162
 #, kde-format
 msgid "Screen Locker"
-msgstr ""
+msgstr "ئېكران قۇلۇپى"
 
 #: logind.cpp:162
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
-msgstr ""
+msgstr "ئۇيغۇ ھالىتىگە كىرىشتىن ئىلگىرى ئېكران قۇلۇپلانغان بولۇشى كېرەك"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
