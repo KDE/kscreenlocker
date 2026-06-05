@@ -3,13 +3,13 @@
 #
 # Balázs Úr <urbalazs@gmail.com>, 2012.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2014, 2020.
-# SPDX-FileCopyrightText: 2021, 2024, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2024-2026 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-03 00:48+0000\n"
-"PO-Revision-Date: 2025-02-03 21:14+0100\n"
+"PO-Revision-Date: 2026-06-04 20:58+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: abstractlocker.cpp:43
 #, kde-format
@@ -70,8 +70,8 @@ msgstr ""
 "\n"
 "loginctl unlock-session %2\n"
 "\n"
-"Ezután jelentkezzen ki a virtuális munkamenetből a Ctrl+D megnyomásával, és "
-"váltson vissza a futó munkamenetre (Ctrl+Alt+F%3).\n"
+"Ezután jelentkezzen ki a virtuális munkamenetből a Ctrl+D megnyomásával,\n"
+"és váltson vissza a futó munkamenetre (Ctrl+Alt+F%3).\n"
 "\n"
 
 #: ksldapp.cpp:183
