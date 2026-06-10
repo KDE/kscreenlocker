@@ -149,7 +149,7 @@ set(KSLD_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KScreenLocker")
 include(ECMQtDeclareLoggingCategory)
 
 ecm_set_disabled_deprecation_versions(QT 6.11.0
-    KF 6.23.0
+    KF 6.27.0
 )
 
 add_subdirectory(greeter)
