@@ -36,7 +36,7 @@ public:
         , m_lockAction(nullptr)
     {
         m_actionCollection->setConfigGlobal(true);
-        m_actionCollection->setComponentDisplayName(i18n("Session Management"));
+        m_actionCollection->setComponentDisplayName(i18nc("Name of a category in System Settings' Shortcuts KCM; match it exactly", "Session Management"));
         m_lockAction = m_actionCollection->addAction(QStringLiteral("Lock Session"));
         m_lockAction->setProperty("isConfigurationAction", true);
         m_lockAction->setText(i18n("Lock Session"));
