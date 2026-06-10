@@ -13,7 +13,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include "logind.h"
 #include "powermanagement_inhibition.h"
 #include "waylandlocker.h"
-#include "x11locker.h"
 
 #include "kscreenlocker_logging.h"
 #include <config-kscreenlocker.h>
@@ -34,13 +33,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QKeyEvent>
 #include <QProcess>
 #include <QTimer>
-// X11
-#include "x11info.h"
-#include <X11/Xlib.h>
-#include <xcb/xcb.h>
-#if X11_Xinput_FOUND
-#include <X11/extensions/XInput2.h>
-#endif
 // other
 #include <signal.h>
 #include <unistd.h>
@@ -91,18 +83,11 @@ KSldApp::KSldApp(QObject *parent)
     , m_greeterEnv(QProcessEnvironment::systemEnvironment())
     , m_powerManagementInhibition(new PowerManagementInhibition(this))
 {
-    m_isX11 = X11Info::isPlatformX11();
-    m_isWayland = QCoreApplication::instance()->property("platformName").toString().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive);
 }
 
 KSldApp::~KSldApp()
 {
 }
-
-static int s_XTimeout;
-static int s_XInterval;
-static int s_XBlanking;
-static int s_XExposures;
 
 void KSldApp::cleanUp()
 {
@@ -114,64 +99,17 @@ void KSldApp::cleanUp()
     }
     delete m_lockProcess;
     delete m_lockWindow;
-
-    // Restore X screensaver parameters
-    XSetScreenSaver(X11Info::display(), s_XTimeout, s_XInterval, s_XBlanking, s_XExposures);
 }
 
 static bool s_graceTimeKill = false;
 static bool s_logindExit = false;
 static bool s_lockProcessRequestedExit = false;
 
-static bool hasXInput()
-{
-#if X11_Xinput_FOUND
-    Display *dpy = X11Info::display();
-    int xi_opcode, event, error;
-    // init XInput extension
-    if (!XQueryExtension(dpy, "XInputExtension", &xi_opcode, &event, &error)) {
-        return false;
-    }
-
-    // verify that the XInput extension is at at least version 2.0
-    int major = 2, minor = 0;
-    int result = XIQueryVersion(dpy, &major, &minor);
-    if (result == BadImplementation) {
-        // Xinput 2.2 returns BadImplementation if checked against 2.0
-        major = 2;
-        minor = 2;
-        return XIQueryVersion(dpy, &major, &minor) == Success;
-    }
-    return result == Success;
-#else
-    return false;
-#endif
-}
-
-void KSldApp::initializeX11()
-{
-    qCDebug(KSCREENLOCKER) << "Initializing X11";
-
-    m_hasXInput2 = hasXInput();
-    // Save X screensaver parameters
-    XGetScreenSaver(X11Info::display(), &s_XTimeout, &s_XInterval, &s_XBlanking, &s_XExposures);
-    // And disable it. The internal X screensaver is not used at all, but we use its
-    // internal idle timer (and it is also used by DPMS support in X). This timer must not
-    // be altered by this code, since e.g. resetting the counter after activating our
-    // screensaver would prevent DPMS from activating. We use the timer merely to detect
-    // user activity.
-    XSetScreenSaver(X11Info::display(), 0, s_XInterval, s_XBlanking, s_XExposures);
-}
-
 void KSldApp::initialize()
 {
     qCDebug(KSCREENLOCKER) << "Initializing";
 
     m_requirePassword = KScreenSaverSettings::requirePassword();
-
-    if (m_isX11) {
-        initializeX11();
-    }
 
     // Global keys
     if (KAuthorized::authorizeAction(QStringLiteral("lock_screen"))) {
@@ -335,11 +273,6 @@ void KSldApp::initialize()
             lock(EstablishLock::Immediate);
         }
     });
-    if (m_isX11) {
-        // on Wayland, KWin handles this, but on X11 we need to handle it ourselves
-        connect(this, &KSldApp::inhibitSuspend, m_logind, &LogindIntegration::inhibit);
-        connect(this, &KSldApp::uninhibitSuspend, m_logind, &LogindIntegration::uninhibit);
-    }
     connect(this, &KSldApp::locked, this, [this]() {
         Q_EMIT uninhibitSuspend();
         m_logind->setLocked(true);
@@ -434,18 +367,6 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
         Q_EMIT aboutToLock();
     }
 
-    if (!establishGrab()) {
-        if (attemptCount < 3) {
-            qCWarning(KSCREENLOCKER) << "Could not establish screen lock. Trying again in 10ms";
-            QTimer::singleShot(10, this, [this, establishLock, attemptCount]() {
-                lock(establishLock, attemptCount + 1);
-            });
-        } else {
-            qCCritical(KSCREENLOCKER) << "Could not establish screen lock";
-        }
-        return;
-    }
-
     KNotification::event(QStringLiteral("locked"), i18n("Screen locked"), QPixmap(), KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
 
     s_lockProcessRequestedExit = false;
@@ -461,150 +382,9 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
     Q_EMIT lockStateChanged();
 }
 
-/*
- * Forward declarations:
- * Only called from KSldApp::establishGrab(). Using from somewhere else is incorrect usage!
- **/
-static bool grabKeyboard();
-static bool grabMouse();
-
-class XServerGrabber
-{
-public:
-    XServerGrabber()
-    {
-        xcb_grab_server(X11Info::connection());
-    }
-    ~XServerGrabber()
-    {
-        xcb_ungrab_server(X11Info::connection());
-        xcb_flush(X11Info::connection());
-    }
-};
-
-bool KSldApp::establishGrab()
-{
-    qCDebug(KSCREENLOCKER) << "Establishing grab";
-
-    if (m_isWayland) {
-        return true;
-    }
-    if (!m_isX11) {
-        return true;
-    }
-    XSync(X11Info::display(), False);
-    XServerGrabber serverGrabber;
-    if (!grabKeyboard()) {
-        return false;
-    }
-
-    if (!grabMouse()) {
-        XUngrabKeyboard(X11Info::display(), CurrentTime);
-        XFlush(X11Info::display());
-        return false;
-    }
-
-#if X11_Xinput_FOUND
-    if (m_hasXInput2) {
-        // get all devices
-        Display *dpy = X11Info::display();
-        int numMasters;
-        XIDeviceInfo *masters = XIQueryDevice(dpy, XIAllMasterDevices, &numMasters);
-        bool success = true;
-        for (int i = 0; i < numMasters; ++i) {
-            // ignoring core pointer and core keyboard as we already grabbed them
-            if (qstrcmp(masters[i].name, "Virtual core pointer") == 0) {
-                continue;
-            }
-            if (qstrcmp(masters[i].name, "Virtual core keyboard") == 0) {
-                continue;
-            }
-            XIEventMask mask;
-            uchar bitmask[] = {0, 0};
-            mask.deviceid = masters[i].deviceid;
-            mask.mask = bitmask;
-            mask.mask_len = sizeof(bitmask);
-            XISetMask(bitmask, XI_ButtonPress);
-            XISetMask(bitmask, XI_ButtonRelease);
-            XISetMask(bitmask, XI_Motion);
-            XISetMask(bitmask, XI_Enter);
-            XISetMask(bitmask, XI_Leave);
-            const int result = XIGrabDevice(dpy,
-                                            masters[i].deviceid,
-                                            X11Info::appRootWindow(),
-                                            XCB_TIME_CURRENT_TIME,
-                                            XCB_CURSOR_NONE,
-                                            XIGrabModeAsync,
-                                            XIGrabModeAsync,
-                                            True,
-                                            &mask);
-            if (result != XIGrabSuccess) {
-                success = false;
-                break;
-            }
-        }
-        if (!success) {
-            // ungrab all devices again
-            for (int i = 0; i < numMasters; ++i) {
-                XIUngrabDevice(dpy, masters[i].deviceid, XCB_TIME_CURRENT_TIME);
-            }
-            xcb_connection_t *c = X11Info::connection();
-            xcb_ungrab_keyboard(c, XCB_CURRENT_TIME);
-            xcb_ungrab_pointer(c, XCB_CURRENT_TIME);
-        }
-        XIFreeDeviceInfo(masters);
-        XFlush(dpy);
-        return success;
-    }
-#endif
-
-    return true;
-}
-
-static bool grabKeyboard()
-{
-    qCDebug(KSCREENLOCKER) << "Grabbing keyboard";
-
-    int rv = XGrabKeyboard(X11Info::display(), X11Info::appRootWindow(), True, GrabModeAsync, GrabModeAsync, CurrentTime);
-
-    return (rv == GrabSuccess);
-}
-
-static bool grabMouse()
-{
-    qCDebug(KSCREENLOCKER) << "Grabbing mouse";
-
-#define GRABEVENTS ButtonPressMask | ButtonReleaseMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask
-    int rv = XGrabPointer(X11Info::display(), X11Info::appRootWindow(), True, GRABEVENTS, GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
-#undef GRABEVENTS
-
-    return (rv == GrabSuccess);
-}
-
 void KSldApp::doUnlock()
 {
     qCDebug(KSCREENLOCKER) << "Unlocking now.";
-
-    if (m_isX11) {
-        xcb_connection_t *c = X11Info::connection();
-        xcb_ungrab_keyboard(c, XCB_CURRENT_TIME);
-        xcb_ungrab_pointer(c, XCB_CURRENT_TIME);
-        xcb_flush(c);
-#if X11_Xinput_FOUND
-        if (m_hasXInput2) {
-            // get all devices
-            Display *dpy = X11Info::display();
-            int numMasters;
-            XIDeviceInfo *masters = XIQueryDevice(dpy, XIAllMasterDevices, &numMasters);
-            // ungrab all devices again
-            for (int i = 0; i < numMasters; ++i) {
-                XIUngrabDevice(dpy, masters[i].deviceid, XCB_TIME_CURRENT_TIME);
-            }
-            XIFreeDeviceInfo(masters);
-            XFlush(dpy);
-        }
-#endif
-    }
     hideLockWindow();
     // delete the window again, to get rid of event filter
     delete m_lockWindow;
@@ -638,7 +418,7 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
 
     QProcessEnvironment env = m_greeterEnv;
 
-    if (m_isWayland && m_waylandFd >= 0) {
+    if (m_waylandFd >= 0) {
         int socket = dup(m_waylandFd);
         if (socket >= 0) {
             env.insert(QStringLiteral("WAYLAND_SOCKET"), QString::number(socket));
@@ -707,24 +487,7 @@ void KSldApp::showLockWindow()
     if (!m_lockWindow) {
         qCDebug(KSCREENLOCKER) << "Creating lock window";
 
-        if (m_isX11) {
-            m_lockWindow = new X11Locker(this);
-
-            connect(
-                m_lockWindow,
-                &AbstractLocker::userActivity,
-                m_lockWindow,
-                [this]() {
-                    if (isGraceTime() || !m_requirePassword) {
-                        unlock();
-                    }
-                },
-                Qt::QueuedConnection);
-        }
-
-        if (m_isWayland) {
-            m_lockWindow = new WaylandLocker(this);
-        }
+        m_lockWindow = new WaylandLocker(this);
         if (!m_lockWindow) {
             return;
         }
@@ -735,9 +498,6 @@ void KSldApp::showLockWindow()
         connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
     m_lockWindow->showLockWindow();
-    if (m_isX11) {
-        XSync(X11Info::display(), False);
-    }
 }
 
 void KSldApp::hideLockWindow()
@@ -810,9 +570,6 @@ void KSldApp::updateIdleTimeout()
         m_idleId = 0;
     } else if (!hasTimeout && !inhibited && timeoutConfigured) {
         std::chrono::duration<double, std::chrono::minutes::period> timeout(KScreenSaverSettings::timeout());
-        if (QGuiApplication::platformName() == QLatin1StringView("xcb")) {
-            timeout += std::chrono::milliseconds(KIdleTime::instance()->idleTime());
-        }
         m_idleId = KIdleTime::instance()->addIdleTimeout(std::chrono::duration_cast<std::chrono::milliseconds>(timeout));
     }
 }
@@ -849,9 +606,7 @@ void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
     qCDebug(KSCREENLOCKER) << "Setting greeter environment";
 
     m_greeterEnv = env;
-    if (m_isWayland) {
-        m_greeterEnv.insert(QStringLiteral("QT_QPA_PLATFORM"), QStringLiteral("wayland"));
-    }
+    m_greeterEnv.insert(QStringLiteral("QT_QPA_PLATFORM"), QStringLiteral("wayland"));
 }
 
 bool KSldApp::event(QEvent *event)

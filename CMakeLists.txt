@@ -62,16 +62,6 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
 
-find_package(X11)
-set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
-                        URL "https://www.x.org"
-                        TYPE REQUIRED
-                        PURPOSE "Required for building the X11 based workspace")
-
-find_package(XCB MODULE REQUIRED COMPONENTS XCB KEYSYMS UTIL XTEST)
-set_package_properties(XCB PROPERTIES TYPE REQUIRED)
-add_feature_info("XInput" X11_Xinput_FOUND "Required for grabbing XInput2 devices in the screen locker")
-
 find_package(WaylandScanner)
 find_package(Wayland 1.3 COMPONENTS Client Server)
 find_package(LayerShellQt REQUIRED)
@@ -167,7 +157,6 @@ set(ksld_SRCS
    ksldapp.cpp
    interface.cpp
    globalaccel.cpp
-   x11locker.cpp
    waylandlocker.cpp
    logind.cpp
    waylandserver.cpp
@@ -176,7 +165,6 @@ set(ksld_SRCS
    ksldapp.h
    interface.h
    globalaccel.h
-   x11locker.h
    waylandlocker.h
    logind.h
    waylandserver.h
@@ -216,9 +204,6 @@ PRIVATE
    KF6::ConfigGui
    KF6::Package
    KF6::WindowSystem
-   X11::X11
-   XCB::XCB
-   XCB::KEYSYMS
    Wayland::Server
 )
 
@@ -229,10 +214,6 @@ target_compile_definitions(KScreenLocker PRIVATE
     KSCREENLOCKER_GREET_BIN_ABS="${kscreenlocker_greet_bin_abs}"
     KSCREENLOCKER_GREET_BIN_REL="${kscreenlocker_greet_bin_rel}"
 )
-
-if (X11_Xinput_FOUND)
-    target_link_libraries(KScreenLocker PRIVATE X11::Xi)
-endif()
 
 target_include_directories(KScreenLocker INTERFACE "$<INSTALL_INTERFACE:${KSLD_INCLUDEDIR}>")
 

@@ -15,11 +15,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QKeyEvent>
 #include <QRegularExpression>
 
-#include "x11info.h"
-#include <X11/keysym.h>
-#include <xcb/xcb.h>
-#include <xcb/xcb_keysyms.h>
-
 static const QString s_kglobalAccelService = QStringLiteral("org.kde.kglobalaccel");
 static const QString s_componentInterface = QStringLiteral("org.kde.kglobalaccel.Component");
 
@@ -42,15 +37,6 @@ static const QMap<QString, QRegularExpression> s_shortcutWhitelist{
     {QStringLiteral("/component/kwin"), QRegularExpression(QStringLiteral("view_zoom_in|view_zoom_out|view_actual_size"))},
 };
 
-static uint g_keyModMaskXAccel = 0;
-static uint g_keyModMaskXOnOrOff = 0;
-
-static void calculateGrabMasks()
-{
-    g_keyModMaskXAccel = KKeyServer::accelModMaskX();
-    g_keyModMaskXOnOrOff = KKeyServer::modXLock() | KKeyServer::modXNumLock() | KKeyServer::modXScrollLock() | KKeyServer::modXModeSwitch();
-}
-
 GlobalAccel::GlobalAccel(QObject *parent)
     : QObject(parent)
 {
@@ -66,11 +52,6 @@ void GlobalAccel::prepare()
     }
     // first ensure that we don't have some left over
     release();
-
-    if (X11Info::isPlatformX11()) {
-        m_keySymbols = xcb_key_symbols_alloc(X11Info::connection());
-        calculateGrabMasks();
-    }
 
     // fetch all components from KGlobalAccel
     m_updatingInformation++;
@@ -153,10 +134,6 @@ void GlobalAccel::components(QDBusPendingCallWatcher *self)
 void GlobalAccel::release()
 {
     m_shortcuts.clear();
-    if (m_keySymbols) {
-        xcb_key_symbols_free(m_keySymbols);
-        m_keySymbols = nullptr;
-    }
 }
 
 bool GlobalAccel::keyEvent(QKeyEvent *event)
@@ -184,70 +161,6 @@ bool GlobalAccel::keyEvent(QKeyEvent *event)
                 signal.setArguments(QList<QVariant>{QVariant(info.uniqueName())});
                 QDBusConnection::sessionBus().asyncCall(signal);
                 event->setAccepted(true);
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-bool GlobalAccel::checkKeyPress(xcb_key_press_event_t *event)
-{
-    if (!m_keySymbols) {
-        return false;
-    }
-    // based and inspired from code in kglobalaccel_x11.cpp
-    xcb_keycode_t keyCodeX = event->detail;
-    uint16_t keyModX = event->state & (g_keyModMaskXAccel | KKeyServer::MODE_SWITCH);
-
-    xcb_keysym_t keySymX = xcb_key_press_lookup_keysym(m_keySymbols, event, 0);
-
-    // If numlock is active and a keypad key is pressed, XOR the SHIFT state.
-    //  e.g., KP_4 => Shift+KP_Left, and Shift+KP_4 => KP_Left.
-    if (event->state & KKeyServer::modXNumLock()) {
-        xcb_keysym_t sym = xcb_key_symbols_get_keysym(m_keySymbols, keyCodeX, 0);
-        // If this is a keypad key,
-        if (sym >= XK_KP_Space && sym <= XK_KP_9) {
-            switch (sym) {
-            // Leave the following keys unaltered
-            // FIXME: The proper solution is to see which keysyms don't change when shifted.
-            case XK_KP_Multiply:
-            case XK_KP_Add:
-            case XK_KP_Subtract:
-            case XK_KP_Divide:
-                break;
-
-            default:
-                keyModX ^= KKeyServer::modXShift();
-            }
-        }
-    }
-
-    int keyCodeQt;
-    KKeyServer::symXModXToKeyQt(keySymX, keyModX, &keyCodeQt);
-    // Split keycode and modifier
-    int keyModQt = keyCodeQt & Qt::KeyboardModifierMask;
-    keyCodeQt &= ~Qt::KeyboardModifierMask;
-
-    if (keyModQt & Qt::SHIFT && !KKeyServer::isShiftAsModifierAllowed(keyCodeQt)) {
-        keyModQt &= ~Qt::SHIFT;
-    }
-
-    if ((keyModQt == 0 || keyModQt == Qt::SHIFT) && (keyCodeQt >= Qt::Key_Space && keyCodeQt <= Qt::Key_AsciiTilde)) {
-        // security check: we don't allow shortcuts without modifier for "normal" keys
-        // this is to prevent a malicious application to grab shortcuts for all keys
-        // and by that being able to read out the keyboard
-        return false;
-    }
-
-    const QKeySequence seq(keyCodeQt | keyModQt);
-    // let's check whether we have a mapping shortcut
-    for (const auto &[key, value] : std::as_const(m_shortcuts).asKeyValueRange()) {
-        for (const auto &info : value) {
-            if (info.keys().contains(seq)) {
-                auto signal = QDBusMessage::createMethodCall(s_kglobalAccelService, key, s_componentInterface, QStringLiteral("invokeShortcut"));
-                signal.setArguments(QList<QVariant>{QVariant(info.uniqueName())});
-                QDBusConnection::sessionBus().asyncCall(signal);
                 return true;
             }
         }

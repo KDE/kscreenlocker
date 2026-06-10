@@ -13,9 +13,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 class QDBusPendingCallWatcher;
 class QKeyEvent;
 
-struct xcb_key_press_event_t;
-typedef struct _XCBKeySymbols xcb_key_symbols_t;
-
 /**
  * @short Interaction with KGlobalAccel.
  *
@@ -61,13 +58,6 @@ public:
      **/
     void release();
 
-    /**
-     * Checks whether a global shortcut is triggered for the given @p event.
-     * If there is a global shortcut it gets invoked and @c true is returned.
-     * If there is no matching global shortcut @c false is returned.
-     **/
-    bool checkKeyPress(xcb_key_press_event_t *event);
-
     bool keyEvent(QKeyEvent *event);
 
 private:
@@ -88,5 +78,4 @@ private:
      * allowed shortcuts.
      **/
     QMap<QString, QList<KGlobalShortcutInfo>> m_shortcuts;
-    xcb_key_symbols_t *m_keySymbols = nullptr;
 };

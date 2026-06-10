@@ -56,16 +56,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QQuickItem>
 #include <QQuickView>
 
-// Wayland
 #include <wayland-client.h>
 #include <wayland-ksld-client-protocol.h>
-// X11
-#include <X11/Xatom.h>
-#include <X11/Xlib.h>
-#include <fixx11h.h>
-//
-#include <xcb/xcb.h>
-#include <xcb/xcb_event.h>
 
 #include "pamauthenticator.h"
 #include "pamauthenticators.h"
@@ -110,20 +102,6 @@ bool verifyPackageApi(const KPackage::Package &package)
     return false;
 }
 
-class FocusOutEventFilter : public QAbstractNativeEventFilter
-{
-public:
-    bool nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result) override
-    {
-        Q_UNUSED(result)
-        if (eventType != QByteArrayLiteral("xcb_generic_event_t")) {
-            return false;
-        }
-        auto event = static_cast<xcb_generic_event_t *>(message);
-        return XCB_EVENT_RESPONSE_TYPE(event) == XCB_FOCUS_OUT;
-    }
-};
-
 // App
 UnlockApp::UnlockApp(int &argc, char **argv)
     : QGuiApplication(argc, argv)
@@ -146,10 +124,6 @@ UnlockApp::UnlockApp(int &argc, char **argv)
         m_authenticators->cancel();
     });
     initialize();
-
-    if (KWindowSystem::isPlatformX11()) {
-        installNativeEventFilter(new FocusOutEventFilter);
-    }
 }
 
 UnlockApp::~UnlockApp()
@@ -312,11 +286,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     view->engine()->setNetworkAccessManagerFactory(new NoAccessNetworkAccessManagerFactory);
 
     if (!m_testing) {
-        if (KWindowSystem::isPlatformX11()) {
-            view->setFlags(Qt::X11BypassWindowManagerHint);
-        } else {
-            view->setFlags(Qt::FramelessWindowHint);
-        }
+        view->setFlags(Qt::FramelessWindowHint);
     }
 
     if (m_ksldInterface) {
@@ -550,31 +520,7 @@ void UnlockApp::lockImmediately()
 
 bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
 {
-    if (obj != this && event->type() == QEvent::Show) {
-        PlasmaQuick::QuickViewSharedEngine *view = nullptr;
-        for (PlasmaQuick::QuickViewSharedEngine *v : std::as_const(m_views)) {
-            if (v == obj) {
-                view = v;
-                break;
-            }
-        }
-        if (view && view->winId() && KWindowSystem::isPlatformX11()) {
-            // showing greeter view window, set property
-            auto x11App = qGuiApp->nativeInterface<QNativeInterface::QX11Application>();
-            static Atom tag = XInternAtom(x11App->display(), "_KDE_SCREEN_LOCKER", False);
-            XChangeProperty(x11App->display(), view->winId(), tag, tag, 32, PropModeReplace, nullptr, 0);
-        }
-        // no further processing
-        return false;
-    }
-
-    if (event->type() == QEvent::MouseButtonPress && KWindowSystem::isPlatformX11()) {
-        if (getActiveScreen()) {
-            getActiveScreen()->requestActivate();
-        }
-        return false;
-    }
-
+    Q_UNUSED(obj);
     if (event->type() == QEvent::KeyPress) { // react if saver is visible
         return false; // we don't care
     } else if (event->type() == QEvent::KeyRelease) { // conditionally reshow the saver
