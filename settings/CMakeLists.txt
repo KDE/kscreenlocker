@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN=\"kscreenlocker\")
+
 add_library(settings STATIC
     kscreensaversettings.cpp
     shell_integration.cpp
