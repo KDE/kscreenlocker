@@ -21,6 +21,8 @@ class Registry;
 
 class QQuickItem;
 
+class KConfigPropertyMap;
+
 namespace PlasmaQuick
 {
 class QuickViewSharedEngine;
@@ -70,7 +72,7 @@ private Q_SLOTS:
 
 private:
     void initialize();
-    PlasmaQuick::SharedQmlEngine *loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view);
+    PlasmaQuick::SharedQmlEngine *loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view, int width, int height, KConfigPropertyMap *config);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
     QWindow *getActiveScreen();
 

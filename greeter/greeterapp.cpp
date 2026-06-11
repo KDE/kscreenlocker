@@ -182,7 +182,7 @@ QWindow *UnlockApp::getActiveScreen()
     return activeScreen;
 }
 
-PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view)
+PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view, int width, int height, KConfigPropertyMap *config)
 {
     if (!m_wallpaperPackage.isValid()) {
         qCWarning(KSCREENLOCKER_GREET) << "Error loading the wallpaper, no valid package loaded";
@@ -196,6 +196,14 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
     qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
     view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
     view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), qmlObject->rootObject());
+
+    // initialize with our size to avoid as much resize events as possible
+    qmlObject->completeInitialization({
+        {QStringLiteral("width"), width},
+        {QStringLiteral("height"), height},
+        {u"configuration"_s, QVariant::fromValue(config)},
+        {u"pluginName"_s, KScreenSaverSettingsBase::self()->wallpaperPluginId()},
+    });
     return qmlObject;
 }
 
@@ -294,16 +302,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         }
     }
 
-    auto wallpaperObj = loadWallpaperPlugin(view);
-    if (wallpaperObj) {
-        // initialize with our size to avoid as much resize events as possible
-        wallpaperObj->completeInitialization({
-            {QStringLiteral("width"), view->width()},
-            {QStringLiteral("height"), view->height()},
-            {u"configuration"_s, QVariant::fromValue(config)},
-            {u"pluginName"_s, KScreenSaverSettingsBase::self()->wallpaperPluginId()},
-        });
-    }
+    auto wallpaperObj = loadWallpaperPlugin(view, view->width(), view->height(), config);
 
     view->setSource(m_mainQmlPath);
     // on error, load the fallback lockscreen to not lock the user out of the system
