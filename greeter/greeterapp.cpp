@@ -192,7 +192,6 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
     auto qmlObject = new PlasmaQuick::SharedQmlEngine(view);
     qmlObject->setInitializationDelayed(true);
     qmlObject->setSource(QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
-    view->setProperty("wallpaperGraphicsObject", QVariant::fromValue(qmlObject));
 
     qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
     view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
@@ -328,9 +327,9 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     }
 
     auto wallpaperObj = loadWallpaperPlugin(view);
-    if (auto object = view->property("wallpaperGraphicsObject").value<PlasmaQuick::SharedQmlEngine *>()) {
+    if (wallpaperObj) {
         // initialize with our size to avoid as much resize events as possible
-        object->completeInitialization({
+        wallpaperObj->completeInitialization({
             {QStringLiteral("width"), view->width()},
             {QStringLiteral("height"), view->height()},
             {u"configuration"_s, QVariant::fromValue(config)},
