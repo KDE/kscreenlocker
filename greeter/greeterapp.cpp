@@ -182,14 +182,14 @@ QWindow *UnlockApp::getActiveScreen()
     return activeScreen;
 }
 
-QQuickItem *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view, int width, int height, KConfigPropertyMap *config)
+QQuickItem *UnlockApp::loadWallpaperPlugin(QObject *parent, int width, int height, KConfigPropertyMap *config)
 {
     if (!m_wallpaperPackage.isValid()) {
         qCWarning(KSCREENLOCKER_GREET) << "Error loading the wallpaper, no valid package loaded";
         return nullptr;
     }
 
-    auto qmlObject = new PlasmaQuick::SharedQmlEngine(view);
+    auto qmlObject = new PlasmaQuick::SharedQmlEngine(parent);
     qmlObject->setInitializationDelayed(true);
     qmlObject->setSource(QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
 
