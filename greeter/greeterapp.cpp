@@ -194,7 +194,6 @@ QQuickItem *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *v
     qmlObject->setSource(QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
 
     qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
-    view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
 
     // initialize with our size to avoid as much resize events as possible
     qmlObject->completeInitialization({
@@ -302,6 +301,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     }
 
     auto wallpaperItem = loadWallpaperPlugin(view, view->width(), view->height(), config);
+    view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), wallpaperItem);
 
     view->setSource(m_mainQmlPath);
     // on error, load the fallback lockscreen to not lock the user out of the system
