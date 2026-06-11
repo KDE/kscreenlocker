@@ -28,7 +28,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KLocalizedQmlContext>
 #include <KScreenDpms/Dpms>
 #include <KWindowSystem>
-#include <PlasmaQuick/QuickViewSharedEngine>
 
 #include <KUser>
 // Plasma
@@ -36,6 +35,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KPackage/PackageLoader>
 
 #include <Plasma/Plasma>
+#include <PlasmaQuick/PlasmaQuick>
 
 // Qt
 #include <QAbstractNativeEventFilter>
@@ -108,7 +108,10 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     , m_noLock(false)
     , m_shellIntegration(new ShellIntegration(this))
     , m_logindIntegration(new LogindIntegration(this))
+    , m_engine(PlasmaQuick::globalEngine())
 {
+    KLocalization::setupLocalizedContext(m_engine.get());
+
     auto interactive = std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SERVICE), KUser().loginName());
     std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
     noninteractive.push_back(
@@ -169,7 +172,7 @@ QWindow *UnlockApp::getActiveScreen()
         return activeScreen;
     }
 
-    for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
+    for (QQuickView *view : std::as_const(m_views)) {
         if (view->geometry().contains(QCursor::pos())) {
             activeScreen = view;
             break;
@@ -229,10 +232,10 @@ void UnlockApp::handleScreen(QScreen *screen)
     });
 }
 
-PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *screen)
+QQuickView *UnlockApp::createViewForScreen(QScreen *screen)
 {
     // create the view
-    auto *view = new PlasmaQuick::QuickViewSharedEngine();
+    auto *view = new QQuickView(m_engine.get(), nullptr);
 
     view->setColor(Qt::black);
     view->setScreen(screen);
@@ -242,8 +245,6 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         view->setGeometry(geo);
     });
 
-    Plasma::setupPlasmaStyle(view->engine().get());
-    view->engine()->rootContext()->setContextObject(new KLocalizedQmlContext(view->engine().get()));
     auto oldFactory = view->engine()->networkAccessManagerFactory();
     view->engine()->setNetworkAccessManagerFactory(nullptr);
     delete oldFactory;
@@ -255,7 +256,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
 
     // engine stuff
     QQmlContext *context = view->engine()->rootContext();
-    connect(view->engine().get(), &QQmlEngine::quit, this, [this]() {
+    connect(view->engine(), &QQmlEngine::quit, this, [this]() {
         if (m_authenticators->isUnlocked()) {
             std::cout << "Unlocked" << std::endl;
             // Quit without exit handlers
@@ -305,7 +306,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
 
     view->setSource(m_mainQmlPath);
     // on error, load the fallback lockscreen to not lock the user out of the system
-    if (view->status() != QQmlComponent::Ready) {
+    if (view->status() != QQuickView::Ready) {
         static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
 
         qCWarning(KSCREENLOCKER_GREET) << "Failed to load lockscreen QML, falling back to built-in locker";
@@ -316,7 +317,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         m_mainQmlPath = fallbackUrl;
         view->setSource(fallbackUrl);
 
-        if (view->status() != QQmlComponent::Ready) {
+        if (view->status() != QQuickView::Ready) {
             qCWarning(KSCREENLOCKER_GREET) << "Failed to load the fallback lockscreen QML, something went really wrong! Terminating...";
             for (const auto &error : view->errors()) {
                 qCWarning(KSCREENLOCKER_GREET) << error;
@@ -324,7 +325,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
             std::terminate();
         }
     }
-    view->setResizeMode(PlasmaQuick::QuickViewSharedEngine::SizeRootObjectToView);
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
 
     if (wallpaperItem) {
         // we need to set this wallpaper properties separately after the lockscreen QML is loaded
@@ -396,7 +397,7 @@ void UnlockApp::getFocus()
     }
     // this loop is required to make the qml/graphicsscene properly handle the shared keyboard input
     // ie. "type something into the box of every greeter"
-    for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
+    for (QQuickView *view : std::as_const(m_views)) {
         if (!m_testing) {
             view->setKeyboardGrabEnabled(true); // TODO - check whether this still works in master!
         }
@@ -416,7 +417,7 @@ void UnlockApp::graceLockEnded()
     delete m_delayedLockTimer;
     m_delayedLockTimer = nullptr;
 
-    for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
+    for (QQuickView *view : std::as_const(m_views)) {
         QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
         lockProperty.write(true);
     }
@@ -432,11 +433,11 @@ void UnlockApp::setTesting(bool enable)
     }
     if (enable) {
         // remove bypass window manager hint
-        for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
+        for (QQuickView *view : std::as_const(m_views)) {
             view->setFlags(view->flags() & ~Qt::X11BypassWindowManagerHint);
         }
     } else {
-        for (PlasmaQuick::QuickViewSharedEngine *view : std::as_const(m_views)) {
+        for (QQuickView *view : std::as_const(m_views)) {
             view->setFlags(view->flags() | Qt::X11BypassWindowManagerHint);
         }
     }
