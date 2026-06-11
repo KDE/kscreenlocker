@@ -44,8 +44,6 @@ add_feature_info("prctl/procctl tracing control"
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
 
-find_package(Qt6GuiPrivate ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
-
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Crash
     KCMUtils
