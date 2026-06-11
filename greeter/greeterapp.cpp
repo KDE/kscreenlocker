@@ -379,16 +379,16 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     view->raise();
 
     auto onFrameSwapped = [this, view] {
-        markViewsAsVisible(view);
+        markViewsAsVisible(view->rootObject());
     };
     connect(view, &QQuickWindow::frameSwapped, this, onFrameSwapped, static_cast<Qt::ConnectionType>(Qt::QueuedConnection | Qt::SingleShotConnection));
 
     return view;
 }
 
-void UnlockApp::markViewsAsVisible(PlasmaQuick::QuickViewSharedEngine *view)
+void UnlockApp::markViewsAsVisible(QQuickItem *view)
 {
-    QQmlProperty showProperty(view->rootObject(), QStringLiteral("viewVisible"));
+    QQmlProperty showProperty(view, QStringLiteral("viewVisible"));
     showProperty.write(true);
     // random state update, actually rather required on init only
     QMetaObject::invokeMethod(this, "getFocus", Qt::QueuedConnection);

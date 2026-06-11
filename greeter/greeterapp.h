@@ -65,7 +65,7 @@ private Q_SLOTS:
     void handleScreen(QScreen *screen);
     PlasmaQuick::QuickViewSharedEngine *createViewForScreen(QScreen *screen);
     void getFocus();
-    void markViewsAsVisible(PlasmaQuick::QuickViewSharedEngine *view);
+    void markViewsAsVisible(QQuickItem *view);
     void graceLockEnded();
 
 private:
