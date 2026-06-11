@@ -199,17 +199,6 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
     return qmlObject;
 }
 
-void UnlockApp::setWallpaperItemProperties(QQuickItem *wallpaperItem, QQuickItem *parentView)
-{
-    wallpaperItem->setParentItem(parentView);
-    wallpaperItem->setZ(-1000);
-
-    // set anchors
-    QQmlExpression expr(qmlContext(wallpaperItem), wallpaperItem, QStringLiteral("parent"));
-    QQmlProperty prop(wallpaperItem, QStringLiteral("anchors.fill"));
-    prop.write(expr.evaluate());
-}
-
 void UnlockApp::initialViewSetup()
 {
     for (QScreen *screen : screens()) {
@@ -343,7 +332,13 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         if (auto wallpaperItem = qobject_cast<QQuickItem *>(wallpaperObj->rootObject())) {
             // we need to set this wallpaper properties separately after the lockscreen QML is loaded
             // this is because we need to anchor to the view that gets loaded
-            setWallpaperItemProperties(wallpaperItem, view->rootObject());
+            wallpaperItem->setParentItem(view->rootObject());
+            wallpaperItem->setZ(-1000);
+
+            // set anchors
+            QQmlExpression expr(qmlContext(wallpaperItem), wallpaperItem, QStringLiteral("parent"));
+            QQmlProperty prop(wallpaperItem, QStringLiteral("anchors.fill"));
+            prop.write(expr.evaluate());
         }
     }
 
