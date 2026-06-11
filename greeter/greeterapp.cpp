@@ -199,23 +199,14 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
     return qmlObject;
 }
 
-void UnlockApp::setWallpaperItemProperties(PlasmaQuick::SharedQmlEngine *wallpaperObject, PlasmaQuick::QuickViewSharedEngine *view)
+void UnlockApp::setWallpaperItemProperties(QQuickItem *wallpaperItem, QQuickItem *parentView)
 {
-    if (!wallpaperObject) {
-        return;
-    }
-
-    auto item = qobject_cast<QQuickItem *>(wallpaperObject->rootObject());
-    if (!item) {
-        qCWarning(KSCREENLOCKER_GREET) << "Wallpaper needs to be a QtQuick Item";
-        return;
-    }
-    item->setParentItem(view->rootObject());
-    item->setZ(-1000);
+    wallpaperItem->setParentItem(parentView);
+    wallpaperItem->setZ(-1000);
 
     // set anchors
-    QQmlExpression expr(wallpaperObject->engine()->rootContext(), item, QStringLiteral("parent"));
-    QQmlProperty prop(item, QStringLiteral("anchors.fill"));
+    QQmlExpression expr(qmlContext(wallpaperItem), wallpaperItem, QStringLiteral("parent"));
+    QQmlProperty prop(wallpaperItem, QStringLiteral("anchors.fill"));
     prop.write(expr.evaluate());
 }
 
@@ -360,9 +351,13 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     }
     view->setResizeMode(PlasmaQuick::QuickViewSharedEngine::SizeRootObjectToView);
 
-    // we need to set this wallpaper properties separately after the lockscreen QML is loaded
-    // this is because we need to anchor to the view that gets loaded
-    setWallpaperItemProperties(wallpaperObj, view);
+    if (wallpaperObj) {
+        if (auto wallpaperItem = qobject_cast<QQuickItem *>(wallpaperObj->rootObject())) {
+            // we need to set this wallpaper properties separately after the lockscreen QML is loaded
+            // this is because we need to anchor to the view that gets loaded
+            setWallpaperItemProperties(wallpaperItem, view->rootObject());
+        }
+    }
 
     QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
     lockProperty.write(m_immediateLock || (!m_noLock && !m_delayedLockTimer));
