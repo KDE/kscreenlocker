@@ -72,7 +72,7 @@ private Q_SLOTS:
 
 private:
     void initialize();
-    PlasmaQuick::SharedQmlEngine *loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view, int width, int height, KConfigPropertyMap *config);
+    QQuickItem *loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view, int width, int height, KConfigPropertyMap *config);
     void screenGeometryChanged(QScreen *screen, const QRect &geo);
     QWindow *getActiveScreen();
 
