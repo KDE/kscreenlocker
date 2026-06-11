@@ -18,7 +18,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <config-kscreenlocker.h>
 
 #include "config-unix.h"
-#include "waylandserver.h"
 // KDE
 #include <KAuthorized>
 #include <KGlobalAccel>
@@ -72,7 +71,6 @@ KSldApp::KSldApp(QObject *parent)
     , m_lockState(Unlocked)
     , m_lockProcess(nullptr)
     , m_lockWindow(nullptr)
-    , m_waylandServer(new WaylandServer(this))
     , m_lockedTimer(QElapsedTimer())
     , m_idleId(0)
     , m_lockGrace(0)
@@ -221,7 +219,6 @@ void KSldApp::initialize()
         if (error == QProcess::FailedToStart) {
             qCDebug(KSCREENLOCKER) << "Greeter Process  failed to start. Trying to directly unlock again.";
             doUnlock();
-            m_waylandServer->stop();
             qCCritical(KSCREENLOCKER) << "Greeter Process not available";
         } else {
             qCWarning(KSCREENLOCKER) << "Greeter Process encountered an unhandled error:" << error << ". Detailed error:" << m_lockProcess->errorString();
@@ -393,7 +390,6 @@ void KSldApp::doUnlock()
     m_lockedTimer.invalidate();
     m_greeterCrashedCounter = 0;
     endGraceTime();
-    m_waylandServer->stop();
     KNotification::event(QStringLiteral("unlocked"), i18n("Screen unlocked"), QPixmap(), KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
     Q_EMIT unlocked();
     Q_EMIT lockStateChanged();
@@ -441,17 +437,6 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
         env.insert(s_qtQuickBackend, QStringLiteral("software"));
     }
 
-    // start the Wayland server
-    int fd = m_waylandServer->start();
-    if (fd == -1) {
-        qCWarning(KSCREENLOCKER) << "Could not start the Wayland server.";
-        Q_EMIT m_lockProcess->errorOccurred(QProcess::FailedToStart);
-        return;
-    }
-
-    args << QStringLiteral("--ksldfd");
-    args << QString::number(fd);
-
     auto greeterPath = KLibexec::path(QStringLiteral(KSCREENLOCKER_GREET_BIN_REL));
     if (!QFile::exists(greeterPath)) {
         greeterPath = QStringLiteral(KSCREENLOCKER_GREET_BIN_ABS);
@@ -461,7 +446,6 @@ void KSldApp::startLockProcess(EstablishLock establishLock)
 
     m_lockProcess->setProcessEnvironment(env);
     m_lockProcess->start(greeterPath, args);
-    close(fd);
 }
 
 void KSldApp::userActivity()
@@ -494,8 +478,6 @@ void KSldApp::showLockWindow()
         m_lockWindow->setGlobalAccel(m_globalAccel);
 
         connect(m_lockWindow, &AbstractLocker::lockWindowShown, this, &KSldApp::lockScreenShown);
-
-        connect(m_waylandServer, &WaylandServer::x11WindowAdded, m_lockWindow, &AbstractLocker::addAllowedWindow);
     }
     m_lockWindow->showLockWindow();
 }

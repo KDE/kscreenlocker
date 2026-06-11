@@ -47,11 +47,6 @@ target_link_libraries(kscreenlocker_authenticator
 
 qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 
-ecm_add_wayland_client_protocol(kscreenlocker_greet_SRCS
-    PROTOCOL ../protocols/ksld.xml
-    BASENAME ksld
-)
-
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
 target_link_libraries(kscreenlocker_greet
@@ -68,7 +63,6 @@ target_link_libraries(kscreenlocker_greet
     Qt::DBus
     Qt::Quick
     Qt::Qml
-    Wayland::Client
     LayerShellQt::Interface
     KF6::ScreenDpms
 )

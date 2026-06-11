@@ -44,8 +44,6 @@ enum class EstablishLock {
 QString establishLockToString(EstablishLock establishLock);
 
 class AbstractLocker;
-class WaylandServer;
-
 /**
  * @class KSldApp
  * @brief The KSldApp class represents the application responsible for screen locking.
@@ -348,11 +346,6 @@ private:
      * The lock window used to display the lock screen.
      **/
     AbstractLocker *m_lockWindow;
-
-    /**
-     * The Wayland server instance used by the lock window.
-     **/
-    WaylandServer *m_waylandServer;
 
     /**
      * Timer to measure how long the screen is locked.

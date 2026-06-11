@@ -159,7 +159,6 @@ set(ksld_SRCS
    globalaccel.cpp
    waylandlocker.cpp
    logind.cpp
-   waylandserver.cpp
    powermanagement_inhibition.cpp
    abstractlocker.h
    ksldapp.h
@@ -167,7 +166,6 @@ set(ksld_SRCS
    globalaccel.h
    waylandlocker.h
    logind.h
-   waylandserver.h
    powermanagement_inhibition.h
 )
 
@@ -182,11 +180,6 @@ ecm_qt_declare_logging_category(ksld_SRCS
 qt_add_dbus_adaptor(ksld_SRCS ${screensaver_dbusXML} interface.h ScreenLocker::Interface)
 qt_add_dbus_adaptor(ksld_SRCS ${kscreensaver_dbusXML} interface.h ScreenLocker::Interface kscreensaveradaptor KScreenSaverAdaptor)
 qt_add_dbus_interface(ksld_SRCS ${powerdevilpolicyagent_xml} powerdevilpolicyagent)
-
-ecm_add_wayland_server_protocol(ksld_SRCS
-    PROTOCOL protocols/ksld.xml
-    BASENAME ksld
-)
 
 add_library(KScreenLocker SHARED ${ksld_SRCS})
 
@@ -204,7 +197,6 @@ PRIVATE
    KF6::ConfigGui
    KF6::Package
    KF6::WindowSystem
-   Wayland::Server
 )
 
 set(kscreenlocker_greet_bin_abs ${CMAKE_INSTALL_FULL_LIBEXECDIR}/kscreenlocker_greet)

@@ -27,8 +27,6 @@ class QuickViewSharedEngine;
 class Authenticator;
 class LogindIntegration;
 
-struct org_kde_ksld;
-
 class PamAuthenticators;
 
 namespace ScreenLocker
@@ -51,8 +49,6 @@ public:
     void lockImmediately();
     void setGraceTime(int milliseconds);
     void setNoLock(bool noLock);
-    void setKsldSocket(int socket);
-
     void updateCanSuspend();
     void updateCanHibernate();
 
@@ -88,9 +84,6 @@ private:
     bool m_noLock;
 
     QString m_userName, m_userImage;
-
-    wl_display *m_display = nullptr;
-    org_kde_ksld *m_ksldInterface = nullptr;
 
     KPackage::Package m_wallpaperPackage;
     ShellIntegration *m_shellIntegration;
