@@ -8,6 +8,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <KPackage/PackageStructure>
 #include <PlasmaQuick/SharedQmlEngine>
 #include <QGuiApplication>
+#include <QQuickView>
 #include <QUrl>
 
 namespace KWayland
@@ -22,11 +23,6 @@ class Registry;
 class QQuickItem;
 
 class KConfigPropertyMap;
-
-namespace PlasmaQuick
-{
-class QuickViewSharedEngine;
-}
 
 class Authenticator;
 class LogindIntegration;
@@ -65,7 +61,7 @@ protected:
 
 private Q_SLOTS:
     void handleScreen(QScreen *screen);
-    PlasmaQuick::QuickViewSharedEngine *createViewForScreen(QScreen *screen);
+    QQuickView *createViewForScreen(QScreen *screen);
     void getFocus();
     void markViewsAsVisible(QQuickItem *view);
     void graceLockEnded();
@@ -78,7 +74,7 @@ private:
 
     QString m_packageName;
     QUrl m_mainQmlPath;
-    QList<PlasmaQuick::QuickViewSharedEngine *> m_views;
+    QList<QQuickView *> m_views;
     QTimer *m_delayedLockTimer;
     bool m_testing;
     bool m_immediateLock;
@@ -91,5 +87,6 @@ private:
     KPackage::Package m_wallpaperPackage;
     ShellIntegration *m_shellIntegration;
     LogindIntegration *m_logindIntegration;
+    std::shared_ptr<QQmlEngine> m_engine;
 };
 } // namespace
