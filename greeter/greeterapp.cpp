@@ -195,7 +195,6 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
 
     qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
     view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
-    view->rootContext()->setContextProperty(QStringLiteral("wallpaperIntegration"), qmlObject->rootObject());
 
     // initialize with our size to avoid as much resize events as possible
     qmlObject->completeInitialization({
