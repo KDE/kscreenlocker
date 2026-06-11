@@ -182,7 +182,7 @@ QWindow *UnlockApp::getActiveScreen()
     return activeScreen;
 }
 
-PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view, int width, int height, KConfigPropertyMap *config)
+QQuickItem *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickViewSharedEngine *view, int width, int height, KConfigPropertyMap *config)
 {
     if (!m_wallpaperPackage.isValid()) {
         qCWarning(KSCREENLOCKER_GREET) << "Error loading the wallpaper, no valid package loaded";
@@ -203,7 +203,7 @@ PlasmaQuick::SharedQmlEngine *UnlockApp::loadWallpaperPlugin(PlasmaQuick::QuickV
         {u"configuration"_s, QVariant::fromValue(config)},
         {u"pluginName"_s, KScreenSaverSettingsBase::self()->wallpaperPluginId()},
     });
-    return qmlObject;
+    return qobject_cast<QQuickItem *>(qmlObject->rootObject());
 }
 
 void UnlockApp::initialViewSetup()
@@ -301,7 +301,7 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
         }
     }
 
-    auto wallpaperObj = loadWallpaperPlugin(view, view->width(), view->height(), config);
+    auto wallpaperItem = loadWallpaperPlugin(view, view->width(), view->height(), config);
 
     view->setSource(m_mainQmlPath);
     // on error, load the fallback lockscreen to not lock the user out of the system
@@ -326,18 +326,16 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     }
     view->setResizeMode(PlasmaQuick::QuickViewSharedEngine::SizeRootObjectToView);
 
-    if (wallpaperObj) {
-        if (auto wallpaperItem = qobject_cast<QQuickItem *>(wallpaperObj->rootObject())) {
-            // we need to set this wallpaper properties separately after the lockscreen QML is loaded
-            // this is because we need to anchor to the view that gets loaded
-            wallpaperItem->setParentItem(view->rootObject());
-            wallpaperItem->setZ(-1000);
+    if (wallpaperItem) {
+        // we need to set this wallpaper properties separately after the lockscreen QML is loaded
+        // this is because we need to anchor to the view that gets loaded
+        wallpaperItem->setParentItem(view->rootObject());
+        wallpaperItem->setZ(-1000);
 
-            // set anchors
-            QQmlExpression expr(qmlContext(wallpaperItem), wallpaperItem, QStringLiteral("parent"));
-            QQmlProperty prop(wallpaperItem, QStringLiteral("anchors.fill"));
-            prop.write(expr.evaluate());
-        }
+        // set anchors
+        QQmlExpression expr(qmlContext(wallpaperItem), wallpaperItem, QStringLiteral("parent"));
+        QQmlProperty prop(wallpaperItem, QStringLiteral("anchors.fill"));
+        prop.write(expr.evaluate());
     }
 
     QQmlProperty lockProperty(view->rootObject(), QStringLiteral("locked"));
