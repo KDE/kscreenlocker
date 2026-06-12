@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:47+0000\n"
+"POT-Creation-Date: 2026-06-12 00:45+0000\n"
 "PO-Revision-Date: 2014-03-27 16:40+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -53,42 +53,37 @@ msgstr "Dizec&lawer"
 msgid "Unlocking failed"
 msgstr ""
 
-#: main.cpp:123
+#: main.cpp:113
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr ""
 "Ascouy pol po l' eclaweu del waitroûle des Espåces di boutaedje Plasma di KDE"
 
-#: main.cpp:127
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Enonder l' ascouy e môde di saye"
 
-#: main.cpp:130
+#: main.cpp:120
 #, fuzzy, kde-format
 #| msgid "Starts the greeter in testing mode"
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "Enonder l' ascouy e môde di saye"
 
-#: main.cpp:134
+#: main.cpp:124
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr ""
 "Eclawer tot d' shûte, sins tni conte d' on moumint po candî d' avisse, evnd."
 
-#: main.cpp:136
+#: main.cpp:126
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 
-#: main.cpp:139
+#: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
-msgstr ""
-
-#: main.cpp:141
-#, kde-format
-msgid "File descriptor for connecting to ksld."
 msgstr ""
 
 #~ msgid "Session"

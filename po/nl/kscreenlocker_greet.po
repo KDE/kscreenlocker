@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:47+0000\n"
+"POT-Creation-Date: 2026-06-12 00:45+0000\n"
 "PO-Revision-Date: 2026-05-13 18:15+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -53,43 +53,41 @@ msgstr "Ontgrende&len"
 msgid "Unlocking failed"
 msgstr "Ontgrendelen is mislukt"
 
-#: main.cpp:123
+#: main.cpp:113
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Begroeting voor de schermvergrendeling van KDE Plasma werkruimte"
 
-#: main.cpp:127
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Start de begroeting in testmodus"
 
-#: main.cpp:130
+#: main.cpp:120
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "Start de begroeting met het geselecteerde shell-thema (alleen in testmodus)"
 
-#: main.cpp:134
+#: main.cpp:124
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Onmiddellijk vergrendelen, met negeren van enige rusttijd etc."
 
-#: main.cpp:136
+#: main.cpp:126
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Vertragen totdat de vergrendelde gebruikersinterface getoond wordt in "
 "milliseconden."
 
-#: main.cpp:139
+#: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Vergrendelde gebruikersinterface niet tonen."
 
-#: main.cpp:141
-#, kde-format
-msgid "File descriptor for connecting to ksld."
-msgstr "Bestandsdescriptor voor verbinden met ksld."
+#~ msgid "File descriptor for connecting to ksld."
+#~ msgstr "Bestandsdescriptor voor verbinden met ksld."
 
 #~ msgid "Default to the switch user UI."
 #~ msgstr "Standaard naar de omgeschakelde gebruikers-UI."

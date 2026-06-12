@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:47+0000\n"
+"POT-Creation-Date: 2026-06-12 00:45+0000\n"
 "PO-Revision-Date: 2025-08-22 18:47+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -58,42 +58,40 @@ msgstr "Раз&блокировать"
 msgid "Unlocking failed"
 msgstr "Ошибка разблокировки"
 
-#: main.cpp:123
+#: main.cpp:113
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Приветствие блокировщика экрана для рабочего пространства KDE Plasma."
 
-#: main.cpp:127
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Запустить приветствие в тестовом режиме."
 
-#: main.cpp:130
+#: main.cpp:120
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "Запустить приветствие с указанной темой оболочки (возможно только в тестовом "
 "режиме)."
 
-#: main.cpp:134
+#: main.cpp:124
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Заблокировать экран сразу, без задержки."
 
-#: main.cpp:136
+#: main.cpp:126
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "Задержка перед показом окна блокировки в миллисекундах."
 
-#: main.cpp:139
+#: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Не показывать окно блокировки."
 
-#: main.cpp:141
-#, kde-format
-msgid "File descriptor for connecting to ksld."
-msgstr "Файловый дескриптор для подключения к ksld."
+#~ msgid "File descriptor for connecting to ksld."
+#~ msgstr "Файловый дескриптор для подключения к ksld."
 
 #~ msgid "Default to the switch user UI."
 #~ msgstr "Сначала показать диалог переключения пользователя."

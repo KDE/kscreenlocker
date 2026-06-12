@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 00:48+0000\n"
+"POT-Creation-Date: 2026-06-12 00:45+0000\n"
 "PO-Revision-Date: 2025-06-01 14:49+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -80,24 +80,24 @@ msgstr ""
 "tilbake til dette skjermbiletet med «Ctrl + Alt + F%2».\n"
 "\n"
 
-#: ksldapp.cpp:183
+#: ksldapp.cpp:119
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
 msgstr "Økthandsaming"
 
-#: ksldapp.cpp:185
+#: ksldapp.cpp:121
 #, kde-format
 msgid "Lock Session"
 msgstr "Lås økta"
 
-#: ksldapp.cpp:449
+#: ksldapp.cpp:367
 #, kde-format
 msgid "Screen locked"
 msgstr "Skjermen låst"
 
-#: ksldapp.cpp:617
+#: ksldapp.cpp:393
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Skjermen låst opp"

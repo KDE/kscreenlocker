@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:47+0000\n"
+"POT-Creation-Date: 2026-06-12 00:45+0000\n"
 "PO-Revision-Date: 2026-05-21 11:02+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -56,40 +56,38 @@ msgstr "&فك القفل"
 msgid "Unlocking failed"
 msgstr "فشل فكّ القفل"
 
-#: main.cpp:123
+#: main.cpp:113
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "مرحّب لقفل شاشة مساحات عمل بلازما كِيدِي"
 
-#: main.cpp:127
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "ابدأ المرحّب في وضع الإختبار"
 
-#: main.cpp:130
+#: main.cpp:120
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "ابدأ المرحّب بالسمة المحددة (في وضع الاختبار فقط)"
 
-#: main.cpp:134
+#: main.cpp:124
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "اقفل مباشرة وتجاهل أي مهلة."
 
-#: main.cpp:136
+#: main.cpp:126
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr "تأخر حتى تظهر واجهة قفل المستخدم في مللي ثواني."
 
-#: main.cpp:139
+#: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "لا تظهر أي واجهة قفل المستخدم"
 
-#: main.cpp:141
-#, kde-format
-msgid "File descriptor for connecting to ksld."
-msgstr "واصف الملف لتوصيل مع ksld."
+#~ msgid "File descriptor for connecting to ksld."
+#~ msgstr "واصف الملف لتوصيل مع ksld."
 
 #~ msgid "Default to the switch user UI."
 #~ msgstr "المبدئي لتبديل واجهة المستخدم"

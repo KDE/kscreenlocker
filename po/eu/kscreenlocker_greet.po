@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-13 00:47+0000\n"
+"POT-Creation-Date: 2026-06-12 00:45+0000\n"
 "PO-Revision-Date: 2026-06-04 21:16+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -57,43 +57,41 @@ msgstr "Gi&ltzapetik askatu"
 msgid "Unlocking failed"
 msgstr "Giltzapetik askatzea huts egin du"
 
-#: main.cpp:123
+#: main.cpp:113
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE Plasma Languneen pantaila giltzatzailearen harreragilea"
 
-#: main.cpp:127
+#: main.cpp:117
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Harreragilea proba moduan abiarazten du"
 
-#: main.cpp:130
+#: main.cpp:120
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "Harreragilea hautatutako oskolerako gaiarekin abiarazten du (Proba moduan "
 "bakarrik)"
 
-#: main.cpp:134
+#: main.cpp:124
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Giltzatu berehala, luzapen denborei etab. begiratu gabe"
 
-#: main.cpp:136
+#: main.cpp:126
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Atzeratu erabiltzailea giltzatzeko interfazea milisegundotan erakutsi arte."
 
-#: main.cpp:139
+#: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ez erakutsi erabiltzailea giltzatzeko interfazerik."
 
-#: main.cpp:141
-#, kde-format
-msgid "File descriptor for connecting to ksld."
-msgstr "ksld-ra konektatzeko fitxategi deskriptorea."
+#~ msgid "File descriptor for connecting to ksld."
+#~ msgstr "ksld-ra konektatzeko fitxategi deskriptorea."
 
 #~ msgid "Default to the switch user UI."
 #~ msgstr "Lehenetsi aldatu erabiltzailea erabiltzaile interfazera."

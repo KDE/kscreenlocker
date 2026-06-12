@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 00:48+0000\n"
+"POT-Creation-Date: 2026-06-12 00:45+0000\n"
 "PO-Revision-Date: 2025-10-23 14:05+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -75,24 +75,24 @@ msgstr ""
 "fram með því að ýta á Ctrl+Alt+F%3\n"
 "\n"
 
-#: ksldapp.cpp:183
+#: ksldapp.cpp:119
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
 msgstr "Setustýring"
 
-#: ksldapp.cpp:185
+#: ksldapp.cpp:121
 #, kde-format
 msgid "Lock Session"
 msgstr "Læsa setu"
 
-#: ksldapp.cpp:449
+#: ksldapp.cpp:367
 #, kde-format
 msgid "Screen locked"
 msgstr "Skjár læstur"
 
-#: ksldapp.cpp:617
+#: ksldapp.cpp:393
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Skjár aflæstur"
