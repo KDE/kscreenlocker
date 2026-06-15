@@ -286,8 +286,6 @@ PlasmaQuick::QuickViewSharedEngine *UnlockApp::createViewForScreen(QScreen *scre
     context->setContextProperty(QStringLiteral("kscreenlocker_userName"), m_userName);
     context->setContextProperty(QStringLiteral("kscreenlocker_userImage"), m_userImage);
     context->setContextProperty(QStringLiteral("authenticator"), m_authenticators);
-    context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_interfaceVersion"), 2);
-    context->setContextProperty(QStringLiteral("org_kde_plasma_screenlocker_greeter_view"), view);
     context->setContextProperty(QStringLiteral("config"), m_shellIntegration->configuration());
 
     const KConfigGroup cfg = KScreenSaverSettingsBase::self()
