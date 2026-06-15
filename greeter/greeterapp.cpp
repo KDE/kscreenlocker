@@ -212,16 +212,6 @@ void UnlockApp::setWallpaperItemProperties(QQuickItem *wallpaperItem, QQuickItem
 
 void UnlockApp::initialViewSetup()
 {
-    qmlRegisterUncreatableType<PamAuthenticator>("org.kde.kscreenlocker",
-                                                 1,
-                                                 0,
-                                                 "Authenticator",
-                                                 QStringLiteral("authenticators must be obtained from the context"));
-    qmlRegisterUncreatableType<PamAuthenticators>("org.kde.kscreenlocker",
-                                                  1,
-                                                  0,
-                                                  "Authenticators",
-                                                  QStringLiteral("authenticators must be obtained from the context"));
     for (QScreen *screen : screens()) {
         handleScreen(screen);
     }

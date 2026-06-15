@@ -29,6 +29,7 @@ set(kscreenlocker_greet_SRCS
    greeterapp.h
    noaccessnetworkaccessmanagerfactory.h
    ../logind.h
+   types.h
 )
 
 ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
@@ -45,11 +46,15 @@ target_link_libraries(kscreenlocker_authenticator
     ${PAM_LIBRARIES}
 )
 
+qt_extract_metatypes(kscreenlocker_authenticator)
+
 qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
-target_link_libraries(kscreenlocker_greet
+ecm_add_qml_module(kscreenlocker_greet URI org.kde.kscreenlocker VERSION 1.0)
+
+target_link_libraries(kscreenlocker_greet PRIVATE
     settings
     kscreenlocker_authenticator
     KF6::Package
@@ -87,6 +92,18 @@ target_compile_definitions(kscreenlocker_greet PRIVATE
     KSCREENLOCKER_PAM_FINGERPRINT_SERVICE=${KSCREENLOCKER_PAM_FINGERPRINT_SERVICE}
     KSCREENLOCKER_PAM_SMARTCARD_SERVICE=${KSCREENLOCKER_PAM_SMARTCARD_SERVICE}
 )
+
+# manually install type info since it's not installed by default for executables but we want it
+# for the kscreenlocker UI in shellpackage
+qt6_query_qml_module(kscreenlocker_greet
+        TARGET_PATH qml_module_target_path
+        QMLDIR qml_module_qmldir
+        TYPEINFO qml_module_typeinfo
+)
+
+install(FILES "${qml_module_qmldir}"   DESTINATION ${KDE_INSTALL_QMLDIR}/${qml_module_target_path})
+install(FILES "${qml_module_typeinfo}" DESTINATION ${KDE_INSTALL_QMLDIR}/${qml_module_target_path})
+
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
 

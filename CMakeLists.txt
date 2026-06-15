@@ -28,6 +28,7 @@ include(GenerateExportHeader)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
+include(ECMQmlModule)
 
 include(CheckIncludeFile)
 include(CheckSymbolExists)
