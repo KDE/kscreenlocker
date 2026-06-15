@@ -83,6 +83,3 @@ msgstr "Forseinking i millisekund til låsarbiletet vert vist."
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ikkje vis noko låsarbilete."
-
-#~ msgid "File descriptor for connecting to ksld."
-#~ msgstr "Filskildring for kopling til ksld."

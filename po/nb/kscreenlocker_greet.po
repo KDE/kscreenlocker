@@ -85,6 +85,3 @@ msgstr "Forsinkelse i millisekunder til låsebildet vises."
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Ikke vis noe låsebilde."
-
-#~ msgid "File descriptor for connecting to ksld."
-#~ msgstr "Filbeskrivelse for tilkobling til ksld."
