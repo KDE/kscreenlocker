@@ -84,6 +84,3 @@ msgstr ""
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Без показване на потребителски интерфейс за заключване."
-
-#~ msgid "File descriptor for connecting to ksld."
-#~ msgstr "Файлов дескриптор за свързване към ksld."
