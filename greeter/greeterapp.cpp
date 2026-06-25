@@ -192,20 +192,27 @@ QQuickItem *UnlockApp::loadWallpaperPlugin(QObject *parent, int width, int heigh
         return nullptr;
     }
 
-    auto qmlObject = new PlasmaQuick::SharedQmlEngine(parent);
-    qmlObject->setInitializationDelayed(true);
-    qmlObject->setSource(QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
+    QQmlComponent component(m_engine.get(), QUrl::fromLocalFile(m_wallpaperPackage.filePath("mainscript")));
 
-    qmlObject->rootContext()->setContextProperty(QStringLiteral("wallpaper"), qmlObject->rootObject());
+    auto context = new QQmlContext(m_engine.get(), parent);
+
+    auto obj = component.beginCreate(context);
+    context->setContextProperty(QStringLiteral("wallpaper"), obj);
 
     // initialize with our size to avoid as much resize events as possible
-    qmlObject->completeInitialization({
-        {QStringLiteral("width"), width},
-        {QStringLiteral("height"), height},
-        {u"configuration"_s, QVariant::fromValue(config)},
-        {u"pluginName"_s, KScreenSaverSettingsBase::self()->wallpaperPluginId()},
-    });
-    return qobject_cast<QQuickItem *>(qmlObject->rootObject());
+    component.setInitialProperties(obj,
+                                   {
+                                       {QStringLiteral("width"), width},
+                                       {QStringLiteral("height"), height},
+                                       {u"configuration"_s, QVariant::fromValue(config)},
+                                       {u"pluginName"_s, KScreenSaverSettingsBase::self()->wallpaperPluginId()},
+                                   });
+
+    obj->setParent(parent);
+
+    component.completeCreate();
+
+    return qobject_cast<QQuickItem *>(obj);
 }
 
 void UnlockApp::initialViewSetup()
