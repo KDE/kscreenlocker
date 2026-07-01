@@ -26,7 +26,7 @@ msgstr "Apparentia"
 #: ui/Appearance.qml:40
 #, kde-format
 msgid "Wallpaper type:"
-msgstr "Typo de Tapete de papiro:"
+msgstr "Typo de Fundo de schermo:"
 
 #: ui/DurationPromptDialog.qml:130
 #, kde-format
