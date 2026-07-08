@@ -56,6 +56,9 @@ public Q_SLOTS:
     void osdProgress(const QString &icon, int percent, const int maximumPercent, const QString &additionalText);
     void osdText(const QString &icon, const QString &additionalText);
 
+Q_SIGNALS:
+    void viewEntered(QQuickView *view);
+
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
@@ -88,5 +91,47 @@ private:
     ShellIntegration *m_shellIntegration;
     LogindIntegration *m_logindIntegration;
     std::shared_ptr<QQmlEngine> m_engine;
+};
+
+class LockscreenState : public QObject
+{
+    Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
+
+public:
+    static LockscreenState *create(QQmlEngine *, QJSEngine *);
+    void init(UnlockApp *app);
+    UnlockApp *m_parentApp;
+
+private:
+    explicit LockscreenState(QObject *parent = nullptr);
+};
+
+class ActiveScreenMonitor : public QObject
+{
+    Q_OBJECT
+    QML_ELEMENT
+
+    Q_PROPERTY(QQuickWindow *window MEMBER m_window REQUIRED FINAL)
+    Q_PROPERTY(LockscreenState *lockscreenState READ lockscreenState WRITE setLockscreenState REQUIRED FINAL)
+    Q_PROPERTY(bool active READ active NOTIFY activeChanged FINAL)
+
+public:
+    explicit ActiveScreenMonitor(QObject *root = nullptr);
+    [[nodiscard]] LockscreenState *lockscreenState();
+    void setLockscreenState(LockscreenState *lockscreen_state);
+    [[nodiscard]] bool active() const;
+
+public Q_SLOTS:
+    void onScreenChange(QQuickView *view);
+
+Q_SIGNALS:
+    void activeChanged();
+
+private:
+    QQuickWindow *m_window;
+    LockscreenState *m_lockscreenState;
+    bool m_active;
 };
 } // namespace

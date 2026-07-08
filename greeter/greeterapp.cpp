@@ -98,6 +98,61 @@ bool verifyPackageApi(const KPackage::Package &package)
     return false;
 }
 
+LockscreenState *LockscreenState::create(QQmlEngine *, QJSEngine *)
+{
+    return new LockscreenState();
+}
+
+LockscreenState::LockscreenState(QObject *parent)
+    : QObject(parent)
+    , m_parentApp(nullptr)
+{
+}
+
+void LockscreenState::init(UnlockApp *app)
+{
+    if (!m_parentApp) {
+        m_parentApp = app;
+    }
+}
+
+ActiveScreenMonitor::ActiveScreenMonitor(QObject *root)
+    : QObject(root)
+    , m_window(nullptr)
+    , m_lockscreenState(nullptr)
+    , m_active(false)
+{
+}
+
+LockscreenState *ActiveScreenMonitor::lockscreenState()
+{
+    return m_lockscreenState;
+}
+
+void ActiveScreenMonitor::setLockscreenState(LockscreenState *lockscreen_state)
+{
+    if (m_lockscreenState) {
+        disconnect(m_lockscreenState->m_parentApp, nullptr, this, nullptr);
+    }
+    m_lockscreenState = lockscreen_state;
+    connect(m_lockscreenState->m_parentApp, &UnlockApp::viewEntered, this, &ActiveScreenMonitor::onScreenChange);
+}
+
+bool ActiveScreenMonitor::active() const
+{
+    return m_active;
+}
+
+void ActiveScreenMonitor::onScreenChange(QQuickView *view)
+{
+    Q_ASSERT(m_window);
+    const auto newActive = (m_window == view);
+    if (m_active != newActive) {
+        m_active = newActive;
+        Q_EMIT activeChanged();
+    }
+}
+
 // App
 UnlockApp::UnlockApp(int &argc, char **argv)
     : QGuiApplication(argc, argv)
@@ -122,6 +177,10 @@ UnlockApp::UnlockApp(int &argc, char **argv)
     connect(m_logindIntegration, &LogindIntegration::prepareForSleep, m_authenticators, [this] {
         m_authenticators->cancel();
     });
+
+    auto state = m_engine->singletonInstance<LockscreenState *>("org.kde.kscreenlocker", "LockscreenState");
+    state->init(this);
+
     initialize();
 }
 
@@ -477,8 +536,12 @@ void UnlockApp::lockImmediately()
 
 bool UnlockApp::eventFilter(QObject *obj, QEvent *event)
 {
-    Q_UNUSED(obj);
-    if (event->type() == QEvent::KeyPress) { // react if saver is visible
+    if (event->type() == QEvent::Enter) {
+        if (m_views.contains(obj)) {
+            Q_EMIT viewEntered(qobject_cast<QQuickView *>(obj));
+        }
+        return false;
+    } else if (event->type() == QEvent::KeyPress) { // react if saver is visible
         return false; // we don't care
     } else if (event->type() == QEvent::KeyRelease) { // conditionally reshow the saver
         QKeyEvent *ke = static_cast<QKeyEvent *>(event);
