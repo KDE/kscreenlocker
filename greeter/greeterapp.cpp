@@ -167,16 +167,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
 {
     KLocalization::setupLocalizedContext(m_engine.get());
 
-    auto interactive = std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SERVICE), KUser().loginName());
-    std::vector<std::unique_ptr<PamAuthenticator>> noninteractive;
-    noninteractive.push_back(
-        std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE), KUser().loginName(), PamAuthenticator::Fingerprint));
-    noninteractive.push_back(
-        std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SMARTCARD_SERVICE), KUser().loginName(), PamAuthenticator::Smartcard));
-    m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
-    connect(m_logindIntegration, &LogindIntegration::prepareForSleep, m_authenticators, [this] {
-        m_authenticators->cancel();
-    });
+    m_authenticators = new PamAuthenticators(KUser().loginName(), this);
 
     auto state = m_engine->singletonInstance<LockscreenState *>("org.kde.kscreenlocker", "LockscreenState");
     state->init(this);
@@ -323,13 +314,12 @@ QQuickView *UnlockApp::createViewForScreen(QScreen *screen)
     // engine stuff
     QQmlContext *context = view->engine()->rootContext();
     connect(view->engine(), &QQmlEngine::quit, this, [this]() {
+        qCDebug(KSCREENLOCKER_GREET) << "Greeter quit signal received, checking if we are unlocked";
         if (m_authenticators->isUnlocked()) {
-            std::cout << "Unlocked" << std::endl;
-            // Quit without exit handlers
-            // This is because:
-            // - the pam_unix backend will always report a failed login if we complete the converse method no matter what exit code we use
-            // - the fprintd backend sometimes takes a long time
-            _exit(0);
+            qCDebug(KSCREENLOCKER_GREET) << "Unlocked";
+            // Mind that we can quit properly. All the blocking PAM tech is in subprocesses that will get reaped either
+            // by destructors or by themselves once they notice we are gone.
+            qApp->quit();
         } else {
             qCWarning(KSCREENLOCKER_GREET) << "Greeter tried to quit without being unlocked";
         }
