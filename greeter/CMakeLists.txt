@@ -48,8 +48,6 @@ target_link_libraries(kscreenlocker_authenticator
 
 qt_extract_metatypes(kscreenlocker_authenticator)
 
-qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
-
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
 ecm_add_qml_module(kscreenlocker_greet URI org.kde.kscreenlocker VERSION 1.0)

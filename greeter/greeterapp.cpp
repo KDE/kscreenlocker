@@ -371,25 +371,12 @@ QQuickView *UnlockApp::createViewForScreen(QScreen *screen)
     view->rootContext()->setContextProperty(QStringLiteral("wallpaper"), wallpaperItem);
 
     view->setSource(m_mainQmlPath);
-    // on error, load the fallback lockscreen to not lock the user out of the system
     if (view->status() != QQuickView::Ready) {
-        static const QUrl fallbackUrl(QUrl(QStringLiteral("qrc:/fallbacktheme/LockScreen.qml")));
-
-        qCWarning(KSCREENLOCKER_GREET) << "Failed to load lockscreen QML, falling back to built-in locker";
+        qCWarning(KSCREENLOCKER_GREET) << "Failed to load lockscreen QML. Terminating...";
         for (const auto &error : view->errors()) {
             qCWarning(KSCREENLOCKER_GREET) << error;
         }
-
-        m_mainQmlPath = fallbackUrl;
-        view->setSource(fallbackUrl);
-
-        if (view->status() != QQuickView::Ready) {
-            qCWarning(KSCREENLOCKER_GREET) << "Failed to load the fallback lockscreen QML, something went really wrong! Terminating...";
-            for (const auto &error : view->errors()) {
-                qCWarning(KSCREENLOCKER_GREET) << error;
-            }
-            std::terminate();
-        }
+        std::terminate();
     }
     view->setResizeMode(QQuickView::SizeRootObjectToView);
 
