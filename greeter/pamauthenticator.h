@@ -1,11 +1,13 @@
 /*
     SPDX-FileCopyrightText: 2020 David Edmundson <davidedmundson@kde.org>
+    SPDX-FileCopyrightText: 2026 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
 #pragma once
 
+#include <QDateTime>
 #include <QObject>
 #include <QThread>
 #include <qqmlregistration.h>
@@ -32,10 +34,16 @@ class PamAuthenticator : public QObject
     Q_PROPERTY(bool unlocked READ isUnlocked NOTIFY succeeded)
 
 public:
+    /*!
+        Exists purely to not have to change the UI code as of Plasma 6.8. Could eventually be dropped in favor of the
+        PamAuthenticators::Authenticator enum.
+     */
     enum NoninteractiveAuthenticatorType {
         None = 0,
         Fingerprint = 1 << 0,
         Smartcard = 2 << 0,
+        Face = 3 << 0,
+        Universal2Factor = 4 << 0,
     };
     Q_DECLARE_FLAGS(NoninteractiveAuthenticatorTypes, NoninteractiveAuthenticatorType)
     Q_FLAG(NoninteractiveAuthenticatorTypes)
@@ -47,9 +55,23 @@ public:
     ~PamAuthenticator() override;
     Q_DISABLE_COPY_MOVE(PamAuthenticator)
 
+    /*!
+        Whether the Authenticator is currently doing something. This mostly means it is currently authenticating.
+        A busy Authenticator probably won't be able to act on further tryUnlock calls.
+     */
     bool isBusy() const;
+
+    /*!
+        Whether the Authenticator has successfully completed tryUnlock. i.e. the PAM service actually unlocked the account
+     */
     bool isUnlocked() const;
-    bool isAvailable() const;
+
+    /*!
+        Is this Authenticator actually available. An Authenticator goes unavailable when the underlying PAM service
+        malfunctions and terminates too quickly, or when it reports itself PAM_AUTHINFO_UNAVAIL.
+     */
+    [[nodiscard]] bool isAvailable() const;
+
     NoninteractiveAuthenticatorTypes authenticatorType() const;
 
     // Get prefix to de-duplicate from their signals.
@@ -81,9 +103,6 @@ public Q_SLOTS:
     void respond(const QByteArray &response);
     void cancel();
 
-protected:
-    void init(const QString &service, const QString &user);
-
 private:
     void setBusy(bool busy);
 
@@ -96,11 +115,26 @@ private:
     QString m_service;
     bool m_busy = false;
     bool m_unlocked = false;
-    bool m_inAuthentication = false;
     bool m_unavailable = false;
     bool m_inPasswordDelay = false;
+    uint m_failedCount = 0;
+    QDateTime m_lastFailed = QDateTime::currentDateTimeUtc();
     NoninteractiveAuthenticatorTypes m_authenticatorType;
-    QThread m_thread;
+    // Tiny problem with bare bones QThread: when we shut down we want to clean up
+    // our subprocess correctly, but doing that means running a function on the thread
+    // before terminating it. This doesn't work out of the box because ther are
+    // no facilities to effectively invokeMethod while the QApplication is already
+    // mid shutdown. Instead we have a custom thread type that calls cleanup on the worker.
+    class WorkerThread : public QThread
+    {
+    public:
+        WorkerThread(std::unique_ptr<PamWorker> &&worker, QObject *parent = nullptr);
+        [[nodiscard]] PamWorker *worker() const;
+        void run() override;
+
+    private:
+        std::unique_ptr<PamWorker> m_worker;
+    } m_thread;
     PamWorker *d;
 };
 

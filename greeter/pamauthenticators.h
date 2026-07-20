@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2023 Janet Blackquill <uhhadd@gmail.com>
+    SPDX-FileCopyrightText: 2026 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -7,6 +8,7 @@
 #pragma once
 
 #include "pamauthenticator.h"
+
 #include <QObject>
 #include <memory>
 #include <qqmlregistration.h>
@@ -30,17 +32,31 @@ class PamAuthenticators : public QObject
     // this property true if any of the authenticators' unlocked properties are true
     Q_PROPERTY(bool unlocked READ isUnlocked NOTIFY succeeded)
 
-    // this property is a sum of the noninteractive authenticators' flags
+    /*!
+        \qmlproperty Authenticator.NoninteractiveAuthenticatorTypes Authenticators::authenticatorTypes
+
+        This purely exists for backwards compatiblity in the plasma-desktop QML code!
+        This property is either Fingerprint or nothing.
+        Prefer the newer Authenticators::authenticator property instead.
+    */
     Q_PROPERTY(PamAuthenticator::NoninteractiveAuthenticatorTypes authenticatorTypes READ authenticatorTypes NOTIFY authenticatorTypesChanged)
 
     Q_PROPERTY(AuthenticatorsState state READ state NOTIFY stateChanged)
 
     Q_PROPERTY(bool hadPrompt READ hadPrompt NOTIFY hadPromptChanged)
+    Q_PROPERTY(Authenticator authenticator MEMBER m_authenticator NOTIFY authenticatorChanged)
 
 public:
-    PamAuthenticators(std::unique_ptr<PamAuthenticator> &&interactive,
-                      std::vector<std::unique_ptr<PamAuthenticator>> &&noninteractive,
-                      QObject *parent = nullptr);
+    enum class Authenticator {
+        Regular,
+        Fingerprint,
+        Smartcard,
+        Face,
+        Universal2Factor,
+    };
+    Q_ENUM(Authenticator)
+
+    PamAuthenticators(const QString &loginName, QObject *parent = nullptr);
     ~PamAuthenticators() override;
 
     enum AuthenticatorsState {
@@ -89,8 +105,15 @@ public:
 
     bool hadPrompt() const;
     Q_SIGNAL void hadPromptChanged();
+    Q_SIGNAL void authenticatorChanged();
 
 private:
+    void onAuthenticatorChanged();
+    Authenticator loadAuthenticatorType();
+    void saveAuthenticatorType(Authenticator authenticator);
+
+    QString m_loginName;
+    Authenticator m_authenticator = loadAuthenticatorType();
     struct Private;
     QScopedPointer<Private> d;
 
