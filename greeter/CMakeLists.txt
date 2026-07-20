@@ -29,7 +29,6 @@ set(kscreenlocker_greet_SRCS
    greeterapp.h
    noaccessnetworkaccessmanagerfactory.h
    ../logind.h
-   types.h
 )
 
 ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
@@ -43,10 +42,9 @@ ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
 add_library(kscreenlocker_authenticator OBJECT ${kscreenlocker_authenticator_SRCS})
 target_link_libraries(kscreenlocker_authenticator
     Qt::Core
+    Qt::Qml
     ${PAM_LIBRARIES}
 )
-
-qt_extract_metatypes(kscreenlocker_authenticator)
 
 qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
 
@@ -92,6 +90,8 @@ target_compile_definitions(kscreenlocker_greet PRIVATE
     KSCREENLOCKER_PAM_FINGERPRINT_SERVICE=${KSCREENLOCKER_PAM_FINGERPRINT_SERVICE}
     KSCREENLOCKER_PAM_SMARTCARD_SERVICE=${KSCREENLOCKER_PAM_SMARTCARD_SERVICE}
 )
+
+qt_generate_foreign_qml_types(kscreenlocker_authenticator kscreenlocker_greet)
 
 # manually install type info since it's not installed by default for executables but we want it
 # for the kscreenlocker UI in shellpackage

@@ -9,10 +9,13 @@
 #include "pamauthenticator.h"
 #include <QObject>
 #include <memory>
+#include <qqmlregistration.h>
 
 class PamAuthenticators : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Authenticators)
+    QML_UNCREATABLE("Only available through the global `authenticator` context property")
 
     // these properties delegate to the interactive authenticator
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)

@@ -8,12 +8,15 @@
 
 #include <QObject>
 #include <QThread>
+#include <qqmlregistration.h>
 
 class PamWorker;
 
 class PamAuthenticator : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Authenticator)
+    QML_UNCREATABLE("Not exposed except for its enum")
 
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
     Q_PROPERTY(bool inPasswordDelay READ inPasswordDelay NOTIFY inPasswordDelayChanged)
