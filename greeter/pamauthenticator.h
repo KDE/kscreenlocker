@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2020 David Edmundson <davidedmundson@kde.org>
+    SPDX-FileCopyrightText: 2026 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -32,10 +33,13 @@ class PamAuthenticator : public QObject
     Q_PROPERTY(bool unlocked READ isUnlocked NOTIFY succeeded)
 
 public:
+#warning replace these with the other enum in PamAuthenticators also the flags aspect is unused
     enum NoninteractiveAuthenticatorType {
         None = 0,
         Fingerprint = 1 << 0,
         Smartcard = 2 << 0,
+        Face = 3 << 0,
+        Universal2Factor = 4 << 0,
     };
     Q_DECLARE_FLAGS(NoninteractiveAuthenticatorTypes, NoninteractiveAuthenticatorType)
     Q_FLAG(NoninteractiveAuthenticatorTypes)
@@ -50,6 +54,7 @@ public:
     bool isBusy() const;
     bool isUnlocked() const;
     bool isAvailable() const;
+    [[nodiscard]] bool isReallyAvailable() const;
     NoninteractiveAuthenticatorTypes authenticatorType() const;
 
     // Get prefix to de-duplicate from their signals.
@@ -81,9 +86,6 @@ public Q_SLOTS:
     void respond(const QByteArray &response);
     void cancel();
 
-protected:
-    void init(const QString &service, const QString &user);
-
 private:
     void setBusy(bool busy);
 
@@ -100,7 +102,21 @@ private:
     bool m_unavailable = false;
     bool m_inPasswordDelay = false;
     NoninteractiveAuthenticatorTypes m_authenticatorType;
-    QThread m_thread;
+    // Tiny problem with bare bones QThread: when we shut down we want to clean up
+    // our subprocess correctly, but doing that means running a function on the thread
+    // before terminating it. This doesn't work out of the box because ther are
+    // no facilities to effectively invokeMethod while the QApplication is already
+    // mid shutdown. Instead we have a custom thread type that calls cleanup on the worker.
+    class WorkerThread : public QThread
+    {
+    public:
+        WorkerThread(std::unique_ptr<PamWorker> &&worker, QObject *parent = nullptr);
+        [[nodiscard]] PamWorker *worker() const;
+        void run() override;
+
+    private:
+        std::unique_ptr<PamWorker> m_worker;
+    } m_thread;
     PamWorker *d;
 };
 

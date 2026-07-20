@@ -1,0 +1,78 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+                      "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+  SPDX-License-Identifier: CC0-1.0
+  SPDX-FileCopyrightText: none
+-->
+<node>
+  <!--
+    org.kde.plasma.screenlocker:
+    The interface of the greeter. It is called by the worker subprocess to communicate and send updates from the pam stack.
+  -->
+  <interface name="org.kde.plasma.screenlocker">
+    <!--
+      Ping:
+      @message: Any message, not really important. Gets printed as debug message.
+
+      This communicates to the greeter that the worker subprocess is ready.
+      The greeter will then call Start() on the worker.
+    -->
+    <method name="Ping">
+      <arg type="s" name="message" direction="in"/>
+    </method>
+
+    <!--
+      Prompt:
+      @request: The prompt message to show to the user (e.g. "Password:")
+      @reply: The reply from the user (e.g. "hunter2")
+
+      This is issuing a non-masked prompt. i.e. the input characters may be echoed to the screen.
+    -->
+    <method name="Prompt">
+      <arg type="s" name="request" direction="in"/>
+      <arg type="s" name="reply" direction="out"/>
+    </method>
+
+    <!--
+      MaskedPrompt:
+      @request: The prompt message to show to the user (e.g. "Password:")
+      @reply: The reply from the user (e.g. "hunter2")
+
+      This is issuing a masked prompt. i.e. the input characters will **NOT** be echoed to the screen.
+    -->
+    <method name="MaskedPrompt">
+      <arg type="s" name="request" direction="in"/>
+      <arg type="s" name="reply" direction="out"/>
+    </method>
+
+    <!--
+      ErrorMessage:
+      @message: The error message to show to the user (e.g. "Incorrect password")
+
+      This is issuing an error message.
+    -->
+    <method name="ErrorMessage">
+      <arg type="s" name="message" direction="in"/>
+    </method>
+
+    <!--
+      InfoMessage:
+      @message: The informational message to show to the user (e.g. "Caps Lock is on")
+
+      This is issuing an informational message.
+    -->
+    <method name="InfoMessage">
+      <arg type="s" name="message" direction="in"/>
+    </method>
+
+    <!--
+      StartFailedDelay:
+      @useconds: The number of microseconds to delay after a failed start.
+
+      This is issuing a start failed delay.
+    -->
+    <method name="StartFailedDelay">
+      <arg type="u" name="useconds" direction="in"/>
+    </method>
+  </interface>
+</node>
