@@ -46,7 +46,7 @@ target_link_libraries(kscreenlocker_authenticator
     ${PAM_LIBRARIES}
 )
 
-qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
+qt_extract_metatypes(kscreenlocker_authenticator)
 
 add_executable(kscreenlocker_greet ${kscreenlocker_greet_SRCS})
 
