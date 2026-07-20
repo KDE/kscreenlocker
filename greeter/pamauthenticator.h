@@ -33,6 +33,7 @@ public:
         None = 0,
         Fingerprint = 1 << 0,
         Smartcard = 2 << 0,
+        U2f = 4 << 0
     };
     Q_DECLARE_FLAGS(NoninteractiveAuthenticatorTypes, NoninteractiveAuthenticatorType)
     Q_FLAG(NoninteractiveAuthenticatorTypes)

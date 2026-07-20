@@ -108,6 +108,12 @@ Item {
             Layout.fillWidth: true
         }
 
+        PlasmaComponents3.Label {
+            visible: authenticator.authenticatorTypes & ScreenLocker.Authenticator.U2f
+            text: i18nd("kscreenlocker_greet", "(or use your u2f key)")
+            Layout.fillWidth: true
+        }
+
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             spacing: Kirigami.Units.largeSpacing

@@ -118,6 +118,7 @@ UnlockApp::UnlockApp(int &argc, char **argv)
         std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE), KUser().loginName(), PamAuthenticator::Fingerprint));
     noninteractive.push_back(
         std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_SMARTCARD_SERVICE), KUser().loginName(), PamAuthenticator::Smartcard));
+    noninteractive.push_back(std::make_unique<PamAuthenticator>(QStringLiteral(KSCREENLOCKER_PAM_U2F_SERVICE), KUser().loginName(), PamAuthenticator::U2f));
     m_authenticators = new PamAuthenticators(std::move(interactive), std::move(noninteractive), this);
     connect(m_logindIntegration, &LogindIntegration::prepareForSleep, m_authenticators, [this] {
         m_authenticators->cancel();
