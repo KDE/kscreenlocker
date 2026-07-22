@@ -44,7 +44,7 @@ public:
     explicit AbstractLocker(QObject *parent);
     ~AbstractLocker() override;
 
-    virtual void addAllowedWindow(quint32 window);
+    void addAllowedWindow(quint32 window);
 
     void setGlobalAccel(GlobalAccel *ga)
     {
@@ -65,6 +65,8 @@ protected:
     QScopedPointer<BackgroundWindow> m_background;
 
 private:
+    void updateGeometryOfBackground();
+
     GlobalAccel *m_globalAccel = nullptr;
 
     friend class BackgroundWindow;

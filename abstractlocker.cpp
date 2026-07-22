@@ -103,6 +103,19 @@ AbstractLocker::AbstractLocker(QObject *parent)
     if (qobject_cast<QGuiApplication *>(QCoreApplication::instance())) {
         m_background.reset(new BackgroundWindow(this));
     }
+
+    if (m_background) {
+        updateGeometryOfBackground();
+        const auto screens = qApp->screens();
+        for (auto s : screens) {
+            connect(s, &QScreen::geometryChanged, this, &AbstractLocker::updateGeometryOfBackground);
+        }
+        connect(qApp, &QGuiApplication::screenAdded, this, [this](QScreen *s) {
+            connect(s, &QScreen::geometryChanged, this, &AbstractLocker::updateGeometryOfBackground);
+            updateGeometryOfBackground();
+        });
+        connect(qApp, &QGuiApplication::screenRemoved, this, &AbstractLocker::updateGeometryOfBackground);
+    }
 }
 
 AbstractLocker::~AbstractLocker()
@@ -119,9 +132,20 @@ void AbstractLocker::emergencyShow()
 
 void AbstractLocker::addAllowedWindow(quint32 windows)
 {
-    Q_UNUSED(windows);
+    Q_UNUSED(windows)
+    Q_EMIT lockWindowShown();
 }
 
+void AbstractLocker::updateGeometryOfBackground()
+{
+    QRect combined;
+    const auto screens = qApp->screens();
+    for (auto s : screens) {
+        combined = combined.united(s->geometry());
+    }
+    m_background->setGeometry(combined);
+    m_background->update();
+}
 }
 
 #include "moc_abstractlocker.cpp"

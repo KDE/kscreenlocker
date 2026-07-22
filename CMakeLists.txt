@@ -156,14 +156,12 @@ set(ksld_SRCS
    ksldapp.cpp
    interface.cpp
    globalaccel.cpp
-   waylandlocker.cpp
    logind.cpp
    powermanagement_inhibition.cpp
    abstractlocker.h
    ksldapp.h
    interface.h
    globalaccel.h
-   waylandlocker.h
    logind.h
    powermanagement_inhibition.h
 )
