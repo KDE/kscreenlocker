@@ -87,7 +87,6 @@ void BackgroundWindow::paintEvent(QPaintEvent *)
             p.drawText(s->geometry(), Qt::AlignVCenter | Qt::AlignHCenter, text.toString());
         }
     }
-    m_lock->stayOnTop();
 }
 
 void BackgroundWindow::emergencyShow()

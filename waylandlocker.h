@@ -26,13 +26,9 @@ public:
     WaylandLocker(QObject *parent);
     ~WaylandLocker() override;
 
-    void showLockWindow() override;
-    void hideLockWindow() override;
-
     void addAllowedWindow(quint32 window) override;
 
 private:
-    void stayOnTop() override;
     void updateGeometryOfBackground();
 };
 

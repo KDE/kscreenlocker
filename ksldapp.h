@@ -309,11 +309,6 @@ private:
     void showLockWindow();
 
     /**
-     * @brief Hides the lock window.
-     */
-    void hideLockWindow();
-
-    /**
      * @brief Performs the unlocking operation.
      *
      * This function is responsible for unlocking the screen. It releases the keyboard and pointer grabs,

@@ -44,9 +44,6 @@ public:
     explicit AbstractLocker(QObject *parent);
     ~AbstractLocker() override;
 
-    virtual void showLockWindow() = 0;
-    virtual void hideLockWindow() = 0;
-
     virtual void addAllowedWindow(quint32 window);
 
     void setGlobalAccel(GlobalAccel *ga)
@@ -61,8 +58,6 @@ Q_SIGNALS:
     void lockWindowShown();
 
 protected:
-    virtual void stayOnTop() = 0;
-
     GlobalAccel *globalAccel()
     {
         return m_globalAccel;

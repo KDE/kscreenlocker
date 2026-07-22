@@ -43,24 +43,11 @@ void WaylandLocker::updateGeometryOfBackground()
     m_background->update();
 }
 
-void WaylandLocker::showLockWindow()
-{
-}
-
-void WaylandLocker::hideLockWindow()
-{
-}
-
 void WaylandLocker::addAllowedWindow(quint32 window)
 {
     Q_UNUSED(window)
     Q_EMIT lockWindowShown();
 }
-
-void WaylandLocker::stayOnTop()
-{
-}
-
 }
 
 #include "moc_waylandlocker.cpp"

@@ -382,7 +382,6 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 void KSldApp::doUnlock()
 {
     qCDebug(KSCREENLOCKER) << "Unlocking now.";
-    hideLockWindow();
     // delete the window again, to get rid of event filter
     delete m_lockWindow;
     m_lockWindow = nullptr;
@@ -479,18 +478,6 @@ void KSldApp::showLockWindow()
 
         connect(m_lockWindow, &AbstractLocker::lockWindowShown, this, &KSldApp::lockScreenShown);
     }
-    m_lockWindow->showLockWindow();
-}
-
-void KSldApp::hideLockWindow()
-{
-    if (!m_lockWindow) {
-        qCDebug(KSCREENLOCKER) << "No lock window to hide";
-        return;
-    }
-
-    qCDebug(KSCREENLOCKER) << "Hiding lock window";
-    m_lockWindow->hideLockWindow();
 }
 
 uint KSldApp::activeTime() const
