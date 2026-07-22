@@ -39,11 +39,6 @@
     </entry>
   </group>
   <group name="Greeter">
-    <entry key="Theme" type="String">
-      <default></default>
-      <label></label>
-      <whatsthis></whatsthis>
-    </entry>
     <entry name="wallpaperPluginId" key="WallpaperPlugin" type="String">
       <default>org.kde.image</default>
       <label></label>
