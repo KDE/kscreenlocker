@@ -152,13 +152,13 @@ set(kscreensaver_dbusXML dbus/org.kde.screensaver.xml)
 set(powerdevilpolicyagent_xml dbus/kf6_org.kde.Solid.PowerManagement.PolicyAgent.xml)
 
 set(ksld_SRCS
-   abstractlocker.cpp
+   locker.cpp
    ksldapp.cpp
    interface.cpp
    globalaccel.cpp
    logind.cpp
    powermanagement_inhibition.cpp
-   abstractlocker.h
+   locker.h
    ksldapp.h
    interface.h
    globalaccel.h

@@ -43,7 +43,7 @@ enum class EstablishLock {
  **/
 QString establishLockToString(EstablishLock establishLock);
 
-class AbstractLocker;
+class Locker;
 /**
  * @class KSldApp
  * @brief The KSldApp class represents the application responsible for screen locking.
@@ -340,7 +340,7 @@ private:
     /**
      * The lock window used to display the lock screen.
      **/
-    AbstractLocker *m_lockWindow;
+    Locker *m_lockWindow;
 
     /**
      * Timer to measure how long the screen is locked.

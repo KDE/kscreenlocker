@@ -9,7 +9,7 @@ SPDX-FileCopyrightText: 2015 Bhushan Shah <bhush94@gmail.com>
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "abstractlocker.h"
+#include "locker.h"
 #include "kscreenlocker_logging.h"
 
 #include <QApplication>
@@ -22,7 +22,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 namespace ScreenLocker
 {
-BackgroundWindow::BackgroundWindow(AbstractLocker *lock)
+BackgroundWindow::BackgroundWindow(Locker *lock)
     : QRasterWindow()
     , m_lock(lock)
 {
@@ -97,7 +97,7 @@ void BackgroundWindow::emergencyShow()
     show();
 }
 
-AbstractLocker::AbstractLocker(QObject *parent)
+Locker::Locker(QObject *parent)
     : QObject(parent)
 {
     if (qobject_cast<QGuiApplication *>(QCoreApplication::instance())) {
@@ -108,21 +108,21 @@ AbstractLocker::AbstractLocker(QObject *parent)
         updateGeometryOfBackground();
         const auto screens = qApp->screens();
         for (auto s : screens) {
-            connect(s, &QScreen::geometryChanged, this, &AbstractLocker::updateGeometryOfBackground);
+            connect(s, &QScreen::geometryChanged, this, &Locker::updateGeometryOfBackground);
         }
         connect(qApp, &QGuiApplication::screenAdded, this, [this](QScreen *s) {
-            connect(s, &QScreen::geometryChanged, this, &AbstractLocker::updateGeometryOfBackground);
+            connect(s, &QScreen::geometryChanged, this, &Locker::updateGeometryOfBackground);
             updateGeometryOfBackground();
         });
-        connect(qApp, &QGuiApplication::screenRemoved, this, &AbstractLocker::updateGeometryOfBackground);
+        connect(qApp, &QGuiApplication::screenRemoved, this, &Locker::updateGeometryOfBackground);
     }
 }
 
-AbstractLocker::~AbstractLocker()
+Locker::~Locker()
 {
 }
 
-void AbstractLocker::emergencyShow()
+void Locker::emergencyShow()
 {
     if (m_background.isNull()) {
         return;
@@ -130,13 +130,13 @@ void AbstractLocker::emergencyShow()
     m_background->emergencyShow();
 }
 
-void AbstractLocker::addAllowedWindow(quint32 windows)
+void Locker::addAllowedWindow(quint32 windows)
 {
     Q_UNUSED(windows)
     Q_EMIT lockWindowShown();
 }
 
-void AbstractLocker::updateGeometryOfBackground()
+void Locker::updateGeometryOfBackground()
 {
     QRect combined;
     const auto screens = qApp->screens();
@@ -148,4 +148,4 @@ void AbstractLocker::updateGeometryOfBackground()
 }
 }
 
-#include "moc_abstractlocker.cpp"
+#include "moc_locker.cpp"

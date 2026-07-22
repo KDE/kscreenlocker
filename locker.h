@@ -18,13 +18,13 @@ class GlobalAccel;
 
 namespace ScreenLocker
 {
-class AbstractLocker;
+class Locker;
 
 class BackgroundWindow : public QRasterWindow
 {
     Q_OBJECT
 public:
-    explicit BackgroundWindow(AbstractLocker *lock);
+    explicit BackgroundWindow(Locker *lock);
     ~BackgroundWindow() override;
 
     void emergencyShow();
@@ -33,16 +33,16 @@ protected:
     void paintEvent(QPaintEvent *) override;
 
 private:
-    AbstractLocker *m_lock;
+    Locker *m_lock;
     bool m_greeterFailure = false;
 };
 
-class AbstractLocker : public QObject
+class Locker : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractLocker(QObject *parent);
-    ~AbstractLocker() override;
+    explicit Locker(QObject *parent);
+    ~Locker() override;
 
     void addAllowedWindow(quint32 window);
 

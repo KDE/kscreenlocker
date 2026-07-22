@@ -7,10 +7,10 @@
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "ksldapp.h"
-#include "abstractlocker.h"
 #include "globalaccel.h"
 #include "interface.h"
 #include "kscreensaversettings.h"
+#include "locker.h"
 #include "logind.h"
 #include "powermanagement_inhibition.h"
 
@@ -470,13 +470,13 @@ void KSldApp::showLockWindow()
     if (!m_lockWindow) {
         qCDebug(KSCREENLOCKER) << "Creating lock window";
 
-        m_lockWindow = new AbstractLocker(this);
+        m_lockWindow = new Locker(this);
         if (!m_lockWindow) {
             return;
         }
         m_lockWindow->setGlobalAccel(m_globalAccel);
 
-        connect(m_lockWindow, &AbstractLocker::lockWindowShown, this, &KSldApp::lockScreenShown);
+        connect(m_lockWindow, &Locker::lockWindowShown, this, &KSldApp::lockScreenShown);
     }
 }
 
