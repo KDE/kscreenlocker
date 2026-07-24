@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-07-24 00:46+0000\n"
 "PO-Revision-Date: 2025-10-23 14:05+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -18,7 +18,29 @@ msgstr ""
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: abstractlocker.cpp:43
+#: ksldapp.cpp:119
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Setustýring"
+
+#: ksldapp.cpp:121
+#, kde-format
+msgid "Lock Session"
+msgstr "Læsa setu"
+
+#: ksldapp.cpp:367
+#, kde-format
+msgid "Screen locked"
+msgstr "Skjár læstur"
+
+#: ksldapp.cpp:392
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Skjár aflæstur"
+
+#: locker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -29,7 +51,7 @@ msgstr ""
 "Til að geta aflæst þarf annað hvort ConsoleKit eða LoginD, en\n"
 "hvorugt þeirra finnst í tölvunni þinni."
 
-#: abstractlocker.cpp:47
+#: locker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -47,7 +69,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:52
+#: locker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -74,28 +96,6 @@ msgstr ""
 "Ef þú manst ekki þessar leiðbeiningar geturðu alltaf kallað þennan skjá\n"
 "fram með því að ýta á Ctrl+Alt+F%3\n"
 "\n"
-
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "Setustýring"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Læsa setu"
-
-#: ksldapp.cpp:367
-#, kde-format
-msgid "Screen locked"
-msgstr "Skjár læstur"
-
-#: ksldapp.cpp:393
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Skjár aflæstur"
 
 #: logind.cpp:162
 #, kde-format

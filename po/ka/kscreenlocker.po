@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-07-24 00:46+0000\n"
 "PO-Revision-Date: 2025-01-22 04:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: abstractlocker.cpp:43
+#: ksldapp.cpp:119
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "სესიების მართვა"
+
+#: ksldapp.cpp:121
+#, kde-format
+msgid "Lock Session"
+msgstr "სესიის ჩაკეტვა"
+
+#: ksldapp.cpp:367
+#, kde-format
+msgid "Screen locked"
+msgstr "ეკრანი დაბლოკილია"
+
+#: ksldapp.cpp:392
+#, kde-format
+msgid "Screen unlocked"
+msgstr "ეკრანი განბლოკილია"
+
+#: locker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -29,7 +51,7 @@ msgstr ""
 "ეკრანის განბლოკვისთვის საჭიროა ConsoleKit ან LoginD, რომლებიც\n"
 "თქვენს სისტემაში აღმოჩენილი არაა."
 
-#: abstractlocker.cpp:47
+#: locker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -47,7 +69,7 @@ msgstr ""
 "# ck-unlock-session <სესიის-სახელი>\n"
 "\n"
 
-#: abstractlocker.cpp:52
+#: locker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -74,28 +96,6 @@ msgstr ""
 "თუ ინსტრუქციები აღარ გახსოვთ, ამ ეკრანზე დაბრუნება CTRL+ALT+F%2-ით "
 "შეგიძლიათ.\n"
 "\n"
-
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "სესიების მართვა"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "სესიის ჩაკეტვა"
-
-#: ksldapp.cpp:367
-#, kde-format
-msgid "Screen locked"
-msgstr "ეკრანი დაბლოკილია"
-
-#: ksldapp.cpp:393
-#, kde-format
-msgid "Screen unlocked"
-msgstr "ეკრანი განბლოკილია"
 
 #: logind.cpp:162
 #, kde-format

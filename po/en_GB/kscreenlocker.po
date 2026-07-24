@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-07-24 00:46+0000\n"
 "PO-Revision-Date: 2023-03-10 19:26+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -17,7 +17,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.03.70\n"
 
-#: abstractlocker.cpp:43
+#: ksldapp.cpp:119
+#, fuzzy, kde-format
+#| msgid "Session Management"
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Session Management"
+
+#: ksldapp.cpp:121
+#, kde-format
+msgid "Lock Session"
+msgstr "Lock Session"
+
+#: ksldapp.cpp:367
+#, kde-format
+msgid "Screen locked"
+msgstr "Screen locked"
+
+#: ksldapp.cpp:392
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Screen unlocked"
+
+#: locker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -28,7 +51,7 @@ msgstr ""
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
 "of which could be found on your system."
 
-#: abstractlocker.cpp:47
+#: locker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -46,7 +69,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: abstractlocker.cpp:52
+#: locker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -73,29 +96,6 @@ msgstr ""
 "Should you have forgotten the instructions, you can get back to this\n"
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
-
-#: ksldapp.cpp:119
-#, fuzzy, kde-format
-#| msgid "Session Management"
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "Session Management"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Lock Session"
-
-#: ksldapp.cpp:367
-#, kde-format
-msgid "Screen locked"
-msgstr "Screen locked"
-
-#: ksldapp.cpp:393
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Screen unlocked"
 
 #: logind.cpp:162
 #, kde-format

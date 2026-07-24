@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-07-24 00:46+0000\n"
 "PO-Revision-Date: 2025-01-22 09:30+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -20,7 +20,29 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.04.3\n"
 
-#: abstractlocker.cpp:43
+#: ksldapp.cpp:119
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Керування сеансами"
+
+#: ksldapp.cpp:121
+#, kde-format
+msgid "Lock Session"
+msgstr "Заблокувати сеанс"
+
+#: ksldapp.cpp:367
+#, kde-format
+msgid "Screen locked"
+msgstr "Екран заблоковано"
+
+#: ksldapp.cpp:392
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Екран розблоковано"
+
+#: locker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -32,7 +54,7 @@ msgstr ""
 "Щоб розблокувати екран, потрібна програма ConsoleKit або LoginD, але жодної\n"
 "з цих програм у вашій системі не виявлено."
 
-#: abstractlocker.cpp:47
+#: locker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -52,7 +74,7 @@ msgstr ""
 "# ck-unlock-session <назва-сеансу>\n"
 "\n"
 
-#: abstractlocker.cpp:52
+#: locker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -81,28 +103,6 @@ msgstr ""
 "Якщо ви забудете настанови, ви можете повернутися до цієї сторінки "
 "натисканням комбінації клавіш Ctrl+Alt+F%3\n"
 "\n"
-
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "Керування сеансами"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Заблокувати сеанс"
-
-#: ksldapp.cpp:367
-#, kde-format
-msgid "Screen locked"
-msgstr "Екран заблоковано"
-
-#: ksldapp.cpp:393
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Екран розблоковано"
 
 #: logind.cpp:162
 #, kde-format

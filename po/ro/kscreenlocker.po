@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-07-24 00:46+0000\n"
 "PO-Revision-Date: 2025-10-19 23:01+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -18,7 +18,29 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 25.08.1\n"
 
-#: abstractlocker.cpp:43
+#: ksldapp.cpp:119
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Gestiunea sesiunii"
+
+#: ksldapp.cpp:121
+#, kde-format
+msgid "Lock Session"
+msgstr "Blochează sesiunea"
+
+#: ksldapp.cpp:367
+#, kde-format
+msgid "Screen locked"
+msgstr "Ecran blocat"
+
+#: ksldapp.cpp:392
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Ecran deblocat"
+
+#: locker.cpp:43
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -29,7 +51,7 @@ msgstr ""
 "Pentru a-l debloca, aveți nevoie de ConsoleKit sau LoginD\n"
 "dar niciunul dintre ele nu e instalat în sistem."
 
-#: abstractlocker.cpp:47
+#: locker.cpp:47
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -48,7 +70,7 @@ msgstr ""
 "# ck-unlock-session <denumire-sesiune>\n"
 "\n"
 
-#: abstractlocker.cpp:52
+#: locker.cpp:52
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -75,28 +97,6 @@ msgstr ""
 "În caz că uitați instrucțiunile, puteți reveni la acest ecran\n"
 "apăsând Ctrl+Alt+F%3\n"
 "\n"
-
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "Gestiunea sesiunii"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Blochează sesiunea"
-
-#: ksldapp.cpp:367
-#, kde-format
-msgid "Screen locked"
-msgstr "Ecran blocat"
-
-#: ksldapp.cpp:393
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Ecran deblocat"
 
 #: logind.cpp:162
 #, kde-format

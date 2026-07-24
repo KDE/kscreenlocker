@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-07-24 00:46+0000\n"
 "PO-Revision-Date: 2024-01-28 19:09-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -16,43 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.4\n"
-
-#: abstractlocker.cpp:43
-#, kde-format
-msgid ""
-"The screen locker is broken and unlocking is not possible anymore.\n"
-"In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
-"of which could be found on your system."
-msgstr ""
-
-#: abstractlocker.cpp:47
-#, kde-format
-msgctxt "%1 = other terminal"
-msgid ""
-"The screen locker is broken and unlocking is not possible anymore.\n"
-"In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-"log in as root and execute the command:\n"
-"\n"
-"# ck-unlock-session <session-name>\n"
-"\n"
-msgstr ""
-
-#: abstractlocker.cpp:52
-#, kde-format
-msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
-msgid ""
-"The screen locker is broken and unlocking is not possible anymore.\n"
-"In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
-"log in to your account and execute the command:\n"
-"\n"
-"loginctl unlock-session %2\n"
-"\n"
-"Then log out of the virtual session by pressing Ctrl+D, and switch\n"
-"back to the running session (Ctrl+Alt+F%3).\n"
-"Should you have forgotten the instructions, you can get back to this\n"
-"screen by pressing Ctrl+Alt+F%3\n"
-"\n"
-msgstr ""
 
 #: ksldapp.cpp:119
 #, kde-format
@@ -71,10 +34,47 @@ msgstr "ਸ਼ੈਸ਼ਨ ਲਾਕ ਕਰੋ"
 msgid "Screen locked"
 msgstr "ਸਕਰੀਨ ਲਾਕ ਹੈ"
 
-#: ksldapp.cpp:393
+#: ksldapp.cpp:392
 #, kde-format
 msgid "Screen unlocked"
 msgstr "ਸਕਰੀਨ ਅਣ-ਲਾਕ ਹੈ"
+
+#: locker.cpp:43
+#, kde-format
+msgid ""
+"The screen locker is broken and unlocking is not possible anymore.\n"
+"In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
+"of which could be found on your system."
+msgstr ""
+
+#: locker.cpp:47
+#, kde-format
+msgctxt "%1 = other terminal"
+msgid ""
+"The screen locker is broken and unlocking is not possible anymore.\n"
+"In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
+"log in as root and execute the command:\n"
+"\n"
+"# ck-unlock-session <session-name>\n"
+"\n"
+msgstr ""
+
+#: locker.cpp:52
+#, kde-format
+msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
+msgid ""
+"The screen locker is broken and unlocking is not possible anymore.\n"
+"In order to unlock it, switch to a virtual terminal (e.g. Ctrl+Alt+F%1),\n"
+"log in to your account and execute the command:\n"
+"\n"
+"loginctl unlock-session %2\n"
+"\n"
+"Then log out of the virtual session by pressing Ctrl+D, and switch\n"
+"back to the running session (Ctrl+Alt+F%3).\n"
+"Should you have forgotten the instructions, you can get back to this\n"
+"screen by pressing Ctrl+Alt+F%3\n"
+"\n"
+msgstr ""
 
 #: logind.cpp:162
 #, kde-format
