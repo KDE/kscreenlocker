@@ -1,6 +1,8 @@
 # Translation of kcm_screenlocker to Norwegian Bokmål
 #
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2014, 2015.
+# Karl Ove Hufthammer <karl@huftis.org>, 2024.
+# Martin Hansen <mh306602@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
