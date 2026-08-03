@@ -1,5 +1,6 @@
 # Translation of kscreenlocker to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2018, 2020, 2022, 2023, 2025.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2021.
 msgid ""
 msgstr ""
