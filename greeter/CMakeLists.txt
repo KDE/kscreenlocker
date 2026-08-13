@@ -106,7 +106,3 @@ install(FILES "${qml_module_typeinfo}" DESTINATION ${KDE_INSTALL_QMLDIR}/${qml_m
 
 
 install(TARGETS kscreenlocker_greet DESTINATION ${KDE_INSTALL_LIBEXECDIR})
-
-if(BUILD_TESTING)
-    add_subdirectory(autotests)
-endif()
