@@ -7,11 +7,19 @@
 
 #include "pamauthenticator.h"
 
-#include <QElapsedTimer>
+#include <QDBusConnection>
+#include <QDBusPendingCallWatcher>
+#include <QDBusServer>
 #include <QMetaMethod>
-#include <QThread>
+#include <QProcess>
+#include <QTimer>
 
-#include "pamworker.h"
+#include <KLibexec>
+
+#include "kscreenlocker_greet_logging.h"
+#include "org.kde.plasma.screenlocker.worker.h"
+#include "result.h"
+#include "screenlockeradaptor.h"
 
 using namespace std::chrono_literals;
 using namespace Qt::StringLiterals;
@@ -26,75 +34,15 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
       })
     , m_service(service)
     , m_authenticatorType(types)
-    , m_thread(std::make_unique<PamWorker>(service, user))
-    , d(m_thread.worker())
+    , m_user(user)
 {
-    connect(d, &PamWorker::busyChanged, this, &PamAuthenticator::setBusy);
-    connect(d, &PamWorker::inPasswordDelayChanged, this, &PamAuthenticator::setInPasswordDelay);
-    connect(d, &PamWorker::prompt, this, [this](const QString &msg) {
-        m_prompt = msg;
-        Q_EMIT prompt(msg);
-    });
-    connect(d, &PamWorker::promptForSecret, this, [this](const QString &msg) {
-        m_promptForSecret = msg;
-        Q_EMIT promptForSecret(msg);
-    });
-    connect(d, &PamWorker::infoMessage, this, [this](const QString &msg) {
-        m_infoMessage = msg;
-        Q_EMIT infoMessage(msg);
-    });
-    connect(d, &PamWorker::errorMessage, this, [this](const QString &msg) {
-        m_errorMessage = msg;
-        Q_EMIT errorMessage(msg);
-    });
-
-    connect(d, &PamWorker::inAuthenticateChanged, this, [this] {
-        Q_EMIT availableChanged();
-    });
-    connect(d, &PamWorker::unavailabilityChanged, this, [this](bool isUnavailable) {
-        m_unavailable = isUnavailable;
-        Q_EMIT availableChanged();
-    });
-
-    connect(d, &PamWorker::succeeded, this, [this]() {
-        m_unlocked = true;
-        Q_EMIT succeeded();
-    });
-    // Failed is not a persistent state. When a view provides authentication that will either result in failure or success,
-    // failure simply means that the prompt is getting delayed.
-    connect(d, &PamWorker::failed, this, [this] {
-        // Guard against particularly broken PAM services. For example when pam-u2f doesn't find a token because it is
-        // not plugged in it will fail the authentication, but it will do it so slowly that the timing checks in the
-        // worker itself don't bite.
-        // Here we can keep a higher level view of the failures and if need be break the loop by marking us unavailable.
-        auto now = QDateTime::currentDateTimeUtc();
-        if (now - m_lastFailed < 2s) {
-            m_failedCount++;
-            if (m_failedCount > 3) {
-                m_unavailable = true;
-                Q_EMIT availableChanged();
-            }
-        } else {
-            m_failedCount = 0;
-        }
-        m_lastFailed = now;
-
-        Q_EMIT failed();
-    });
-    connect(d, &PamWorker::loginFailedDelayStarted, this, &PamAuthenticator::loginFailedDelayStarted);
-
-    m_thread.start();
-
-    QMetaObject::invokeMethod(d, [this]() {
-        d->start();
-    });
+    new ScreenlockerAdaptor(this);
+    startWorker();
 }
 
 PamAuthenticator::~PamAuthenticator()
 {
-    // This is a special thread type that cleans up the worker before returning to us.
-    m_thread.quit();
-    m_thread.wait();
+    quitWorkerProcess();
 }
 
 bool PamAuthenticator::isBusy() const
@@ -128,17 +76,78 @@ bool PamAuthenticator::isUnlocked() const
 void PamAuthenticator::tryUnlock()
 {
     m_unlocked = false;
-    QMetaObject::invokeMethod(d, &PamWorker::authenticate);
+
+    if (m_busy) {
+        return;
+    }
+
+    if (!m_dbusWorker) {
+        qCWarning(KSCREENLOCKER_GREET) << "DBus worker not initialized, cannot authenticate yet.";
+        return;
+    }
+
+    if (m_unavailable) {
+        qCDebug(KSCREENLOCKER_GREET) << "PAM service is not available. Cannot authenticate.";
+        return;
+    }
+
+    setBusy(true);
+    auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Authenticate(), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
+        watcher->deleteLater();
+        setBusy(false);
+
+        if (watcher->error().isValid()) {
+            qCWarning(KSCREENLOCKER_GREET) << "PAM worker failed to authenticate:" << watcher->error().message();
+            Q_EMIT failed();
+            return;
+        }
+
+        decltype(m_dbusWorker->Authenticate()) reply = watcher->reply();
+        switch (reply.value()) {
+        case WorkerResult::Type::Failure: {
+            // Guard against particularly broken PAM services. For example when pam-u2f doesn't find a token because it is
+            // not plugged in it will fail the authentication, but it will do it so slowly that the timing checks in the
+            // worker itself don't bite.
+            // Here we can keep a higher level view of the failures and if need be break the loop by marking us unavailable.
+            auto now = QDateTime::currentDateTimeUtc();
+            if (now - m_lastFailed < 2s) {
+                m_failedCount++;
+                if (m_failedCount > 3) {
+                    m_unavailable = true;
+                    Q_EMIT availableChanged();
+                }
+            } else {
+                m_failedCount = 0;
+            }
+            m_lastFailed = now;
+
+            Q_EMIT failed();
+            return;
+        }
+        case WorkerResult::Type::Success:
+            m_unlocked = true;
+            Q_EMIT succeeded();
+            return;
+        case WorkerResult::Type::Unavailable:
+            m_unavailable = true;
+            Q_EMIT availableChanged();
+            return;
+        };
+
+        qWarning() << "Unexpected authentication result" << reply.value();
+    });
 }
 
 void PamAuthenticator::respond(const QByteArray &response)
 {
-    QMetaObject::invokeMethod(
-        d,
-        [this, response]() {
-            Q_EMIT d->promptResponseReceived(response);
-        },
-        Qt::QueuedConnection);
+    if (m_pendingPrompt.type() != QDBusMessage::InvalidMessage && m_dbusWorker) {
+        QDBusMessage reply = m_pendingPrompt.createReply(QString::fromUtf8(response));
+        m_dbusWorker->connection().send(reply);
+        m_pendingPrompt = {};
+    } else {
+        qCWarning(KSCREENLOCKER_GREET) << "Received prompt response, but no pending prompt was found!";
+    }
 }
 
 void PamAuthenticator::cancel()
@@ -147,7 +156,18 @@ void PamAuthenticator::cancel()
     m_promptForSecret.clear();
     m_infoMessage.clear();
     m_errorMessage.clear();
-    QMetaObject::invokeMethod(d, &PamWorker::cancelled);
+
+    if (!m_dbusWorker) {
+        return;
+    }
+
+    // Timings here are tight because we may need to cancel two workers, we don't want to get stuck on this for too long.
+    // Let it quit on its own. Mind that this usually will get stuck because the worker is itself waiting for a prompt response.
+    std::ignore = m_dbusWorker->Cancel();
+    if (m_workerProcess) {
+        m_workerProcess->waitForFinished((5ms).count());
+    }
+    quitWorkerProcess();
 }
 
 QString PamAuthenticator::getPrompt() const
@@ -186,20 +206,113 @@ void PamAuthenticator::setInPasswordDelay(bool timeout)
     Q_EMIT inPasswordDelayChanged();
 }
 
-PamAuthenticator::WorkerThread::WorkerThread(std::unique_ptr<PamWorker> &&worker, QObject *parent)
-    : QThread(parent)
-    , m_worker(std::move(worker))
+void PamAuthenticator::Ping(const QString &message)
 {
-    m_worker->moveToThread(this);
+    qCDebug(KSCREENLOCKER_GREET) << "Ping received" << message << calledFromDBus();
+    if (!m_dbusWorker) {
+        qCWarning(KSCREENLOCKER_GREET) << "Worker pinged before DBus worker interface was initialized.";
+        return;
+    }
+
+    auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Start(m_service, m_user), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [watcher]() {
+        watcher->deleteLater();
+        Q_ASSERT(watcher->isValid());
+    });
 }
 
-[[nodiscard]] PamWorker *PamAuthenticator::WorkerThread::worker() const
+QString PamAuthenticator::Prompt(const QString &msg)
 {
-    return m_worker.get();
+    return promptInternal(msg, false);
 }
 
-void PamAuthenticator::WorkerThread::run()
+QString PamAuthenticator::MaskedPrompt(const QString &msg)
 {
-    QThread::run();
-    m_worker.reset();
+    return promptInternal(msg, true);
+}
+
+void PamAuthenticator::StartFailedDelay(uint useconds)
+{
+    setInPasswordDelay(true);
+    QTimer::singleShot(std::chrono::microseconds(useconds), this, [this]() {
+        setInPasswordDelay(false);
+    });
+    Q_EMIT loginFailedDelayStarted(useconds);
+}
+
+void PamAuthenticator::InfoMessage(const QString &msg)
+{
+    m_infoMessage = msg;
+    Q_EMIT infoMessage(msg);
+}
+
+void PamAuthenticator::ErrorMessage(const QString &msg)
+{
+    m_errorMessage = msg;
+    Q_EMIT errorMessage(msg);
+}
+
+QString PamAuthenticator::promptInternal(const QString &msg, bool isSecret)
+{
+    setBusy(false);
+
+    if (isSecret) {
+        m_promptForSecret = msg;
+        Q_EMIT promptForSecret(msg);
+    } else {
+        m_prompt = msg;
+        Q_EMIT prompt(msg);
+    }
+
+    qCDebug(KSCREENLOCKER_GREET,
+            "[PAM worker %s] Message: %s: %s",
+            qUtf8Printable(m_service),
+            (isSecret ? "Echo-off prompt" : "Echo-on prompt"),
+            qUtf8Printable(msg));
+
+    setDelayedReply(true);
+    m_pendingPrompt = message();
+
+    return {};
+}
+
+void PamAuthenticator::quitWorkerProcess()
+{
+    if (m_workerProcess) {
+        m_workerProcess->terminate();
+        if (!m_workerProcess->waitForFinished((25ms).count())) {
+            qWarning() << "Worker did not terminate in time, killing it.";
+            m_workerProcess->kill();
+        }
+    }
+    m_dbusWorker.reset();
+    m_workerProcess = nullptr;
+}
+
+void PamAuthenticator::startWorker()
+{
+    Q_ASSERT(!m_workerProcess);
+
+    qCDebug(KSCREENLOCKER_GREET) << "Starting PAM worker for service" << m_service << "and user" << m_user;
+
+    m_server = new QDBusServer(this);
+    connect(m_server, &QDBusServer::newConnection, this, &PamAuthenticator::connectWorker);
+
+    m_workerProcess = new QProcess(this);
+    m_workerProcess->setProcessChannelMode(QProcess::ForwardedChannels);
+    m_workerProcess->setProgram(KLibexec::path(u"kscreenlocker_worker"_s));
+    m_workerProcess->setArguments({m_service});
+    m_workerProcess->start();
+    m_workerProcess->write(m_server->address().toUtf8());
+    m_workerProcess->closeWriteChannel();
+}
+
+void PamAuthenticator::connectWorker(const QDBusConnection &connection)
+{
+    Q_ASSERT(!m_dbusWorker); // only accept a connection once to mitigate the risk of a malicious actor connecting to us
+    qCDebug(KSCREENLOCKER_GREET) << "New D-Bus connection established" << connection.name();
+    auto c = connection; // make a non-const copy
+    c.registerObject(u"/org/kde/plasma/screenlocker"_s, this, QDBusConnection::ExportAdaptors);
+    m_dbusWorker = std::make_unique<OrgKdePlasmaScreenlockerWorkerInterface>(QString(), u"/org/kde/plasma/screenlocker/worker"_s, c);
+    m_dbusWorker->setTimeout(std::numeric_limits<int>::max()); // disable timeout, we expect blocking calls to arrive eventually
 }

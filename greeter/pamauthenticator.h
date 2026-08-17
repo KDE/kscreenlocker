@@ -7,14 +7,19 @@
 
 #pragma once
 
+#include <QDBusConnection>
+#include <QDBusContext>
+#include <QDBusMessage>
 #include <QDateTime>
 #include <QObject>
-#include <QThread>
+#include <memory>
 #include <qqmlregistration.h>
 
-class PamWorker;
+class QDBusServer;
+class QProcess;
+class OrgKdePlasmaScreenlockerWorkerInterface;
 
-class PamAuthenticator : public QObject
+class PamAuthenticator : public QObject, protected QDBusContext
 {
     Q_OBJECT
     QML_NAMED_ELEMENT(Authenticator)
@@ -102,9 +107,19 @@ public Q_SLOTS:
     void tryUnlock();
     void respond(const QByteArray &response);
     void cancel();
+    void Ping(const QString &message);
+    [[nodiscard]] QString Prompt(const QString &msg);
+    [[nodiscard]] QString MaskedPrompt(const QString &msg);
+    void StartFailedDelay(uint useconds);
+    void InfoMessage(const QString &msg);
+    void ErrorMessage(const QString &msg);
 
 private:
     void setBusy(bool busy);
+    [[nodiscard]] QString promptInternal(const QString &msg, bool isSecret);
+    void quitWorkerProcess();
+    void startWorker();
+    void connectWorker(const QDBusConnection &connection);
 
     const std::vector<std::pair<QMetaMethod, const QString &>> m_signalsToMembers;
     // NOTE Don't forget to reset in cancel as necessary
@@ -120,22 +135,11 @@ private:
     uint m_failedCount = 0;
     QDateTime m_lastFailed = QDateTime::currentDateTimeUtc();
     NoninteractiveAuthenticatorTypes m_authenticatorType;
-    // Tiny problem with bare bones QThread: when we shut down we want to clean up
-    // our subprocess correctly, but doing that means running a function on the thread
-    // before terminating it. This doesn't work out of the box because ther are
-    // no facilities to effectively invokeMethod while the QApplication is already
-    // mid shutdown. Instead we have a custom thread type that calls cleanup on the worker.
-    class WorkerThread : public QThread
-    {
-    public:
-        WorkerThread(std::unique_ptr<PamWorker> &&worker, QObject *parent = nullptr);
-        [[nodiscard]] PamWorker *worker() const;
-        void run() override;
-
-    private:
-        std::unique_ptr<PamWorker> m_worker;
-    } m_thread;
-    PamWorker *d;
+    QDBusMessage m_pendingPrompt;
+    QDBusServer *m_server = nullptr;
+    std::unique_ptr<OrgKdePlasmaScreenlockerWorkerInterface> m_dbusWorker;
+    QProcess *m_workerProcess = nullptr;
+    QString m_user;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(PamAuthenticator::NoninteractiveAuthenticatorTypes)
