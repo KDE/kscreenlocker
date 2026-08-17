@@ -14,7 +14,6 @@ set(kscreenlocker_authenticator_SRCS
     pamauthenticator.cpp
     pamauthenticator.h
     pamauthenticatormodel.cpp
-    pamworker.cpp
     pamauthenticatordescriptor.cpp
 )
 
@@ -46,7 +45,7 @@ ecm_qt_declare_logging_category(kscreenlocker_greet_SRCS
 
 set_source_files_properties(worker/org.kde.plasma.screenlocker.worker.xml PROPERTIES INCLUDE "result.h")
 qt_add_dbus_interface(kscreenlocker_authenticator_SRCS worker/org.kde.plasma.screenlocker.worker.xml org.kde.plasma.screenlocker.worker)
-qt_add_dbus_adaptor(kscreenlocker_authenticator_SRCS worker/org.kde.plasma.screenlocker.xml pamworker.h PamWorker)
+qt_add_dbus_adaptor(kscreenlocker_authenticator_SRCS worker/org.kde.plasma.screenlocker.xml pamauthenticator.h PamAuthenticator)
 
 add_library(kscreenlocker_authenticator OBJECT ${kscreenlocker_authenticator_SRCS})
 target_link_libraries(kscreenlocker_authenticator
