@@ -39,6 +39,9 @@ target_include_directories(WorkerResult PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURREN
 
 set_source_files_properties(org.kde.plasma.screenlocker.xml PROPERTIES NO_NAMESPACE TRUE)
 qt_add_dbus_interface(SRCS org.kde.plasma.screenlocker.xml org.kde.plasma.screenlocker)
+set_source_files_properties(org.kde.plasma.screenlocker.Arbiter.xml PROPERTIES NO_NAMESPACE TRUE)
+qt_add_dbus_interface(SRCS org.kde.plasma.screenlocker.Arbiter.xml org.kde.plasma.screenlocker.Arbiter)
+
 add_executable(kscreenlocker_worker main.cpp ${SRCS})
 target_link_libraries(kscreenlocker_worker
     PRIVATE

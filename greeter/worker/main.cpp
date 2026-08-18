@@ -17,6 +17,7 @@
 #include "config-worker.h"
 #include "debug.h"
 #include "diewithparent.h"
+#include "org.kde.plasma.screenlocker.Arbiter.h"
 #include "org.kde.plasma.screenlocker.h"
 #include "result.h"
 
@@ -59,7 +60,7 @@ class Worker : public QObject
 {
     Q_OBJECT
 public:
-    Worker(bool fingerprint, OrgKdePlasmaScreenlockerInterface *screenlocker);
+    Worker(bool fingerprint, OrgKdePlasmaScreenlockerInterface *screenlocker, OrgKdePlasmaScreenlockerArbiterInterface *arbiter);
     void start(const QString &service, const QString &user);
     [[nodiscard]] WorkerResult::Type authenticate();
     void startFailedDelay(uint useconds);
@@ -73,6 +74,7 @@ Q_SIGNALS:
     void interrupt();
 
 private:
+    [[nodiscard]] WorkerResult::Type authenticateInternal();
     [[nodiscard]] static int converse(int n, const struct pam_message **msg, struct pam_response **resp, void *data);
 
     bool m_fingerprint;
@@ -83,6 +85,7 @@ private:
     int m_result = -1;
     QString m_service;
     OrgKdePlasmaScreenlockerInterface *m_screenlocker;
+    OrgKdePlasmaScreenlockerArbiterInterface *m_arbiter;
 };
 
 class Adaptor : public QObject
@@ -90,18 +93,33 @@ class Adaptor : public QObject
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.plasma.screenlocker.worker")
 public:
-    Adaptor(OrgKdePlasmaScreenlockerInterface &screenlocker)
+    Adaptor(OrgKdePlasmaScreenlockerInterface &screenlocker, OrgKdePlasmaScreenlockerArbiterInterface &arbiter)
         : QObject(nullptr)
         , m_screenlocker(screenlocker)
+        , m_arbiter(arbiter)
     {
     }
 
 public Q_SLOTS:
-    Q_NOREPLY void Start(const QString &service, const QString &username)
+    Q_NOREPLY void Start(const QString &service, const QString &untrustedUsername)
     {
-        qCDebug(WORKER) << "Proxy: Start called with service" << service << "and username" << username;
-        m_worker = std::make_unique<Worker>(service == KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, &m_screenlocker);
-        m_worker->start(service, username);
+        const QString trustedUsername = [&] {
+            if (!m_arbiter.isValid()) {
+                return untrustedUsername;
+            }
+
+            auto reply = m_arbiter.GetUser();
+            reply.waitForFinished();
+            if (reply.isError()) {
+                qCFatal(WORKER) << "Arbiter failed to provide a username:" << reply.error().message();
+                _exit(1);
+            }
+            return reply.value();
+        }();
+
+        qCDebug(WORKER) << "Proxy: Start called with service" << service << "and username" << trustedUsername;
+        m_worker = std::make_unique<Worker>(service == KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, &m_screenlocker, &m_arbiter);
+        m_worker->start(service, trustedUsername);
     }
 
     [[nodiscard]] int Authenticate()
@@ -118,6 +136,7 @@ public Q_SLOTS:
 
 private:
     OrgKdePlasmaScreenlockerInterface &m_screenlocker;
+    OrgKdePlasmaScreenlockerArbiterInterface &m_arbiter;
     std::unique_ptr<Worker> m_worker;
 };
 
@@ -210,15 +229,28 @@ int Worker::converse(int n, const struct pam_message **msg, struct pam_response 
     return PAM_SUCCESS;
 }
 
-Worker::Worker(bool fingerprint, OrgKdePlasmaScreenlockerInterface *screenlocker)
+Worker::Worker(bool fingerprint, OrgKdePlasmaScreenlockerInterface *screenlocker, OrgKdePlasmaScreenlockerArbiterInterface *arbiter)
     : QObject(nullptr)
     , m_fingerprint(fingerprint)
     , m_conv({.conv = &Worker::converse, .appdata_ptr = this})
     , m_screenlocker(screenlocker)
+    , m_arbiter(arbiter)
 {
 }
 
 WorkerResult::Type Worker::authenticate()
+{
+    auto ret = authenticateInternal();
+    if (m_arbiter->isValid()) {
+        qCDebug(WORKER) << "Reporting authentication result to arbiter" << ret;
+        m_arbiter->Result(ret);
+    } else {
+        qCWarning(WORKER) << "Arbiter is not connected, cannot report authentication result";
+    }
+    return ret;
+}
+
+WorkerResult::Type Worker::authenticateInternal()
 {
     if (m_inAuthenticate) {
         qCDebug(WORKER, "[PAM worker %s] Authentication is already in progress", qUtf8Printable(m_service));
@@ -378,19 +410,30 @@ int main(int argc, char *argv[])
         return category;
     };
 
-    std::string address = [] {
-        std::string address;
-        while (address.empty()) {
-            std::getline(std::cin, address);
+    const auto payload = [&] {
+        QTextStream stream(stdin);
+        auto json = stream.readAll();
+        QJsonParseError error;
+        auto document = QJsonDocument::fromJson(json.toUtf8(), &error);
+        if (error.error != QJsonParseError::NoError) {
+            qCFatal(WORKER) << "Failed to parse JSON payload from stdin:" << error.errorString();
+            _exit(1);
         }
-        return address;
+        return document.object();
     }();
+    const QString screenlockerAddress = payload.value(u"screenlockerAddress"_s).toString();
+    const QString arbiterAddress = payload.value(u"arbiterAddress"_s).toString();
 
-    auto connection = QDBusConnection::connectToPeer(QString::fromStdString(address), u"org.kde.plasma.screenlocker"_s);
+    auto connection = QDBusConnection::connectToPeer(screenlockerAddress, u"org.kde.plasma.screenlocker"_s);
     OrgKdePlasmaScreenlockerInterface screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
     screenlocker.setTimeout(
         std::numeric_limits<int>::max()); // disable timeout, we expect blocking calls to arrive eventually (or we get terminated by our parent)
-    Adaptor proxy(screenlocker);
+
+    auto arbiterConnection = QDBusConnection::connectToPeer(arbiterAddress, u"org.kde.plasma.screenlocker.Arbiter"_s);
+    OrgKdePlasmaScreenlockerArbiterInterface arbiter(QString(), u"/org/kde/plasma/screenlocker/Arbiter"_s, arbiterConnection);
+    // Arbiter currently has no blocking calls; no need to disable timeout.
+
+    Adaptor proxy(screenlocker, arbiter);
     connection.registerObject(u"/org/kde/plasma/screenlocker/worker"_s, &proxy, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
     // Tell the screenlocker we are ready. This is necessary because there is technically a race between
     // the connection getting established and us registering the object. To avoid any issues we have this

@@ -13,7 +13,8 @@
     <!--
       Start:
       @service: The pam service stack name (e.g. kde, or kde-fingerprint)
-      @username: The username to authenticate (or empty string to prompt nullptr)
+      @username: The username to authenticate (or empty string to prompt nullptr).
+                 If an Arbiter is set this argument gets ignored and instead the Arbiter determines the username.
 
       This starts the pam stack. It's called in reaction to a Ping() on the greeter.
       Ping essentially communicates that the worker subprocess is ready. Start()

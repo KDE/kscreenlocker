@@ -1,0 +1,42 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+                      "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+  SPDX-License-Identifier: CC0-1.0
+  SPDX-FileCopyrightText: none
+-->
+<node>
+  <!--
+    org.kde.plasma.Arbiter:
+    The Arbiter is a special interface implemented by a secondary (trusted) client of sorts. It acts as authentication arbiter on
+    behalf of the client. For example with Plasma Login Manager the greeter process (the UI) isn't run as root and thus cannot
+    authenticate random users. So the greeter calls the Arbiter (through the org.kde.plasma.pam.agent interface) and the Arbiter
+    creates the worker by passing along the client's peer-to-peer address. The Worker and the Client then talk to each other,
+    once the Authenticate flow is complete the Result is returned to the Client and in addition to the Arbiter.
+
+    BEWARE: Do not implement both the Client and the Arbiter interface in the same process. It risks deadlocks (between Authenticate and the Result call)!
+            It also makes no sense.
+  -->
+  <interface name="org.kde.plasma.screenlocker.Arbiter">
+    <!--
+      Result:
+      @username: The username of the user to authenticate
+
+      This overrides the username passed to Start() on the worker.
+      It is supposed to get called by the worker when an Arbiter is set on the worker.
+    -->
+    <method name="GetUser">
+      <arg type="s" name="username" direction="out"/>
+    </method>
+
+    <!--
+      Result:
+      @result: The result code
+
+      Called by the worker if an Arbiter is set and the authenticate flow reached a result state.
+      In other words: it tells the arbiter the result of the Authenticate() call issued by the client (which is potentially untrusted).
+    -->
+    <method name="Result">
+      <arg type="i" name="result" direction="in"/>
+    </method>
+  </interface>
+</node>

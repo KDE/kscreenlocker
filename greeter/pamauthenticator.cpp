@@ -10,6 +10,8 @@
 #include <QDBusConnection>
 #include <QDBusPendingCallWatcher>
 #include <QDBusServer>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QMetaMethod>
 #include <QProcess>
 #include <QTimer>
@@ -307,7 +309,11 @@ void PamAuthenticator::startWorker()
     m_workerProcess->setProgram(KLibexec::path(u"kscreenlocker_worker"_s));
     m_workerProcess->setArguments({m_service});
     m_workerProcess->start();
-    m_workerProcess->write(m_server->address().toUtf8());
+    m_workerProcess->write(QJsonDocument(QJsonObject{
+                                             {u"screenlockerAddress"_s, m_server->address()},
+                                             {u"arbiterAddress"_s, QString()},
+                                         })
+                               .toJson(QJsonDocument::Compact));
     m_workerProcess->closeWriteChannel();
 }
 
