@@ -59,7 +59,7 @@ class Worker : public QObject
 {
     Q_OBJECT
 public:
-    Worker(const QString &service, const QString &user, org::kde::plasma::screenlocker *screenlocker);
+    Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface *screenlocker);
     [[nodiscard]] WorkerResult::Type authenticate();
     void startFailedDelay(uint useconds);
 
@@ -80,7 +80,7 @@ private:
     struct pam_conv m_conv;
     bool m_available = true;
     bool m_inAuthenticate = false;
-    org::kde::plasma::screenlocker *m_screenlocker;
+    OrgKdePlasmaScreenlockerInterface *m_screenlocker;
 
     // Initialized based on other members, keep last!
     std::unique_ptr<pam_handle_t> m_handle = nullptr; //< the actual PAM handle
@@ -91,7 +91,7 @@ class Adaptor : public QObject
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.plasma.screenlocker.worker")
 public:
-    Adaptor(const QString &service, const QString &user, org::kde::plasma::screenlocker &screenlocker)
+    Adaptor(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface &screenlocker)
         : QObject(nullptr)
         , m_screenlocker(screenlocker)
         , m_worker(service, user, &m_screenlocker)
@@ -112,7 +112,7 @@ public Q_SLOTS:
     }
 
 private:
-    org::kde::plasma::screenlocker &m_screenlocker;
+    OrgKdePlasmaScreenlockerInterface &m_screenlocker;
     Worker m_worker;
 };
 
@@ -205,7 +205,7 @@ int Worker::converse(int n, const struct pam_message **msg, struct pam_response 
     return PAM_SUCCESS;
 }
 
-Worker::Worker(const QString &service, const QString &user, org::kde::plasma::screenlocker *screenlocker)
+Worker::Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface *screenlocker)
     : QObject(nullptr)
     , m_service(service)
     , m_user(user)
@@ -366,7 +366,7 @@ int main(int argc, char *argv[])
     }();
 
     auto connection = QDBusConnection::connectToPeer(QString::fromStdString(address), u"org.kde.plasma.screenlocker"_s);
-    org::kde::plasma::screenlocker screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
+    OrgKdePlasmaScreenlockerInterface screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
     screenlocker.setTimeout(
         std::numeric_limits<int>::max()); // disable timeout, we expect blocking calls to arrive eventually (or we get terminated by our parent)
     Adaptor proxy(service, user, screenlocker);
