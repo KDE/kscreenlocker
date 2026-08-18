@@ -264,32 +264,32 @@ void PamAuthenticators::onAuthenticatorChanged()
 
 bool PamAuthenticators::isBusy() const
 {
-    return d->m_activeAuthenticator->isBusy();
+    return d->m_activeAuthenticator && d->m_activeAuthenticator->isBusy();
 }
 
 bool PamAuthenticators::inPasswordDelay() const
 {
-    return d->m_activeAuthenticator->inPasswordDelay();
+    return d->m_activeAuthenticator && d->m_activeAuthenticator->inPasswordDelay();
 }
 
 QString PamAuthenticators::prompt() const
 {
-    return d->m_activeAuthenticator->getPrompt();
+    return d->m_activeAuthenticator ? d->m_activeAuthenticator->getPrompt() : QString();
 }
 
 QString PamAuthenticators::promptForSecret() const
 {
-    return d->m_activeAuthenticator->getPromptForSecret();
+    return d->m_activeAuthenticator ? d->m_activeAuthenticator->getPromptForSecret() : QString();
 }
 
 QString PamAuthenticators::infoMessage() const
 {
-    return d->m_activeAuthenticator->getInfoMessage();
+    return d->m_activeAuthenticator ? d->m_activeAuthenticator->getInfoMessage() : QString();
 }
 
 QString PamAuthenticators::errorMessage() const
 {
-    return d->m_activeAuthenticator->getErrorMessage();
+    return d->m_activeAuthenticator ? d->m_activeAuthenticator->getErrorMessage() : QString();
 }
 
 void PamAuthenticators::respond(const QByteArray &response)
