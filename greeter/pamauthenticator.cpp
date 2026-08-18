@@ -62,7 +62,25 @@ PamAuthenticator::PamAuthenticator(const QString &service, const QString &user, 
     });
     // Failed is not a persistent state. When a view provides authentication that will either result in failure or success,
     // failure simply means that the prompt is getting delayed.
-    connect(d, &PamWorker::failed, this, &PamAuthenticator::failed);
+    connect(d, &PamWorker::failed, this, [this] {
+        // Guard against particularly broken PAM services. For example when pam-u2f doesn't find a token because it is
+        // not plugged in it will fail the authentication, but it will do it so slowly that the timing checks in the
+        // worker itself don't bite.
+        // Here we can keep a higher level view of the failures and if need be break the loop by marking us unavailable.
+        auto now = QDateTime::currentDateTimeUtc();
+        if (now - m_lastFailed < 2s) {
+            m_failedCount++;
+            if (m_failedCount > 3) {
+                m_unavailable = true;
+                Q_EMIT availableChanged();
+            }
+        } else {
+            m_failedCount = 0;
+        }
+        m_lastFailed = now;
+
+        Q_EMIT failed();
+    });
     connect(d, &PamWorker::loginFailedDelayStarted, this, &PamAuthenticator::loginFailedDelayStarted);
 
     m_thread.start();

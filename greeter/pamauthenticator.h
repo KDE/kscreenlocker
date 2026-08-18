@@ -117,6 +117,8 @@ private:
     bool m_unlocked = false;
     bool m_unavailable = false;
     bool m_inPasswordDelay = false;
+    uint m_failedCount = 0;
+    QDateTime m_lastFailed = QDateTime::currentDateTimeUtc();
     NoninteractiveAuthenticatorTypes m_authenticatorType;
     // Tiny problem with bare bones QThread: when we shut down we want to clean up
     // our subprocess correctly, but doing that means running a function on the thread
