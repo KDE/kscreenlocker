@@ -17,6 +17,7 @@
 #include "config-worker.h"
 #include "debug.h"
 #include "diewithparent.h"
+#include "org.kde.plasma.screenlocker.Arbiter.h"
 #include "org.kde.plasma.screenlocker.h"
 #include "result.h"
 
@@ -59,7 +60,7 @@ class Worker : public QObject
 {
     Q_OBJECT
 public:
-    Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface *screenlocker);
+    Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface *screenlocker, OrgKdePlasmaScreenlockerArbiterInterface *arbiter);
     [[nodiscard]] WorkerResult::Type authenticate();
     void startFailedDelay(uint useconds);
 
@@ -72,6 +73,7 @@ Q_SIGNALS:
     void interrupt();
 
 private:
+    [[nodiscard]] WorkerResult::Type authenticateInternal();
     [[nodiscard]] static int converse(int n, const struct pam_message **msg, struct pam_response **resp, void *data);
 
     QString m_service;
@@ -81,6 +83,7 @@ private:
     bool m_available = true;
     bool m_inAuthenticate = false;
     OrgKdePlasmaScreenlockerInterface *m_screenlocker;
+    OrgKdePlasmaScreenlockerArbiterInterface *m_arbiter;
 
     // Initialized based on other members, keep last!
     std::unique_ptr<pam_handle_t> m_handle = nullptr; //< the actual PAM handle
@@ -91,10 +94,11 @@ class Adaptor : public QObject
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.plasma.screenlocker.worker")
 public:
-    Adaptor(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface &screenlocker)
+    Adaptor(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface &screenlocker, OrgKdePlasmaScreenlockerArbiterInterface &arbiter)
         : QObject(nullptr)
         , m_screenlocker(screenlocker)
-        , m_worker(service, user, &m_screenlocker)
+        , m_arbiter(arbiter)
+        , m_worker(service, user, &m_screenlocker, &m_arbiter)
     {
     }
 
@@ -113,6 +117,7 @@ public Q_SLOTS:
 
 private:
     OrgKdePlasmaScreenlockerInterface &m_screenlocker;
+    OrgKdePlasmaScreenlockerArbiterInterface &m_arbiter;
     Worker m_worker;
 };
 
@@ -205,13 +210,14 @@ int Worker::converse(int n, const struct pam_message **msg, struct pam_response 
     return PAM_SUCCESS;
 }
 
-Worker::Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface *screenlocker)
+Worker::Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlockerInterface *screenlocker, OrgKdePlasmaScreenlockerArbiterInterface *arbiter)
     : QObject(nullptr)
     , m_service(service)
     , m_user(user)
     , m_fingerprint(service == KSCREENLOCKER_PAM_FINGERPRINT_SERVICE)
     , m_conv({.conv = &Worker::converse, .appdata_ptr = this})
     , m_screenlocker(screenlocker)
+    , m_arbiter(arbiter)
     , m_handle([service, user, this]() -> pam_handle_t * {
         int result = -1;
         pam_handle_t *handle = nullptr;
@@ -240,6 +246,18 @@ Worker::Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlo
 }
 
 WorkerResult::Type Worker::authenticate()
+{
+    auto ret = authenticateInternal();
+    if (m_arbiter->isValid()) {
+        qCDebug(WORKER) << "Reporting authentication result to arbiter" << ret;
+        m_arbiter->Result(ret);
+    } else {
+        qCDebug(WORKER) << "No arbiter is connected, only reporting result to greeter";
+    }
+    return ret;
+}
+
+WorkerResult::Type Worker::authenticateInternal()
 {
     if (m_inAuthenticate) {
         qCDebug(WORKER, "[PAM worker %s] Authentication is already in progress", qUtf8Printable(m_service));
@@ -357,19 +375,30 @@ int main(int argc, char *argv[])
         return category;
     };
 
-    std::string address = [] {
-        std::string address;
-        while (address.empty()) {
-            std::getline(std::cin, address);
+    const auto payload = [&] {
+        QTextStream stream(stdin);
+        auto json = stream.readAll();
+        QJsonParseError error;
+        auto document = QJsonDocument::fromJson(json.toUtf8(), &error);
+        if (error.error != QJsonParseError::NoError) {
+            qCFatal(WORKER) << "Failed to parse JSON payload from stdin:" << error.errorString();
+            _exit(1);
         }
-        return address;
+        return document.object();
     }();
+    const QString screenlockerAddress = payload.value(u"screenlockerAddress"_s).toString();
+    const QString arbiterAddress = payload.value(u"arbiterAddress"_s).toString();
 
-    auto connection = QDBusConnection::connectToPeer(QString::fromStdString(address), u"org.kde.plasma.screenlocker"_s);
+    auto connection = QDBusConnection::connectToPeer(screenlockerAddress, u"org.kde.plasma.screenlocker"_s);
     OrgKdePlasmaScreenlockerInterface screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
     screenlocker.setTimeout(
         std::numeric_limits<int>::max()); // disable timeout, we expect blocking calls to arrive eventually (or we get terminated by our parent)
-    Adaptor proxy(service, user, screenlocker);
+
+    auto arbiterConnection = QDBusConnection::connectToPeer(arbiterAddress, u"org.kde.plasma.screenlocker.Arbiter"_s);
+    OrgKdePlasmaScreenlockerArbiterInterface arbiter(QString(), u"/org/kde/plasma/screenlocker/Arbiter"_s, arbiterConnection);
+    // Arbiter currently has no blocking calls; no need to disable timeout.
+
+    Adaptor proxy(service, user, screenlocker, arbiter);
     connection.registerObject(u"/org/kde/plasma/screenlocker/worker"_s, &proxy, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
     // Tell the screenlocker we are ready. This is necessary because there is technically a race between
     // the connection getting established and us registering the object. To avoid any issues we have this
