@@ -59,7 +59,7 @@ class Worker : public QObject
 {
     Q_OBJECT
 public:
-    Worker(bool fingerprint, org::kde::plasma::screenlocker *screenlocker);
+    Worker(bool fingerprint, OrgKdePlasmaScreenlockerInterface *screenlocker);
     void start(const QString &service, const QString &user);
     [[nodiscard]] WorkerResult::Type authenticate();
     void startFailedDelay(uint useconds);
@@ -82,7 +82,7 @@ private:
     bool m_inAuthenticate = false;
     int m_result = -1;
     QString m_service;
-    org::kde::plasma::screenlocker *m_screenlocker;
+    OrgKdePlasmaScreenlockerInterface *m_screenlocker;
 };
 
 class Adaptor : public QObject
@@ -90,7 +90,7 @@ class Adaptor : public QObject
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.plasma.screenlocker.worker")
 public:
-    Adaptor(org::kde::plasma::screenlocker &screenlocker)
+    Adaptor(OrgKdePlasmaScreenlockerInterface &screenlocker)
         : QObject(nullptr)
         , m_screenlocker(screenlocker)
     {
@@ -117,7 +117,7 @@ public Q_SLOTS:
     }
 
 private:
-    org::kde::plasma::screenlocker &m_screenlocker;
+    OrgKdePlasmaScreenlockerInterface &m_screenlocker;
     std::unique_ptr<Worker> m_worker;
 };
 
@@ -210,7 +210,7 @@ int Worker::converse(int n, const struct pam_message **msg, struct pam_response 
     return PAM_SUCCESS;
 }
 
-Worker::Worker(bool fingerprint, org::kde::plasma::screenlocker *screenlocker)
+Worker::Worker(bool fingerprint, OrgKdePlasmaScreenlockerInterface *screenlocker)
     : QObject(nullptr)
     , m_fingerprint(fingerprint)
     , m_conv({.conv = &Worker::converse, .appdata_ptr = this})
@@ -387,7 +387,7 @@ int main(int argc, char *argv[])
     }();
 
     auto connection = QDBusConnection::connectToPeer(QString::fromStdString(address), u"org.kde.plasma.screenlocker"_s);
-    org::kde::plasma::screenlocker screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
+    OrgKdePlasmaScreenlockerInterface screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
     screenlocker.setTimeout(
         std::numeric_limits<int>::max()); // disable timeout, we expect blocking calls to arrive eventually (or we get terminated by our parent)
     Adaptor proxy(screenlocker);
