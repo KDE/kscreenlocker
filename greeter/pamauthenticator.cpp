@@ -219,6 +219,10 @@ void PamAuthenticator::Ping(const QString &message)
         watcher->deleteLater();
         Q_ASSERT(watcher->isValid());
     });
+
+    Q_ASSERT(!m_ready); // only one ping ever. thank you!
+    m_ready = true;
+    Q_EMIT readyChanged();
 }
 
 QString PamAuthenticator::Prompt(const QString &msg)

@@ -29,18 +29,24 @@ PamTest::PamTest()
 
     qputenv("PAM_WRAPPER", "1");
     qputenv("PAM_WRAPPER_DEBUGLEVEL", "2"); // DEBUG level
-    qputenv("PAM_WRAPPER_SERVICE_DIR", QFINDTESTDATA("data").toUtf8());
+    qputenv("PAM_WRAPPER_SERVICE_DIR", QFINDTESTDATA("services").toUtf8());
     qputenv("PAM_MATRIX_PASSWD", QFINDTESTDATA("data/test_db").toUtf8());
+
+    // Do not trigger the time checks. pam_matrix will respond way too quickly (expectedly)!
+    qputenv("KSCREENLOCKER_PAM_TIME_CHECK", "0");
 }
 
 void PamTest::testLogin()
 {
     PamAuthenticator auth(QStringLiteral("test_service"), QStringLiteral("test_user"));
+    QSignalSpy readySpy(&auth, &PamAuthenticator::readyChanged);
     QSignalSpy promptSpy(&auth, &PamAuthenticator::prompt);
     QSignalSpy promptForSecretSpy(&auth, &PamAuthenticator::promptForSecret);
     QSignalSpy succeededSpy(&auth, &PamAuthenticator::succeeded);
     QSignalSpy failedSpy(&auth, &PamAuthenticator::failed);
     QSignalSpy busyChangedSpy(&auth, &PamAuthenticator::busyChanged);
+
+    QVERIFY(readySpy.wait());
 
     // invalid password
     auth.tryUnlock();

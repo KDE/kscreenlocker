@@ -246,8 +246,10 @@ WorkerResult::Type Worker::authenticate()
 
     qCWarning(WORKER) << timer.elapsed() << "ms elapsed during pam_authenticate call for service" << qUtf8Printable(m_service) << "with result code" << rc;
 
+    constexpr auto checkTimesDefault = "1"_L1;
+    static const auto checkTimes = qEnvironmentVariable("KSCREENLOCKER_PAM_TIME_CHECK", checkTimesDefault) == checkTimesDefault;
     constexpr auto tooQuick = 50ms;
-    if (timer.durationElapsed() <= tooQuick) {
+    if (checkTimes && timer.durationElapsed() <= tooQuick) {
         // This happened faster than is reasonable for any service -> let's mark as unavailable to avoid hammering a broken service with retries
         // Has been observed with the vibe coded face authenticators on github. They will report success in 0ms when they are totally defunct.
         qCWarning(WORKER) << "Unexpectedly short auth error on PAM service" << qUtf8Printable(m_service) << timer.durationElapsed();

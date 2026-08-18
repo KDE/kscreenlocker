@@ -25,6 +25,7 @@ class PamAuthenticator : public QObject, protected QDBusContext
     QML_NAMED_ELEMENT(Authenticator)
     QML_UNCREATABLE("Not exposed except for its enum")
 
+    Q_PROPERTY(bool ready MEMBER m_ready NOTIFY readyChanged)
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
     Q_PROPERTY(bool inPasswordDelay READ inPasswordDelay NOTIFY inPasswordDelayChanged)
     Q_PROPERTY(bool available READ isAvailable NOTIFY availableChanged)
@@ -92,6 +93,7 @@ public:
     void setInPasswordDelay(bool timeout);
 
 Q_SIGNALS:
+    void readyChanged();
     void busyChanged();
     void promptForSecret(const QString &msg);
     void prompt(const QString &msg);
@@ -128,6 +130,7 @@ private:
     QString m_errorMessage;
     QString m_infoMessage;
     QString m_service;
+    bool m_ready = false;
     bool m_busy = false;
     bool m_unlocked = false;
     bool m_unavailable = false;
