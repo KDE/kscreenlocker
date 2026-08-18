@@ -7,6 +7,10 @@
 
 #include "pamauthenticator.h"
 
+#include <unistd.h>
+
+#include <dbus/dbus.h>
+
 #include <QDBusConnection>
 #include <QDBusPendingCallWatcher>
 #include <QDBusServer>
@@ -313,9 +317,28 @@ void PamAuthenticator::startWorker()
 void PamAuthenticator::connectWorker(const QDBusConnection &connection)
 {
     Q_ASSERT(!m_dbusWorker); // only accept a connection once to mitigate the risk of a malicious actor connecting to us
+
     qCDebug(KSCREENLOCKER_GREET) << "New D-Bus connection established" << connection.name();
+
+    // QtDBus doesn't provide authentication facilities. As such the sever only works if the client is the same user (that's the dbus default).
+    // Let's supply our own authentication function to be a bit more flexible.
+    dbus_connection_set_unix_user_function(
+        static_cast<DBusConnection *>(connection.internalPointer()),
+        []([[maybe_unused]] DBusConnection *connection, unsigned long uid, void *data) -> dbus_bool_t {
+            auto that = static_cast<PamAuthenticator *>(data);
+            return that->isUIDAllowed(uid);
+        },
+        this,
+        nullptr);
+
     auto c = connection; // make a non-const copy
     c.registerObject(u"/org/kde/plasma/screenlocker"_s, this, QDBusConnection::ExportAdaptors);
     m_dbusWorker = std::make_unique<OrgKdePlasmaScreenlockerWorkerInterface>(QString(), u"/org/kde/plasma/screenlocker/worker"_s, c);
     m_dbusWorker->setTimeout(std::numeric_limits<int>::max()); // disable timeout, we expect blocking calls to arrive eventually
+}
+
+[[nodiscard]] bool PamAuthenticator::isUIDAllowed(unsigned long uid)
+{
+    constexpr auto rootUID = 0UL;
+    return uid == rootUID || uid == getuid();
 }

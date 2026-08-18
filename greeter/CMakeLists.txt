@@ -57,6 +57,7 @@ target_link_libraries(kscreenlocker_authenticator
     KF6::CoreAddons
     KF6::ConfigCore
     KF6::I18n
+    PkgConfig::dbus-1
 )
 
 qt_add_resources(kscreenlocker_greet_SRCS fallbacktheme.qrc)
