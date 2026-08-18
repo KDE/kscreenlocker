@@ -96,6 +96,9 @@ add_feature_info("Unlock broken screenlocker"
                  HAVE_UNLOCK_CAPABILITY
                  "Needed for emergency unlock in case that the greeter is broken. In case your distribution does not provide loginctl or consolekit please contact plasma-devel@kde.org to discuss alternatives.")
 
+find_package(PkgConfig)
+pkg_check_modules(dbus-1 REQUIRED IMPORTED_TARGET dbus-1)
+
 find_package(PAM REQUIRED)
 set_package_properties(PAM PROPERTIES DESCRIPTION "PAM Libraries"
                        URL "https://www.kernel.org/pub/linux/libs/pam/"

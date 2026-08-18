@@ -122,6 +122,7 @@ private:
     void quitWorkerProcess();
     void startWorker();
     void connectWorker(const QDBusConnection &connection);
+    [[nodiscard]] bool isUIDAllowed(unsigned long uid);
 
     const std::vector<std::pair<QMetaMethod, const QString &>> m_signalsToMembers;
     // NOTE Don't forget to reset in cancel as necessary
