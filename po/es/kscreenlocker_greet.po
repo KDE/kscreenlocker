@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-08-19 00:48+0000\n"
 "PO-Revision-Date: 2026-05-13 20:34+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -88,6 +88,39 @@ msgstr ""
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "No mostrar ninguna interfaz de usuario de bloqueo."
+
+#: pamauthenticatormodel.cpp:50
+#, fuzzy, kde-format
+#| msgid "Password"
+msgctxt "authentication type in unlock dialogs"
+msgid "Password"
+msgstr "Contraseña"
+
+#: pamauthenticatormodel.cpp:56
+#, kde-format
+msgctxt "authentication type in unlock dialogs"
+msgid "Smartcard"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:62
+#, kde-format
+msgctxt "authentication type in unlock dialogs"
+msgid "Fingerprint"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:68
+#, kde-format
+msgctxt "authentication type in unlock dialogs - facial authentication"
+msgid "Face"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:75
+#, kde-format
+msgctxt ""
+"authentication type in unlock dialogs - universal 2 factor authentication "
+"(yubikey etc)"
+msgid "Universal 2 Factor"
+msgstr ""
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Descriptor de archivo para conectar a ksld."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-08-19 00:48+0000\n"
 "PO-Revision-Date: 2014-05-28 11:32+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-doc@kde.org>\n"
@@ -85,6 +85,39 @@ msgstr "Töövtiet in Millisekunnen, ehr de Schirmslott-Böversiet wiest warrt"
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Gor keen Schirmslott-Böversiet wiesen"
+
+#: pamauthenticatormodel.cpp:50
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgctxt "authentication type in unlock dialogs"
+msgid "Password"
+msgstr "Passwoort:"
+
+#: pamauthenticatormodel.cpp:56
+#, kde-format
+msgctxt "authentication type in unlock dialogs"
+msgid "Smartcard"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:62
+#, kde-format
+msgctxt "authentication type in unlock dialogs"
+msgid "Fingerprint"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:68
+#, kde-format
+msgctxt "authentication type in unlock dialogs - facial authentication"
+msgid "Face"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:75
+#, kde-format
+msgctxt ""
+"authentication type in unlock dialogs - universal 2 factor authentication "
+"(yubikey etc)"
+msgid "Universal 2 Factor"
+msgstr ""
 
 #~ msgid "Session"
 #~ msgstr "Törn"

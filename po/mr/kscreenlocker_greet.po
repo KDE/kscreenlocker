@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-12 00:45+0000\n"
+"POT-Creation-Date: 2026-08-19 00:48+0000\n"
 "PO-Revision-Date: 2013-02-23 17:39+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -82,6 +82,38 @@ msgstr ""
 #: main.cpp:129
 #, kde-format
 msgid "Don't show any lock user interface."
+msgstr ""
+
+#: pamauthenticatormodel.cpp:50
+#, kde-format
+msgctxt "authentication type in unlock dialogs"
+msgid "Password"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:56
+#, kde-format
+msgctxt "authentication type in unlock dialogs"
+msgid "Smartcard"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:62
+#, kde-format
+msgctxt "authentication type in unlock dialogs"
+msgid "Fingerprint"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:68
+#, kde-format
+msgctxt "authentication type in unlock dialogs - facial authentication"
+msgid "Face"
+msgstr ""
+
+#: pamauthenticatormodel.cpp:75
+#, kde-format
+msgctxt ""
+"authentication type in unlock dialogs - universal 2 factor authentication "
+"(yubikey etc)"
+msgid "Universal 2 Factor"
 msgstr ""
 
 #~ msgid "Session"
