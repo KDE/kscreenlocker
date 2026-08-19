@@ -3,7 +3,7 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2024, 2025, 2026 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2012-2016, 2024-2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2015, 2016, 2020 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2019 Empar Montoro Martín <montoro_mde@gva.es>
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-19 00:48+0000\n"
-"PO-Revision-Date: 2026-05-13 07:52+0200\n"
+"PO-Revision-Date: 2026-08-19 09:24+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
@@ -95,8 +95,7 @@ msgid "Don't show any lock user interface."
 msgstr "No mostris cap interfície de bloqueig d'usuari."
 
 #: pamauthenticatormodel.cpp:50
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "Contrasenya"
@@ -105,19 +104,19 @@ msgstr "Contrasenya"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Targeta intel·ligent"
 
 #: pamauthenticatormodel.cpp:62
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Empremta digital"
 
 #: pamauthenticatormodel.cpp:68
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Cara"
 
 #: pamauthenticatormodel.cpp:75
 #, kde-format
@@ -125,7 +124,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "2 factors universal"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Descriptor de fitxer per a connectar amb el «ksld»."

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-19 00:48+0000\n"
-"PO-Revision-Date: 2026-05-13 08:28+0200\n"
+"PO-Revision-Date: 2026-08-19 05:59+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -85,8 +85,7 @@ msgid "Don't show any lock user interface."
 msgstr "დაბლოკვის მომხმარებლის ინტერფეისი ნაჩვენები არ იქნება."
 
 #: pamauthenticatormodel.cpp:50
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "პაროლი"
@@ -95,19 +94,19 @@ msgstr "პაროლი"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Smart ბარათი"
 
 #: pamauthenticatormodel.cpp:62
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "თითის ანაბეჭდი"
 
 #: pamauthenticatormodel.cpp:68
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "სახე"
 
 #: pamauthenticatormodel.cpp:75
 #, kde-format
@@ -115,7 +114,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "უნივერსალური 2 ფაქტორიანი"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "ფაილის დესკრიპტორი ksld-სთან მისაერთებლად."
