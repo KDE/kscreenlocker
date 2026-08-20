@@ -11,18 +11,6 @@
   -->
   <interface name="org.kde.plasma.screenlocker.worker">
     <!--
-      Start:
-      @username: The username to authenticate (or empty string to prompt nullptr)
-
-      This starts the pam stack. It's called in reaction to a Ping() on the greeter.
-      Ping essentially communicates that the worker subprocess is ready. Start()
-      communicates the greeter is also ready.
-    -->
-    <method name="Start">
-      <arg type="s" name="username" direction="in"/>
-    </method>
-
-    <!--
       Authenticate:
       @result: 0 on success, 1 on failure, 2 on service stack being unavailable
 

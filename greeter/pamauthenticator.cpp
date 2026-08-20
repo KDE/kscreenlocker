@@ -219,15 +219,9 @@ void PamAuthenticator::Ping(const QString &message)
         return;
     }
 
-    auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Start(m_user), this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
-        watcher->deleteLater();
-        Q_ASSERT(watcher->isValid());
-
-        Q_ASSERT(!m_ready); // only one ping ever. thank you!
-        m_ready = true;
-        Q_EMIT readyChanged();
-    });
+    Q_ASSERT(!m_ready); // only one ping ever. thank you!
+    m_ready = true;
+    Q_EMIT readyChanged();
 }
 
 QString PamAuthenticator::Prompt(const QString &msg)
@@ -310,7 +304,7 @@ void PamAuthenticator::startWorker()
     m_workerProcess = new QProcess(this);
     m_workerProcess->setProcessChannelMode(QProcess::ForwardedChannels);
     m_workerProcess->setProgram(KLibexec::path(u"kscreenlocker_worker"_s));
-    m_workerProcess->setArguments({m_service});
+    m_workerProcess->setArguments({m_service, m_user});
     m_workerProcess->start();
     m_workerProcess->write(m_server->address().toUtf8());
     m_workerProcess->closeWriteChannel();
