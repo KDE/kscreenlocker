@@ -219,7 +219,7 @@ void PamAuthenticator::Ping(const QString &message)
         return;
     }
 
-    auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Start(m_service, m_user), this);
+    auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Start(m_user), this);
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
         watcher->deleteLater();
         Q_ASSERT(watcher->isValid());

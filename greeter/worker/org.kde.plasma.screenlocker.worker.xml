@@ -12,7 +12,6 @@
   <interface name="org.kde.plasma.screenlocker.worker">
     <!--
       Start:
-      @service: The pam service stack name (e.g. kde, or kde-fingerprint)
       @username: The username to authenticate (or empty string to prompt nullptr)
 
       This starts the pam stack. It's called in reaction to a Ping() on the greeter.
@@ -20,7 +19,6 @@
       communicates the greeter is also ready.
     -->
     <method name="Start">
-      <arg type="s" name="service" direction="in"/>
       <arg type="s" name="username" direction="in"/>
     </method>
 

@@ -59,8 +59,8 @@ class Worker : public QObject
 {
     Q_OBJECT
 public:
-    Worker(bool fingerprint, org::kde::plasma::screenlocker *screenlocker);
-    void start(const QString &service, const QString &user);
+    Worker(const QString &service, org::kde::plasma::screenlocker *screenlocker);
+    void start(const QString &user);
     [[nodiscard]] WorkerResult::Type authenticate();
     void startFailedDelay(uint useconds);
 
@@ -75,13 +75,13 @@ Q_SIGNALS:
 private:
     [[nodiscard]] static int converse(int n, const struct pam_message **msg, struct pam_response **resp, void *data);
 
+    QString m_service;
     bool m_fingerprint;
     std::unique_ptr<pam_handle_t> m_handle = nullptr; //< the actual PAM handle
     struct pam_conv m_conv;
     bool m_available = true;
     bool m_inAuthenticate = false;
     int m_result = -1;
-    QString m_service;
     org::kde::plasma::screenlocker *m_screenlocker;
 };
 
@@ -90,24 +90,24 @@ class Adaptor : public QObject
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.plasma.screenlocker.worker")
 public:
-    Adaptor(org::kde::plasma::screenlocker &screenlocker)
+    Adaptor(const QString &service, org::kde::plasma::screenlocker &screenlocker)
         : QObject(nullptr)
         , m_screenlocker(screenlocker)
+        , m_worker(service, &m_screenlocker)
     {
     }
 
 public Q_SLOTS:
-    Q_NOREPLY void Start(const QString &service, const QString &username)
+    Q_NOREPLY void Start(const QString &username)
     {
-        qCDebug(WORKER) << "Proxy: Start called with service" << service << "and username" << username;
-        m_worker = std::make_unique<Worker>(service == KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, &m_screenlocker);
-        m_worker->start(service, username);
+        qCDebug(WORKER) << "Proxy: Start for username" << username;
+        m_worker.start(username);
     }
 
     [[nodiscard]] int Authenticate()
     {
         qCDebug(WORKER) << "Proxy: Authenticate called";
-        return m_worker->authenticate();
+        return m_worker.authenticate();
     }
 
     Q_NOREPLY void Cancel()
@@ -118,7 +118,7 @@ public Q_SLOTS:
 
 private:
     org::kde::plasma::screenlocker &m_screenlocker;
-    std::unique_ptr<Worker> m_worker;
+    Worker m_worker;
 };
 
 void fail_delay(int retval, unsigned usec_delay, void *appdata_ptr)
@@ -210,9 +210,10 @@ int Worker::converse(int n, const struct pam_message **msg, struct pam_response 
     return PAM_SUCCESS;
 }
 
-Worker::Worker(bool fingerprint, org::kde::plasma::screenlocker *screenlocker)
+Worker::Worker(const QString &service, org::kde::plasma::screenlocker *screenlocker)
     : QObject(nullptr)
-    , m_fingerprint(fingerprint)
+    , m_service(service)
+    , m_fingerprint(service == KSCREENLOCKER_PAM_FINGERPRINT_SERVICE)
     , m_conv({.conv = &Worker::converse, .appdata_ptr = this})
     , m_screenlocker(screenlocker)
 {
@@ -293,29 +294,28 @@ void Worker::startFailedDelay(uint useconds)
     QThread::sleep(std::chrono::microseconds(useconds));
 }
 
-void Worker::start(const QString &service, const QString &user)
+void Worker::start(const QString &user)
 {
     m_handle.reset([&] {
         pam_handle_t *handle = nullptr;
         if (user.isEmpty()) {
-            m_result = pam_start(qPrintable(service), nullptr, &m_conv, &handle);
+            m_result = pam_start(qPrintable(m_service), nullptr, &m_conv, &handle);
         } else {
-            m_result = pam_start(qPrintable(service), qPrintable(user), &m_conv, &handle);
+            m_result = pam_start(qPrintable(m_service), qPrintable(user), &m_conv, &handle);
         }
 
         if (m_result != PAM_SUCCESS) {
             qCWarning(WORKER,
                       "[PAM worker %s] start: error starting, result code: %d (%s)",
-                      qUtf8Printable(service),
+                      qUtf8Printable(m_service),
                       m_result,
-                      pam_strerror(m_handle.get(), m_result));
+                      pam_strerror(handle, m_result));
             return handle;
         }
 
-        qCDebug(WORKER, "[PAM worker %s] start: successfully started", qUtf8Printable(service));
+        qCDebug(WORKER, "[PAM worker %s] start: successfully started", qUtf8Printable(m_service));
         return handle;
     }());
-    m_service = service;
 
     // get errors quicker
 #if defined(HAVE_PAM_FAIL_DELAY)
@@ -390,7 +390,7 @@ int main(int argc, char *argv[])
     org::kde::plasma::screenlocker screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
     screenlocker.setTimeout(
         std::numeric_limits<int>::max()); // disable timeout, we expect blocking calls to arrive eventually (or we get terminated by our parent)
-    Adaptor proxy(screenlocker);
+    Adaptor proxy(service, screenlocker);
     connection.registerObject(u"/org/kde/plasma/screenlocker/worker"_s, &proxy, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
     // Tell the screenlocker we are ready. This is necessary because there is technically a race between
     // the connection getting established and us registering the object. To avoid any issues we have this
