@@ -81,6 +81,11 @@ void PamAuthenticator::tryUnlock()
         return;
     }
 
+    if (!m_ready) {
+        qCWarning(KSCREENLOCKER_GREET) << "Worker not ready yet, cannot authenticate.";
+        return;
+    }
+
     if (!m_dbusWorker) {
         qCWarning(KSCREENLOCKER_GREET) << "DBus worker not initialized, cannot authenticate yet.";
         return;
@@ -215,14 +220,14 @@ void PamAuthenticator::Ping(const QString &message)
     }
 
     auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Start(m_service, m_user), this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [watcher]() {
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
         watcher->deleteLater();
         Q_ASSERT(watcher->isValid());
-    });
 
-    Q_ASSERT(!m_ready); // only one ping ever. thank you!
-    m_ready = true;
-    Q_EMIT readyChanged();
+        Q_ASSERT(!m_ready); // only one ping ever. thank you!
+        m_ready = true;
+        Q_EMIT readyChanged();
+    });
 }
 
 QString PamAuthenticator::Prompt(const QString &msg)
