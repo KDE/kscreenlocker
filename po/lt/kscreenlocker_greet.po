@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-19 00:48+0000\n"
-"PO-Revision-Date: 2026-05-16 01:13+0300\n"
+"PO-Revision-Date: 2026-08-20 12:04+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
@@ -88,8 +88,7 @@ msgid "Don't show any lock user interface."
 msgstr "Nerodyti jokios užrakto naudotojo sąsajos."
 
 #: pamauthenticatormodel.cpp:50
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "Slaptažodis"
@@ -98,19 +97,19 @@ msgstr "Slaptažodis"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Lustinė kortelė"
 
 #: pamauthenticatormodel.cpp:62
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Piršto atspaudas"
 
 #: pamauthenticatormodel.cpp:68
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Veidas"
 
 #: pamauthenticatormodel.cpp:75
 #, kde-format
@@ -118,7 +117,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "Universalus dviejų faktorių"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Failo deskriptorius, skirtas prisijungimui prie ksld."

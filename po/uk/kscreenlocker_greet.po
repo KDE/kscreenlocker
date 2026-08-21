@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2012, 2013, 2014, 2015, 2016, 2024, 2025, 2026.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2024, 2025, 2026 Yuri Chornoivan <yurchor@ukr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-19 00:48+0000\n"
-"PO-Revision-Date: 2026-05-13 08:45+0300\n"
+"PO-Revision-Date: 2026-08-19 17:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
@@ -88,8 +88,7 @@ msgid "Don't show any lock user interface."
 msgstr "Не показувати інтерфейс блокування користувача."
 
 #: pamauthenticatormodel.cpp:50
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "Пароль"
@@ -98,19 +97,19 @@ msgstr "Пароль"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Картка пам'яті"
 
 #: pamauthenticatormodel.cpp:62
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Відбиток"
 
 #: pamauthenticatormodel.cpp:68
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Обличчя"
 
 #: pamauthenticatormodel.cpp:75
 #, kde-format
@@ -118,7 +117,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "Універсальний двофакторний"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Дескриптор файла для встановлення з’єднання із ksld."
