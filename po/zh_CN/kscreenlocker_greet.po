@@ -87,25 +87,25 @@ msgstr "不显示锁屏界面。"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: pamauthenticatormodel.cpp:56
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "智能卡"
 
 #: pamauthenticatormodel.cpp:62
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "指纹"
 
 #: pamauthenticatormodel.cpp:68
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "人脸"
 
 #: pamauthenticatormodel.cpp:75
 #, kde-format
@@ -113,4 +113,4 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "通用双因素认证"
