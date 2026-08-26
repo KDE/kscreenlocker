@@ -16,41 +16,17 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 namespace ScreenLocker
 {
-class Locker;
 
-class BackgroundWindow : public QRasterWindow
+class EmergencyWindow : public QRasterWindow
 {
     Q_OBJECT
 public:
-    explicit BackgroundWindow(Locker *lock);
-    ~BackgroundWindow() override;
-
-    void emergencyShow();
+    explicit EmergencyWindow();
+    ~EmergencyWindow() override;
 
 protected:
     void paintEvent(QPaintEvent *) override;
-
-private:
-    Locker *m_lock;
-    bool m_greeterFailure = false;
-};
-
-class Locker : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Locker(QObject *parent);
-    ~Locker() override;
-
-    void emergencyShow();
-
-protected:
-    QScopedPointer<BackgroundWindow> m_background;
-
-private:
-    void updateGeometryOfBackground();
-
-    friend class BackgroundWindow;
+    void updateGeometry();
 };
 
 }

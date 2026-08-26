@@ -43,7 +43,7 @@ enum class EstablishLock {
  **/
 QString establishLockToString(EstablishLock establishLock);
 
-class Locker;
+class EmergencyWindow;
 /**
  * @class KSldApp
  * @brief The KSldApp class represents the application responsible for screen locking.
@@ -288,14 +288,6 @@ private:
     void startLockProcess(EstablishLock establishLock);
 
     /**
-     * @brief Shows the lock window.
-     *
-     * Creates the lock window if it doesn't exist and sets up the necessary
-     * connections.
-     */
-    void showLockWindow();
-
-    /**
      * @brief Performs the unlocking operation.
      *
      * This function is responsible for unlocking the screen. It releases the keyboard and pointer grabs,
@@ -325,9 +317,9 @@ private:
     QProcess *m_lockProcess;
 
     /**
-     * The lock window used to display the lock screen.
+     * The lock window used to display the "The screen locker is broken" message
      **/
-    Locker *m_lockWindow;
+    std::unique_ptr<EmergencyWindow> m_emergencyLockWindow;
 
     /**
      * Timer to measure how long the screen is locked.

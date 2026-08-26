@@ -7,10 +7,10 @@
 SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "ksldapp.h"
+#include "emergencywindow.h"
 #include "globalaccel.h"
 #include "interface.h"
 #include "kscreensaversettings.h"
-#include "locker.h"
 #include "logind.h"
 #include "powermanagement_inhibition.h"
 
@@ -70,7 +70,6 @@ KSldApp::KSldApp(QObject *parent)
     : QObject(parent)
     , m_lockState(Unlocked)
     , m_lockProcess(nullptr)
-    , m_lockWindow(nullptr)
     , m_lockedTimer(QElapsedTimer())
     , m_idleId(0)
     , m_lockGrace(0)
@@ -96,7 +95,6 @@ void KSldApp::cleanUp()
         m_lockProcess->terminate();
     }
     delete m_lockProcess;
-    delete m_lockWindow;
 }
 
 static bool s_graceTimeKill = false;
@@ -206,11 +204,9 @@ void KSldApp::initialize()
             qCDebug(KSCREENLOCKER, "Trying to lock again with software rendering (%d/4).", m_greeterCrashedCounter);
             setForceSoftwareRendering(true);
             startLockProcess(EstablishLock::Immediate);
-        } else if (m_lockWindow) {
+        } else if (!m_emergencyLockWindow) {
             qCWarning(KSCREENLOCKER) << "Everything else failed. Need to put Greeter in emergency mode.";
-            m_lockWindow->emergencyShow();
-        } else {
-            qCCritical(KSCREENLOCKER) << "Greeter process exitted and we could in no way recover from that!";
+            m_emergencyLockWindow = std::make_unique<EmergencyWindow>();
         }
     });
     connect(m_lockProcess, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
@@ -366,9 +362,6 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 
     s_lockProcessRequestedExit = false;
 
-    // blank the screen
-    showLockWindow();
-
     m_lockState = Locked;
     m_lockedTimer.restart();
 
@@ -383,9 +376,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 void KSldApp::doUnlock()
 {
     qCDebug(KSCREENLOCKER) << "Unlocking now.";
-    // delete the window again, to get rid of event filter
-    delete m_lockWindow;
-    m_lockWindow = nullptr;
+    m_emergencyLockWindow.reset();
     m_lockState = Unlocked;
     m_lockedTimer.invalidate();
     m_greeterCrashedCounter = 0;
@@ -458,17 +449,6 @@ void KSldApp::userActivity()
 
     if (isGraceTime() || !m_requirePassword) {
         unlock();
-    }
-}
-
-void KSldApp::showLockWindow()
-{
-    qCDebug(KSCREENLOCKER) << "Showing lock window";
-
-    if (!m_lockWindow) {
-        qCDebug(KSCREENLOCKER) << "Creating lock window";
-
-        m_lockWindow = new Locker(this);
     }
 }
 
