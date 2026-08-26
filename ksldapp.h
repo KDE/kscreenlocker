@@ -66,11 +66,7 @@ public:
      * @brief The LockState enum represents the current state of the screen lock.
      */
     enum LockState {
-        /** The screen is unlocked. */
         Unlocked,
-        /** The screen is in the process of being locked. */
-        AcquiringLock,
-        /** The screen is locked. */
         Locked,
     };
     Q_ENUM(LockState)
@@ -278,15 +274,6 @@ private Q_SLOTS:
      * it checks if the screen should be locked upon resuming from suspend. If so, it locks the screen immediately.
      */
     void solidSuspend();
-
-public Q_SLOTS:
-
-    /**
-     * @brief Called when the lock screen is shown.
-     *
-     * Updates the lock state and emits signals to inform other components.
-     */
-    void lockScreenShown();
 
 private:
     /**

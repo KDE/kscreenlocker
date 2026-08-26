@@ -136,7 +136,7 @@ void Interface::Lock()
     }
     m_daemon->lock(calledFromDBus() ? EstablishLock::Immediate : EstablishLock::Delayed);
 
-    if (calledFromDBus() && m_daemon->lockState() == KSldApp::AcquiringLock) {
+    if (calledFromDBus() && m_daemon->lockState() == KSldApp::Locked) {
         m_lockReplies << message().createReply();
         setDelayedReply(true);
     }

@@ -235,7 +235,7 @@ void KSldApp::initialize()
         lock(EstablishLock::Immediate);
     });
     connect(m_logind, &LogindIntegration::requestUnlock, this, [this]() {
-        if (lockState() == Locked || lockState() == AcquiringLock) {
+        if (lockState() == Locked) {
             if (m_lockProcess->state() != QProcess::NotRunning) {
                 s_logindExit = true;
                 m_lockProcess->terminate();
@@ -369,12 +369,15 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
     // blank the screen
     showLockWindow();
 
-    m_lockState = AcquiringLock;
+    m_lockState = Locked;
+    m_lockedTimer.restart();
 
     setForceSoftwareRendering(false);
     // start unlock screen process
     startLockProcess(establishLock);
+
     Q_EMIT lockStateChanged();
+    Q_EMIT locked();
 }
 
 void KSldApp::doUnlock()
@@ -544,19 +547,6 @@ void KSldApp::solidSuspend()
         qCDebug(KSCREENLOCKER) << "Solid suspend called, locking now";
         lock(EstablishLock::Immediate);
     }
-}
-
-void KSldApp::lockScreenShown()
-{
-    qCDebug(KSCREENLOCKER) << "lockScreenShown(): m_lockState:" << m_lockState;
-
-    if (m_lockState == Locked) {
-        return;
-    }
-    m_lockState = Locked;
-    m_lockedTimer.restart();
-    Q_EMIT locked();
-    Q_EMIT lockStateChanged();
 }
 
 void KSldApp::setGreeterEnvironment(const QProcessEnvironment &env)
