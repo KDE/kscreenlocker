@@ -130,12 +130,6 @@ void Locker::emergencyShow()
     m_background->emergencyShow();
 }
 
-void Locker::addAllowedWindow(quint32 windows)
-{
-    Q_UNUSED(windows)
-    Q_EMIT lockWindowShown();
-}
-
 void Locker::updateGeometryOfBackground()
 {
     QRect combined;

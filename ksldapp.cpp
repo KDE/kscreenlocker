@@ -456,9 +456,6 @@ void KSldApp::userActivity()
     if (isGraceTime() || !m_requirePassword) {
         unlock();
     }
-    if (m_lockWindow) {
-        Q_EMIT m_lockWindow->userActivity();
-    }
 }
 
 void KSldApp::showLockWindow()
@@ -469,12 +466,6 @@ void KSldApp::showLockWindow()
         qCDebug(KSCREENLOCKER) << "Creating lock window";
 
         m_lockWindow = new Locker(this);
-        if (!m_lockWindow) {
-            return;
-        }
-        m_lockWindow->setGlobalAccel(m_globalAccel);
-
-        connect(m_lockWindow, &Locker::lockWindowShown, this, &KSldApp::lockScreenShown);
     }
 }
 

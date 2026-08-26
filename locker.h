@@ -14,8 +14,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
 #include <QObject>
 #include <QRasterWindow>
 
-class GlobalAccel;
-
 namespace ScreenLocker
 {
 class Locker;
@@ -44,30 +42,13 @@ public:
     explicit Locker(QObject *parent);
     ~Locker() override;
 
-    void addAllowedWindow(quint32 window);
-
-    void setGlobalAccel(GlobalAccel *ga)
-    {
-        m_globalAccel = ga;
-    }
-
     void emergencyShow();
 
-Q_SIGNALS:
-    void userActivity();
-    void lockWindowShown();
-
 protected:
-    GlobalAccel *globalAccel()
-    {
-        return m_globalAccel;
-    }
     QScopedPointer<BackgroundWindow> m_background;
 
 private:
     void updateGeometryOfBackground();
-
-    GlobalAccel *m_globalAccel = nullptr;
 
     friend class BackgroundWindow;
 };
