@@ -248,16 +248,12 @@ void KSldApp::initialize()
         }
         if (KScreenSaverSettings::lockOnResume()) {
             qCDebug(KSCREENLOCKER) << "Prepare for sleep called, locking now";
-            Q_EMIT inhibitSuspend();
             lock(EstablishLock::Immediate);
         }
     });
     connect(m_logind, &LogindIntegration::connectedChanged, this, [this]() {
         if (!m_logind->isConnected()) {
             return;
-        }
-        if (m_lockState == ScreenLocker::KSldApp::Unlocked && KScreenSaverSettings::lockOnResume()) {
-            Q_EMIT inhibitSuspend();
         }
         if (m_logind->isLocked()) {
             qCDebug(KSCREENLOCKER) << "LogindIntegration::connectedChanged signal received, locking now";
@@ -316,11 +312,6 @@ void KSldApp::configure()
     } else {
         m_lockGrace = -1;
     }
-    if (KScreenSaverSettings::lockOnResume()) {
-        Q_EMIT inhibitSuspend();
-    } else {
-        Q_EMIT uninhibitSuspend();
-    }
     m_requirePassword = KScreenSaverSettings::requirePassword();
 }
 
@@ -356,7 +347,6 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 
     Q_EMIT lockStateChanged();
     Q_EMIT locked();
-    Q_EMIT uninhibitSuspend();
     m_globalAccel->prepare();
     m_logind->setLocked(true);
     if (m_lockGrace > 0 && m_inGraceTime) {
@@ -376,9 +366,6 @@ void KSldApp::doUnlock()
     Q_EMIT unlocked();
     m_logind->setLocked(false);
     m_globalAccel->release();
-    if (KScreenSaverSettings::lockOnResume()) {
-        Q_EMIT inhibitSuspend();
-    }
     Q_EMIT lockStateChanged();
 }
 
