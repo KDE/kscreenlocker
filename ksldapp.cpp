@@ -264,23 +264,8 @@ void KSldApp::initialize()
             lock(EstablishLock::Immediate);
         }
     });
-    connect(this, &KSldApp::locked, this, [this]() {
-        Q_EMIT uninhibitSuspend();
-        m_logind->setLocked(true);
-        if (m_lockGrace > 0 && m_inGraceTime) {
-            m_graceTimer->start(m_lockGrace);
-        }
-    });
-    connect(this, &KSldApp::unlocked, this, [this]() {
-        m_logind->setLocked(false);
-        if (KScreenSaverSettings::lockOnResume()) {
-            Q_EMIT inhibitSuspend();
-        }
-    });
 
     m_globalAccel = new GlobalAccel(this);
-    connect(this, &KSldApp::locked, m_globalAccel, &GlobalAccel::prepare);
-    connect(this, &KSldApp::unlocked, m_globalAccel, &GlobalAccel::release);
 
     // fallback for non-logind systems:
     // connect to signal emitted by Solid. This is emitted unconditionally also on logind enabled systems
@@ -371,6 +356,12 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
 
     Q_EMIT lockStateChanged();
     Q_EMIT locked();
+    Q_EMIT uninhibitSuspend();
+    m_globalAccel->prepare();
+    m_logind->setLocked(true);
+    if (m_lockGrace > 0 && m_inGraceTime) {
+        m_graceTimer->start(m_lockGrace);
+    }
 }
 
 void KSldApp::doUnlock()
@@ -383,6 +374,11 @@ void KSldApp::doUnlock()
     endGraceTime();
     KNotification::event(QStringLiteral("unlocked"), i18n("Screen unlocked"), QPixmap(), KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
     Q_EMIT unlocked();
+    m_logind->setLocked(false);
+    m_globalAccel->release();
+    if (KScreenSaverSettings::lockOnResume()) {
+        Q_EMIT inhibitSuspend();
+    }
     Q_EMIT lockStateChanged();
 }
 
