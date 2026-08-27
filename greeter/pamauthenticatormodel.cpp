@@ -40,6 +40,7 @@ namespace
 
     KConfig config(u"kscreenlockerrc"_s);
     const auto authenticators = config.group(u"Authenticators"_s);
+    const auto ui = config.group(u"UI"_s);
 
     auto all = std::initializer_list{
         std::make_shared<PAMAuthenticatorDescriptor>(true, // must be always available
@@ -47,32 +48,39 @@ namespace
                                                      u"input-keyboard-symbolic"_s,
                                                      true,
                                                      true,
-                                                     i18nc("authentication type in unlock dialogs", "Password")),
+                                                     i18nc("authentication type in unlock dialogs", "Password"),
+                                                     // This is holding on to old behavior where we don't show a prompt for the regular authenticator.
+                                                     // Rationale being that it is 99% of the time simply a password and we have a password field for that.
+                                                     ui.readEntry("ShowPromptInRegularAuthenticator", false)),
         std::make_shared<PAMAuthenticatorDescriptor>(smartcardEnabled && authenticators.readEntry("Smartcard", false),
                                                      PamAuthenticators::Authenticator::Smartcard,
                                                      u"secure-card-symbolic"_s,
                                                      true,
                                                      true,
-                                                     i18nc("authentication type in unlock dialogs", "Smartcard")),
+                                                     i18nc("authentication type in unlock dialogs", "Smartcard"),
+                                                     true),
         std::make_shared<PAMAuthenticatorDescriptor>(fingerprintEnabled && authenticators.readEntry("Fingerprint", false),
                                                      PamAuthenticators::Authenticator::Fingerprint,
                                                      u"fingerprint-symbolic"_s,
                                                      false,
                                                      false,
-                                                     i18nc("authentication type in unlock dialogs", "Fingerprint")),
+                                                     i18nc("authentication type in unlock dialogs", "Fingerprint"),
+                                                     true),
         std::make_shared<PAMAuthenticatorDescriptor>(faceEnabled && authenticators.readEntry("Face", false),
                                                      PamAuthenticators::Authenticator::Face,
                                                      u"edit-image-face-detect-symbolic"_s,
                                                      false,
                                                      false,
-                                                     i18nc("authentication type in unlock dialogs - facial authentication", "Face")),
+                                                     i18nc("authentication type in unlock dialogs - facial authentication", "Face"),
+                                                     true),
         std::make_shared<PAMAuthenticatorDescriptor>(
             universal2factorEnabled && authenticators.readEntry("Universal2Factor", false),
             PamAuthenticators::Authenticator::Universal2Factor,
             u"database-change-key-symbolic"_s,
             false,
             false,
-            i18nc("authentication type in unlock dialogs - universal 2 factor authentication (yubikey etc)", "Universal 2 Factor")),
+            i18nc("authentication type in unlock dialogs - universal 2 factor authentication (yubikey etc)", "Universal 2 Factor"),
+            true),
     };
 
     auto view = all | std::views::filter([](const auto &d) {

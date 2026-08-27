@@ -11,6 +11,7 @@ PAMAuthenticatorDescriptor::PAMAuthenticatorDescriptor(bool enabled,
                                                        bool passwordField,
                                                        bool expectingPrompt,
                                                        const QString &tooltip,
+                                                       bool showPrompt,
                                                        QObject *parent)
     : QObject(parent)
     , m_enabled(enabled)
@@ -19,6 +20,7 @@ PAMAuthenticatorDescriptor::PAMAuthenticatorDescriptor(bool enabled,
     , m_passwordField(passwordField)
     , m_expectingPrompt(expectingPrompt)
     , m_tooltip(tooltip)
+    , m_showPrompt(showPrompt)
 {
 }
 
