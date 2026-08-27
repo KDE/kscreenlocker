@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-24 00:46+0000\n"
+"POT-Creation-Date: 2026-08-27 00:47+0000\n"
 "PO-Revision-Date: 2013-02-12 10:54+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -29,12 +29,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "सत्र कुलूपबंद करा"
 
-#: ksldapp.cpp:367
+#: ksldapp.cpp:365
 #, kde-format
 msgid "Screen locked"
 msgstr ""
 
-#: ksldapp.cpp:392
+#: ksldapp.cpp:390
 #, kde-format
 msgid "Screen unlocked"
 msgstr ""

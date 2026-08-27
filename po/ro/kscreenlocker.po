@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-24 00:46+0000\n"
+"POT-Creation-Date: 2026-08-27 00:47+0000\n"
 "PO-Revision-Date: 2025-10-19 23:01+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -30,12 +30,12 @@ msgstr "Gestiunea sesiunii"
 msgid "Lock Session"
 msgstr "Blochează sesiunea"
 
-#: ksldapp.cpp:367
+#: ksldapp.cpp:365
 #, kde-format
 msgid "Screen locked"
 msgstr "Ecran blocat"
 
-#: ksldapp.cpp:392
+#: ksldapp.cpp:390
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ecran deblocat"
