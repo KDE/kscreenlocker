@@ -122,13 +122,15 @@ void PamAuthenticators::onAuthenticatorChanged()
 {
     qCWarning(KSCREENLOCKER_GREET) << "PamAuthenticators: Authenticator changed to" << m_authenticator;
     if (d->m_activeAuthenticator) {
-        d->m_activeAuthenticator->disconnect();
+        // Be careful with disconnect. Disconnecting the QDBusConnections can cause confusion for Qt leading to crashes.
+        d->m_activeAuthenticator->disconnect(this);
         d->m_activeAuthenticator->cancel();
         d->m_activeAuthenticator.reset();
     }
 
     if (m_authenticator == Authenticator::Fingerprint && d->m_fingerprintAuthenticator) {
-        d->m_fingerprintAuthenticator->disconnect();
+        // Be careful with disconnect. Disconnecting the QDBusConnections can cause confusion for Qt leading to crashes.
+        d->m_fingerprintAuthenticator->disconnect(this);
         d->m_fingerprintAuthenticator->cancel();
         d->m_fingerprintAuthenticator.reset();
     } else if (!d->m_fingerprintAuthenticator) {
