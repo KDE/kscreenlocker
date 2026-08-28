@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-27 00:47+0000\n"
+"POT-Creation-Date: 2026-08-28 00:47+0000\n"
 "PO-Revision-Date: 2025-03-23 19:07+0100\n"
 "Last-Translator: Martin Hansen <mh306602@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -20,29 +20,7 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "Øktbehandler"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Lås økt"
-
-#: ksldapp.cpp:365
-#, kde-format
-msgid "Screen locked"
-msgstr "Skjermen låst"
-
-#: ksldapp.cpp:390
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Skjermen låst opp"
-
-#: locker.cpp:43
+#: emergencywindow.cpp:54
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -53,7 +31,7 @@ msgstr ""
 "For å låse den opp trenger du enten ConsoleKit eller LoginD, og ingen\n"
 "av disse er tilgjengelige på systemet."
 
-#: locker.cpp:47
+#: emergencywindow.cpp:58
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -73,7 +51,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: locker.cpp:52
+#: emergencywindow.cpp:63
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -102,6 +80,28 @@ msgstr ""
 "Om du glemmer disse instruksjonene, kan du komme\n"
 "tilbake til dette skjermbildet med «Ctrl + Alt + F%2».\n"
 "\n"
+
+#: ksldapp.cpp:117
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Øktbehandler"
+
+#: ksldapp.cpp:119
+#, kde-format
+msgid "Lock Session"
+msgstr "Lås økt"
+
+#: ksldapp.cpp:337
+#, kde-format
+msgid "Screen locked"
+msgstr "Skjermen låst"
+
+#: ksldapp.cpp:365
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Skjermen låst opp"
 
 #: logind.cpp:162
 #, kde-format

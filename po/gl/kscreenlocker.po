@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-27 00:47+0000\n"
+"POT-Creation-Date: 2026-08-28 00:47+0000\n"
 "PO-Revision-Date: 2025-01-25 11:54+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -19,29 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.12.0\n"
 
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "Xestión de sesións"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Bloquear a sesión"
-
-#: ksldapp.cpp:365
-#, kde-format
-msgid "Screen locked"
-msgstr "A pantalla está bloqueada"
-
-#: ksldapp.cpp:390
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Desbloqueouse a pantalla"
-
-#: locker.cpp:43
+#: emergencywindow.cpp:54
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -53,7 +31,7 @@ msgstr ""
 "Para desbloqueala necesita ou ConsoleKit ou LoginD, e non se atopou ningún "
 "deles no sistema."
 
-#: locker.cpp:47
+#: emergencywindow.cpp:58
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -73,7 +51,7 @@ msgstr ""
 "# ck-unlock-session <nome-da-sesión>\n"
 "\n"
 
-#: locker.cpp:52
+#: emergencywindow.cpp:63
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -103,6 +81,28 @@ msgstr ""
 "Se esquece as instrucións, pode volver a esta pantalla premendo Ctrl+Alt+F"
 "%3\n"
 "\n"
+
+#: ksldapp.cpp:117
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Xestión de sesións"
+
+#: ksldapp.cpp:119
+#, kde-format
+msgid "Lock Session"
+msgstr "Bloquear a sesión"
+
+#: ksldapp.cpp:337
+#, kde-format
+msgid "Screen locked"
+msgstr "A pantalla está bloqueada"
+
+#: ksldapp.cpp:365
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Desbloqueouse a pantalla"
 
 #: logind.cpp:162
 #, kde-format

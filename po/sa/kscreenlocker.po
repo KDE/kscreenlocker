@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-27 00:47+0000\n"
+"POT-Creation-Date: 2026-08-28 00:47+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -17,29 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
 
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr ""
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "ताला सत्रम्"
-
-#: ksldapp.cpp:365
-#, kde-format
-msgid "Screen locked"
-msgstr "स्क्रीन तालाबद्धा"
-
-#: ksldapp.cpp:390
-#, kde-format
-msgid "Screen unlocked"
-msgstr "स्क्रीन अनलॉक् अभवत्"
-
-#: locker.cpp:43
+#: emergencywindow.cpp:54
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -50,7 +28,7 @@ msgstr ""
 "तस्य अनलॉक् कर्तुं ConsoleKit अथवा LoginD इत्येतयोः एकस्य अपि आवश्यकता वर्तते, न च\n"
 "यस्य भवतः प्रणाल्यां प्राप्यते स्म ।"
 
-#: locker.cpp:47
+#: emergencywindow.cpp:58
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -68,7 +46,7 @@ msgstr ""
 "# ck-unlock-session <सत्र-नाम>\n"
 "\n"
 
-#: locker.cpp:52
+#: emergencywindow.cpp:63
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -95,6 +73,28 @@ msgstr ""
 "यदि भवता निर्देशाः विस्मृतव्याः आसन् तर्हि भवन्तः पुनः एतत् प्राप्तुं शक्नुवन्ति\n"
 "Ctrl+Alt+F%3 दबावन् स्क्रीन् भवति\n"
 "\n"
+
+#: ksldapp.cpp:117
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr ""
+
+#: ksldapp.cpp:119
+#, kde-format
+msgid "Lock Session"
+msgstr "ताला सत्रम्"
+
+#: ksldapp.cpp:337
+#, kde-format
+msgid "Screen locked"
+msgstr "स्क्रीन तालाबद्धा"
+
+#: ksldapp.cpp:365
+#, kde-format
+msgid "Screen unlocked"
+msgstr "स्क्रीन अनलॉक् अभवत्"
 
 #: logind.cpp:162
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-27 00:47+0000\n"
+"POT-Creation-Date: 2026-08-28 00:47+0000\n"
 "PO-Revision-Date: 2025-01-23 11:27+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17,29 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "Gestion de Session"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Bloca session"
-
-#: ksldapp.cpp:365
-#, kde-format
-msgid "Screen locked"
-msgstr "Schermo blocate"
-
-#: ksldapp.cpp:390
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Schermo disblocate"
-
-#: locker.cpp:43
+#: emergencywindow.cpp:54
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -50,7 +28,7 @@ msgstr ""
 " disblocar. Pro disblocar lo il necessita o ConsoleKit o LoginD, necun del\n"
 "qual poteva esser trovate sur tu systema."
 
-#: locker.cpp:47
+#: emergencywindow.cpp:58
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -69,7 +47,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: locker.cpp:52
+#: emergencywindow.cpp:63
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -96,6 +74,28 @@ msgstr ""
 "Si tu oblidava le instructiones tu pote retornar a iste schermop per\n"
 "pressar Ctrl+Alt+F%3\n"
 "\n"
+
+#: ksldapp.cpp:117
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "Gestion de Session"
+
+#: ksldapp.cpp:119
+#, kde-format
+msgid "Lock Session"
+msgstr "Bloca session"
+
+#: ksldapp.cpp:337
+#, kde-format
+msgid "Screen locked"
+msgstr "Schermo blocate"
+
+#: ksldapp.cpp:365
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Schermo disblocate"
 
 #: logind.cpp:162
 #, kde-format

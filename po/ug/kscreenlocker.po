@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-27 00:47+0000\n"
+"POT-Creation-Date: 2026-08-28 00:47+0000\n"
 "PO-Revision-Date: 2026-05-31 19:41-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -18,29 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.9\n"
 
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr "جەريانچاق باشقۇرۇش"
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "جەريانچاقنى قۇلۇپلا"
-
-#: ksldapp.cpp:365
-#, kde-format
-msgid "Screen locked"
-msgstr "ئېكران قۇلۇپلانغان"
-
-#: ksldapp.cpp:390
-#, kde-format
-msgid "Screen unlocked"
-msgstr "ئېكران قۇلۇپى ئوچۇق"
-
-#: locker.cpp:43
+#: emergencywindow.cpp:54
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -52,7 +30,7 @@ msgstr ""
 "قۇلۇپ ئېچىشتا ConsoleKit ياكى LoginD كېرەك، ئەمما سىستېمىدا ھېچقايسىسى "
 "تېپىلمىدى."
 
-#: locker.cpp:47
+#: emergencywindow.cpp:58
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -71,7 +49,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: locker.cpp:52
+#: emergencywindow.cpp:63
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -99,6 +77,28 @@ msgstr ""
 "ئەگەر بۇ تەرتىپنى ئۇنتۇپ قالغان بولسىڭىز Ctrl+Alt+F%3 نى بېسىپ بۇ ئېكرانغا "
 "قايتالايسىز\n"
 "\n"
+
+#: ksldapp.cpp:117
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr "جەريانچاق باشقۇرۇش"
+
+#: ksldapp.cpp:119
+#, kde-format
+msgid "Lock Session"
+msgstr "جەريانچاقنى قۇلۇپلا"
+
+#: ksldapp.cpp:337
+#, kde-format
+msgid "Screen locked"
+msgstr "ئېكران قۇلۇپلانغان"
+
+#: ksldapp.cpp:365
+#, kde-format
+msgid "Screen unlocked"
+msgstr "ئېكران قۇلۇپى ئوچۇق"
 
 #: logind.cpp:162
 #, kde-format

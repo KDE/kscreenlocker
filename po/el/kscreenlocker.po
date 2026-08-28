@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-27 00:47+0000\n"
+"POT-Creation-Date: 2026-08-28 00:47+0000\n"
 "PO-Revision-Date: 2021-07-03 09:26+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -19,29 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.04.2\n"
 
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr ""
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr "Κλείδωμα συνεδρίας"
-
-#: ksldapp.cpp:365
-#, kde-format
-msgid "Screen locked"
-msgstr "Οθόνη κλειδωμένη"
-
-#: ksldapp.cpp:390
-#, kde-format
-msgid "Screen unlocked"
-msgstr "Οθόνη ξεκλείδωτη"
-
-#: locker.cpp:43
+#: emergencywindow.cpp:54
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -57,7 +35,7 @@ msgstr ""
 "Για να την ξεκλειδώσετε απαιτείται το ConsoleKit ή το LoginD, κανένα\n"
 "από τα οποία δεν βρίσκεται στο σύστημά σας."
 
-#: locker.cpp:47
+#: emergencywindow.cpp:58
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -84,7 +62,7 @@ msgstr ""
 "# ck-unlock-session <session-name>\n"
 "\n"
 
-#: locker.cpp:52
+#: emergencywindow.cpp:63
 #, fuzzy, kde-format
 #| msgid ""
 #| "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -119,6 +97,28 @@ msgstr ""
 "\n"
 "Στη συνέχεια αποσυνδεθείτε από την εικονική συνεδρία με Ctrl+D και μεταβείτε "
 "πάλι στην εκτελούμενη συνεδρία (Ctrl+Alt+F%2)."
+
+#: ksldapp.cpp:117
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr ""
+
+#: ksldapp.cpp:119
+#, kde-format
+msgid "Lock Session"
+msgstr "Κλείδωμα συνεδρίας"
+
+#: ksldapp.cpp:337
+#, kde-format
+msgid "Screen locked"
+msgstr "Οθόνη κλειδωμένη"
+
+#: ksldapp.cpp:365
+#, kde-format
+msgid "Screen unlocked"
+msgstr "Οθόνη ξεκλείδωτη"
 
 #: logind.cpp:162
 #, kde-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-27 00:47+0000\n"
+"POT-Creation-Date: 2026-08-28 00:47+0000\n"
 "PO-Revision-Date: 2018-08-16 09:15+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc."
@@ -18,29 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ksldapp.cpp:119
-#, kde-format
-msgctxt ""
-"Name of a category in System Settings' Shortcuts KCM; match it exactly"
-msgid "Session Management"
-msgstr ""
-
-#: ksldapp.cpp:121
-#, kde-format
-msgid "Lock Session"
-msgstr ""
-
-#: ksldapp.cpp:365
-#, kde-format
-msgid "Screen locked"
-msgstr ""
-
-#: ksldapp.cpp:390
-#, kde-format
-msgid "Screen unlocked"
-msgstr ""
-
-#: locker.cpp:43
+#: emergencywindow.cpp:54
 #, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -48,7 +26,7 @@ msgid ""
 "of which could be found on your system."
 msgstr ""
 
-#: locker.cpp:47
+#: emergencywindow.cpp:58
 #, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
@@ -60,7 +38,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: locker.cpp:52
+#: emergencywindow.cpp:63
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
@@ -75,6 +53,28 @@ msgid ""
 "Should you have forgotten the instructions, you can get back to this\n"
 "screen by pressing Ctrl+Alt+F%3\n"
 "\n"
+msgstr ""
+
+#: ksldapp.cpp:117
+#, kde-format
+msgctxt ""
+"Name of a category in System Settings' Shortcuts KCM; match it exactly"
+msgid "Session Management"
+msgstr ""
+
+#: ksldapp.cpp:119
+#, kde-format
+msgid "Lock Session"
+msgstr ""
+
+#: ksldapp.cpp:337
+#, kde-format
+msgid "Screen locked"
+msgstr ""
+
+#: ksldapp.cpp:365
+#, kde-format
+msgid "Screen unlocked"
 msgstr ""
 
 #: logind.cpp:162
