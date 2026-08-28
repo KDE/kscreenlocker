@@ -70,12 +70,13 @@ Q_SIGNALS:
     void functionalChanged();
 
 private:
-    bool m_enabled;
-    PamAuthenticators::Authenticator m_type;
+    // Mind that we must be default-constructible for QRangeModel to work. Always initialize members!
+    bool m_enabled = false;
+    PamAuthenticators::Authenticator m_type = PamAuthenticators::Authenticator::Regular;
     QString m_iconName;
-    bool m_passwordField;
-    bool m_expectingPrompt;
+    bool m_passwordField = false;
+    bool m_expectingPrompt = false;
     QString m_tooltip;
-    bool m_showPrompt;
+    bool m_showPrompt = false;
     bool m_functional = true; // always functional by default
 };
