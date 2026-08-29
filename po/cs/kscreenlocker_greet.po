@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 00:48+0000\n"
+"POT-Creation-Date: 2026-08-29 00:47+0000\n"
 "PO-Revision-Date: 2026-08-19 11:49+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -90,31 +90,31 @@ msgstr ""
 msgid "Don't show any lock user interface."
 msgstr "Nezobrazovat rozhraní pro zamčení uživatele."
 
-#: pamauthenticatormodel.cpp:50
+#: pamauthenticatormodel.cpp:51
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "Heslo"
 
-#: pamauthenticatormodel.cpp:56
+#: pamauthenticatormodel.cpp:60
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
 msgstr "Čipová karta"
 
-#: pamauthenticatormodel.cpp:62
+#: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
 msgstr "Otisk"
 
-#: pamauthenticatormodel.cpp:68
+#: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
 msgstr "Obličej"
 
-#: pamauthenticatormodel.cpp:75
+#: pamauthenticatormodel.cpp:82
 #, kde-format
 msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 00:48+0000\n"
+"POT-Creation-Date: 2026-08-29 00:47+0000\n"
 "PO-Revision-Date: 2026-05-25 21:37+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -83,32 +83,32 @@ msgstr "밀리초 단위의 잠금 사용자 인터페이스 표시 지연 시�
 msgid "Don't show any lock user interface."
 msgstr "잠금 사용자 인터페이스를 표시하지 않습니다."
 
-#: pamauthenticatormodel.cpp:50
+#: pamauthenticatormodel.cpp:51
 #, fuzzy, kde-format
 #| msgid "Password"
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "암호"
 
-#: pamauthenticatormodel.cpp:56
+#: pamauthenticatormodel.cpp:60
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
 msgstr ""
 
-#: pamauthenticatormodel.cpp:62
+#: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
 msgstr ""
 
-#: pamauthenticatormodel.cpp:68
+#: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
 msgstr ""
 
-#: pamauthenticatormodel.cpp:75
+#: pamauthenticatormodel.cpp:82
 #, kde-format
 msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "

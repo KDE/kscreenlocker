@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 00:48+0000\n"
+"POT-Creation-Date: 2026-08-29 00:47+0000\n"
 "PO-Revision-Date: 2019-01-17 03:23+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc."
@@ -84,31 +84,31 @@ msgstr ""
 msgid "Don't show any lock user interface."
 msgstr ""
 
-#: pamauthenticatormodel.cpp:50
+#: pamauthenticatormodel.cpp:51
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr ""
 
-#: pamauthenticatormodel.cpp:56
+#: pamauthenticatormodel.cpp:60
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
 msgstr ""
 
-#: pamauthenticatormodel.cpp:62
+#: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
 msgstr ""
 
-#: pamauthenticatormodel.cpp:68
+#: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
 msgstr ""
 
-#: pamauthenticatormodel.cpp:75
+#: pamauthenticatormodel.cpp:82
 #, kde-format
 msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
