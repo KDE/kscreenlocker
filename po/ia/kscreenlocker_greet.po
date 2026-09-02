@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:47+0000\n"
-"PO-Revision-Date: 2026-05-13 12:14+0200\n"
+"PO-Revision-Date: 2026-09-01 12:40+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -90,8 +90,7 @@ msgid "Don't show any lock user interface."
 msgstr "Non monstrar ulle interfacie de usator de bloco"
 
 #: pamauthenticatormodel.cpp:51
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "Contrasigno"
@@ -100,19 +99,19 @@ msgstr "Contrasigno"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Smartcard (carta intelligente)"
 
 #: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Impression digital"
 
 #: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Face (facie)"
 
 #: pamauthenticatormodel.cpp:82
 #, kde-format
@@ -120,7 +119,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "Universal 2 Factor"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Descriptor de file per connecter a ksld"
