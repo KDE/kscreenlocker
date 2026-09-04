@@ -6,13 +6,13 @@ SPDX-FileCopyrightText: 2024 Jakob Petsovits <jpetso@petsovits.com>
 SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 
 import org.kde.kcmutils as KCM
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kquickcontrols 2.0 as KQuickControls
+import org.kde.kirigami as Kirigami
+import org.kde.kquickcontrols as KQuickControls
 
 KCM.SimpleKCM {
     id: root

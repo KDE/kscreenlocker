@@ -5,9 +5,9 @@ SPDX-FileCopyrightText: 2019 Kevin Ottens <kevin.ottens@enioka.com>
 SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 
 QQC2.StackView {
     id: main
