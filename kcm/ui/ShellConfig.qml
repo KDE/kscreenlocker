@@ -15,6 +15,7 @@ QQC2.StackView {
     signal configurationChanged
 
     property string sourceFile
+    required property var configDialog
 
     implicitHeight: currentItem && currentItem.implicitHeight || 0
     Layout.fillWidth: true

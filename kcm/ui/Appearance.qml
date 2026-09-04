@@ -30,6 +30,7 @@ Kirigami.ScrollablePage {
 
         ShellConfig {
             sourceFile: kcm.shellConfigFile
+            configDialog: appearanceRoot.configDialog
             onConfigurationChanged: kcm.updateState()
         }
 
@@ -57,6 +58,7 @@ Kirigami.ScrollablePage {
 
         WallpaperConfig {
             sourceFile: kcm.wallpaperConfigFile
+            configDialog: appearanceRoot.configDialog
             onConfigurationChanged: kcm.updateState()
             onConfigurationForceChanged: kcm.forceUpdateState()
             // Cancel out page margins so it touches the edges

@@ -9,12 +9,11 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 
-import org.kde.kirigami as Kirigami
-
 QQC2.StackView {
     id: main
 
     property string sourceFile
+    required property var configDialog
 
     signal configurationChanged
     signal configurationForceChanged
