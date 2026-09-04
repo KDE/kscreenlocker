@@ -5,6 +5,7 @@ SPDX-FileCopyrightText: 2024 Jakob Petsovits <jpetso@petsovits.com>
 
 SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -60,7 +61,8 @@ KCM.SimpleKCM {
                     // Pass the current value to the dialog so it can be pre-filled in the input field.
                     customDurationPromptDialogLoader.load(customTimeoutPromptDialogComponent);
                     customDurationPromptDialogLoader.item.value = kcm.settings.timeout;
-                    customDurationPromptDialogLoader.item.open();
+                    const durationDialog = customDurationPromptDialogLoader.item as DurationPromptDialog;
+                    durationDialog.open();
                 }
                 onConfiguredValueOptionMissing: {
                     customOptions = [{
@@ -151,12 +153,12 @@ KCM.SimpleKCM {
                         : { seconds: kcm.settings.lockGrace, unit: DurationPromptDialog.Unit.Seconds };
 
                     customDurationPromptDialogLoader.load(customLockGracePromptDialogComponent);
-                    customDurationPromptDialogLoader.item.unit = currentOption.unit;
-                    customDurationPromptDialogLoader.item.value =
-                        currentOption.unit === DurationPromptDialog.Unit.Minutes
-                            ? (currentOption.seconds / 60)
-                            : currentOption.seconds;
-                    customDurationPromptDialogLoader.item.open();
+                    const durationDialog = customDurationPromptDialogLoader.item as DurationPromptDialog;
+                    durationDialog.unit = currentOption.unit;
+                    durationDialog.value = currentOption.unit === DurationPromptDialog.Unit.Minutes
+                        ? (currentOption.seconds / 60)
+                        : currentOption.seconds;
+                    durationDialog.open();
                 }
                 onConfiguredValueOptionMissing: {
                     const isMinutes = configuredValue % 60 === 0 &&
