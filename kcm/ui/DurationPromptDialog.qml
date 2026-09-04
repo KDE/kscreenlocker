@@ -6,6 +6,7 @@
 
     Originating from kcm_screenlocker. Upstream any changes there until it goes into Kirigami (Addons).
 */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
@@ -101,11 +102,11 @@ Kirigami.Dialog {
 
         QQC2.Label {
             id: labelItem
-            visible: (root.label?.length ?? 0) > 0
+            visible: root.label.length > 0
 
             Kirigami.MnemonicData.enabled: visible && durationValueSpinBox.enabled
             Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-            Kirigami.MnemonicData.label: root.label ?? ""
+            Kirigami.MnemonicData.label: root.label
             text: Kirigami.MnemonicData.richTextLabel
         }
 
@@ -147,8 +148,8 @@ Kirigami.Dialog {
             }
 
             QQC2.Label {
-                visible: acceptsUnits.length == 1
-                text: parent.unitSuffixForValue(value, acceptsUnits[0])
+                visible: root.acceptsUnits.length == 1
+                text: parent.unitSuffixForValue(root.value, root.acceptsUnits[0])
 
                 // Try not to shrink. The +1 is there because I couldn't figure out why actual
                 // plural metrics were 49 but implicitWidth for the plural string 49.78125.
@@ -156,14 +157,14 @@ Kirigami.Dialog {
                 Layout.preferredWidth: Math.max(implicitWidth, pluralUnitLabelMetrics.width + leftPadding + rightPadding + 1)
                 TextMetrics {
                     id: pluralUnitLabelMetrics
-                    text: unitSelectionRadios.labelForUnit(acceptsUnits[0])
+                    text: unitSelectionRadios.labelForUnit(root.acceptsUnits[0])
                 }
             }
 
             ColumnLayout {
                 id: unitSelectionRadios
                 spacing: Kirigami.Units.smallSpacing
-                visible: acceptsUnits.length > 1
+                visible: root.acceptsUnits.length > 1
 
                 function labelForUnit(unit) {
                     switch (unit) {
@@ -189,15 +190,15 @@ Kirigami.Dialog {
 
                 Repeater {
                     id: repeater
-                    model: acceptsUnits
+                    model: root.acceptsUnits
 
                     QQC2.RadioButton {
                         required property int index
                         required property int modelData
 
-                        text: parent.labelForUnit(modelData)
-                        checked: unit === modelData
-                        onClicked: unit = modelData
+                        text: unitSelectionRadios.labelForUnit(modelData)
+                        checked: root.unit === modelData
+                        onClicked: root.unit = modelData
 
                         Keys.onReturnPressed: { root.accept(); }
                         Keys.onUpPressed: { const prev = repeater.itemAt(index - 1); if (prev) prev.focus = true; }
