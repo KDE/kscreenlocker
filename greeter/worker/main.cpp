@@ -16,8 +16,8 @@
 
 #include "config-worker.h"
 #include "debug.h"
-#include "diewithparent.h"
 #include "org.kde.plasma.screenlocker.h"
+#include "prctls.h"
 #include "result.h"
 
 using namespace std::chrono_literals;
