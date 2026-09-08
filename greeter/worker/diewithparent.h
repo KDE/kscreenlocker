@@ -5,10 +5,10 @@
 
 #include <QtGlobal>
 
-#if defined(Q_OS_FREEBSD)
-#include <sys/procctl.h>
-#else
+#if !defined(Q_OS_FREEBSD)
 #include <sys/prctl.h>
+#else
+#include <sys/procctl.h>
 #endif
 
 #include <cerrno>
@@ -17,16 +17,16 @@
 
 [[nodiscard]] inline std::expected<void, int> dieWithParent()
 {
-#if defined(Q_OS_FREEBSD)
-    auto sig = SIGKILL;
-    // procctl returns -1 on error and sets errno, it is undefined which value is returned on success
-    if (procctl(P_PID, 0, PROC_PDEATHSIG_CTL, static_cast<void *>(&sig)) == -1) {
+#if !defined(Q_OS_FREEBSD)
+    // PR_SET_PDEATHSIG returns -1 on error and sets errno
+    if (prctl(PR_SET_PDEATHSIG, SIGKILL) == -1) {
         return std::unexpected{errno};
     }
     return {};
 #else
-    // PR_SET_PDEATHSIG returns -1 on error and sets errno
-    if (prctl(PR_SET_PDEATHSIG, SIGKILL) == -1) {
+    auto sig = SIGKILL;
+    // procctl returns -1 on error and sets errno, it is undefined which value is returned on success
+    if (procctl(P_PID, 0, PROC_PDEATHSIG_CTL, static_cast<void *>(&sig)) == -1) {
         return std::unexpected{errno};
     }
     return {};
