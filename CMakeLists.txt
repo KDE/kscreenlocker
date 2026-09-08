@@ -30,19 +30,6 @@ include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
 include(ECMQmlModule)
 
-include(CheckIncludeFile)
-include(CheckSymbolExists)
-check_include_file("sys/prctl.h" HAVE_SYS_PRCTL_H)
-check_symbol_exists(PR_SET_DUMPABLE "sys/prctl.h" HAVE_PR_SET_DUMPABLE)
-check_include_file("sys/procctl.h" HAVE_SYS_PROCCTL_H)
-check_symbol_exists(PROC_TRACE_CTL "sys/procctl.h" HAVE_PROC_TRACE_CTL)
-if (HAVE_PR_SET_DUMPABLE OR HAVE_PROC_TRACE_CTL)
-  set(CAN_DISABLE_PTRACE TRUE)
-endif ()
-add_feature_info("prctl/procctl tracing control"
-                 CAN_DISABLE_PTRACE
-                 "Required for disallowing ptrace on greeter and kcheckpass process")
-
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Widgets Quick Test)
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
