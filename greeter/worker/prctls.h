@@ -39,7 +39,7 @@ namespace PRCTLs
 [[nodiscard]] inline auto setDumpable(bool dumpable)
 {
 #if !defined(Q_OS_FREEBSD)
-    return _expecting(prctl(PR_SET_DUMPABLE, dumpable ? 1 : 0));
+    return _expecting(prctl(PR_SET_DUMPABLE, dumpable ? 1L : 0L));
 #else
     auto mode = dumpable ? PROC_TRACE_CTL_ENABLE : PROC_TRACE_CTL_DISABLE;
     return _expecting(procctl(P_PID, 0, PROC_TRACE_CTL, &mode));
