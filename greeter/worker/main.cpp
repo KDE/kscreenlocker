@@ -368,9 +368,20 @@ int main(int argc, char *argv[])
         std::string address;
         while (address.empty()) {
             std::getline(std::cin, address);
+            if (std::cin.fail()) {
+                qCWarning(WORKER) << "std::cin encountered an error";
+                return std::string{};
+            }
+            if (std::cin.eof()) {
+                break;
+            }
         }
         return address;
     }();
+    if (address.empty()) {
+        qCWarning(WORKER) << "Failed to read D-Bus address from stdin, exiting.";
+        return 1;
+    }
 
     auto connection = QDBusConnection::connectToPeer(QString::fromStdString(address), u"org.kde.plasma.screenlocker"_s);
     OrgKdePlasmaScreenlockerInterface screenlocker(QString(), u"/org/kde/plasma/screenlocker"_s, connection);
