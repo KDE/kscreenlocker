@@ -55,6 +55,53 @@ template<typename Output, typename Input>
     return o;
 }
 
+void setUpWorkerLogging(const QString &service)
+{
+    // Switch our QLoggingCategory to the correct service. This makes it clearer which PAM service we are working with.
+    //
+    // Mind that qstrdup calls new char[], so we need the ptr to delete [] as well, that is why the type is char[].
+    std::unique_ptr<char[]> serviceName(qstrdup(u"kscreenlocker.worker.pam-%1"_s.arg(service).toUtf8().constData()));
+    static const QLoggingCategory category(serviceName.get(), [] {
+        // QLoggingCategory doesn't have a way to get the set level. It only allows querying if a given level is enabled.
+        // Trouble is that this is cascading. When Warning is enabled then Critical is also, so we'd have to iterate in the correct order.
+        // BUT we cannot use QMetaEnum to iterate the enum because it is not ordered by importance.
+        // So here we are, manually calling the functions in the right order such that we inherit the right level. Meh.
+        if (DEFAULT_WORKER().isCriticalEnabled()) {
+            return QtCriticalMsg;
+        }
+        if (DEFAULT_WORKER().isWarningEnabled()) {
+            return QtWarningMsg;
+        }
+        if (DEFAULT_WORKER().isInfoEnabled()) {
+            return QtInfoMsg;
+        }
+        if (DEFAULT_WORKER().isDebugEnabled()) {
+            return QtDebugMsg;
+        }
+        return QtInfoMsg;
+    }());
+    WORKER = []() -> const QLoggingCategory & {
+        // return the reference to our function local static
+        return category;
+    };
+}
+
+[[nodiscard]] inline auto readAddressFromStdin()
+{
+    std::string address;
+    while (address.empty()) {
+        std::getline(std::cin, address);
+        if (std::cin.fail()) {
+            qCWarning(WORKER) << "std::cin encountered an error";
+            return std::string{};
+        }
+        if (std::cin.eof()) {
+            break;
+        }
+    }
+    return address;
+};
+
 class Worker : public QObject
 {
     Q_OBJECT
@@ -336,47 +383,9 @@ int main(int argc, char *argv[])
     auto service = app.arguments().at(1); // the PAM service name (e.g. kde-fingerprint)
     auto user = app.arguments().at(2);
 
-    // Switch our QLoggingCategory to the correct service. This makes it clearer which PAM service we are working with.
-    //
-    // Mind that qstrdup calls new char[], so we need the ptr to delete [] as well, that is why the type is char[].
-    std::unique_ptr<char[]> serviceName(qstrdup(u"kscreenlocker.worker.pam-%1"_s.arg(service).toUtf8().constData()));
-    static const QLoggingCategory category(serviceName.get(), [] {
-        // QLoggingCategory doesn't have a way to get the set level. It only allows querying if a given level is enabled.
-        // Trouble is that this is cascading. When Warning is enabled then Critical is also, so we'd have to iterate in the correct order.
-        // BUT we cannot use QMetaEnum to iterate the enum because it is not ordered by importance.
-        // So here we are, manually calling the functions in the right order such that we inherit the right level. Meh.
-        if (DEFAULT_WORKER().isCriticalEnabled()) {
-            return QtCriticalMsg;
-        }
-        if (DEFAULT_WORKER().isWarningEnabled()) {
-            return QtWarningMsg;
-        }
-        if (DEFAULT_WORKER().isInfoEnabled()) {
-            return QtInfoMsg;
-        }
-        if (DEFAULT_WORKER().isDebugEnabled()) {
-            return QtDebugMsg;
-        }
-        return QtInfoMsg;
-    }());
-    WORKER = []() -> const QLoggingCategory & {
-        return category;
-    };
+    setUpWorkerLogging(service);
 
-    std::string address = [] {
-        std::string address;
-        while (address.empty()) {
-            std::getline(std::cin, address);
-            if (std::cin.fail()) {
-                qCWarning(WORKER) << "std::cin encountered an error";
-                return std::string{};
-            }
-            if (std::cin.eof()) {
-                break;
-            }
-        }
-        return address;
-    }();
+    auto address = readAddressFromStdin();
     if (address.empty()) {
         qCWarning(WORKER) << "Failed to read D-Bus address from stdin, exiting.";
         return 1;
