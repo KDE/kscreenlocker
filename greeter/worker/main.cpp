@@ -362,7 +362,7 @@ void Worker::startFailedDelay(uint useconds)
 
 int main(int argc, char *argv[])
 {
-    if (!dieWithParent()) {
+    if (!PRCTLs::dieWithParent()) {
         qCWarning(WORKER) << "Failed to set death signal on parent, exiting.";
         return 1;
     }

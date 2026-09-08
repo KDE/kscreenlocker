@@ -49,7 +49,7 @@ qt_add_dbus_adaptor(kscreenlocker_authenticator_SRCS worker/org.kde.plasma.scree
 
 add_library(kscreenlocker_authenticator OBJECT ${kscreenlocker_authenticator_SRCS})
 target_link_libraries(kscreenlocker_authenticator
-    WorkerResult
+    WorkerInterface
     Qt::Core
     Qt::Qml
     Qt::DBus
