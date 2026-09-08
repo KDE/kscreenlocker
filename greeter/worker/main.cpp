@@ -320,6 +320,10 @@ int main(int argc, char *argv[])
         qCWarning(WORKER) << "Failed to set death signal on parent, exiting.";
         return 1;
     }
+    if (getppid() == 1) {
+        qCWarning(WORKER) << "Worker is orphaned, exiting.";
+        return 0;
+    }
 
     QCoreApplication app(argc, argv);
 
