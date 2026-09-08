@@ -316,7 +316,10 @@ void Worker::startFailedDelay(uint useconds)
 
 int main(int argc, char *argv[])
 {
-    dieWithParent();
+    if (!dieWithParent()) {
+        qCWarning(WORKER) << "Failed to set death signal on parent, exiting.";
+        return 1;
+    }
 
     QCoreApplication app(argc, argv);
 

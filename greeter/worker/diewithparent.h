@@ -11,17 +11,24 @@
 #include <sys/prctl.h>
 #endif
 
+#include <cerrno>
 #include <csignal>
+#include <expected>
 
+[[nodiscard]] inline std::expected<void, int> dieWithParent()
+{
 #if defined(Q_OS_FREEBSD)
-inline auto dieWithParent()
-{
     auto sig = SIGKILL;
-    return procctl(P_PID, 0, PROC_PDEATHSIG_CTL, static_cast<void *>(&sig));
-}
+    // procctl returns -1 on error and sets errno, it is undefined which value is returned on success
+    if (procctl(P_PID, 0, PROC_PDEATHSIG_CTL, static_cast<void *>(&sig)) == -1) {
+        return std::unexpected{errno};
+    }
+    return {};
 #else
-inline auto dieWithParent()
-{
-    return prctl(PR_SET_PDEATHSIG, SIGKILL);
-}
+    // PR_SET_PDEATHSIG returns -1 on error and sets errno
+    if (prctl(PR_SET_PDEATHSIG, SIGKILL) == -1) {
+        return std::unexpected{errno};
+    }
+    return {};
 #endif
+}
