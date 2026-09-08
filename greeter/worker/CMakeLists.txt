@@ -34,15 +34,15 @@ endif()
 
 configure_file(config-worker.h.in ${CMAKE_CURRENT_BINARY_DIR}/config-worker.h)
 
-add_library(WorkerResult INTERFACE)
-target_include_directories(WorkerResult INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR};${CMAKE_CURRENT_BINARY_DIR}>")
+add_library(WorkerInterface INTERFACE)
+target_include_directories(WorkerInterface INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR};${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_source_files_properties(org.kde.plasma.screenlocker.xml PROPERTIES NO_NAMESPACE TRUE)
 qt_add_dbus_interface(SRCS org.kde.plasma.screenlocker.xml org.kde.plasma.screenlocker)
 add_executable(kscreenlocker_worker main.cpp ${SRCS})
 target_link_libraries(kscreenlocker_worker
     PRIVATE
-        WorkerResult
+        WorkerInterface
         Qt::Core
         Qt::DBus
         ${PAM_LIBRARIES}
