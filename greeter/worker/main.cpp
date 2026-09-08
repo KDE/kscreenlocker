@@ -212,22 +212,21 @@ Worker::Worker(const QString &service, const QString &user, OrgKdePlasmaScreenlo
     , m_fingerprint(service == KSCREENLOCKER_PAM_FINGERPRINT_SERVICE)
     , m_conv({.conv = &Worker::converse, .appdata_ptr = this})
     , m_screenlocker(screenlocker)
-    , m_handle([service, user, this]() -> pam_handle_t * {
-        int result = -1;
-        pam_handle_t *handle = nullptr;
-        if (user.isEmpty()) {
-            result = pam_start(qPrintable(service), nullptr, &m_conv, &handle);
-        } else {
-            result = pam_start(qPrintable(service), qPrintable(user), &m_conv, &handle);
-        }
+    , m_handle([service, user, this]() -> std::unique_ptr<pam_handle_t> {
+        std::unique_ptr<pam_handle_t> handle;
 
+        auto result = pam_start(qPrintable(service), user.isEmpty() ? nullptr : qPrintable(user), &m_conv, std::out_ptr(handle));
         if (result != PAM_SUCCESS) {
-            qCWarning(WORKER, "[PAM worker %s] start: error starting, result code: %d (%s)", qUtf8Printable(service), result, pam_strerror(handle, result));
-            return handle;
+            qCWarning(WORKER,
+                      "[PAM worker %s] start: error starting, result code: %d (%s)",
+                      qUtf8Printable(service),
+                      result,
+                      pam_strerror(handle.get(), result));
+            return nullptr;
         }
 
 #if defined(HAVE_PAM_FAIL_DELAY)
-        pam_set_item(handle, PAM_FAIL_DELAY, reinterpret_cast<void *>(fail_delay));
+        pam_set_item(handle.get(), PAM_FAIL_DELAY, reinterpret_cast<void *>(fail_delay));
 #else
         Q_UNUSED(fail_delay);
 #endif
