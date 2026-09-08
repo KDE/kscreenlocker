@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include <QtGlobal>
-
 #if !defined(Q_OS_FREEBSD)
 #include <sys/prctl.h>
 #else

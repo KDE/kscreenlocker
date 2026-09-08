@@ -370,6 +370,10 @@ int main(int argc, char *argv[])
         qCWarning(WORKER) << "Worker is orphaned, exiting.";
         return 0;
     }
+    if (auto dumpable = WORKER().isDebugEnabled(); !PRCTLs::setDumpable(dumpable)) {
+        qCWarning(WORKER) << "Failed to set dumpable flag on the worker" << (dumpable ? "enabled" : "disabled");
+        // We'll continue but it is a bit unexpected.
+    }
 
     QCoreApplication app(argc, argv);
 
@@ -384,11 +388,6 @@ int main(int argc, char *argv[])
     auto user = app.arguments().at(2);
 
     setUpWorkerLogging(service);
-
-    if (!PRCTLs::setDumpable(WORKER.isDebugEnabled())) {
-        qCWarning(WORKER) << "Failed to set dumpable flag on the greeter" << (WORKER.isDebugEnabled() ? "enabled" : "disabled");
-        // We'll continue but it is a bit unexpected.
-    }
 
     auto address = readAddressFromStdin();
     if (address.empty()) {
