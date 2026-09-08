@@ -133,7 +133,7 @@ void PamAuthenticators::onAuthenticatorChanged()
         d->m_fingerprintAuthenticator->disconnect(this);
         d->m_fingerprintAuthenticator->cancel();
         d->m_fingerprintAuthenticator.reset();
-    } else if (!d->m_fingerprintAuthenticator) {
+    } else if (m_authenticator != Authenticator::Fingerprint && !d->m_fingerprintAuthenticator) {
         d->m_fingerprintAuthenticator = std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, m_loginName, PamAuthenticator::Fingerprint);
         connect(d->m_fingerprintAuthenticator.get(), &PamAuthenticator::succeeded, this, [this] {
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Success from non-interactive authenticator" << qUtf8Printable(d->m_fingerprintAuthenticator->service());
