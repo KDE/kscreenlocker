@@ -57,9 +57,9 @@ int main(int argc, char *argv[])
     sigaddset(&blockedSignals, SIGUSR1);
     pthread_sigmask(SIG_BLOCK, &blockedSignals, NULL);
 
-    // disable ptrace on the greeter
-    if (!PRCTLs::setDumpable(false)) {
-        qCWarning(KSCREENLOCKER_GREET) << "Failed to disable ptrace on the greeter";
+    // disable ptrace on the greeter unless debugging is enabled
+    if (auto dumpable = KSCREENLOCKER_GREET().isDebugEnabled(); !PRCTLs::setDumpable(dumpable)) {
+        qCWarning(KSCREENLOCKER_GREET) << "Failed to switch ptrace on the greeter to" << (dumpable ? "enabled" : "disabled");
     }
 
     qCDebug(KSCREENLOCKER_GREET) << "Greeter is starting up.";
