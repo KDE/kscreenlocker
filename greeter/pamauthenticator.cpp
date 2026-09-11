@@ -170,7 +170,7 @@ void PamAuthenticator::cancel()
     // Let it quit on its own. Mind that this usually will get stuck because the worker is itself waiting for a prompt response.
     std::ignore = m_dbusWorker->Cancel();
     if (m_workerProcess) {
-        m_workerProcess->waitForFinished((5ms).count());
+        std::ignore = m_workerProcess->waitForFinished(5ms);
     }
     quitWorkerProcess();
 }
@@ -283,7 +283,7 @@ void PamAuthenticator::quitWorkerProcess()
 {
     if (m_workerProcess) {
         m_workerProcess->terminate();
-        if (!m_workerProcess->waitForFinished((25ms).count())) {
+        if (!m_workerProcess->waitForFinished(25ms)) {
             qWarning() << "Worker did not terminate in time, killing it.";
             m_workerProcess->kill();
         }
@@ -301,13 +301,12 @@ void PamAuthenticator::startWorker()
     m_server = new QDBusServer(this);
     connect(m_server, &QDBusServer::newConnection, this, &PamAuthenticator::connectWorker);
 
-    m_workerProcess = new QProcess(this);
-    m_workerProcess->setProcessChannelMode(QProcess::ForwardedChannels);
-    m_workerProcess->setProgram(KLibexec::path(u"kscreenlocker_worker"_s));
-    m_workerProcess->setArguments({m_service, m_user});
+    m_workerProcess = std::make_unique<PlasmaAuthentication::Worker>(m_service, m_user, m_server->address(), std::nullopt);
+    connect(m_workerProcess.get(), &PlasmaAuthentication::Worker::errorOccurred, this, [this] {
+        m_unavailable = true;
+        Q_EMIT availableChanged();
+    });
     m_workerProcess->start();
-    m_workerProcess->write(m_server->address().toUtf8());
-    m_workerProcess->closeWriteChannel();
 }
 
 void PamAuthenticator::connectWorker(const QDBusConnection &connection)

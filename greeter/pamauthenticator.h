@@ -15,6 +15,8 @@
 #include <memory>
 #include <qqmlregistration.h>
 
+#include <startworker.h>
+
 class QDBusServer;
 class QProcess;
 class OrgKdePlasmaScreenlockerWorkerInterface;
@@ -141,7 +143,7 @@ private:
     QDBusMessage m_pendingPrompt;
     QDBusServer *m_server = nullptr;
     std::unique_ptr<OrgKdePlasmaScreenlockerWorkerInterface> m_dbusWorker;
-    QProcess *m_workerProcess = nullptr;
+    std::unique_ptr<PlasmaAuthentication::Worker> m_workerProcess;
     QString m_user;
 };
 

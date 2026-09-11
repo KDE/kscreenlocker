@@ -141,6 +141,7 @@ ecm_set_disabled_deprecation_versions(QT 6.11.0
     KF 6.27.0
 )
 
+add_subdirectory(lib)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
 add_subdirectory(settings)
