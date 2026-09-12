@@ -24,7 +24,6 @@ Dependencies:
     'plasma/libplasma': '@same'
     'plasma/layer-shell-qt': '@same'
     'plasma/libkscreen': '@same'
-    'third-party/wayland': '@latest'
 
 RuntimeDependencies:
  - 'on': ['@all']

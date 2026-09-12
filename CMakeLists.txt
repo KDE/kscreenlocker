@@ -61,14 +61,8 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
 
-find_package(WaylandScanner)
-find_package(Wayland 1.3 COMPONENTS Client Server)
 find_package(LayerShellQt REQUIRED)
 find_package(KF6Screen REQUIRED)
-
-set_package_properties(Wayland PROPERTIES
-                       TYPE REQUIRED
-                       PURPOSE "Required for building screenlocker")
 
 find_package(loginctl)
 set_package_properties(loginctl PROPERTIES
@@ -120,9 +114,6 @@ configure_file(config-unix.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-unix.h )
 if (HAVE_CONSOLEKIT)
     configure_file(ck-unlock-session.cmake ${CMAKE_CURRENT_BINARY_DIR}/ck-unlock-session)
 endif ()
-
-# adjusting CMAKE_C_FLAGS to get wayland protocols to compile
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu90")
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KSCREENLOCKER
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kscreenlocker_version.h"
