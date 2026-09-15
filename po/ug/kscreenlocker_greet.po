@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:47+0000\n"
+"POT-Creation-Date: 2026-09-15 02:47+0000\n"
 "PO-Revision-Date: 2026-07-22 17:17-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -54,36 +54,36 @@ msgstr "قۇلۇپ ئاچ(&L)"
 msgid "Unlocking failed"
 msgstr "قۇلۇپ ئاچالمىدى"
 
-#: main.cpp:113
+#: main.cpp:102
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "KDE Plasma خىزمەت بوشلۇقى ئېكران قۇلۇپ پىروگراممىسى"
 
-#: main.cpp:117
+#: main.cpp:106
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "سىناق ھالىتىدە قارشى ئېلىش كۆرۈنۈشىنى قوزغىتىدۇ"
 
-#: main.cpp:120
+#: main.cpp:109
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "تاللانغان shell ئۆرنىكىدە  قارشى ئېلىش كۆرۈنۈشىنى قوزغىتىدۇ (پەقەت سىناق "
 "ھالىتىدىلا)"
 
-#: main.cpp:124
+#: main.cpp:113
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "دەرھال قۇلۇپلاپ، ھەر قانداق كېچىكتۈرۈش ۋاقتىغا پەرۋا قىلمايدۇ."
 
-#: main.cpp:126
+#: main.cpp:115
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "ئىشلەتكۈچى ئارايۈز ئېكرانىنى قۇلۇپلاشتىن ئىلگىرىكى مىللىسېكۇنت بىلەن "
 "ئىپادىلەنگەن كېچىكىش ۋاقتىنى كۆرسىتىدۇ."
 
-#: main.cpp:129
+#: main.cpp:118
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "ھەر قانداق ئىشلەتكۈچى ئارايۈز قۇلۇپلاش ئېكرانىنى كۆرسەتمەيدۇ."
