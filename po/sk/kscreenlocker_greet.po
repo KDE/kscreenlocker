@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:47+0000\n"
-"PO-Revision-Date: 2016-08-31 22:29+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"POT-Creation-Date: 2026-09-15 00:46+0000\n"
+"PO-Revision-Date: 2026-09-14 20:10+0200\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -51,41 +51,40 @@ msgstr "Odomknúť"
 msgid "Unlocking failed"
 msgstr "Odomknutie zlyhalo"
 
-#: main.cpp:113
+#: main.cpp:102
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr "Uvítač pre zamykač obrazovky KDE pracovnej plochy Plasma"
 
-#: main.cpp:117
+#: main.cpp:106
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Spustí uvítač v testovacom režime"
 
-#: main.cpp:120
+#: main.cpp:109
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr "Spustí uvítač s vybranou témou (iba v testovacom režime)"
 
-#: main.cpp:124
+#: main.cpp:113
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Zamknúť okamžite, ignorovať milostný čas atď."
 
-#: main.cpp:126
+#: main.cpp:115
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Oneskorenie, kým sa zobrazí zamykacie používateľské rozhranie v "
 "milisekundách."
 
-#: main.cpp:129
+#: main.cpp:118
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "Nezobraziť žiadne zamykacie používateľské rozhranie."
 
 #: pamauthenticatormodel.cpp:51
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "Heslo"
@@ -94,19 +93,19 @@ msgstr "Heslo"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Smartcard"
 
 #: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Odtlačok"
 
 #: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Tvár"
 
 #: pamauthenticatormodel.cpp:82
 #, kde-format
@@ -114,7 +113,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "Univerzálny druhý faktor"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Popisovač súboru na pripojenie k ksld."

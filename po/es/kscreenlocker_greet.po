@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:47+0000\n"
+"POT-Creation-Date: 2026-09-15 00:46+0000\n"
 "PO-Revision-Date: 2026-08-20 00:02+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -54,37 +54,37 @@ msgstr "Desb&loquear"
 msgid "Unlocking failed"
 msgstr "El desbloqueo ha fallado"
 
-#: main.cpp:113
+#: main.cpp:102
 #, kde-format
 msgid "Greeter for the KDE Plasma Workspaces Screen locker"
 msgstr ""
 "Bienvenida del bloqueo de pantalla del espacio de trabajo Plasma de KDE"
 
-#: main.cpp:117
+#: main.cpp:106
 #, kde-format
 msgid "Starts the greeter in testing mode"
 msgstr "Inicia la bienvenida en modo de pruebas"
 
-#: main.cpp:120
+#: main.cpp:109
 #, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
 msgstr ""
 "Inicia la bienvenida con el tema seleccionado en la interfaz gráfica (solo "
 "en modo de pruebas)"
 
-#: main.cpp:124
+#: main.cpp:113
 #, kde-format
 msgid "Lock immediately, ignoring any grace time etc."
 msgstr "Bloquear inmediatamente, ignorando cualquier tiempo concedido, etc."
 
-#: main.cpp:126
+#: main.cpp:115
 #, kde-format
 msgid "Delay till the lock user interface gets shown in milliseconds."
 msgstr ""
 "Retrasar hasta que la interfaz de usuario de bloqueo se muestre (en "
 "milisegundos)."
 
-#: main.cpp:129
+#: main.cpp:118
 #, kde-format
 msgid "Don't show any lock user interface."
 msgstr "No mostrar ninguna interfaz de usuario de bloqueo."
