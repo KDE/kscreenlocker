@@ -134,12 +134,12 @@ void Interface::Lock()
     if (!KAuthorized::authorizeAction(QStringLiteral("lock_screen"))) {
         return;
     }
-    m_daemon->lock(calledFromDBus() ? EstablishLock::Immediate : EstablishLock::Delayed);
-
-    if (calledFromDBus() && m_daemon->lockState() == KSldApp::Locked) {
+    if (calledFromDBus()) {
         m_lockReplies << message().createReply();
         setDelayedReply(true);
     }
+
+    m_daemon->lock(calledFromDBus() ? EstablishLock::Immediate : EstablishLock::Delayed);
 }
 
 bool Interface::SetActive(bool state)
