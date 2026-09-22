@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:46+0000\n"
-"PO-Revision-Date: 2026-07-22 17:17-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -89,8 +89,7 @@ msgid "Don't show any lock user interface."
 msgstr "ھەر قانداق ئىشلەتكۈچى ئارايۈز قۇلۇپلاش ئېكرانىنى كۆرسەتمەيدۇ."
 
 #: pamauthenticatormodel.cpp:51
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "ئىم"
@@ -99,13 +98,13 @@ msgstr "ئىم"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "ئىدراكلىق كارتا"
 
 #: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "بارماق ئىزى"
 
 #: pamauthenticatormodel.cpp:74
 #, kde-format
