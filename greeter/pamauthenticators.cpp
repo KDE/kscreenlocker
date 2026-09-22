@@ -7,6 +7,7 @@
 
 #include <QDebug>
 #include <QMetaEnum>
+#include <QTimer>
 #include <QtConcurrent/QtConcurrentRun>
 #include <algorithm>
 
@@ -20,24 +21,16 @@
 #include "pamauthenticatormodel.h"
 #include "pamauthenticators.h"
 
+using namespace std::chrono_literals;
 using namespace Qt::StringLiterals;
 
 struct PamAuthenticators::Private {
     std::unique_ptr<PamAuthenticator> m_activeAuthenticator = nullptr;
     std::unique_ptr<PamAuthenticator> m_fingerprintAuthenticator = nullptr;
-    PamAuthenticator::NoninteractiveAuthenticatorTypes computedTypes = PamAuthenticator::NoninteractiveAuthenticatorType::None;
+    std::optional<bool> m_fingerprintAvailable;
     AuthenticatorsState state = AuthenticatorsState::Idle;
     bool graceLocked = false;
     bool hadPrompt = false;
-
-    void recomputeNoninteractiveAuthenticationTypes()
-    {
-        if (!m_fingerprintAuthenticator || !m_fingerprintAuthenticator->isAvailable()) {
-            return;
-        }
-
-        computedTypes = PamAuthenticator::NoninteractiveAuthenticatorType::Fingerprint;
-    }
 };
 
 PamAuthenticators::PamAuthenticators(const QString &loginName, QObject *parent)
@@ -134,6 +127,21 @@ void PamAuthenticators::onAuthenticatorChanged()
         d->m_fingerprintAuthenticator->cancel();
         d->m_fingerprintAuthenticator.reset();
     } else if (m_authenticator != Authenticator::Fingerprint && !d->m_fingerprintAuthenticator) {
+        if (!d->m_fingerprintAvailable.has_value()) {
+            auto timer = std::make_shared<QTimer>(nullptr);
+            timer->setSingleShot(true);
+            timer->setInterval(5s);
+            connect(timer.get(), &QTimer::timeout, this, [this, timer]() {
+                if (d->m_fingerprintAvailable.has_value()) {
+                    return;
+                }
+
+                d->m_fingerprintAvailable = true;
+                Q_EMIT authenticatorTypesChanged();
+            });
+            timer->start();
+        }
+
         d->m_fingerprintAuthenticator = std::make_unique<PamAuthenticator>(KSCREENLOCKER_PAM_FINGERPRINT_SERVICE, m_loginName, PamAuthenticator::Fingerprint);
         connect(d->m_fingerprintAuthenticator.get(), &PamAuthenticator::succeeded, this, [this] {
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Success from non-interactive authenticator" << qUtf8Printable(d->m_fingerprintAuthenticator->service());
@@ -143,8 +151,10 @@ void PamAuthenticators::onAuthenticatorChanged()
         connect(d->m_fingerprintAuthenticator.get(), &PamAuthenticator::availableChanged, this, [this] {
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Availability changed for non-interactive authenticator"
                                          << qUtf8Printable(d->m_fingerprintAuthenticator->service()) << d->m_fingerprintAuthenticator->isAvailable();
-            d->recomputeNoninteractiveAuthenticationTypes();
-            // Mind that this is the "implicit" fingerprint reader. It has no descriptor and consequently doesn't need marking defunct.
+            // Mind that this is the "implicit" fingerprint reader. It has no descriptor.
+            if (!d->m_fingerprintAuthenticator->isAvailable()) {
+                d->m_fingerprintAvailable = false;
+            }
             Q_EMIT authenticatorTypesChanged();
         });
         connect(d->m_fingerprintAuthenticator.get(), &PamAuthenticator::failed, this, [this] {
@@ -201,7 +211,6 @@ void PamAuthenticators::onAuthenticatorChanged()
     connect(authenticator, &PamAuthenticator::availableChanged, this, [this, authenticator] {
         qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Availability changed for interactive authenticator" << qUtf8Printable(authenticator->service())
                                      << authenticator->isAvailable();
-        d->recomputeNoninteractiveAuthenticationTypes();
         if (!authenticator->isAvailable()) {
             PAMAuthenticatorModel::instance()->markDefunct(m_authenticator);
         }
@@ -308,7 +317,10 @@ void PamAuthenticators::cancel()
 
 PamAuthenticator::NoninteractiveAuthenticatorTypes PamAuthenticators::authenticatorTypes() const
 {
-    return d->computedTypes;
+    if (d->m_fingerprintAvailable.has_value() && d->m_fingerprintAvailable.value()) {
+        return PamAuthenticator::NoninteractiveAuthenticatorType::Fingerprint;
+    }
+    return PamAuthenticator::NoninteractiveAuthenticatorType::None;
 }
 
 void PamAuthenticators::setGraceLocked(bool b)
