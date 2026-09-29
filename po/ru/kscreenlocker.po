@@ -38,7 +38,6 @@ msgstr ""
 "ConsoleKit или LoginD, но они не найдены в этой системе."
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
-# BUGME: please add ctxt telling about the above. --aspotashev
 #: emergencywindow.cpp:58
 #, kde-format
 msgctxt "%1 = other terminal"
@@ -60,7 +59,6 @@ msgstr ""
 "\n"
 
 # This message is displayed using a huge font, on my 1366x768 screen it can be at most 65 characters in width, but better limit it to something less  than 60 to be sure and to have margins. --aspotashev
-# BUGME: please add ctxt telling about the above. --aspotashev
 #: emergencywindow.cpp:63
 #, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
