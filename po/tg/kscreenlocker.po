@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-28 00:47+0000\n"
+"POT-Creation-Date: 2026-10-01 17:43+0000\n"
 "PO-Revision-Date: 2019-09-19 17:52+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -66,12 +66,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Қулф кардани ҷаласа"
 
-#: ksldapp.cpp:337
+#: ksldapp.cpp:335
 #, kde-format
 msgid "Screen locked"
 msgstr "Экран қулф карда шуд"
 
-#: ksldapp.cpp:365
+#: ksldapp.cpp:363
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Қулфи экран кушода шуд"

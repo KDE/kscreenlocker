@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-28 00:47+0000\n"
+"POT-Creation-Date: 2026-10-01 17:43+0000\n"
 "PO-Revision-Date: 2019-10-31 00:12+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -101,12 +101,12 @@ msgstr ""
 msgid "Lock Session"
 msgstr "Lukusta seanss"
 
-#: ksldapp.cpp:337
+#: ksldapp.cpp:335
 #, kde-format
 msgid "Screen locked"
 msgstr "Ekraan on lukustatud"
 
-#: ksldapp.cpp:365
+#: ksldapp.cpp:363
 #, kde-format
 msgid "Screen unlocked"
 msgstr "Ekraan on lahtilukustatud"
