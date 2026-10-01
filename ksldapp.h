@@ -160,9 +160,8 @@ public:
      * If the lock is successfully established, it shows the lock window, starts the lock process, and emits the lockStateChanged() signal.
      *
      * @param establishLock The type of lock to establish (eg. immediate or delayed).
-     * @param attemptCount The number of attempts made to establish the lock.
      */
-    void lock(EstablishLock establishLock, int attemptCount = 0);
+    void lock(EstablishLock establishLock);
 
     /**
      * @brief Initializes the KSldApp object.

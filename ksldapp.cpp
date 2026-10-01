@@ -315,9 +315,9 @@ void KSldApp::configure()
     m_requirePassword = KScreenSaverSettings::requirePassword();
 }
 
-void KSldApp::lock(EstablishLock establishLock, int attemptCount)
+void KSldApp::lock(EstablishLock establishLock)
 {
-    qCDebug(KSCREENLOCKER) << "lock called with establishLock:" << establishLockToString(establishLock) << "attemptCount:" << attemptCount;
+    qCDebug(KSCREENLOCKER) << "lock called with establishLock:" << establishLockToString(establishLock);
 
     if (lockState() != Unlocked) {
         // already locked or acquiring lock, no need to lock again
@@ -330,9 +330,7 @@ void KSldApp::lock(EstablishLock establishLock, int attemptCount)
         return;
     }
 
-    if (attemptCount == 0) {
-        Q_EMIT aboutToLock();
-    }
+    Q_EMIT aboutToLock();
 
     KNotification::event(QStringLiteral("locked"), i18n("Screen locked"), QPixmap(), KNotification::CloseOnTimeout, QStringLiteral("ksmserver"));
 
