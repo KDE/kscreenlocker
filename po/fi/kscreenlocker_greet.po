@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2012, 2016, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2012, 2016, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2013, 2014, 2015, 2016.
 #
 # KDE Finnish translation sprint participants:
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:46+0000\n"
-"PO-Revision-Date: 2025-07-31 09:48+0300\n"
+"PO-Revision-Date: 2026-09-02 20:26+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
@@ -32,10 +32,8 @@ msgid "The session has been locked by %1"
 msgstr "%1 on lukinnut istunnon"
 
 #: fallbacktheme/Greeter.qml:83
-#, fuzzy
-#| msgid "Password:"
 msgid "Password"
-msgstr "Salasana:"
+msgstr "Salasana"
 
 #: fallbacktheme/Greeter.qml:101
 msgid "(or place your fingerprint on the reader)"
@@ -88,29 +86,28 @@ msgid "Don't show any lock user interface."
 msgstr "Älä näytä mitään lukkokäyttöliittymää."
 
 #: pamauthenticatormodel.cpp:51
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
-msgstr "Salasana:"
+msgstr "Salasana"
 
 #: pamauthenticatormodel.cpp:60
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Älykortti"
 
 #: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Sormenjälki"
 
 #: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Kasvot"
 
 #: pamauthenticatormodel.cpp:82
 #, kde-format
@@ -118,7 +115,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "Universal 2 -tyyppi"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Tiedostokuvaaja ksld:hen yhdistämistä varten."
