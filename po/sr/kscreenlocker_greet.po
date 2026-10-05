@@ -1,12 +1,13 @@
 # Translation of kscreenlocker_greet.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2012, 2013, 2014, 2015, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker_greet\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 02:47+0000\n"
-"PO-Revision-Date: 2016-11-23 19:27+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-03 22:09+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -20,39 +21,39 @@ msgstr ""
 
 #: fallbacktheme/Greeter.qml:59
 msgid "Warning: Caps Lock on"
-msgstr ""
+msgstr "Упозорење: CapsLock укључен"
 
 #: fallbacktheme/Greeter.qml:75
 msgid "The session is locked"
-msgstr ""
+msgstr "Сесија је закључана"
 
 #: fallbacktheme/Greeter.qml:76
 msgid "The session has been locked by %1"
-msgstr ""
+msgstr "Сесију закључа %1"
 
 #: fallbacktheme/Greeter.qml:83
 msgid "Password"
-msgstr ""
+msgstr "Лозинка"
 
 #: fallbacktheme/Greeter.qml:101
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(или ставите прст на читач)"
 
 #: fallbacktheme/Greeter.qml:107
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(или употребите своју смарт-картицу)"
 
 #: fallbacktheme/Greeter.qml:116
 msgid "&Switch Users"
-msgstr ""
+msgstr "&Промени кориснике"
 
 #: fallbacktheme/Greeter.qml:123
 msgid "Un&lock"
-msgstr ""
+msgstr "&Откључај"
 
 #: fallbacktheme/Greeter.qml:135
 msgid "Unlocking failed"
-msgstr ""
+msgstr "Откључавање пропало"
 
 # rewrite-msgid: /KDE Plasma Workspaces//
 #: main.cpp:102
@@ -66,10 +67,10 @@ msgid "Starts the greeter in testing mode"
 msgstr "Покреће поздравни дијалог у пробном режиму"
 
 #: main.cpp:109
-#, fuzzy, kde-format
-#| msgid "Starts the greeter with the selected theme (only in Testing mode)"
+#, kde-format
 msgid "Starts the greeter with the selected shell theme (only in Testing mode)"
-msgstr "Покреће поздравни дијалог са изабраном темом (само у пробном режиму)"
+msgstr ""
+"Покреће поздравни дијалог са изабраном темом шкољке (само у пробном режиму)"
 
 #: main.cpp:113
 #, kde-format
@@ -90,25 +91,25 @@ msgstr "Без приказивања закључаног сучеља."
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
-msgstr ""
+msgstr "Лозинка"
 
 #: pamauthenticatormodel.cpp:60
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Смарт-картица"
 
 #: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Отисак прста"
 
 #: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Лице"
 
 #: pamauthenticatormodel.cpp:82
 #, kde-format
@@ -116,11 +117,4 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
-
-# rewrite-msgid: /ksld/KScreenLocker daemon/
-#~ msgid "File descriptor for connecting to ksld."
-#~ msgstr "Описник фајла за повезивање са демоном К‑закључавача-екрана."
-
-#~ msgid "Default to the switch user UI."
-#~ msgstr "Подразумевано на сучеље за промену корисника."
+msgstr "Универзални други фактор"

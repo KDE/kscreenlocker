@@ -1,12 +1,13 @@
 # Translation of kscreenlocker.po into Serbian.
-# Chusslove Illich <caslav.ilic@gmx.net>, 2012, 2014, 2015, 2017.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2012, 2014, 2015, 2017, 2018.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-01 20:15+0000\n"
-"PO-Revision-Date: 2017-06-10 21:26+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-03 22:09+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -19,38 +20,18 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: emergencywindow.cpp:54
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %1\n"
-#| "\n"
-#| "Afterwards switch back to the running session (Ctrl+Alt+F%2)."
+#, kde-format
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
 "In order to unlock it either ConsoleKit or LoginD is needed, neither\n"
 "of which could be found on your system."
 msgstr ""
 "Закључавач екрана је покварен и откључавање више није могуће.\n"
-"Да бисте откључали, пређите на виртуелни терминал (нпр. Ctrl+Alt+F2),\n"
-"пријавите се и извршите наредбу:\n"
-"\n"
-"loginctl unlock-session %1\n"
-"\n"
-"Потом се пребаците назад на сесију у погону (Ctrl+Alt+F%2)."
+"За откључавање је потребан Консолкит или LoginD, а ниједан\n"
+"од њих није нађен на вашем систему."
 
 #: emergencywindow.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %1\n"
-#| "\n"
-#| "Afterwards switch back to the running session (Ctrl+Alt+F%2)."
+#, kde-format
 msgctxt "%1 = other terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -61,23 +42,14 @@ msgid ""
 "\n"
 msgstr ""
 "Закључавач екрана је покварен и откључавање више није могуће.\n"
-"Да бисте откључали, пређите на виртуелни терминал (нпр. Ctrl+Alt+F2),\n"
-"пријавите се и извршите наредбу:\n"
+"Да бисте откључали, пријеђите на виртуелни терминал (нпр. Ctrl+Alt+F%1),\n"
+"пријавите се као коријен и извршите наредбу:\n"
 "\n"
-"loginctl unlock-session %1\n"
+"# ck-unlock-session <session-name>\n"
 "\n"
-"Потом се пребаците назад на сесију у погону (Ctrl+Alt+F%2)."
 
 #: emergencywindow.cpp:63
-#, fuzzy, kde-format
-#| msgid ""
-#| "The screen locker is broken and unlocking is not possible anymore.\n"
-#| "In order to unlock switch to a virtual terminal (e.g. Ctrl+Alt+F2),\n"
-#| "log in and execute the command:\n"
-#| "\n"
-#| "loginctl unlock-session %1\n"
-#| "\n"
-#| "Afterwards switch back to the running session (Ctrl+Alt+F%2)."
+#, kde-format
 msgctxt "%1 = other terminal, %2 = session ID, %3 = this terminal"
 msgid ""
 "The screen locker is broken and unlocking is not possible anymore.\n"
@@ -93,19 +65,23 @@ msgid ""
 "\n"
 msgstr ""
 "Закључавач екрана је покварен и откључавање више није могуће.\n"
-"Да бисте откључали, пређите на виртуелни терминал (нпр. Ctrl+Alt+F2),\n"
-"пријавите се и извршите наредбу:\n"
+"Да бисте откључали, пријеђите на виртуелни терминал (нпр. Ctrl+Alt+F%1),\n"
+"пријавите се на свој налог и извршите наредбу:\n"
 "\n"
-"loginctl unlock-session %1\n"
+"loginctl unlock-session %2\n"
 "\n"
-"Потом се пребаците назад на сесију у погону (Ctrl+Alt+F%2)."
+"Потом се одјавите из виртуелне сесије притиском на Ctrl+D и пребаците се\n"
+"назад на сесију у погону (Ctrl+Alt+F%3).\n"
+"Ако заборавите ова упутства, на овај екран се можете вратити\n"
+"притиском на Ctrl+Alt+F%3\n"
+"\n"
 
 #: ksldapp.cpp:117
 #, kde-format
 msgctxt ""
 "Name of a category in System Settings' Shortcuts KCM; match it exactly"
 msgid "Session Management"
-msgstr ""
+msgstr "Управљање сесијама"
 
 #: ksldapp.cpp:119
 #, kde-format
@@ -130,16 +106,4 @@ msgstr "Закључавач екрана"
 #: logind.cpp:162
 #, kde-format
 msgid "Ensuring that the screen gets locked before going to sleep"
-msgstr "Обезбеђује закључавање екрана пре одласка на спавање"
-
-#~ msgid "Screen lock enabled"
-#~ msgstr "Закључавање екрана активно"
-
-#~ msgid "Sets whether the screen will be locked after the specified time."
-#~ msgstr "Да ли ће екран бити закључан после задатог времена."
-
-#~ msgid "Screen saver timeout"
-#~ msgstr "Прековреме чувара екрана"
-
-#~ msgid "Sets the minutes after which the screen is locked."
-#~ msgstr "Број минута после којег ће екран бити закључан."
+msgstr "Обезбјеђује закључавање екрана прије одласка на спавање"
