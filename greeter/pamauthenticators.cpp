@@ -29,6 +29,8 @@ struct PamAuthenticators::Private {
     AuthenticatorsState state = AuthenticatorsState::Idle;
     bool graceLocked = false;
     bool hadPrompt = false;
+    /*! Whether the authenticators is locked. This only turns false if any authenticator reports succeeded */
+    bool locked = true;
 
     void recomputeNoninteractiveAuthenticationTypes()
     {
@@ -71,7 +73,7 @@ void PamAuthenticators::saveAuthenticatorType(Authenticator authenticator)
 
 bool PamAuthenticators::isUnlocked() const
 {
-    return d->m_activeAuthenticator->isUnlocked() || d->m_fingerprintAuthenticator->isUnlocked();
+    return !d->locked;
 }
 
 PamAuthenticators::AuthenticatorsState PamAuthenticators::state() const
@@ -138,6 +140,7 @@ void PamAuthenticators::onAuthenticatorChanged()
         connect(d->m_fingerprintAuthenticator.get(), &PamAuthenticator::succeeded, this, [this] {
             qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Success from non-interactive authenticator" << qUtf8Printable(d->m_fingerprintAuthenticator->service());
             saveAuthenticatorType(m_authenticator);
+            d->locked = false;
             Q_EMIT succeeded();
         });
         connect(d->m_fingerprintAuthenticator.get(), &PamAuthenticator::availableChanged, this, [this] {
@@ -196,6 +199,7 @@ void PamAuthenticators::onAuthenticatorChanged()
     connect(authenticator, &PamAuthenticator::succeeded, this, [this, authenticator] {
         qCDebug(KSCREENLOCKER_GREET) << "PamAuthenticators: Success from interactive authenticator" << qUtf8Printable(authenticator->service());
         saveAuthenticatorType(m_authenticator);
+        d->locked = false;
         Q_EMIT succeeded();
     });
     connect(authenticator, &PamAuthenticator::availableChanged, this, [this, authenticator] {
