@@ -122,6 +122,23 @@ int main(int argc, char *argv[])
     parser.addOption(immediateLockOption);
     parser.addOption(graceTimeOption);
     parser.addOption(nolockOption);
+
+    // we may have the greeter launched from an old ksldapp in the case of a live upgrade
+    // handle mismatched arguments gracefully, defaulting to try to run
+    // Add all unknown options but make sure to print a warning.
+
+    // To implement this smartly we'll ::parse all arguments, and then ::process
+    // them again once we have injected no-op options for all unknown ones.
+    // This allows ::process to still do common argument handling for --version
+    // as well as standard error handling.
+    if (!parser.parse(app.arguments())) {
+        const QStringList unknownOptionNames = parser.unknownOptionNames();
+        for (const QString &option : unknownOptionNames) {
+            qWarning() << "Unknown option" << option << " - ignoring it.";
+            parser.addOption(QCommandLineOption(option));
+        }
+    }
+
     parser.process(app);
 
     if (parser.isSet(testingOption)) {
