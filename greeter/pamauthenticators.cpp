@@ -123,6 +123,11 @@ void PamAuthenticators::setState(AuthenticatorsState state)
 void PamAuthenticators::onAuthenticatorChanged()
 {
     qCWarning(KSCREENLOCKER_GREET) << "PamAuthenticators: Authenticator changed to" << m_authenticator;
+    const QString oldPrompt = prompt();
+    const QString oldPromptForSecret = promptForSecret();
+    const QString oldInfoMessage = infoMessage();
+    const QString oldErrorMessage = errorMessage();
+
     if (d->m_activeAuthenticator) {
         // Be careful with disconnect. Disconnecting the QDBusConnections can cause confusion for Qt leading to crashes.
         d->m_activeAuthenticator->disconnect(this);
@@ -257,10 +262,18 @@ void PamAuthenticators::onAuthenticatorChanged()
     d->state = AuthenticatorsState::Idle;
     Q_EMIT stateChanged();
 
-    Q_EMIT promptChanged();
-    Q_EMIT promptForSecretChanged();
-    Q_EMIT infoMessageChanged();
-    Q_EMIT errorMessageChanged();
+    if (prompt() != oldPrompt) {
+        Q_EMIT promptChanged();
+    }
+    if (promptForSecret() != oldPromptForSecret) {
+        Q_EMIT promptForSecretChanged();
+    }
+    if (infoMessage() != oldInfoMessage) {
+        Q_EMIT infoMessageChanged();
+    }
+    if (errorMessage() != oldErrorMessage) {
+        Q_EMIT errorMessageChanged();
+    }
     Q_EMIT busyChanged();
 
     startAuthenticating();
