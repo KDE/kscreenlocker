@@ -136,6 +136,7 @@ private:
     bool m_unavailable = false;
     bool m_inPasswordDelay = false;
     uint m_failedCount = 0;
+    uint m_cancelCount = 0; // Results of authentications started before a cancel are ignored
     QDateTime m_lastFailed = QDateTime::currentDateTimeUtc();
     NoninteractiveAuthenticatorTypes m_authenticatorType;
     QDBusMessage m_pendingPrompt;

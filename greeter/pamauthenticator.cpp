@@ -75,6 +75,11 @@ bool PamAuthenticator::isUnlocked() const
 
 void PamAuthenticator::tryUnlock()
 {
+    // cancel() stops the worker, start a new one
+    if (!m_workerProcess) {
+        startWorker();
+    }
+
     m_unlocked = false;
 
     if (m_busy) {
@@ -98,8 +103,12 @@ void PamAuthenticator::tryUnlock()
 
     setBusy(true);
     auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Authenticate(), this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, cancelCount = m_cancelCount]() {
         watcher->deleteLater();
+        // The worker of a cancelled authentication is gone, its reply is an error that must not be reported as a failure
+        if (cancelCount != m_cancelCount) {
+            return;
+        }
         setBusy(false);
 
         if (watcher->error().isValid()) {
@@ -172,7 +181,12 @@ void PamAuthenticator::cancel()
     if (m_workerProcess) {
         m_workerProcess->waitForFinished((5ms).count());
     }
+    m_cancelCount++;
     quitWorkerProcess();
+    setBusy(false);
+    // The next worker becomes ready when it pings
+    m_ready = false;
+    Q_EMIT readyChanged();
 }
 
 QString PamAuthenticator::getPrompt() const
@@ -287,6 +301,11 @@ void PamAuthenticator::quitWorkerProcess()
             qWarning() << "Worker did not terminate in time, killing it.";
             m_workerProcess->kill();
         }
+        m_workerProcess->deleteLater();
+    }
+    if (m_server) {
+        m_server->deleteLater();
+        m_server = nullptr;
     }
     m_dbusWorker.reset();
     m_workerProcess = nullptr;
