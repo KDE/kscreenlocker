@@ -16,6 +16,15 @@ add_test(NAME ksmserver-logindTest COMMAND logindTest)
 ecm_mark_as_test(logindTest)
 
 #######################################
+# AuthenticatorsTest
+#######################################
+
+add_executable(authenticatorsTest authenticatorstest.cpp)
+target_link_libraries(authenticatorsTest Qt::Test kscreenlocker_authenticator)
+add_test(NAME ksmserver-authenticatorsTest COMMAND authenticatorsTest)
+ecm_mark_as_test(authenticatorsTest)
+
+#######################################
 # PamTest
 #######################################
 

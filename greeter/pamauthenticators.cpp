@@ -51,8 +51,13 @@ PamAuthenticators::Authenticator PamAuthenticators::loadAuthenticatorType()
     auto authenticators = QMetaEnum::fromType<Authenticator>();
     auto group = KSharedConfig::openStateConfig(u"kscreenlockerrc"_s)->group(u"Greeter"_s);
     auto authenticatorKey = group.readEntry("Authenticator", authenticators.valueToKey(std::to_underlying(Authenticator::Regular)));
-    auto authenticatorValue = authenticators.keysToValue(authenticatorKey.toUtf8().constData());
-    return static_cast<Authenticator>(authenticatorValue);
+    bool ok = false;
+    const auto authenticator = static_cast<Authenticator>(authenticators.keysToValue(authenticatorKey.toUtf8().constData(), &ok));
+    // The last used authenticator may have been disabled since, or the entry may be bogus.
+    if (!ok || !PAMAuthenticatorModel::instance()->isEnabled(authenticator)) {
+        return Authenticator::Regular;
+    }
+    return authenticator;
 }
 
 void PamAuthenticators::saveAuthenticatorType(Authenticator authenticator)
