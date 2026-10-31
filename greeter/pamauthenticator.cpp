@@ -82,7 +82,8 @@ void PamAuthenticator::tryUnlock()
 
     m_unlocked = false;
 
-    if (m_busy) {
+    // Not busy while waiting for a prompt response, but the authentication is still running
+    if (m_busy || m_authenticateWatcher) {
         return;
     }
 
@@ -103,12 +104,10 @@ void PamAuthenticator::tryUnlock()
 
     setBusy(true);
     auto watcher = new QDBusPendingCallWatcher(m_dbusWorker->Authenticate(), this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, cancelCount = m_cancelCount]() {
+    m_authenticateWatcher = watcher;
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher]() {
         watcher->deleteLater();
-        // The worker of a cancelled authentication is gone, its reply is an error that must not be reported as a failure
-        if (cancelCount != m_cancelCount) {
-            return;
-        }
+        m_authenticateWatcher = nullptr;
         setBusy(false);
 
         if (watcher->error().isValid()) {
@@ -175,13 +174,19 @@ void PamAuthenticator::cancel()
         return;
     }
 
+    // The worker is going away, its reply to the pending authentication is an error that must not be reported as a failure
+    if (m_authenticateWatcher) {
+        m_authenticateWatcher->disconnect(this);
+        m_authenticateWatcher->deleteLater();
+        m_authenticateWatcher = nullptr;
+    }
+
     // Timings here are tight because we may need to cancel two workers, we don't want to get stuck on this for too long.
     // Let it quit on its own. Mind that this usually will get stuck because the worker is itself waiting for a prompt response.
     std::ignore = m_dbusWorker->Cancel();
     if (m_workerProcess) {
         m_workerProcess->waitForFinished((5ms).count());
     }
-    m_cancelCount++;
     quitWorkerProcess();
     setBusy(false);
     // The next worker becomes ready when it pings
@@ -302,13 +307,13 @@ void PamAuthenticator::quitWorkerProcess()
             m_workerProcess->kill();
         }
         m_workerProcess->deleteLater();
+        m_workerProcess = nullptr;
     }
     if (m_server) {
         m_server->deleteLater();
         m_server = nullptr;
     }
     m_dbusWorker.reset();
-    m_workerProcess = nullptr;
 }
 
 void PamAuthenticator::startWorker()

@@ -15,6 +15,7 @@
 #include <memory>
 #include <qqmlregistration.h>
 
+class QDBusPendingCallWatcher;
 class QDBusServer;
 class QProcess;
 class OrgKdePlasmaScreenlockerWorkerInterface;
@@ -136,11 +137,11 @@ private:
     bool m_unavailable = false;
     bool m_inPasswordDelay = false;
     uint m_failedCount = 0;
-    uint m_cancelCount = 0; // Results of authentications started before a cancel are ignored
     QDateTime m_lastFailed = QDateTime::currentDateTimeUtc();
     NoninteractiveAuthenticatorTypes m_authenticatorType;
     QDBusMessage m_pendingPrompt;
     QDBusServer *m_server = nullptr;
+    QDBusPendingCallWatcher *m_authenticateWatcher = nullptr;
     std::unique_ptr<OrgKdePlasmaScreenlockerWorkerInterface> m_dbusWorker;
     QProcess *m_workerProcess = nullptr;
     QString m_user;

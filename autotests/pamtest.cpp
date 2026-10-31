@@ -81,6 +81,8 @@ void PamTest::testCancelAndRestart()
 
     auth.tryUnlock();
     QVERIFY(promptForSecretSpy.wait());
+    // the lock screen heartbeat keeps calling tryUnlock while the prompt is shown
+    auth.tryUnlock();
 
     // cancel while the worker waits for the password, like the lock screen does when its UI hides
     auth.cancel();
