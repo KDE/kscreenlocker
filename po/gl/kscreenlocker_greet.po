@@ -20,14 +20,20 @@ msgstr ""
 "X-Generator: Lokalize 24.05.1\n"
 
 #: fallbacktheme/Greeter.qml:59
+#, fuzzy
+#| msgid "Warning: Caps Lock on"
 msgid "Warning: Caps Lock on"
 msgstr "Aviso: O bloqueo das maiúsculas está aceso"
 
 #: fallbacktheme/Greeter.qml:75
+#, fuzzy
+#| msgid "The session is locked"
 msgid "The session is locked"
 msgstr "A sesión está trancada"
 
 #: fallbacktheme/Greeter.qml:76
+#, fuzzy
+#| msgid "The session has been locked by %1"
 msgid "The session has been locked by %1"
 msgstr "A sesión foi trancada por %1"
 
@@ -46,14 +52,20 @@ msgid "(or use your smartcard)"
 msgstr ""
 
 #: fallbacktheme/Greeter.qml:116
+#, fuzzy
+#| msgid "&Switch Users"
 msgid "&Switch Users"
 msgstr "&Trocar de usuario"
 
 #: fallbacktheme/Greeter.qml:123
+#, fuzzy
+#| msgid "Un&lock"
 msgid "Un&lock"
 msgstr "&Desatrancar"
 
 #: fallbacktheme/Greeter.qml:135
+#, fuzzy
+#| msgid "Unlocking failed"
 msgid "Unlocking failed"
 msgstr "Fallou o desbloqueo"
 
