@@ -28,7 +28,7 @@ Item {
     }
 
     KWorkspace.SessionManagement {
-        id: sessionManagment
+        id: sessionManagement
     }
 
     KSvg.FrameSvgItem {
@@ -71,7 +71,7 @@ Item {
     Greeter {
         id: unlockUI
 
-        switchUserEnabled: sessionManagment.canSwitchUser
+        switchUserEnabled: sessionManagement.canSwitchUser
 
         visible: opacity > 0
         opacity: mainStack.currentItem == unlockUI
@@ -81,7 +81,7 @@ Item {
             }
         }
 
-        onSwitchUserClicked: sessionManagment.switchUser()
+        onSwitchUserClicked: sessionManagement.switchUser()
     }
 
     function returnToLogin() {
