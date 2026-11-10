@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: screenlocker_kcm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-09 08:27+0000\n"
 "PO-Revision-Date: 2020-08-07 14:40+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -23,12 +23,12 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: ui/Appearance.qml:40
+#: ui/Appearance.qml:41
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "Typ tapety:"
 
-#: ui/DurationPromptDialog.qml:130
+#: ui/DurationPromptDialog.qml:131
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
@@ -37,7 +37,7 @@ msgstr[0] "milisekunda"
 msgstr[1] "milisekundy"
 msgstr[2] "milisekúnd"
 
-#: ui/DurationPromptDialog.qml:132
+#: ui/DurationPromptDialog.qml:133
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
@@ -46,7 +46,7 @@ msgstr[0] "sekunda"
 msgstr[1] "sekundy"
 msgstr[2] "sekúnd"
 
-#: ui/DurationPromptDialog.qml:134
+#: ui/DurationPromptDialog.qml:135
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
@@ -55,7 +55,7 @@ msgstr[0] "minúta"
 msgstr[1] "minúty"
 msgstr[2] "minút"
 
-#: ui/DurationPromptDialog.qml:136
+#: ui/DurationPromptDialog.qml:137
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "hour"
@@ -64,7 +64,7 @@ msgstr[0] "hodina"
 msgstr[1] "hodiny"
 msgstr[2] "hodín"
 
-#: ui/DurationPromptDialog.qml:138
+#: ui/DurationPromptDialog.qml:139
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
@@ -73,7 +73,7 @@ msgstr[0] "deň"
 msgstr[1] "dni"
 msgstr[2] "dní"
 
-#: ui/DurationPromptDialog.qml:140
+#: ui/DurationPromptDialog.qml:141
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
@@ -82,7 +82,7 @@ msgstr[0] "týždeň"
 msgstr[1] "týždne"
 msgstr[2] "týždňov"
 
-#: ui/DurationPromptDialog.qml:142
+#: ui/DurationPromptDialog.qml:143
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
@@ -91,7 +91,7 @@ msgstr[0] "mesiac"
 msgstr[1] "mesiace"
 msgstr[2] "mesiacov"
 
-#: ui/DurationPromptDialog.qml:144
+#: ui/DurationPromptDialog.qml:145
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
@@ -100,109 +100,109 @@ msgstr[0] "rok"
 msgstr[1] "roky"
 msgstr[2] "rokov"
 
-#: ui/DurationPromptDialog.qml:171
+#: ui/DurationPromptDialog.qml:172
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
 msgstr "milisekúnd"
 
-#: ui/DurationPromptDialog.qml:173
+#: ui/DurationPromptDialog.qml:174
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "sekúnd"
 
-#: ui/DurationPromptDialog.qml:175
+#: ui/DurationPromptDialog.qml:176
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "minút"
 
-#: ui/DurationPromptDialog.qml:177
+#: ui/DurationPromptDialog.qml:178
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
 msgstr "hodín"
 
-#: ui/DurationPromptDialog.qml:179
+#: ui/DurationPromptDialog.qml:180
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
 msgstr "dní"
 
-#: ui/DurationPromptDialog.qml:181
+#: ui/DurationPromptDialog.qml:182
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
 msgstr "týždňov"
 
-#: ui/DurationPromptDialog.qml:183
+#: ui/DurationPromptDialog.qml:184
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
 msgstr "mesiacov"
 
-#: ui/DurationPromptDialog.qml:185
+#: ui/DurationPromptDialog.qml:186
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
 msgstr "rokov"
 
-#: ui/main.qml:25
+#: ui/main.qml:26
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
 msgstr "Vzhľad"
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "Zamknúť obrazovku automaticky:"
 
-#: ui/main.qml:42
+#: ui/main.qml:43
 #, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "Nikdy"
 
-#: ui/main.qml:43 ui/main.qml:128
+#: ui/main.qml:44 ui/main.qml:130
 #, kde-format
 msgid "1 minute"
 msgstr "1 minúta"
 
-#: ui/main.qml:44
+#: ui/main.qml:45
 #, kde-format
 msgid "2 minutes"
 msgstr "2 minúty"
 
-#: ui/main.qml:45 ui/main.qml:129
+#: ui/main.qml:46 ui/main.qml:131
 #, kde-format
 msgid "5 minutes"
 msgstr "5 minút"
 
-#: ui/main.qml:46
+#: ui/main.qml:47
 #, kde-format
 msgid "10 minutes"
 msgstr "10 minút"
 
-#: ui/main.qml:47 ui/main.qml:130
+#: ui/main.qml:48 ui/main.qml:132
 #, kde-format
 msgid "15 minutes"
 msgstr "15 minút"
 
-#: ui/main.qml:48
+#: ui/main.qml:49
 #, kde-format
 msgid "30 minutes"
 msgstr "30 minút"
 
-#: ui/main.qml:49 ui/main.qml:131
+#: ui/main.qml:50 ui/main.qml:133
 #, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
 msgstr "Vlastné…"
 
-#: ui/main.qml:67 ui/main.qml:167
+#: ui/main.qml:69 ui/main.qml:169
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -210,47 +210,47 @@ msgstr[0] "%1 minúte"
 msgstr[1] "%1 minútach"
 msgstr[2] "%1 minútach"
 
-#: ui/main.qml:77 ui/main.qml:180
+#: ui/main.qml:79 ui/main.qml:182
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "Vlastné pozadie:"
 
-#: ui/main.qml:102
+#: ui/main.qml:104
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "Po prebudení zo spánku"
 
-#: ui/main.qml:119
+#: ui/main.qml:121
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "Oneskorenie pred vyžiadaním hesla:"
 
-#: ui/main.qml:124
+#: ui/main.qml:126
 #, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "Vyžadovať heslo po zamknutí:"
 
-#: ui/main.qml:125
+#: ui/main.qml:127
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
 msgstr "Nikdy nevyžadovať heslo"
 
-#: ui/main.qml:126
+#: ui/main.qml:128
 #, kde-format
 msgid "5 seconds"
 msgstr "5 sekúnd"
 
-#: ui/main.qml:127
+#: ui/main.qml:129
 #, kde-format
 msgid "30 seconds"
 msgstr "30 sekúnd"
 
-#: ui/main.qml:168
+#: ui/main.qml:170
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
@@ -258,7 +258,7 @@ msgstr[0] "%1 sekundy"
 msgstr[1] "%1 sekúnd"
 msgstr[2] "%1 sekúnd"
 
-#: ui/main.qml:215
+#: ui/main.qml:217
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "Klávesová skratka:"

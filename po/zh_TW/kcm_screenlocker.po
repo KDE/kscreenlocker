@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-09 08:27+0000\n"
 "PO-Revision-Date: 2024-05-23 16:07+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -27,222 +27,222 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "外觀"
 
-#: ui/Appearance.qml:40
+#: ui/Appearance.qml:41
 #, kde-format
 msgid "Wallpaper type:"
 msgstr "桌布類型："
 
-#: ui/DurationPromptDialog.qml:130
+#: ui/DurationPromptDialog.qml:131
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
 msgstr[0] "毫秒"
 
-#: ui/DurationPromptDialog.qml:132
+#: ui/DurationPromptDialog.qml:133
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "秒"
 
-#: ui/DurationPromptDialog.qml:134
+#: ui/DurationPromptDialog.qml:135
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分鐘"
 
-#: ui/DurationPromptDialog.qml:136
+#: ui/DurationPromptDialog.qml:137
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小時"
 
-#: ui/DurationPromptDialog.qml:138
+#: ui/DurationPromptDialog.qml:139
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
 msgid_plural "days"
 msgstr[0] "天"
 
-#: ui/DurationPromptDialog.qml:140
+#: ui/DurationPromptDialog.qml:141
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
 msgid_plural "weeks"
 msgstr[0] "週"
 
-#: ui/DurationPromptDialog.qml:142
+#: ui/DurationPromptDialog.qml:143
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
 msgid_plural "months"
 msgstr[0] "個月"
 
-#: ui/DurationPromptDialog.qml:144
+#: ui/DurationPromptDialog.qml:145
 #, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
 msgid_plural "years"
 msgstr[0] "年"
 
-#: ui/DurationPromptDialog.qml:171
+#: ui/DurationPromptDialog.qml:172
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
 msgstr "毫秒"
 
-#: ui/DurationPromptDialog.qml:173
+#: ui/DurationPromptDialog.qml:174
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
 msgstr "秒"
 
-#: ui/DurationPromptDialog.qml:175
+#: ui/DurationPromptDialog.qml:176
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
 msgstr "分鐘"
 
-#: ui/DurationPromptDialog.qml:177
+#: ui/DurationPromptDialog.qml:178
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
 msgstr "小時"
 
-#: ui/DurationPromptDialog.qml:179
+#: ui/DurationPromptDialog.qml:180
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
 msgstr "天"
 
-#: ui/DurationPromptDialog.qml:181
+#: ui/DurationPromptDialog.qml:182
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
 msgstr "週"
 
-#: ui/DurationPromptDialog.qml:183
+#: ui/DurationPromptDialog.qml:184
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
 msgstr "個月"
 
-#: ui/DurationPromptDialog.qml:185
+#: ui/DurationPromptDialog.qml:186
 #, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
 msgstr "年"
 
-#: ui/main.qml:25
+#: ui/main.qml:26
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure Appearance…"
 msgstr "設定外觀…"
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "Lock screen automatically:"
 msgstr "自動鎖定畫面："
 
-#: ui/main.qml:42
+#: ui/main.qml:43
 #, kde-format
 msgctxt "Screen will not lock automatically"
 msgid "Never"
 msgstr "永不"
 
-#: ui/main.qml:43 ui/main.qml:128
+#: ui/main.qml:44 ui/main.qml:130
 #, kde-format
 msgid "1 minute"
 msgstr "1 分鐘"
 
-#: ui/main.qml:44
+#: ui/main.qml:45
 #, kde-format
 msgid "2 minutes"
 msgstr "2 分鐘"
 
-#: ui/main.qml:45 ui/main.qml:129
+#: ui/main.qml:46 ui/main.qml:131
 #, kde-format
 msgid "5 minutes"
 msgstr "5 分鐘"
 
-#: ui/main.qml:46
+#: ui/main.qml:47
 #, kde-format
 msgid "10 minutes"
 msgstr "10 分鐘"
 
-#: ui/main.qml:47 ui/main.qml:130
+#: ui/main.qml:48 ui/main.qml:132
 #, kde-format
 msgid "15 minutes"
 msgstr "15 分鐘"
 
-#: ui/main.qml:48
+#: ui/main.qml:49
 #, kde-format
 msgid "30 minutes"
 msgstr "30 分鐘"
 
-#: ui/main.qml:49 ui/main.qml:131
+#: ui/main.qml:50 ui/main.qml:133
 #, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
 msgstr "自訂…"
 
-#: ui/main.qml:67 ui/main.qml:167
+#: ui/main.qml:69 ui/main.qml:169
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 分鐘"
 
-#: ui/main.qml:77 ui/main.qml:180
+#: ui/main.qml:79 ui/main.qml:182
 #, kde-format
 msgctxt "@title:window"
 msgid "Custom Duration"
 msgstr "自訂時長"
 
-#: ui/main.qml:102
+#: ui/main.qml:104
 #, kde-format
 msgctxt "@option:check"
 msgid "Lock after waking from sleep"
 msgstr "從睡眠模式醒來之後鎖定畫面"
 
-#: ui/main.qml:119
+#: ui/main.qml:121
 #, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
 msgstr "需要密碼之前的延遲時間："
 
-#: ui/main.qml:124
+#: ui/main.qml:126
 #, kde-format
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
 msgstr "馬上要求密碼"
 
-#: ui/main.qml:125
+#: ui/main.qml:127
 #, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
 msgstr "永不要求密碼"
 
-#: ui/main.qml:126
+#: ui/main.qml:128
 #, kde-format
 msgid "5 seconds"
 msgstr "5 秒"
 
-#: ui/main.qml:127
+#: ui/main.qml:129
 #, kde-format
 msgid "30 seconds"
 msgstr "30 秒"
 
-#: ui/main.qml:168
+#: ui/main.qml:170
 #, kde-format
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 秒"
 
-#: ui/main.qml:215
+#: ui/main.qml:217
 #, kde-format
 msgid "Keyboard shortcut:"
 msgstr "鍵盤快捷鍵："
