@@ -36,8 +36,8 @@ msgstr "Τύπος ταπετσαρίας:"
 msgctxt "The unit of the time input field"
 msgid "millisecond"
 msgid_plural "milliseconds"
-msgstr[0] "%1 δευτ."
-msgstr[1] "%1 δευτ."
+msgstr[0] "χιλιοστό του δευτερολέπτου"
+msgstr[1] "χιλιοστά του δευτερολέπτου"
 
 #: ui/DurationPromptDialog.qml:133
 #, fuzzy, kde-format
@@ -46,8 +46,8 @@ msgstr[1] "%1 δευτ."
 msgctxt "The unit of the time input field"
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "%1 δευτ."
-msgstr[1] "%1 δευτ."
+msgstr[0] "δευτερόλεπτο"
+msgstr[1] "δευτερόλεπτα"
 
 #: ui/DurationPromptDialog.qml:135
 #, fuzzy, kde-format
@@ -56,48 +56,48 @@ msgstr[1] "%1 δευτ."
 msgctxt "The unit of the time input field"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "%1 λεπτό"
-msgstr[1] "%1  λεπτά"
+msgstr[0] "λεπτό"
+msgstr[1] "λεπτά"
 
 #: ui/DurationPromptDialog.qml:137
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "The unit of the time input field"
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ώρα"
+msgstr[1] "ώρες"
 
 #: ui/DurationPromptDialog.qml:139
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "The unit of the time input field"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ημέρα"
+msgstr[1] "ημέρες"
 
 #: ui/DurationPromptDialog.qml:141
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "The unit of the time input field"
 msgid "week"
 msgid_plural "weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "εβδομάδα"
+msgstr[1] "εβδομάδες"
 
 #: ui/DurationPromptDialog.qml:143
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "The unit of the time input field"
 msgid "month"
 msgid_plural "months"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "μήνας"
+msgstr[1] "μήνες"
 
 #: ui/DurationPromptDialog.qml:145
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "The unit of the time input field"
 msgid "year"
 msgid_plural "years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "έτος"
+msgstr[1] "έτη"
 
 #: ui/DurationPromptDialog.qml:172
 #, fuzzy, kde-format
@@ -105,7 +105,7 @@ msgstr[1] ""
 #| msgid_plural "%1 seconds"
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "milliseconds"
-msgstr "%1 δευτ."
+msgstr "χιλιοστά του δευτερολέπτου"
 
 #: ui/DurationPromptDialog.qml:174
 #, fuzzy, kde-format
@@ -113,7 +113,7 @@ msgstr "%1 δευτ."
 #| msgid_plural "%1 seconds"
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "seconds"
-msgstr "%1 δευτ."
+msgstr "δευτερόλεπτα"
 
 #: ui/DurationPromptDialog.qml:176
 #, fuzzy, kde-format
@@ -121,37 +121,37 @@ msgstr "%1 δευτ."
 #| msgid_plural "%1 minutes"
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "minutes"
-msgstr "%1 λεπτό"
+msgstr "λεπτά"
 
 #: ui/DurationPromptDialog.qml:178
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "hours"
-msgstr ""
+msgstr "ώρες"
 
 #: ui/DurationPromptDialog.qml:180
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "days"
-msgstr ""
+msgstr "ημέρες"
 
 #: ui/DurationPromptDialog.qml:182
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "weeks"
-msgstr ""
+msgstr "εβδομάδες"
 
 #: ui/DurationPromptDialog.qml:184
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "months"
-msgstr ""
+msgstr "μήνες"
 
 #: ui/DurationPromptDialog.qml:186
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@text:radiobutton Unit of the time input field"
 msgid "years"
-msgstr ""
+msgstr "έτη"
 
 #: ui/main.qml:26
 #, fuzzy, kde-format
@@ -182,42 +182,42 @@ msgstr "1 λεπτό"
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "2 minutes"
-msgstr "%1 λεπτό"
+msgstr "2 λεπτά"
 
 #: ui/main.qml:46 ui/main.qml:131
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "5 minutes"
-msgstr "%1 λεπτό"
+msgstr "5 λεπτά"
 
 #: ui/main.qml:47
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "10 minutes"
-msgstr "%1 λεπτό"
+msgstr "10 λεπτά"
 
 #: ui/main.qml:48 ui/main.qml:132
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "15 minutes"
-msgstr "%1 λεπτό"
+msgstr "15 λεπτά"
 
 #: ui/main.qml:49
 #, fuzzy, kde-format
 #| msgid "%1 minute"
 #| msgid_plural "%1 minutes"
 msgid "30 minutes"
-msgstr "%1 λεπτό"
+msgstr "30 λεπτά"
 
 #: ui/main.qml:50 ui/main.qml:133
-#, kde-format
+#, fuzzy, kde-format
 msgctxt ""
 "@option:combobox Choose a custom value outside the list of preset values"
 msgid "Custom…"
-msgstr ""
+msgstr "Προσαρμογή…"
 
 #: ui/main.qml:69 ui/main.qml:169
 #, kde-format
@@ -242,37 +242,37 @@ msgid "Lock after waking from sleep"
 msgstr "Μετά την αφύπνιση"
 
 #: ui/main.qml:121
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "First part of sentence \"Delay before password required: X minutes\""
 msgid "Delay before password required:"
-msgstr ""
+msgstr "Καθυστέρηση πριν ζητηθεί κωδικός:"
 
 #: ui/main.qml:126
 #, fuzzy, kde-format
 #| msgid "Re&quire password after locking:"
 msgctxt "The grace period is disabled"
 msgid "Require password immediately"
-msgstr "Α&παίτηση κωδικού πρόσβασης μετά το κλείδωμα:"
+msgstr "Άμεση απαίτηση κωδικού"
 
 #: ui/main.qml:127
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Password not required"
 msgid "Never require password"
-msgstr ""
+msgstr "Χωρίς απαίτηση κωδικού"
 
 #: ui/main.qml:128
 #, fuzzy, kde-format
 #| msgid "%1 second"
 #| msgid_plural "%1 seconds"
 msgid "5 seconds"
-msgstr "%1 δευτ."
+msgstr "5 δευτερόλεπτα"
 
 #: ui/main.qml:129
 #, fuzzy, kde-format
 #| msgid "%1 second"
 #| msgid_plural "%1 seconds"
 msgid "30 seconds"
-msgstr "%1 δευτ."
+msgstr "30 δευτερόλεπτα"
 
 #: ui/main.qml:170
 #, kde-format

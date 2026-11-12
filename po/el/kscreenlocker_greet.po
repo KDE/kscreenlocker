@@ -40,12 +40,14 @@ msgid "Password"
 msgstr "Κωδικός πρόσβασης:"
 
 #: fallbacktheme/Greeter.qml:101
+#, fuzzy
 msgid "(or place your fingerprint on the reader)"
-msgstr ""
+msgstr "(ή τοποθετήστε το δαχτυλικό σας αποτύπωμα στον αναγνώστη)"
 
 #: fallbacktheme/Greeter.qml:107
+#, fuzzy
 msgid "(or use your smartcard)"
-msgstr ""
+msgstr "(ή χρησιμοποιήστε την έξυπνη κάρτα σας)"
 
 #: fallbacktheme/Greeter.qml:116
 msgid "&Switch Users"
