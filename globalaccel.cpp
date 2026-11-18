@@ -26,7 +26,7 @@ static const QString s_componentInterface = QStringLiteral("org.kde.kglobalaccel
  * E.g. plasmashell might accept media shortcuts, but not shortcuts for switching the activity.
  **/
 static const QMap<QString, QRegularExpression> s_shortcutWhitelist{
-    {QStringLiteral("/component/mediacontrol"), QRegularExpression(QStringLiteral("stopmedia|nextmedia|previousmedia|playpausemedia"))},
+    {QStringLiteral("/component/mediacontrol"), QRegularExpression(QStringLiteral("stopmedia|nextmedia|previousmedia|playpausemedia|pausemedia|playmedia"))},
     {QStringLiteral("/component/kmix"), QRegularExpression(QStringLiteral("mute|decrease_volume|increase_volume"))},
     {QStringLiteral("/component/org_kde_powerdevil"),
      QRegularExpression(QStringLiteral("Increase Screen Brightness|Decrease Screen Brightness|Increase Keyboard Brightness|Decrease Keyboard Brightness|Toggle "
