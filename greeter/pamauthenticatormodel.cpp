@@ -110,12 +110,20 @@ void PAMAuthenticatorModel::markDefunct(PamAuthenticators::Authenticator authent
         qCWarning(KSCREENLOCKER_GREET) << "Regular authenticator is defunct. This is unexpected and we ignore it.";
         return;
     }
-    m_hash.value(authenticator)->setFunctional(false);
+    if (const auto descriptor = m_hash.value(authenticator)) {
+        descriptor->setFunctional(false);
+    }
 }
 
 [[nodiscard]] bool PAMAuthenticatorModel::isFunctional(PamAuthenticators::Authenticator authenticator) const
 {
-    return m_hash.value(authenticator)->isFunctional();
+    const auto descriptor = m_hash.value(authenticator);
+    return descriptor && descriptor->isFunctional();
+}
+
+[[nodiscard]] bool PAMAuthenticatorModel::isEnabled(PamAuthenticators::Authenticator authenticator) const
+{
+    return m_hash.contains(authenticator);
 }
 
 PAMAuthenticatorModel *PAMAuthenticatorModel::instance()

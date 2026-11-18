@@ -24,6 +24,7 @@ public:
     // Helpers for PamAuthenticators accessing our internals. Bit out of place here but convenient.
     void markDefunct(PamAuthenticators::Authenticator authenticator) const;
     [[nodiscard]] bool isFunctional(PamAuthenticators::Authenticator authenticator) const;
+    [[nodiscard]] bool isEnabled(PamAuthenticators::Authenticator authenticator) const;
 
 private:
     using Range = std::vector<std::shared_ptr<PAMAuthenticatorDescriptor>>;
