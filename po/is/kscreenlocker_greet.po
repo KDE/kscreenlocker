@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kscreenlocker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:46+0000\n"
-"PO-Revision-Date: 2026-06-01 10:13+0000\n"
+"PO-Revision-Date: 2026-11-25 16:47+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -85,8 +85,7 @@ msgid "Don't show any lock user interface."
 msgstr "Ekki sýna neitt læsiviðmót."
 
 #: pamauthenticatormodel.cpp:51
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Password"
 msgstr "Lykilorð"
@@ -95,19 +94,19 @@ msgstr "Lykilorð"
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Smartcard"
-msgstr ""
+msgstr "Snjallkort"
 
 #: pamauthenticatormodel.cpp:67
 #, kde-format
 msgctxt "authentication type in unlock dialogs"
 msgid "Fingerprint"
-msgstr ""
+msgstr "Fingrafar"
 
 #: pamauthenticatormodel.cpp:74
 #, kde-format
 msgctxt "authentication type in unlock dialogs - facial authentication"
 msgid "Face"
-msgstr ""
+msgstr "Andlit"
 
 #: pamauthenticatormodel.cpp:82
 #, kde-format
@@ -115,7 +114,7 @@ msgctxt ""
 "authentication type in unlock dialogs - universal 2 factor authentication "
 "(yubikey etc)"
 msgid "Universal 2 Factor"
-msgstr ""
+msgstr "Almennt 2-þátta"
 
 #~ msgid "File descriptor for connecting to ksld."
 #~ msgstr "Skráarlýsir fyrir tengingu við ksld."
